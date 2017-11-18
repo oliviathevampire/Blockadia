@@ -257,12 +257,6 @@ public class DummyGame implements IGameLogic {
 
         // Update sound listener position;
 //        soundMgr.updateListenerPosition(camera);
-
-        boolean aux = mouseInput.isLeftButtonPressed();
-        if (aux && !this.leftButtonPressed && this.selectDetector.selectGameItem(gameItems, window, mouseInput.getCurrentPos(), camera)) {
-            this.hud.incCounter();
-        }
-        this.leftButtonPressed = aux;
     }
 
     @Override
@@ -272,7 +266,7 @@ public class DummyGame implements IGameLogic {
             firstTime = false;
         }
         renderer.render(window, camera, scene, sceneChanged);
-//        hud.render(window);
+        hud.render(window);
     }
 
     @Override
