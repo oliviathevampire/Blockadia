@@ -3,15 +3,9 @@ package net.thegaminghuskymc.sandboxgame.game;
 import net.thegaminghuskymc.sandboxgame.engine.Utils;
 import net.thegaminghuskymc.sandboxgame.engine.Window;
 import org.lwjgl.nanovg.NVGColor;
-import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.*;
 import static org.lwjgl.system.MemoryUtil.NULL;

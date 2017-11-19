@@ -127,8 +127,8 @@ public class FlowParticleEmitter implements IParticleEmitter {
         // Add a little bit of randomness of the parrticle
         float sign = Math.random() > 0.5d ? -1.0f : 1.0f;
         float speedInc = sign * (float)Math.random() * this.speedRndRange;
-        float posInc = sign * (float)Math.random() * this.positionRndRange;        
-        float scaleInc = sign * (float)Math.random() * this.scaleRndRange;        
+        float posInc = sign * (float)Math.random() * this.positionRndRange;
+        float scaleInc = sign * (float)Math.random() * this.scaleRndRange;
         long updateAnimInc = (long)sign *(long)(Math.random() * (float)this.animRange);
         particle.getPosition().add(posInc, posInc, posInc);
         particle.getSpeed().add(speedInc, speedInc, speedInc);

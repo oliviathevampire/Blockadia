@@ -29,7 +29,7 @@ public class GameItem {
         rotation = new Quaternionf();
         textPos = 0;
         insideFrustum = true;
-        disableFrustumCulling = false;
+        disableFrustumCulling = true;
     }
 
     public GameItem(Mesh mesh) {

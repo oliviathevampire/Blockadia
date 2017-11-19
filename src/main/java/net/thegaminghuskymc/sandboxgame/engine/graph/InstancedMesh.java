@@ -101,39 +101,39 @@ public class InstancedMesh extends Mesh {
         super.endRender();
     }
 
-    public void renderListInstanced( List<GameItem> gameItems, Transformation transformation, Matrix4f viewMatrix) {
-        renderListInstanced(gameItems, false, transformation, viewMatrix);
+    public void renderListInstanced(List<GameItem> GameItems, Transformation transformation, Matrix4f viewMatrix) {
+        renderListInstanced(GameItems, false, transformation, viewMatrix);
     }
 
-    public void renderListInstanced(List<GameItem> gameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
+    public void renderListInstanced(List<GameItem> GameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
         initRender();
 
         int chunkSize = numInstances;
-        int length = gameItems.size();
+        int length = GameItems.size();
         for (int i = 0; i < length; i += chunkSize) {
             int end = Math.min(length, i + chunkSize);
-            List<GameItem> subList = gameItems.subList(i, end);
+            List<GameItem> subList = GameItems.subList(i, end);
             renderChunkInstanced(subList, billBoard, transformation, viewMatrix);
         }
 
         endRender();
     }
 
-    private void renderChunkInstanced(List<GameItem> gameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
+    private void renderChunkInstanced(List<GameItem> GameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
         this.instanceDataBuffer.clear();
 
         int i = 0;
 
         Texture text = getMaterial().getTexture();
-        for (GameItem gameItem : gameItems) {
-            Matrix4f modelMatrix = transformation.buildModelMatrix(gameItem);
+        for (GameItem GameItem : GameItems) {
+            Matrix4f modelMatrix = transformation.buildModelMatrix(GameItem);
             if (viewMatrix != null && billBoard) {
                 viewMatrix.transpose3x3(modelMatrix);
             }
             modelMatrix.get(INSTANCE_SIZE_FLOATS * i, instanceDataBuffer);
             if (text != null) {
-                int col = gameItem.getTextPos() % text.getNumCols();
-                int row = gameItem.getTextPos() / text.getNumCols();
+                int col = GameItem.getTextPos() % text.getNumCols();
+                int row = GameItem.getTextPos() / text.getNumCols();
                 float textXOffset = (float) col / text.getNumCols();
                 float textYOffset = (float) row / text.getNumRows();
                 int buffPos = INSTANCE_SIZE_FLOATS * i + MATRIX_SIZE_FLOATS;
@@ -143,7 +143,7 @@ public class InstancedMesh extends Mesh {
 
             // Selected data or scaling for billboard
             int buffPos = INSTANCE_SIZE_FLOATS * i + MATRIX_SIZE_FLOATS + 2;
-            this.instanceDataBuffer.put(buffPos, billBoard ? gameItem.getScale() : gameItem.isSelected() ? 1 : 0);
+            this.instanceDataBuffer.put(buffPos, billBoard ? GameItem.getScale() : GameItem.isSelected() ? 1 : 0);
 
             i++;
         }
@@ -152,7 +152,7 @@ public class InstancedMesh extends Mesh {
         glBufferData(GL_ARRAY_BUFFER, instanceDataBuffer, GL_DYNAMIC_READ);
 
         glDrawElementsInstanced(
-                GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0, gameItems.size());
+                GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0, GameItems.size());
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }

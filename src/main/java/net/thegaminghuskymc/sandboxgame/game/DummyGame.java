@@ -1,34 +1,22 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
-import de.matthiasmann.twl.utils.PNGDecoder;
-import java.nio.ByteBuffer;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.openal.AL11;
-import net.thegaminghuskymc.sandboxgame.engine.IGameLogic;
-import net.thegaminghuskymc.sandboxgame.engine.MouseInput;
-import net.thegaminghuskymc.sandboxgame.engine.Scene;
-import net.thegaminghuskymc.sandboxgame.engine.SceneLight;
-import net.thegaminghuskymc.sandboxgame.engine.Window;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Camera;
-import net.thegaminghuskymc.sandboxgame.engine.graph.HeightMapMesh;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Renderer;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
+import net.thegaminghuskymc.sandboxgame.engine.*;
+import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
-import net.thegaminghuskymc.sandboxgame.engine.graph.particles.FlowParticleEmitter;
-import net.thegaminghuskymc.sandboxgame.engine.graph.particles.Particle;
-import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.loaders.obj.OBJLoader;
-import net.thegaminghuskymc.sandboxgame.engine.sound.SoundBuffer;
-import net.thegaminghuskymc.sandboxgame.engine.sound.SoundListener;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
-import net.thegaminghuskymc.sandboxgame.engine.sound.SoundSource;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+import org.lwjgl.BufferUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
 
@@ -85,7 +73,7 @@ public class DummyGame implements IGameLogic {
 
         float reflectance = 1f;
 
-        float blockScale = 0.5f;
+        float blockScale = 1f;
         float skyBoxScale = 100.0f;
         float extension = 2.0f;
 
@@ -100,30 +88,39 @@ public class DummyGame implements IGameLogic {
 
         selectDetector = new MouseBoxSelectionDetector();
 
-        PNGDecoder decoder = new PNGDecoder(getClass().getResourceAsStream("/textures/heightmap.png"));
-        int height = decoder.getHeight();
-        int width = decoder.getWidth();
-        ByteBuffer buf = ByteBuffer.allocateDirect(4 * width * height);
-        decoder.decode(buf, width * 4, PNGDecoder.Format.RGBA);
-        buf.flip();
+        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/textures/heightmap.png"));
+        int w = image.getWidth();
+        int h = image.getHeight();
+        int pixels[] = new int[w * h];
+        image.getRGB(0, 0, w, h, pixels, 0, w);
+        ByteBuffer bb = BufferUtils.createByteBuffer(pixels.length * 4);
+        for (int p : pixels)
+        {
+            bb.put((byte) getRed(p));
+            bb.put((byte) getGreen(p));
+            bb.put((byte) getBlue(p));
+            bb.put((byte) getAlpha(p));
+        }
 
-        int instances = height * width;
+        bb.flip();
+
+        int instances = w * h;
         Mesh mesh = OBJLoader.loadMesh("/models/cube.obj", instances);
-        mesh.setBoundingRadius(1);
-        Texture texture = new Texture("/textures/terrain_textures.png", 2, 1);
+        mesh.setBoundingRadius(2);
+        Texture texture = new Texture("/textures/terrain_textures.png", 1, 1);
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
         gameItems = new GameItem[instances];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
                 GameItem gameItem = new GameItem(mesh);
                 gameItem.setScale(blockScale);
-                int rgb = HeightMapMesh.getRGB(i, j, width, buf);
+                int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
                 gameItem.setPosition(posx, starty + incy, posz);
                 int textPos = Math.random() > 0.5f ? 0 : 1;
                 gameItem.setTextPos(textPos);
-                gameItems[i * width + j] = gameItem;
+                gameItems[i * w + j] = gameItem;
 
                 posx += inc;
             }
@@ -153,24 +150,26 @@ public class DummyGame implements IGameLogic {
         camera.getPosition().z = 6.5f;
         camera.getRotation().x = 25;
         camera.getRotation().y = -1;
-
-        // Sounds
-        this.soundMgr.init();
-        this.soundMgr.setAttenuationModel(AL11.AL_EXPONENT_DISTANCE);
-        setupSounds();
     }
 
-    private void setupSounds() throws Exception {
-        /*SoundBuffer buffFire = new SoundBuffer("/sounds/fire.ogg");
-        soundMgr.addSoundBuffer(buffFire);
-        SoundSource sourceFire = new SoundSource(true, false);
-        Vector3f pos = particleEmitter.getBaseParticle().getPosition();
-        sourceFire.setPosition(pos);
-        sourceFire.setBuffer(buffFire.getBufferId());
-        soundMgr.addSoundSource(Sounds.FIRE.toString(), sourceFire);
-        sourceFire.play();
+    public static int getRed(int c)
+    {
+        return (c >> 16) & 255;
+    }
 
-        soundMgr.setListener(new SoundListener(new Vector3f(0, 0, 0)));*/
+    public static int getGreen(int c)
+    {
+        return (c >> 8) & 255;
+    }
+
+    public static int getBlue(int c)
+    {
+        return c & 255;
+    }
+
+    public static int getAlpha(int c)
+    {
+        return (c >> 24) & 255;
     }
 
     private void setupLights() {
@@ -194,24 +193,24 @@ public class DummyGame implements IGameLogic {
         cameraInc.set(0, 0, 0);
         if (window.isKeyPressed(GLFW_KEY_W)) {
             sceneChanged = true;
-            cameraInc.z = -1;
+            cameraInc.z = -4;
         } else if (window.isKeyPressed(GLFW_KEY_S)) {
             sceneChanged = true;
-            cameraInc.z = 1;
+            cameraInc.z = 4;
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
             sceneChanged = true;
-            cameraInc.x = -1;
+            cameraInc.x = -4;
         } else if (window.isKeyPressed(GLFW_KEY_D)) {
             sceneChanged = true;
-            cameraInc.x = 1;
+            cameraInc.x = 4;
         }
         if (window.isKeyPressed(GLFW_KEY_Z)) {
             sceneChanged = true;
-            cameraInc.y = -1;
+            cameraInc.y = -4;
         } else if (window.isKeyPressed(GLFW_KEY_X)) {
             sceneChanged = true;
-            cameraInc.y = 1;
+            cameraInc.y = 4;
         }
         if (window.isKeyPressed(GLFW_KEY_LEFT)) {
             sceneChanged = true;
