@@ -1,12 +1,13 @@
 package net.thegaminghuskymc.sandboxgame.engine.items;
 
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.loaders.obj.OBJLoader;
 import org.joml.Vector4f;
 
-public class SkyBox extends GameItem {
+public class SkyBox extends Block {
 
     public SkyBox(String objModel, String textureFile) throws Exception {
         super();

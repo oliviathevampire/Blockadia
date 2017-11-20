@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Block extends GameItem {
+public class Block {
 
     private boolean selected;
 
@@ -32,8 +32,9 @@ public class Block extends GameItem {
         scale = 1;
         rotation = new Quaternionf();
         textPos = 0;
-        insideFrustum = true;
+        insideFrustum = false;
         disableFrustumCulling = false;
+//        render();
     }
 
     public Block(Mesh mesh) {
@@ -46,84 +47,86 @@ public class Block extends GameItem {
         this.meshes = meshes;
     }
 
-    public void Render() {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glLoadIdentity();
-
-        GL11.glTranslatef(0f,0.0f,-7f);
-        GL11.glRotatef(45f,0.0f,1.0f,0.0f);
-        GL11.glColor3f(0.5f,0.5f,1.0f);
-
-        GL11.glBegin(GL11.GL_QUADS);
-        GL11.glColor3f(1.0f,1.0f,0.0f);
-        GL11.glVertex3f( 1.0f, 1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f( 1.0f, 1.0f, 1.0f);
-        GL11.glColor3f(1.0f,0.5f,0.0f);
-        GL11.glVertex3f( 1.0f,-1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f,-1.0f);
-        GL11.glVertex3f( 1.0f,-1.0f,-1.0f);
-        GL11.glColor3f(1.0f,0.0f,0.0f);
-        GL11.glVertex3f( 1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f, 1.0f);
-        GL11.glVertex3f( 1.0f,-1.0f, 1.0f);
-        GL11.glColor3f(1.0f,1.0f,0.0f);
-        GL11.glVertex3f( 1.0f,-1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f,-1.0f);
-        GL11.glVertex3f( 1.0f, 1.0f,-1.0f);
-        GL11.glColor3f(0.0f,0.0f,1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f,-1.0f);
-        GL11.glVertex3f(-1.0f,-1.0f, 1.0f);
-        GL11.glColor3f(1.0f,0.0f,1.0f);
-        GL11.glVertex3f( 1.0f, 1.0f,-1.0f);
-        GL11.glVertex3f( 1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f( 1.0f,-1.0f, 1.0f);
-        GL11.glVertex3f( 1.0f,-1.0f,-1.0f);
-        GL11.glEnd();
-
+    public Vector3f getPosition() {
+        return position;
     }
 
-    public void renderCubes() {
-        GL11.glBegin(GL11.GL_QUADS);
-        GL11.glColor3f(0.0f, 1.0f, 0.0f);
-        GL11.glVertex3f(1.0f, 1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(1.0f, 1.0f, 1.0f);
-        GL11.glColor3f(1.0f, 0.5f, 0.0f);
-        GL11.glVertex3f(1.0f, -1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, -1.0f);
-        GL11.glVertex3f(1.0f, -1.0f, -1.0f);
-        GL11.glColor3f(1.0f, 0.0f, 0.0f);
-        GL11.glVertex3f(1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, 1.0f);
-        GL11.glVertex3f(1.0f, -1.0f, 1.0f);
-        GL11.glColor3f(1.0f, 1.0f, 0.0f);
-        GL11.glVertex3f(1.0f, -1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, -1.0f);
-        GL11.glVertex3f(1.0f, 1.0f, -1.0f);
-        GL11.glColor3f(0.0f, 0.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(-1.0f, 1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, -1.0f);
-        GL11.glVertex3f(-1.0f, -1.0f, 1.0f);
-        GL11.glColor3f(1.0f, 0.0f, 1.0f);
-        GL11.glVertex3f(1.0f, 1.0f, -1.0f);
-        GL11.glVertex3f(1.0f, 1.0f, 1.0f);
-        GL11.glVertex3f(1.0f, -1.0f, 1.0f);
-        GL11.glVertex3f(1.0f, -1.0f, -1.0f);
-        GL11.glEnd();
+    public int getTextPos() {
+        return textPos;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public final void setPosition(float x, float y, float z) {
+        this.position.x = x;
+        this.position.y = y;
+        this.position.z = z;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    public final void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    public Quaternionf getRotation() {
+        return rotation;
+    }
+
+    public final void setRotation(Quaternionf q) {
+        this.rotation.set(q);
+    }
+
+    public Mesh getMesh() {
+        return meshes[0];
+    }
+
+    public Mesh[] getMeshes() {
+        return meshes;
+    }
+
+    public void setMeshes(Mesh[] meshes) {
+        this.meshes = meshes;
+    }
+
+    public void setMesh(Mesh mesh) {
+        this.meshes = new Mesh[]{mesh};
+    }
+
+    public void cleanup() {
+        int numMeshes = this.meshes != null ? this.meshes.length : 0;
+        for (int i = 0; i < numMeshes; i++) {
+            this.meshes[i].cleanUp();
+        }
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public void setTextPos(int textPos) {
+        this.textPos = textPos;
+    }
+
+    public boolean isInsideFrustum() {
+        return insideFrustum;
+    }
+
+    public void setInsideFrustum(boolean insideFrustum) {
+        this.insideFrustum = insideFrustum;
+    }
+
+    public boolean isDisableFrustumCulling() {
+        return disableFrustumCulling;
+    }
+
+    public void setDisableFrustumCulling(boolean disableFrustumCulling) {
+        this.disableFrustumCulling = disableFrustumCulling;
+    }
 
     public void render() {
 

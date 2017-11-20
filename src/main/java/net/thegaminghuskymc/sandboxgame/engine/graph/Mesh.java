@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -194,13 +194,13 @@ public class Mesh {
         endRender();
     }
 
-    public void renderList(List<GameItem> gameItems, Consumer<GameItem> consumer) {
+    public void renderList(List<Block> Blocks, Consumer<Block> consumer) {
         initRender();
 
-        for (GameItem gameItem : gameItems) {
-            if (gameItem.isInsideFrustum()) {
-                // Set up data requiered by gameItem
-                consumer.accept(gameItem);
+        for (Block Block : Blocks) {
+            if (Block.isInsideFrustum()) {
+                // Set up data requiered by Block
+                consumer.accept(Block);
                 // Render this game item
                 glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
             }

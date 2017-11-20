@@ -10,5 +10,6 @@
 		<level name="KotlinJavaRuntime (2)" value="project"/>
 		<level name="jars" value="project"/>
 		<level name="PNGDecoder" value="project"/>
+		<level name="commons-io-2.5" value="project"/>
 	</levels>
 </component>

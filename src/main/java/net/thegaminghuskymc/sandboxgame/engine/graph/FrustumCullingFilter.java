@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.FrustumIntersection;
 import org.joml.Matrix4f;
@@ -27,17 +28,17 @@ public class FrustumCullingFilter {
         frustumInt.set(prjViewMatrix);
     }
 
-    public void filter(Map<? extends Mesh, List<GameItem>> mapMesh) {
-        for (Map.Entry<? extends Mesh, List<GameItem>> entry : mapMesh.entrySet()) {
-            List<GameItem> gameItems = entry.getValue();
+    public void filter(Map<? extends Mesh, List<Block>> mapMesh) {
+        for (Map.Entry<? extends Mesh, List<Block>> entry : mapMesh.entrySet()) {
+            List<Block> gameItems = entry.getValue();
             filter(gameItems, entry.getKey().getBoundingRadius());
         }
     }
 
-    public void filter(List<GameItem> gameItems, float meshBoundingRadius) {
+    public void filter(List<Block> gameItems, float meshBoundingRadius) {
         float boundingRadius;
         Vector3f pos;
-        for (GameItem gameItem : gameItems) {
+        for (Block gameItem : gameItems) {
             if (!gameItem.isDisableFrustumCulling()) {
                 boundingRadius = gameItem.getScale() * meshBoundingRadius;
                 pos = gameItem.getPosition();

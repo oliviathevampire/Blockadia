@@ -1,12 +1,14 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph.anim;
 
+import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.IGameItemThingy;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.Matrix4f;
 
 import java.util.List;
 
-public class AnimGameItem extends GameItem {
+public class AnimGameItem extends Block {
 
     private int currentFrame;
     

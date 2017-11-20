@@ -3,6 +3,7 @@ package net.thegaminghuskymc.sandboxgame.game;
 import net.thegaminghuskymc.sandboxgame.engine.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
+import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.loaders.obj.OBJLoader;
@@ -48,7 +49,7 @@ public class DummyGame implements IGameLogic {
 
     private boolean sceneChanged;
 
-    private GameItem[] gameItems;
+    private Block[] blocks;
 
     public DummyGame() {
         renderer = new Renderer();
@@ -105,37 +106,181 @@ public class DummyGame implements IGameLogic {
         bb.flip();
 
         int instances = w * h;
-        Mesh mesh = OBJLoader.loadMesh("/models/cube.obj", instances);
+        float[] positions = new float[] {
+                // V0
+                -1f, 1f, 1f,
+                // V1
+                -1f, -1f, 1f,
+                // V2
+                1f, -1f, 1f,
+                // V3
+                1f, 1f, 1f,
+                // V4
+                -1f, 1f, -1f,
+                // V5
+                1f, 1f, -1f,
+                // V6
+                -1f, -1f, -1f,
+                // V7
+                1f, -1f, -1f,
+
+                // For text coords in top face
+                // V8: V4 repeated
+                -1f, 1f, -1f,
+                // V9: V5 repeated
+                1f, 1f, -1f,
+                // V10: V0 repeated
+                -1f, 1f, 1f,
+                // V11: V3 repeated
+                1f, 1f, 1f,
+
+                // For text coords in right face
+                // V12: V3 repeated
+                1f, 1f, 1f,
+                // V13: V2 repeated
+                1f, -1f, 1f,
+
+                // For text coords in left face
+                // V14: V0 repeated
+                -1f, 1f, 1f,
+                // V15: V1 repeated
+                -1f, -1f, 1f,
+
+                // For text coords in bottom face
+                // V16: V6 repeated
+                -1f, -1f, -1f,
+                // V17: V7 repeated
+                1f, -1f, -1f,
+                // V18: V1 repeated
+                -1f, -1f, 1f,
+                // V19: V2 repeated
+                1f, -1f, 1f,
+        };
+        float[] textCoords = new float[]{
+                0.0f, 0.0f,
+                0.0f, 1f,
+                1f, 1f,
+                1f, 0.0f,
+
+                0.0f, 0.0f,
+                1f, 0.0f,
+                0.0f, 1f,
+                1f, 1f,
+
+                // For text coords in top face
+                0.0f, 0.5f,
+                0.5f, 0.5f,
+                0.0f, 1.0f,
+                0.5f, 1.0f,
+
+                // For text coords in right face
+                0.0f, 0.0f,
+                0.0f, 1f,
+
+                // For text coords in left face
+                1f, 0.0f,
+                1f, 1f,
+
+                // For text coords in bottom face
+                0.5f, 0.0f,
+                1.0f, 0.0f,
+                0.5f, 0.5f,
+                1.0f, 0.5f,
+        };
+        int[] indices = new int[]{
+                // Front face
+                0, 1, 3, 3, 1, 2,
+                // Top Face
+                8, 10, 11, 9, 8, 11,
+                // Right face
+                12, 13, 7, 5, 12, 7,
+                // Left face
+                14, 15, 6, 4, 14, 6,
+                // Bottom face
+                16, 18, 19, 17, 16, 19,
+                // Back face
+                4, 6, 7, 5, 4, 7,};
+        float[] normals = new float[]{
+                // V0
+                -1.0f, 1.0f, 1.0f,
+                // V1
+                -1.0f, -1.0f, 1.0f,
+                // V2
+                1.0f, -1.0f, 1.0f,
+                // V3
+                1.0f, 1.0f, 1.0f,
+                // V4
+                -1.0f, 1.0f, -1.0f,
+                // V5
+                1.0f, 1.0f, -1.0f,
+                // V6
+                -1.0f, -1.0f, -1.0f,
+                // V7
+                1.0f, -1.0f, -1.0f,
+
+                // For text coords in top face
+                // V8: V4 repeated
+                -1.0f, 1.0f, -1.0f,
+                // V9: V5 repeated
+                1.0f, 1.0f, -1.0f,
+                // V10: V0 repeated
+                -1.0f, 1.0f, 1.0f,
+                // V11: V3 repeated
+                1.0f, 1.0f, 1.0f,
+
+                // For text coords in right face
+                // V12: V3 repeated
+                1.0f, 1.0f, 1.0f,
+                // V13: V2 repeated
+                1.0f, -1.0f, 1.0f,
+
+                // For text coords in left face
+                // V14: V0 repeated
+                -1.0f, 1.0f, 1.0f,
+                // V15: V1 repeated
+                -1.0f, -1.0f, 1.0f,
+
+                // For text coords in bottom face
+                // V16: V6 repeated
+                -1.0f, -1.0f, -1.0f,
+                // V17: V7 repeated
+                1.0f, -1.0f, -1.0f,
+                // V18: V1 repeated
+                -1.0f, -1.0f, 1.0f,
+                // V19: V2 repeated
+                1.0f, -1.0f, 1.0f,
+        };
+        Mesh mesh = new Mesh(positions, textCoords, normals, indices);
         mesh.setBoundingRadius(2);
-        Texture texture = new Texture("/textures/terrain_textures.png", 1, 1);
+        Texture texture = new Texture("/textures/terrain_textures.png", 2, 1);
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
-        gameItems = new GameItem[instances];
+        blocks = new Block[instances];
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
-                GameItem gameItem = new GameItem(mesh);
-                gameItem.setScale(blockScale);
+                Block block = new Block(mesh);
+                block.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
-                gameItem.setPosition(posx, starty + incy, posz);
-                int textPos = Math.random() > 0.5f ? 0 : 1;
-                gameItem.setTextPos(textPos);
-                gameItems[i * w + j] = gameItem;
+                block.setPosition(posx, starty + incy, posz);
+                int textPos = Math.random() > 1.0f ? 0 : 1;
+                block.setTextPos(textPos);
+                blocks[i * w + j] = block;
 
                 posx += inc;
             }
             posx = startx;
             posz -= inc;
         }
-        scene.setGameItems(gameItems);
+        scene.setGameItems(blocks);
 
 
         // Shadows
         scene.setRenderShadows(true);
 
         // Fog
-        /*Vector3f fogColour = new Vector3f(0.5f, 0.5f, 0.5f);
-        scene.setFog(new Fog(true, fogColour, 0.02f));*/
+        Vector3f fogColour = new Vector3f(0.5f, 0.5f, 0.5f);
+        scene.setFog(new Fog(true, fogColour, 0.02f));
 
         // Setup  SkyBox
         SkyBox skyBox = new SkyBox("/models/skybox.obj", new Vector4f(0.65f, 0.65f, 0.65f, 1.0f));
@@ -249,13 +394,8 @@ public class DummyGame implements IGameLogic {
         lightDirection.z = zValue;
         lightDirection.normalize();
 
-//        particleEmitter.update((long) (interval * 1000));
-
         // Update view matrix
         camera.updateViewMatrix();
-
-        // Update sound listener position;
-//        soundMgr.updateListenerPosition(camera);
     }
 
     @Override

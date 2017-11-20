@@ -1,12 +1,14 @@
-package net.thegaminghuskymc.sandboxgame.engine.items;
+package net.thegaminghuskymc.sandboxgame.engine;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class GameItem {
+public class Entity {
 
-    private boolean selected;
+    private boolean lookedOn;
+
+    private boolean isAgressive;
 
     private Mesh[] meshes;
 
@@ -22,8 +24,9 @@ public class GameItem {
 
     private boolean insideFrustum;
 
-    public GameItem() {
-        selected = false;
+    public Entity() {
+        lookedOn = false;
+        isAgressive = false;
         position = new Vector3f(0, 0, 0);
         scale = 1;
         rotation = new Quaternionf();
@@ -32,12 +35,12 @@ public class GameItem {
         disableFrustumCulling = false;
     }
 
-    public GameItem(Mesh mesh) {
+    public Entity(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
     }
 
-    public GameItem(Mesh[] meshes) {
+    public Entity(Mesh[] meshes) {
         this();
         this.meshes = meshes;
     }
@@ -50,8 +53,12 @@ public class GameItem {
         return textPos;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public boolean isLookedOn() {
+        return lookedOn;
+    }
+
+    public boolean isAgressive() {
+        return isAgressive;
     }
 
     public final void setPosition(float x, float y, float z) {
@@ -99,8 +106,12 @@ public class GameItem {
         }
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setLookedOn(boolean lookedOn) {
+        this.lookedOn = lookedOn;
+    }
+
+    public void setIsAgressive(boolean isAgressive) {
+        this.isAgressive = isAgressive;
     }
 
     public void setTextPos(int textPos) {

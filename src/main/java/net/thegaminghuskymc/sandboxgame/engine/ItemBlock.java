@@ -1,12 +1,10 @@
-package net.thegaminghuskymc.sandboxgame.engine.items;
+package net.thegaminghuskymc.sandboxgame.engine;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class GameItem {
-
-    private boolean selected;
+public class ItemBlock {
 
     private Mesh[] meshes;
 
@@ -17,13 +15,16 @@ public class GameItem {
     private final Quaternionf rotation;
 
     private int textPos;
-    
+
     private boolean disableFrustumCulling;
 
     private boolean insideFrustum;
 
-    public GameItem() {
-        selected = false;
+    private Block block;
+
+    private Item item;
+
+    public ItemBlock() {
         position = new Vector3f(0, 0, 0);
         scale = 1;
         rotation = new Quaternionf();
@@ -32,12 +33,22 @@ public class GameItem {
         disableFrustumCulling = false;
     }
 
-    public GameItem(Mesh mesh) {
+    public ItemBlock(Block block) {
+        this();
+        this.block = block;
+    }
+
+    public ItemBlock(Item item) {
+        this();
+        this.item = item;
+    }
+
+    public ItemBlock(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
     }
 
-    public GameItem(Mesh[] meshes) {
+    public ItemBlock(Mesh[] meshes) {
         this();
         this.meshes = meshes;
     }
@@ -48,10 +59,6 @@ public class GameItem {
 
     public int getTextPos() {
         return textPos;
-    }
-
-    public boolean isSelected() {
-        return selected;
     }
 
     public final void setPosition(float x, float y, float z) {
@@ -76,6 +83,18 @@ public class GameItem {
         this.rotation.set(q);
     }
 
+    public Block setBlock(Block block) {
+        this.block = block;
+        return block;
+    }
+
+    public Item setItem(Item item) {
+        this.item = item;
+        return item;
+    }
+
+//    public ItemBlock getItemBlock()
+
     public Mesh getMesh() {
         return meshes[0];
     }
@@ -92,15 +111,19 @@ public class GameItem {
         this.meshes = new Mesh[]{mesh};
     }
 
+    public Block getBlock() {
+        return block;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
     public void cleanup() {
         int numMeshes = this.meshes != null ? this.meshes.length : 0;
         for (int i = 0; i < numMeshes; i++) {
             this.meshes[i].cleanUp();
         }
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
     }
 
     public void setTextPos(int textPos) {

@@ -1,9 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
-import net.thegaminghuskymc.sandboxgame.engine.Scene;
-import net.thegaminghuskymc.sandboxgame.engine.SceneLight;
-import net.thegaminghuskymc.sandboxgame.engine.Utils;
-import net.thegaminghuskymc.sandboxgame.engine.Window;
+import net.thegaminghuskymc.sandboxgame.engine.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimGameItem;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimatedFrame;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
@@ -45,7 +42,7 @@ public class Renderer {
 
     private final FrustumCullingFilter frustumFilter;
 
-    private final List<GameItem> filteredItems;
+    private final List<Block> filteredItems;
 
     public Renderer() {
         transformation = new Transformation();
@@ -268,7 +265,7 @@ public class Renderer {
         sceneShaderProgram.setUniform("isInstanced", 0);
 
         // Render each mesh with the associated game Items
-        Map<Mesh, List<GameItem>> mapMeshes = scene.getGameMeshes();
+        Map<Mesh, List<Block>> mapMeshes = scene.getGameMeshes();
         for (Mesh mesh : mapMeshes.keySet()) {
             sceneShaderProgram.setUniform("material", mesh.getMaterial());
 
@@ -280,7 +277,7 @@ public class Renderer {
 
             shadowRenderer.bindTextures(GL_TEXTURE2);
 
-            mesh.renderList(mapMeshes.get(mesh), (GameItem gameItem) -> {
+            mesh.renderList(mapMeshes.get(mesh), (Block gameItem) -> {
                 sceneShaderProgram.setUniform("selectedNonInstanced", gameItem.isSelected() ? 1.0f : 0.0f);
                 Matrix4f modelMatrix = transformation.buildModelMatrix(gameItem);
                 sceneShaderProgram.setUniform("modelNonInstancedMatrix", modelMatrix);
@@ -298,7 +295,7 @@ public class Renderer {
         sceneShaderProgram.setUniform("isInstanced", 1);
 
         // Render each mesh with the associated game Items
-        Map<InstancedMesh, List<GameItem>> mapMeshes = scene.getGameInstancedMeshes();
+        Map<InstancedMesh, List<Block>> mapMeshes = scene.getGameInstancedMeshes();
         for (InstancedMesh mesh : mapMeshes.keySet()) {
             Texture text = mesh.getMaterial().getTexture();
             if (text != null) {
@@ -309,7 +306,7 @@ public class Renderer {
             sceneShaderProgram.setUniform("material", mesh.getMaterial());
 
             filteredItems.clear();
-            for (GameItem gameItem : mapMeshes.get(mesh)) {
+            for (Block gameItem : mapMeshes.get(mesh)) {
                 if (gameItem.isInsideFrustum()) {
                     filteredItems.add(gameItem);
                 }

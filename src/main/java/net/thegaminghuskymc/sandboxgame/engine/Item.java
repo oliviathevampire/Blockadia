@@ -1,12 +1,12 @@
-package net.thegaminghuskymc.sandboxgame.engine.items;
+package net.thegaminghuskymc.sandboxgame.engine;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class GameItem {
+public class Item {
 
-    private boolean selected;
+    private boolean held;
 
     private Mesh[] meshes;
 
@@ -22,8 +22,8 @@ public class GameItem {
 
     private boolean insideFrustum;
 
-    public GameItem() {
-        selected = false;
+    public Item() {
+        held = false;
         position = new Vector3f(0, 0, 0);
         scale = 1;
         rotation = new Quaternionf();
@@ -32,14 +32,22 @@ public class GameItem {
         disableFrustumCulling = false;
     }
 
-    public GameItem(Mesh mesh) {
+    public Item(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
     }
 
-    public GameItem(Mesh[] meshes) {
+    public Item(Block block) {
+        this();
+    }
+
+    public Item(Mesh[] meshes) {
         this();
         this.meshes = meshes;
+    }
+
+    public Item getItemFromBlock(Block block) {
+        return new Item(block);
     }
 
     public Vector3f getPosition() {
@@ -50,8 +58,8 @@ public class GameItem {
         return textPos;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public boolean isHeld() {
+        return held;
     }
 
     public final void setPosition(float x, float y, float z) {
@@ -99,8 +107,8 @@ public class GameItem {
         }
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setIsHeld(boolean isHeld) {
+        this.held = isHeld;
     }
 
     public void setTextPos(int textPos) {

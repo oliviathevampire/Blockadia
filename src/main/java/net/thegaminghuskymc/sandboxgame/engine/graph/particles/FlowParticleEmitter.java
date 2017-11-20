@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph.particles;
 
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class FlowParticleEmitter implements IParticleEmitter {
 
     private boolean active;
 
-    private final List<GameItem> particles;
+    private final List<Block> particles;
 
     private final Particle baseParticle;
 
@@ -52,7 +52,7 @@ public class FlowParticleEmitter implements IParticleEmitter {
     }
 
     @Override
-    public List<GameItem> getParticles() {
+    public List<Block> getParticles() {
         return particles;
     }
 
@@ -105,7 +105,7 @@ public class FlowParticleEmitter implements IParticleEmitter {
         if (lastCreationTime == 0) {
             lastCreationTime = now;
         }
-        Iterator<? extends GameItem> it = particles.iterator();
+        Iterator<? extends Block> it = particles.iterator();
         while (it.hasNext()) {
             Particle particle = (Particle) it.next();
             if (particle.updateTtl(elapsedTime) < 0) {
@@ -154,7 +154,7 @@ public class FlowParticleEmitter implements IParticleEmitter {
 
     @Override
     public void cleanup() {
-        for (GameItem particle : getParticles()) {
+        for (Block particle : getParticles()) {
             particle.cleanup();
         }
     }

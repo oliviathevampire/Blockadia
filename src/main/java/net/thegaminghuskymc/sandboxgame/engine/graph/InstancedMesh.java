@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
 
@@ -101,39 +101,39 @@ public class InstancedMesh extends Mesh {
         super.endRender();
     }
 
-    public void renderListInstanced(List<GameItem> GameItems, Transformation transformation, Matrix4f viewMatrix) {
-        renderListInstanced(GameItems, false, transformation, viewMatrix);
+    public void renderListInstanced(List<Block> Blocks, Transformation transformation, Matrix4f viewMatrix) {
+        renderListInstanced(Blocks, false, transformation, viewMatrix);
     }
 
-    public void renderListInstanced(List<GameItem> GameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
+    public void renderListInstanced(List<Block> Blocks, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
         initRender();
 
         int chunkSize = numInstances;
-        int length = GameItems.size();
+        int length = Blocks.size();
         for (int i = 0; i < length; i += chunkSize) {
             int end = Math.min(length, i + chunkSize);
-            List<GameItem> subList = GameItems.subList(i, end);
+            List<Block> subList = Blocks.subList(i, end);
             renderChunkInstanced(subList, billBoard, transformation, viewMatrix);
         }
 
         endRender();
     }
 
-    private void renderChunkInstanced(List<GameItem> GameItems, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
+    private void renderChunkInstanced(List<Block> Blocks, boolean billBoard, Transformation transformation, Matrix4f viewMatrix) {
         this.instanceDataBuffer.clear();
 
         int i = 0;
 
         Texture text = getMaterial().getTexture();
-        for (GameItem GameItem : GameItems) {
-            Matrix4f modelMatrix = transformation.buildModelMatrix(GameItem);
+        for (Block Block : Blocks) {
+            Matrix4f modelMatrix = transformation.buildModelMatrix(Block);
             if (viewMatrix != null && billBoard) {
                 viewMatrix.transpose3x3(modelMatrix);
             }
             modelMatrix.get(INSTANCE_SIZE_FLOATS * i, instanceDataBuffer);
             if (text != null) {
-                int col = GameItem.getTextPos() % text.getNumCols();
-                int row = GameItem.getTextPos() / text.getNumCols();
+                int col = Block.getTextPos() % text.getNumCols();
+                int row = Block.getTextPos() / text.getNumCols();
                 float textXOffset = (float) col / text.getNumCols();
                 float textYOffset = (float) row / text.getNumRows();
                 int buffPos = INSTANCE_SIZE_FLOATS * i + MATRIX_SIZE_FLOATS;
@@ -143,7 +143,7 @@ public class InstancedMesh extends Mesh {
 
             // Selected data or scaling for billboard
             int buffPos = INSTANCE_SIZE_FLOATS * i + MATRIX_SIZE_FLOATS + 2;
-            this.instanceDataBuffer.put(buffPos, billBoard ? GameItem.getScale() : GameItem.isSelected() ? 1 : 0);
+            this.instanceDataBuffer.put(buffPos, billBoard ? Block.getScale() : Block.isSelected() ? 1 : 0);
 
             i++;
         }
@@ -152,7 +152,7 @@ public class InstancedMesh extends Mesh {
         glBufferData(GL_ARRAY_BUFFER, instanceDataBuffer, GL_DYNAMIC_READ);
 
         glDrawElementsInstanced(
-                GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0, GameItems.size());
+                GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0, Blocks.size());
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }

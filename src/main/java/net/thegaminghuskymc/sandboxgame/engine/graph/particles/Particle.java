@@ -2,10 +2,10 @@ package net.thegaminghuskymc.sandboxgame.engine.graph.particles;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
+import net.thegaminghuskymc.sandboxgame.engine.Block;
 import org.joml.Vector3f;
 
-public class Particle extends GameItem {
+public class Particle extends Block {
 
     private long updateTextureMillis;
     
