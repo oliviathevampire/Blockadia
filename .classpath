@@ -10,5 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jars"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PNGDecoder"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/commons-io-2.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ibxm"/>
 	<classpathentry kind="output" path="out/production/Husky's Sandbox Game"/>
 </classpath>

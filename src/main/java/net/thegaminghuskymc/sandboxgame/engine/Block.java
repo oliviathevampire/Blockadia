@@ -34,17 +34,19 @@ public class Block {
         textPos = 0;
         insideFrustum = false;
         disableFrustumCulling = false;
-//        render();
+        render();
     }
 
     public Block(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
+        render();
     }
 
     public Block(Mesh[] meshes) {
         this();
         this.meshes = meshes;
+        render();
     }
 
     public Vector3f getPosition() {

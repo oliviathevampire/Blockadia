@@ -11,5 +11,6 @@
 		<level name="jars" value="project"/>
 		<level name="PNGDecoder" value="project"/>
 		<level name="commons-io-2.5" value="project"/>
+		<level name="ibxm" value="project"/>
 	</levels>
 </component>

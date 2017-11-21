@@ -4,9 +4,7 @@ import net.thegaminghuskymc.sandboxgame.engine.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
-import net.thegaminghuskymc.sandboxgame.engine.loaders.obj.OBJLoader;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -88,6 +86,8 @@ public class DummyGame implements IGameLogic {
         float incy = 0.0f;
 
         selectDetector = new MouseBoxSelectionDetector();
+
+        HeightsGenerator heightsGenerator = new HeightsGenerator();
 
         BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/textures/heightmap.png"));
         int w = image.getWidth();
@@ -193,13 +193,14 @@ public class DummyGame implements IGameLogic {
                 // Top Face
                 8, 10, 11, 9, 8, 11,
                 // Right face
-                12, 13, 7, 5, 12, 7,
+                7, 13, 12, 7, 12, 5,
                 // Left face
-                14, 15, 6, 4, 14, 6,
+                15, 14, 6, 6, 14, 4,
                 // Bottom face
-                16, 18, 19, 17, 16, 19,
+                19, 18, 16, 19, 16, 17,
                 // Back face
-                4, 6, 7, 5, 4, 7,};
+                7, 6, 4, 7, 4, 5
+        };
         float[] normals = new float[]{
                 // V0
                 -1.0f, 1.0f, 1.0f,
@@ -256,14 +257,15 @@ public class DummyGame implements IGameLogic {
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
         blocks = new Block[instances];
-        for (int i = 0; i < h; i++) {
+        for (int i = 0; i < heightsGenerator.generateHeight(w, h); i++) {
             for (int j = 0; j < w; j++) {
+                OpenGlUtils.goWireframe(true);
                 Block block = new Block(mesh);
                 block.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
                 block.setPosition(posx, starty + incy, posz);
-                int textPos = Math.random() > 1.0f ? 0 : 1;
+                int textPos = Math.random() > 0.5f ? 0 : 1;
                 block.setTextPos(textPos);
                 blocks[i * w + j] = block;
 
