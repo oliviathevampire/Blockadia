@@ -2,6 +2,7 @@ package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
+import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
