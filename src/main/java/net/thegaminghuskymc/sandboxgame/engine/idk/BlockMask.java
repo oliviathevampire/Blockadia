@@ -16,7 +16,7 @@ public class BlockMask implements Renderable {
 	public static final float OUTLINE_B = 0.5f;
 	public static final float OUTLINE_WIDTH = 4f;
 	
-	public static enum index { TOP, BOTTOM, LEFT, RIGHT, NEAR, FAR }
+	public enum index { TOP, BOTTOM, LEFT, RIGHT, NEAR, FAR }
 	
 	public Block block;
 

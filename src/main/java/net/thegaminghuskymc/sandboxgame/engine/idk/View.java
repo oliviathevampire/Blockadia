@@ -37,13 +37,13 @@ public class View {
 	 * Initializes OpenGL
 	 */
 	public void init() {
-		int width = glfwGetVideoMode();
+		/*int width = glfwGetVideoMode();
 		int height = (int)glfwGetPrimaryMonitor();
 
 		glViewport(0, 0, width, height);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		GLU.gluPerspective(45.0f, ((float) width / (float) height), 0.1f, 256.0f);
+		//		GLU.gluPerspective(45.0f, ((float) width / (float) height), 0.1f, 256.0f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
@@ -54,7 +54,7 @@ public class View {
 		glDepthFunc(GL_LEQUAL);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-		this.run();
+		this.run();*/
 	}
 
 	/**

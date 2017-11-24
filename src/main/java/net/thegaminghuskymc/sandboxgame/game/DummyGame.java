@@ -258,14 +258,14 @@ public class DummyGame implements IGameLogic {
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
         blocks = new Block[instances];
-        for (int i = 0; i < heightsGenerator.generateHeight(w, h); i++) {
+        for (int i = 0; i < w; i++) {
             for (int j = 0; j < w; j++) {
-                OpenGlUtils.goWireframe(true);
                 Block block = new Block(mesh);
                 block.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
                 block.setPosition(posx, starty + incy, posz);
+                net.thegaminghuskymc.sandboxgame.engine.idk.Perlin.perlin2D(w, h);
                 int textPos = Math.random() > 0.5f ? 0 : 1;
                 block.setTextPos(textPos);
                 blocks[i * w + j] = block;

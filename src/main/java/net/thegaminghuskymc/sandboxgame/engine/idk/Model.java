@@ -7,9 +7,6 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  * 
  */
 
-import nexus.model.structs.Camera;
-import nexus.model.structs.ChunkContainer;
-
 public class Model implements Runnable {
 	public static final long SLEEPTIME = 15l;
 	
