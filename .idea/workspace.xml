@@ -12,15 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f20e5d-dbf4-441d-aa6b-0c2e6338e830" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_crafting.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_storage.json" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/cube.obj" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/plane.obj" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/quad.obj" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -104,11 +96,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemBlock.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ItemBlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+            <state relative-caret-position="272">
+              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DummyGame.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="252" column="99" lean-forward="false" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="99" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MouseBoxSelectionDetector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -623,7 +635,6 @@
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumFacing.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ITextComponent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumParticleTypes.java" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_crafting.json" />
@@ -631,6 +642,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_storage.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
       </list>
     </option>
   </component>
@@ -715,16 +727,6 @@
               <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
               <item name="engine" type="462c0819:PsiDirectoryNode" />
               <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="world" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
@@ -1256,14 +1258,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="42" column="40" lean-forward="true" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/Sound.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1284,14 +1278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="214" column="24" lean-forward="true" selection-start-line="214" selection-start-column="24" selection-end-line="214" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1451,8 +1437,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        <state relative-caret-position="272">
+          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="252" column="99" lean-forward="false" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="99" />
           <folding />
         </state>
       </provider>

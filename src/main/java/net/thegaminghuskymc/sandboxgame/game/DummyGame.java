@@ -110,14 +110,14 @@ public class DummyGame implements IGameLogic {
         blocks = new Block[instances];
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                Block gameItem = new Block(mesh);
-                gameItem.setScale(blockScale);
+                block = new Block(mesh);
+                block.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
-                gameItem.setPosition(posx, starty + incy, posz);
+                block.setPosition(posx, starty + incy, posz);
                 int textPos = Math.random() > 0.5f ? 0 : 1;
-                gameItem.setTextPos(textPos);
-                blocks[i * w + j] = gameItem;
+                block.setTextPos(textPos);
+                blocks[i * w + j] = block;
 
                 posx += inc;
             }
@@ -212,7 +212,6 @@ public class DummyGame implements IGameLogic {
         if (window.isKeyPressed(GLFW_KEY_LEFT)) {
             sceneChanged = true;
             angleInc -= 0.0005f;
-            new Block();
         } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
             sceneChanged = true;
             angleInc += 0.0005f;
@@ -250,7 +249,7 @@ public class DummyGame implements IGameLogic {
         // Update view matrix
         camera.updateViewMatrix();
 
-        if (mouseInput.isRightButtonPressed()) {
+        if (mouseInput.isLeftButtonPressed()) {
             this.selectDetector.selectGameItem(blocks, window, mouseInput.getCurrentPos(), camera);
         }
 
