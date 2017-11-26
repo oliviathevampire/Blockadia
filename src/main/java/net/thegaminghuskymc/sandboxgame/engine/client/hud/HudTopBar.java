@@ -28,7 +28,7 @@ public class HudTopBar implements IHudComponent {
             throw new Exception("Could not init nanovg");
         }
 
-        fontBuffer = Utils.ioResourceToByteBuffer("/fonts/OpenSans-Bold.ttf", 150 * 1024);
+        fontBuffer = Utils.ioResourceToByteBuffer("/assets/sandboxgame/fonts/OpenSans-Bold.ttf", 150 * 1024);
         int font = nvgCreateFontMem(vg, FONT_NAME, fontBuffer, 0);
         if (font == -1) {
             throw new Exception("Could not add font");
