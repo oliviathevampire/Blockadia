@@ -12,187 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f20e5d-dbf4-441d-aa6b-0c2e6338e830" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/gdx-0.6-sources.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/gdx-0.6.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/gdx-backend-desktop.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/gdx-dependencies-desktop.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/guava-21.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/log4j-api-2.8.1.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/jars/netty-all-4.1.9.Final.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/ISound.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/ISoundEventAccessor.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/ISoundEventListener.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/Sound.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/SoundEventAccessor.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/IHudComponent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/EnumFaceDirection.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/WorldVertexBufferUploader.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/DefaultVertexFormats.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormatElement.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/EnumDyeColor.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/BlockRenderLayer.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ChatAllowedCharacters.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumActionResult.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumBlockRenderType.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumFacing.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumHand.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumHandSide.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumParticleTypes.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumTypeAdapterFactory.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/FrameTimer.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HudUtils.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IJsonSerializable.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IObjectIntIterable.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IProgressUpdate.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IStringSerializable.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ITabCompleter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IThreadListener.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ITickable.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IntHashMap.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IntIdentityHashBiMap.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/IntegerCache.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/JsonUtils.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/LazyLoadBase.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/LoggingPrintStream.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/LowerStringMap.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/MapPopulator.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Mirror.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ResourceLocation.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Rotation.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundCategory.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/StringUtils.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Util.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/WeightedRandom.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/AxisAlignedBB.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/BlockPos.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/Cartesian.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/MathHelper.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/RayTraceResult.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/Vec2f.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/Vec3d.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/Vec3i.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/registry/IRegistry.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/registry/RegistryDefaulted.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/registry/RegistryNamespaced.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/registry/RegistryNamespacedDefaultedByKey.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/registry/RegistrySimple.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ChatType.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ITextComponent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/Style.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentBase.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentKeybind.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentScore.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentSelector.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentString.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentTranslation.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextComponentTranslationFormatException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/TextFormatting.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/event/ClickEvent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/event/HoverEvent.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/translation/I18n.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/translation/LanguageMap.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/ColorizerGrass.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/EnumDifficulty.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/GameRules.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/GameType.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/IBlockAccess.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/WorldSettings.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/WorldType.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGenerator.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorImproved.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorOctaves.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorPerlin.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorSimplex.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/storage/ISaveFormat.java" />
-      <change beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Husky_s_Sandbox_Game_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Husky_s_Sandbox_Game_jar.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime__2_.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/PNGDecoder.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jars.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Husky's Sandbox Game.eml" afterPath="$PROJECT_DIR$/Husky's Sandbox Game.eml" />
-      <change beforePath="$PROJECT_DIR$/Husky's Sandbox Game.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Block.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/GameEngine.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/GameEngine.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Item.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Item.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/ArrTexture.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/ArrTexture.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/FrustumCullingFilter.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/FrustumCullingFilter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/InstancedMesh.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/InstancedMesh.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Mesh.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Mesh.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Transformation.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Transformation.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/anim/AnimGameItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/anim/AnimGameItem.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/FlowParticleEmitter.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/FlowParticleEmitter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/IParticleEmitter.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/IParticleEmitter.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/Particle.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/particles/Particle.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/shadow/ShadowRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/shadow/ShadowRenderer.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/idk/Controller.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/idk/Controller.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/idk/Renderable.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/idk/Renderable.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/SkyBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/SkyBox.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/TextItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/TextItem.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5AnimHeader.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5AnimModel.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5BaseFrame.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5BoundInfo.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Frame.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Hierarchy.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5JointInfo.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Loader.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Mesh.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Model.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5ModelHeader.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/md5/MD5Utils.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/sound/SoundManager.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/sound/SoundManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/BlockPos.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/BlockPosOld.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Vector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/Vector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Hud.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Hud.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/grass_texture.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/cobblestone.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/diamond_sword.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/grass.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/grassblock.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/heightmap.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/idk_sword.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/placeholder.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/skybox.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/stone.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/stone_brick.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/sword.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/terrain.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/terrain_textures.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/boblamp.md5anim" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/boblamp.md5mesh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/bunny.obj" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/compass.obj" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/cube.obj" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/cube.obj" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/monster.md5anim" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/monster.md5mesh" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/particle.obj" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/misc/particle.obj" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/plane.obj" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/plane.obj" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/quad.obj" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/quad.obj" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/models/skybox.obj" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/misc/skybox.obj" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/textures/icons/icon.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/icons/icon.png" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -249,8 +69,8 @@
       <file leaf-file-name="DummyGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="214" column="24" lean-forward="true" selection-start-line="214" selection-start-column="24" selection-end-line="214" selection-end-column="24" />
+            <state relative-caret-position="315">
+              <caret line="220" column="9" lean-forward="true" selection-start-line="220" selection-start-column="9" selection-end-line="220" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -271,26 +91,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="156">
               <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenGlHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="109" column="42" lean-forward="false" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GlStateManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -913,17 +713,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
               <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="hud" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1137,7 +926,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="32" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.4936034" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3314917" sideWeight="0.42963752" order="7" side_tool="false" content_ui="tabs" />
@@ -1148,7 +936,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2979744" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2979744" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1206,29 +994,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/lwjgl-nanovg-sources.jar!/org/lwjgl/nanovg/NanoVG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1800" column="9" lean-forward="false" selection-start-line="1800" selection-start-column="9" selection-end-line="1800" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="125" column="5" lean-forward="true" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/misc/heightmap.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1617,10 +1382,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/Sound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/SoundEventAccessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="21" column="59" lean-forward="false" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/ISoundEventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="214" column="24" lean-forward="true" selection-start-line="214" selection-start-column="24" selection-end-line="214" selection-end-column="24" />
+        <state relative-caret-position="315">
+          <caret line="220" column="9" lean-forward="true" selection-start-line="220" selection-start-column="9" selection-end-line="220" selection-end-column="9" />
           <folding />
         </state>
       </provider>
