@@ -15,7 +15,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map.Entry;
 
-import net.thegaminghuskymc.sandboxgame.engine.util.EnumTypeAdapterFactory;
 import net.thegaminghuskymc.sandboxgame.engine.util.JsonUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -338,7 +337,6 @@ public interface ITextComponent extends Iterable<ITextComponent>
                 GsonBuilder gsonbuilder = new GsonBuilder();
                 gsonbuilder.registerTypeHierarchyAdapter(ITextComponent.class, new ITextComponent.Serializer());
                 gsonbuilder.registerTypeHierarchyAdapter(Style.class, new Style.Serializer());
-                gsonbuilder.registerTypeAdapterFactory(new EnumTypeAdapterFactory());
                 GSON = gsonbuilder.create();
             }
         }
