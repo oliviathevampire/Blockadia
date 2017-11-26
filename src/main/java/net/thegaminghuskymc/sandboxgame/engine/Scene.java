@@ -1,10 +1,10 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.InstancedMesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.particles.IParticleEmitter;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -46,8 +47,8 @@ public class Item {
         this.meshes = meshes;
     }
 
-    public Item getItemFromBlock(Block block) {
-        return new Item(block);
+    public Block getItemFromBlock(Block block) {
+        return block;
     }
 
     public Vector3f getPosition() {

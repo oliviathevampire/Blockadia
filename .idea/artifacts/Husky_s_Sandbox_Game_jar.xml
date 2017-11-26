@@ -2,7 +2,6 @@
   <artifact type="jar" name="Husky's Sandbox Game:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Husky_s_Sandbox_Game_jar</output-path>
     <root id="archive" name="Husky's Sandbox Game.jar">
-      <element id="module-output" name="Husky's Sandbox Game" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/TWL.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-egl.jar" path-in-jar="/" />
@@ -18,7 +17,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-jawt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-lmdb.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-yoga.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/jars/PNGDecoder.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-assimp.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-nanovg.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/jars/lwjgl-openal.jar" path-in-jar="/" />

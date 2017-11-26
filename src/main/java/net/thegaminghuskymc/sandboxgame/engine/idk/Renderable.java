@@ -12,6 +12,6 @@ public interface Renderable {
 	/**
 	 * Draws the object itself
 	 */
-	public void draw();
+    void draw();
 
 }

@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph.particles;
 
-import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;

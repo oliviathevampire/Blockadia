@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
-import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
 

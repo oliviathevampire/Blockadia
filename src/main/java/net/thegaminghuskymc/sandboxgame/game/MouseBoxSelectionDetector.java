@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.Window;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Camera;
 import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.Matrix4f;
@@ -26,7 +27,7 @@ public class MouseBoxSelectionDetector extends CameraBoxSelectionDetector {
         tmpVec = new Vector4f();
     }
     
-    public boolean selectGameItem(GameItem[] gameItems, Window window, Vector2d mousePos, Camera camera) {
+    public boolean selectGameItem(Block[] gameItems, Window window, Vector2d mousePos, Camera camera) {
         // Transform mouse coordinates into normalized spaze [-1, 1]
         int wdwWitdh = window.getWidth();
         int wdwHeight = window.getHeight();

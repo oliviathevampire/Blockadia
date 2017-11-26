@@ -2,7 +2,7 @@ package net.thegaminghuskymc.sandboxgame.engine.graph.particles;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
-import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import org.joml.Vector3f;
 
 public class Particle extends Block {

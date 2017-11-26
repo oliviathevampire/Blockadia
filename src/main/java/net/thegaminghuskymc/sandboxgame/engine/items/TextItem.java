@@ -18,7 +18,7 @@ public class TextItem extends GameItem {
     
     private String text;
 
-    public TextItem(String text, FontTexture fontTexture) throws Exception {
+    public TextItem(String text, FontTexture fontTexture) {
         super();
         this.text = text;
         this.fontTexture = fontTexture;

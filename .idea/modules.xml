@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Husky's Sandbox Game.iml" filepath="$PROJECT_DIR$/Husky's Sandbox Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game.iml" filepath="$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game_main.iml" group="Husky's_Sandbox_Game" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Husky's_Sandbox_Game_test.iml" group="Husky's_Sandbox_Game" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.items;
 
-import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;

@@ -26,7 +26,7 @@ public class GameEngine implements Runnable {
         this(windowTitle, 400, 400, vSync, opts, gameLogic);
     }
 
-    public GameEngine(String windowTitle, int width, int height, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) throws Exception {
+    public GameEngine(String windowTitle, int width, int height, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) {
         this.windowTitle = windowTitle;
         gameLoopThread = new Thread(this, "GAME_LOOP_THREAD");
         window = new Window(windowTitle, width, height, vSync, opts);

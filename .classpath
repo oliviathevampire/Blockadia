@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="/Husky's Sandbox Game/src/main/java"/>
-	<classpathentry kind="src" path="/Husky's Sandbox Game/src/main/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/scala-sdk-2.12.3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/KotlinJavaRuntime (2)"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jars"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PNGDecoder"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/commons-io-2.5"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ibxm"/>
 	<classpathentry kind="output" path="out/production/Husky's Sandbox Game"/>
 </classpath>

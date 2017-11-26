@@ -8,7 +8,7 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimGameItem;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimatedFrame;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
-import net.thegaminghuskymc.sandboxgame.engine.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import org.joml.Matrix4f;
 
 import java.util.ArrayList;

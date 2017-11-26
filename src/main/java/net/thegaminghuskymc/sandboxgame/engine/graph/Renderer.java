@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
 import net.thegaminghuskymc.sandboxgame.engine.*;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimGameItem;
 import net.thegaminghuskymc.sandboxgame.engine.graph.anim.AnimatedFrame;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
@@ -9,7 +10,6 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.lights.SpotLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.particles.IParticleEmitter;
 import net.thegaminghuskymc.sandboxgame.engine.graph.shadow.ShadowCascade;
 import net.thegaminghuskymc.sandboxgame.engine.graph.shadow.ShadowRenderer;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

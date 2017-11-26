@@ -73,7 +73,7 @@ public class Controller implements Runnable {
 		this.model.camera.update();
 		
 		for (float i = 0f; i < MAX_SELECT_DISTANCE; i += 0.1f) {
-			Vector3 target = model.camera.eye.add(model.camera.unitFocal.scale((float) i));
+			Vector3 target = model.camera.eye.add(model.camera.unitFocal.scale(i));
 
 			if (model.chunks.inBounds(target) && model.chunks.getBlock(target).visible()) {
 				if (target != model.chunks.selected) {

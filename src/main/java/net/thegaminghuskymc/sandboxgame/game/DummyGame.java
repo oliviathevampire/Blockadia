@@ -1,12 +1,15 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.*;
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
+import net.thegaminghuskymc.sandboxgame.engine.util.NoiseGenerator;
+import net.thegaminghuskymc.sandboxgame.engine.world.gen.NoiseGeneratorPerlin;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -15,6 +18,7 @@ import org.lwjgl.BufferUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.util.Random;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -42,8 +46,6 @@ public class DummyGame implements IGameLogic {
 
     private MouseBoxSelectionDetector selectDetector;
 
-    private boolean leftButtonPressed;
-
     private boolean firstTime;
 
     private boolean sceneChanged;
@@ -58,24 +60,20 @@ public class DummyGame implements IGameLogic {
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
         angleInc = 0;
         lightAngle = 90;
-        firstTime = true;
     }
 
     @Override
     public void init(Window window) throws Exception {
         hud.init(window);
         renderer.init(window);
-        soundMgr.init();
-
-        leftButtonPressed = false;
 
         scene = new Scene();
 
         float reflectance = 1f;
 
-        float blockScale = 1f;
+        float blockScale = 0.5f;
         float skyBoxScale = 100.0f;
-        float extension = 2.0f;
+        float extension = 1.0f;
 
         float startx = extension * (-skyBoxScale + blockScale);
         float startz = extension * (skyBoxScale - blockScale);
@@ -84,191 +82,42 @@ public class DummyGame implements IGameLogic {
 
         float posx = startx;
         float posz = startz;
-        float incy = 0.0f;
+        float incy;
 
         selectDetector = new MouseBoxSelectionDetector();
 
-        HeightsGenerator heightsGenerator = new HeightsGenerator();
-
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/textures/heightmap.png"));
+        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/assets/sandboxgame/textures/misc/heightmap.png"));
         int w = image.getWidth();
         int h = image.getHeight();
         int pixels[] = new int[w * h];
         image.getRGB(0, 0, w, h, pixels, 0, w);
         ByteBuffer bb = BufferUtils.createByteBuffer(pixels.length * 4);
-        for (int p : pixels)
-        {
+        for (int p : pixels) {
             bb.put((byte) getRed(p));
             bb.put((byte) getGreen(p));
             bb.put((byte) getBlue(p));
             bb.put((byte) getAlpha(p));
         }
-
         bb.flip();
 
         int instances = w * h;
-        float[] positions = new float[] {
-                // V0
-                -1f, 1f, 1f,
-                // V1
-                -1f, -1f, 1f,
-                // V2
-                1f, -1f, 1f,
-                // V3
-                1f, 1f, 1f,
-                // V4
-                -1f, 1f, -1f,
-                // V5
-                1f, 1f, -1f,
-                // V6
-                -1f, -1f, -1f,
-                // V7
-                1f, -1f, -1f,
-
-                // For text coords in top face
-                // V8: V4 repeated
-                -1f, 1f, -1f,
-                // V9: V5 repeated
-                1f, 1f, -1f,
-                // V10: V0 repeated
-                -1f, 1f, 1f,
-                // V11: V3 repeated
-                1f, 1f, 1f,
-
-                // For text coords in right face
-                // V12: V3 repeated
-                1f, 1f, 1f,
-                // V13: V2 repeated
-                1f, -1f, 1f,
-
-                // For text coords in left face
-                // V14: V0 repeated
-                -1f, 1f, 1f,
-                // V15: V1 repeated
-                -1f, -1f, 1f,
-
-                // For text coords in bottom face
-                // V16: V6 repeated
-                -1f, -1f, -1f,
-                // V17: V7 repeated
-                1f, -1f, -1f,
-                // V18: V1 repeated
-                -1f, -1f, 1f,
-                // V19: V2 repeated
-                1f, -1f, 1f,
-        };
-        float[] textCoords = new float[]{
-                0.0f, 0.0f,
-                0.0f, 1f,
-                1f, 1f,
-                1f, 0.0f,
-
-                0.0f, 0.0f,
-                1f, 0.0f,
-                0.0f, 1f,
-                1f, 1f,
-
-                // For text coords in top face
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.0f, 1.0f,
-                0.5f, 1.0f,
-
-                // For text coords in right face
-                0.0f, 0.0f,
-                0.0f, 1f,
-
-                // For text coords in left face
-                1f, 0.0f,
-                1f, 1f,
-
-                // For text coords in bottom face
-                0.5f, 0.0f,
-                1.0f, 0.0f,
-                0.5f, 0.5f,
-                1.0f, 0.5f,
-        };
-        int[] indices = new int[]{
-                // Front face
-                0, 1, 3, 3, 1, 2,
-                // Top Face
-                8, 10, 11, 9, 8, 11,
-                // Right face
-                7, 13, 12, 7, 12, 5,
-                // Left face
-                15, 14, 6, 6, 14, 4,
-                // Bottom face
-                19, 18, 16, 19, 16, 17,
-                // Back face
-                7, 6, 4, 7, 4, 5
-        };
-        float[] normals = new float[]{
-                // V0
-                -1.0f, 1.0f, 1.0f,
-                // V1
-                -1.0f, -1.0f, 1.0f,
-                // V2
-                1.0f, -1.0f, 1.0f,
-                // V3
-                1.0f, 1.0f, 1.0f,
-                // V4
-                -1.0f, 1.0f, -1.0f,
-                // V5
-                1.0f, 1.0f, -1.0f,
-                // V6
-                -1.0f, -1.0f, -1.0f,
-                // V7
-                1.0f, -1.0f, -1.0f,
-
-                // For text coords in top face
-                // V8: V4 repeated
-                -1.0f, 1.0f, -1.0f,
-                // V9: V5 repeated
-                1.0f, 1.0f, -1.0f,
-                // V10: V0 repeated
-                -1.0f, 1.0f, 1.0f,
-                // V11: V3 repeated
-                1.0f, 1.0f, 1.0f,
-
-                // For text coords in right face
-                // V12: V3 repeated
-                1.0f, 1.0f, 1.0f,
-                // V13: V2 repeated
-                1.0f, -1.0f, 1.0f,
-
-                // For text coords in left face
-                // V14: V0 repeated
-                -1.0f, 1.0f, 1.0f,
-                // V15: V1 repeated
-                -1.0f, -1.0f, 1.0f,
-
-                // For text coords in bottom face
-                // V16: V6 repeated
-                -1.0f, -1.0f, -1.0f,
-                // V17: V7 repeated
-                1.0f, -1.0f, -1.0f,
-                // V18: V1 repeated
-                -1.0f, -1.0f, 1.0f,
-                // V19: V2 repeated
-                1.0f, -1.0f, 1.0f,
-        };
-        Mesh mesh = new Mesh(positions, textCoords, normals, indices);
+        Block block = new Block();
+        Mesh mesh = new Mesh(block.getPositions(), block.getTextCoords(), block.getNormals(), block.getIndices());
         mesh.setBoundingRadius(2);
-        Texture texture = new Texture("/textures/terrain_textures.png", 2, 1);
+        Texture texture = new Texture("/assets/sandboxgame/textures/blocks/terrain_textures.png", 2, 1);
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
         blocks = new Block[instances];
         for (int i = 0; i < w; i++) {
-            for (int j = 0; j < w; j++) {
-                Block block = new Block(mesh);
-                block.setScale(blockScale);
+            for (int j = 0; j < h; j++) {
+                Block gameItem = new Block(mesh);
+                gameItem.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
-                block.setPosition(posx, starty + incy, posz);
-                net.thegaminghuskymc.sandboxgame.engine.idk.Perlin.perlin2D(w, h);
+                gameItem.setPosition(posx, starty + incy, posz);
                 int textPos = Math.random() > 0.5f ? 0 : 1;
-                block.setTextPos(textPos);
-                blocks[i * w + j] = block;
+                gameItem.setTextPos(textPos);
+                blocks[i * w + j] = gameItem;
 
                 posx += inc;
             }
@@ -283,10 +132,10 @@ public class DummyGame implements IGameLogic {
 
         // Fog
         Vector3f fogColour = new Vector3f(0.5f, 0.5f, 0.5f);
-        scene.setFog(new Fog(true, fogColour, 0.02f));
+        scene.setFog(new Fog(true, fogColour, 0.04f));
 
         // Setup  SkyBox
-        SkyBox skyBox = new SkyBox("/models/skybox.obj", new Vector4f(0.65f, 0.65f, 0.65f, 1.0f));
+        SkyBox skyBox = new SkyBox("/assets/sandboxgame/models/misc/skybox.obj", new Vector4f(0.65f, 0.65f, 0.65f, 1.0f));
         skyBox.setScale(skyBoxScale);
         scene.setSkyBox(skyBox);
 
@@ -300,22 +149,22 @@ public class DummyGame implements IGameLogic {
         camera.getRotation().y = -1;
     }
 
-    public static int getRed(int c)
+    private static int getRed(int c)
     {
         return (c >> 16) & 255;
     }
 
-    public static int getGreen(int c)
+    private static int getGreen(int c)
     {
         return (c >> 8) & 255;
     }
 
-    public static int getBlue(int c)
+    private static int getBlue(int c)
     {
         return c & 255;
     }
 
-    public static int getAlpha(int c)
+    private static int getAlpha(int c)
     {
         return (c >> 24) & 255;
     }
@@ -362,10 +211,11 @@ public class DummyGame implements IGameLogic {
         }
         if (window.isKeyPressed(GLFW_KEY_LEFT)) {
             sceneChanged = true;
-            angleInc -= 0.05f;
+            angleInc -= 0.0005f;
+            new Block();
         } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
             sceneChanged = true;
-            angleInc += 0.05f;
+            angleInc += 0.0005f;
         } else {
             angleInc = 0;
         }
@@ -399,6 +249,11 @@ public class DummyGame implements IGameLogic {
 
         // Update view matrix
         camera.updateViewMatrix();
+
+        if (mouseInput.isRightButtonPressed()) {
+            this.selectDetector.selectGameItem(blocks, window, mouseInput.getCurrentPos(), camera);
+        }
+
     }
 
     @Override
