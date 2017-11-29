@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"ambientocclusion": false,
 	"textures": {
 		"0": "entity/chest/chest",
 		"1": "items/stick",
@@ -706,7 +707,6 @@
 				"axis": "y",
 				"angle": -22.5
 			},
-			"_loading": false,
 			"type": "cube"
 		},
 		{
@@ -853,7 +853,6 @@
 				"up": {"uv": [2, 0, 4, 2], "texture": "#3"},
 				"down": {"uv": [4, 0, 6, 2], "texture": "#3"}
 			},
-			"_loading": false,
 			"type": "cube"
 		},
 		{
@@ -1109,7 +1108,6 @@
 			"type": "cube"
 		}
 	],
-	"groups": [43, 46, 47, 55],
 	"display": {
 		"thirdperson_righthand": {
 			"scale": [0.375, 0.375, 0.375],

@@ -3,7 +3,6 @@ package net.thegaminghuskymc.sandboxgame.game;
 import net.thegaminghuskymc.sandboxgame.engine.Window;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Camera;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.Matrix4f;
 import org.joml.Vector2d;
 import org.joml.Vector3f;

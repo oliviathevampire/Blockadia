@@ -134,7 +134,7 @@ public class HttpUtil
         }
     }
 
-    public static ListenableFuture<Object> downloadResourcePack(final File saveFile, final String packUrl, final Map<String, String> p_180192_2_, final int maxSize, @Nullable final IProgressUpdate p_180192_4_, final Proxy p_180192_5_)
+    /*public static ListenableFuture<Object> downloadResourcePack(final File saveFile, final String packUrl, final Map<String, String> p_180192_2_, final int maxSize, @Nullable final IProgressUpdate p_180192_4_, final Proxy p_180192_5_)
     {
         ListenableFuture<?> listenablefuture = DOWNLOADER_EXECUTOR.submit(new Runnable()
         {
@@ -289,7 +289,7 @@ public class HttpUtil
             }
         });
         return (ListenableFuture<Object>) listenablefuture;
-    }
+    }*/
 
     public static int getSuitableLanPort() throws IOException
     {

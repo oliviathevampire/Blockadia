@@ -19,8 +19,6 @@ public class HudTopBar implements IHudComponent {
 
     private NVGColor colour;
 
-    private ByteBuffer fontBuffer;
-
     @Override
     public void init(Window window) throws Exception {
         this.vg = window.getOptions().antialiasing ? nvgCreate(NVG_ANTIALIAS | NVG_STENCIL_STROKES) : nvgCreate(NVG_STENCIL_STROKES);
@@ -28,11 +26,6 @@ public class HudTopBar implements IHudComponent {
             throw new Exception("Could not init nanovg");
         }
 
-        fontBuffer = Utils.ioResourceToByteBuffer("/assets/sandboxgame/fonts/OpenSans-Bold.ttf", 150 * 1024);
-        int font = nvgCreateFontMem(vg, FONT_NAME, fontBuffer, 0);
-        if (font == -1) {
-            throw new Exception("Could not add font");
-        }
         colour = NVGColor.create();
     }
 

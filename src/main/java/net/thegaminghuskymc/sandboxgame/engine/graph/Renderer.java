@@ -10,7 +10,7 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.lights.SpotLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.particles.IParticleEmitter;
 import net.thegaminghuskymc.sandboxgame.engine.graph.shadow.ShadowCascade;
 import net.thegaminghuskymc.sandboxgame.engine.graph.shadow.ShadowRenderer;
-import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
+import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -311,7 +311,7 @@ public class Renderer {
                     filteredItems.add(gameItem);
                 }
             }
-            shadowRenderer.bindTextures(GL_TEXTURE2);
+//            shadowRenderer.bindTextures(GL_TEXTURE2);
 
             mesh.renderListInstanced(filteredItems, transformation, viewMatrix);
         }
@@ -430,12 +430,12 @@ public class Renderer {
     }
 
     public void cleanup() {
-        if (shadowRenderer != null) {
+        /*if (shadowRenderer != null) {
             shadowRenderer.cleanup();
-        }
-        if (skyBoxShaderProgram != null) {
+        }*/
+        /*if (skyBoxShaderProgram != null) {
             skyBoxShaderProgram.cleanup();
-        }
+        }*/
         if (sceneShaderProgram != null) {
             sceneShaderProgram.cleanup();
         }

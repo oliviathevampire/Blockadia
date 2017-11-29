@@ -6,10 +6,8 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
-import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
+import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
-import net.thegaminghuskymc.sandboxgame.engine.util.NoiseGenerator;
-import net.thegaminghuskymc.sandboxgame.engine.world.gen.NoiseGeneratorPerlin;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -18,7 +16,6 @@ import org.lwjgl.BufferUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
-import java.util.Random;
 
 import static org.lwjgl.glfw.GLFW.*;
 

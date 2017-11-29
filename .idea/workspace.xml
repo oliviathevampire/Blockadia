@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Husky's Sandbox Game:jar" />
+      <artifact name="Husky's_Sandbox_Game_main:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutomaticModuleUnloader">
@@ -12,7 +12,195 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f20e5d-dbf4-441d-aa6b-0c2e6338e830" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+      <change beforePath="$PROJECT_DIR$/jars/gdx-0.6-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gdx-0.6.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gdx-backend-desktop.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gdx-dependencies-desktop.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/jogg-0.0.7.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/jorbis-0.0.15.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/log4j-api-2.8.1.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-linux.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-macos.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-windows.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjgl.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/netty-all-4.1.9.Final.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Item.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Item.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ResourceLoader.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/GameItem.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/SkyBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/SkyBox.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/Terrain.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/TextItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/cobblestone.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/cobblestone.png" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/grass.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/grass.png" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -45,7 +233,18 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Husky's Sandbox Game" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Husky's Sandbox Game" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Husky's Sandbox Game" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -66,91 +265,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="workbench_base.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+            <state relative-caret-position="369">
+              <caret line="130" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="134" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="workbench_brewing.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json">
+      <file leaf-file-name="Texture.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="1029" column="37" lean-forward="true" selection-start-line="1029" selection-start-column="37" selection-end-line="1029" selection-end-column="37" />
+            <state relative-caret-position="153">
+              <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MouseInput.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/MouseInput.java">
+      <file leaf-file-name="VertexFormat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ItemBlock.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DummyGame.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="252" column="99" lean-forward="false" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="99" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseBoxSelectionDetector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workbench_crafting.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_crafting.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workbench_everything.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workbench_storage.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_storage.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -194,12 +333,12 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Bruker\.gradle\wrapper\dists\gradle-2.4-all\8ym2u3wqq10sf8a9a8x2q9tiv\gradle-2.4" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\Bruker\.gradle\wrapper\dists\gradle-4.3.1-bin\7yzdu24db77gi3zukl2a7o0xx\gradle-4.3.1" />
       </map>
     </option>
     <option name="myGradleVersions">
       <map>
-        <entry key="$PROJECT_DIR$" value="2.4" />
+        <entry key="$PROJECT_DIR$" value="4.3.1" />
       </map>
     </option>
     <option name="availableProjects">
@@ -238,35 +377,32 @@
                 <option name="name" value="buildDependents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="cleanEclipseClasspath" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Displays the sub-projects of root project 'Husky's Sandbox Game'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Cleans all Eclipse files." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="cleanEclipse" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Assembles classes 'main'." />
+                <option name="description" value="Assembles main classes." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="classes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Displays the dependent components of components in root project 'Husky's Sandbox Game'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="cleanEclipseProject" />
+                <option name="name" value="dependentComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Generates Gradle wrapper files. [incubating]" />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'Husky's Sandbox Game'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="buildEnvironment" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Gradle wrapper files." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="wrapper" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Assembles classes 'test'." />
+                <option name="description" value="Assembles test classes." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="testClasses" />
               </ExternalTaskPojo>
@@ -274,11 +410,6 @@
                 <option name="description" value="Generates Javadoc API documentation for the main source code." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javadoc" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Generates the Eclipse classpath file." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="eclipseClasspath" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Assembles a jar archive containing the main classes." />
@@ -291,11 +422,7 @@
                 <option name="name" value="model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="copyMainKotlinClasses" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Processes JVM resources 'main:resources'." />
+                <option name="description" value="Processes main resources." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processResources" />
               </ExternalTaskPojo>
@@ -305,17 +432,9 @@
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="cleanEclipseJdt" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Initializes a new Gradle build. [incubating]" />
+                <option name="description" value="Initializes a new Gradle build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="init" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="copyTestKotlinClasses" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs the unit tests." />
@@ -323,7 +442,7 @@
                 <option name="name" value="test" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Compiles Java source 'main:java'." />
+                <option name="description" value="Compiles main Java source." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileJava" />
               </ExternalTaskPojo>
@@ -353,7 +472,7 @@
                 <option name="name" value="clean" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Compiles Java source 'test:java'." />
+                <option name="description" value="Compiles test Java source." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileTestJava" />
               </ExternalTaskPojo>
@@ -363,12 +482,7 @@
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Generates all Eclipse files." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="eclipse" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Processes JVM resources 'test:resources'." />
+                <option name="description" value="Processes test resources." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processTestResources" />
               </ExternalTaskPojo>
@@ -383,11 +497,6 @@
                 <option name="name" value="compileKotlin" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Generates the Eclipse JDT settings file." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="eclipseJdt" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="build" />
@@ -396,11 +505,6 @@
                 <option name="description" value="Assembles and tests this project and all projects it depends on." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildNeeded" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Generates the Eclipse project file." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="eclipseProject" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the properties of root project 'Husky's Sandbox Game'." />
@@ -414,8 +518,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4534680211670" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="3108533782" />
+        <entry key="$PROJECT_DIR$" value="4535469464766" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="1174223100" />
+        <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1491888232" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -465,117 +570,149 @@
               <option name="name" value="Husky's Sandbox Game" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/announce" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/antlr" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/base-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/base-services-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/build-comparison" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/build-init" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/cli" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/code-quality" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/dependency-management" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/diagnostics" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/ear" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/ide" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/ide-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/internal-integ-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/internal-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/ivy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/jacoco" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/javascript" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/jetty" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/language-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/language-java" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/language-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/language-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/language-scala" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/launcher" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/maven" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/messaging" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/model-core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/model-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/open-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/osgi" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/platform-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/platform-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/platform-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/platform-play" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/plugin-development" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/plugin-use" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/plugins" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/publish" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/reporting" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/resources" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/resources-http" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/resources-s3" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/resources-sftp" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/scala" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/signing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/sonar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/testing-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/tooling-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/tooling-api-builders" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/ui" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/src/wrapper" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/ant-1.9.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/ant-launcher-1.9.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-base-services-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-base-services-groovy-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-cli-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-core-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-docs-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-launcher-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-messaging-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-model-core-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-model-groovy-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-native-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-open-api-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-resources-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-tooling-api-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-ui-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/gradle-wrapper-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/groovy-all-2.3.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-announce-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-antlr-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-build-comparison-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-build-init-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-code-quality-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-dependency-management-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-diagnostics-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-ear-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-ide-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-ide-native-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-ivy-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-jacoco-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-javascript-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-jetty-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-language-groovy-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-language-java-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-language-jvm-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-language-native-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-language-scala-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-maven-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-osgi-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-platform-base-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-platform-jvm-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-platform-native-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-platform-play-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-plugin-development-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-plugin-use-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-plugins-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-publish-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-reporting-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-resources-http-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-resources-s3-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-resources-sftp-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-scala-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-signing-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-sonar-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-testing-native-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/gradle-tooling-api-builders-2.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.4-all/8ym2u3wqq10sf8a9a8x2q9tiv/gradle-2.4/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/announce" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/antlr" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/base-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/build-cache" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/build-cache-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/build-option" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/composite-builds" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/core-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/dependency-management" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/ide" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/ide-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/ide-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/installation-beacon" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/internal-android-performance-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/internal-integ-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/internal-performance-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/internal-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/ivy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/jvm-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/language-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/language-java" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/language-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/language-scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/logging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/model-core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/osgi" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/persistent-cache" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/platform-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/platform-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/platform-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/platform-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/plugin-use" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/plugins" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/process-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/publish" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/reporting" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/resources-gcs" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/resources-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/resources-s3" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/resources-sftp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/signing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/test-kit" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/testing-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/testing-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/testing-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/tooling-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/version-control" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/workers" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/src/wrapper" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/ant-1.9.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/ant-launcher-1.9.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-base-services-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-base-services-groovy-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-build-cache-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-build-option-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-cli-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-core-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-core-api-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-docs-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-installation-beacon-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-jvm-services-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-kotlin-dsl-0.12.3.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-kotlin-dsl-tooling-builders-0.12.3.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-kotlin-dsl-tooling-models-0.12.3.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-launcher-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-logging-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-messaging-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-model-core-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-model-groovy-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-native-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-persistent-cache-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-process-services-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-resources-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-runtime-api-info-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-tooling-api-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/gradle-wrapper-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/groovy-all-2.4.12.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-announce-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-antlr-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-build-cache-http-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-build-comparison-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-build-init-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-code-quality-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-composite-builds-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-dependency-management-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-diagnostics-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-ear-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-ide-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-ide-native-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-ide-play-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-ivy-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-jacoco-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-javascript-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-language-groovy-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-language-java-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-language-jvm-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-language-native-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-language-scala-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-maven-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-osgi-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-platform-base-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-platform-jvm-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-platform-native-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-platform-play-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-plugin-development-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-plugin-use-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-plugins-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-publish-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-reporting-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-resources-gcs-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-resources-http-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-resources-s3-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-resources-sftp-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-scala-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-signing-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-test-kit-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-testing-base-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-testing-jvm-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-testing-native-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-tooling-api-builders-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-version-control-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/gradle-workers-4.3.1.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.3.1-all/97nfwr7im082t7xwc6bkwfrg9/gradle-4.3.1/lib/plugins/ivy-2.2.0.jar" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
                 </list>
@@ -592,16 +729,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/Gui.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiBossOverlay.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiButton.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiButtonImage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiButtonLanguage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiButtonToggle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiScreen.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiChat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiLabel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiListButton.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiSlot.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiListExtended.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiPageButtonList.java" />
@@ -626,11 +753,8 @@
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HudUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Hud.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Material.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumFacing.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
@@ -642,7 +766,20 @@
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_storage.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/shadow/ShadowRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Utils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -652,11 +789,11 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2260" />
-    <option name="y" value="-11" />
-    <option name="width" value="1934" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="1912" />
+    <option name="y" value="32" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -676,6 +813,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -686,6 +826,11 @@
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="jars" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -708,107 +853,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="blocks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
-              <item name="blocks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
-              <item name="items" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
@@ -818,18 +862,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/jars/TWL.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.31264368" />
-    <property name="settings.editor.selected.configurable" value="sbt.project.settings.configurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
@@ -837,23 +878,23 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\jars" />
-      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources" />
-      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java" />
-      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java\net\thegaminghuskymc\sandboxgame\engine\idk" />
-      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java\net\thegaminghuskymc\sandboxgame\engine" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="net.thegaminghuskymc.sandboxgame.engine" />
-      <recent name="net.thegaminghuskymc.sandboxgame.engine.graph.anim" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources\assets\sandboxgame\textures\items" />
       <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources\assets\sandboxgame\models\blocks" />
       <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources\assets\sandboxgame\shaders" />
       <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources\assets\sandboxgame\fonts" />
       <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources\assets\sandboxgame\sounds" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.thegaminghuskymc.sandboxgame.engine" />
+      <recent name="net.thegaminghuskymc.sandboxgame.engine.graph.anim" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\jars" />
+      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\resources" />
+      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java" />
+      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java\net\thegaminghuskymc\sandboxgame\engine\idk" />
+      <recent name="C:\Users\Bruker\Documents\Development\Husky's Sandbox Game\src\main\java\net\thegaminghuskymc\sandboxgame\engine" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -868,7 +909,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.Husky's Sandbox Game [assemble]">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="WIDTH" value="400" />
@@ -900,6 +941,23 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+    </configuration>
+    <configuration name="Husky's Sandbox Game [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -936,9 +994,18 @@
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [assemble]" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [assemble]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1511636559896" />
+    <option name="lastUpdateTimestamp" value="1511975256840" />
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -977,30 +1044,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="32" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="32" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.4936034" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3314917" sideWeight="0.42963752" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48933902" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314917" sideWeight="0.4035181" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39779004" sideWeight="0.5490405" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314917" sideWeight="0.59648186" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.46375266" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49573562" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.4936034" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2979744" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3075693" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48720682" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48933902" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39779004" sideWeight="0.45095947" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39779004" sideWeight="0.4424307" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29157782" sideWeight="0.5038674" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1047,198 +1114,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-626">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/DefaultVertexFormats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-555">
-          <caret line="13" column="78" lean-forward="true" selection-start-line="13" selection-start-column="78" selection-end-line="13" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormatElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
-          <caret line="8" column="52" lean-forward="true" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="92" lean-forward="true" selection-start-line="25" selection-start-column="92" selection-end-line="25" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/loaders/obj/OBJLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1972">
-          <caret line="26" column="49" lean-forward="true" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/sound/SoundSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/RayTraceResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/math/AxisAlignedBB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumHandSide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/BlockRenderLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/sound/SoundManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="443" column="64" lean-forward="true" selection-start-line="443" selection-start-column="64" selection-end-line="443" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Rotation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1445">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundCategory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="18" column="51" lean-forward="true" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/NoiseGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/SmoothFloat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="36" lean-forward="true" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorSimplex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2884">
-          <caret line="20" column="45" lean-forward="true" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Random.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding>
-            <element signature="e#3504#3505#0" expanded="false" />
-            <element signature="e#3562#3563#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1246,7 +1125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1254,7 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,7 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="21" column="59" lean-forward="false" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1278,23 +1153,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumActionResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumActionResult.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumBlockRenderType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1302,33 +1168,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="236" column="5" lean-forward="false" selection-start-line="236" selection-start-column="5" selection-end-line="236" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumTypeAdapterFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumTypeAdapterFactory.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/FrameTimer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1336,7 +1183,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1344,17 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ITextComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="324" column="16" lean-forward="true" selection-start-line="324" selection-start-column="16" selection-end-line="324" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1362,7 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1370,18 +1204,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/entity/lhfilkdj.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/entity/lhfilkdj.json" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/entity/chest/chest.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1390,7 +1216,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1406,7 +1232,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1414,15 +1240,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_crafting.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+          <caret line="12" column="31" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="1029" column="37" lean-forward="true" selection-start-line="1029" selection-start-column="37" selection-end-line="1029" selection-end-column="37" />
+        <state relative-caret-position="17493">
+          <caret line="1029" column="37" lean-forward="false" selection-start-line="1029" selection-start-column="37" selection-end-line="1029" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1438,27 +1264,232 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/GameItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state relative-caret-position="258">
+          <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="68" column="13" lean-forward="false" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="252" column="99" lean-forward="false" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="99" />
+        <state relative-caret-position="275">
+          <caret line="113" column="61" lean-forward="false" selection-start-line="113" selection-start-column="61" selection-end-line="113" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Hud.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/shadow/ShadowRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="52" column="5" lean-forward="false" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ChatAllowedCharacters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="63" lean-forward="false" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="639" column="63" lean-forward="true" selection-start-line="639" selection-start-column="63" selection-end-line="639" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ResourceLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="718" column="31" lean-forward="false" selection-start-line="718" selection-start-column="31" selection-end-line="718" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-549">
+          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629">
+          <caret line="51" column="49" lean-forward="false" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="129" column="69" lean-forward="true" selection-start-line="129" selection-start-column="69" selection-end-line="129" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ITextComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="130" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="134" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="gradleExecuteTaskHistory">
+    <option value="" />
   </component>
   <component name="masterDetails">
     <states>
@@ -1466,8 +1497,8 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="artifact" />
               <type id="library" />
+              <type id="artifact" />
             </show-content>
           </artifact-editor>
           <last-edited>Husky's Sandbox Game:jar</last-edited>
@@ -1543,7 +1574,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>commons-codec-1.10</last-edited>
+          <last-edited>TWL (2)</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

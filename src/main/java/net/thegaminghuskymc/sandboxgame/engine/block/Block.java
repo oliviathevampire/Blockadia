@@ -1,12 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.lwjgl.opengl.GL11;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class Block {
 

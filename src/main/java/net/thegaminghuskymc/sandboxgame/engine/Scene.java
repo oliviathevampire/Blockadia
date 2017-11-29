@@ -5,7 +5,7 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.InstancedMesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.engine.graph.particles.IParticleEmitter;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
-import net.thegaminghuskymc.sandboxgame.engine.items.SkyBox;
+import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 
 import java.util.ArrayList;
 import java.util.HashMap;

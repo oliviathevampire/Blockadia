@@ -1,12 +1,13 @@
-package net.thegaminghuskymc.sandboxgame.engine;
+package net.thegaminghuskymc.sandboxgame.engine.item;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.engine.item.Item;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class ItemBlock {
+public class Item {
+
+    private boolean held;
 
     private Mesh[] meshes;
 
@@ -17,16 +18,13 @@ public class ItemBlock {
     private final Quaternionf rotation;
 
     private int textPos;
-
+    
     private boolean disableFrustumCulling;
 
     private boolean insideFrustum;
 
-    private Block block;
-
-    private Item item;
-
-    public ItemBlock() {
+    public Item() {
+        held = false;
         position = new Vector3f(0, 0, 0);
         scale = 1;
         rotation = new Quaternionf();
@@ -35,24 +33,22 @@ public class ItemBlock {
         disableFrustumCulling = false;
     }
 
-    public ItemBlock(Block block) {
-        this();
-        this.block = block;
-    }
-
-    public ItemBlock(Item item) {
-        this();
-        this.item = item;
-    }
-
-    public ItemBlock(Mesh mesh) {
+    public Item(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
     }
 
-    public ItemBlock(Mesh[] meshes) {
+    public Item(Block block) {
+        this();
+    }
+
+    public Item(Mesh[] meshes) {
         this();
         this.meshes = meshes;
+    }
+
+    public Block getItemFromBlock(Block block) {
+        return block;
     }
 
     public Vector3f getPosition() {
@@ -61,6 +57,10 @@ public class ItemBlock {
 
     public int getTextPos() {
         return textPos;
+    }
+
+    public boolean isHeld() {
+        return held;
     }
 
     public final void setPosition(float x, float y, float z) {
@@ -85,18 +85,6 @@ public class ItemBlock {
         this.rotation.set(q);
     }
 
-    public Block setBlock(Block block) {
-        this.block = block;
-        return block;
-    }
-
-    public Item setItem(Item item) {
-        this.item = item;
-        return item;
-    }
-
-//    public ItemBlock getItemBlock()
-
     public Mesh getMesh() {
         return meshes[0];
     }
@@ -113,19 +101,15 @@ public class ItemBlock {
         this.meshes = new Mesh[]{mesh};
     }
 
-    public Block getBlock() {
-        return block;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
     public void cleanup() {
         int numMeshes = this.meshes != null ? this.meshes.length : 0;
         for (int i = 0; i < numMeshes; i++) {
             this.meshes[i].cleanUp();
         }
+    }
+
+    public void setIsHeld(boolean isHeld) {
+        this.held = isHeld;
     }
 
     public void setTextPos(int textPos) {

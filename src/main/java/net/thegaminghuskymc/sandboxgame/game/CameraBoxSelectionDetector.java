@@ -2,7 +2,6 @@ package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Camera;
-import net.thegaminghuskymc.sandboxgame.engine.items.GameItem;
 import org.joml.Intersectionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
