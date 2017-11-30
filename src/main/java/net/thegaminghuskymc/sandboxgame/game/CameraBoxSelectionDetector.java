@@ -6,6 +6,9 @@ import org.joml.Intersectionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class CameraBoxSelectionDetector {
 
     private final Vector3f max;
@@ -23,12 +26,12 @@ public class CameraBoxSelectionDetector {
         nearFar = new Vector2f();
     }
 
-    public void selectGameItem(Block[] gameItems, Camera camera) {
+    public void selectGameItem(Collection<Block> gameItems, Camera camera) {
         dir = camera.getViewMatrix().positiveZ(dir).negate();
         selectGameItem(gameItems, camera.getPosition(), dir);
     }
     
-    protected boolean selectGameItem(Block[] gameItems, Vector3f center, Vector3f dir) {
+    protected boolean selectGameItem(Collection<Block> gameItems, Vector3f center, Vector3f dir) {
         boolean selected = false;
         Block selectedGameItem = null;
         float closestDistance = Float.POSITIVE_INFINITY;

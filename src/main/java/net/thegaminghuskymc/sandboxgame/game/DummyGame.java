@@ -8,6 +8,8 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
+import net.thegaminghuskymc.sandboxgame.engine.world.World;
+import org.joml.Quaternionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -23,13 +25,16 @@ public class DummyGame implements IGameLogic {
 
     private static final float MOUSE_SENSITIVITY = 0.2f;
 
+    // .5f
+    public static final float GRAVITY = 0f;
+
     private final Vector3f cameraInc;
 
     private final Renderer renderer;
 
     private final SoundManager soundMgr;
 
-    private final Camera camera;
+    protected final Camera camera;
 
     private Scene scene;
 
@@ -47,7 +52,9 @@ public class DummyGame implements IGameLogic {
 
     private boolean sceneChanged;
 
-    private Block[] blocks;
+    private EntityPlayer player;
+
+    public World world;
 
     public DummyGame() {
         renderer = new Renderer();
@@ -57,6 +64,9 @@ public class DummyGame implements IGameLogic {
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
         angleInc = 0;
         lightAngle = 90;
+        player = new EntityPlayer();
+        world = new World();
+        world.entities.add(player);
     }
 
     @Override
@@ -97,31 +107,29 @@ public class DummyGame implements IGameLogic {
         }
         bb.flip();
 
-        int instances = w * h;
         Block block = new Block();
         Mesh mesh = new Mesh(block.getPositions(), block.getTextCoords(), block.getNormals(), block.getIndices());
         mesh.setBoundingRadius(2);
         Texture texture = new Texture("/assets/sandboxgame/textures/blocks/terrain_textures.png", 2, 1);
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
-        blocks = new Block[instances];
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 block = new Block(mesh);
                 block.setScale(blockScale);
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
-                block.setPosition(posx, starty + incy, posz);
                 int textPos = Math.random() > 0.5f ? 0 : 1;
                 block.setTextPos(textPos);
-                blocks[i * w + j] = block;
+                block.setPosition(posx, starty + incy, posz);
+                world.blocks.put(block.getPosition(), block);
 
                 posx += inc;
             }
             posx = startx;
             posz -= inc;
         }
-        scene.setGameItems(blocks);
+        scene.setGameItems(world.blocks.values());
 
 
         // Shadows
@@ -222,12 +230,15 @@ public class DummyGame implements IGameLogic {
         if (mouseInput.isRightButtonPressed()) {
             // Update camera based on mouse            
             Vector2f rotVec = mouseInput.getDisplVec();
-            camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+            //camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+            player.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
             sceneChanged = true;
         }
 
         // Update camera position
-        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        //camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        player.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        player.update();
 
         lightAngle += angleInc;
         if (lightAngle < 0) {
@@ -247,7 +258,7 @@ public class DummyGame implements IGameLogic {
         camera.updateViewMatrix();
 
         if (mouseInput.isLeftButtonPressed()) {
-            this.selectDetector.selectGameItem(blocks, window, mouseInput.getCurrentPos(), camera);
+            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
         }
 
     }

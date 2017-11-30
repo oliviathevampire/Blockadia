@@ -8,6 +8,9 @@ import org.joml.Vector2d;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class MouseBoxSelectionDetector extends CameraBoxSelectionDetector {
 
     private final Matrix4f invProjectionMatrix;
@@ -26,7 +29,7 @@ public class MouseBoxSelectionDetector extends CameraBoxSelectionDetector {
         tmpVec = new Vector4f();
     }
     
-    public boolean selectGameItem(Block[] gameItems, Window window, Vector2d mousePos, Camera camera) {
+    public boolean selectGameItem(Collection<Block> gameItems, Window window, Vector2d mousePos, Camera camera) {
         // Transform mouse coordinates into normalized spaze [-1, 1]
         int wdwWitdh = window.getWidth();
         int wdwHeight = window.getHeight();

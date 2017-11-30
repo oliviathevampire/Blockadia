@@ -1,15 +1,15 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
-import net.thegaminghuskymc.sandboxgame.engine.IGameLogic;
 import net.thegaminghuskymc.sandboxgame.engine.Window;
 
 public class Main {
 
+    public static final DummyGame gameLogic = new DummyGame();
+
     public static void main(String[] args) {
         try {
             boolean vSync = true;
-            IGameLogic gameLogic = new DummyGame();
             Window.WindowOptions opts = new Window.WindowOptions();
             opts.cullFace = false;
             opts.compatibleProfile = true;
