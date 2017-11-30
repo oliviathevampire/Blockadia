@@ -7,10 +7,7 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.particles.IParticleEmitter;
 import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Scene {
 
@@ -47,11 +44,9 @@ public class Scene {
         return renderShadows;
     }
 
-    public void setGameItems(Block[] gameItems) {
+    public void setGameItems(Collection<Block> gameItems) {
         // Create a map of meshes to speed up rendering
-        int numGameItems = gameItems != null ? gameItems.length : 0;
-        for (int i = 0; i < numGameItems; i++) {
-            Block gameItem = gameItems[i];
+        for (Block gameItem : gameItems) {
             Mesh[] meshes = gameItem.getMeshes();
             for (Mesh mesh : meshes) {
                 boolean instancedMesh = mesh instanceof InstancedMesh;

@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class Camera {
@@ -31,6 +32,12 @@ public class Camera {
         position.y = y;
         position.z = z;
     }
+
+    public void setPosition(Vector3f vec) {
+        position.x = vec.x;
+        position.y = vec.y;
+        position.z = vec.z;
+    }
     
     public Matrix4f getViewMatrix() {
         return viewMatrix;
@@ -39,7 +46,7 @@ public class Camera {
     public Matrix4f updateViewMatrix() {
         return Transformation.updateGenericViewMatrix(position, rotation, viewMatrix);
     }
-    
+
     public void movePosition(float offsetX, float offsetY, float offsetZ) {
         if ( offsetZ != 0 ) {
             position.x += (float)Math.sin(Math.toRadians(rotation.y)) * -1.0f * offsetZ;
@@ -60,6 +67,18 @@ public class Camera {
         rotation.x = x;
         rotation.y = y;
         rotation.z = z;
+    }
+
+    public void setRotation(Vector3f vec) {
+        rotation.x = vec.x;
+        rotation.y = vec.y;
+        rotation.z = vec.z;
+    }
+
+    public void setRotation(Quaternionf quat) {
+        rotation.x = quat.x;
+        rotation.y = quat.y;
+        rotation.z = quat.z;
     }
 
     public void moveRotation(float offsetX, float offsetY, float offsetZ) {
