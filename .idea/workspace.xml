@@ -12,195 +12,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f20e5d-dbf4-441d-aa6b-0c2e6338e830" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change beforePath="$PROJECT_DIR$/jars/gdx-0.6-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/gdx-0.6.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/gdx-backend-desktop.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/gdx-dependencies-desktop.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/jogg-0.0.7.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/joml-1.9.4.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/jorbis-0.0.15.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/TWL.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/commons-io-2.5.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/commons-lang3-3.5-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/commons-lang3-3.5-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/commons-lang3-3.5.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gson-2.8.0-javadoc.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gson-2.8.0-sources.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/gson-2.8.0.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/guava-21.0.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jars/ibxm.jar" afterPath="" />
       <change beforePath="$PROJECT_DIR$/jars/log4j-api-2.8.1.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-assimp.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-bgfx.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-egl.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-glfw.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jawt.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-jemalloc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-lmdb.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nanovg.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nfd.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-nuklear.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openal.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opencl.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengl.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-opengles.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-openvr.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-ovr.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-par.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-rpmalloc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-sse.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-stb.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyexr.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-tinyfd.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-vulkan.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-xxhash.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-linux.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-macos.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-natives-windows.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl-yoga.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjgl.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/lwjglx-debug-1.0.0.jar" afterPath="" />
       <change beforePath="$PROJECT_DIR$/jars/netty-all-4.1.9.Final.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2-javadoc.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2-sources.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/jars/steamworks4j-1.6.2.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Item.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Item.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ItemBlock.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ResourceLoader.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/Scene.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Renderer.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/GameItem.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/SkyBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/SkyBox.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/Terrain.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/items/TextItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" afterPath="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/MouseBoxSelectionDetector.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_everything.json" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/cobblestone.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/cobblestone.png" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/grass.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/textures/blocks/grass.png" />
+      <change beforePath="$PROJECT_DIR$/jars/slick-util.jar" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -265,31 +90,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="130" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="134" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Texture.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="-221">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VertexFormat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+            <state relative-caret-position="187">
+              <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -333,7 +150,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Bruker\.gradle\wrapper\dists\gradle-4.3.1-bin\7yzdu24db77gi3zukl2a7o0xx\gradle-4.3.1" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\Bruker\.gradle\wrapper\dists\gradle-4.3.1-all\97nfwr7im082t7xwc6bkwfrg9\gradle-4.3.1" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -518,8 +335,8 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4535469464766" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="1174223100" />
+        <entry key="$PROJECT_DIR$" value="4535547266479" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="1933064563" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1491888232" />
       </map>
     </option>
@@ -729,10 +546,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiSlot.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiListExtended.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/gui/GuiPageButtonList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/ChunkRenderContainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/VboRenderList.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/EnumFaceDirection.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/block/model/BlockFaceUV.java" />
@@ -754,7 +567,6 @@
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Hud.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/GameEngine.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Material.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/EnumFacing.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/block/Block.java" />
@@ -766,7 +578,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_storage.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_base.json" />
         <option value="$PROJECT_DIR$/src/main/resources/assets/sandboxgame/models/blocks/workbench_brewing.json" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/DummyGame.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/hud/HudTopBar.java" />
@@ -776,10 +587,16 @@
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormatElement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ChatAllowedCharacters.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java" />
       </list>
     </option>
   </component>
@@ -789,7 +606,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1912" />
     <option name="y" value="32" />
     <option name="width" value="1936" />
@@ -813,20 +630,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="jars" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
@@ -856,12 +666,39 @@
             </path>
             <path>
               <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="graph" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Husky's Sandbox Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Husky's Sandbox Game" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sandboxgame" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="item" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -909,7 +746,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Husky's Sandbox Game [assemble]">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="WIDTH" value="400" />
@@ -959,6 +796,40 @@
         <option name="vmOptions" />
       </ExternalSystemSettings>
     </configuration>
+    <configuration name="Husky's Sandbox Game [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="Husky's Sandbox Game [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -994,18 +865,22 @@
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [assemble]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [build]" />
+      <item index="3" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [buildDependents]" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [assemble]" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [buildDependents]" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [build]" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.Husky's Sandbox Game [assemble]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1511975256840" />
+    <option name="lastUpdateTimestamp" value="1512053076534" />
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -1044,24 +919,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="32" width="1936" height="1056" extended-state="7" />
+    <frame x="1912" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48933902" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314917" sideWeight="0.4035181" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3314917" sideWeight="0.39872068" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314917" sideWeight="0.59648186" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39779004" sideWeight="0.5597015" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281768" sideWeight="0.46375266" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.49573562" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.4936034" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3075693" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48720682" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48933902" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3107676" sideWeight="0.49613258" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48507464" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39779004" sideWeight="0.4424307" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39779004" sideWeight="0.4402985" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29157782" sideWeight="0.5038674" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1072,6 +946,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.48933902" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1114,27 +989,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/CameraBoxSelectionDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/world/gen/NoiseGeneratorPerlin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/audio/Sound.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1217,7 +1071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1225,7 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1233,7 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1241,7 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="31" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1249,7 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17493">
           <caret line="1029" column="37" lean-forward="false" selection-start-line="1029" selection-start-column="37" selection-end-line="1029" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1269,14 +1118,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/GameItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/GameItem.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/TextItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-51">
@@ -1289,15 +1131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
           <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="68" column="13" lean-forward="false" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1313,7 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="113" column="61" lean-forward="false" selection-start-line="113" selection-start-column="61" selection-end-line="113" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1321,7 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1329,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1361,97 +1191,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ChatAllowedCharacters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="63" lean-forward="false" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="639" column="63" lean-forward="true" selection-start-line="639" selection-start-column="63" selection-end-line="639" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ResourceLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="718" column="31" lean-forward="false" selection-start-line="718" selection-start-column="31" selection-end-line="718" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-549">
-          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-629">
-          <caret line="51" column="49" lean-forward="false" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="129" column="69" lean-forward="true" selection-start-line="129" selection-start-column="69" selection-end-line="129" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GlStateManager.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/ResourceLoader.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/OpenGlHelper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/GLAllocation.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/RenderHelper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/SoundEvent.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/BufferBuilder.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/Tessellator.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/text/ITextComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1459,30 +1213,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="130" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="134" selection-end-column="1" />
+        <state relative-caret-position="1989">
+          <caret line="117" column="67" lean-forward="false" selection-start-line="117" selection-start-column="67" selection-end-line="117" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/game/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/677abe279b68c5e7490d6d50c6951376238d7d3e/log4j-1.2.17-sources.jar!/org/apache/log4j/LogManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="225" column="39" lean-forward="true" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormatElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/HttpUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4505">
+          <caret line="293" column="61" lean-forward="false" selection-start-line="293" selection-start-column="61" selection-end-line="293" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/client/renderer/vertex/VertexFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/util/ChatAllowedCharacters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/graph/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/thegaminghuskymc/sandboxgame/engine/item/Terrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
           <folding />
         </state>
       </provider>
