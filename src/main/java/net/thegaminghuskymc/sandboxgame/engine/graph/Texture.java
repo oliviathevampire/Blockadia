@@ -1,5 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
+import de.matthiasmann.twl.utils.PNGDecoder;
+
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
@@ -60,7 +62,7 @@ public class Texture {
             // Load texture contents into a byte buffer
             ByteBuffer buf = ByteBuffer.allocateDirect(
                     4 * decoder.getWidth() * decoder.getHeight());
-            decoder.decode(buf, decoder.getWidth() * 4, Format.RGBA);
+            decoder.decode(buf, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);
             buf.flip();
 
             // Create a new OpenGL texture 

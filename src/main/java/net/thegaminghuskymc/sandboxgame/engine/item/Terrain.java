@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.item;
 
+import de.matthiasmann.twl.utils.PNGDecoder;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.HeightMapMesh;
 import org.joml.Vector3f;

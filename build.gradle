@@ -52,6 +52,9 @@ repositories {
     maven {
         url "https://mvnrepository.com/artifact/org.apache.commons/commons-lang3"
     }
+    maven {
+        url "http://clojars.org/repo/"
+    }
 }
 
 dependencies {
@@ -122,6 +125,9 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.l33tlabs.twl', name: 'pngdecoder', version: '1.0'
+    compile group: 'org.clojars.aseipp', name: 'ibxm', version: '0.0.1'
+    compile group: 'slick-util', name: 'slick-util', version: '1.0.0'
 }
 
 compileKotlin {
