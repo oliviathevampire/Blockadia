@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
+import net.thegaminghuskymc.sandboxgame.game.Main;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -22,7 +23,7 @@ public class Block {
 
     private boolean insideFrustum;
 
-    private float[] positions = new float[] {
+    private static  float[] positions = new float[] {
             // V0
             -1f, 1f, 1f,
             // V1
@@ -72,7 +73,7 @@ public class Block {
             // V19: V2 repeated
             1f, -1f, 1f,
     };
-    private float[] textCoords = new float[]{
+    private static  float[] textCoords = new float[]{
             0.0f, 0.0f,
             0.0f, 0.5f,
             0.5f, 0.5f,
@@ -103,7 +104,7 @@ public class Block {
             0.5f, 0.5f,
             1.0f, 0.5f,
     };
-    private int[] indices = new int[]{
+    private static  int[] indices = new int[]{
             // Front face
             0, 1, 3, 3, 1, 2,
             // Top Face
@@ -117,7 +118,7 @@ public class Block {
             // Back face
             7, 6, 4, 7, 4, 5
     };
-    private float[] normals = new float[]{
+    private static float[] normals = new float[]{
             // V0
             -1.0f, 1.0f, 1.0f,
             // V1
@@ -171,7 +172,7 @@ public class Block {
     public Block() {
         selected = false;
         position = new Vector3f(0, 0, 0);
-        scale = 2;
+        scale = .5f;
         rotation = new Quaternionf();
         textPos = 0;
         insideFrustum = true;
@@ -245,24 +246,28 @@ public class Block {
         }
     }
 
-    public int[] getIndices() {
+    public static int[] getIndices() {
         return indices;
     }
 
-    public float[] getTextCoords() {
+    public static float[] getTextCoords() {
         return textCoords;
     }
 
-    public float[] getPositions() {
+    public static float[] getPositions() {
         return positions;
     }
 
-    public float[] getNormals() {
+    public static float[] getNormals() {
         return normals;
     }
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+        if (selected){
+            if (Main.gameLogic.selected != null) Main.gameLogic.selected.setSelected(false);
+            Main.gameLogic.selected = this;
+        }
     }
 
     public void setTextPos(int textPos) {

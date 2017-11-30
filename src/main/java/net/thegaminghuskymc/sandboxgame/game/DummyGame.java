@@ -18,6 +18,8 @@ import org.lwjgl.BufferUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -48,6 +50,8 @@ public class DummyGame implements IGameLogic {
 
     private MouseBoxSelectionDetector selectDetector;
 
+    public Block selected;
+
     private boolean firstTime;
 
     private boolean sceneChanged;
@@ -64,9 +68,6 @@ public class DummyGame implements IGameLogic {
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
         angleInc = 0;
         lightAngle = 90;
-        player = new EntityPlayer();
-        world = new World();
-        world.entities.add(player);
     }
 
     @Override
@@ -76,7 +77,13 @@ public class DummyGame implements IGameLogic {
 
         scene = new Scene();
 
-        float reflectance = 1f;
+        Texture terrainTexture = new Texture("/assets/sandboxgame/textures/blocks/terrain_textures.png", 2, 1);
+        Material terrainMaterial = new Material(terrainTexture, 1f);
+
+        world = new World(terrainMaterial);
+
+        player = new EntityPlayer();
+        world.entities.add(player);
 
         float blockScale = 0.5f;
         float skyBoxScale = 100.0f;
@@ -107,29 +114,23 @@ public class DummyGame implements IGameLogic {
         }
         bb.flip();
 
-        Block block = new Block();
-        Mesh mesh = new Mesh(block.getPositions(), block.getTextCoords(), block.getNormals(), block.getIndices());
-        mesh.setBoundingRadius(2);
-        Texture texture = new Texture("/assets/sandboxgame/textures/blocks/terrain_textures.png", 2, 1);
-        Material material = new Material(texture, reflectance);
-        mesh.setMaterial(material);
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                block = new Block(mesh);
-                block.setScale(blockScale);
+                Block block = new Block();
                 int rgb = HeightMapMesh.getRGB(i, j, w, bb);
                 incy = rgb / (10 * 255 * 255);
-                int textPos = Math.random() > 0.5f ? 0 : 1;
-                block.setTextPos(textPos);
-                block.setPosition(posx, starty + incy, posz);
-                world.blocks.put(block.getPosition(), block);
+//                int textPos = Math.random() > 0.5f ? 0 : 1;
+//                block.setTextPos(textPos);
+//                block.setPosition(posx, starty + incy, posz);
+//                world.blocks.put(block.getPosition(), block);
+                world.setBlock(new Vector3f(posx, starty + incy, posz), block);
 
                 posx += inc;
             }
             posx = startx;
             posz -= inc;
         }
-        scene.setGameItems(world.blocks.values());
+        world.endAddingBlocks(scene);
 
 
         // Shadows
@@ -238,7 +239,6 @@ public class DummyGame implements IGameLogic {
         // Update camera position
         //camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
         player.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
-        player.update();
 
         lightAngle += angleInc;
         if (lightAngle < 0) {
@@ -260,7 +260,15 @@ public class DummyGame implements IGameLogic {
         if (mouseInput.isLeftButtonPressed()) {
             this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
         }
-
+        if (mouseInput.isRightButtonPressed()) {
+            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
+            if (selected != null) {
+                Vector3f pos = selected.getPosition();
+                world.setBlock(new Vector3f(pos.x, pos.y + 1, pos.z), new Block());
+                world.endAddingBlocks(scene);
+            }
+        }
+        world.update();
     }
 
     @Override
