@@ -63,34 +63,15 @@ public class AxisAlignedBB
         {
             return false;
         }
-        else
-        {
-            AxisAlignedBB axisalignedbb = (AxisAlignedBB)p_equals_1_;
+        else {
+            AxisAlignedBB axisalignedbb = (AxisAlignedBB) p_equals_1_;
 
-            if (Double.compare(axisalignedbb.minX, this.minX) != 0)
-            {
-                return false;
-            }
-            else if (Double.compare(axisalignedbb.minY, this.minY) != 0)
-            {
-                return false;
-            }
-            else if (Double.compare(axisalignedbb.minZ, this.minZ) != 0)
-            {
-                return false;
-            }
-            else if (Double.compare(axisalignedbb.maxX, this.maxX) != 0)
-            {
-                return false;
-            }
-            else if (Double.compare(axisalignedbb.maxY, this.maxY) != 0)
-            {
-                return false;
-            }
-            else
-            {
-                return Double.compare(axisalignedbb.maxZ, this.maxZ) == 0;
-            }
+            return Double.compare(axisalignedbb.minX, this.minX) == 0 &&
+                    Double.compare(axisalignedbb.minY, this.minY) == 0 &&
+                    Double.compare(axisalignedbb.minZ, this.minZ) == 0 &&
+                    Double.compare(axisalignedbb.maxX, this.maxX) == 0 &&
+                    Double.compare(axisalignedbb.maxY, this.maxY) == 0 &&
+                    Double.compare(axisalignedbb.maxZ, this.maxZ) == 0;
         }
     }
 
@@ -470,23 +451,8 @@ public class AxisAlignedBB
     /**
      * Returns if the supplied Vec3D is completely inside the bounding box
      */
-    public boolean contains(Vec3d vec)
-    {
-        if (vec.x > this.minX && vec.x < this.maxX)
-        {
-            if (vec.y > this.minY && vec.y < this.maxY)
-            {
-                return vec.z > this.minZ && vec.z < this.maxZ;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
+    public boolean contains(Vec3d vec) {
+        return vec.x > this.minX && vec.x < this.maxX && vec.y > this.minY && vec.y < this.maxY && vec.z > this.minZ && vec.z < this.maxZ;
     }
 
     /**

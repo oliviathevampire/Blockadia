@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.text.translation;
 
-@Deprecated
 public class I18n
 {
     private static final LanguageMap localizedName = LanguageMap.getInstance();

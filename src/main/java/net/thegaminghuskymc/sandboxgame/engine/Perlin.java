@@ -4,9 +4,8 @@ public class Perlin {
 
 	public int repeat;
 	
-	public Perlin(int repeat) {
-		repeat = -1;
-		this.repeat = repeat;
+	public Perlin(boolean setRepeatToMinusOne) {
+		this.repeat = -1;
 	}
 
 	public double OctavePerlin(double x, double y, double z, int octaves, double persistence) {

@@ -8,7 +8,7 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  */
 
 public class Model implements Runnable {
-	public static final long SLEEPTIME = 15l;
+	public static final long SLEEPTIME = 15L;
 	
 	Thread modelThread;
 	boolean stop = false;

@@ -1,9 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.text;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.List;
@@ -137,21 +135,11 @@ public abstract class TextComponentBase implements ITextComponent
      */
     public static Iterator<ITextComponent> createDeepCopyIterator(Iterable<ITextComponent> components)
     {
-        Iterator<ITextComponent> iterator = Iterators.concat(Iterators.transform(components.iterator(), new Function<ITextComponent, Iterator<ITextComponent>>()
-        {
-            public Iterator<ITextComponent> apply(@Nullable ITextComponent p_apply_1_)
-            {
-                return p_apply_1_.iterator();
-            }
-        }));
-        iterator = Iterators.transform(iterator, new Function<ITextComponent, ITextComponent>()
-        {
-            public ITextComponent apply(@Nullable ITextComponent p_apply_1_)
-            {
-                ITextComponent itextcomponent = p_apply_1_.createCopy();
-                itextcomponent.setStyle(itextcomponent.getStyle().createDeepCopy());
-                return itextcomponent;
-            }
+        Iterator<ITextComponent> iterator = Iterators.concat(Iterators.transform(components.iterator(), Iterable::iterator));
+        iterator = Iterators.transform(iterator, p_apply_1_ -> {
+            ITextComponent itextcomponent = p_apply_1_.createCopy();
+            itextcomponent.setStyle(itextcomponent.getStyle().createDeepCopy());
+            return itextcomponent;
         });
         return iterator;
     }

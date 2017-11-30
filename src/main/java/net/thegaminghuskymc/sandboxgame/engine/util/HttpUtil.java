@@ -1,17 +1,12 @@
 package net.thegaminghuskymc.sandboxgame.engine.util;
 
-import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
@@ -23,9 +18,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.thegaminghuskymc.sandboxgame.engine.util.text.translation.I18n;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -111,7 +103,7 @@ public class HttpUtil
             dataoutputstream.flush();
             dataoutputstream.close();
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(httpurlconnection.getInputStream()));
-            StringBuffer stringbuffer = new StringBuffer();
+            StringBuilder stringbuffer = new StringBuilder();
             String s;
 
             while ((s = bufferedreader.readLine()) != null)
@@ -310,7 +302,7 @@ public class HttpUtil
                     serversocket.close();
                 }
             }
-            catch (IOException var8)
+            catch (IOException ignored)
             {
             }
         }

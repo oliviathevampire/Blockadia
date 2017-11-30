@@ -107,16 +107,14 @@ public class Vector implements Cloneable, Serializable {
 
 	@Override
 	public String toString() {
-		return new StringBuilder()
-				.append(getClass().getSimpleName())
-				.append("[")
-				.append(x)
-				.append(", ")
-				.append(y)
-				.append(", ")
-				.append(z)
-				.append("]")
-				.toString();
+		return getClass().getSimpleName() +
+                "[" +
+                x +
+                ", " +
+                y +
+                ", " +
+                z +
+                "]";
 	}
 
 	public Vector3f toVector3f() {

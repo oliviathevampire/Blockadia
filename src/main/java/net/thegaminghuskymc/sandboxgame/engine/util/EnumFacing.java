@@ -3,7 +3,6 @@ package net.thegaminghuskymc.sandboxgame.engine.util;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
-import net.thegaminghuskymc.sandboxgame.engine.util.math.BlockPos;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.MathHelper;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vec3i;
 import org.jetbrains.annotations.Nullable;

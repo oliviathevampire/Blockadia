@@ -3,7 +3,7 @@ package net.thegaminghuskymc.sandboxgame.engine.util.text.translation;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import java.io.IOException;
+
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.IllegalFormatException;
@@ -14,7 +14,7 @@ import org.apache.commons.io.IOUtils;
 public class LanguageMap
 {
     /** Pattern that matches numeric variable placeholders in a resource string, such as "%d", "%3$d", "%.2f" */
-    private static final Pattern NUMERIC_VARIABLE_PATTERN = Pattern.compile("%(\\d+\\$)?[\\d\\.]*[df]");
+    private static final Pattern NUMERIC_VARIABLE_PATTERN = Pattern.compile("%(\\d+\\$)?[\\d.]*[df]");
     /** A Splitter that splits a string on the first "=".  For example, "a=b=c" would split into ["a", "b=c"]. */
     private static final Splitter EQUAL_SIGN_SPLITTER = Splitter.on('=').limit(2);
     /** Is the private singleton instance of StringTranslate. */
@@ -63,11 +63,7 @@ public class LanguageMap
                 }
             }
 
-        }
-        catch (IOException var7)
-        {
-        }
-        catch (Exception ex) {}
+        } catch (Exception ignored) {}
         return table;
     }
 

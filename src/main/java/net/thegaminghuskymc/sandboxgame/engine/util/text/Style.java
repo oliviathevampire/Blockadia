@@ -213,7 +213,7 @@ public class Style
      */
     public boolean getBold()
     {
-        return this.bold == null ? this.getParent().getBold() : this.bold.booleanValue();
+        return this.bold == null ? this.getParent().getBold() : this.bold;
     }
 
     /**
@@ -221,7 +221,7 @@ public class Style
      */
     public boolean getItalic()
     {
-        return this.italic == null ? this.getParent().getItalic() : this.italic.booleanValue();
+        return this.italic == null ? this.getParent().getItalic() : this.italic;
     }
 
     /**
@@ -229,7 +229,7 @@ public class Style
      */
     public boolean getStrikethrough()
     {
-        return this.strikethrough == null ? this.getParent().getStrikethrough() : this.strikethrough.booleanValue();
+        return this.strikethrough == null ? this.getParent().getStrikethrough() : this.strikethrough;
     }
 
     /**
@@ -237,7 +237,7 @@ public class Style
      */
     public boolean getUnderlined()
     {
-        return this.underlined == null ? this.getParent().getUnderlined() : this.underlined.booleanValue();
+        return this.underlined == null ? this.getParent().getUnderlined() : this.underlined;
     }
 
     /**
@@ -245,7 +245,7 @@ public class Style
      */
     public boolean getObfuscated()
     {
-        return this.obfuscated == null ? this.getParent().getObfuscated() : this.obfuscated.booleanValue();
+        return this.obfuscated == null ? this.getParent().getObfuscated() : this.obfuscated;
     }
 
     /**
@@ -551,11 +551,11 @@ public class Style
     public Style createDeepCopy()
     {
         Style style = new Style();
-        style.setBold(Boolean.valueOf(this.getBold()));
-        style.setItalic(Boolean.valueOf(this.getItalic()));
-        style.setStrikethrough(Boolean.valueOf(this.getStrikethrough()));
-        style.setUnderlined(Boolean.valueOf(this.getUnderlined()));
-        style.setObfuscated(Boolean.valueOf(this.getObfuscated()));
+        style.setBold(this.getBold());
+        style.setItalic(this.getItalic());
+        style.setStrikethrough(this.getStrikethrough());
+        style.setUnderlined(this.getUnderlined());
+        style.setObfuscated(this.getObfuscated());
         style.setColor(this.getColor());
         style.setClickEvent(this.getClickEvent());
         style.setHoverEvent(this.getHoverEvent());

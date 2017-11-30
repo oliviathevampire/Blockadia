@@ -35,22 +35,10 @@ public class Vec3i implements Comparable<Vec3i>
         {
             return false;
         }
-        else
-        {
-            Vec3i vec3i = (Vec3i)p_equals_1_;
+        else {
+            Vec3i vec3i = (Vec3i) p_equals_1_;
 
-            if (this.getX() != vec3i.getX())
-            {
-                return false;
-            }
-            else if (this.getY() != vec3i.getY())
-            {
-                return false;
-            }
-            else
-            {
-                return this.getZ() == vec3i.getZ();
-            }
+            return this.getX() == vec3i.getX() && this.getY() == vec3i.getY() && this.getZ() == vec3i.getZ();
         }
     }
 

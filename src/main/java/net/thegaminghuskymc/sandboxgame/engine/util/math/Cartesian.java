@@ -184,7 +184,7 @@ public class Cartesian
                                 ++this.index;
                             }
 
-                            return (T[]) this.results.clone();
+                            return this.results.clone();
                         }
                     }
                 }

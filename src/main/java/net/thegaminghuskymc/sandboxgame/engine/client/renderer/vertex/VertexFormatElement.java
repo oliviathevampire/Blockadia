@@ -28,7 +28,7 @@ public class VertexFormatElement
         this.elementCount = count;
     }
 
-    private final boolean isFirstOrUV(int p_177372_1_, VertexFormatElement.EnumUsage p_177372_2_)
+    private boolean isFirstOrUV(int p_177372_1_, VertexFormatElement.EnumUsage p_177372_2_)
     {
         return p_177372_1_ == 0 || p_177372_2_ == VertexFormatElement.EnumUsage.UV;
     }
@@ -74,26 +74,10 @@ public class VertexFormatElement
         {
             return true;
         }
-        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
-        {
-            VertexFormatElement vertexformatelement = (VertexFormatElement)p_equals_1_;
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) {
+            VertexFormatElement vertexformatelement = (VertexFormatElement) p_equals_1_;
 
-            if (this.elementCount != vertexformatelement.elementCount)
-            {
-                return false;
-            }
-            else if (this.index != vertexformatelement.index)
-            {
-                return false;
-            }
-            else if (this.type != vertexformatelement.type)
-            {
-                return false;
-            }
-            else
-            {
-                return this.usage == vertexformatelement.usage;
-            }
+            return this.elementCount == vertexformatelement.elementCount && this.index == vertexformatelement.index && this.type == vertexformatelement.type && this.usage == vertexformatelement.usage;
         }
         else
         {

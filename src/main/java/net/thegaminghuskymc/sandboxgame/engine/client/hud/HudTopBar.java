@@ -1,11 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.engine.client.hud;
 
-import net.thegaminghuskymc.sandboxgame.engine.Utils;
 import net.thegaminghuskymc.sandboxgame.engine.Window;
 import net.thegaminghuskymc.sandboxgame.engine.util.HudUtils;
 import org.lwjgl.nanovg.NVGColor;
-
-import java.nio.ByteBuffer;
 
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.*;

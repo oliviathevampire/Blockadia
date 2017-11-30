@@ -3,10 +3,6 @@ package net.thegaminghuskymc.sandboxgame.game;
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.IGameLogic;
 import net.thegaminghuskymc.sandboxgame.engine.Window;
-import org.apache.logging.log4j.Logger;
-
-import java.io.File;
-import java.util.logging.LogManager;
 
 public class Main {
 

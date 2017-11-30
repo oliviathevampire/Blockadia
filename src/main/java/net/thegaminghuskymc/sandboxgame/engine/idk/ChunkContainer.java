@@ -20,7 +20,7 @@ public class ChunkContainer {
 	 * Creates an empty ChunkContainer
 	 */
 	public ChunkContainer() {
-		this.chunks = new HashMap<Long, Chunk>();
+		this.chunks = new HashMap<>();
 		this.selected = new Vector3(0f, 0f, 0f);
 	}
 

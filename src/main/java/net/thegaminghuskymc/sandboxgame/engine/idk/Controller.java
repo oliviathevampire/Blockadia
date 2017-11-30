@@ -34,7 +34,7 @@ public class Controller implements Runnable {
 			processInput();
 			
 			try {
-				Thread.sleep(15l);
+				Thread.sleep(15L);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

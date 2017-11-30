@@ -65,16 +65,8 @@ public class JsonUtils
     /**
      * Does the given JsonObject contain a field with the given name?
      */
-    public static boolean hasField(JsonObject json, String memberName)
-    {
-        if (json == null)
-        {
-            return false;
-        }
-        else
-        {
-            return json.get(memberName) != null;
-        }
+    public static boolean hasField(JsonObject json, String memberName) {
+        return json != null && json.get(memberName) != null;
     }
 
     /**

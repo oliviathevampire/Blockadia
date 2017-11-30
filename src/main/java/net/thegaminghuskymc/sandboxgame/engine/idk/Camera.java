@@ -43,7 +43,7 @@ public class Camera {
 	/**
 	 * Calculates an absolute point that the camera should point at
 	 * 
-	 * @see unitLookAt()
+	 * @see Camera#unitLookAt()
 	 * @return an absolute point that the camera should look at
 	 */
 	public Vector3 lookAt() {

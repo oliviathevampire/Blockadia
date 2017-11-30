@@ -217,22 +217,10 @@ public class Vec3d
         {
             return false;
         }
-        else
-        {
-            Vec3d vec3d = (Vec3d)p_equals_1_;
+        else {
+            Vec3d vec3d = (Vec3d) p_equals_1_;
 
-            if (Double.compare(vec3d.x, this.x) != 0)
-            {
-                return false;
-            }
-            else if (Double.compare(vec3d.y, this.y) != 0)
-            {
-                return false;
-            }
-            else
-            {
-                return Double.compare(vec3d.z, this.z) == 0;
-            }
+            return Double.compare(vec3d.x, this.x) == 0 && Double.compare(vec3d.y, this.y) == 0 && Double.compare(vec3d.z, this.z) == 0;
         }
     }
 

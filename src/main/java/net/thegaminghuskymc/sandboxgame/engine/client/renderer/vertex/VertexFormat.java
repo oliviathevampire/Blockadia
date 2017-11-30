@@ -60,7 +60,7 @@ public class VertexFormat
         else
         {
             this.elements.add(element);
-            this.offsets.add(Integer.valueOf(this.nextOffset));
+            this.offsets.add(this.nextOffset);
 
             switch (element.getUsage())
             {
@@ -71,7 +71,7 @@ public class VertexFormat
                     this.colorElementOffset = this.nextOffset;
                     break;
                 case UV:
-                    this.uvOffsetsById.add(element.getIndex(), Integer.valueOf(this.nextOffset));
+                    this.uvOffsetsById.add(element.getIndex(), this.nextOffset);
             }
 
             this.nextOffset += element.getSize();
@@ -107,24 +107,24 @@ public class VertexFormat
 
     public int getUvOffsetById(int id)
     {
-        return this.uvOffsetsById.get(id).intValue();
+        return this.uvOffsetsById.get(id);
     }
 
     public String toString()
     {
-        String s = "format: " + this.elements.size() + " elements: ";
+        StringBuilder s = new StringBuilder("format: " + this.elements.size() + " elements: ");
 
         for (int i = 0; i < this.elements.size(); ++i)
         {
-            s = s + this.elements.get(i).toString();
+            s.append(this.elements.get(i).toString());
 
             if (i != this.elements.size() - 1)
             {
-                s = s + " ";
+                s.append(" ");
             }
         }
 
-        return s;
+        return s.toString();
     }
 
     private boolean hasPosition()
@@ -171,7 +171,7 @@ public class VertexFormat
 
     public int getOffset(int index)
     {
-        return this.offsets.get(index).intValue();
+        return this.offsets.get(index);
     }
 
     public boolean equals(Object p_equals_1_)
@@ -180,22 +180,10 @@ public class VertexFormat
         {
             return true;
         }
-        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass())
-        {
-            VertexFormat vertexformat = (VertexFormat)p_equals_1_;
+        else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) {
+            VertexFormat vertexformat = (VertexFormat) p_equals_1_;
 
-            if (this.nextOffset != vertexformat.nextOffset)
-            {
-                return false;
-            }
-            else if (!this.elements.equals(vertexformat.elements))
-            {
-                return false;
-            }
-            else
-            {
-                return this.offsets.equals(vertexformat.offsets);
-            }
+            return this.nextOffset == vertexformat.nextOffset && this.elements.equals(vertexformat.elements) && this.offsets.equals(vertexformat.offsets);
         }
         else
         {
