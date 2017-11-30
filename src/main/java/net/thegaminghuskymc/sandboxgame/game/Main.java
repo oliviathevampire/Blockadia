@@ -13,7 +13,7 @@ public class Main {
             Window.WindowOptions opts = new Window.WindowOptions();
             opts.cullFace = false;
             opts.compatibleProfile = true;
-            opts.antialiasing = false;
+            opts.antialiasing = true;
             opts.frustumCulling = true;
             GameEngine gameEng = new GameEngine("Husky's Sandbox Game", vSync, opts, gameLogic);
             gameEng.start();
