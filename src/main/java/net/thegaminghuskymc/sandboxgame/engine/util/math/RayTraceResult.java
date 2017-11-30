@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
-import net.thegaminghuskymc.sandboxgame.engine.entities.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.Entity;
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
 
 public class RayTraceResult

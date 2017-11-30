@@ -2,7 +2,6 @@ package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.*;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
-import net.thegaminghuskymc.sandboxgame.engine.entities.EntityPlayer;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
@@ -10,6 +9,7 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
+import org.joml.Quaternionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -153,10 +153,6 @@ public class DummyGame implements IGameLogic {
         camera.getPosition().z = 6.5f;
         camera.getRotation().x = 25;
         camera.getRotation().y = -1;
-    }
-
-    public Camera getCamera() {
-        return camera;
     }
 
     private static int getRed(int c)

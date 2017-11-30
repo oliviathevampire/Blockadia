@@ -1,8 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.engine.world;
 
 import net.thegaminghuskymc.sandboxgame.engine.Scene;
+import net.thegaminghuskymc.sandboxgame.engine.Entity;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
-import net.thegaminghuskymc.sandboxgame.engine.entities.Entity;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Vector3f;
