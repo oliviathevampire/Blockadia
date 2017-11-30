@@ -187,31 +187,31 @@ public class DummyGame implements IGameLogic {
         cameraInc.set(0, 0, 0);
         if (window.isKeyPressed(GLFW_KEY_W)) {
             sceneChanged = true;
-            cameraInc.z = -4;
+            cameraInc.z = -8;
         } else if (window.isKeyPressed(GLFW_KEY_S)) {
             sceneChanged = true;
-            cameraInc.z = 4;
+            cameraInc.z = 8;
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
             sceneChanged = true;
-            cameraInc.x = -4;
+            cameraInc.x = -8;
         } else if (window.isKeyPressed(GLFW_KEY_D)) {
             sceneChanged = true;
-            cameraInc.x = 4;
+            cameraInc.x = 8;
         }
-        if (window.isKeyPressed(GLFW_KEY_Z)) {
+        if (window.isKeyPressed(GLFW_KEY_LEFT_SHIFT) || window.isKeyPressed(GLFW_KEY_RIGHT_SHIFT)) {
             sceneChanged = true;
-            cameraInc.y = -4;
-        } else if (window.isKeyPressed(GLFW_KEY_X)) {
+            cameraInc.y = -3;
+        } else if (window.isKeyPressed(GLFW_KEY_SPACE)) {
             sceneChanged = true;
-            cameraInc.y = 4;
+            cameraInc.y = 3;
         }
         if (window.isKeyPressed(GLFW_KEY_LEFT)) {
             sceneChanged = true;
-            angleInc -= 0.0005f;
+            angleInc -= 2;
         } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
             sceneChanged = true;
-            angleInc += 0.0005f;
+            angleInc += 2;
         } else {
             angleInc = 0;
         }
