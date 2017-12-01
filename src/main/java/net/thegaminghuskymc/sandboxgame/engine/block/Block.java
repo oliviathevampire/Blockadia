@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
+import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import net.thegaminghuskymc.sandboxgame.game.Main;
 import org.joml.Quaternionf;
@@ -22,6 +23,12 @@ public class Block {
     private boolean disableFrustumCulling;
 
     private boolean insideFrustum;
+
+    private String unlocolizedName;
+
+    private String registryName;
+
+    private Material material;
 
     private static  float[] positions = new float[] {
             // V0
@@ -177,16 +184,66 @@ public class Block {
         textPos = 0;
         insideFrustum = true;
         disableFrustumCulling = false;
+        setUnlocalizedName("test_block");
+        setRegistryName("test_block");
     }
 
     public Block(Mesh mesh) {
         this();
         this.meshes = new Mesh[]{mesh};
+        setUnlocalizedName("test_block");
+        setRegistryName("test_block");
     }
 
     public Block(Mesh[] meshes) {
         this();
         this.meshes = meshes;
+        setUnlocalizedName("test_block");
+        setRegistryName("test_block");
+    }
+
+    public Block(Material material) {
+        this();
+        setMaterial(material);
+        setUnlocalizedName("test_block");
+        setRegistryName("test_block");
+    }
+
+    public Block(String name) {
+        this();
+        setUnlocalizedName(name);
+        setRegistryName(name);
+    }
+
+    public Block(String name, Material material) {
+        this();
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setMaterial(material);
+    }
+
+    public String getUnlocalizedName() {
+        return unlocolizedName;
+    }
+
+    public void setUnlocalizedName(String unlocolizedName) {
+        this.unlocolizedName = unlocolizedName;
+    }
+
+    public String getRegistryName() {
+        return registryName;
+    }
+
+    public void setRegistryName(String registryName) {
+        this.registryName = registryName;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Vector3f getPosition() {

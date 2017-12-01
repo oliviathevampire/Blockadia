@@ -1,7 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.*;
-import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+import net.thegaminghuskymc.sandboxgame.engine.block.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.*;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Texture;
 import net.thegaminghuskymc.sandboxgame.engine.graph.lights.DirectionalLight;
@@ -81,6 +81,13 @@ public class DummyGame implements IGameLogic {
         world.entities.add(player);
 
         BiomeRegistry.biomes.add(new BiomePlains());
+        BiomeRegistry.biomes.add(new BiomeMountains());
+
+        BlockRegistry.blocks.add(new BlockDirt());
+        BlockRegistry.blocks.add(new BlockCobblestone());
+        BlockRegistry.blocks.add(new BlockGrass());
+        BlockRegistry.blocks.add(new BlockGrassPath());
+        BlockRegistry.blocks.add(new BlockStone());
 
         float blockScale = 0.5f;
         float skyBoxScale = 100.0f;
@@ -93,23 +100,6 @@ public class DummyGame implements IGameLogic {
 
         float posx = startx;
         float posz = startz;
-        float incy;
-
-        selectDetector = new MouseBoxSelectionDetector();
-
-//        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/assets/sandboxgame/textures/misc/heightmap.png"));
-//        int w = image.getWidth();
-//        int h = image.getHeight();
-//        int pixels[] = new int[w * h];
-//        image.getRGB(0, 0, w, h, pixels, 0, w);
-//        ByteBuffer bb = BufferUtils.createByteBuffer(pixels.length * 4);
-//        for (int p : pixels) {
-//            bb.put((byte) getRed(p));
-//            bb.put((byte) getGreen(p));
-//            bb.put((byte) getBlue(p));
-//            bb.put((byte) getAlpha(p));
-//        }
-//        bb.flip();
 
         int w = 50;
         int h = 50;
@@ -119,9 +109,6 @@ public class DummyGame implements IGameLogic {
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
                 world.setBlock(new Vector3f(posx, 0, posz), new Block());
-//                int rgb = HeightMapMesh.getRGB(i, j, w, bb);
-//                incy = rgb / (10 * 255 * 255);
-//                world.setBlock(new Vector3f(posx, starty + incy, posz), block);
 
                 float freq = 1f;
                 float exp = 1f;
@@ -134,9 +121,7 @@ public class DummyGame implements IGameLogic {
                 }
 
                 float maxHeight = myNoise(posx, posz, freq, exp);
-                //System.out.println(maxHeight + " " + x + " " + y);
                 for (float bH = 0; bH < maxHeight; bH++) {
-                    //System.out.println(bH);
                     world.setBlock(new Vector3f(posx, bH, posz), new Block());
                 }
 
@@ -272,17 +257,17 @@ public class DummyGame implements IGameLogic {
         // Update view matrix
         camera.updateViewMatrix();
 
-        if (mouseInput.isLeftButtonPressed()) {
+        /*if (mouseInput.isLeftButtonPressed()) {
             this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
-        }
-        if (mouseInput.isRightButtonPressed()) {
+        }*/
+        /*if (mouseInput.isRightButtonPressed()) {
             this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
             if (selected != null) {
                 Vector3f pos = selected.getPosition();
                 world.setBlock(new Vector3f(pos.x, pos.y + 1, pos.z), new Block());
                 world.endAddingBlocks(scene);
             }
-        }
+        }*/
         world.update();
     }
 
