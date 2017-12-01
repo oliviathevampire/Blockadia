@@ -9,18 +9,13 @@ import net.thegaminghuskymc.sandboxgame.engine.graph.weather.Fog;
 import net.thegaminghuskymc.sandboxgame.engine.item.SkyBox;
 import net.thegaminghuskymc.sandboxgame.engine.sound.SoundManager;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
-import org.joml.Quaternionf;
+import net.thegaminghuskymc.sandboxgame.engine.world.biome.BiomeRegistry;
+import net.thegaminghuskymc.sandboxgame.engine.world.biome.IBiome;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.lwjgl.BufferUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import static net.thegaminghuskymc.sandboxgame.engine.world.gen.Noise.myNoise;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
@@ -85,6 +80,8 @@ public class DummyGame implements IGameLogic {
         player = new EntityPlayer();
         world.entities.add(player);
 
+        BiomeRegistry.biomes.add(new BiomePlains());
+
         float blockScale = 0.5f;
         float skyBoxScale = 100.0f;
         float extension = 1.0f;
@@ -100,30 +97,48 @@ public class DummyGame implements IGameLogic {
 
         selectDetector = new MouseBoxSelectionDetector();
 
-        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/assets/sandboxgame/textures/misc/heightmap.png"));
-        int w = image.getWidth();
-        int h = image.getHeight();
-        int pixels[] = new int[w * h];
-        image.getRGB(0, 0, w, h, pixels, 0, w);
-        ByteBuffer bb = BufferUtils.createByteBuffer(pixels.length * 4);
-        for (int p : pixels) {
-            bb.put((byte) getRed(p));
-            bb.put((byte) getGreen(p));
-            bb.put((byte) getBlue(p));
-            bb.put((byte) getAlpha(p));
-        }
-        bb.flip();
+//        BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/assets/sandboxgame/textures/misc/heightmap.png"));
+//        int w = image.getWidth();
+//        int h = image.getHeight();
+//        int pixels[] = new int[w * h];
+//        image.getRGB(0, 0, w, h, pixels, 0, w);
+//        ByteBuffer bb = BufferUtils.createByteBuffer(pixels.length * 4);
+//        for (int p : pixels) {
+//            bb.put((byte) getRed(p));
+//            bb.put((byte) getGreen(p));
+//            bb.put((byte) getBlue(p));
+//            bb.put((byte) getAlpha(p));
+//        }
+//        bb.flip();
 
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
-                Block block = new Block();
-                int rgb = HeightMapMesh.getRGB(i, j, w, bb);
-                incy = rgb / (10 * 255 * 255);
-//                int textPos = Math.random() > 0.5f ? 0 : 1;
-//                block.setTextPos(textPos);
-//                block.setPosition(posx, starty + incy, posz);
-//                world.blocks.put(block.getPosition(), block);
-                world.setBlock(new Vector3f(posx, starty + incy, posz), block);
+        int w = 50;
+        int h = 50;
+
+        player.setPosition(startx, starty, startz);
+
+        for (int x = 0; x < w; x++) {
+            for (int y = 0; y < h; y++) {
+                world.setBlock(new Vector3f(posx, 0, posz), new Block());
+//                int rgb = HeightMapMesh.getRGB(i, j, w, bb);
+//                incy = rgb / (10 * 255 * 255);
+//                world.setBlock(new Vector3f(posx, starty + incy, posz), block);
+
+                float freq = 1f;
+                float exp = 1f;
+                for (IBiome biome : BiomeRegistry.biomes) {
+                    if (biome.shouldGenerate(1f)) {
+                        freq = biome.getNoiseFrequency();
+                        exp = biome.getNoiseExponent();
+                        break;
+                    }
+                }
+
+                float maxHeight = myNoise(posx, posz, freq, exp);
+                //System.out.println(maxHeight + " " + x + " " + y);
+                for (float bH = 0; bH < maxHeight; bH++) {
+                    //System.out.println(bH);
+                    world.setBlock(new Vector3f(posx, bH, posz), new Block());
+                }
 
                 posx += inc;
             }
@@ -138,7 +153,7 @@ public class DummyGame implements IGameLogic {
 
         // Fog
         Vector3f fogColour = new Vector3f(0.5f, 0.5f, 0.5f);
-        scene.setFog(new Fog(true, fogColour, 0.04f));
+        scene.setFog(new Fog(false, fogColour, 0.04f));
 
         // Setup  SkyBox
         SkyBox skyBox = new SkyBox("/assets/sandboxgame/models/misc/skybox.obj", new Vector4f(0.65f, 0.65f, 0.65f, 1.0f));
