@@ -73,10 +73,7 @@ public class DummyGame implements IGameLogic {
 
         scene = new Scene();
 
-        Texture terrainTexture = new Texture("/assets/sandboxgame/textures/blocks/terrain_textures.png", 2, 1);
-        Material terrainMaterial = new Material(terrainTexture, 1f);
-
-        world = new World(terrainMaterial);
+        world = new World();
 
         player = new EntityPlayer();
         world.entities.add(player);

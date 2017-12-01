@@ -26,6 +26,12 @@ public class World {
         mesh.setMaterial(terrainMaterial);
     }
 
+    public World() {
+        mesh = new Mesh(Block.getPositions(), Block.getTextCoords(), Block.getNormals(), Block.getIndices());
+        mesh.setBoundingRadius(2);
+        mesh.setMaterial(Block.instance.getMaterial());
+    }
+
     public Block setBlock(Vector3f vec, Block block) {
         if (block != null) {
             block.setMesh(mesh);
