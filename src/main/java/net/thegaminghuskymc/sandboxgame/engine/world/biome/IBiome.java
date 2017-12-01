@@ -1,5 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.world.biome;
 
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+
 public interface IBiome {
 
     /**
@@ -8,6 +10,14 @@ public interface IBiome {
     boolean shouldGenerate(float moisture);
 
     float getNoiseFrequency();
+
     float getNoiseExponent();
 
+    int getSurfaceThickness();
+    
+    Block getSurfaceBlock();
+
+    Block getUndergroundBlock();
+
+    Block getZeroBlock();
 }
