@@ -14,7 +14,7 @@ public interface IBiome {
     float getNoiseExponent();
 
     int getSurfaceThickness();
-
+    
     Block getSurfaceBlock();
 
     Block getUndergroundBlock();

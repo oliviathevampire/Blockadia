@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
-import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 import org.joml.Vector4f;
 
 public class Material {

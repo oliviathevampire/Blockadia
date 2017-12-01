@@ -2,14 +2,11 @@ package net.thegaminghuskymc.sandboxgame.engine.block;
 
 import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 import net.thegaminghuskymc.sandboxgame.game.Main;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class Block {
-
-    public static Block instance = new Block();
 
     private boolean selected;
 
@@ -32,8 +29,6 @@ public class Block {
     private String registryName;
 
     private Material material;
-
-    private ResourceLocation texture;
 
     private static  float[] positions = new float[] {
             // V0
@@ -227,29 +222,6 @@ public class Block {
         setMaterial(material);
     }
 
-    public Block(Material material, ResourceLocation texture) {
-        this();
-        setMaterial(material);
-        setUnlocalizedName("test_block");
-        setRegistryName("test_block");
-        setTexture(texture);
-    }
-
-    public Block(String name, ResourceLocation texture) {
-        this();
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setTexture(texture);
-    }
-
-    public Block(String name, Material material, ResourceLocation texture) {
-        this();
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setMaterial(material);
-        setTexture(texture);
-    }
-
     public String getUnlocalizedName() {
         return unlocolizedName;
     }
@@ -272,14 +244,6 @@ public class Block {
 
     public void setMaterial(Material material) {
         this.material = material;
-    }
-
-    public ResourceLocation getTexture() {
-        return texture;
-    }
-
-    public void setTexture(ResourceLocation texture) {
-        this.texture = texture;
     }
 
     public Vector3f getPosition() {
