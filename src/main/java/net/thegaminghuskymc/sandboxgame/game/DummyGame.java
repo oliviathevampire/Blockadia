@@ -15,6 +15,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import static net.thegaminghuskymc.sandboxgame.engine.world.gen.Noise.myMoistureNoise;
 import static net.thegaminghuskymc.sandboxgame.engine.world.gen.Noise.myNoise;
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -118,26 +119,35 @@ public class DummyGame implements IGameLogic {
 
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
-                world.setBlock(new Vector3f(posx, 0, posz), new Block());
 //                int rgb = HeightMapMesh.getRGB(i, j, w, bb);
 //                incy = rgb / (10 * 255 * 255);
 //                world.setBlock(new Vector3f(posx, starty + incy, posz), block);
 
-                float freq = 1f;
-                float exp = 1f;
+                IBiome biomeToGen = null;
+
+                float freq = biomeToGen !=null ? biomeToGen.getNoiseFrequency() : 0f;
+                float exp = biomeToGen !=null ? biomeToGen.getNoiseExponent() : 0f;
+
+                int surfaceThickness = biomeToGen !=null ? biomeToGen.getSurfaceThickness() : 0;
+
                 for (IBiome biome : BiomeRegistry.biomes) {
-                    if (biome.shouldGenerate(1f)) {
-                        freq = biome.getNoiseFrequency();
-                        exp = biome.getNoiseExponent();
+                    if (biome.shouldGenerate(myMoistureNoise(posx, posz))) {
+                        biomeToGen = biome;
                         break;
                     }
                 }
 
+                world.setBlock(new Vector3f(posx, 0, posz), biomeToGen !=null ? biomeToGen.getZeroBlock() : new Block());
                 float maxHeight = myNoise(posx, posz, freq, exp);
+
                 //System.out.println(maxHeight + " " + x + " " + y);
                 for (float bH = 0; bH < maxHeight; bH++) {
                     //System.out.println(bH);
-                    world.setBlock(new Vector3f(posx, bH, posz), new Block());
+                    if (maxHeight-bH >= surfaceThickness) {
+                        world.setBlock(new Vector3f(posx, bH, posz), biomeToGen !=null ? biomeToGen.getSurfaceBlock() : new Block());
+                    } else {
+                        world.setBlock(new Vector3f(posx, bH, posz), biomeToGen !=null ? biomeToGen.getUndergroundBlock() : new Block());
+                    }
                 }
 
                 posx += inc;

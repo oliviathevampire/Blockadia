@@ -8,6 +8,8 @@ public class Noise {
 
     public static Random worldGenRandom = new Random();
     public static NoiseGeneratorPerlin perlin = new NoiseGeneratorPerlin(worldGenRandom, 5);
+    public static Random moistureRandom = new Random();
+    public static NoiseGeneratorPerlin perlinMoisture = new NoiseGeneratorPerlin(moistureRandom, 5);
 
 /*
     public static float[][] simplexNoise(int width, int height) {
@@ -41,13 +43,26 @@ public class Noise {
 //        return noise;
 //    }
 
-        public static float myNoise(float x, float y, float frequency, float exponent) {
-            double e = 1 * perlin.getValue(frequency * 1 * x, 1 * y)
-            +  0.5 * perlin.getValue(frequency * 2 * x, 2 * y)
-            + 0.25 * perlin.getValue(frequency * 4 * x, 4 * y);
-            //noise[x][y] = (float) Math.pow(e, 1.24);
-            return (float) Math.pow(e, exponent);
-            //System.out.println(e);
-        }
+    public static float myNoise(float x, float y, float frequency, float exponent) {
+        double e = 1 * perlin.getValue(frequency * 1 * x, 1 * y)
+                + 0.5 * perlin.getValue(frequency * 2 * x, 2 * y)
+                + 0.25 * perlin.getValue(frequency * 4 * x, 4 * y);
+        //noise[x][y] = (float) Math.pow(e, 1.24);
+        return (float) Math.pow(e, exponent);
+        //System.out.println(e);
+    }
+
+    public static float myMoistureNoise(float x, float y) {
+        double e = (1.00 * perlinMoisture.getValue( 1 * x,  1 * y)
+                + 0.75 * perlinMoisture.getValue( 2 * x,  2 * y)
+                + 0.33 * perlinMoisture.getValue( 4 * x,  4 * y)
+                + 0.33 * perlinMoisture.getValue( 8 * x,  8 * y)
+                + 0.33 * perlinMoisture.getValue(16 * x, 16 * y)
+                + 0.50 * perlinMoisture.getValue(32 * x, 32 * y));
+        //noise[x][y] = (float) Math.pow(e, 1.24);
+        return (float) e;
+        //System.out.println(e);
+    }
+
 
 }

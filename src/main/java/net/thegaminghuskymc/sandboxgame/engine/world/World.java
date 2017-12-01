@@ -27,13 +27,17 @@ public class World {
     }
 
     public Block setBlock(Vector3f vec, Block block) {
-        block.setMesh(mesh);
-        int textPos = Math.random() > 0.5f ? 0 : 1;
-        block.setTextPos(textPos);
-        block.setPosition(vec.x,vec.y,vec.z);
-        blocks.put(block.getPosition(), block);
-        notAddedToScene.add(block);
-
+        if (block != null) {
+            block.setMesh(mesh);
+            int textPos = Math.random() > 0.5f ? 0 : 1;
+            block.setTextPos(textPos);
+            block.setPosition(vec.x, vec.y, vec.z);
+            blocks.put(block.getPosition(), block);
+            notAddedToScene.add(block);
+        } else {
+            blocks.remove(vec);
+            notAddedToScene.add(block);
+        }
         return block;
     }
 

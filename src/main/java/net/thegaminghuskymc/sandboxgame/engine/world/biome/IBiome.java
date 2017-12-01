@@ -1,5 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.world.biome;
 
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+
 public interface IBiome {
 
     /**
@@ -10,4 +12,10 @@ public interface IBiome {
     float getNoiseFrequency();
     float getNoiseExponent();
 
+    int getSurfaceThickness();
+    Block getSurfaceBlock();
+
+    Block getUndergroundBlock();
+
+    Block getZeroBlock();
 }
