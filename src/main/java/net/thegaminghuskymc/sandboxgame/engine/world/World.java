@@ -1,14 +1,14 @@
 package net.thegaminghuskymc.sandboxgame.engine.world;
 
-import net.thegaminghuskymc.sandboxgame.engine.Scene;
 import net.thegaminghuskymc.sandboxgame.engine.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.Scene;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class World {
@@ -40,6 +40,9 @@ public class World {
     public void endAddingBlocks(Scene scene) {
         scene.setGameItems(notAddedToScene);
         notAddedToScene.clear();
+    }
+
+    public void rayTrace(Vector3f pos, Quaternionf rot, float lenght) {
     }
 
     public void update() {
