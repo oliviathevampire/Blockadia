@@ -125,17 +125,17 @@ public class DummyGame implements IGameLogic {
 
                 IBiome biomeToGen = null;
 
-                float freq = biomeToGen !=null ? biomeToGen.getNoiseFrequency() : 0f;
-                float exp = biomeToGen !=null ? biomeToGen.getNoiseExponent() : 0f;
-
-                int surfaceThickness = biomeToGen !=null ? biomeToGen.getSurfaceThickness() : 0;
-
                 for (IBiome biome : BiomeRegistry.biomes) {
                     if (biome.shouldGenerate(myMoistureNoise(posx, posz))) {
                         biomeToGen = biome;
                         break;
                     }
                 }
+
+                float freq = biomeToGen !=null ? biomeToGen.getNoiseFrequency() : 0f;
+                float exp = biomeToGen !=null ? biomeToGen.getNoiseExponent() : 0f;
+
+                int surfaceThickness = biomeToGen !=null ? biomeToGen.getSurfaceThickness() : 0;
 
                 world.setBlock(new Vector3f(posx, 0, posz), biomeToGen !=null ? biomeToGen.getZeroBlock() : new Block());
                 float maxHeight = myNoise(posx, posz, freq, exp);
