@@ -8,7 +8,6 @@ import org.joml.Vector2d;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class MouseBoxSelectionDetector extends CameraBoxSelectionDetector {

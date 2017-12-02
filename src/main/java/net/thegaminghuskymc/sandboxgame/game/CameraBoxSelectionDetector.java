@@ -6,7 +6,6 @@ import org.joml.Intersectionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class CameraBoxSelectionDetector {

@@ -28,7 +28,7 @@ public class Block {
 
     private String registryName;
 
-    private Material material;
+    public static Material material;
 
     private static  float[] positions = new float[] {
             // V0

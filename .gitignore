@@ -65,3 +65,6 @@ build/
 ## OS Specific
 .DS_Store
 jars
+src/main/java/com/*
+src/main/java/idk/*
+classes/*
