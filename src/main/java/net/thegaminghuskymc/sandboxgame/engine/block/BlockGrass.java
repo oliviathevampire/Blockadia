@@ -6,4 +6,8 @@ public class BlockGrass extends Block {
         super("grass");
     }
 
+    public BlockGrass(int ID) {
+        super(ID);
+    }
+
 }

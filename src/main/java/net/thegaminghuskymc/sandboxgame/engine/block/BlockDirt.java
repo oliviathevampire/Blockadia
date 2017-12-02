@@ -13,4 +13,12 @@ public class BlockDirt extends Block {
         setMaterial(material);
     }
 
+    public BlockDirt(int ID) {
+        super(ID);
+    }
+
+    @Override
+    public boolean isFullBlock() {
+        return true;
+    }
 }
