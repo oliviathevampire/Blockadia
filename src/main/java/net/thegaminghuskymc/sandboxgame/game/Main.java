@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            boolean vSync = false;
+            boolean vSync = true;
             Window.WindowOptions opts = new Window.WindowOptions();
             opts.cullFace = false;
             opts.compatibleProfile = true;

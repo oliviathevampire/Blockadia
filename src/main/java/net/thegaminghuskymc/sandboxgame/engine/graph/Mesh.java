@@ -189,9 +189,16 @@ public class Mesh {
     public void render() {
         initRender();
 
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+        if(isDebug()) {
+            glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
+        } else
+            glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
 
         endRender();
+    }
+
+    public static boolean isDebug() {
+        return false;
     }
 
     public void renderList(List<Block> Blocks, Consumer<Block> consumer) {
@@ -202,7 +209,10 @@ public class Mesh {
                 // Set up data requiered by Block
                 consumer.accept(Block);
                 // Render this game item
-                glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                if(isDebug()) {
+                    glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
+                } else
+                    glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
             }
         }
 
