@@ -240,7 +240,6 @@ public class DummyGame implements IGameLogic {
         if (mouseInput.isRightButtonPressed()) {
             // Update camera based on mouse            
             Vector2f rotVec = mouseInput.getDisplVec();
-            //camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
             player.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
             sceneChanged = true;
         }
@@ -266,17 +265,6 @@ public class DummyGame implements IGameLogic {
         // Update view matrix
         camera.updateViewMatrix();
 
-        /*if (mouseInput.isLeftButtonPressed()) {
-            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
-        }*/
-        /*if (mouseInput.isRightButtonPressed()) {
-            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
-            if (selected != null) {
-                Vector3f pos = selected.getPosition();
-                world.setBlock(new Vector3f(pos.x, pos.y + 1, pos.z), new Block());
-                world.endAddingBlocks(scene);
-            }
-        }*/
         world.update();
     }
 

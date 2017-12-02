@@ -6,4 +6,8 @@ public class BlockStone extends Block {
         super("stone");
     }
 
+    public BlockStone(int ID) {
+        super(ID);
+    }
+
 }

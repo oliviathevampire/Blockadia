@@ -23,14 +23,10 @@ public class Entity {
 
     private int textPos;
     
-    private boolean disableFrustumCulling;
-
-    private boolean insideFrustum;
-    
     public AxisAlignedBB boundingbox;
 
-    public float width = 1;
-    public float height = 1;
+    public float width = 1f;
+    public float height = 1f;
     
     public Entity() {
         lookedOn = false;
@@ -39,8 +35,6 @@ public class Entity {
         scale = 1;
         rotation = new Quaternionf();
         textPos = 0;
-        insideFrustum = true;
-        disableFrustumCulling = false;
     }
 
     public Entity(Mesh mesh) {
@@ -148,26 +142,9 @@ public class Entity {
     public void setTextPos(int textPos) {
         this.textPos = textPos;
     }
-
-    public boolean isInsideFrustum() {
-        return insideFrustum;
-    }
-
-    public void setInsideFrustum(boolean insideFrustum) {
-        this.insideFrustum = insideFrustum;
-    }
-    
-    public boolean isDisableFrustumCulling() {
-        return disableFrustumCulling;
-    }
-
-    public void setDisableFrustumCulling(boolean disableFrustumCulling) {
-        this.disableFrustumCulling = disableFrustumCulling;
-    }    
-    
     
     public boolean getAffectedByGravity() {
-    	return true;
+    	return false;
     }
     
 }
