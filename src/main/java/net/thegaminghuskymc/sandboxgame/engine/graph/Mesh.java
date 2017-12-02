@@ -1,7 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
-import net.thegaminghuskymc.sandboxgame.engine.client.renderer.Cube;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
