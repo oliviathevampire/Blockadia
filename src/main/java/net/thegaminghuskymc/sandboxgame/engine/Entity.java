@@ -1,8 +1,11 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
-import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+
+import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.AxisAlignedBB;
+import net.thegaminghuskymc.sandboxgame.game.DummyGame;
 
 public class Entity {
 
@@ -20,10 +23,11 @@ public class Entity {
 
     private int textPos;
     
-    private boolean disableFrustumCulling;
+    public AxisAlignedBB boundingbox;
 
-    private boolean insideFrustum;
-
+    public float width = 1f;
+    public float height = 1f;
+    
     public Entity() {
         lookedOn = false;
         isAgressive = false;
@@ -31,8 +35,6 @@ public class Entity {
         scale = 1;
         rotation = new Quaternionf();
         textPos = 0;
-        insideFrustum = true;
-        disableFrustumCulling = false;
     }
 
     public Entity(Mesh mesh) {
@@ -67,17 +69,19 @@ public class Entity {
         this.position.z = z;
     }
 
-    public void movePosition(float offsetX, float offsetY, float offsetZ) {
-        if ( offsetZ != 0 ) {
-            position.x += (float)Math.sin(Math.toRadians(rotation.y)) * -1.0f * offsetZ;
-            position.z += (float)Math.cos(Math.toRadians(rotation.y)) * offsetZ;
-        }
-        if ( offsetX != 0) {
-            position.x += (float)Math.sin(Math.toRadians(rotation.y - 90)) * -1.0f * offsetX;
-            position.z += (float)Math.cos(Math.toRadians(rotation.y - 90)) * offsetX;
-        }
-        position.y += offsetY;
-    }
+	public void movePosition(float offsetX, float offsetY, float offsetZ) {
+		if (offsetZ != 0) {
+			position.x += (float) Math.sin(Math.toRadians(rotation.y)) * -1.0f * offsetZ;
+			position.z += (float) Math.cos(Math.toRadians(rotation.y)) * offsetZ;
+		}
+		if (offsetX != 0) {
+			position.x += (float) Math.sin(Math.toRadians(rotation.y - 90)) * -1.0f * offsetX;
+			position.z += (float) Math.cos(Math.toRadians(rotation.y - 90)) * offsetX;
+		}
+		position.y += offsetY;
+		boundingbox = new AxisAlignedBB(position.x, position.y, position.z, position.x + width, position.y + height,
+				position.z + width);
+	}
     public float getScale() {
         return scale;
     }
@@ -123,7 +127,9 @@ public class Entity {
         }
     }
 
-    public void update() {}
+    public void update() {
+        if (getAffectedByGravity() && !DummyGame.getGame().world.isCollidingWithGround(this)) position.y -= DummyGame.GRAVITY;
+    }
 
     public void setLookedOn(boolean lookedOn) {
         this.lookedOn = lookedOn;
@@ -136,20 +142,9 @@ public class Entity {
     public void setTextPos(int textPos) {
         this.textPos = textPos;
     }
-
-    public boolean isInsideFrustum() {
-        return insideFrustum;
-    }
-
-    public void setInsideFrustum(boolean insideFrustum) {
-        this.insideFrustum = insideFrustum;
+    
+    public boolean getAffectedByGravity() {
+    	return false;
     }
     
-    public boolean isDisableFrustumCulling() {
-        return disableFrustumCulling;
-    }
-
-    public void setDisableFrustumCulling(boolean disableFrustumCulling) {
-        this.disableFrustumCulling = disableFrustumCulling;
-    }    
 }

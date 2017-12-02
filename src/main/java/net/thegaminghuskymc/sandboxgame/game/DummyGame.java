@@ -24,7 +24,7 @@ public class DummyGame implements IGameLogic {
     private static final float MOUSE_SENSITIVITY = 0.2f;
 
     // .5f
-    public static final float GRAVITY = 0f;
+    public static final float GRAVITY = /*0f*/.5f;
 
     private final Vector3f cameraInc;
 
@@ -105,7 +105,7 @@ public class DummyGame implements IGameLogic {
         int w = 50;
         int h = 50;
 
-        player.setPosition(startx, starty, startz);
+        player.setPosition(startx, starty+50, startz);
 
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
@@ -240,7 +240,6 @@ public class DummyGame implements IGameLogic {
         if (mouseInput.isRightButtonPressed()) {
             // Update camera based on mouse            
             Vector2f rotVec = mouseInput.getDisplVec();
-            //camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
             player.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
             sceneChanged = true;
         }
@@ -266,17 +265,6 @@ public class DummyGame implements IGameLogic {
         // Update view matrix
         camera.updateViewMatrix();
 
-        /*if (mouseInput.isLeftButtonPressed()) {
-            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
-        }*/
-        /*if (mouseInput.isRightButtonPressed()) {
-            this.selectDetector.selectGameItem(world.blocks.values(), window, mouseInput.getCurrentPos(), camera);
-            if (selected != null) {
-                Vector3f pos = selected.getPosition();
-                world.setBlock(new Vector3f(pos.x, pos.y + 1, pos.z), new Block());
-                world.endAddingBlocks(scene);
-            }
-        }*/
         world.update();
     }
 
@@ -300,4 +288,9 @@ public class DummyGame implements IGameLogic {
             hud.cleanup();
         }
     }
+    
+    public static DummyGame getGame() {
+    	return Main.gameLogic;
+    }
+    
 }
