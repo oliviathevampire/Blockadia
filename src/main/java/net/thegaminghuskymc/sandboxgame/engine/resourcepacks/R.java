@@ -1,7 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.resourcepacks;
 
-import com.grillecube.common.VoxelEngine;
-import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.managers.LangManager;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.game.Main;

@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import com.google.gson.JsonObject;
-import com.grillecube.common.utils.JSONHelper;
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
+import net.thegaminghuskymc.sandboxgame.engine.util.JSONHelper;
 
 public class Config {
 
