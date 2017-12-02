@@ -5,13 +5,11 @@ import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
 import net.thegaminghuskymc.sandboxgame.engine.util.Rotation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Immutable
 public class BlockPos extends Vec3i
 {
     private static final Logger LOGGER = LogManager.getLogger();

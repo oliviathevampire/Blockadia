@@ -45,6 +45,15 @@ public class World {
         scene.setGameItems(notAddedToScene);
         notAddedToScene.clear();
     }
+    
+    public boolean isCollidingWithGround(Entity e) {
+    	for (Block b : blocks.values()) {
+    		if (b.boundingbox.intersects(e.boundingbox)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     public void rayTrace(Vector3f pos, Quaternionf rot, float lenght) {
     }

@@ -24,7 +24,7 @@ public class DummyGame implements IGameLogic {
     private static final float MOUSE_SENSITIVITY = 0.2f;
 
     // .5f
-    public static final float GRAVITY = 0f;
+    public static final float GRAVITY = /*0f*/.5f;
 
     private final Vector3f cameraInc;
 
@@ -105,7 +105,7 @@ public class DummyGame implements IGameLogic {
         int w = 50;
         int h = 50;
 
-        player.setPosition(startx, starty, startz);
+        player.setPosition(startx, starty+50, startz);
 
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
@@ -300,4 +300,9 @@ public class DummyGame implements IGameLogic {
             hud.cleanup();
         }
     }
+    
+    public static DummyGame getGame() {
+    	return Main.gameLogic;
+    }
+    
 }

@@ -1,10 +1,12 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
-import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.game.Main;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+
+import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
+import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.AxisAlignedBB;
+import net.thegaminghuskymc.sandboxgame.game.Main;
 
 public class Block {
 
@@ -30,6 +32,8 @@ public class Block {
 
     public static Material material;
 
+    public AxisAlignedBB boundingbox;
+    
     private static  float[] positions = new float[] {
             // V0
             -1f, 1f, 1f,
@@ -262,6 +266,7 @@ public class Block {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
+        boundingbox = new AxisAlignedBB(x, y, z, x+scale, y+scale, z+scale);
     }
 
     public float getScale() {
