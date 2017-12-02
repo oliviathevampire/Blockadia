@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+import net.thegaminghuskymc.sandboxgame.engine.client.renderer.Cube;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -20,11 +21,11 @@ public class Mesh {
 
     public static final int MAX_WEIGHTS = 4;
 
-    protected final int vaoId;
+    protected int vaoId;
 
-    protected final List<Integer> vboIdList;
+    protected List<Integer> vboIdList;
 
-    private final int vertexCount;
+    private int vertexCount;
 
     private Material material;
 

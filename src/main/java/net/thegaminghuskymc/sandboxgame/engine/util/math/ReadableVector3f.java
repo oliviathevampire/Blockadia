@@ -31,85 +31,12 @@
  */
 package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
-import java.io.Serializable;
-import java.nio.ByteBuffer;
-
 /**
- *
- * Base class for vectors.
- *
- * @author cix_foo <cix_foo@users.sourceforge.net>
- * @version $Revision$
- * $Id$
+ * @author foo
  */
-public abstract class Vector implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-
+public interface ReadableVector3f extends ReadableVector2f {
 	/**
-	 * Constructor for Vector.
+	 * @return z
 	 */
-	protected Vector() {
-		super();
-	}
-
-	/**
-	 * @return the length of the vector
-	 */
-	public final float length() {
-		return (float) Math.sqrt(lengthSquared());
-	}
-
-
-	/**
-	 * @return the length squared of the vector
-	 */
-	public abstract float lengthSquared();
-
-	/**
-	 * Load this vector from a ByteBuffer
-	 * @param buf The buffer to load it from, at the current position
-	 * @return this
-	 */
-	public abstract Vector load(ByteBuffer buf);
-
-	/**
-	 * Negate a vector
-	 * @return this
-	 */
-	public abstract Vector negate();
-
-
-	/**
-	 * Normalise this vector
-	 * @return this
-	 */
-	public final Vector normalise() {
-		float len = length();
-		if (len != 0.0f) {
-			float l = 1.0f / len;
-			return scale(l);
-		}
-		return (this);
-	}
-
-
-	/**
-	 * Store this vector in a ByteBuffer
-	 * @param buf The buffer to store it in, at the current position
-	 * @return this
-	 */
-	public abstract Vector store(ByteBuffer buf);
-
-
-	/**
-	 * Scale this vector
-	 * @param scale The scale factor
-	 * @return this
-	 */
-	public abstract Vector scale(float scale);
-
-
-
+	float getZ();
 }

@@ -155,7 +155,7 @@ public class FlowParticleEmitter implements IParticleEmitter {
     @Override
     public void cleanup() {
         for (Block particle : getParticles()) {
-            particle.cleanup();
+
         }
     }
 }
