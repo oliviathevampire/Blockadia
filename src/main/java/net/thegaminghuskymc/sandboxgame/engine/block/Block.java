@@ -266,7 +266,7 @@ public class Block {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
-        boundingbox = new AxisAlignedBB(x, y, z, x+scale, y+scale, z+scale);
+        boundingbox = new AxisAlignedBB(x, y, z, x+1, y+1, z+1);
     }
 
     public float getScale() {
