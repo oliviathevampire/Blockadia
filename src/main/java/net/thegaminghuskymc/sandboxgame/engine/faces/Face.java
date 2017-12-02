@@ -14,8 +14,8 @@
 
 package net.thegaminghuskymc.sandboxgame.engine.faces;
 
-import com.grillecube.common.maths.Vector3f;
-import com.grillecube.common.maths.Vector3i;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3i;
 
 public interface Face {
 
