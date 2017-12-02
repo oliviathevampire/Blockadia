@@ -144,7 +144,7 @@ public class Entity {
     }
     
     public boolean getAffectedByGravity() {
-    	return false;
+    	return true;
     }
     
 }

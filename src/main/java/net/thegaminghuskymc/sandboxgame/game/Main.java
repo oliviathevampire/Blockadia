@@ -10,11 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            boolean vSync = true;
+            boolean vSync = false;
             Window.WindowOptions opts = new Window.WindowOptions();
             opts.cullFace = false;
             opts.compatibleProfile = true;
-            opts.antialiasing = false;
+            opts.antialiasing = true;
             opts.frustumCulling = true;
             opts.showFps = true;
             GameEngine gameEng = new GameEngine("Husky's Sandbox Game", vSync, opts, gameLogic);

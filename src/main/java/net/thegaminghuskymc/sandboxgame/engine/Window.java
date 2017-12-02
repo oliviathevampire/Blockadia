@@ -34,7 +34,7 @@ public class Window {
 
     private int height;
 
-    private long windowHandle;
+    private static long windowHandle;
 
     private boolean resized;
 
@@ -197,7 +197,7 @@ public class Window {
         glClearColor(r, g, b, alpha);
     }
 
-    public boolean isKeyPressed(int keyCode) {
+    public static boolean isKeyPressed(int keyCode) {
         return glfwGetKey(windowHandle, keyCode) == GLFW_PRESS;
     }
 
