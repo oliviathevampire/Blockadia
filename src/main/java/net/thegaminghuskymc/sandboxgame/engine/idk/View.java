@@ -7,10 +7,11 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  * 
  */
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.glfw.GLFW.*;
-
 import java.util.HashSet;
+
+import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+import static org.lwjgl.opengl.GL11.*;
 
 public class View {
 

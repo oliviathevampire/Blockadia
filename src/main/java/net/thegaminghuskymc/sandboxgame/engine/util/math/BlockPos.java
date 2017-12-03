@@ -2,13 +2,13 @@ package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
-import java.util.Iterator;
-import java.util.List;
-
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
 import net.thegaminghuskymc.sandboxgame.engine.util.Rotation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class BlockPos extends Vec3i
 {

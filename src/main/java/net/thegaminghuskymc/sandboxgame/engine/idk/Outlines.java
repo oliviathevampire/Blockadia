@@ -7,10 +7,7 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  * 
  */
 
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glVertex3f;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Outlines {
 	

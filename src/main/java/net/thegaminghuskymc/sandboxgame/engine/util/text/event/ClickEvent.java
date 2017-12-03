@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.text.event;
 
 import com.google.common.collect.Maps;
+
 import java.util.Map;
 
 public class ClickEvent

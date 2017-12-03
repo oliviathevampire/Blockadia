@@ -6,11 +6,7 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  *  @author Lane Aasen <laneaasen@gmail.com>
  */
 
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glLineWidth;
-import static org.lwjgl.opengl.GL11.glVertex3f;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Grid implements Renderable {
 	float width, spacing, height, thickness;

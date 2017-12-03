@@ -3,32 +3,33 @@ package net.thegaminghuskymc.sandboxgame.engine.managers;
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 public abstract class ResourceManager {
 
-//	private WorldManager worldManager;
+	/** World manager */
+	private WorldManager worldManager;
 
+	/** Block manager */
 	private BlockManager blockManager;
 
-	/*private ItemManager itemManager;
+	/** Block manager */
+	private ItemManager itemManager;
 
+	/** Packets */
 	private PacketManager packetManager;
 
+	/** Entities */
 	private EntityManager entityManager;
 
-	private EventManager eventManager;*/
+	/** events */
+	private EventManager eventManager;
 
+	/** lang manager */
 	private LangManager langManager;
 
 	/** managers as a list */
@@ -46,25 +47,42 @@ public abstract class ResourceManager {
 		this.engine = engine;
 	}
 
+	/** initialize every game resources */
+	public final void initialize() {
+
+		Logger.get().log(Logger.Level.FINE, "* Initializing resources manager");
+
+		this.managers = new ArrayList<>();
+		this.addManagers();
+
+		// create config
+		this.config = new Config();
+
+		for (GenericManager<?> manager : this.managers) {
+			Logger.get().log(Logger.Level.FINE, manager.getClass().getSimpleName());
+			manager.initialize();
+		}
+	}
+
 	protected void addManagers() {
 
-		/*this.eventManager = new EventManager(this);
+		this.eventManager = new EventManager(this);
 		this.addManager(this.eventManager);
 
 		this.worldManager = new WorldManager(this);
-		this.addManager(this.worldManager);*/
+		this.addManager(this.worldManager);
 
 		this.blockManager = new BlockManager(this);
 		this.addManager(this.blockManager);
 
-		/*this.itemManager = new ItemManager(this);
+		this.itemManager = new ItemManager(this);
 		this.addManager(this.itemManager);
 
 		this.entityManager = new EntityManager(this);
 		this.addManager(this.entityManager);
 
 		this.packetManager = new PacketManager(this);
-		this.addManager(this.packetManager);*/
+		this.addManager(this.packetManager);
 
 		this.langManager = new LangManager(this);
 		this.addManager(this.langManager);
@@ -83,33 +101,15 @@ public abstract class ResourceManager {
 		return (RESOURCE_MANAGER_INSTANCE);
 	}
 
-	public void preInit() {
-
-	}
-
-	public void init() {
-        Logger.get().log(Logger.Level.FINE, "* Initializing resources manager");
-
-        this.managers = new ArrayList<GenericManager<?>>();
-        this.addManagers();
-
-        // create config
-        this.config = new Config();
-
-        for (GenericManager<?> manager : this.managers) {
-            Logger.get().log(Logger.Level.FINE, manager.getClass().getSimpleName());
-            manager.initialize();
-        }
-	}
-
-	public void postInit() {
-        Logger.get().log(Logger.Level.FINE, "* Deinitializing resources manager");
-        for (int i = this.managers.size() - 1; i >= 0; i--) {
-            GenericManager<?> manager = this.managers.get(i);
-            Logger.get().log(Logger.Level.FINE, manager.getClass().getSimpleName());
-            manager.deinitialize();
-        }
-        this.managers = null;
+	/** deinitilize every game resources */
+	public final void deinitialize() {
+		Logger.get().log(Logger.Level.FINE, "* Deinitializing resources manager");
+		for (int i = this.managers.size() - 1; i >= 0; i--) {
+			GenericManager<?> manager = this.managers.get(i);
+			Logger.get().log(Logger.Level.FINE, manager.getClass().getSimpleName());
+			manager.deinitialize();
+		}
+		this.managers = null;
 	}
 
 	/** deinitilize every game resources */
@@ -130,33 +130,40 @@ public abstract class ResourceManager {
 		}
 	}
 
-	/*public final WorldManager getWorldManager() {
+	/** get the world manager */
+	public final WorldManager getWorldManager() {
 		return (this.worldManager);
-	}*/
+	}
 
+	/** language manager */
 	public final LangManager getLangManager() {
 		return (this.langManager);
 	}
 
+	/** get the block manager */
 	public final BlockManager getBlockManager() {
 		return (this.blockManager);
 	}
 
-	/*public ItemManager getItemManager() {
+	/** get the item manager */
+	public ItemManager getItemManager() {
 		return (this.itemManager);
 	}
 
+	/** get the packet manager */
 	public final PacketManager getPacketManager() {
 		return (this.packetManager);
 	}
 
+	/** get the entity manager */
 	public final EntityManager getEntityManager() {
 		return (this.entityManager);
 	}
 
+	/** get the event manager */
 	public final EventManager getEventManager() {
 		return (this.eventManager);
-	}*/
+	}
 
 	/** get the resource filepath */
 	public String getResourcePath(String modid, String path) {
@@ -181,15 +188,15 @@ public abstract class ResourceManager {
 	// config file constants
 	private static final char COMMENT_CHAR = '#';
 
-	public static HashMap<String, String> getConfigFile(String filepath, int defaultcapacity) {
-		return (getConfigFile(filepath, new HashMap<String, String>(defaultcapacity)));
+	public static final HashMap<String, String> getConfigFile(String filepath, int defaultcapacity) {
+		return (getConfigFile(filepath, new HashMap<>(defaultcapacity)));
 	}
 
 	/**
 	 * a function which parse the given file and return a hashmap containing
 	 * 'key-values'
 	 */
-	private static HashMap<String, String> getConfigFile(String filepath, HashMap<String, String> map) {
+	public static final HashMap<String, String> getConfigFile(String filepath, HashMap<String, String> map) {
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filepath));
@@ -203,14 +210,14 @@ public abstract class ResourceManager {
 				if (index == 0) {
 					continue;
 				}
-                @NotNull String data;
+				String data = null;
 
 				data = index == -1 ? line : line.substring(0, index - 1);
-				if (data.length() > 0) {
+				if (data != null && data.length() > 0) {
 					String[] strs = data.split("=", 0);
 					if (strs.length < 2) {
 						Logger.get().log(Logger.Level.DEBUG,
-								"line malformation: l " + i + " : `" + line + "` in file " + filepath);
+								"line malformatted: l " + i + " : `" + line + "` in file " + filepath);
 						continue;
 					}
 					String value = strs[strs.length - 1].trim();
@@ -227,12 +234,12 @@ public abstract class ResourceManager {
 		return (map);
 	}
 
-	private static boolean fileExists(String filepath) {
+	public static boolean fileExists(String filepath) {
 		return (new File(filepath).exists());
 	}
 
 	/** export the map to the given filepath */
-	private static void exportConfigFile(String filepath, HashMap<String, String> map) {
+	public static final void exportConfigFile(String filepath, HashMap<String, String> map) {
 
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));

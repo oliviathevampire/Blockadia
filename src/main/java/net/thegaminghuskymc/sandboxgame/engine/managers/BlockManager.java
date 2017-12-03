@@ -26,6 +26,10 @@ public class BlockManager extends GenericManager<Block> {
 		return (super.getObjectByID(id));
 	}
 
+	public Block getBlockByName(String name) {
+		return super.getObjectByName(name);
+	}
+
 	public int getBlockCount() {
 		return (super.getObjectCount());
 	}

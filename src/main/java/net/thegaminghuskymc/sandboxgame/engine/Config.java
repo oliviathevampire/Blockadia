@@ -1,11 +1,10 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
+import com.google.gson.JsonObject;
+import net.thegaminghuskymc.sandboxgame.engine.util.JSONHelper;
+
 import java.io.File;
 import java.io.IOException;
-
-import com.google.gson.JsonObject;
-import net.thegaminghuskymc.sandboxgame.engine.Logger;
-import net.thegaminghuskymc.sandboxgame.engine.util.JSONHelper;
 
 public class Config {
 

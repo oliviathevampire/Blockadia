@@ -4,10 +4,10 @@ package net.thegaminghuskymc.sandboxgame.engine.idk;
  * BlockMasks define which parts of a Block must be rendered
  */
 
+import java.util.Arrays;
+
 import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glLineWidth;
-
-import java.util.Arrays;
 
 public class BlockMask implements Renderable {
 

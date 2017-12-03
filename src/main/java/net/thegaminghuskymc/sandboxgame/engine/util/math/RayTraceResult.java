@@ -1,7 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
-import net.thegaminghuskymc.sandboxgame.engine.Entity;
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
 
 public class RayTraceResult
 {

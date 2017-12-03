@@ -1,19 +1,31 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
+import net.thegaminghuskymc.sandboxgame.engine.Logger.Level;
+import net.thegaminghuskymc.sandboxgame.engine.events.*;
+import net.thegaminghuskymc.sandboxgame.engine.events.EventListener;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModLoader;
+import net.thegaminghuskymc.sandboxgame.engine.packets.INetwork;
+import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
+import net.thegaminghuskymc.sandboxgame.engine.world.World;
+import net.thegaminghuskymc.sandboxgame.game.mod.DefaultMod;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
-public class GameEngine implements Runnable {
+public abstract class GameEngine {
 
     /** version */
     public static final String VERSION = "0.0.1";
-//    public static final String MOD_ID = "Husky's Sandbox Game";
+    public static final String MOD_ID = "game_engine";
 
-    public static GameEngine INSTANCE;
+    /** singleton */
+    private static GameEngine INSTANCE;
 
     public enum Side {
         CLIENT, SERVER, BOTH;
@@ -33,6 +45,9 @@ public class GameEngine implements Runnable {
     /** the tasks to run each frames */
     private ArrayList<Callable<Taskable>> tasks;
 
+    /** executor service */
+    private ExecutorService executor;
+
     /** the resources directory */
     private File gameDir;
     private ArrayList<ResourcePack> assets;
@@ -47,9 +62,11 @@ public class GameEngine implements Runnable {
     /** Mod loader */
     private ModLoader modLoader;
 
-
     /** Resources */
     protected ResourceManager resources;
+
+    /** networking */
+    private INetwork network;
 
     /** random number generator */
     private Random rng;
@@ -57,55 +74,31 @@ public class GameEngine implements Runnable {
     /** Timer */
     private Timer timer;
 
+    /** events */
+    private EventPreLoop eventPreLoop;
+    private EventOnLoop eventOnLoop;
+    private EventPostLoop eventPostLoop;
+
+    /** loaded worlds */
+    private ArrayList<World> loadedWorlds;
+
     /**
      * config hashmap, key: filepath, value: config file
      */
     private HashMap<String, Config> config;
 
-    public static final int TARGET_FPS = 75;
+    public GameEngine(Side side) {
 
-    public static final int TARGET_UPS = 30;
+        Logger.get().log(Level.FINE, "Starting common Engine!");
 
-    private final Window window;
-
-    private final Thread gameLoopThread;
-
-    private final IGameLogic gameLogic;
-
-    private final MouseInput mouseInput;
-
-    private double lastFps;
-    
-    private int fps;
-    
-    private String windowTitle;
-    
-    public GameEngine(String windowTitle, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) throws Exception {
-        this(windowTitle, 400, 400, vSync, opts, gameLogic);
-    }
-
-    public GameEngine(String windowTitle, int width, int height, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) {
-        this.windowTitle = windowTitle;
-        gameLoopThread = new Thread(this, "GAME_LOOP_THREAD");
-        window = new Window(windowTitle, width, height, vSync, opts);
-        mouseInput = new MouseInput();
-        this.gameLogic = gameLogic;
-        timer = new Timer();
-    }
-
-    public void start() {
-        String osName = System.getProperty("os.name");
-        if ( osName.contains("Mac") ) {
-            gameLoopThread.run();
-        } else {
-            gameLoopThread.start();
-        }
+        INSTANCE = this;
+        this.side = side;
     }
 
     /** allocate the engine */
     public final void initialize() {
 
-        Logger.get().log(Logger.Level.FINE, "Initializing engine...");
+        Logger.get().log(Level.FINE, "Initializing engine...");
 
         this.debug(true);
 
@@ -114,26 +107,36 @@ public class GameEngine implements Runnable {
 
         // assets
         this.loadGamedir();
-        this.assets = new ArrayList<ResourcePack>();
+        this.assets = new ArrayList<>();
 
+        this.resources = this.instanciateResourceManager();
+        this.resources.initialize();
 
         // config
-        this.config = new HashMap<String, Config>();
-//        this.loadConfig(Main.MODID, R.getResPath("config.json"));
+        this.config = new HashMap<>();
+        this.loadConfig(MOD_ID, R.getResPath("config.json"));
 
         this.modLoader = new ModLoader();
-        this.tasks = new ArrayList<Callable<Taskable>>(256);
+        this.tasks = new ArrayList<>(256);
 
         // inject default mod
-//        this.modLoader.injectMod(DefaultMod.class);
+        this.modLoader.injectMod(DefaultMod.class);
+
+        // events
+        this.eventPreLoop = new EventPreLoop(this);
+        this.eventOnLoop = new EventOnLoop(this);
+        this.eventPostLoop = new EventPostLoop(this);
+
+        // worlds
+        this.loadedWorlds = new ArrayList<>();
 
         this.onInitialized();
 
-        Logger.get().log(Logger.Level.FINE, "Common Engine initialized!");
+        Logger.get().log(Level.FINE, "Common Engine initialized!");
     }
 
     /** load game directory */
-    private final void loadGamedir() {
+    private void loadGamedir() {
         String OS = (System.getProperty("os.name")).toUpperCase();
         String gamepath;
         if (OS.contains("WIN")) {
@@ -145,9 +148,9 @@ public class GameEngine implements Runnable {
         if (!gamepath.endsWith("/")) {
             gamepath = gamepath + "/";
         }
-        this.gameDir = new File(gamepath + "Husky-s-Sandbox-Game");
+        this.gameDir = new File(gamepath + "Game Engine");
 
-        Logger.get().log(Logger.Level.FINE, "Game directory is: " + this.gameDir.getAbsolutePath());
+        Logger.get().log(Level.FINE, "Game directory is: " + this.gameDir.getAbsolutePath());
         if (!this.gameDir.exists()) {
             this.gameDir.mkdirs();
         } else if (!this.gameDir.canWrite()) {
@@ -156,13 +159,13 @@ public class GameEngine implements Runnable {
     }
 
     /** load config */
-    private final Config loadConfig(String id, String filepath) {
+    private Config loadConfig(String id, String filepath) {
         if (this.config.containsKey(id)) {
             return (this.config.get(id));
         }
         Config cfg = new Config(filepath);
         this.config.put(id, cfg);
-        Logger.get().log(Logger.Level.FINE, "Loading config", filepath);
+        Logger.get().log(Level.FINE, "Loading config", filepath);
         cfg.load();
         return (cfg);
     }
@@ -177,34 +180,46 @@ public class GameEngine implements Runnable {
         return (this.config);
     }
 
-    protected void onInitialized() {
-
-    };
+    protected abstract void onInitialized();
 
     /** deallocate the engine properly */
     public final void deinitialize() {
 
-        Logger.get().log(Logger.Level.FINE, "Deinitializing engine...");
+        Logger.get().log(Level.FINE, "Deinitializing engine...");
 
         this.stopRunning();
 
         if (this.resources == null) {
-            Logger.get().log(Logger.Level.WARNING, "Tried to stop an unstarted / already stopped engine! Cancelling");
+            Logger.get().log(Level.WARNING, "Tried to stop an unstarted / already stopped engine! Cancelling");
             return;
         }
 
-        Logger.get().log(Logger.Level.FINE, "Saving configs");
+        Logger.get().log(Level.FINE, "Saving configs");
         for (Map.Entry<String, Config> entry : this.config.entrySet()) {
             Config cfg = entry.getValue();
-            Logger.get().log(Logger.Level.FINE, "\t\t", entry.getKey(), cfg.getFilepath());
+            Logger.get().log(Level.FINE, "\t\t", entry.getKey(), cfg.getFilepath());
             cfg.save();
         }
+
+        this.stopExecutor();
+        this.resources.deinitialize();
+        this.resources = null;
 
         this.modLoader.deinitialize(this.resources);
         this.modLoader = null;
 
-        Logger.get().log(Logger.Level.FINE, "Stopped");
+        if (this.network != null) {
+            this.network.stop();
+            this.network = null;
+        }
+        Logger.get().log(Level.FINE, "Stopped");
+
+        this.onDeinitialized();
     }
+
+    protected abstract void onDeinitialized();
+
+    protected abstract ResourceManager instanciateResourceManager();
 
     /** load resources */
     public void load() {
@@ -217,16 +232,18 @@ public class GameEngine implements Runnable {
         this.load();
     }
 
-    private final void unload() {
+    private void unload() {
         this.resources.unload();
+        this.modLoader.unload(this.getResourceManager());
     }
 
-    private final void loadResources(String... folders) {
+    private void loadResources(String... folders) {
 
         for (String folder : folders) {
             this.modLoader.injectMods(folder);
         }
 
+        this.modLoader.load(this.getResourceManager());
         this.resources.load();
     }
 
@@ -239,19 +256,19 @@ public class GameEngine implements Runnable {
 
         this.isRunning = true;
 
-//        this.executor = Executors.newFixedThreadPool(8);
-//        this.invokeEvent(this.eventPreLoop);
+        this.executor = Executors.newFixedThreadPool(8);
+        this.invokeEvent(this.eventPreLoop);
 
         while (this.isRunning()) {
-//            this.timer.update();
-//            this.invokeEvent(this.eventOnLoop);
-//            this.updateTasks();
+            this.timer.update();
+            this.invokeEvent(this.eventOnLoop);
+            this.updateTasks();
         }
 
-//        this.invokeEvent(this.eventPostLoop);
+        this.invokeEvent(this.eventPostLoop);
     }
 
-    /*private final void updateTasks() {
+    private void updateTasks() {
 
         // clear tasks
         this.tasks.clear();
@@ -262,7 +279,7 @@ public class GameEngine implements Runnable {
         this.runTasks();
     }
 
-    private final void runTasks() {
+    private void runTasks() {
 
         // run tasks and get their results
         List<Future<Taskable>> results;
@@ -285,36 +302,53 @@ public class GameEngine implements Runnable {
                     if (!result.isCancelled() && result.get() != null) {
                         // task ran properly
                     } else {
-                        Logger.get().log(Logger.Level.ERROR, "Task cancelled (timeout): ", task);
+                        Logger.get().log(Level.ERROR, "Task cancelled (timeout): ", task);
                     }
                 } catch (Exception e) {
                     // if get() failed, then an error occured
-                    Logger.get().log(Logger.Level.ERROR, "Exception occured when executing task", task);
+                    Logger.get().log(Level.ERROR, "Exception occured when executing task", task);
                     e.printStackTrace(Logger.get().getPrintStream());
                 }
             }
         }
-    }*/
+    }
+
+    /** stop the thread executor */
+    private void stopExecutor() {
+        if (this.executor == null) {
+            return;
+        }
+        Logger.get().log(Level.DEBUG, "Stopping thread executor...");
+        this.executor.shutdown();
+        try {
+            this.executor.awaitTermination(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Logger.get().log(Level.DEBUG, "Thread executor timeout: " + e.getLocalizedMessage());
+        }
+    }
 
     public final Timer getTimer() {
         return (this.timer);
     }
 
-    /*protected final void invokeEvent(Event event) {
+    protected void invokeEvent(Event event) {
         this.getResourceManager().getEventManager().invokeEvent(event);
     }
 
-    protected final void registerEventCallback(EventListener<?> eventCallback) {
+    protected void registerEventCallback(EventListener<?> eventCallback) {
         this.getResourceManager().getEventManager().addListener(eventCallback);
-    }*/
+    }
 
     /** request the game to stop */
-    public final void stopRunning() {
+    public void stopRunning() {
         this.isRunning = false;
     }
 
+    /** return the main resource manager */
+    public abstract <T extends ResourceManager> T getResourceManager();
+
     /** get the mod loader */
-    public final ModLoader getModLoader() {
+    public ModLoader getModLoader() {
         return (this.modLoader);
     }
 
@@ -324,7 +358,7 @@ public class GameEngine implements Runnable {
     }
 
     /** return true if the voxel engine is running */
-    public final boolean isRunning() {
+    private boolean isRunning() {
         return (this.isRunning);
     }
 
@@ -351,6 +385,37 @@ public class GameEngine implements Runnable {
         return (this.debug);
     }
 
+    /** add a world to the game logic loop */
+    public final World loadWorld(int worldID) {
+        World world = this.getResourceManager().getWorldManager().getWorld(worldID);
+        if (world == null) {
+            Logger.get().log(Level.ERROR, "Tried to load an unknown world, with id", worldID);
+            return (null);
+        }
+        if (this.loadedWorlds.contains(world)) {
+            Logger.get().log(Level.ERROR, "Tried to load an already-loaded world, with id", worldID);
+            return (null);
+        }
+        this.loadedWorlds.add(world);
+        world.load();
+        return (world);
+    }
+
+    /** remove a world from the game logic loop */
+    public final void unloadWorld(int worldID) {
+        World world = this.getResourceManager().getWorldManager().getWorld(worldID);
+        if (world == null) {
+            Logger.get().log(Level.ERROR, "Tried to unload an unknown world, with id", worldID);
+            return;
+        }
+        this.loadedWorlds.remove(world);
+    }
+
+    /** get the current world of the client (can be null) */
+    public World getWorld(int worldID) {
+        return (this.getResourceManager().getWorldManager().getWorld(worldID));
+    }
+
     /** return the game main directory */
     public final File getGamedir() {
         return (this.gameDir);
@@ -360,96 +425,15 @@ public class GameEngine implements Runnable {
     public ResourcePack putAssets(ResourcePack pack) {
         for (ResourcePack tmppack : this.assets) {
             if (tmppack.getModID().equals(pack.getModID())) {
-                Logger.get().log(Logger.Level.ERROR,
+                Logger.get().log(Level.ERROR,
                         "Tried to put an assets pack which already exists. Canceling operation. ModID: "
                                 + pack.getModID());
                 return (null);
             }
         }
         this.assets.add(pack);
-//        pack.extract();
+        pack.extract();
         return (pack);
-    }
-
-    @Override
-    public void run() {
-        try {
-            init();
-            gameLoop();
-        } catch (Exception excp) {
-            excp.printStackTrace();
-        } finally {
-            cleanup();
-        }
-    }
-
-    protected void init() throws Exception {
-        window.init();
-        timer.init();
-        mouseInput.init(window);
-        gameLogic.init(window);
-        lastFps = timer.getTime();
-        fps = 0;
-    }
-
-    protected void gameLoop() {
-        float elapsedTime;
-        float accumulator = 0f;
-        float interval = 1f / TARGET_UPS;
-
-        boolean running = true;
-        while (running && !window.windowShouldClose()) {
-            elapsedTime = timer.getElapsedTime();
-            accumulator += elapsedTime;
-
-            input();
-
-            while (accumulator >= interval) {
-                update(interval);
-                accumulator -= interval;
-            }
-
-            render();
-
-            if ( !window.isvSync() ) {
-                sync();
-            }
-        }
-    }
-
-    protected void cleanup() {
-        gameLogic.cleanup();
-    }
-    
-    private void sync() {
-        float loopSlot = 1f / TARGET_FPS;
-        double endTime = timer.getLastLoopTime() + loopSlot;
-        while (timer.getTime() < endTime) {
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException ignored) {
-            }
-        }
-    }
-
-    protected void input() {
-        mouseInput.input(window);
-        gameLogic.input(window, mouseInput);
-    }
-
-    protected void update(float interval) {
-        gameLogic.update(interval, mouseInput, window);
-    }
-
-    protected void render() {
-        if ( window.getWindowOptions().showFps && timer.getLastLoopTime() - lastFps > 1 ) {
-            lastFps = timer.getLastLoopTime();
-            window.setWindowTitle(windowTitle + " - " + fps + " FPS");
-            fps = 0;
-        }
-        fps++;
-        gameLogic.render(window);
-        window.update();
     }
 
 }

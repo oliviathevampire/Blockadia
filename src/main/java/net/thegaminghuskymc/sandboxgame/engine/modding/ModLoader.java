@@ -19,7 +19,7 @@ public class ModLoader {
     private ArrayList<Mod> mods;
 
     public ModLoader() {
-        this.mods = new ArrayList<Mod>();
+        this.mods = new ArrayList<>();
     }
 
     public ArrayList<Mod> getMods() {
@@ -128,7 +128,7 @@ public class ModLoader {
         try {
             IMod imod = (IMod) modClass.newInstance();
             Mod mod = new Mod(imod, modInfo);
-            mod.init();
+            mod.initialize();
             this.mods.add(mod);
             Logger.get().log(Logger.Level.FINE, "Adding mod", mod);
             return (true);
@@ -141,7 +141,7 @@ public class ModLoader {
     /** deinitialize every mods and clean the mod list */
     public void deinitialize(ResourceManager manager) {
         for (Mod mod : this.mods) {
-            mod.postInit();
+            mod.deinitialize();
         }
         this.mods.clear();
     }

@@ -2,7 +2,6 @@ package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.graph.Camera;
-import org.joml.Intersectionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -34,23 +33,6 @@ public class CameraBoxSelectionDetector {
         boolean selected = false;
         Block selectedGameItem = null;
         float closestDistance = Float.POSITIVE_INFINITY;
-
-        for (Block gameItem : gameItems) {
-            gameItem.setSelected(false);
-            min.set(gameItem.getPosition());
-            max.set(gameItem.getPosition());
-            min.add(-gameItem.getScale(), -gameItem.getScale(), -gameItem.getScale());
-            max.add(gameItem.getScale(), gameItem.getScale(), gameItem.getScale());
-            if (Intersectionf.intersectRayAab(center, dir, min, max, nearFar) && nearFar.x < closestDistance) {
-                closestDistance = nearFar.x;
-                selectedGameItem = gameItem;
-            }
-        }
-
-        if (selectedGameItem != null) {
-            selectedGameItem.setSelected(true);
-            selected = true;
-        }
         return selected;
     }
 }

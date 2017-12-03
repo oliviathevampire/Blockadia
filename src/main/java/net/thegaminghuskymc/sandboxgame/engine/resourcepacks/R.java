@@ -2,7 +2,7 @@ package net.thegaminghuskymc.sandboxgame.engine.resourcepacks;
 
 import net.thegaminghuskymc.sandboxgame.engine.managers.LangManager;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
-import net.thegaminghuskymc.sandboxgame.game.Main;
+import net.thegaminghuskymc.sandboxgame.testmod.client.Main;
 
 /** a simple wrapper class which make ResourceManager expression shorten */
 public class R {
@@ -13,7 +13,7 @@ public class R {
 
 	/** get the resource path for a standart resource */
 	public static String getResPath(String filepath) {
-		return (ResourceManager.instance().getResourcePath(Main.MODID, filepath));
+		return (ResourceManager.instance().getResourcePath("huskys_sandbox_game", filepath));
 	}
 
 	/** return the string value of the given word */

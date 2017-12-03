@@ -4,7 +4,6 @@ import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 /**
  * a generic manager class, T is the type to register, I is the id variable type
@@ -29,7 +28,7 @@ public abstract class GenericManager<T> {
 	}
 
 	public final GameEngine.Side getSide() {
-		return (GameEngine.INSTANCE.getSide());
+		return (GameEngine.instance().getSide());
 	}
 
 	/** register an object to the manager and return it id */
@@ -96,6 +95,13 @@ public abstract class GenericManager<T> {
 			return (null);
 		}
 		return (this.objects.get(id));
+	}
+
+	public T getObjectByName(String name) {
+		if (name.length() < 0 || name.length() >= this.objects.size()) {
+			return (null);
+		}
+		return (this.objects.get(name.length()));
 	}
 
 	/** return true if the manager already have registered the given object */

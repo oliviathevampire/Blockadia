@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBindTexture;
 
 public class Texture implements Comparable<Texture> {
 	

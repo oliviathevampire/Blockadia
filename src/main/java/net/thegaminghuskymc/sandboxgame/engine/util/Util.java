@@ -1,11 +1,12 @@
 package net.thegaminghuskymc.sandboxgame.engine.util;
 
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.Nullable;
 
 public class Util {
 

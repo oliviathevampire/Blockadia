@@ -16,15 +16,11 @@ public class Mod  {
     public Mod(IMod mod, ModInfo modInfo) {
         this.mod = mod;
         this.modInfo = modInfo;
-        this.modResources = new ArrayList<IModResource>();
+        this.modResources = new ArrayList<>();
     }
 
     public IMod getMod() {
         return (this.mod);
-    }
-
-    public ModInfo getModInfo() {
-        return (this.modInfo);
     }
 
     public IModResource addResource(IModResource resource) {
@@ -73,7 +69,17 @@ public class Mod  {
         return (builder.toString());
     }
 
-    public void preInit() {
+    public void initialize() {
+        Logger.get().log(Logger.Level.FINE, "Initializing: " + this.toString());
+        this.mod.initialize(this);
+    }
+
+    public void deinitialize() {
+        Logger.get().log(Logger.Level.FINE, "DeInitializing: " + this.toString());
+        this.mod.deinitialize(this);
+    }
+
+    /*public void preInit() {
         Logger.get().log(Logger.Level.FINE, "Pre Initializing: " + this.toString());
         this.mod.init(this);
     }
@@ -86,7 +92,7 @@ public class Mod  {
     public void postInit() {
         Logger.get().log(Logger.Level.FINE, "Post Initializing: " + this.toString());
         this.mod.postInit(this);
-    }
+    }*/
 
     public void getTasks(ArrayList<GameEngine.Callable<Taskable>> tasks) {
     }

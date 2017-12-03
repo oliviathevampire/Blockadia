@@ -1,13 +1,26 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
-public class BlockGrass extends Block {
+import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 
-    public BlockGrass() {
-        super("grass");
+public class BlockGrass extends BlockCubeOpaque {
+
+    public BlockGrass(int blockID) {
+        super(blockID);
     }
 
-    public BlockGrass(int ID) {
-        super(ID);
+    @Override
+    public String getUnlocalizedName() {
+        return "Grass Block";
+    }
+
+    @Override
+    public String getRegistryName() {
+        return "grass_block";
+    }
+
+    @Override
+    public void update(Terrain terrain, int x, int y, int z) {
+
     }
 
 }

@@ -1,9 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.game;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
-import net.thegaminghuskymc.sandboxgame.engine.block.BlockGrass;
-import net.thegaminghuskymc.sandboxgame.engine.block.BlockStone;
 import net.thegaminghuskymc.sandboxgame.engine.world.biome.IBiome;
+import net.thegaminghuskymc.sandboxgame.game.mod.Blocks;
 
 public class BiomeMountains implements IBiome {
 
@@ -29,12 +28,12 @@ public class BiomeMountains implements IBiome {
 
     @Override
     public Block getSurfaceBlock() {
-        return new BlockGrass();
+        return Blocks.GRASS;
     }
 
     @Override
     public Block getUndergroundBlock() {
-        return new BlockStone();
+        return Blocks.GRASS;
     }
 
     @Override
