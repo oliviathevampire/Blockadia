@@ -191,11 +191,18 @@ public class Mesh {
     public void render() {
         initRender();
 
-        if(isDebug()) {
-            glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
+        /*if(isDebug()) {
+            glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
             OpenGlUtils.goWireframe(true);
         } else {
-            glDrawElements(GL_QUADS, getVertexCount(), GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_POLYGON, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(false);
+        }*/
+        if(isDebug()) {
+            glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(true);
+        } else {
+            glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
             OpenGlUtils.goWireframe(false);
         }
 
@@ -214,11 +221,18 @@ public class Mesh {
                 // Set up data requiered by Block
                 consumer.accept(Block);
                 // Render this game item
-                if(isDebug()) {
-                    glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
+                /*if(isDebug()) {
+                    glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
                     OpenGlUtils.goWireframe(true);
                 } else {
-                    glDrawElements(GL_QUADS, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    glDrawElements(GL_POLYGON, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(false);
+                }*/
+                if(isDebug()) {
+                    glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(true);
+                } else {
+                    glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
                     OpenGlUtils.goWireframe(false);
                 }
             }
