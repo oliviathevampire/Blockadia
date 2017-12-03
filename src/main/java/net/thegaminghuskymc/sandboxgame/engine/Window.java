@@ -4,6 +4,9 @@ import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengles.GLES20;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -80,8 +83,8 @@ public class Window {
         // If no size has been specified set it to maximized state
         if (width == 0 || height == 0) {
             // Set up a fixed width and height so window initialization does not fail
-            width = 100;
-            height = 100;
+            width = 800;
+            height = 600;
             glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
             maximized = true;
         }
@@ -151,6 +154,10 @@ public class Window {
         if (opts.antialiasing) {
             glfwWindowHint(GLFW_SAMPLES, 4);
         }
+
+        glfwSetWindowSize(windowHandle, 800, 600);
+        GL11.glOrtho(0, 800, 0, 600, -1.0, 1.0);
+        GL11.glViewport(0, 0, 800, 600);
     }
     
     public void restoreState() {

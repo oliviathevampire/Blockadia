@@ -369,17 +369,16 @@ public class Renderer {
         if (window.getWindowOptions().compatibleProfile) {
             glPushMatrix();
             glLoadIdentity();
-
-            float inc = 0.05f;
+            glOrtho(-window.getWidth()/2, window.getWidth()/2, -window.getHeight()/2, window.getHeight()/2, -1.0, 1.0);
+            glViewport(0, 0, window.getWidth(), window.getHeight());
+            float inc = 5;
             glLineWidth(2.0f);
 
             glBegin(GL_LINES);
-
-            glColor3f(1.0f, 1.0f, 1.0f);
-
+            glColor3d(51, 51, 51);
             // Horizontal line
-            glVertex3f(-inc, 0.0f, 0.0f);
-            glVertex3f(+inc, 0.0f, 0.0f);
+            glVertex3d(-inc, 0.0, 0.0);
+            glVertex3d(+inc, 0.0, 0.0);
             glEnd();
 
             // Vertical line

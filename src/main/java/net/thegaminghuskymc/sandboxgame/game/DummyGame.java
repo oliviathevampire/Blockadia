@@ -294,8 +294,11 @@ public class DummyGame implements IGameLogic {
     public void cleanup() {
         renderer.cleanup();
         soundMgr.cleanup();
-
-        scene.cleanup();
+        try {
+            scene.cleanup();
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
         if (hud != null) {
             hud.cleanup();
         }

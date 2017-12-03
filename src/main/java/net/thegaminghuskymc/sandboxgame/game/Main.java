@@ -16,7 +16,7 @@ public class Main {
             opts.antialiasing = false;
             opts.frustumCulling = true;
             opts.showFps = true;
-            GameEngine gameEng = new GameEngine("Husky's Sandbox Game", vSync, opts, gameLogic);
+            GameEngine gameEng = new GameEngine("Husky's Sandbox Game", false, opts, gameLogic);
             gameEng.start();
         } catch (Exception excp) {
             excp.printStackTrace();

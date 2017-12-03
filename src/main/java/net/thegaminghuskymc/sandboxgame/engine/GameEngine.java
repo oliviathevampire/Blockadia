@@ -2,11 +2,11 @@ package net.thegaminghuskymc.sandboxgame.engine;
 
 public class GameEngine implements Runnable {
 
-    public static final int TARGET_FPS = 75;
+    public static final int TARGET_FPS = 120;
 
     public static final int TARGET_UPS = 30;
 
-    private final Window window;
+    public static Window window;
 
     private final Thread gameLoopThread;
 
@@ -123,6 +123,10 @@ public class GameEngine implements Runnable {
         fps++;
         gameLogic.render(window);
         window.update();
+    }
+
+    public static long getWindow(){
+        return window.getWindowHandle();
     }
 
 }

@@ -7,17 +7,21 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class MouseInput {
 
-    private final Vector2d previousPos;
+    private static Vector2d previousPos;
 
-    private final Vector2d currentPos;
+    private static Vector2d currentPos;
 
     private final Vector2f displVec;
 
     private boolean inWindow = false;
 
-    private boolean leftButtonPressed = false;
+    private int action = 1;
 
-    private boolean rightButtonPressed = false;
+    private static boolean leftButtonPressed = false;
+
+    private static boolean rightButtonPressed = false;
+
+    public long windowid;
 
     public MouseInput() {
         previousPos = new Vector2d(-1, -1);
@@ -32,6 +36,7 @@ public class MouseInput {
         });
         glfwSetCursorEnterCallback(window.getWindowHandle(), (windowHandle, entered) -> inWindow = entered);
         glfwSetMouseButtonCallback(window.getWindowHandle(), (windowHandle, button, action, mode) -> {
+            this.action = action;
             leftButtonPressed = button == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS;
             rightButtonPressed = button == GLFW_MOUSE_BUTTON_2 && action == GLFW_PRESS;
         });
@@ -71,4 +76,6 @@ public class MouseInput {
     public boolean isRightButtonPressed() {
         return rightButtonPressed;
     }
+
+    public int getAction(){return action;}
 }

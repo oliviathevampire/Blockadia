@@ -32,7 +32,7 @@ public class HudTopBar implements IHudComponent {
 
         // Upper ribbon
         nvgBeginPath(vg);
-        nvgRect(vg, 0, 0, window.getWidth(), 50);
+        nvgRect(vg, 0, 0, window.getWidth(), window.getHeight()/10);
         nvgFillColor(vg, HudUtils.rgba(0x23, 0xa1, 0xf1, 200, colour));
         nvgFill(vg);
 

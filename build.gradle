@@ -91,6 +91,12 @@ dependencies {
     compile "org.lwjgl:lwjgl-xxhash:$lwjglVersion"
     compile "org.lwjgl:lwjgl-yoga:$lwjglVersion"
     compile "org.lwjgl:lwjgl-zstd:$lwjglVersion"
+    //Compile FreeType
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.6"
+    compile "com.badlogicgames.gdx:gdx-platform:1.9.6:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-freetype:1.9.6"
+    compile "com.badlogicgames.gdx:gdx-freetype-platform:1.9.6:natives-desktop"
+    //End FreeType
     runtime "org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives"
     runtime "org.lwjgl:lwjgl-assimp:$lwjglVersion:$lwjglNatives"
     runtime "org.lwjgl:lwjgl-bgfx:$lwjglVersion:$lwjglNatives"
