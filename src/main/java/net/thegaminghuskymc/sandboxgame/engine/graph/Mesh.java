@@ -1,6 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
+import net.thegaminghuskymc.sandboxgame.engine.OpenGlUtils;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -191,8 +193,11 @@ public class Mesh {
 
         if(isDebug()) {
             glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
-        } else
-            glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(true);
+        } else {
+            glDrawElements(GL_QUADS, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(false);
+        }
 
         endRender();
     }
@@ -211,8 +216,11 @@ public class Mesh {
                 // Render this game item
                 if(isDebug()) {
                     glDrawElements(GL_LINE_LOOP, getVertexCount(), GL_UNSIGNED_INT, 0);
-                } else
-                    glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(true);
+                } else {
+                    glDrawElements(GL_QUADS, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(false);
+                }
             }
         }
 

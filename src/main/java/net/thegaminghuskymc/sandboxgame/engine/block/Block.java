@@ -42,29 +42,29 @@ public class Block {
 
     private static  float[] positions = new float[] {
             // V0
-            -1f, 1f, 1f,
+            0f, 1f, 1f,
             // V1
-            -1f, -1f, 1f,
+            0f, 0f, 1f,
             // V2
-            1f, -1f, 1f,
+            1f, 0f, 1f,
             // V3
             1f, 1f, 1f,
             // V4
-            -1f, 1f, -1f,
+            0f, 1f, 0f,
             // V5
-            1f, 1f, -1f,
+            1f, 1f, 0f,
             // V6
-            -1f, -1f, -1f,
+            0f, 0f, 0f,
             // V7
-            1f, -1f, -1f,
+            1f, 0f, 0f,
 
             // For text coords in top face
             // V8: V4 repeated
-            -1f, 1f, -1f,
+            0f, 1f, 0f,
             // V9: V5 repeated
-            1f, 1f, -1f,
+            1f, 1f, 0f,
             // V10: V0 repeated
-            -1f, 1f, 1f,
+            0f, 1f, 1f,
             // V11: V3 repeated
             1f, 1f, 1f,
 
@@ -72,23 +72,23 @@ public class Block {
             // V12: V3 repeated
             1f, 1f, 1f,
             // V13: V2 repeated
-            1f, -1f, 1f,
+            1f, 0f, 1f,
 
             // For text coords in left face
             // V14: V0 repeated
-            -1f, 1f, 1f,
+            0f, 1f, 1f,
             // V15: V1 repeated
-            -1f, -1f, 1f,
+            0f, 0f, 1f,
 
             // For text coords in bottom face
             // V16: V6 repeated
-            -1f, -1f, -1f,
+            0f, 0f, 0f,
             // V17: V7 repeated
-            1f, -1f, -1f,
+            1f, 0f, 0f,
             // V18: V1 repeated
-            -1f, -1f, 1f,
+            0f, 0f, 1f,
             // V19: V2 repeated
-            1f, -1f, 1f,
+            1f, 0f, 1f,
     };
     private static  float[] textCoords = new float[]{
             0.0f, 0.0f,
@@ -137,53 +137,53 @@ public class Block {
     };
     private static float[] normals = new float[]{
             // V0
-            -1.0f, 1.0f, 1.0f,
+            0f, 1f, 1f,
             // V1
-            -1.0f, -1.0f, 1.0f,
+            0f, 0f, 1f,
             // V2
-            1.0f, -1.0f, 1.0f,
+            1f, 0f, 1f,
             // V3
-            1.0f, 1.0f, 1.0f,
+            1f, 1f, 1f,
             // V4
-            -1.0f, 1.0f, -1.0f,
+            0f, 1f, 0f,
             // V5
-            1.0f, 1.0f, -1.0f,
+            1f, 1f, 0f,
             // V6
-            -1.0f, -1.0f, -1.0f,
+            0f, 0f, 0f,
             // V7
-            1.0f, -1.0f, -1.0f,
+            1f, 0f, 0f,
 
             // For text coords in top face
             // V8: V4 repeated
-            -1.0f, 1.0f, -1.0f,
+            0f, 1f, 0f,
             // V9: V5 repeated
-            1.0f, 1.0f, -1.0f,
+            1f, 1f, 0f,
             // V10: V0 repeated
-            -1.0f, 1.0f, 1.0f,
+            0f, 1f, 1f,
             // V11: V3 repeated
-            1.0f, 1.0f, 1.0f,
+            1f, 1f, 1f,
 
             // For text coords in right face
             // V12: V3 repeated
-            1.0f, 1.0f, 1.0f,
+            1f, 1f, 1f,
             // V13: V2 repeated
-            1.0f, -1.0f, 1.0f,
+            1f, 0f, 1f,
 
             // For text coords in left face
             // V14: V0 repeated
-            -1.0f, 1.0f, 1.0f,
+            0f, 1f, 1f,
             // V15: V1 repeated
-            -1.0f, -1.0f, 1.0f,
+            0f, 0f, 1f,
 
             // For text coords in bottom face
             // V16: V6 repeated
-            -1.0f, -1.0f, -1.0f,
+            0f, 0f, 0f,
             // V17: V7 repeated
-            1.0f, -1.0f, -1.0f,
+            1f, 0f, 0f,
             // V18: V1 repeated
-            -1.0f, -1.0f, 1.0f,
+            0f, 0f, 1f,
             // V19: V2 repeated
-            1.0f, -1.0f, 1.0f,
+            1f, 0f, 1f,
     };
 
     public Block() {

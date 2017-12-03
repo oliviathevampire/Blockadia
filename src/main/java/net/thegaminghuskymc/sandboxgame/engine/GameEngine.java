@@ -2,10 +2,7 @@ package net.thegaminghuskymc.sandboxgame.engine;
 
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModLoader;
-import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
-import net.thegaminghuskymc.sandboxgame.game.Main;
-import net.thegaminghuskymc.sandboxgame.game.mod.DefaultMod;
 
 import java.io.File;
 import java.util.*;
