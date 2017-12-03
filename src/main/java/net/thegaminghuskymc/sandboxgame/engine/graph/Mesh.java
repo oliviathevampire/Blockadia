@@ -1,6 +1,8 @@
 package net.thegaminghuskymc.sandboxgame.engine.graph;
 
+import net.thegaminghuskymc.sandboxgame.engine.OpenGlUtils;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -20,11 +22,11 @@ public class Mesh {
 
     public static final int MAX_WEIGHTS = 4;
 
-    protected final int vaoId;
+    protected int vaoId;
 
-    protected final List<Integer> vboIdList;
+    protected List<Integer> vboIdList;
 
-    private final int vertexCount;
+    private int vertexCount;
 
     private Material material;
 
@@ -189,9 +191,26 @@ public class Mesh {
     public void render() {
         initRender();
 
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+        /*if(isDebug()) {
+            glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(true);
+        } else {
+            glDrawElements(GL_POLYGON, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(false);
+        }*/
+        if(isDebug()) {
+            glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(true);
+        } else {
+            glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+            OpenGlUtils.goWireframe(false);
+        }
 
         endRender();
+    }
+
+    public static boolean isDebug() {
+        return false;
     }
 
     public void renderList(List<Block> Blocks, Consumer<Block> consumer) {
@@ -202,7 +221,20 @@ public class Mesh {
                 // Set up data requiered by Block
                 consumer.accept(Block);
                 // Render this game item
-                glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                /*if(isDebug()) {
+                    glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(true);
+                } else {
+                    glDrawElements(GL_POLYGON, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(false);
+                }*/
+                if(isDebug()) {
+                    glDrawElements(GL_LINES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(true);
+                } else {
+                    glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+                    OpenGlUtils.goWireframe(false);
+                }
             }
         }
 

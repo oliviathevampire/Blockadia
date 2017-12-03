@@ -79,7 +79,7 @@ public class Renderer {
         window.updateProjectionMatrix();
 
         renderScene(window, camera, scene);
-        renderSkyBox(window, camera, scene);
+//        renderSkyBox(window, camera, scene);
         renderParticles(window, camera, scene);
 
         //renderAxes(camera);
@@ -176,7 +176,7 @@ public class Renderer {
         glDepthMask(false);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-        for (int i = 0; i < numEmitters; i++) {
+        /*for (int i = 0; i < numEmitters; i++) {
             IParticleEmitter emitter = emitters[i];
             InstancedMesh mesh = (InstancedMesh) emitter.getBaseParticle().getMesh();
 
@@ -185,7 +185,7 @@ public class Renderer {
             particlesShaderProgram.setUniform("numRows", text.getNumRows());
 
             mesh.renderListInstanced(emitter.getParticles(), true, transformation, viewMatrix);
-        }
+        }*/
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDepthMask(true);
@@ -193,7 +193,7 @@ public class Renderer {
         particlesShaderProgram.unbind();
     }
 
-    private void renderSkyBox(Window window, Camera camera, Scene scene) {
+    /*private void renderSkyBox(Window window, Camera camera, Scene scene) {
         SkyBox skyBox = scene.getSkyBox();
         if (skyBox != null) {
             skyBoxShaderProgram.bind();
@@ -224,9 +224,9 @@ public class Renderer {
             viewMatrix.m32(m32);
             skyBoxShaderProgram.unbind();
         }
-    }
+    }*/
 
-    public void renderScene(Window window, Camera camera, Scene scene) {
+    private void renderScene(Window window, Camera camera, Scene scene) {
         sceneShaderProgram.bind();
 
         Matrix4f viewMatrix = camera.getViewMatrix();
@@ -391,50 +391,13 @@ public class Renderer {
         }
     }
 
-    /**
-     * Renders the three axis in space (For debugging purposes only
-     *
-     * @param camera
-     */
-    private void renderAxes(Window window, Camera camera) {
-        Window.WindowOptions opts = window.getWindowOptions();
-        if (opts.compatibleProfile) {
-            glPushMatrix();
-            glLoadIdentity();
-            float rotX = camera.getRotation().x;
-            float rotY = camera.getRotation().y;
-            float rotZ = 0;
-            glRotatef(rotX, 1.0f, 0.0f, 0.0f);
-            glRotatef(rotY, 0.0f, 1.0f, 0.0f);
-            glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
-            glLineWidth(2.0f);
-
-            glBegin(GL_LINES);
-            // X Axis
-            glColor3f(1.0f, 0.0f, 0.0f);
-            glVertex3f(0.0f, 0.0f, 0.0f);
-            glVertex3f(1.0f, 0.0f, 0.0f);
-            // Y Axis
-            glColor3f(0.0f, 1.0f, 0.0f);
-            glVertex3f(0.0f, 0.0f, 0.0f);
-            glVertex3f(0.0f, 1.0f, 0.0f);
-            // Z Axis
-            glColor3f(1.0f, 1.0f, 1.0f);
-            glVertex3f(0.0f, 0.0f, 0.0f);
-            glVertex3f(0.0f, 0.0f, 1.0f);
-            glEnd();
-
-            glPopMatrix();
-        }
-    }
-
     public void cleanup() {
-        /*if (shadowRenderer != null) {
+        if (shadowRenderer != null) {
             shadowRenderer.cleanup();
-        }*/
-        /*if (skyBoxShaderProgram != null) {
+        }
+        if (skyBoxShaderProgram != null) {
             skyBoxShaderProgram.cleanup();
-        }*/
+        }
         if (sceneShaderProgram != null) {
             sceneShaderProgram.cleanup();
         }

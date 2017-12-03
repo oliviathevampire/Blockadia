@@ -1,10 +1,12 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
-import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
-import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
-import net.thegaminghuskymc.sandboxgame.game.Main;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+
+import net.thegaminghuskymc.sandboxgame.engine.graph.Material;
+import net.thegaminghuskymc.sandboxgame.engine.graph.Mesh;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.AxisAlignedBB;
+import net.thegaminghuskymc.sandboxgame.game.Main;
 
 public class Block {
 
@@ -29,6 +31,14 @@ public class Block {
     private String registryName;
 
     public static Material material;
+
+    private boolean hasTransparency;
+
+    private boolean isFullBlock;
+
+    private boolean isOpaque;
+
+    public AxisAlignedBB boundingbox;
 
     private static  float[] positions = new float[] {
             // V0
@@ -209,6 +219,12 @@ public class Block {
         setRegistryName("test_block");
     }
 
+    public Block(int blockID) {
+        this();
+        setUnlocalizedName("test_block");
+        setRegistryName("test_block");
+    }
+
     public Block(String name) {
         this();
         setUnlocalizedName(name);
@@ -262,6 +278,31 @@ public class Block {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
+        boundingbox = new AxisAlignedBB(x, y, z, x+1, y+1, z+1);
+    }
+
+    public boolean hasTransparency() {
+        return hasTransparency;
+    }
+
+    public void setHasTransparency(boolean hasTransparency) {
+        this.hasTransparency = hasTransparency;
+    }
+
+    public boolean isFullBlock() {
+        return isFullBlock;
+    }
+
+    public void setFullBlock(boolean isFullBlock) {
+        this.isFullBlock = isFullBlock;
+    }
+
+    public boolean isOpaque() {
+        return isOpaque;
+    }
+
+    public void setIsOpaque(boolean isOpaque) {
+        this.isOpaque = isOpaque;
     }
 
     public float getScale() {
@@ -325,6 +366,10 @@ public class Block {
             if (Main.gameLogic.selected != null) Main.gameLogic.selected.setSelected(false);
             Main.gameLogic.selected = this;
         }
+    }
+
+    public static void renderBlock() {
+
     }
 
     public void setTextPos(int textPos) {
