@@ -24,6 +24,8 @@ public class ModelEditorMod implements IMod, IModResource {
 
 	}*/
 
+    public static int WORLD_ID = 0;
+
     @Override
     public void initialize(Mod mod) {
 
@@ -34,15 +36,13 @@ public class ModelEditorMod implements IMod, IModResource {
 
     }
 
-    public static int WORLD_ID = 0;
+    @Override
+    public void load(Mod mod, ResourceManager manager) {
+        WORLD_ID = manager.getWorldManager().registerWorld(new ModelEditorWorld());
+    }
 
-	@Override
-	public void load(Mod mod, ResourceManager manager) {
-		WORLD_ID = manager.getWorldManager().registerWorld(new ModelEditorWorld());
-	}
+    @Override
+    public void unload(Mod mod, ResourceManager manager) {
 
-	@Override
-	public void unload(Mod mod, ResourceManager manager) {
-
-	}
+    }
 }

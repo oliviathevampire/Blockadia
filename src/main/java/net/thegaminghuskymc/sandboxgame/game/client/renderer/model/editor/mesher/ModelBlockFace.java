@@ -4,10 +4,10 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.ModelMeshVert
 
 public class ModelBlockFace {
 
-	// the vertices
-	public final ModelMeshVertex[] vertices;
+    // the vertices
+    public final ModelMeshVertex[] vertices;
 
-	public ModelBlockFace(ModelMeshVertex... vertices) {
-		this.vertices = vertices;
-	}
+    public ModelBlockFace(ModelMeshVertex... vertices) {
+        this.vertices = vertices;
+    }
 }

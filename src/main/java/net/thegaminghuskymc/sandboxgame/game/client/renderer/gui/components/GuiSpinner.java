@@ -7,182 +7,224 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/** a spinner list */
+/**
+ * a spinner list
+ */
 public abstract class GuiSpinner extends Gui {
 
-	/** the objects hold */
-	private final ArrayList<Pair<Object, String>> values;
+    /**
+     * the objects hold
+     */
+    private final ArrayList<Pair<Object, String>> values;
 
-	/** true if this spinner is expanded */
-	private boolean expanded;
+    /**
+     * true if this spinner is expanded
+     */
+    private boolean expanded;
 
-	/** the currently picked index */
-	private int pickedIndex;
+    /**
+     * the currently picked index
+     */
+    private int pickedIndex;
 
-	/** default text */
-	private String hintText;
+    /**
+     * default text
+     */
+    private String hintText;
 
-	public GuiSpinner() {
-		super();
-		this.values = new ArrayList<>();
-		this.expanded = false;
-		this.pickedIndex = -1;
-		this.hintText = "...";
-		this.addListener(ON_PRESS_FOCUS_LISTENER);
-	}
+    public GuiSpinner() {
+        super();
+        this.values = new ArrayList<>();
+        this.expanded = false;
+        this.pickedIndex = -1;
+        this.hintText = "...";
+        this.addListener(ON_PRESS_FOCUS_LISTENER);
+    }
 
-	/** expands the gui spinner */
-	public final void expand() {
-		this.expanded = !this.expanded;
-		this.onExpansionChanged();
-		super.stackEvent(new GuiSpinnerEventExpanded<GuiSpinner>(this));
-	}
+    /**
+     * expands the gui spinner
+     */
+    public final void expand() {
+        this.expanded = !this.expanded;
+        this.onExpansionChanged();
+        super.stackEvent(new GuiSpinnerEventExpanded<GuiSpinner>(this));
+    }
 
-	/** add a value to the spinner */
-	public final void add(Object value) {
-		this.add(value, String.valueOf(value));
-	}
+    /**
+     * add a value to the spinner
+     */
+    public final void add(Object value) {
+        this.add(value, String.valueOf(value));
+    }
 
-	/** add a value, and the given string name id to be shown */
-	public final void add(Object value, String name) {
-		this.add(value, name, this.values.size());
-	}
+    /**
+     * add a value, and the given string name id to be shown
+     */
+    public final void add(Object value, String name) {
+        this.add(value, name, this.values.size());
+    }
 
-	public final void add(Object value, String name, int index) {
-		this.values.add(index, new Pair<Object, String>(value, name));
-		this.onObjectAdded(index);
-		super.stackEvent(new GuiSpinnerEventAdd<GuiSpinner>(this, index, value, name));
-	}
+    public final void add(Object value, String name, int index) {
+        this.values.add(index, new Pair<Object, String>(value, name));
+        this.onObjectAdded(index);
+        super.stackEvent(new GuiSpinnerEventAdd<GuiSpinner>(this, index, value, name));
+    }
 
-	/** add a value to the spinner */
-	public final void remove(Object value) {
-		int i = 0;
-		for (Pair<Object, String> pair : this.values) {
-			if (pair.left.equals(value)) {
-				break;
-			}
-			++i;
-		}
-		if (i == this.values.size()) {
-			return;
-		}
-		this.remove(i);
-	}
+    /**
+     * add a value to the spinner
+     */
+    public final void remove(Object value) {
+        int i = 0;
+        for (Pair<Object, String> pair : this.values) {
+            if (pair.left.equals(value)) {
+                break;
+            }
+            ++i;
+        }
+        if (i == this.values.size()) {
+            return;
+        }
+        this.remove(i);
+    }
 
-	public final void remove(int index) {
-		if (index < 0 || index >= this.values.size()) {
-			return;
-		}
-		Pair<Object, String> value = this.values.remove(index);
-		if (this.pickedIndex >= this.values.size()) {
-			this.pick(this.values.size() - 1);
-		}
-		this.onObjectRemoved(index);
-		super.stackEvent(new GuiSpinnerEventRemove<GuiSpinner>(this, index, value.left, value.right));
-	}
+    public final void remove(int index) {
+        if (index < 0 || index >= this.values.size()) {
+            return;
+        }
+        Pair<Object, String> value = this.values.remove(index);
+        if (this.pickedIndex >= this.values.size()) {
+            this.pick(this.values.size() - 1);
+        }
+        this.onObjectRemoved(index);
+        super.stackEvent(new GuiSpinnerEventRemove<GuiSpinner>(this, index, value.left, value.right));
+    }
 
-	/** sort the spinner */
-	public final void sort(Comparator<Object> comparator) {
-		this.values.sort(comparator);
-		this.onObjectsSorted();
-		super.stackEvent(new GuiSpinnerEventSorted<GuiSpinner>(this));
-	}
+    /**
+     * sort the spinner
+     */
+    public final void sort(Comparator<Object> comparator) {
+        this.values.sort(comparator);
+        this.onObjectsSorted();
+        super.stackEvent(new GuiSpinnerEventSorted<GuiSpinner>(this));
+    }
 
-	/** remove every items of this spinner */
-	public final void removeAll() {
-		this.values.clear();
-		this.onObjectsRemoved();
-		super.stackEvent(new GuiSpinnerEventRemoveAll<GuiSpinner>(this));
-	}
+    /**
+     * remove every items of this spinner
+     */
+    public final void removeAll() {
+        this.values.clear();
+        this.onObjectsRemoved();
+        super.stackEvent(new GuiSpinnerEventRemoveAll<GuiSpinner>(this));
+    }
 
-	/** callback when #GuiSpinner{@link #removeAll()} is called */
-	protected void onObjectsRemoved() {
-	}
+    /**
+     * callback when #GuiSpinner{@link #removeAll()} is called
+     */
+    protected void onObjectsRemoved() {
+    }
 
-	/** pick the given index */
-	public final void pick(int index) {
-		int prevIndex = this.pickedIndex;
-		this.pickedIndex = index;
-		this.onIndexPicked(this.pickedIndex);
-		super.stackEvent(new GuiSpinnerEventPick<GuiSpinner>(this, prevIndex));
-	}
+    /**
+     * pick the given index
+     */
+    public final void pick(int index) {
+        int prevIndex = this.pickedIndex;
+        this.pickedIndex = index;
+        this.onIndexPicked(this.pickedIndex);
+        super.stackEvent(new GuiSpinnerEventPick<GuiSpinner>(this, prevIndex));
+    }
 
-	public final boolean isExpanded() {
-		return (this.expanded);
-	}
+    public final boolean isExpanded() {
+        return (this.expanded);
+    }
 
-	/** get the objets */
-	public final ArrayList<Pair<Object, String>> getValues() {
-		return (this.values);
-	}
+    /**
+     * get the objets
+     */
+    public final ArrayList<Pair<Object, String>> getValues() {
+        return (this.values);
+    }
 
-	/** do the rendering of this gui */
-	protected void onRender(GuiRenderer guiRenderer) {
-	}
+    /**
+     * do the rendering of this gui
+     */
+    protected void onRender(GuiRenderer guiRenderer) {
+    }
 
-	/**
-	 * @return the number of object hold by this spinner
-	 */
-	public final int count() {
-		return (this.values.size());
-	}
+    /**
+     * @return the number of object hold by this spinner
+     */
+    public final int count() {
+        return (this.values.size());
+    }
 
-	/** get the name at given index */
-	public final Object getPickedObject() {
-		return (this.getObject(this.getPickedIndex()));
-	}
+    /**
+     * get the name at given index
+     */
+    public final Object getPickedObject() {
+        return (this.getObject(this.getPickedIndex()));
+    }
 
-	public final String getPickedName() {
-		return (this.getName(this.getPickedIndex()));
-	}
+    public final String getPickedName() {
+        return (this.getName(this.getPickedIndex()));
+    }
 
-	/** get the value at given index */
-	public final Object getObject(int index) {
-		if (index < 0 || index >= this.values.size()) {
-			return (null);
-		}
-		return (this.values.get(index).left);
-	}
+    /**
+     * get the value at given index
+     */
+    public final Object getObject(int index) {
+        if (index < 0 || index >= this.values.size()) {
+            return (null);
+        }
+        return (this.values.get(index).left);
+    }
 
-	/** get the name at given index */
-	public final String getName(int index) {
-		if (index < 0 || index >= this.values.size()) {
-			return (null);
-		}
-		return (this.values.get(index).right);
-	}
+    /**
+     * get the name at given index
+     */
+    public final String getName(int index) {
+        if (index < 0 || index >= this.values.size()) {
+            return (null);
+        }
+        return (this.values.get(index).right);
+    }
 
-	/** get the index of the picked item (or -1 if empty, or no item picked) */
-	public final int getPickedIndex() {
-		return (this.pickedIndex);
-	}
+    /**
+     * get the index of the picked item (or -1 if empty, or no item picked)
+     */
+    public final int getPickedIndex() {
+        return (this.pickedIndex);
+    }
 
-	/** set the hint to be displayed by default (or when empty) */
-	public final void setHint(String hintText) {
-		this.hintText = hintText;
-		this.onHintChanged();
-	}
+    public final String getHint() {
+        return (this.hintText);
+    }
 
-	public final String getHint() {
-		return (this.hintText);
-	}
+    /**
+     * set the hint to be displayed by default (or when empty)
+     */
+    public final void setHint(String hintText) {
+        this.hintText = hintText;
+        this.onHintChanged();
+    }
 
-	/** called whenever the hint changes */
-	protected void onHintChanged() {
-	}
+    /**
+     * called whenever the hint changes
+     */
+    protected void onHintChanged() {
+    }
 
-	protected void onIndexPicked(int pickedIndex) {
-	}
+    protected void onIndexPicked(int pickedIndex) {
+    }
 
-	protected void onExpansionChanged() {
-	}
+    protected void onExpansionChanged() {
+    }
 
-	protected void onObjectAdded(int index) {
-	}
+    protected void onObjectAdded(int index) {
+    }
 
-	protected void onObjectsSorted() {
-	}
+    protected void onObjectsSorted() {
+    }
 
-	protected void onObjectRemoved(int index) {
-	}
+    protected void onObjectRemoved(int index) {
+    }
 }

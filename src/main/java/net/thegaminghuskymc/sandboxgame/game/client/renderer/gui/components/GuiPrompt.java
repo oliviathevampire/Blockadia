@@ -9,342 +9,381 @@ import org.lwjgl.glfw.GLFW;
 
 public class GuiPrompt extends GuiLabel {
 
-	private static final GuiListener<GuiEventChar<GuiPrompt>> CHAR_LISTENER = new GuiListener<GuiEventChar<GuiPrompt>>() {
-		@Override
-		public void invoke(GuiEventChar<GuiPrompt> event) {
-			event.getGui().onChar(event.getGLFWWindow(), event.getCharacter());
-		}
-	};
+    public static final TextTestFormat FORMAT_FLOAT = new TextTestFormat() {
+        @Override
+        public boolean isTextFormatValid(String text) {
+            if (text == null || text.length() == 0) {
+                return (true);
+            }
+            try {
+                Float.parseFloat(text);
+                return (true);
+            } catch (Exception e) {
+            }
+            return (false);
+        }
+    };
+    private static final GuiListener<GuiEventChar<GuiPrompt>> CHAR_LISTENER = new GuiListener<GuiEventChar<GuiPrompt>>() {
+        @Override
+        public void invoke(GuiEventChar<GuiPrompt> event) {
+            event.getGui().onChar(event.getGLFWWindow(), event.getCharacter());
+        }
+    };
+    private static final GuiListener<GuiEventKeyPress<GuiPrompt>> KEY_PRESS_LISTENER = new GuiListener<GuiEventKeyPress<GuiPrompt>>() {
+        @Override
+        public void invoke(GuiEventKeyPress<GuiPrompt> event) {
+            event.getGui().onKeyPressed(event.getGLFWWindow(), event.getKey(), event.getScancode(), event.getMods());
+        }
+    };
+    private static final GuiListener<GuiEventGainFocus<GuiPrompt>> GAIN_FOCUS_LISTENER = new GuiListener<GuiEventGainFocus<GuiPrompt>>() {
+        @Override
+        public void invoke(GuiEventGainFocus<GuiPrompt> event) {
+            event.getGui().onFocusGained();
+        }
+    };
+    private static final GuiListener<GuiEventLooseFocus<GuiPrompt>> LOST_FOCUS_LISTENER = new GuiListener<GuiEventLooseFocus<GuiPrompt>>() {
+        @Override
+        public void invoke(GuiEventLooseFocus<GuiPrompt> event) {
+            event.getGui().onFocusLost();
+        }
+    };
+    private static final String DEFAULT_CHARSET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\n[](){}\"'#&�~+=-*/.,;:?!<> ";
+    private static final int CURSOR_MS = 500;
+    /**
+     * the text held by the prompt
+     */
+    private String heldText;
+    private float r, g, b, a;
 
-	private static final GuiListener<GuiEventKeyPress<GuiPrompt>> KEY_PRESS_LISTENER = new GuiListener<GuiEventKeyPress<GuiPrompt>>() {
-		@Override
-		public void invoke(GuiEventKeyPress<GuiPrompt> event) {
-			event.getGui().onKeyPressed(event.getGLFWWindow(), event.getKey(), event.getScancode(), event.getMods());
-		}
-	};
+    /**
+     * format tests
+     */
+    private TextTestFormat format;
 
-	private static final GuiListener<GuiEventGainFocus<GuiPrompt>> GAIN_FOCUS_LISTENER = new GuiListener<GuiEventGainFocus<GuiPrompt>>() {
-		@Override
-		public void invoke(GuiEventGainFocus<GuiPrompt> event) {
-			event.getGui().onFocusGained();
-		}
-	};
+    /**
+     * max number of character to be hold
+     */
+    private int maxChars;
 
-	private static final GuiListener<GuiEventLooseFocus<GuiPrompt>> LOST_FOCUS_LISTENER = new GuiListener<GuiEventLooseFocus<GuiPrompt>>() {
-		@Override
-		public void invoke(GuiEventLooseFocus<GuiPrompt> event) {
-			event.getGui().onFocusLost();
-		}
-	};
+    /**
+     * charset (allowed chars)
+     */
+    private String charset;
+    private float rh, gh, bh, ah;
 
-	private static final String DEFAULT_CHARSET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\n[](){}\"'#&�~+=-*/.,;:?!<> ";
-	private static final int CURSOR_MS = 500;
+    /**
+     * hint text to be shown when prompt is empty
+     */
+    private String hintText;
 
-	public static final TextTestFormat FORMAT_FLOAT = new TextTestFormat() {
-		@Override
-		public boolean isTextFormatValid(String text) {
-			if (text == null || text.length() == 0) {
-				return (true);
-			}
-			try {
-				Float.parseFloat(text);
-				return (true);
-			} catch (Exception e) {
-			}
-			return (false);
-		}
-	};
+    /**
+     * cursor position
+     */
+    private int cursor;
 
-	/** the text held by the prompt */
-	private String heldText;
-	private float r, g, b, a;
+    /**
+     * cursor timers
+     */
+    private long lastCursorUpdate;
+    private long cursorTimer;
 
-	/** format tests */
-	private TextTestFormat format;
+    public GuiPrompt() {
+        super();
+        this.addListener(CHAR_LISTENER);
+        this.addListener(KEY_PRESS_LISTENER);
+        this.addListener(LOST_FOCUS_LISTENER);
+        this.addListener(LOST_FOCUS_LISTENER);
+        this.addListener(GAIN_FOCUS_LISTENER);
+        this.addListener(ON_PRESS_FOCUS_LISTENER);
 
-	/** max number of character to be hold */
-	private int maxChars;
+        this.charset = new String(DEFAULT_CHARSET);
+        this.maxChars = Integer.MAX_VALUE;
+        this.setHintColor(0.5f, 0.5f, 0.5f, 0.5f);
+        this.setHeldTextColor(Gui.COLOR_BLUE);
+    }
 
-	/** charset (allowed chars) */
-	private String charset;
-	private float rh, gh, bh, ah;
+    protected void onFocusLost() {
+        this.updateVisibleText();
+    }
 
-	/** hint text to be shown when prompt is empty */
-	private String hintText;
+    protected void onFocusGained() {
+        this.tickCursor();
+        this.updateVisibleText();
+    }
 
-	/** cursor position */
-	private int cursor;
+    protected void onChar(GLFWWindow glfwWindow, char character) {
+        this.addChar(character);
+    }
 
-	/** cursor timers */
-	private long lastCursorUpdate;
-	private long cursorTimer;
+    protected void onKeyPressed(GLFWWindow glfwWindow, int key, int scancode, int mods) {
 
-	public GuiPrompt() {
-		super();
-		this.addListener(CHAR_LISTENER);
-		this.addListener(KEY_PRESS_LISTENER);
-		this.addListener(LOST_FOCUS_LISTENER);
-		this.addListener(LOST_FOCUS_LISTENER);
-		this.addListener(GAIN_FOCUS_LISTENER);
-		this.addListener(ON_PRESS_FOCUS_LISTENER);
+        String text = this.getHeldText();
+        if (text != null) {
+            if (key == GLFW.GLFW_KEY_BACKSPACE && this.getCursor() > 0) {
+                this.backspace();
+            } else if (key == GLFW.GLFW_KEY_DELETE && this.getCursor() < text.length()) {
+                this.delete();
+            } else if (key == GLFW.GLFW_KEY_LEFT && this.getCursor() > 0) {
+                this.moveCursor(-1);
+            } else if (key == GLFW.GLFW_KEY_RIGHT && this.getCursor() < this.getText().length()) {
+                this.moveCursor(1);
+            }
+        }
 
-		this.charset = new String(DEFAULT_CHARSET);
-		this.maxChars = Integer.MAX_VALUE;
-		this.setHintColor(0.5f, 0.5f, 0.5f, 0.5f);
-		this.setHeldTextColor(Gui.COLOR_BLUE);
-	}
+        if ((key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_KP_ENTER)
+                && (mods & GLFW.GLFW_MOD_SHIFT) == GLFW.GLFW_MOD_SHIFT) {
+            this.addChar('\n');
+        }
+    }
 
-	protected void onFocusLost() {
-		this.updateVisibleText();
-	}
+    /**
+     * delete the char at the 'right' of the cursor
+     */
+    public final void delete() {
+        if (this.heldText == null || this.cursor == this.heldText.length()) {
+            return;
+        }
+        String begin = this.heldText.substring(0, this.cursor);
+        String end = this.heldText.substring(this.cursor + 1, heldText.length());
+        this.setHeldText(begin + end, this.cursor);
+    }
 
-	protected void onFocusGained() {
-		this.tickCursor();
-		this.updateVisibleText();
-	}
+    /**
+     * delete the char at the 'left' of the cursor
+     */
+    public final void backspace() {
+        if (this.heldText == null || this.cursor == 0) {
+            return;
+        }
+        String begin = this.heldText.substring(0, this.cursor - 1);
+        String end = this.heldText.substring(this.cursor, heldText.length());
+        this.setHeldText(begin + end, this.cursor - 1);
+    }
 
-	protected void onChar(GLFWWindow glfwWindow, char character) {
-		this.addChar(character);
-	}
+    /**
+     * add a char to the prompt at the current cursor position
+     */
+    public final void addChar(char c) {
+        String txt = this.heldText == null ? "" : this.heldText;
+        if (txt.length() < this.maxChars && this.charset.indexOf(c) >= 0) {
+            String begin = txt.substring(0, this.cursor);
+            String end = txt.substring(this.cursor, txt.length());
+            this.setHeldText(begin + c + end, this.cursor + 1);
+        }
+    }
 
-	protected void onKeyPressed(GLFWWindow glfwWindow, int key, int scancode, int mods) {
+    /**
+     * move the cursor position
+     */
+    public final void moveCursor(int xoffset) {
+        this.setCursor(this.cursor + xoffset);
+    }
 
-		String text = this.getHeldText();
-		if (text != null) {
-			if (key == GLFW.GLFW_KEY_BACKSPACE && this.getCursor() > 0) {
-				this.backspace();
-			} else if (key == GLFW.GLFW_KEY_DELETE && this.getCursor() < text.length()) {
-				this.delete();
-			} else if (key == GLFW.GLFW_KEY_LEFT && this.getCursor() > 0) {
-				this.moveCursor(-1);
-			} else if (key == GLFW.GLFW_KEY_RIGHT && this.getCursor() < this.getText().length()) {
-				this.moveCursor(1);
-			}
-		}
+    /**
+     * set the cursor position
+     */
+    public final int setCursor(int index) {
+        if (this.cursor == index) {
+            return (this.cursor);
+        }
 
-		if ((key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_KP_ENTER)
-				&& (mods & GLFW.GLFW_MOD_SHIFT) == GLFW.GLFW_MOD_SHIFT) {
-			this.addChar('\n');
-		}
-	}
+        if (this.heldText == null) {
+            this.cursor = 0;
+            return (0);
+        }
 
-	/** delete the char at the 'right' of the cursor */
-	public final void delete() {
-		if (this.heldText == null || this.cursor == this.heldText.length()) {
-			return;
-		}
-		String begin = this.heldText.substring(0, this.cursor);
-		String end = this.heldText.substring(this.cursor + 1, heldText.length());
-		this.setHeldText(begin + end, this.cursor);
-	}
+        this.cursor = index < 0 ? 0 : index > this.heldText.length() ? this.heldText.length() : index;
+        this.tickCursor();
+        this.setHeldTextAsText();
+        return (this.cursor);
+    }
 
-	/** delete the char at the 'left' of the cursor */
-	public final void backspace() {
-		if (this.heldText == null || this.cursor == 0) {
-			return;
-		}
-		String begin = this.heldText.substring(0, this.cursor - 1);
-		String end = this.heldText.substring(this.cursor, heldText.length());
-		this.setHeldText(begin + end, this.cursor - 1);
-	}
+    private final int getCursor() {
+        return (this.cursor);
+    }
 
-	/** add a char to the prompt at the current cursor position */
-	public final void addChar(char c) {
-		String txt = this.heldText == null ? "" : this.heldText;
-		if (txt.length() < this.maxChars && this.charset.indexOf(c) >= 0) {
-			String begin = txt.substring(0, this.cursor);
-			String end = txt.substring(this.cursor, txt.length());
-			this.setHeldText(begin + c + end, this.cursor + 1);
-		}
-	}
+    private final void updateCursor() {
+        long now = System.currentTimeMillis();
+        boolean prevShowCursor = this.showCursor();
+        this.cursorTimer = (this.cursorTimer + (now - this.lastCursorUpdate)) % (CURSOR_MS * 2);
+        this.lastCursorUpdate = now;
+        boolean nextShowCursor = this.showCursor();
+        if ((nextShowCursor && !prevShowCursor) || !nextShowCursor && prevShowCursor) {
+            this.setHeldTextAsText();
+        }
+    }
 
-	/** move the cursor position */
-	public final void moveCursor(int xoffset) {
-		this.setCursor(this.cursor + xoffset);
-	}
+    public final boolean showCursor() {
+        return (this.cursorTimer < CURSOR_MS && this.hasFocus());
+    }
 
-	/** set the cursor position */
-	public final int setCursor(int index) {
-		if (this.cursor == index) {
-			return (this.cursor);
-		}
+    private final void tickCursor() {
+        this.cursorTimer = 0;
+        this.lastCursorUpdate = System.currentTimeMillis();
+    }
 
-		if (this.heldText == null) {
-			this.cursor = 0;
-			return (0);
-		}
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if (this.hasFocus()) {
+            this.updateCursor();
+        }
+    }
 
-		this.cursor = index < 0 ? 0 : index > this.heldText.length() ? this.heldText.length() : index;
-		this.tickCursor();
-		this.setHeldTextAsText();
-		return (this.cursor);
-	}
+    public final void setHintColor(Vector4f color) {
+        this.setHintColor(color.x, color.y, color.z, color.w);
+    }
 
-	private final int getCursor() {
-		return (this.cursor);
-	}
+    /**
+     * set text color of the hint
+     */
+    public final void setHintColor(float r, float g, float b, float a) {
+        this.rh = r;
+        this.gh = g;
+        this.bh = b;
+        this.ah = a;
+        this.updateVisibleText();
+    }
 
-	private final void updateCursor() {
-		long now = System.currentTimeMillis();
-		boolean prevShowCursor = this.showCursor();
-		this.cursorTimer = (this.cursorTimer + (now - this.lastCursorUpdate)) % (CURSOR_MS * 2);
-		this.lastCursorUpdate = now;
-		boolean nextShowCursor = this.showCursor();
-		if ((nextShowCursor && !prevShowCursor) || !nextShowCursor && prevShowCursor) {
-			this.setHeldTextAsText();
-		}
-	}
+    public final void setHeldTextColor(Color color) {
+        this.setHeldTextColor(color.getR(), color.getG(), color.getB(), color.getA());
+    }
 
-	public final boolean showCursor() {
-		return (this.cursorTimer < CURSOR_MS && this.hasFocus());
-	}
+    /**
+     * set text color of the held text
+     */
+    public final void setHeldTextColor(float r, float g, float b, float a) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+        this.updateVisibleText();
+    }
 
-	private final void tickCursor() {
-		this.cursorTimer = 0;
-		this.lastCursorUpdate = System.currentTimeMillis();
-	}
+    /**
+     * get the maximum chars this prompt can holds
+     */
+    public final int getMaxChars() {
+        return (this.maxChars);
+    }
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (this.hasFocus()) {
-			this.updateCursor();
-		}
-	}
+    /**
+     * set the maximum chars this prompt can holds
+     */
+    public final void setMaxChars(int max) {
+        this.maxChars = max;
+    }
 
-	public final void setHintColor(Vector4f color) {
-		this.setHintColor(color.x, color.y, color.z, color.w);
-	}
+    /**
+     * get the hint
+     */
+    public final String getHint() {
+        return (this.hintText);
+    }
 
-	/** set text color of the hint */
-	public final void setHintColor(float r, float g, float b, float a) {
-		this.rh = r;
-		this.gh = g;
-		this.bh = b;
-		this.ah = a;
-		this.updateVisibleText();
-	}
+    /**
+     * set the hint text
+     */
+    public final void setHint(String hintText) {
+        this.hintText = hintText;
+        this.updateVisibleText();
+    }
 
-	public final void setHeldTextColor(Color color) {
-		this.setHeldTextColor(color.getR(), color.getG(), color.getB(), color.getA());
-	}
+    /**
+     * return the text held by this prompt
+     */
+    public final String getHeldText() {
+        return (this.heldText);
+    }
 
-	/** set text color of the held text */
-	public final void setHeldTextColor(float r, float g, float b, float a) {
-		this.r = r;
-		this.g = g;
-		this.b = b;
-		this.a = a;
-		this.updateVisibleText();
-	}
+    public final void setHeldText(String text) {
+        this.setHeldText(text, text != null ? text.length() : 0);
+    }
 
-	/** set the maximum chars this prompt can holds */
-	public final void setMaxChars(int max) {
-		this.maxChars = max;
-	}
+    public final void setHeldText(String text, int index) {
+        if (this.format != null && !this.format.isTextFormatValid(text)) {
+            return;
+        }
+        if (text == null || text.length() == 0) {
+            this.heldText = null;
+            this.setCursor(0);
+        } else {
+            this.heldText = text;
+            this.setCursor(index);
+        }
+        this.updateVisibleText();
+        super.stackEvent(new GuiPromptEventHeldTextChanged<GuiPrompt>(this));
+    }
 
-	/** get the maximum chars this prompt can holds */
-	public final int getMaxChars() {
-		return (this.maxChars);
-	}
+    public final void setTextTestFormat(TextTestFormat textTestFormat) {
+        this.format = textTestFormat;
+    }
 
-	/** get the hint */
-	public final String getHint() {
-		return (this.hintText);
-	}
+    private final void setHintAsText() {
+        super.setFontColor(this.rh, this.gh, this.bh, this.ah);
+        super.setText(this.hintText);
+    }
 
-	/** set the hint text */
-	public final void setHint(String hintText) {
-		this.hintText = hintText;
-		this.updateVisibleText();
-	}
+    private final void setHeldTextAsText() {
+        super.setFontColor(this.r, this.g, this.b, this.a);
+        if (this.heldText == null) {
+            super.setText(this.showCursor() ? "" + FontFile.CURSOR_CHAR : "");
+        } else {
+            if (this.showCursor()) {
+                String begin = this.heldText.substring(0, this.cursor);
+                String end = this.heldText.substring(this.cursor, heldText.length());
+                super.setText(begin + FontFile.CURSOR_CHAR + end);
+            } else {
+                super.setText(this.heldText);
+            }
+        }
+    }
 
-	/** return the text held by this prompt */
-	public final String getHeldText() {
-		return (this.heldText);
-	}
+    private final void updateVisibleText() {
+        if (this.hasFocus() || this.getHeldText() != null) {
+            this.setHeldTextAsText();
+        } else {
+            this.setHintAsText();
+        }
+    }
 
-	public final void setHeldText(String text) {
-		this.setHeldText(text, text != null ? text.length() : 0);
-	}
+    public final void setCharset(String charset) {
+        this.charset = charset;
+    }
 
-	/** a test interface to validate or not text modification */
-	public interface TextTestFormat {
-		/**
-		 * @param text
-		 *            : the new string to be set
-		 * @return : true of false weather this string is valid
-		 */
-		public boolean isTextFormatValid(String text);
-	}
+    /**
+     * get the value as a float, throw exception if parsed error failed
+     */
+    public final float asFloat() throws Exception {
+        return (Float.parseFloat(this.getHeldText()));
+    }
 
-	public final void setHeldText(String text, int index) {
-		if (this.format != null && !this.format.isTextFormatValid(text)) {
-			return;
-		}
-		if (text == null || text.length() == 0) {
-			this.heldText = null;
-			this.setCursor(0);
-		} else {
-			this.heldText = text;
-			this.setCursor(index);
-		}
-		this.updateVisibleText();
-		super.stackEvent(new GuiPromptEventHeldTextChanged<GuiPrompt>(this));
-	}
+    /**
+     * get the value as a float, throw exception if parsed error failed
+     */
+    public final float asFloat(float defaultValue) {
+        try {
+            return (Float.parseFloat(this.getHeldText()));
+        } catch (Exception e) {
+        }
+        return (defaultValue);
+    }
 
-	public final void setTextTestFormat(TextTestFormat textTestFormat) {
-		this.format = textTestFormat;
-	}
+    /**
+     * get the value as a string, throw exception if parsed error failed
+     */
+    public final String asString() {
+        return (this.getHeldText());
+    }
 
-	private final void setHintAsText() {
-		super.setFontColor(this.rh, this.gh, this.bh, this.ah);
-		super.setText(this.hintText);
-	}
-
-	private final void setHeldTextAsText() {
-		super.setFontColor(this.r, this.g, this.b, this.a);
-		if (this.heldText == null) {
-			super.setText(this.showCursor() ? "" + FontFile.CURSOR_CHAR : "");
-		} else {
-			if (this.showCursor()) {
-				String begin = this.heldText.substring(0, this.cursor);
-				String end = this.heldText.substring(this.cursor, heldText.length());
-				super.setText(begin + FontFile.CURSOR_CHAR + end);
-			} else {
-				super.setText(this.heldText);
-			}
-		}
-	}
-
-	private final void updateVisibleText() {
-		if (this.hasFocus() || this.getHeldText() != null) {
-			this.setHeldTextAsText();
-		} else {
-			this.setHintAsText();
-		}
-	}
-
-	public final void setCharset(String charset) {
-		this.charset = charset;
-	}
-
-	/** get the value as a float, throw exception if parsed error failed */
-	public final float asFloat() throws Exception {
-		return (Float.parseFloat(this.getHeldText()));
-	}
-
-	/** get the value as a float, throw exception if parsed error failed */
-	public final float asFloat(float defaultValue) {
-		try {
-			return (Float.parseFloat(this.getHeldText()));
-		} catch (Exception e) {
-		}
-		return (defaultValue);
-	}
-
-	/** get the value as a string, throw exception if parsed error failed */
-	public final String asString() {
-		return (this.getHeldText());
-	}
+    /**
+     * a test interface to validate or not text modification
+     */
+    public interface TextTestFormat {
+        /**
+         * @param text : the new string to be set
+         * @return : true of false weather this string is valid
+         */
+        public boolean isTextFormatValid(String text);
+    }
 }

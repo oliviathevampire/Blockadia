@@ -7,91 +7,107 @@ import java.util.ArrayList;
 
 public class AnimationInstance {
 
-	/** the animation */
-	private final ModelSkeletonAnimation animation;
+    /**
+     * state of the animation (loop, freeze...)
+     */
+    private static final int STATE_NONE = 0;
+    private static final int STATE_LOOP = 1;
+    private static final int STATE_FREEZE = 2;
+    private static final int STATE_STOP = 3;
+    /**
+     * the animation
+     */
+    private final ModelSkeletonAnimation animation;
+    /**
+     * the begin time
+     */
+    private long time;
+    private byte state;
 
-	/** the begin time */
-	private long time;
+    public AnimationInstance(ModelSkeletonAnimation animation) {
+        this.animation = animation;
+        this.time = 0;
+        this.state = STATE_NONE;
+    }
 
-	/** state of the animation (loop, freeze...) */
-	private static final int STATE_NONE = 0;
-	private static final int STATE_LOOP = 1;
-	private static final int STATE_FREEZE = 2;
-	private static final int STATE_STOP = 3;
-	private byte state;
+    /**
+     * upate the animation instance, return true if the animation is ended
+     */
+    public void update(long dt) {
 
-	public AnimationInstance(ModelSkeletonAnimation animation) {
-		this.animation = animation;
-		this.time = 0;
-		this.state = STATE_NONE;
-	}
+        if (this.state == STATE_STOP || this.state == STATE_FREEZE) {
+            return;
+        }
 
-	/** upate the animation instance, return true if the animation is ended */
-	public void update(long dt) {
+        this.setTime(this.time + dt);
+    }
 
-		if (this.state == STATE_STOP || this.state == STATE_FREEZE) {
-			return;
-		}
+    /**
+     * freeze the animation
+     */
+    public void freeze() {
+        this.state = STATE_FREEZE;
+    }
 
-		this.setTime(this.time + dt);
-	}
+    /**
+     * loop the animation
+     */
+    public void loop() {
+        this.state = STATE_LOOP;
+    }
 
-	/** freeze the animation */
-	public void freeze() {
-		this.state = STATE_FREEZE;
-	}
+    /**
+     * stop the animation roughly
+     */
+    public void stop() {
+        this.state = STATE_STOP;
+    }
 
-	/** loop the animation */
-	public void loop() {
-		this.state = STATE_LOOP;
-	}
+    /**
+     * end the animation loop by ending the current loop
+     */
+    public void stopLoop() {
+        this.state = STATE_NONE;
+    }
 
-	/** stop the animation roughly */
-	public void stop() {
-		this.state = STATE_STOP;
-	}
+    public boolean isStopped() {
+        return (this.state == STATE_STOP);
+    }
 
-	/** end the animation loop by ending the current loop */
-	public void stopLoop() {
-		this.state = STATE_NONE;
-	}
+    /**
+     * return the previous and next frame for this animation
+     */
+    public KeyFrame[] getFrames() {
+        ArrayList<KeyFrame> frames = this.animation.getKeyFrames();
+        if (frames == null || frames.isEmpty()) {
+            return (null);
+        }
+        KeyFrame prev = frames.get(0);
+        KeyFrame next = frames.get(0);
+        for (int i = 1; i < frames.size(); i++) {
+            next = frames.get(i);
+            if (next.getTime() > this.time) {
+                break;
+            }
+            prev = next;
+        }
+        return (new KeyFrame[]{prev, next});
 
-	public boolean isStopped() {
-		return (this.state == STATE_STOP);
-	}
+    }
 
-	/** return the previous and next frame for this animation */
-	public KeyFrame[] getFrames() {
-		ArrayList<KeyFrame> frames = this.animation.getKeyFrames();
-		if (frames == null || frames.isEmpty()) {
-			return (null);
-		}
-		KeyFrame prev = frames.get(0);
-		KeyFrame next = frames.get(0);
-		for (int i = 1; i < frames.size(); i++) {
-			next = frames.get(i);
-			if (next.getTime() > this.time) {
-				break;
-			}
-			prev = next;
-		}
-		return (new KeyFrame[] { prev, next });
+    public long getTime() {
+        return (this.time);
+    }
 
-	}
-
-	public long getTime() {
-		return (this.time);
-	}
-
-	public void setTime(long t) {
-		long duration = this.animation.getDuration();
-		this.time = t;
-		if (this.time >= duration) {
-			if (this.state == STATE_LOOP) {
-				this.time %= duration;
-			} else {
-				this.state = STATE_STOP;
-			}
-		}
-	}
+    public void setTime(long t) {
+        long duration = this.animation.getDuration();
+        this.time = t;
+        if (this.time >= duration) {
+            if (this.state == STATE_LOOP) {
+                this.time %= duration;
+            } else {
+                this.state = STATE_STOP;
+            }
+        }
+    }
 }

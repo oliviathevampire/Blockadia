@@ -8,11 +8,11 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.font.FontModel;
  * the text or the font size
  */
 public class GuiTextParameterTextCenterBox extends GuiParameter<GuiText> {
-	@Override
-	public void run(GuiText guiText) {
-		FontModel fontModel = guiText.getFontModel();
-		float x = 2.0f * guiText.getBoxCenterX() - 1.0f - guiText.getTextWidth();
-		float y = 2.0f * guiText.getBoxCenterY() - 1.0f - guiText.getTextHeight();
-		fontModel.setPosition(x, y, 1.0f);
-	}
+    @Override
+    public void run(GuiText guiText) {
+        FontModel fontModel = guiText.getFontModel();
+        float x = 2.0f * guiText.getBoxCenterX() - 1.0f - guiText.getTextWidth();
+        float y = 2.0f * guiText.getBoxCenterY() - 1.0f - guiText.getTextHeight();
+        fontModel.setPosition(x, y, 1.0f);
+    }
 }
