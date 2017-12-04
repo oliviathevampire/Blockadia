@@ -1,17 +1,3 @@
-/**
- * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
- * *
- * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
- * *
- * *	PEREIRA Romain
- * *                                       4-----7
- * *                                      /|    /|
- * *                                     0-----3 |
- * *                                     | 5___|_6
- * *                                     |/    | /
- * *                                     1-----2
- */
-
 package net.thegaminghuskymc.sandboxgame.engine.world;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
@@ -69,12 +55,4 @@ public abstract class Light {
         this._intensed_color.set(r * this._intensity, g * this._intensity, b * this._intensity);
     }
 
-    public void setColorAndIntensity(float intensity, float r, float g, float b) {
-        this._intensity = intensity;
-        this.setColor(r, g, b);
-    }
-
-    public Vector3f getIntensedLight() {
-        return (this._intensed_color);
-    }
 }

@@ -20,63 +20,21 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class GameEngine {
 
-    /**
-     * version
-     */
-    public static final String VERSION = "0.0.1";
-    public static final String MOD_ID = "game_engine";
+    private static final String MOD_ID = "game_engine";
 
-    /**
-     * singleton
-     */
     private static GameEngine INSTANCE;
-    /**
-     * side of the running engine
-     */
     protected Side side;
-    /**
-     * Resources
-     */
     protected ResourceManager resources;
-    /**
-     * the tasks to run each frames
-     */
     private ArrayList<Callable<Taskable>> tasks;
-
-    /**
-     * executor service
-     */
     private ExecutorService executor;
-
-    /**
-     * the resources directory
-     */
     private File gameDir;
     private ArrayList<ResourcePack> assets;
-    /**
-     * bools
-     */
     private boolean isRunning;
     private boolean debug;
-    /**
-     * Mod loader
-     */
     private ModLoader modLoader;
-    /**
-     * networking
-     */
     private INetwork network;
-    /**
-     * random number generator
-     */
     private Random rng;
-    /**
-     * Timer
-     */
     private Timer timer;
-    /**
-     * events
-     */
     private EventPreLoop eventPreLoop;
     private EventOnLoop eventOnLoop;
     private EventPostLoop eventPostLoop;
@@ -182,20 +140,6 @@ public abstract class GameEngine {
         return (cfg);
     }
 
-    /**
-     * get a config
-     */
-    public final Config getConfig(String filepath) {
-        return (this.config.get(filepath));
-    }
-
-    /**
-     * get every configs
-     */
-    public final HashMap<String, Config> getConfigs() {
-        return (this.config);
-    }
-
     protected abstract void onInitialized();
 
     /**
@@ -244,19 +188,6 @@ public abstract class GameEngine {
      */
     public void load() {
         this.loadResources("./mods", "./mod", "./plugin", "./plugins");
-    }
-
-    /**
-     * reload every game resources
-     */
-    public final void reload(String... folders) {
-        this.unload();
-        this.load();
-    }
-
-    private void unload() {
-        this.resources.unload();
-        this.modLoader.unload(this.getResourceManager());
     }
 
     private void loadResources(String... folders) {
@@ -383,24 +314,10 @@ public abstract class GameEngine {
     }
 
     /**
-     * run the garbage collector
-     */
-    public final void runGC() {
-        Runtime.getRuntime().gc();
-    }
-
-    /**
      * return true if the voxel engine is running
      */
     private boolean isRunning() {
         return (this.isRunning);
-    }
-
-    /**
-     * get the rng
-     */
-    public final Random getRNG() {
-        return (this.rng);
     }
 
     /**
@@ -437,18 +354,6 @@ public abstract class GameEngine {
         this.loadedWorlds.add(world);
         world.load();
         return (world);
-    }
-
-    /**
-     * remove a world from the game logic loop
-     */
-    public final void unloadWorld(int worldID) {
-        World world = this.getResourceManager().getWorldManager().getWorld(worldID);
-        if (world == null) {
-            Logger.get().log(Level.ERROR, "Tried to unload an unknown world, with id", worldID);
-            return;
-        }
-        this.loadedWorlds.remove(world);
     }
 
     /**

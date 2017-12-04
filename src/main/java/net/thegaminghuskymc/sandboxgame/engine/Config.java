@@ -29,7 +29,7 @@ public class Config {
      *                  object)
      * @return : the associated objects, or null if doesn't exists
      */
-    public final JsonObject getObject(String... hierarchy) {
+    private final JsonObject getObject(String... hierarchy) {
         JsonObject jsonObject = this.values;
         for (String child : hierarchy) {
             jsonObject = jsonObject.getAsJsonObject(child);
@@ -43,17 +43,7 @@ public class Config {
             try {
                 return (jsonObject.get(key).getAsString());
             } catch (Exception e) {
-            }
-        }
-        return (defaultValue);
-    }
-
-    public final double getDouble(String key, double defaultValue, String... hierarchy) {
-        JsonObject jsonObject = this.getObject(hierarchy);
-        if (jsonObject != null) {
-            try {
-                return (jsonObject.get(key).getAsDouble());
-            } catch (Exception e) {
+                return null;
             }
         }
         return (defaultValue);
