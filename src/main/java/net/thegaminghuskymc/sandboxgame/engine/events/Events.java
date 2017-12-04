@@ -13,33 +13,33 @@ import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 
 public class Events implements IModResource {
 
-	@Override
-	public void load(Mod mod, ResourceManager manager) {
-		// default events
-		EventManager eventManager = manager.getEventManager();
+    @Override
+    public void load(Mod mod, ResourceManager manager) {
+        // default events
+        EventManager eventManager = manager.getEventManager();
 
-		// entities event
-		eventManager.registerEvent(EventEntityJump.class);
-		eventManager.registerEvent(EventEntitySpawn.class);
-		eventManager.registerEvent(EventEntityDespawn.class);
-		eventManager.registerEvent(EventEntityPlaySound.class);
+        // entities event
+        eventManager.registerEvent(EventEntityJump.class);
+        eventManager.registerEvent(EventEntitySpawn.class);
+        eventManager.registerEvent(EventEntityDespawn.class);
+        eventManager.registerEvent(EventEntityPlaySound.class);
 
-		// world event
-		eventManager.registerEvent(EventTerrainSpawn.class);
-		eventManager.registerEvent(EventTerrainDespawn.class);
-		eventManager.registerEvent(EventTerrainSetBlock.class);
-		eventManager.registerEvent(EventTerrainDurabilityChanged.class);
-		eventManager.registerEvent(EventTerrainBlocklightUpdate.class);
-		eventManager.registerEvent(EventTerrainSunlightUpdate.class);
+        // world event
+        eventManager.registerEvent(EventTerrainSpawn.class);
+        eventManager.registerEvent(EventTerrainDespawn.class);
+        eventManager.registerEvent(EventTerrainSetBlock.class);
+        eventManager.registerEvent(EventTerrainDurabilityChanged.class);
+        eventManager.registerEvent(EventTerrainBlocklightUpdate.class);
+        eventManager.registerEvent(EventTerrainSunlightUpdate.class);
 
-		// engine events
-		eventManager.registerEvent(EventGetTasks.class);
-		eventManager.registerEvent(EventPreLoop.class);
-		eventManager.registerEvent(EventOnLoop.class);
-		eventManager.registerEvent(EventPostLoop.class);
-	}
+        // engine events
+        eventManager.registerEvent(EventGetTasks.class);
+        eventManager.registerEvent(EventPreLoop.class);
+        eventManager.registerEvent(EventOnLoop.class);
+        eventManager.registerEvent(EventPostLoop.class);
+    }
 
-	@Override
-	public void unload(Mod mod, ResourceManager manager) {
-	}
+    @Override
+    public void unload(Mod mod, ResourceManager manager) {
+    }
 }

@@ -36,9 +36,9 @@ package net.thegaminghuskymc.sandboxgame.engine.util.math;
  */
 public interface ReadableVector4f extends ReadableVector3f {
 
-	/**
-	 * @return w
-	 */
-	float getW();
+    /**
+     * @return w
+     */
+    float getW();
 
 }

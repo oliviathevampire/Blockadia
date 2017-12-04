@@ -9,29 +9,29 @@ import org.lwjgl.opengl.GL32;
 
 public class ProgramColoredQuad extends GLProgram {
 
-	private int transfMatrix;
-	private int color;
+    private int transfMatrix;
+    private int color;
 
-	public ProgramColoredQuad() {
-		super();
-		this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.fs"), GL20.GL_FRAGMENT_SHADER));
-		this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.gs"), GL32.GL_GEOMETRY_SHADER));
-		this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.vs"), GL20.GL_VERTEX_SHADER));
-		this.link();
-	}
+    public ProgramColoredQuad() {
+        super();
+        this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.fs"), GL20.GL_FRAGMENT_SHADER));
+        this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.gs"), GL32.GL_GEOMETRY_SHADER));
+        this.addShader(GLH.glhLoadShader(R.getResPath("shaders/gui/quadColored.vs"), GL20.GL_VERTEX_SHADER));
+        this.link();
+    }
 
-	@Override
-	public void bindAttributes() {
-	}
+    @Override
+    public void bindAttributes() {
+    }
 
-	@Override
-	public void linkUniforms() {
-		this.transfMatrix = super.getUniform("transfMatrix");
-		this.color = super.getUniform("color");
-	}
+    @Override
+    public void linkUniforms() {
+        this.transfMatrix = super.getUniform("transfMatrix");
+        this.color = super.getUniform("color");
+    }
 
-	public void loadQuadColored(float r, float g, float b, float a, Matrix4f transformMatrix) {
-		super.loadUniformMatrix(this.transfMatrix, transformMatrix);
-		super.loadUniformVec(this.color, r, g, b, a);
-	}
+    public void loadQuadColored(float r, float g, float b, float a, Matrix4f transformMatrix) {
+        super.loadUniformMatrix(this.transfMatrix, transformMatrix);
+        super.loadUniformVec(this.color, r, g, b, a);
+    }
 }

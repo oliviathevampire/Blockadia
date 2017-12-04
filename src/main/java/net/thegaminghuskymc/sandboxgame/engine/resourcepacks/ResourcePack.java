@@ -10,7 +10,9 @@ import java.util.zip.ZipInputStream;
 
 public class ResourcePack {
 
-    /** the zip file */
+    /**
+     * the zip file
+     */
     private String pack;
     private String modid;
 
@@ -33,7 +35,9 @@ public class ResourcePack {
         return (this.modid + " ; " + this.pack);
     }
 
-    /** extract the whole assets pack */
+    /**
+     * extract the whole assets pack
+     */
     public void extract() {
 
         String exportpath = R.getResPath(this.getModID(), "");

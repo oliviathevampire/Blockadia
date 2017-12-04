@@ -9,7 +9,6 @@ import net.thegaminghuskymc.sandboxgame.engine.events.world.EventTerrainDurabili
 import net.thegaminghuskymc.sandboxgame.engine.events.world.EventTerrainSetBlock;
 import net.thegaminghuskymc.sandboxgame.engine.events.world.EventTerrainSunlightUpdate;
 import net.thegaminghuskymc.sandboxgame.engine.faces.Face;
-import net.thegaminghuskymc.sandboxgame.engine.util.math.Maths;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector2i;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3i;
@@ -24,21 +23,23 @@ import java.util.Stack;
 
 public class Terrain {
 
-    private static final int STATE_FACE_VISIBILTY_UP_TO_DATE = 1;
-
     public static final float BLOCK_SIZE = 1.0f;
     public static final float METER_TO_BLOCK = 4.0f / 1.0f; // 4 blocks = 1
-
     // (and use 1 as implicit value to
     // optimize calculations)
     public static final float BLOCK_DEMI_SIZE = BLOCK_SIZE / 2.0f;
-
     public static final int DIMX = 16;
     public static final int DIMY = 64;
     public static final int DIMZ = DIMX;
-    private static final int MAX_BLOCK_INDEX = Terrain.DIMX * Terrain.DIMY * Terrain.DIMZ;
     public static final float SIZE_DIAGONAL3 = (float) Vector3f.distance(new Vector3f(0, 0, 0),
             new Vector3f(DIMX * BLOCK_SIZE, DIMY * BLOCK_SIZE, DIMZ * BLOCK_SIZE));
+    private static final int STATE_FACE_VISIBILTY_UP_TO_DATE = 1;
+    private static final int MAX_BLOCK_INDEX = Terrain.DIMX * Terrain.DIMY * Terrain.DIMZ;
+    /**
+     * max durability of a block
+     */
+    private static final byte MIN_DURABILITY = 0;
+    private static final byte MAX_DURABILITY = 7;
     public static float DIMX_SIZE = DIMX * BLOCK_SIZE;
     private static float DIMY_SIZE = DIMY * BLOCK_SIZE;
     private static float DIMZ_SIZE = DIMZ * BLOCK_SIZE;
@@ -46,48 +47,58 @@ public class Terrain {
     private static float DEMI_DIMX_SIZE = DIMX_SIZE / 2.0f;
     private static float DEMI_DIMY_SIZE = DIMY_SIZE / 2.0f;
     private static float DEMI_DIMZ_SIZE = DIMZ_SIZE / 2.0f;
-
-    /** max durability of a block */
-    private static final byte MIN_DURABILITY = 0;
-    private static final byte MAX_DURABILITY = 7;
-
-    /** terrain location */
+    /**
+     * terrain location
+     */
     private final Vector2i index2;
     private final Vector3i index3;
     private final Vector3f worldPos;
     private final Vector3f worldPosCenter;
-
-    /** block instances */
-    private HashMap<Integer, BlockInstance> blockInstances;
-
-    /** block ids */
+    /**
+     * block ids
+     */
     protected short[] blocks;
-
-    /** this terrain heightmap */
-    private byte[] heightmap;
-
-    /** number of blocks opaque or transparent */
-    private int blockCount;
-
-    /** block lights (4 bits : sun , 4 bits: block) */
-    private byte[] lights; // light values for every blocks
-
-    /** blocks durability */
+    /**
+     * blocks durability
+     */
     protected byte[] durability;
-
-    /** world in which this terrain depends */
+    /**
+     * block instances
+     */
+    private HashMap<Integer, BlockInstance> blockInstances;
+    /**
+     * this terrain heightmap
+     */
+    private byte[] heightmap;
+    /**
+     * number of blocks opaque or transparent
+     */
+    private int blockCount;
+    /**
+     * block lights (4 bits : sun , 4 bits: block)
+     */
+    private byte[] lights; // light values for every blocks
+    /**
+     * world in which this terrain depends
+     */
     private World world;
 
-    /** terrain states */
+    /**
+     * terrain states
+     */
     private int state;
 
-    /** the lights lists */
+    /**
+     * the lights lists
+     */
     private Stack<LightNodeAdd> lightBlockAddQueue;
     private Stack<LightNodeRemoval> lightBlockRemovalQueue;
     private Stack<LightNodeAdd> sunLightAddQueue;
     private Stack<LightNodeRemoval> sunLightRemovalQueue;
 
-    /** which face can see another */
+    /**
+     * which face can see another
+     */
     private boolean[][] facesVisibility;
 
     public Terrain(Vector3i index) {
@@ -124,14 +135,18 @@ public class Terrain {
         // this.updateBlocks();
     }
 
-    /** terrain face visibility update */
+    /**
+     * terrain face visibility update
+     */
     private void updateFaceVisibility() {
         if (!this.hasState(Terrain.STATE_FACE_VISIBILTY_UP_TO_DATE)) {
             this.updateFaceVisiblity();
         }
     }
 
-    /** tick once block instances of this terrain */
+    /**
+     * tick once block instances of this terrain
+     */
     private void updateBlockInstances() {
         if (this.blockInstances == null) {
             return;
@@ -168,7 +183,7 @@ public class Terrain {
      * return the terrain at the given position, relative to this instance It
      * fills the 'dst' Vector3i with it terrain-relative coordinates and return
      * it
-     *
+     * <p>
      * if the terrain didnt exists, it creates it
      */
     public Terrain getRelativeTerrain(int xyz[]) {
@@ -234,7 +249,7 @@ public class Terrain {
     }
 
     public final Block getBlock(int x, int y, int z) {
-        return (this.getBlock(new int[] { x, y, z }));
+        return (this.getBlock(new int[]{x, y, z}));
     }
 
     public final Block getBlock(int xyz[]) {
@@ -245,7 +260,9 @@ public class Terrain {
         return (terrain.getBlockAt(xyz[0], xyz[1], xyz[2]));
     }
 
-    /** this function doesnt check bounds */
+    /**
+     * this function doesnt check bounds
+     */
     public Block getBlockAt(int x, int y, int z) {
         return (this.getBlockAt(this.getIndex(x, y, z)));
     }
@@ -259,9 +276,11 @@ public class Terrain {
 
     }
 
-    /** secure function to set a block relative to this terrain */
+    /**
+     * secure function to set a block relative to this terrain
+     */
     public BlockInstance setBlock(Block block, int x, int y, int z) {
-        int[] xyz = { x, y, z };
+        int[] xyz = {x, y, z};
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
             return (null);
@@ -270,7 +289,9 @@ public class Terrain {
         return (terrain.setBlock(block, index, xyz[0], xyz[1], xyz[2]));
     }
 
-    /** secure function to set a block relative to this terrain */
+    /**
+     * secure function to set a block relative to this terrain
+     */
     public void setBlock(Block block, Vector3i pos) {
         this.setBlock(block, pos.x, pos.y, pos.z);
     }
@@ -286,12 +307,16 @@ public class Terrain {
         return (this.setBlock(block, this.getIndex(x, y, z), x, y, z));
     }
 
-    /** @see #setBlock(Block, int, int, int, int) */
+    /**
+     * @see #setBlock(Block, int, int, int, int)
+     */
     public final BlockInstance setBlock(Block block, int index, int xyz[]) {
         return (this.setBlock(block, index, xyz[0], xyz[1], xyz[2]));
     }
 
-    /** function to set a block to this terrain */
+    /**
+     * function to set a block to this terrain
+     */
     public final BlockInstance setBlock(Block block, int index, int x, int y, int z) {
 
         // if terrain was empty
@@ -371,7 +396,9 @@ public class Terrain {
         GameEngine.instance().getResourceManager().getEventManager().invokeEvent(event);
     }
 
-    /** remove and return the block instance at the given location */
+    /**
+     * remove and return the block instance at the given location
+     */
     private BlockInstance removeBlockInstance(Integer index) {
         if (this.blockInstances == null) {
             return (null);
@@ -403,37 +430,8 @@ public class Terrain {
     }
 
     /**
-     * LIGHT BEGINS HERE:
-     *
-     * THE IMPLEMENTATION IS BASED ON THIS WORK:
-     * https://www.seedofandromeda.com/blogs/29-fast-flood-fill-lighting-in-a-blocky-voxel-game-pt-1
-     *
-     * SPECIAL THANK TO SOA TEAM FOR THEIR SHARING
+     * get sunlight value
      */
-
-    public class LightNodeAdd {
-        public final Terrain terrain;
-        public final int index;
-
-        private LightNodeAdd(Terrain terrain, int index) {
-            this.terrain = terrain;
-            this.index = index;
-        }
-    }
-
-    public class LightNodeRemoval {
-        public final Terrain terrain;
-        public final int index;
-        public final byte value;
-
-        private LightNodeRemoval(Terrain terrain, int index, byte value) {
-            this.terrain = terrain;
-            this.index = index;
-            this.value = value;
-        }
-    }
-
-    /** get sunlight value */
     public final byte getSunLight(int xyz[]) {
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
@@ -443,10 +441,12 @@ public class Terrain {
     }
 
     public final byte getSunLight(int x, int y, int z) {
-        return (this.getSunLight(new int[] { x, y, z }));
+        return (this.getSunLight(new int[]{x, y, z}));
     }
 
-    /** get sunlight value */
+    /**
+     * get sunlight value
+     */
     public final byte getSunLight(int index) {
         if (this.lights == null) {
             return (0);
@@ -454,7 +454,9 @@ public class Terrain {
         return (byte) ((this.lights[index] >> 4) & 0xF);
     }
 
-    /** set the sunlight value */
+    /**
+     * set the sunlight value
+     */
     private void setSunLight(byte value, int index) {
         if (this.lights == null) {
             // initialize it, fill it with 0
@@ -468,7 +470,9 @@ public class Terrain {
         this.addSunLight(lightValue, this.getIndex(x, y, z));
     }
 
-    /** add a light to the terrain */
+    /**
+     * add a light to the terrain
+     */
     private void addSunLight(byte lightValue, int index) {
         if (lightValue <= 0) {
             return;
@@ -480,7 +484,9 @@ public class Terrain {
         this.setSunLight(lightValue, index);
     }
 
-    /** remove the light at given index */
+    /**
+     * remove the light at given index
+     */
     private void removeSunLight(int index) {
         this.removeSunLight(index, this.getBlockLight(index));
     }
@@ -499,7 +505,9 @@ public class Terrain {
         this.setSunLight((byte) 0, index);
     }
 
-    /** empty the sunlight queue */
+    /**
+     * empty the sunlight queue
+     */
     private void updateSunLight() {
 
         if (this.sunLightAddQueue == null && this.sunLightRemovalQueue == null) {
@@ -721,11 +729,8 @@ public class Terrain {
     }
 
     /**
-     *
-     * BLOCK LIGHT PROPAGATION ABOVE
-     *
+     * get the block light value
      */
-    /** get the block light value */
     public final byte getBlockLight(int xyz[]) {
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
@@ -735,10 +740,18 @@ public class Terrain {
     }
 
     public final byte getBlockLight(int x, int y, int z) {
-        return (this.getBlockLight(new int[] { x, y, z }));
+        return (this.getBlockLight(new int[]{x, y, z}));
     }
 
-    /** get the block light value */
+    /**
+     *
+     * BLOCK LIGHT PROPAGATION ABOVE
+     *
+     */
+
+    /**
+     * get the block light value
+     */
     public byte getBlockLight(int index) {
         if (this.lights == null) {
             return (0);
@@ -746,7 +759,9 @@ public class Terrain {
         return ((byte) (this.lights[index] & 0xF));
     }
 
-    /** set tje block light value */
+    /**
+     * set tje block light value
+     */
     private final void setBlockLight(byte val, int index) {
         if (this.lights == null) {
             // initialize it, fill it with 0
@@ -760,7 +775,9 @@ public class Terrain {
         this.addBlockLight(lightValue, this.getIndex(x, y, z));
     }
 
-    /** add a light to the terrain */
+    /**
+     * add a light to the terrain
+     */
     public void addBlockLight(byte lightValue, int index) {
         if (lightValue == 0) {
             return;
@@ -772,12 +789,16 @@ public class Terrain {
         this.setBlockLight(lightValue, index);
     }
 
-    /** remove the light at given coordinates */
+    /**
+     * remove the light at given coordinates
+     */
     public void removeLight(int x, int y, int z) {
         this.removeLight(this.getIndex(x, y, z));
     }
 
-    /** remove the light at given index */
+    /**
+     * remove the light at given index
+     */
     public void removeLight(int index) {
         this.removeLight(index, this.getBlockLight(index));
     }
@@ -796,7 +817,9 @@ public class Terrain {
         this.setBlockLight((byte) 0, index);
     }
 
-    /** update the lighting */
+    /**
+     * update the lighting
+     */
     private void updateBlockLights() {
 
         if (this.lightBlockAddQueue == null && this.lightBlockRemovalQueue == null) {
@@ -1017,18 +1040,21 @@ public class Terrain {
         }
     }
 
-    /** LIGHTS ENDS HERE */
+    /**
+     * LIGHTS ENDS HERE
+     */
 
     // @Override
     // public int hashCode() {
     // return (this.terrainLocation.hashCode() + this.world.hashCode());
     // }
-
     public void requestFaceVisibilityUpdate() {
         this.unsetState(Terrain.STATE_FACE_VISIBILTY_UP_TO_DATE);
     }
 
-    /** return terrain location */
+    /**
+     * return terrain location
+     */
 
     public Vector2i getWorldIndex2() {
         return (this.index2);
@@ -1053,31 +1079,31 @@ public class Terrain {
 
     /**
      * non overflow proof:
-     *
+     * <p>
      * let D = Terrain.DIM
-     *
+     * <p>
      * 0 <= x <= D - 1 0 <= y <= D - 1 0 <= z <= D - 1
-     *
+     * <p>
      * => 0 <= x + D * (y + z.D) <= (D - 1) + D . ((D - 1) + D . (D - 1)) => 0
      * <= index <= (D - 1) + D . ((D - 1) + D^2 - D)) => 0 <= index <= (D - 1) +
      * D . (D^2 - 1) => 0 <= index <= (D - 1) + D^3 - D) => 0 <= index <= D^3 -
      * 1 => 0 <= index <= this.blocks.length : OK
-     *
+     * <p>
      * unicity proof: index = x + D * (y + D * z) = x + y.D + z.D^2 = z.D^2 +
      * y.D + x
-     *
+     * <p>
      * if x < D, then x / D = 0 (we are doing division using integers). Then we
      * know that:
-     *
+     * <p>
      * index / D = (z.D^2 + y.D + x) / D = z.D + y + x / D = z.D + y + 0 = z.D +
      * y
-     *
+     * <p>
      * index / D^2 = (index / D) / D = (z.D + y) / D = z + y / D = z
-     *
+     * <p>
      * And so: y = index / D - z.D
-     *
+     * <p>
      * Finally: x = index - z.D^2 - y.D
-     *
+     * <p>
      * (x, y, z) are unique for a given index, and we found their value.
      */
     public final int getIndex(int x, int y, int z) {
@@ -1133,17 +1159,23 @@ public class Terrain {
         return (this.world.getTerrain(x, y, z));
     }
 
-    /** called when the terrain is added to the world */
+    /**
+     * called when the terrain is added to the world
+     */
     public final void onSpawned(World world) {
         this.setWorld(world);
         this.requestFaceVisibilityUpdate();
     }
 
-    /** called before this terrain is generated by a world generator */
+    /**
+     * called before this terrain is generated by a world generator
+     */
     public void preGenerated() {
     }
 
-    /** called after this terrain is generated by a world generator */
+    /**
+     * called after this terrain is generated by a world generator
+     */
     public void postGenerated() {
         // get the upper world terrain
         // if this terrain is the toppest, set sunlight to maximum for
@@ -1165,18 +1197,22 @@ public class Terrain {
         }
     }
 
-    /** called right before this terrain is spawned */
+    /**
+     * called right before this terrain is spawned
+     */
     public void preSpawned() {
 
     }
 
-    /** called right after this terrain is spawned */
+    /**
+     * called right after this terrain is spawned
+     */
     public void postSpawned() {
     }
 
     /**
      * @return the y coordinate of the first air block in this column, (0 if the
-     *         column is full of air, 16 if column is full of blocks)
+     * column is full of air, 16 if column is full of blocks)
      */
     public int getHeightAt(int x, int z) {
         if (this.heightmap == null) {
@@ -1185,26 +1221,18 @@ public class Terrain {
         return (this.heightmap[x + Terrain.DIMX * z]);
     }
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
     public World getWorld() {
         return (this.world);
     }
 
-    /**
-     * this function updates the visibility of each face toward another using a
-     * flood fill algorythm for each cell which werent already visited: - use
-     * flood fill algorythm, and register which faces are touched by the flood -
-     * for each of touched faces, set the visibility linked with the others
-     * touched
-     */
+    public void setWorld(World world) {
+        this.world = world;
+    }
 
     /**
      * this set the 'this.facesVisibility' bits to 1 if faces can be seen from
      * another
-     *
+     * <p>
      * This uses an explicit stack (to avoid stackoverflow in recursive)
      **/
     private void updateFaceVisiblity() {
@@ -1304,10 +1332,20 @@ public class Terrain {
         }
     }
 
-    /** return true if the given faces id can be seen from another */
+    /**
+     * return true if the given faces id can be seen from another
+     */
     public final boolean canFaceBeSeenFrom(int faceA, int faceB) {
         return (this.facesVisibility[faceA][faceB]);
     }
+
+    /**
+     * this function updates the visibility of each face toward another using a
+     * flood fill algorythm for each cell which werent already visited: - use
+     * flood fill algorythm, and register which faces are touched by the flood -
+     * for each of touched faces, set the visibility linked with the others
+     * touched
+     */
 
     public final boolean canFaceBeSeenFrom(Face faceA, Face faceB) {
         return (this.canFaceBeSeenFrom(faceA.getID(), faceB.getID()));
@@ -1329,12 +1367,16 @@ public class Terrain {
 
     }
 
-    /** return raw block data */
+    /**
+     * return raw block data
+     */
     public final short[] getRawBlocks() {
         return (this.blocks);
     }
 
-    /** get the raw light map */
+    /**
+     * get the raw light map
+     */
     public final byte[] getRawLights() {
         return (this.lights);
     }
@@ -1349,11 +1391,9 @@ public class Terrain {
     /**
      * set the durability of a block
      *
-     * @param index
-     *            : block index
-     * @param durability
-     *            : durability value (in range of ([{@link #MIN_DURABILITY} ,
-     *            {@link #MAX_DURABILITY} ])
+     * @param index      : block index
+     * @param durability : durability value (in range of ([{@link #MIN_DURABILITY} ,
+     *                   {@link #MAX_DURABILITY} ])
      */
     public final void setDurabilityAt(int index, byte durability) {
         if (this.durability == null) {
@@ -1373,7 +1413,7 @@ public class Terrain {
     }
 
     public final void setDurability(int x, int y, int z, byte durability) {
-        this.setDurability(new int[] { x, y, z }, durability);
+        this.setDurability(new int[]{x, y, z}, durability);
     }
 
     public final void setDurability(int[] xyz, byte durability) {
@@ -1384,7 +1424,9 @@ public class Terrain {
         terrain.setDurabilityAt(xyz[0], xyz[1], xyz[2], durability);
     }
 
-    /** decrease the durabiltiy of a block */
+    /**
+     * decrease the durabiltiy of a block
+     */
     public final void decreaseDurability(int index) {
         if (this.durability == null) {
             return;
@@ -1392,7 +1434,9 @@ public class Terrain {
         this.setDurabilityAt(index, (byte) (this.durability[index] + 1));
     }
 
-    /** increase the durabiltiy of a block */
+    /**
+     * increase the durabiltiy of a block
+     */
     public final void increaseDurability(int index) {
         if (this.durability == null) {
             return;
@@ -1426,6 +1470,37 @@ public class Terrain {
     }
 
     public final byte getDurability(int x, int y, int z) {
-        return (this.getDurability(new int[] { x, y, z }));
+        return (this.getDurability(new int[]{x, y, z}));
+    }
+
+    /**
+     * LIGHT BEGINS HERE:
+     * <p>
+     * THE IMPLEMENTATION IS BASED ON THIS WORK:
+     * https://www.seedofandromeda.com/blogs/29-fast-flood-fill-lighting-in-a-blocky-voxel-game-pt-1
+     * <p>
+     * SPECIAL THANK TO SOA TEAM FOR THEIR SHARING
+     */
+
+    public class LightNodeAdd {
+        public final Terrain terrain;
+        public final int index;
+
+        private LightNodeAdd(Terrain terrain, int index) {
+            this.terrain = terrain;
+            this.index = index;
+        }
+    }
+
+    public class LightNodeRemoval {
+        public final Terrain terrain;
+        public final int index;
+        public final byte value;
+
+        private LightNodeRemoval(Terrain terrain, int index, byte value) {
+            this.terrain = terrain;
+            this.index = index;
+            this.value = value;
+        }
     }
 }

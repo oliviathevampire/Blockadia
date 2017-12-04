@@ -11,18 +11,18 @@ import net.thegaminghuskymc.sandboxgame.testmod.common.world.POTWorlds;
 @ModInfo(name = "Default Common 'People of Toss' mod", author = "toss-dev", version = "1.0.0.a", modid = "pot", clientProxy = "net.thegaminghuskymc.sandboxgame.testmod.client.ModPOTClient")
 public class ModPOT implements IMod {
 
-	@Override
-	public void initialize(Mod mod) {
-		mod.addResource(new POTBlocks());
-		mod.addResource(new POTItems());
-		mod.addResource(new POTEntities());
-		mod.addResource(new POTWorlds());
-	}
+    @Override
+    public void initialize(Mod mod) {
+        mod.addResource(new POTBlocks());
+        mod.addResource(new POTItems());
+        mod.addResource(new POTEntities());
+        mod.addResource(new POTWorlds());
+    }
 
-	@Override
-	public void deinitialize(Mod mod) {
+    @Override
+    public void deinitialize(Mod mod) {
 
-	}
+    }
 
 	/*@Override
 	public void preInit(Mod mod) {

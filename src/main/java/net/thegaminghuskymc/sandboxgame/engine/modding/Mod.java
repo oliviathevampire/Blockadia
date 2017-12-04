@@ -7,7 +7,7 @@ import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 
 import java.util.ArrayList;
 
-public class Mod  {
+public class Mod {
 
     private IMod mod;
     private ModInfo modInfo;
@@ -28,7 +28,9 @@ public class Mod  {
         return (resource);
     }
 
-    /** called when resources of this mod should be loaded */
+    /**
+     * called when resources of this mod should be loaded
+     */
     public void loadResources(ResourceManager manager) {
         Logger.get().log(Logger.Level.FINE, "Loading resources: " + this.toString());
 
@@ -42,7 +44,9 @@ public class Mod  {
         Logger.get().indent(-1);
     }
 
-    /** called when resources of this mod should be loaded */
+    /**
+     * called when resources of this mod should be loaded
+     */
     public void unloadResources(ResourceManager manager) {
         Logger.get().log(Logger.Level.FINE, "Unloading resources: " + this.toString());
 

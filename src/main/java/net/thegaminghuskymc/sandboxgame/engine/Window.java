@@ -25,17 +25,11 @@ public class Window {
      * Distance to the far plane
      */
     public static final float Z_FAR = 1000.f;
-
-    private long window;
-
-    private final String title;
-
-    private int width;
-
-    private int height;
-
     private static long windowHandle;
-
+    private final String title;
+    private long window;
+    private int width;
+    private int height;
     private boolean resized;
 
     private boolean vSync;
@@ -52,6 +46,15 @@ public class Window {
         this.resized = false;
         this.opts = opts;
         projectionMatrix = new Matrix4f();
+    }
+
+    public static Matrix4f updateProjectionMatrix(Matrix4f matrix, int width, int height) {
+        float aspectRatio = (float) width / (float) height;
+        return matrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
+    }
+
+    public static boolean isKeyPressed(int keyCode) {
+        return glfwGetKey(windowHandle, keyCode) == GLFW_PRESS;
     }
 
     public void init() {
@@ -152,7 +155,7 @@ public class Window {
             glfwWindowHint(GLFW_SAMPLES, 4);
         }
     }
-    
+
     public void restoreState() {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_STENCIL_TEST);
@@ -188,17 +191,8 @@ public class Window {
         return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
     }
 
-    public static Matrix4f updateProjectionMatrix(Matrix4f matrix, int width, int height) {
-        float aspectRatio = (float) width / (float) height;
-        return matrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
-    }
-
     public void setClearColor(float r, float g, float b, float alpha) {
         glClearColor(r, g, b, alpha);
-    }
-
-    public static boolean isKeyPressed(int keyCode) {
-        return glfwGetKey(windowHandle, keyCode) == GLFW_PRESS;
     }
 
     public boolean windowShouldClose() {
@@ -241,7 +235,7 @@ public class Window {
     public WindowOptions getOptions() {
         return opts;
     }
-    
+
     public static class WindowOptions {
 
         public boolean cullFace;
@@ -254,6 +248,6 @@ public class Window {
 
         public boolean antialiasing;
 
-        public boolean frustumCulling;        
+        public boolean frustumCulling;
     }
 }

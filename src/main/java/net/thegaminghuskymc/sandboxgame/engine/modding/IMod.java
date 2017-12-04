@@ -8,10 +8,14 @@ public interface IMod {
 
     void postInit(Mod mod);*/
 
-    /** called when the mod should be initialized */
+    /**
+     * called when the mod should be initialized
+     */
     public void initialize(Mod mod);
 
-    /** called when the mod should be deinitialized */
+    /**
+     * called when the mod should be deinitialized
+     */
     public void deinitialize(Mod mod);
 
 }

@@ -8,21 +8,21 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.Gui;
  */
 public class GuiEventAspectRatio<T extends Gui> extends GuiEvent<T> {
 
-	private final float oldAspectRatio;
-	private final float newAspectRatio;
+    private final float oldAspectRatio;
+    private final float newAspectRatio;
 
-	public GuiEventAspectRatio(T gui, float oldAspectRatio, float newAspectRatio) {
-		super(gui);
-		this.oldAspectRatio = oldAspectRatio;
-		this.newAspectRatio = newAspectRatio;
-	}
+    public GuiEventAspectRatio(T gui, float oldAspectRatio, float newAspectRatio) {
+        super(gui);
+        this.oldAspectRatio = oldAspectRatio;
+        this.newAspectRatio = newAspectRatio;
+    }
 
-	public final float getOldAspectRatio() {
-		return (this.oldAspectRatio);
-	}
+    public final float getOldAspectRatio() {
+        return (this.oldAspectRatio);
+    }
 
-	public final float getNewAspectRatio() {
-		return (this.newAspectRatio);
-	}
+    public final float getNewAspectRatio() {
+        return (this.newAspectRatio);
+    }
 
 }

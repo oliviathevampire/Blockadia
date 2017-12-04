@@ -2,91 +2,102 @@ package net.thegaminghuskymc.sandboxgame.engine.world.entity.collision;
 
 public interface Positioneable {
 
-	/** positions */
-	public float getPositionX();
+    /**
+     * update the velocity of the positioneable objects depending on the elasped
+     * time 'dt' and it current acceleration
+     *
+     * @param positioneable : the positioneable object
+     * @param dt            : elasped time
+     */
+    public static void velocity(Positioneable positioneable, double dt) {
+        positioneable.setPositionVelocityX(
+                (float) (positioneable.getPositionVelocityX() + positioneable.getPositionAccelerationX() * dt));
+        positioneable.setPositionVelocityY(
+                (float) (positioneable.getPositionVelocityY() + positioneable.getPositionAccelerationY() * dt));
+        positioneable.setPositionVelocityZ(
+                (float) (positioneable.getPositionVelocityZ() + positioneable.getPositionAccelerationZ() * dt));
+    }
 
-	public float getPositionY();
+    /**
+     * update the position of the positioneable objects depending on the elasped
+     * time 'dt' and it current velocity
+     *
+     * @param positioneable : the positioneable object
+     * @param dt
+     */
+    public static void position(Positioneable positioneable, double dt) {
+        float vx = positioneable.getPositionVelocityX();
+        float vy = positioneable.getPositionVelocityY();
+        float vz = positioneable.getPositionVelocityZ();
+        position(positioneable, vx, vy, vz, dt);
+    }
 
-	public float getPositionZ();
+    public static void position(Positioneable positioneable, float vx, float vy, float vz, double dt) {
+        positioneable.setPositionX((float) (positioneable.getPositionX() + vx * dt));
+        positioneable.setPositionY((float) (positioneable.getPositionY() + vy * dt));
+        positioneable.setPositionZ((float) (positioneable.getPositionZ() + vz * dt));
+    }
 
-	/** position velocity */
-	public float getPositionVelocityX();
+    /**
+     * @return true if this positioneable objects is rotating
+     */
+    public static boolean isMoving(Positioneable positioneable) {
+        return (positioneable.getPositionVelocityX() != 0 || positioneable.getPositionVelocityY() != 0
+                || positioneable.getPositionVelocityZ() != 0);
+    }
 
-	public float getPositionVelocityY();
+    /**
+     * positions
+     */
+    public float getPositionX();
 
-	public float getPositionVelocityZ();
+    /**
+     * positions
+     */
+    public void setPositionX(float x);
 
-	/** position acceleration */
-	public float getPositionAccelerationX();
+    public float getPositionY();
 
-	public float getPositionAccelerationY();
+    public void setPositionY(float y);
 
-	public float getPositionAccelerationZ();
+    public float getPositionZ();
 
-	/** positions */
-	public void setPositionX(float x);
+    public void setPositionZ(float z);
 
-	public void setPositionY(float y);
+    /**
+     * position velocity
+     */
+    public float getPositionVelocityX();
 
-	public void setPositionZ(float z);
+    /**
+     * position velocity
+     */
+    public void setPositionVelocityX(float vx);
 
-	/** position velocity */
-	public void setPositionVelocityX(float vx);
+    public float getPositionVelocityY();
 
-	public void setPositionVelocityY(float vy);
+    public void setPositionVelocityY(float vy);
 
-	public void setPositionVelocityZ(float vz);
+    public float getPositionVelocityZ();
 
-	/** position acceleration */
-	public void setPositionAccelerationX(float ax);
+    public void setPositionVelocityZ(float vz);
 
-	public void setPositionAccelerationY(float ay);
+    /**
+     * position acceleration
+     */
+    public float getPositionAccelerationX();
 
-	public void setPositionAccelerationZ(float az);
+    /**
+     * position acceleration
+     */
+    public void setPositionAccelerationX(float ax);
 
-	/**
-	 * update the velocity of the positioneable objects depending on the elasped
-	 * time 'dt' and it current acceleration
-	 * 
-	 * @param positioneable
-	 *            : the positioneable object
-	 * @param dt
-	 *            : elasped time
-	 */
-	public static void velocity(Positioneable positioneable, double dt) {
-		positioneable.setPositionVelocityX(
-				(float) (positioneable.getPositionVelocityX() + positioneable.getPositionAccelerationX() * dt));
-		positioneable.setPositionVelocityY(
-				(float) (positioneable.getPositionVelocityY() + positioneable.getPositionAccelerationY() * dt));
-		positioneable.setPositionVelocityZ(
-				(float) (positioneable.getPositionVelocityZ() + positioneable.getPositionAccelerationZ() * dt));
-	}
+    public float getPositionAccelerationY();
 
-	/**
-	 * update the position of the positioneable objects depending on the elasped
-	 * time 'dt' and it current velocity
-	 * 
-	 * @param positioneable
-	 *            : the positioneable object
-	 * @param dt
-	 */
-	public static void position(Positioneable positioneable, double dt) {
-		float vx = positioneable.getPositionVelocityX();
-		float vy = positioneable.getPositionVelocityY();
-		float vz = positioneable.getPositionVelocityZ();
-		position(positioneable, vx, vy, vz, dt);
-	}
+    public void setPositionAccelerationY(float ay);
 
-	public static void position(Positioneable positioneable, float vx, float vy, float vz, double dt) {
-		positioneable.setPositionX((float) (positioneable.getPositionX() + vx * dt));
-		positioneable.setPositionY((float) (positioneable.getPositionY() + vy * dt));
-		positioneable.setPositionZ((float) (positioneable.getPositionZ() + vz * dt));
-	}
+    public float getPositionAccelerationZ();
 
-	/** @return true if this positioneable objects is rotating */
-	public static boolean isMoving(Positioneable positioneable) {
-		return (positioneable.getPositionVelocityX() != 0 || positioneable.getPositionVelocityY() != 0
-				|| positioneable.getPositionVelocityZ() != 0);
-	}
+    public void setPositionAccelerationZ(float az);
 
 }

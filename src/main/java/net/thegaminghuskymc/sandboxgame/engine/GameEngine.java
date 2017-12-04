@@ -20,68 +20,70 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class GameEngine {
 
-    /** version */
+    /**
+     * version
+     */
     public static final String VERSION = "0.0.1";
     public static final String MOD_ID = "game_engine";
 
-    /** singleton */
+    /**
+     * singleton
+     */
     private static GameEngine INSTANCE;
-
-    public enum Side {
-        CLIENT, SERVER, BOTH;
-
-        public boolean match(Side side) {
-            return (this == side || side == BOTH || this == BOTH);
-        }
-    }
-
-    public abstract class Callable<T> implements java.util.concurrent.Callable<T> {
-        @Override
-        public abstract T call() throws Exception;
-
-        public abstract String getName();
-    }
-
-    /** the tasks to run each frames */
+    /**
+     * side of the running engine
+     */
+    protected Side side;
+    /**
+     * Resources
+     */
+    protected ResourceManager resources;
+    /**
+     * the tasks to run each frames
+     */
     private ArrayList<Callable<Taskable>> tasks;
 
-    /** executor service */
+    /**
+     * executor service
+     */
     private ExecutorService executor;
 
-    /** the resources directory */
+    /**
+     * the resources directory
+     */
     private File gameDir;
     private ArrayList<ResourcePack> assets;
-
-    /** side of the running engine */
-    protected Side side;
-
-    /** bools */
+    /**
+     * bools
+     */
     private boolean isRunning;
     private boolean debug;
-
-    /** Mod loader */
+    /**
+     * Mod loader
+     */
     private ModLoader modLoader;
-
-    /** Resources */
-    protected ResourceManager resources;
-
-    /** networking */
+    /**
+     * networking
+     */
     private INetwork network;
-
-    /** random number generator */
+    /**
+     * random number generator
+     */
     private Random rng;
-
-    /** Timer */
+    /**
+     * Timer
+     */
     private Timer timer;
-
-    /** events */
+    /**
+     * events
+     */
     private EventPreLoop eventPreLoop;
     private EventOnLoop eventOnLoop;
     private EventPostLoop eventPostLoop;
-
-    /** loaded worlds */
+    /**
+     * loaded worlds
+     */
     private ArrayList<World> loadedWorlds;
-
     /**
      * config hashmap, key: filepath, value: config file
      */
@@ -95,7 +97,13 @@ public abstract class GameEngine {
         this.side = side;
     }
 
-    /** allocate the engine */
+    public static GameEngine instance() {
+        return (INSTANCE);
+    }
+
+    /**
+     * allocate the engine
+     */
     public final void initialize() {
 
         Logger.get().log(Level.FINE, "Initializing engine...");
@@ -135,7 +143,9 @@ public abstract class GameEngine {
         Logger.get().log(Level.FINE, "Common Engine initialized!");
     }
 
-    /** load game directory */
+    /**
+     * load game directory
+     */
     private void loadGamedir() {
         String OS = (System.getProperty("os.name")).toUpperCase();
         String gamepath;
@@ -158,7 +168,9 @@ public abstract class GameEngine {
         }
     }
 
-    /** load config */
+    /**
+     * load config
+     */
     private Config loadConfig(String id, String filepath) {
         if (this.config.containsKey(id)) {
             return (this.config.get(id));
@@ -170,19 +182,25 @@ public abstract class GameEngine {
         return (cfg);
     }
 
-    /** get a config */
+    /**
+     * get a config
+     */
     public final Config getConfig(String filepath) {
         return (this.config.get(filepath));
     }
 
-    /** get every configs */
+    /**
+     * get every configs
+     */
     public final HashMap<String, Config> getConfigs() {
         return (this.config);
     }
 
     protected abstract void onInitialized();
 
-    /** deallocate the engine properly */
+    /**
+     * deallocate the engine properly
+     */
     public final void deinitialize() {
 
         Logger.get().log(Level.FINE, "Deinitializing engine...");
@@ -221,12 +239,16 @@ public abstract class GameEngine {
 
     protected abstract ResourceManager instanciateResourceManager();
 
-    /** load resources */
+    /**
+     * load resources
+     */
     public void load() {
         this.loadResources("./mods", "./mod", "./plugin", "./plugins");
     }
 
-    /** reload every game resources */
+    /**
+     * reload every game resources
+     */
     public final void reload(String... folders) {
         this.unload();
         this.load();
@@ -313,7 +335,9 @@ public abstract class GameEngine {
         }
     }
 
-    /** stop the thread executor */
+    /**
+     * stop the thread executor
+     */
     private void stopExecutor() {
         if (this.executor == null) {
             return;
@@ -339,44 +363,56 @@ public abstract class GameEngine {
         this.getResourceManager().getEventManager().addListener(eventCallback);
     }
 
-    /** request the game to stop */
+    /**
+     * request the game to stop
+     */
     public void stopRunning() {
         this.isRunning = false;
     }
 
-    /** return the main resource manager */
+    /**
+     * return the main resource manager
+     */
     public abstract <T extends ResourceManager> T getResourceManager();
 
-    /** get the mod loader */
+    /**
+     * get the mod loader
+     */
     public ModLoader getModLoader() {
         return (this.modLoader);
     }
 
-    /** run the garbage collector */
+    /**
+     * run the garbage collector
+     */
     public final void runGC() {
         Runtime.getRuntime().gc();
     }
 
-    /** return true if the voxel engine is running */
+    /**
+     * return true if the voxel engine is running
+     */
     private boolean isRunning() {
         return (this.isRunning);
     }
 
-    /** get the rng */
+    /**
+     * get the rng
+     */
     public final Random getRNG() {
         return (this.rng);
     }
 
-    public static GameEngine instance() {
-        return (INSTANCE);
-    }
-
-    /** get the side on which the engine is running */
+    /**
+     * get the side on which the engine is running
+     */
     public final Side getSide() {
         return (instance().side);
     }
 
-    /** enable or disable debug (note: debug on may influence performances) */
+    /**
+     * enable or disable debug (note: debug on may influence performances)
+     */
     public void debug(boolean value) {
         this.debug = value;
     }
@@ -385,7 +421,9 @@ public abstract class GameEngine {
         return (this.debug);
     }
 
-    /** add a world to the game logic loop */
+    /**
+     * add a world to the game logic loop
+     */
     public final World loadWorld(int worldID) {
         World world = this.getResourceManager().getWorldManager().getWorld(worldID);
         if (world == null) {
@@ -401,7 +439,9 @@ public abstract class GameEngine {
         return (world);
     }
 
-    /** remove a world from the game logic loop */
+    /**
+     * remove a world from the game logic loop
+     */
     public final void unloadWorld(int worldID) {
         World world = this.getResourceManager().getWorldManager().getWorld(worldID);
         if (world == null) {
@@ -411,17 +451,23 @@ public abstract class GameEngine {
         this.loadedWorlds.remove(world);
     }
 
-    /** get the current world of the client (can be null) */
+    /**
+     * get the current world of the client (can be null)
+     */
     public World getWorld(int worldID) {
         return (this.getResourceManager().getWorldManager().getWorld(worldID));
     }
 
-    /** return the game main directory */
+    /**
+     * return the game main directory
+     */
     public final File getGamedir() {
         return (this.gameDir);
     }
 
-    /** add an assets pack (zip file) to be added to the game */
+    /**
+     * add an assets pack (zip file) to be added to the game
+     */
     public ResourcePack putAssets(ResourcePack pack) {
         for (ResourcePack tmppack : this.assets) {
             if (tmppack.getModID().equals(pack.getModID())) {
@@ -434,6 +480,21 @@ public abstract class GameEngine {
         this.assets.add(pack);
         pack.extract();
         return (pack);
+    }
+
+    public enum Side {
+        CLIENT, SERVER, BOTH;
+
+        public boolean match(Side side) {
+            return (this == side || side == BOTH || this == BOTH);
+        }
+    }
+
+    public abstract class Callable<T> implements java.util.concurrent.Callable<T> {
+        @Override
+        public abstract T call() throws Exception;
+
+        public abstract String getName();
     }
 
 }

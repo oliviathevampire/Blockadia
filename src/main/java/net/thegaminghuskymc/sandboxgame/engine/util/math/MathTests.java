@@ -1,9 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
 public class MathTests {
-	public MathTests() {
+    public MathTests() {
 
-	}
+    }
 
 	/*public void testQuaternion() {
 		Vector3f toTest = new Vector3f(0.4f, 0.5f, 0.6f);

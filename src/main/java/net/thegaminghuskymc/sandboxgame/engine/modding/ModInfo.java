@@ -19,10 +19,14 @@ public @interface ModInfo {
 
     String acceptedGameVersions() default "";
 
-    /** the classpath of the client proxy. */
+    /**
+     * the classpath of the client proxy.
+     */
     String clientProxy() default "";
 
-    /** the classpath of the server proxy */
+    /**
+     * the classpath of the server proxy
+     */
     String serverProxy() default "";
 
 }

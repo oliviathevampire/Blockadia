@@ -4,11 +4,11 @@ import java.nio.ByteBuffer;
 
 public abstract class MeshVertex {
 
-	public MeshVertex() {
-	}
+    public MeshVertex() {
+    }
 
-	public abstract void store(ByteBuffer buffer);
+    public abstract void store(ByteBuffer buffer);
 
-	public abstract MeshVertex clone();
+    public abstract MeshVertex clone();
 
 }

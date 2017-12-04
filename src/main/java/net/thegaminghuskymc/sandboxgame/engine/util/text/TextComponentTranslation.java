@@ -12,12 +12,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextComponentTranslation extends TextComponentBase
-{
+public class TextComponentTranslation extends TextComponentBase {
+    public static final Pattern STRING_VARIABLE_PATTERN = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)");
     private final String key;
     private final Object[] formatArgs;
     private final Object syncLock = new Object();
-    private long lastTranslationUpdateTimeInMilliseconds = -1L;
     /**
      * The discrete elements that make up this component.  For example, this would be ["Prefix, ", "FirstArg",
      * "SecondArg", " again ", "SecondArg", " and ", "FirstArg", " lastly ", "ThirdArg", " and also ", "FirstArg", "
@@ -25,18 +24,15 @@ public class TextComponentTranslation extends TextComponentBase
      */
     @VisibleForTesting
     List<ITextComponent> children = Lists.newArrayList();
-    public static final Pattern STRING_VARIABLE_PATTERN = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)");
+    private long lastTranslationUpdateTimeInMilliseconds = -1L;
 
-    public TextComponentTranslation(String translationKey, Object... args)
-    {
+    public TextComponentTranslation(String translationKey, Object... args) {
         this.key = translationKey;
         this.formatArgs = args;
 
-        for (Object object : args)
-        {
-            if (object instanceof ITextComponent)
-            {
-                ((ITextComponent)object).getStyle().setParentStyle(this.getStyle());
+        for (Object object : args) {
+            if (object instanceof ITextComponent) {
+                ((ITextComponent) object).getStyle().setParentStyle(this.getStyle());
             }
         }
     }
@@ -46,14 +42,11 @@ public class TextComponentTranslation extends TextComponentBase
      */
     @SuppressWarnings("deprecation")
     @VisibleForTesting
-    synchronized void ensureInitialized()
-    {
-        synchronized (this.syncLock)
-        {
+    synchronized void ensureInitialized() {
+        synchronized (this.syncLock) {
             long i = I18n.getLastTranslationUpdateTimeInMilliseconds();
 
-            if (i == this.lastTranslationUpdateTimeInMilliseconds)
-            {
+            if (i == this.lastTranslationUpdateTimeInMilliseconds) {
                 return;
             }
 
@@ -61,20 +54,14 @@ public class TextComponentTranslation extends TextComponentBase
             this.children.clear();
         }
 
-        try
-        {
+        try {
             this.initializeFromFormat(I18n.translateToLocal(this.key));
-        }
-        catch (TextComponentTranslationFormatException textcomponenttranslationformatexception)
-        {
+        } catch (TextComponentTranslationFormatException textcomponenttranslationformatexception) {
             this.children.clear();
 
-            try
-            {
+            try {
                 this.initializeFromFormat(I18n.translateToFallback(this.key));
-            }
-            catch (TextComponentTranslationFormatException var5)
-            {
+            } catch (TextComponentTranslationFormatException var5) {
                 throw textcomponenttranslationformatexception;
             }
         }
@@ -83,24 +70,20 @@ public class TextComponentTranslation extends TextComponentBase
     /**
      * Initializes the content of this component, substituting in variables.
      */
-    protected void initializeFromFormat(String format)
-    {
+    protected void initializeFromFormat(String format) {
         boolean flag = false;
         Matcher matcher = STRING_VARIABLE_PATTERN.matcher(format);
         int i = 0;
         int j = 0;
 
-        try
-        {
+        try {
             int l;
 
-            for (; matcher.find(j); j = l)
-            {
+            for (; matcher.find(j); j = l) {
                 int k = matcher.start();
                 l = matcher.end();
 
-                if (k > j)
-                {
+                if (k > j) {
                     TextComponentString textcomponentstring = new TextComponentString(format.substring(j, k));
                     textcomponentstring.getStyle().setParentStyle(this.getStyle());
                     this.children.add(textcomponentstring);
@@ -109,59 +92,44 @@ public class TextComponentTranslation extends TextComponentBase
                 String s2 = matcher.group(2);
                 String s = format.substring(k, l);
 
-                if ("%".equals(s2) && "%%".equals(s))
-                {
+                if ("%".equals(s2) && "%%".equals(s)) {
                     TextComponentString textcomponentstring2 = new TextComponentString("%");
                     textcomponentstring2.getStyle().setParentStyle(this.getStyle());
                     this.children.add(textcomponentstring2);
-                }
-                else
-                {
-                    if (!"s".equals(s2))
-                    {
+                } else {
+                    if (!"s".equals(s2)) {
                         throw new TextComponentTranslationFormatException(this, "Unsupported format: '" + s + "'");
                     }
 
                     String s1 = matcher.group(1);
                     int i1 = s1 != null ? Integer.parseInt(s1) - 1 : i++;
 
-                    if (i1 < this.formatArgs.length)
-                    {
+                    if (i1 < this.formatArgs.length) {
                         this.children.add(this.getFormatArgumentAsComponent(i1));
                     }
                 }
             }
 
-            if (j < format.length())
-            {
+            if (j < format.length()) {
                 TextComponentString textcomponentstring1 = new TextComponentString(format.substring(j));
                 textcomponentstring1.getStyle().setParentStyle(this.getStyle());
                 this.children.add(textcomponentstring1);
             }
-        }
-        catch (IllegalFormatException illegalformatexception)
-        {
+        } catch (IllegalFormatException illegalformatexception) {
             throw new TextComponentTranslationFormatException(this, illegalformatexception);
         }
     }
 
-    private ITextComponent getFormatArgumentAsComponent(int index)
-    {
-        if (index >= this.formatArgs.length)
-        {
+    private ITextComponent getFormatArgumentAsComponent(int index) {
+        if (index >= this.formatArgs.length) {
             throw new TextComponentTranslationFormatException(this, index);
-        }
-        else
-        {
+        } else {
             Object object = this.formatArgs[index];
             ITextComponent itextcomponent;
 
-            if (object instanceof ITextComponent)
-            {
-                itextcomponent = (ITextComponent)object;
-            }
-            else
-            {
+            if (object instanceof ITextComponent) {
+                itextcomponent = (ITextComponent) object;
+            } else {
                 itextcomponent = new TextComponentString(object == null ? "null" : object.toString());
                 itextcomponent.getStyle().setParentStyle(this.getStyle());
             }
@@ -173,22 +141,17 @@ public class TextComponentTranslation extends TextComponentBase
     /**
      * Sets the style of this component and updates the parent style of all of the sibling components.
      */
-    public ITextComponent setStyle(Style style)
-    {
+    public ITextComponent setStyle(Style style) {
         super.setStyle(style);
 
-        for (Object object : this.formatArgs)
-        {
-            if (object instanceof ITextComponent)
-            {
-                ((ITextComponent)object).getStyle().setParentStyle(this.getStyle());
+        for (Object object : this.formatArgs) {
+            if (object instanceof ITextComponent) {
+                ((ITextComponent) object).getStyle().setParentStyle(this.getStyle());
             }
         }
 
-        if (this.lastTranslationUpdateTimeInMilliseconds > -1L)
-        {
-            for (ITextComponent itextcomponent : this.children)
-            {
+        if (this.lastTranslationUpdateTimeInMilliseconds > -1L) {
+            for (ITextComponent itextcomponent : this.children) {
                 itextcomponent.getStyle().setParentStyle(style);
             }
         }
@@ -196,8 +159,7 @@ public class TextComponentTranslation extends TextComponentBase
         return this;
     }
 
-    public Iterator<ITextComponent> iterator()
-    {
+    public Iterator<ITextComponent> iterator() {
         this.ensureInitialized();
         return Iterators.concat(createDeepCopyIterator(this.children), createDeepCopyIterator(this.siblings));
     }
@@ -207,13 +169,11 @@ public class TextComponentTranslation extends TextComponentBase
      * example, this is the raw text in a {@link TextComponentString}, but it's the translated text for a {@link
      * TextComponentTranslation} and it's the score value for a {@link TextComponentScore}.
      */
-    public String getUnformattedComponentText()
-    {
+    public String getUnformattedComponentText() {
         this.ensureInitialized();
         StringBuilder stringbuilder = new StringBuilder();
 
-        for (ITextComponent itextcomponent : this.children)
-        {
+        for (ITextComponent itextcomponent : this.children) {
             stringbuilder.append(itextcomponent.getUnformattedComponentText());
         }
 
@@ -223,18 +183,13 @@ public class TextComponentTranslation extends TextComponentBase
     /**
      * Creates a copy of this component.  Almost a deep copy, except the style is shallow-copied.
      */
-    public TextComponentTranslation createCopy()
-    {
+    public TextComponentTranslation createCopy() {
         Object[] aobject = new Object[this.formatArgs.length];
 
-        for (int i = 0; i < this.formatArgs.length; ++i)
-        {
-            if (this.formatArgs[i] instanceof ITextComponent)
-            {
-                aobject[i] = ((ITextComponent)this.formatArgs[i]).createCopy();
-            }
-            else
-            {
+        for (int i = 0; i < this.formatArgs.length; ++i) {
+            if (this.formatArgs[i] instanceof ITextComponent) {
+                aobject[i] = ((ITextComponent) this.formatArgs[i]).createCopy();
+            } else {
                 aobject[i] = this.formatArgs[i];
             }
         }
@@ -242,57 +197,46 @@ public class TextComponentTranslation extends TextComponentBase
         TextComponentTranslation textcomponenttranslation = new TextComponentTranslation(this.key, aobject);
         textcomponenttranslation.setStyle(this.getStyle().createShallowCopy());
 
-        for (ITextComponent itextcomponent : this.getSiblings())
-        {
+        for (ITextComponent itextcomponent : this.getSiblings()) {
             textcomponenttranslation.appendSibling(itextcomponent.createCopy());
         }
 
         return textcomponenttranslation;
     }
 
-    public boolean equals(Object p_equals_1_)
-    {
-        if (this == p_equals_1_)
-        {
+    public boolean equals(Object p_equals_1_) {
+        if (this == p_equals_1_) {
             return true;
-        }
-        else if (!(p_equals_1_ instanceof TextComponentTranslation))
-        {
+        } else if (!(p_equals_1_ instanceof TextComponentTranslation)) {
             return false;
-        }
-        else
-        {
-            TextComponentTranslation textcomponenttranslation = (TextComponentTranslation)p_equals_1_;
+        } else {
+            TextComponentTranslation textcomponenttranslation = (TextComponentTranslation) p_equals_1_;
             return Arrays.equals(this.formatArgs, textcomponenttranslation.formatArgs) && this.key.equals(textcomponenttranslation.key) && super.equals(p_equals_1_);
         }
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         int i = super.hashCode();
         i = 31 * i + this.key.hashCode();
         i = 31 * i + Arrays.hashCode(this.formatArgs);
         return i;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "TranslatableComponent{key='" + this.key + '\'' + ", args=" + Arrays.toString(this.formatArgs) + ", siblings=" + this.siblings + ", style=" + this.getStyle() + '}';
     }
 
     /**
      * Gets the key used to translate this component.
      */
-    public String getKey()
-    {
+    public String getKey() {
         return this.key;
     }
 
     /**
      * Gets the object array that is used to translate the key.
      */
-    public Object[] getFormatArgs()
-    {
+    public Object[] getFormatArgs() {
         return this.formatArgs;
     }
 }

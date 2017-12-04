@@ -6,170 +6,204 @@ import java.util.ArrayList;
 
 public class Model {
 
-	/** the maximum number of joints transformations which affects a vertex */
-	public static final int MAX_WEIGHTS = 3;
+    /**
+     * the maximum number of joints transformations which affects a vertex
+     */
+    public static final int MAX_WEIGHTS = 3;
+    /**
+     * model initialized callback
+     */
+    private final ModelInitializer modelInitializer;
+    /**
+     * the model name
+     */
+    private String name;
+    /**
+     * the model mesh
+     */
+    private ModelMesh mesh;
+    /**
+     * the model skeleton
+     */
+    private ModelSkeleton skeleton;
+    /**
+     * the model animations
+     */
+    private ArrayList<ModelSkeletonAnimation> animations;
+    /**
+     * the skin list for this model
+     */
+    private ArrayList<ModelSkin> skins;
 
-	/** the model name */
-	private String name;
+    public Model() {
+        this(null);
+    }
 
-	/** the model mesh */
-	private ModelMesh mesh;
+    public Model(ModelInitializer modelInitializer) {
+        this.modelInitializer = modelInitializer;
+    }
 
-	/** the model skeleton */
-	private ModelSkeleton skeleton;
+    /**
+     * initialize this model, to be called in a gl context
+     */
+    public void initialize() {
 
-	/** the model animations */
-	private ArrayList<ModelSkeletonAnimation> animations;
+        this.mesh = new ModelMesh();
+        this.skeleton = new ModelSkeleton();
+        this.skins = new ArrayList<>();
+        this.animations = new ArrayList<>();
 
-	/** the skin list for this model */
-	private ArrayList<ModelSkin> skins;
+        this.mesh.initialize();
 
-	/** model initialized callback */
-	private final ModelInitializer modelInitializer;
+        if (this.modelInitializer != null) {
+            this.modelInitializer.onInitialized(this);
+        }
+    }
 
-	public Model() {
-		this(null);
-	}
+    /**
+     * deinitialize this model
+     */
+    public void deinitialize() {
+        this.mesh.deinitialize();
 
-	public Model(ModelInitializer modelInitializer) {
-		this.modelInitializer = modelInitializer;
-	}
+        this.skeleton = null;
+        this.skins = null;
+        this.animations = null;
+    }
 
-	/** initialize this model, to be called in a gl context */
-	public void initialize() {
+    /**
+     * @return : true if this model is already initialized
+     */
+    public final boolean isInitialized() {
+        return (this.mesh != null);
+    }
 
-		this.mesh = new ModelMesh();
-		this.skeleton = new ModelSkeleton();
-		this.skins = new ArrayList<>();
-		this.animations = new ArrayList<>();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return (this.name);
+    }
 
-		this.mesh.initialize();
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-		if (this.modelInitializer != null) {
-			this.modelInitializer.onInitialized(this);
-		}
-	}
+    /**
+     * get the skin for this model
+     */
+    public ArrayList<ModelSkin> getSkins() {
+        return (this.skins);
+    }
 
-	/** deinitialize this model */
-	public void deinitialize() {
-		this.mesh.deinitialize();
+    /**
+     * get this model mesh
+     */
+    public ModelMesh getMesh() {
+        return (this.mesh);
+    }
 
-		this.skeleton = null;
-		this.skins = null;
-		this.animations = null;
-	}
+    /**
+     * get this model skeleton
+     */
+    public ModelSkeleton getSkeleton() {
+        return (this.skeleton);
+    }
 
-	/**
-	 * @return : true if this model is already initialized
-	 */
-	public final boolean isInitialized() {
-		return (this.mesh != null);
-	}
+    /**
+     * add a skin to this model and return it id
+     */
+    public int addSkin(ModelSkin modelSkin) {
+        int ID = this.skins.size();
+        this.skins.add(modelSkin);
+        return (ID);
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return (this.name);
-	}
+    /**
+     * @return : the skin
+     */
+    public ModelSkin getSkin(int skinID) {
+        if (skinID < 0 || skinID >= this.skins.size()) {
+            return (null);
+        }
+        return (this.skins.get(skinID));
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * add an animation to the model
+     */
+    public void addAnimation(ModelSkeletonAnimation animation) {
+        this.animations.add(animation);
+    }
 
-	/** get the skin for this model */
-	public ArrayList<ModelSkin> getSkins() {
-		return (this.skins);
-	}
+    /**
+     * get the animations this model can play
+     */
+    public ModelSkeletonAnimation getAnimation(int id) {
+        if (id < 0 || id >= this.animations.size()) {
+            return (null);
+        }
+        return (this.animations.get(id));
+    }
 
-	/** get this model mesh */
-	public ModelMesh getMesh() {
-		return (this.mesh);
-	}
+    /**
+     * returnt he list of animations
+     */
+    public final ArrayList<ModelSkeletonAnimation> getAnimations() {
+        return (this.animations);
+    }
 
-	/** get this model skeleton */
-	public ModelSkeleton getSkeleton() {
-		return (this.skeleton);
-	}
+    /**
+     * clone this model so it has it own mesh (destructible then)
+     */
+    public final Model clone() {
+        Model model = new Model();
+        model.initialize();
+        model.getMesh().setVertices(model.getMesh().getVertices());
+        model.getMesh().setIndices(model.getMesh().getIndices());
+        return (model);
+    }
 
-	/** add a skin to this model and return it id */
-	public int addSkin(ModelSkin modelSkin) {
-		int ID = this.skins.size();
-		this.skins.add(modelSkin);
-		return (ID);
-	}
+    @Override
+    public String toString() {
+        return ("Model: " + this.getName());
+    }
 
-	/**
-	 *
-	 * @return : the skin
-	 */
-	public ModelSkin getSkin(int skinID) {
-		if (skinID < 0 || skinID >= this.skins.size()) {
-			return (null);
-		}
-		return (this.skins.get(skinID));
-	}
+    public ModelInitializer getInitializer() {
+        return (this.modelInitializer);
+    }
 
-	/** add an animation to the model */
-	public void addAnimation(ModelSkeletonAnimation animation) {
-		this.animations.add(animation);
-	}
+    /**
+     * bind this model before rendering
+     */
+    public final void bind() {
+        if (!this.isInitialized()) {
+            this.initialize();
+        }
+        this.getMesh().bind();
+        this.onBound();
+    }
 
-	/** get the animations this model can play */
-	public ModelSkeletonAnimation getAnimation(int id) {
-		if (id < 0 || id >= this.animations.size()) {
-			return (null);
-		}
-		return (this.animations.get(id));
-	}
+    /**
+     * bound callback
+     */
+    protected void onBound() {
+    }
 
-	/** returnt he list of animations */
-	public final ArrayList<ModelSkeletonAnimation> getAnimations() {
-		return (this.animations);
-	}
+    /**
+     * draw the mesh
+     */
+    public final void draw() {
+        this.getMesh().drawElements();
+        this.onDraw();
+    }
 
-	/** clone this model so it has it own mesh (destructible then) */
-	public final Model clone() {
-		Model model = new Model();
-		model.initialize();
-		model.getMesh().setVertices(model.getMesh().getVertices());
-		model.getMesh().setIndices(model.getMesh().getIndices());
-		return (model);
-	}
-
-	@Override
-	public String toString() {
-		return ("Model: " + this.getName());
-	}
-
-	public ModelInitializer getInitializer() {
-		return (this.modelInitializer);
-	}
-
-	/** bind this model before rendering */
-	public final void bind() {
-		if (!this.isInitialized()) {
-			this.initialize();
-		}
-		this.getMesh().bind();
-		this.onBound();
-	}
-
-	/** bound callback */
-	protected void onBound() {
-	}
-
-	/** draw the mesh */
-	public final void draw() {
-		this.getMesh().drawElements();
-		this.onDraw();
-	}
-
-	/** draw callback */
-	protected void onDraw() {
-	}
+    /**
+     * draw callback
+     */
+    protected void onDraw() {
+    }
 }

@@ -4,21 +4,21 @@ import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
 
 public class LoadingUnloadingTest {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		/* 1 */
-		// initialize engine
-		GameEngineClient engine = new GameEngineClient();
-		engine.initialize();
+        /* 1 */
+        // initialize engine
+        GameEngineClient engine = new GameEngineClient();
+        engine.initialize();
 
-		// load resources (mods)
-		engine.load();
+        // load resources (mods)
+        engine.load();
 
-		try {
-			engine.loop();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		engine.deinitialize();
-	}
+        try {
+            engine.loop();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        engine.deinitialize();
+    }
 }

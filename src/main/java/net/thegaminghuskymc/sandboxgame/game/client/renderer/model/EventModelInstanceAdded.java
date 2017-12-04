@@ -4,7 +4,7 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.instance.Mode
 
 public class EventModelInstanceAdded extends EventModelInstance {
 
-	public EventModelInstanceAdded(ModelInstance modelInstance) {
-		super(modelInstance);
-	}
+    public EventModelInstanceAdded(ModelInstance modelInstance) {
+        super(modelInstance);
+    }
 }

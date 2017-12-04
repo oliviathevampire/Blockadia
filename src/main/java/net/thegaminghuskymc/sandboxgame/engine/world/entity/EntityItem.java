@@ -7,8 +7,8 @@ import net.thegaminghuskymc.sandboxgame.engine.world.World;
  */
 public class EntityItem extends EntityObject {
 
-	public EntityItem(World world) {
-		super(world);
-	}
+    public EntityItem(World world) {
+        super(world);
+    }
 
 }

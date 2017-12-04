@@ -4,17 +4,17 @@ import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 
 public abstract class GLFWEvent {
 
-	private final GLFWWindow window;
+    private final GLFWWindow window;
 
-	public GLFWEvent(GLFWWindow window) {
-		this.window = window;
-	}
+    public GLFWEvent(GLFWWindow window) {
+        this.window = window;
+    }
 
-	public final GLFWWindow getGLFWWindow() {
-		return (this.window);
-	}
+    public final GLFWWindow getGLFWWindow() {
+        return (this.window);
+    }
 
-	public String getName() {
-		return (this.getClass().getSimpleName());
-	}
+    public String getName() {
+        return (this.getClass().getSimpleName());
+    }
 }

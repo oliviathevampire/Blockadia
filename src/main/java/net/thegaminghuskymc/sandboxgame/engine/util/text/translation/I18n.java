@@ -1,7 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.text.translation;
 
-public class I18n
-{
+public class I18n {
     private static final LanguageMap localizedName = LanguageMap.getInstance();
     /**
      * A StringTranslate instance using the hardcoded default locale (en_US).  Used as a fallback in case the shared
@@ -13,8 +12,7 @@ public class I18n
      * Translates a Stat name
      */
     @Deprecated
-    public static String translateToLocal(String key)
-    {
+    public static String translateToLocal(String key) {
         return localizedName.translateKey(key);
     }
 
@@ -22,8 +20,7 @@ public class I18n
      * Translates a Stat name with format args
      */
     @Deprecated
-    public static String translateToLocalFormatted(String key, Object... format)
-    {
+    public static String translateToLocalFormatted(String key, Object... format) {
         return localizedName.translateKeyFormat(key, format);
     }
 
@@ -32,8 +29,7 @@ public class I18n
      * translateToLocal fails.
      */
     @Deprecated
-    public static String translateToFallback(String key)
-    {
+    public static String translateToFallback(String key) {
         return fallbackTranslator.translateKey(key);
     }
 
@@ -41,16 +37,14 @@ public class I18n
      * Determines whether or not translateToLocal will find a translation for the given key.
      */
     @Deprecated
-    public static boolean canTranslate(String key)
-    {
+    public static boolean canTranslate(String key) {
         return localizedName.isKeyTranslated(key);
     }
 
     /**
      * Gets the time, in milliseconds since epoch, that the translation mapping was last updated
      */
-    public static long getLastTranslationUpdateTimeInMilliseconds()
-    {
+    public static long getLastTranslationUpdateTimeInMilliseconds() {
         return localizedName.getLastUpdateTimeInMilliseconds();
     }
 }

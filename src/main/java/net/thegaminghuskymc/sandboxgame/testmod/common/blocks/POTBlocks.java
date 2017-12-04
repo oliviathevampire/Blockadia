@@ -6,12 +6,12 @@ import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 
 public class POTBlocks implements IModResource {
 
-	@Override
-	public void load(Mod mod, ResourceManager manager) {		
-	}
+    @Override
+    public void load(Mod mod, ResourceManager manager) {
+    }
 
-	@Override
-	public void unload(Mod mod, ResourceManager manager) {
-	}
+    @Override
+    public void unload(Mod mod, ResourceManager manager) {
+    }
 
 }

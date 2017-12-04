@@ -1,28 +1,28 @@
 /**
-**	This file is part of the project https://github.com/toss-dev/VoxelEngine
-**
-**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
-**
-**	PEREIRA Romain
-**                                       4-----7          
-**                                      /|    /|
-**                                     0-----3 |
-**                                     | 5___|_6
-**                                     |/    | /
-**                                     1-----2
-*/
+ * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
+ * *
+ * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+ * *
+ * *	PEREIRA Romain
+ * *                                       4-----7
+ * *                                      /|    /|
+ * *                                     0-----3 |
+ * *                                     | 5___|_6
+ * *                                     |/    | /
+ * *                                     1-----2
+ */
 
 package net.thegaminghuskymc.sandboxgame.engine.modding;
 
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 
 public interface IModResource {
-	/** load the resources */
-	public void load(Mod mod, ResourceManager manager);
+    /** load the resources */
+    public void load(Mod mod, ResourceManager manager);
 
-	/**
-	 * unload resources. Useless most of the time because the program clean
-	 * every resources at the program termination anyway :)
-	 */
-	public void unload(Mod mod, ResourceManager manager);
+    /**
+     * unload resources. Useless most of the time because the program clean
+     * every resources at the program termination anyway :)
+     */
+    public void unload(Mod mod, ResourceManager manager);
 }

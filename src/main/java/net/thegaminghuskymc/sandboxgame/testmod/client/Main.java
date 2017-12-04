@@ -3,14 +3,11 @@ package net.thegaminghuskymc.sandboxgame.testmod.client;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
 import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraPerspectiveWorld;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraPerspectiveWorldEntity;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraPerspectiveWorldFree;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiViewDebug;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiViewWorld;
 import net.thegaminghuskymc.sandboxgame.testmod.common.ModPOT;
 import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityBipedTest;
-import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityTest;
 import net.thegaminghuskymc.sandboxgame.testmod.common.world.POTWorlds;
 
 public class Main {

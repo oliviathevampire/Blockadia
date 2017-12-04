@@ -15,7 +15,9 @@ import java.util.jar.JarFile;
 
 public class ModLoader {
 
-    /** every mods */
+    /**
+     * every mods
+     */
     private ArrayList<Mod> mods;
 
     public ModLoader() {
@@ -26,7 +28,9 @@ public class ModLoader {
         return (this.mods);
     }
 
-    /** find mods into the given folder and try to load it */
+    /**
+     * find mods into the given folder and try to load it
+     */
     public void injectMods(String filepath) {
         File folder = new File(filepath);
 
@@ -54,12 +58,14 @@ public class ModLoader {
         }
     }
 
-    /** load a mod from the given file (which should be a JarFile) */
-    @SuppressWarnings({ "resource" })
+    /**
+     * load a mod from the given file (which should be a JarFile)
+     */
+    @SuppressWarnings({"resource"})
     private void loadMod(File file) throws ClassNotFoundException, IOException {
         JarFile jar = new JarFile(file.getAbsolutePath());
         Enumeration<JarEntry> entries = jar.entries();
-        URL[] urls = { new URL("jar:file:" + file.getAbsolutePath() + "!/") };
+        URL[] urls = {new URL("jar:file:" + file.getAbsolutePath() + "!/")};
         URLClassLoader cl = URLClassLoader.newInstance(urls);
 
         while (entries.hasMoreElements()) {
@@ -76,9 +82,8 @@ public class ModLoader {
     /**
      * INJECT A MOD INTO THE ENGINE;
      *
-     * @param modClass
-     *            : the mod class, which should implement the interface
-     *            "IMod.class" and the annotation "ModInfo.class"
+     * @param modClass : the mod class, which should implement the interface
+     *                 "IMod.class" and the annotation "ModInfo.class"
      * @return true if the mod could be injected
      * @throws ClassNotFoundException
      */
@@ -138,7 +143,9 @@ public class ModLoader {
         }
     }
 
-    /** deinitialize every mods and clean the mod list */
+    /**
+     * deinitialize every mods and clean the mod list
+     */
     public void deinitialize(ResourceManager manager) {
         for (Mod mod : this.mods) {
             mod.deinitialize();
@@ -146,7 +153,9 @@ public class ModLoader {
         this.mods.clear();
     }
 
-    /** load every mod resources */
+    /**
+     * load every mod resources
+     */
     public void load(ResourceManager manager) {
         for (Mod mod : this.mods) {
             mod.loadResources(manager);

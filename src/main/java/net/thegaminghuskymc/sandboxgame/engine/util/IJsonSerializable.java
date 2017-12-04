@@ -2,8 +2,7 @@ package net.thegaminghuskymc.sandboxgame.engine.util;
 
 import com.google.gson.JsonElement;
 
-public interface IJsonSerializable
-{
+public interface IJsonSerializable {
     void fromJson(JsonElement json);
 
     /**

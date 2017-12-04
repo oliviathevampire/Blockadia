@@ -6,103 +6,103 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Logger {
-	private static final String ANSI_RESET = "\u001B[0m";
-	private static final String ANSI_BLACK = "\u001B[30m";
-	private static final String ANSI_RED = "\u001B[31m";
-	private static final String ANSI_GREEN = "\u001B[32m";
-	private static final String ANSI_YELLOW = "\u001B[33m";
-	private static final String ANSI_BLUE = "\u001B[34m";
-	private static final String ANSI_PURPLE = "\u001B[35m";
-	private static final String ANSI_CYAN = "\u001B[36m";
-	private static final String ANSI_WHITE = "\u001B[37m";
-	private static final String ANSI_BOLD = "\u001B[1m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_BLACK = "\u001B[30m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
+    private static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_WHITE = "\u001B[37m";
+    private static final String ANSI_BOLD = "\u001B[1m";
 
-	private static final DateFormat _date_format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	private static final Calendar _calendar = Calendar.getInstance();
+    private static final DateFormat _date_format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private static final Calendar _calendar = Calendar.getInstance();
 
-	private static Logger _instance = new Logger(System.out);
+    private static Logger _instance = new Logger(System.out);
 
-	private PrintStream _print_stream;
-	private int _indentation;
+    private PrintStream _print_stream;
+    private int _indentation;
 
-	public Logger(PrintStream stream) {
-		this._print_stream = stream;
-	}
+    public Logger(PrintStream stream) {
+        this._print_stream = stream;
+    }
 
-	public PrintStream getPrintStream() {
-		return (this._print_stream);
-	}
+    public static Logger get() {
+        return (_instance);
+    }
 
-	public void setPrintStream(PrintStream stream) {
-		this._print_stream = stream;
-	}
+    public PrintStream getPrintStream() {
+        return (this._print_stream);
+    }
 
-	public void print(String string) {
-		this._print_stream.println(string);
-	}
+    public void setPrintStream(PrintStream stream) {
+        this._print_stream = stream;
+    }
 
-	public void log(Level level, String message) {
-		log(level, 3, message);
-	}
+    public void print(String string) {
+        this._print_stream.println(string);
+    }
 
-	public void log(Level level, int stackDepth, String message) {
-		Thread thrd = Thread.currentThread();
-		StackTraceElement[] trace = thrd.getStackTrace();
-		StringBuilder stack = new StringBuilder();
-		int offset = 2;
-		int end = trace.length < stackDepth + offset ? trace.length : stackDepth + offset;
-		for (int i = offset; i < end; i++) {
-			if (trace[i].getFileName() == null) {
-				continue;
-			}
-			stack.append(" [" + trace[i].getFileName() + ":" + trace[i].getLineNumber() + "]");
-		}
-		this._print_stream.printf("%s[%s] [%s] [Thread: %s(%d)]" + stack.toString() + "%s %s\n", level.getColor(),
-				_date_format.format(_calendar.getTime()), level.getLabel(), thrd.getName(), thrd.getId(), ANSI_RESET,
-				message);
-	}
+    public void log(Level level, String message) {
+        log(level, 3, message);
+    }
 
-	public void log(Level level, Object... objs) {
-		int i = 0;
-		StringBuilder builder = new StringBuilder();
-		for (Object obj : objs) {
-			builder.append(obj);
-			if (i != objs.length - 1) {
-				builder.append(" : ");
-			}
-			++i;
-		}
-		log(level, builder.toString());
-	}
+    public void log(Level level, int stackDepth, String message) {
+        Thread thrd = Thread.currentThread();
+        StackTraceElement[] trace = thrd.getStackTrace();
+        StringBuilder stack = new StringBuilder();
+        int offset = 2;
+        int end = trace.length < stackDepth + offset ? trace.length : stackDepth + offset;
+        for (int i = offset; i < end; i++) {
+            if (trace[i].getFileName() == null) {
+                continue;
+            }
+            stack.append(" [" + trace[i].getFileName() + ":" + trace[i].getLineNumber() + "]");
+        }
+        this._print_stream.printf("%s[%s] [%s] [Thread: %s(%d)]" + stack.toString() + "%s %s\n", level.getColor(),
+                _date_format.format(_calendar.getTime()), level.getLabel(), thrd.getName(), thrd.getId(), ANSI_RESET,
+                message);
+    }
 
-	public static Logger get() {
-		return (_instance);
-	}
+    public void log(Level level, Object... objs) {
+        int i = 0;
+        StringBuilder builder = new StringBuilder();
+        for (Object obj : objs) {
+            builder.append(obj);
+            if (i != objs.length - 1) {
+                builder.append(" : ");
+            }
+            ++i;
+        }
+        log(level, builder.toString());
+    }
 
-	public enum Level {
-		FINE(ANSI_GREEN, "fine"), WARNING(ANSI_YELLOW, "warning"), ERROR(ANSI_RED, "error"), DEBUG(ANSI_CYAN, "debug");
+    public void indent(int i) {
+        this._indentation += i;
+        if (this._indentation < 0) {
+            this._indentation = 0;
+        }
+    }
 
-		String _color;
-		String _label;
+    public enum Level {
+        FINE(ANSI_GREEN, "fine"), WARNING(ANSI_YELLOW, "warning"), ERROR(ANSI_RED, "error"), DEBUG(ANSI_CYAN, "debug");
 
-		Level(String color, String label) {
-			this._color = color;
-			this._label = label.toUpperCase();
-		}
+        String _color;
+        String _label;
 
-		String getLabel() {
-			return (this._label);
-		}
+        Level(String color, String label) {
+            this._color = color;
+            this._label = label.toUpperCase();
+        }
 
-		String getColor() {
-			return (this._color);
-		}
-	}
+        String getLabel() {
+            return (this._label);
+        }
 
-	public void indent(int i) {
-		this._indentation += i;
-		if (this._indentation < 0) {
-			this._indentation = 0;
-		}
-	}
+        String getColor() {
+            return (this._color);
+        }
+    }
 }

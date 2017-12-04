@@ -5,50 +5,50 @@ import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 
 public class BlockManager extends GenericManager<Block> {
 
-	private static BlockManager BLOCK_MANAGER_INSTANCE;
+    private static BlockManager BLOCK_MANAGER_INSTANCE;
 
-	private BlockManager(ResourceManager manager) {
-		super(manager);
-		BLOCK_MANAGER_INSTANCE = this;
-	}
+    protected BlockManager(ResourceManager manager) {
+        super(manager);
+        BLOCK_MANAGER_INSTANCE = this;
+    }
 
-	public static BlockManager instance() {
-		return (BLOCK_MANAGER_INSTANCE);
-	}
+    public static BlockManager instance() {
+        return (BLOCK_MANAGER_INSTANCE);
+    }
 
-	public Block registerBlock(Block block) {
-		Logger.get().log(Logger.Level.FINE, "Registering a block: " + block.toString());
-		super.registerObject(block);
-		return (block);
-	}
+    public Block registerBlock(Block block) {
+        Logger.get().log(Logger.Level.FINE, "Registering a block: " + block.toString());
+        super.registerObject(block);
+        return (block);
+    }
 
-	public Block getBlockByID(int id) {
-		return (super.getObjectByID(id));
-	}
+    public Block getBlockByID(int id) {
+        return (super.getObjectByID(id));
+    }
 
-	@Override
-	public void onInitialized() {
+    @Override
+    public void onInitialized() {
 
-	}
+    }
 
-	@Override
-	public void onLoaded() {
+    @Override
+    public void onLoaded() {
 
-	}
+    }
 
-	@Override
-	protected void onDeinitialized() {
+    @Override
+    protected void onDeinitialized() {
 
-	}
+    }
 
-	@Override
-	protected void onUnloaded() {
+    @Override
+    protected void onUnloaded() {
 
-	}
+    }
 
-	@Override
-	protected void onObjectRegistered(Block object) {
+    @Override
+    protected void onObjectRegistered(Block object) {
 
-	}
+    }
 
 }

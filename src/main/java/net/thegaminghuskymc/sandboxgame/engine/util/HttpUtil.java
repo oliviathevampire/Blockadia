@@ -14,46 +14,37 @@ import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class HttpUtil
-{
+public class HttpUtil {
     public static final ListeningExecutorService DOWNLOADER_EXECUTOR = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool((new ThreadFactoryBuilder()).setDaemon(true).setNameFormat("Downloader %d").build()));
-    /** The number of download threads that we have started so far. */
+    /**
+     * The number of download threads that we have started so far.
+     */
     private static final AtomicInteger DOWNLOAD_THREADS_STARTED = new AtomicInteger(0);
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Builds an encoded HTTP POST content string from a string map
      */
-    public static String buildPostString(Map<String, Object> data)
-    {
+    public static String buildPostString(Map<String, Object> data) {
         StringBuilder stringbuilder = new StringBuilder();
 
-        for (Entry<String, Object> entry : data.entrySet())
-        {
-            if (stringbuilder.length() > 0)
-            {
+        for (Entry<String, Object> entry : data.entrySet()) {
+            if (stringbuilder.length() > 0) {
                 stringbuilder.append('&');
             }
 
-            try
-            {
+            try {
                 stringbuilder.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            }
-            catch (UnsupportedEncodingException unsupportedencodingexception1)
-            {
+            } catch (UnsupportedEncodingException unsupportedencodingexception1) {
                 unsupportedencodingexception1.printStackTrace();
             }
 
-            if (entry.getValue() != null)
-            {
+            if (entry.getValue() != null) {
                 stringbuilder.append('=');
 
-                try
-                {
+                try {
                     stringbuilder.append(URLEncoder.encode(entry.getValue().toString(), "UTF-8"));
-                }
-                catch (UnsupportedEncodingException unsupportedencodingexception)
-                {
+                } catch (UnsupportedEncodingException unsupportedencodingexception) {
                     unsupportedencodingexception.printStackTrace();
                 }
             }
@@ -65,24 +56,20 @@ public class HttpUtil
     /**
      * Sends a POST to the given URL using the map as the POST args
      */
-    public static String postMap(URL url, Map<String, Object> data, boolean skipLoggingErrors, @Nullable Proxy proxyIn)
-    {
+    public static String postMap(URL url, Map<String, Object> data, boolean skipLoggingErrors, @Nullable Proxy proxyIn) {
         return post(url, buildPostString(data), skipLoggingErrors, proxyIn);
     }
 
     /**
      * Sends a POST to the given URL
      */
-    private static String post(URL url, String content, boolean skipLoggingErrors, @Nullable Proxy p_151225_3_)
-    {
-        try
-        {
-            if (p_151225_3_ == null)
-            {
+    private static String post(URL url, String content, boolean skipLoggingErrors, @Nullable Proxy p_151225_3_) {
+        try {
+            if (p_151225_3_ == null) {
                 p_151225_3_ = Proxy.NO_PROXY;
             }
 
-            HttpURLConnection httpurlconnection = (HttpURLConnection)url.openConnection(p_151225_3_);
+            HttpURLConnection httpurlconnection = (HttpURLConnection) url.openConnection(p_151225_3_);
             httpurlconnection.setRequestMethod("POST");
             httpurlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpurlconnection.setRequestProperty("Content-Length", "" + content.getBytes().length);
@@ -98,19 +85,15 @@ public class HttpUtil
             StringBuilder stringbuffer = new StringBuilder();
             String s;
 
-            while ((s = bufferedreader.readLine()) != null)
-            {
+            while ((s = bufferedreader.readLine()) != null) {
                 stringbuffer.append(s);
                 stringbuffer.append('\r');
             }
 
             bufferedreader.close();
             return stringbuffer.toString();
-        }
-        catch (Exception exception)
-        {
-            if (!skipLoggingErrors)
-            {
+        } catch (Exception exception) {
+            if (!skipLoggingErrors) {
                 LOGGER.error("Could not post to {}", url, exception);
             }
 
@@ -275,27 +258,19 @@ public class HttpUtil
         return (ListenableFuture<Object>) listenablefuture;
     }*/
 
-    public static int getSuitableLanPort() throws IOException
-    {
+    public static int getSuitableLanPort() throws IOException {
         ServerSocket serversocket = null;
         int i = -1;
 
-        try
-        {
+        try {
             serversocket = new ServerSocket(0);
             i = serversocket.getLocalPort();
-        }
-        finally
-        {
-            try
-            {
-                if (serversocket != null)
-                {
+        } finally {
+            try {
+                if (serversocket != null) {
                     serversocket.close();
                 }
-            }
-            catch (IOException ignored)
-            {
+            } catch (IOException ignored) {
             }
         }
 

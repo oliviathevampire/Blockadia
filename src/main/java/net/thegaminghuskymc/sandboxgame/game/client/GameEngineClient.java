@@ -19,139 +19,151 @@ import java.util.ArrayList;
 
 public class GameEngineClient extends GameEngine {
 
-	/** Game window */
-	private GLFWContext glContext;
+    /**
+     * Game window
+     */
+    private GLFWContext glContext;
 
-	/** Renderer */
-	private MainRenderer renderer;
+    /**
+     * Renderer
+     */
+    private MainRenderer renderer;
 
-	/** tasks to be run in a gl context */
-	private ArrayList<MainRenderer.GLTask> glTasks;
+    /**
+     * tasks to be run in a gl context
+     */
+    private ArrayList<MainRenderer.GLTask> glTasks;
 
-	public GameEngineClient() {
-		super(Side.CLIENT);
-	}
+    public GameEngineClient() {
+        super(Side.CLIENT);
+    }
 
-	/** initialize libraries + window */
-	@Override
-	protected final void onInitialized() {
+    public static GameEngineClient instance() {
+        return ((GameEngineClient) GameEngine.instance());
+    }
 
-		// load assets pack
-		String assets = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath() + "../assets.zip";
-		super.putAssets(new ResourcePack("GameEngine", assets));
+    /**
+     * initialize libraries + window
+     */
+    @Override
+    protected final void onInitialized() {
 
-		// init opengl
-		GLH.glhInit();
-		this.glContext = GLH.glhCreateContext(GLH.glhCreateWindow());
-		GLH.glhSetContext(this.glContext);
+        // load assets pack
+        String assets = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath() + "../assets.zip";
+        super.putAssets(new ResourcePack("GameEngine", assets));
 
-		Logger.get().log(Logger.Level.FINE, "OpenGL initiated.");
-		Logger.get().log(Logger.Level.FINE, "GLFW version: " + GLFW.glfwGetVersionString());
+        // init opengl
+        GLH.glhInit();
+        this.glContext = GLH.glhCreateContext(GLH.glhCreateWindow());
+        GLH.glhSetContext(this.glContext);
 
-		// init opencl
-		CLH.clhInit();
+        Logger.get().log(Logger.Level.FINE, "OpenGL initiated.");
+        Logger.get().log(Logger.Level.FINE, "GLFW version: " + GLFW.glfwGetVersionString());
 
-		// main renderer
-		this.renderer = new MainRenderer(this);
-		this.renderer.initialize();
+        // init opencl
+        CLH.clhInit();
 
-		this.glTasks = new ArrayList<>();
-	}
+        // main renderer
+        this.renderer = new MainRenderer(this);
+        this.renderer.initialize();
 
-	@Override
-	public void load() {
-		super.load();
+        this.glTasks = new ArrayList<>();
+    }
 
-		// event callback
-		this.registerEventCallback(new EventListener<EventOnLoop>() {
-			@Override
-			public void invoke(EventOnLoop event) {
+    @Override
+    public void load() {
+        super.load();
 
-				// run tasks
-				for (MainRenderer.GLTask glTask : glTasks) {
-					glTask.run();
-				}
-				glTasks.clear();
+        // event callback
+        this.registerEventCallback(new EventListener<EventOnLoop>() {
+            @Override
+            public void invoke(EventOnLoop event) {
 
-				// window update has to be done in the main thread
-				// BEGIN FRAME
-				getGLFWWindow().clearScreen();
+                // run tasks
+                for (MainRenderer.GLTask glTask : glTasks) {
+                    glTask.run();
+                }
+                glTasks.clear();
 
-				// render has to be done in the main thread
-				// RENDER THE FRAME
-				getRenderer().render();
+                // window update has to be done in the main thread
+                // BEGIN FRAME
+                getGLFWWindow().clearScreen();
 
-				// FLUSH THE FRAME
-				getGLFWWindow().flushScreen();
-				getGLFWWindow().pollEvents();
+                // render has to be done in the main thread
+                // RENDER THE FRAME
+                getRenderer().render();
 
-				if (getGLFWWindow().shouldClose()) {
-					stopRunning();
-				}
+                // FLUSH THE FRAME
+                getGLFWWindow().flushScreen();
+                getGLFWWindow().pollEvents();
 
-				getTimer().update();
+                if (getGLFWWindow().shouldClose()) {
+                    stopRunning();
+                }
 
-				try {
-					// ensure 60 fps, not more, not less
-					long toSleep = 1000 / (60 + 20) - (long) (getTimer().getDt() * 1000) + 1;
-					if (toSleep > 0 && toSleep < 20) {
-						Thread.sleep(toSleep);
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+                getTimer().update();
 
-		// get tasks
-		this.registerEventCallback(new EventListener<EventGetTasks>() {
-			@Override
-			public void invoke(EventGetTasks event) {
-				// get all renderer tasks
-				renderer.getTasks(event.getEngine(), event.getTasksList());
-			}
-		});
-	}
+                try {
+                    // ensure 60 fps, not more, not less
+                    long toSleep = 1000 / (60 + 20) - (long) (getTimer().getDt() * 1000) + 1;
+                    if (toSleep > 0 && toSleep < 20) {
+                        Thread.sleep(toSleep);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-	@Override
-	protected void onDeinitialized() {
-		GLH.glhStop();
-	}
+        // get tasks
+        this.registerEventCallback(new EventListener<EventGetTasks>() {
+            @Override
+            public void invoke(EventGetTasks event) {
+                // get all renderer tasks
+                renderer.getTasks(event.getEngine(), event.getTasksList());
+            }
+        });
+    }
 
-	@Override
-	protected ResourceManager instanciateResourceManager() {
-		return (new ResourceManagerClient(this));
-	}
+    @Override
+    protected void onDeinitialized() {
+        GLH.glhStop();
+    }
 
-	/**
-	 * a task to be run on a gl context (will be run on the next main thread
-	 * update)
-	 */
-	public final void addGLTask(MainRenderer.GLTask glTask) {
-		this.glTasks.add(glTask);
-	}
+    @Override
+    protected ResourceManager instanciateResourceManager() {
+        return (new ResourceManagerClient(this));
+    }
 
-	/** return the main renderer */
-	public MainRenderer getRenderer() {
-		return (this.renderer);
-	}
+    /**
+     * a task to be run on a gl context (will be run on the next main thread
+     * update)
+     */
+    public final void addGLTask(MainRenderer.GLTask glTask) {
+        this.glTasks.add(glTask);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ResourceManagerClient getResourceManager() {
-		return ((ResourceManagerClient) super.resources);
-	}
+    /**
+     * return the main renderer
+     */
+    public MainRenderer getRenderer() {
+        return (this.renderer);
+    }
 
-	/** get the window */
-	public final GLFWWindow getGLFWWindow() {
-		return (this.getGLContext().getWindow());
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public ResourceManagerClient getResourceManager() {
+        return ((ResourceManagerClient) super.resources);
+    }
 
-	public final GLFWContext getGLContext() {
-		return (this.glContext);
-	}
+    /**
+     * get the window
+     */
+    public final GLFWWindow getGLFWWindow() {
+        return (this.getGLContext().getWindow());
+    }
 
-	public static GameEngineClient instance() {
-		return ((GameEngineClient) GameEngine.instance());
-	}
+    public final GLFWContext getGLContext() {
+        return (this.glContext);
+    }
 }

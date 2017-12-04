@@ -6,8 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public enum EnumParticleTypes
-{
+public enum EnumParticleTypes {
     EXPLOSION_NORMAL("explode", 0, true),
     EXPLOSION_LARGE("largeexplode", 1, true),
     EXPLOSION_HUGE("hugeexplosion", 2, true),
@@ -46,72 +45,62 @@ public enum EnumParticleTypes
     FALLING_DUST("fallingdust", 36, false, 1),
     SPIT("spit", 37, true);
 
+    private static final Map<Integer, EnumParticleTypes> PARTICLES = Maps.newHashMap();
+    private static final Map<String, EnumParticleTypes> BY_NAME = Maps.newHashMap();
+
+    static {
+        for (EnumParticleTypes enumparticletypes : values()) {
+            PARTICLES.put(enumparticletypes.getParticleID(), enumparticletypes);
+            BY_NAME.put(enumparticletypes.getParticleName(), enumparticletypes);
+        }
+    }
+
     private final String particleName;
     private final int particleID;
     private final boolean shouldIgnoreRange;
     private final int argumentCount;
-    private static final Map<Integer, EnumParticleTypes> PARTICLES = Maps.newHashMap();
-    private static final Map<String, EnumParticleTypes> BY_NAME = Maps.newHashMap();
 
-    EnumParticleTypes(String particleNameIn, int particleIDIn, boolean shouldIgnoreRangeIn, int argumentCountIn)
-    {
+    EnumParticleTypes(String particleNameIn, int particleIDIn, boolean shouldIgnoreRangeIn, int argumentCountIn) {
         this.particleName = particleNameIn;
         this.particleID = particleIDIn;
         this.shouldIgnoreRange = shouldIgnoreRangeIn;
         this.argumentCount = argumentCountIn;
     }
 
-    EnumParticleTypes(String particleNameIn, int particleIDIn, boolean shouldIgnoreRangeIn)
-    {
+    EnumParticleTypes(String particleNameIn, int particleIDIn, boolean shouldIgnoreRangeIn) {
         this(particleNameIn, particleIDIn, shouldIgnoreRangeIn, 0);
     }
 
-    public static Set<String> getParticleNames()
-    {
+    public static Set<String> getParticleNames() {
         return BY_NAME.keySet();
-    }
-
-    public String getParticleName()
-    {
-        return this.particleName;
-    }
-
-    public int getParticleID()
-    {
-        return this.particleID;
-    }
-
-    public int getArgumentCount()
-    {
-        return this.argumentCount;
-    }
-
-    public boolean getShouldIgnoreRange()
-    {
-        return this.shouldIgnoreRange;
     }
 
     /**
      * Gets the relative EnumParticleTypes by id.
      */
     @Nullable
-    public static EnumParticleTypes getParticleFromId(int particleId)
-    {
+    public static EnumParticleTypes getParticleFromId(int particleId) {
         return PARTICLES.get(particleId);
     }
 
     @Nullable
-    public static EnumParticleTypes getByName(String nameIn)
-    {
+    public static EnumParticleTypes getByName(String nameIn) {
         return BY_NAME.get(nameIn);
     }
 
-    static
-    {
-        for (EnumParticleTypes enumparticletypes : values())
-        {
-            PARTICLES.put(enumparticletypes.getParticleID(), enumparticletypes);
-            BY_NAME.put(enumparticletypes.getParticleName(), enumparticletypes);
-        }
+    public String getParticleName() {
+        return this.particleName;
+    }
+
+    public int getParticleID() {
+        return this.particleID;
+    }
+
+    public int getArgumentCount() {
+        return this.argumentCount;
+    }
+
+    public boolean getShouldIgnoreRange() {
+        return this.shouldIgnoreRange;
     }
 }

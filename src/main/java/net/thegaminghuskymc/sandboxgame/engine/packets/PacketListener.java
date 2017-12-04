@@ -1,16 +1,16 @@
 /**
-**	This file is part of the project https://github.com/toss-dev/VoxelEngine
-**
-**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
-**
-**	PEREIRA Romain
-**                                       4-----7          
-**                                      /|    /|
-**                                     0-----3 |
-**                                     | 5___|_6
-**                                     |/    | /
-**                                     1-----2
-*/
+ * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
+ * *
+ * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+ * *
+ * *	PEREIRA Romain
+ * *                                       4-----7
+ * *                                      /|    /|
+ * *                                     0-----3 |
+ * *                                     | 5___|_6
+ * *                                     |/    | /
+ * *                                     1-----2
+ */
 
 package net.thegaminghuskymc.sandboxgame.engine.packets;
 
@@ -20,10 +20,10 @@ package net.thegaminghuskymc.sandboxgame.engine.packets;
  *
  */
 public interface PacketListener<T extends Packet> {
-	/**
-	 * This is to be called when packet is received.
-	 * Every class that needs network handling should implement this
-	 * @param packet
-	 */
-	public void onReceive(T packet);
+    /**
+     * This is to be called when packet is received.
+     * Every class that needs network handling should implement this
+     * @param packet
+     */
+    public void onReceive(T packet);
 }

@@ -1,7 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.util;
 
-public enum EnumBlockRenderType
-{
+public enum EnumBlockRenderType {
     INVISIBLE,
     LIQUID,
     ENTITYBLOCK_ANIMATED,

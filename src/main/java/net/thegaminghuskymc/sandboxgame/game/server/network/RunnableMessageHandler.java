@@ -1,16 +1,16 @@
 /**
-**	This file is part of the project https://github.com/toss-dev/VoxelEngine
-**
-**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
-**
-**	PEREIRA Romain
-**                                       4-----7          
-**                                      /|    /|
-**                                     0-----3 |
-**                                     | 5___|_6
-**                                     |/    | /
-**                                     1-----2
-*/
+ * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
+ * *
+ * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+ * *
+ * *	PEREIRA Romain
+ * *                                       4-----7
+ * *                                      /|    /|
+ * *                                     0-----3 |
+ * *                                     | 5___|_6
+ * *                                     |/    | /
+ * *                                     1-----2
+ */
 
 package net.thegaminghuskymc.sandboxgame.game.server.network;
 
@@ -21,65 +21,64 @@ import java.util.Queue;
 
 public class RunnableMessageHandler implements Runnable {
 
-	public class PacketClientDataWrapper {
-		private Packet packet;
-		private ClientData clientData;
+    private Queue<PacketClientDataWrapper> messageQueue;
+    private boolean shouldStop;
+    public RunnableMessageHandler() {
+        this.messageQueue = new LinkedList<PacketClientDataWrapper>();
+        this.shouldStop = false;
+    }
 
-		public PacketClientDataWrapper(Packet packet, ClientData clientData) {
-			super();
-			this.packet = packet;
-			this.clientData = clientData;
-		}
+    public int queueLength() {
+        return messageQueue.size();
+    }
 
-		public Packet getpacket() {
-			return packet;
-		}
+    public void add(PacketClientDataWrapper packetClientDataWrapper) {
+        messageQueue.add(packetClientDataWrapper);
+    }
 
-		public void setpacket(Packet packet) {
-			this.packet = packet;
-		}
+    public void stop() {
+        this.shouldStop = true;
+    }
 
-		public ClientData getclientData() {
-			return clientData;
-		}
+    public boolean shouldStop() {
+        return (this.shouldStop);
+    }
 
-		public void setclientData(ClientData clientData) {
-			this.clientData = clientData;
-		}
-	}
+    @Override
+    public void run() {
+        while (!shouldStop()) {
+            PacketClientDataWrapper packet = this.messageQueue.poll();
+            if (packet != null) {
+                /** do something with packet **/
+            }
+        }
+    }
 
-	private Queue<PacketClientDataWrapper> messageQueue;
-	private boolean shouldStop;
+    public class PacketClientDataWrapper {
+        private Packet packet;
+        private ClientData clientData;
 
-	public RunnableMessageHandler() {
-		this.messageQueue = new LinkedList<PacketClientDataWrapper>();
-		this.shouldStop = false;
-	}
+        public PacketClientDataWrapper(Packet packet, ClientData clientData) {
+            super();
+            this.packet = packet;
+            this.clientData = clientData;
+        }
 
-	public int queueLength() {
-		return messageQueue.size();
-	}
+        public Packet getpacket() {
+            return packet;
+        }
 
-	public void add(PacketClientDataWrapper packetClientDataWrapper) {
-		messageQueue.add(packetClientDataWrapper);
-	}
+        public void setpacket(Packet packet) {
+            this.packet = packet;
+        }
 
-	public void stop() {
-		this.shouldStop = true;
-	}
+        public ClientData getclientData() {
+            return clientData;
+        }
 
-	public boolean shouldStop() {
-		return (this.shouldStop);
-	}
-
-	@Override
-	public void run() {
-		while (!shouldStop()) {
-			PacketClientDataWrapper packet = this.messageQueue.poll();
-			if (packet != null) {
-				/** do something with packet **/
-			}
-		}
-	}
+        public void setclientData(ClientData clientData) {
+            this.clientData = clientData;
+        }
+    }
 
 }
