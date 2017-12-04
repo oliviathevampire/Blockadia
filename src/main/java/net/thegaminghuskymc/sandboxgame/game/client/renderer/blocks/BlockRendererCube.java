@@ -27,7 +27,7 @@ public class BlockRendererCube extends BlockRenderer {
 	 *
 	 * @param ids
 	 *            : the face and texture ID's
-	 * 
+	 *
 	 *            e.g: new BlockRendererCube(Blocks.GRASS, Face.LEFT,
 	 *            ClientBlocks.T_GRASS_SIDE, Face.RIGHT,
 	 *            ClientBlocks.T_GRASS_SIDE, Face.FRONT,
@@ -70,15 +70,6 @@ public class BlockRendererCube extends BlockRenderer {
 		for (Face face : Face.faces) {
 			this.textureIDs[face.getID()] = textureID;
 		}
-	}
-
-	/** return the array of texture for the given block */
-	public int[] getTextureIDs() {
-		return (this.textureIDs);
-	}
-
-	public int getTextureID(Face face) {
-		return (this.textureIDs[face.getID()]);
 	}
 
 	@Override

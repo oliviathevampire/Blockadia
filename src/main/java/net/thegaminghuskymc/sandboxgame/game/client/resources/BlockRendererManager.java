@@ -126,11 +126,6 @@ public class BlockRendererManager extends GenericManager<String> {
 		ImageUtils.exportPNGImage(filepath, atlas);
 	}
 
-	/** get block texture by id */
-	public String getBlockTextureByID(int id) {
-		return (super.getObjectByID(id));
-	}
-
 	/** get the number of block textures */
 	public int getBlockTextureCount() {
 		return (super.getObjectCount());

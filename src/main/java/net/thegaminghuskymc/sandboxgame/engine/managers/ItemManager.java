@@ -5,7 +5,7 @@ import net.thegaminghuskymc.sandboxgame.engine.item.Item;
 
 public class ItemManager extends GenericManager<Item> {
 
-	public ItemManager(ResourceManager resource_manager) {
+	private ItemManager(ResourceManager resource_manager) {
 		super(resource_manager);
 	}
 

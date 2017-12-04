@@ -49,7 +49,7 @@ public abstract class GenericManager<T> {
 
 	/** called once when program is started */
 	public final void initialize() {
-		this.objects = new ArrayList<T>();
+		this.objects = new ArrayList<>();
 		this.onInitialized();
 	}
 
@@ -85,7 +85,7 @@ public abstract class GenericManager<T> {
 	}
 
 	/** return the number of object registered */
-	public int getObjectCount() {
+	protected int getObjectCount() {
 		return (this.objects.size());
 	}
 
@@ -95,18 +95,6 @@ public abstract class GenericManager<T> {
 			return (null);
 		}
 		return (this.objects.get(id));
-	}
-
-	public T getObjectByName(String name) {
-		if (name.length() < 0 || name.length() >= this.objects.size()) {
-			return (null);
-		}
-		return (this.objects.get(name.length()));
-	}
-
-	/** return true if the manager already have registered the given object */
-	public boolean hasObject(T object) {
-		return (this.objects.contains(object));
 	}
 
 	/** return every registered objects */

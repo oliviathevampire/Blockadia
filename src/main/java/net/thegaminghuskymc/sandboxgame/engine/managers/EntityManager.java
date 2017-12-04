@@ -20,19 +20,6 @@ public class EntityManager extends GenericManager<Class<? extends Entity>> {
 		return (super.registerObject(entityclass));
 	}
 
-	/** create a new instance of the given entity by it ID */
-	@SuppressWarnings("unchecked")
-	public <T> T newInstance(int entityID) {
-		try {
-			Class<? extends Entity> entityclass = super.getObjectByID(entityID);
-			return (T) (entityclass.newInstance());
-		} catch (Exception exception) {
-			Logger.get().log(Logger.Level.ERROR, "Exception occured while creating new entity instance:");
-			exception.printStackTrace(Logger.get().getPrintStream());
-			return (null);
-		}
-	}
-
 	@Override
 	public void onInitialized() {
 	}

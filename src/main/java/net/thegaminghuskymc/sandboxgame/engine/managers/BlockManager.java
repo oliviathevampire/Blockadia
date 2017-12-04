@@ -7,7 +7,7 @@ public class BlockManager extends GenericManager<Block> {
 
 	private static BlockManager BLOCK_MANAGER_INSTANCE;
 
-	public BlockManager(ResourceManager manager) {
+	private BlockManager(ResourceManager manager) {
 		super(manager);
 		BLOCK_MANAGER_INSTANCE = this;
 	}
@@ -24,14 +24,6 @@ public class BlockManager extends GenericManager<Block> {
 
 	public Block getBlockByID(int id) {
 		return (super.getObjectByID(id));
-	}
-
-	public Block getBlockByName(String name) {
-		return super.getObjectByName(name);
-	}
-
-	public int getBlockCount() {
-		return (super.getObjectCount());
 	}
 
 	@Override

@@ -45,35 +45,6 @@ public class SoundManager extends GenericManager<String> {
 		this.soundPool.destroy();
 	}
 
-	/**
-	 * register a new sound
-	 * 
-	 * @param sound
-	 *            : the filename (it has to be in folder './assets/sounds/')
-	 * @return
-	 */
-	public int registerSound(String sound) {
-		return (super.registerObject(sound));
-	}
-
-	/**
-	 * play a sound relative to source, meaning you will hear it wherever you
-	 * are
-	 */
-	public void playSound(ALSound sound) {
-		this.soundPool.play(sound);
-	}
-
-	/** play a sound relative to the listener */
-	public void playSoundAt(ALSound sound, Vector3f pos) {
-		this.soundPool.playAt(sound, pos);
-	}
-
-	/** play a sound relative to the listener */
-	public void playSoundAt(ALSound sound, Vector3f pos, Vector3f velocity) {
-		this.soundPool.playAt(sound, pos, velocity);
-	}
-
 	public void update(CameraView camera) {
 		ALH.alhGetListener().setPosition(camera.getPosition());
 		ALH.alhGetListener().setOrientation(camera.getViewVector());

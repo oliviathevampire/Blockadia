@@ -111,8 +111,4 @@ class EventHandler {
 		return (this.event);
 	}
 
-	public ArrayList<EventListener> getCallbacks() {
-		return (this.callbacks);
-	}
-
 }

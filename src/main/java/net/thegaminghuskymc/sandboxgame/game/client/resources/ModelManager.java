@@ -56,7 +56,7 @@ public class ModelManager extends GenericManager<Model> {
 
 	@Override
 	protected final void onLoaded() {
-		
+
 	}
 
 	/** remove every model instances */

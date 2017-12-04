@@ -37,11 +37,6 @@ public class ResourceManagerClient extends ResourceManager {
 		return (this.blockTextureManager);
 	}
 
-	/** get the sound manager */
-	public final SoundManager getSoundManager() {
-		return (this.soundManager);
-	}
-
 	/** get the model manager */
 	public final ModelManager getModelManager() {
 		return (this.modelManager);
