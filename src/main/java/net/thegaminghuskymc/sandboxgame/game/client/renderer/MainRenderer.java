@@ -22,7 +22,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainRenderer implements Taskable {
 
@@ -87,29 +86,16 @@ public class MainRenderer implements Taskable {
     private ParticleRenderer particleRenderer;
 
     /**
-     * random number generator
-     */
-    private Random rng;
-
-    /**
      * event instances (so we do not realloc them every frames
      */
     private EventPreRender preRenderEvent;
     private EventPostRender postRenderEvent;
 
     /**
-     * values
-     */
-    private int verticesDrawn;
-    private int drawCalls;
-
-    /**
      * default and simple vao (to use geometry shaders)
      */
     private GLVertexArray defaultVao;
     private GLVertexBuffer defaultVbo;
-
-    private boolean toggle = true;
 
     private GLFWListener<GLFWEventWindowResize> windowResizeListener;
 
@@ -125,10 +111,9 @@ public class MainRenderer implements Taskable {
         GLH.glhCheckError("Pre mainrenderer initialization");
         Logger.get().log(Logger.Level.FINE, "Initializing " + this.getClass().getSimpleName());
 
-        this.customRenderers = new ArrayList<Renderer>();
-        this.defaultRenderers = new ArrayList<Renderer>();
+        this.customRenderers = new ArrayList<>();
+        this.defaultRenderers = new ArrayList<>();
 
-        this.rng = new Random();
         this.preRenderEvent = new EventPreRender(this);
         this.postRenderEvent = new EventPostRender(this);
 
@@ -211,7 +196,7 @@ public class MainRenderer implements Taskable {
     /**
      * called whenever the window is resized
      */
-    public void onWindowResize(GLFWWindow window) {
+    private void onWindowResize(GLFWWindow window) {
         for (Renderer renderer : this.defaultRenderers) {
             renderer.onWindowResize(window);
         }
@@ -269,22 +254,7 @@ public class MainRenderer implements Taskable {
      */
     public void render() {
 
-        // if renderer is not enabled, return
-        if (!this.toggle) {
-            return;
-        }
-
-        // TODO move this somewhere else, if openal is thread safe
-        // if (this.getCamera() != null) {
-        // this.getCamera().update();
-        // this.engine.getResourceManager().getSoundManager().update(this.getCamera());
-        // }
-
         this.getResourceManager().getEventManager().invokeEvent(this.preRenderEvent);
-
-        // reset these values before next rendering
-        this.drawCalls = GLH.glhGetContext().resetDrawCalls();
-        this.verticesDrawn = GLH.glhGetContext().resetDrawVertices();
 
         this.getDefaultVAO().bind();
 
@@ -313,20 +283,6 @@ public class MainRenderer implements Taskable {
     }
 
     /**
-     * return the draw calls for the last frame
-     */
-    public int getDrawCalls() {
-        return (this.drawCalls);
-    }
-
-    /**
-     * return the vertices drawn for the last frame
-     */
-    public int getVerticesDrawn() {
-        return (this.verticesDrawn);
-    }
-
-    /**
      * get the resource manager
      */
     public ResourceManagerClient getResourceManager() {
@@ -342,10 +298,6 @@ public class MainRenderer implements Taskable {
 
     public GameEngineClient getEngine() {
         return (this.engine);
-    }
-
-    public Random getRNG() {
-        return (this.rng);
     }
 
     @Override
@@ -367,22 +319,11 @@ public class MainRenderer implements Taskable {
         this.customRenderers.add(renderer);
     }
 
-    public final void removeRenderer(Renderer renderer) {
-        this.customRenderers.remove(renderer);
-    }
-
-    /**
-     * set to true of false weather you want to render or not
-     */
-    public void toggle(boolean b) {
-        this.toggle = b;
-    }
-
     /**
      * OpenGL tasks to be realized in main thread
      */
     public interface GLTask {
-        public void run();
+        void run();
     }
 
 }

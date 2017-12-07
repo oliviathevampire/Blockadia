@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.resourcepacks;
 
+import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.managers.LangManager;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 
@@ -16,24 +17,7 @@ public class R {
      * get the resource path for a standart resource
      */
     public static String getResPath(String filepath) {
-        return (ResourceManager.instance().getResourcePath("huskys_sandbox_game", filepath));
+        return (ResourceManager.instance().getResourcePath(GameEngine.instance().getModId(), filepath));
     }
 
-    /**
-     * return the string value of the given word
-     */
-    public static String getWord(String word) {
-        String str = getString("word." + word);
-        if (str == null) {
-            return (word);
-        }
-        return (str);
-    }
-
-    /**
-     * return the string value for the given string ID
-     */
-    public static String getString(String strid) {
-        return (LangManager.instance().getString(strid));
-    }
 }

@@ -4,20 +4,20 @@ import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
 import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraPerspectiveWorldEntity;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiViewDebug;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiViewWorld;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.*;
 import net.thegaminghuskymc.sandboxgame.testmod.common.ModPOT;
 import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityBipedTest;
 import net.thegaminghuskymc.sandboxgame.testmod.common.world.POTWorlds;
 
 public class Main {
 
+    public static GameEngineClient engine = new GameEngineClient();
+
     public static void main(String[] args) {
-        GameEngineClient engine = new GameEngineClient();
         engine.initialize();
 
         engine.getModLoader().injectMod(ModPOT.class);
-        engine.putAssets(new ResourcePack("huskys_sandbox_game", "./assets.zip"));
+        engine.putAssets(new ResourcePack("sandbox_game", "./assets.zip"));
 
         engine.load();
 
@@ -45,8 +45,7 @@ public class Main {
         camera.setWorld(world);
         camera.setEntity(player);
 
-        engine.getRenderer().getGuiRenderer().addGui(new GuiViewWorld(camera, POTWorlds.DEFAULT));
-        engine.getRenderer().getGuiRenderer().addGui(new GuiViewDebug(camera));
+        engine.getRenderer().getGuiRenderer().addGui(new GuiViewMainMenu());
     }
 
 }

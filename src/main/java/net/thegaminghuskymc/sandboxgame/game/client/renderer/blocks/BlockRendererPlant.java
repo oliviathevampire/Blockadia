@@ -54,7 +54,7 @@ public class BlockRendererPlant extends BlockRenderer {
         }
     }
 
-    private final void createPlantVertices(Terrain terrain, Block block, int x, int y, int z,
+    private void createPlantVertices(Terrain terrain, Block block, int x, int y, int z,
                                            ArrayList<TerrainMeshTriangle> stack) {
         TerrainMeshVertex v0 = this.createBlockFaceVertex(terrain, Face.F_RIGHT, x, y, z, 0);
         TerrainMeshVertex v1 = this.createBlockFaceVertex(terrain, Face.F_RIGHT, x, y, z, 1);
@@ -75,7 +75,7 @@ public class BlockRendererPlant extends BlockRenderer {
     /**
      * return the vertex for the given vertex ID at the given coordinates
      */
-    public TerrainMeshVertex createBlockFaceVertex(Terrain terrain, Face face, int x, int y, int z, int vertexID) {
+    private TerrainMeshVertex createBlockFaceVertex(Terrain terrain, Face face, int x, int y, int z, int vertexID) {
         Vector3i[] neighboors = FACES_NEIGHBORS[face.getID()][vertexID];
 
         // position

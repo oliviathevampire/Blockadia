@@ -7,7 +7,8 @@ import net.thegaminghuskymc.sandboxgame.engine.world.entity.control.Control;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.mod.Blocks;
-import org.lwjgl.glfw.GLFW;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * a camera which follow the given entity, 3rd perso view
@@ -31,20 +32,20 @@ public class CameraPerspectiveWorldEntity extends CameraPerspectiveWorldCentered
         float z = this.getEntity().getPositionZ() + this.getEntity().getSizeZ() * 0.5f;
         super.setCenter(x, y, z);
 
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
+        if (GLH.glhGetWindow().isKeyPressed(GLFW_KEY_SPACE)) {
             this.getEntity().jump();
         }
 
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_W)) {
+        if (GLH.glhGetWindow().isKeyPressed(GLFW_KEY_W)) {
             this.getEntity().addControl(Control.FORWARD);
         }
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_S)) {
+        if (GLH.glhGetWindow().isKeyPressed(GLFW_KEY_S)) {
             this.getEntity().addControl(Control.BACKWARD);
         }
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_D)) {
+        if (GLH.glhGetWindow().isKeyPressed(GLFW_KEY_D)) {
             this.getEntity().addControl(Control.STRAFE_RIGHT);
         }
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_A)) {
+        if (GLH.glhGetWindow().isKeyPressed(GLFW_KEY_A)) {
             this.getEntity().addControl(Control.STRAFE_LEFT);
         }
 
@@ -61,32 +62,32 @@ public class CameraPerspectiveWorldEntity extends CameraPerspectiveWorldCentered
 
     @Override
     public void invokeCursorPos(GLFWWindow window, double xpos, double ypos) {
-        if (window.isMouseRightPressed()) {
-            float pitch = (float) ((window.getMouseDY()) * 0.1f);
-            super.increasePitch(pitch);
-
-            float angle = (float) ((window.getMouseDX()) * 0.3f);
-            super.setAngleAroundCenter((float) (super.getAngleAroundCenter() - angle));
-        } else {
-            double dy = -(window.getMouseDX() * 0.2f);
-            this.entity.setRotationY(this.entity.getRotationY() + (float) dy);
-            super.increasePitch((float) (window.getMouseDY() * 0.1f));
-            super.increaseAngleAroundCenter((float) dy);
-        }
+        double dy = -(window.getMouseDX() * 0.2f);
+        this.entity.setRotationY(this.entity.getRotationY() + (float) dy);
+        super.increasePitch((float) (window.getMouseDY() * 0.1f));
+        super.increaseAngleAroundCenter((float) dy);
     }
 
     @Override
     public void invokeKeyRelease(GLFWWindow glfwWindow, int key, int scancode, int mods) {
+
     }
 
     @Override
     public void invokeKeyPress(GLFWWindow glfwWindow, int key, int scancode, int mods) {
-        if (key == GLFW.GLFW_KEY_R) {
+        if (glfwWindow.isKeyPressed(GLFW_KEY_P)) {
+            Vector3f pos = new Vector3f();
+            pos.set(this.entity.getPositionX() + 1, this.entity.getPositionY(), this.entity.getPositionZ());
+            pos.add(this.entity.getViewVector());
+            pos.add(this.entity.getViewVector());
+            super.setBlock(Blocks.COBBLESTONE, pos);
+        }
+        if (glfwWindow.isKeyPressed(GLFW_KEY_R)) {
             Vector3f pos = new Vector3f();
             pos.set(this.entity.getPositionX(), this.entity.getPositionY(), this.entity.getPositionZ());
             pos.add(this.entity.getViewVector());
             pos.add(this.entity.getViewVector());
-            super.setBlock(Blocks.LIGHT, pos);
+            super.setBlock(Blocks.AIR, pos);
         }
     }
 

@@ -94,9 +94,6 @@ public class ProgramModel extends GLProgram {
         // the skin
         ModelSkin skin = modelInstance.getModel().getSkin(modelInstance.getSkinID());
         if (skin == null) {
-            // Logger.get().log(Logger.Level.DEBUG, "Tried to load a NULL model
-            // skin: " + modelInstance.getSkinID() + "/"
-            // + modelInstance.getModel().getSkins().size());
             return;
         }
         skin.bind(GL13.GL_TEXTURE1, GL11.GL_TEXTURE_2D);

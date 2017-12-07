@@ -86,7 +86,6 @@ public class BlockRendererCube extends BlockRenderer {
     private final BlockFace createBlockFace(Terrain terrain, Block block, Face face, int x, int y, int z) {
 
         // if the face-neighboor block is visible isnt transparent
-        // TODO : find a solution on leaves square
         if (!this.canRenderFace(terrain, block, face, x, y, z)) {
             // the face isnt visible
             return (null);
@@ -119,40 +118,30 @@ public class BlockRendererCube extends BlockRenderer {
 
         int vertexID = FACES_VERTICES[face.getID()][faceVertexID];
 
-        // position
         float px = (x + VERTICES[vertexID].x) * Terrain.BLOCK_SIZE;
         float py = (y + VERTICES[vertexID].y) * Terrain.BLOCK_SIZE;
         float pz = (z + VERTICES[vertexID].z) * Terrain.BLOCK_SIZE;
 
-        // uv
         float uvx = FACES_UV[faceVertexID][0];
         float uvy = FACES_UV[faceVertexID][1];
         int textureID = this.textureIDs[face.getID()];
         float atlasX = super.getAtlasX(textureID);
         float atlasY = super.getAtlasY(textureID);
 
-        // get light value
-
-        // the ambiant occlusion
         float ao = BlockRenderer.getAmbiantOcclusion(terrain, x, y, z, face.getID(), faceVertexID);
 
-        // the block light
         float blockLight = super.getBlockLight(terrain, x, y, z, face.getID(), faceVertexID);
 
-        // the sun light
         float sunLight = super.getSunLight(terrain, x, y, z, face.getID(), faceVertexID);
 
-        // durability
         byte durability = terrain.getDurability(x, y, z);
 
-        // final brightness
         float brightness = 0.1f + sunLight + blockLight - ao;
         if (brightness < 0.0f) {
             brightness = 0.0f;
         }
 
-        // light color
-        int color = 0xFFFFFFFF;// ColorInt.get(255, 255, 255, 255);
+        int color = 0xFFFFFFFF;
         float nx = face.getNormal().x;
         float ny = face.getNormal().y;
         float nz = face.getNormal().z;

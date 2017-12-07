@@ -61,3 +61,7 @@ jars
 src/main/java/com/*
 src/main/java/idk/*
 classes/*
+src/main/resources/assets/sandboxgame/textures/blocks/light.png
+src/main/resources/assets/sandboxgame/textures/blocks/grassblock.png
+src/main/resources/assets/sandboxgame/textures/blocks/none.png
+src/main/resources/assets/sandboxgame/textures/icons/Grass_hues.png

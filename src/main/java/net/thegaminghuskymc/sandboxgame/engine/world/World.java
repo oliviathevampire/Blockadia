@@ -24,7 +24,7 @@ import java.util.Random;
  */
 public abstract class World implements Taskable {
 
-    public static final int seed = 42;
+    private static final int seed = 42;
     public static final SimplexNoiseOctave NOISE_OCTAVE = new SimplexNoiseOctave(seed);
     public static final SimplexNoiseOctave[] NOISE_OCTAVES = {new SimplexNoiseOctave(seed + 1),
             new SimplexNoiseOctave(seed + 2), new SimplexNoiseOctave(seed + 3), new SimplexNoiseOctave(seed + 4)};
@@ -61,13 +61,13 @@ public abstract class World implements Taskable {
      * save the given world to the given folder
      */
 
-    public static final void save(World world, String filepath) {
+    public static void save(World world, String filepath) {
     }
 
     /**
      * load the given folder as a world
      */
-    public static final World load(String filepath) {
+    public static World load(String filepath) {
         return (null);
     }
 
@@ -96,7 +96,7 @@ public abstract class World implements Taskable {
     /**
      * generate the terrain for the given coordinates, spawn it if un-existant
      */
-    public Terrain generateTerrain(int x, int y, int z) {
+    protected Terrain generateTerrain(int x, int y, int z) {
         Terrain terrain = this.getTerrain(x, y, z);
         if (terrain == null) {
             terrain = new Terrain(x, y, z);
@@ -105,7 +105,7 @@ public abstract class World implements Taskable {
         return (this.generateTerrain(terrain));
     }
 
-    public Terrain generateTerrain(Terrain terrain) {
+    protected Terrain generateTerrain(Terrain terrain) {
         terrain.preGenerated();
         this.generator.generate(terrain);
         terrain.postGenerated();
@@ -115,7 +115,7 @@ public abstract class World implements Taskable {
     /**
      * set the world generator
      */
-    public void setWorldGenerator(WorldGenerator worldgen) {
+    protected void setWorldGenerator(WorldGenerator worldgen) {
         this.generator = worldgen;
     }
 
@@ -135,7 +135,7 @@ public abstract class World implements Taskable {
         this.onDelete();
     }
 
-    protected void onDelete() {
+    private void onDelete() {
 
     }
 
@@ -149,13 +149,6 @@ public abstract class World implements Taskable {
 
     public WorldEntityStorage getEntityStorage() {
         return (this.entities);
-    }
-
-    /**
-     * set the block durabiltiy at the given world relative position
-     */
-    public final void setBlockDurability(byte durability, float x, float y, float z) {
-        this.terrains.setBlockDurability(durability, x, y, z);
     }
 
     /**
@@ -220,13 +213,6 @@ public abstract class World implements Taskable {
 
     public Vector3i getTerrainIndex(Vector3f position, Vector3i world_index) {
         return (this.terrains.getIndex(position, world_index));
-    }
-
-    /**
-     * return true if this world can hold this terrain
-     */
-    public boolean canHoldTerrain(Terrain terrain) {
-        return (this.terrains.canHold(terrain));
     }
 
     /**

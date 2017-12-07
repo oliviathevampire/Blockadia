@@ -15,12 +15,6 @@ import java.util.ArrayList;
 
 public class MarchingCubesTerrainMesher extends TerrainMesher {
 
-    /**
-     * 256x5x5 UV for the given edgeFlags, triangleID, (faceID, u0, v0, u1, v1,
-     * u2, v2)
-     */
-    // private static int[][][] UV_TABLE;
-
     private final Vector3i lod;
     int EDGE_DEBUG = -1;
     T TRI_TABLE[][];
@@ -46,9 +40,6 @@ public class MarchingCubesTerrainMesher extends TerrainMesher {
         //TODO : finish to complet the array
         TRI_TABLE = new T[][]{
                 {},
-
-                //V == VERIFIED
-                //n == never appeared in meshing (yet)
 
 /*V*/                {new T(Face.LEFT, 0, 8, 3, 0.0f, 1.0f, 1.0f, 1.0f, 0.5f, 0.0f)},
 /*V*/                {new T(Face.FRONT, 0, 1, 9, 0.0f, 1.0f, 0.5f, 0.0f, 1.0f, 1.0f)},

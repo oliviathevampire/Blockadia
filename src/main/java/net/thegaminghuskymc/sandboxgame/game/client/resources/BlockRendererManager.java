@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.game.client.resources;
 
+import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.managers.GenericManager;
@@ -143,7 +144,7 @@ public class BlockRendererManager extends GenericManager<String> {
     /**
      * get the number of block textures
      */
-    public int getBlockTextureCount() {
+    private int getBlockTextureCount() {
         return (super.getObjectCount());
     }
 
@@ -152,7 +153,7 @@ public class BlockRendererManager extends GenericManager<String> {
      */
     public BlockRenderer setBlockRenderer(Block block, BlockRenderer blockRenderer) {
         this.blockRenderers.put(block, blockRenderer);
-        return (blockRenderer);
+        return blockRenderer;
     }
 
     /**
@@ -183,7 +184,7 @@ public class BlockRendererManager extends GenericManager<String> {
         this.destroyTextureAtlas();
     }
 
-    private final void destroyTextureAtlas() {
+    private void destroyTextureAtlas() {
         for (GLTexture texture : this.glTextureAtlas) {
             if (texture != null) {
                 texture.delete();

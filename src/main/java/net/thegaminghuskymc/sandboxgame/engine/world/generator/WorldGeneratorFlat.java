@@ -10,10 +10,10 @@ public class WorldGeneratorFlat extends WorldGenerator {
         for (int x = 0; x < Terrain.DIMX; x++) {
             for (int z = 0; z < Terrain.DIMZ; z++) {
                 terrain.setBlockAt(Blocks.GRASS, x, Terrain.DIMY - 1, z);
-				/*terrain.setBlockAt(Blocks.STONES[0], x, Terrain.DIMY - 2, z);
-				terrain.setBlockAt(Blocks.STONES[0], x, Terrain.DIMY - 3, z);
-				terrain.setBlockAt(Blocks.STONES[0], x, Terrain.DIMY - 4, z);
-				terrain.setBlockAt(Blocks.STONES[0], x, Terrain.DIMY - 5, z);*/
+				terrain.setBlockAt(Blocks.STONES.get(0), x, Terrain.DIMY - 2, z);
+				terrain.setBlockAt(Blocks.STONES.get(0), x, Terrain.DIMY - 3, z);
+				terrain.setBlockAt(Blocks.DIRT, x, Terrain.DIMY - 4, z);
+				terrain.setBlockAt(Blocks.DIRT, x, Terrain.DIMY - 5, z);
             }
         }
     }

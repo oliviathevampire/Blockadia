@@ -33,7 +33,7 @@ public class BlockRendererJSON extends BlockRenderer {
         }
     }
 
-    private final void offsetVertex(TerrainMeshVertex v, int x, int y, int z) {
+    private void offsetVertex(TerrainMeshVertex v, int x, int y, int z) {
         // offset position
         v.posx = (v.posx + x) * Terrain.BLOCK_SIZE;
         v.posy = (v.posy + y) * Terrain.BLOCK_SIZE;

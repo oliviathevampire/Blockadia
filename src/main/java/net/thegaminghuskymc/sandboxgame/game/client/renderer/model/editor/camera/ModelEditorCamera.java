@@ -34,11 +34,11 @@ public class ModelEditorCamera extends CameraPerspectiveWorldCentered {
         super.setRoll(0);
         super.setSpeed(0.2f);
         super.setRotSpeed(1);
-        super.setFarDistance(Float.MAX_VALUE);
+//        super.setFarDistance(Float.MAX_VALUE);
         super.setRenderDistance(Float.MAX_VALUE);
         super.setDistanceFromCenter(16);
         super.setAngleAroundCenter(-45);
-        this.oldStates = new Stack<ModelEditorState>();
+        this.oldStates = new Stack<>();
     }
 
     @Override

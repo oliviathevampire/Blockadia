@@ -34,10 +34,10 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
 
     public WorldFlatTerrainStorage(World world) {
         super(world);
-        this.terrains = new HashMap<Vector3i, Terrain>(4096 * 4);
-        this.topTerrains = new HashMap<Vector2i, Terrain>(4096);
-        this.botTerrains = new HashMap<Vector2i, Terrain>(4096);
-        this.loadedTerrains = new ArrayList<Terrain>(128);
+        this.terrains = new HashMap<>(4096 * 4);
+        this.topTerrains = new HashMap<>(4096);
+        this.botTerrains = new HashMap<>(4096);
+        this.loadedTerrains = new ArrayList<>(128);
         this.setMinHeightIndex(-32);
         this.setMaxHeightIndex(32);
     }
@@ -203,7 +203,7 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
     /**
      * get the terrain location (x, y, z) for the given world location
      */
-    private final int getIndex(float coord, int dim) {
+    private int getIndex(float coord, int dim) {
         if (coord < 0) {
             coord -= dim - 1;
         }
@@ -238,52 +238,30 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
         return (y >= this.minY && y <= this.maxY);
     }
 
-    public final int getMaxHeight() {
-        return (this.maxY * Terrain.DIMY);
-    }
-
-    /**
-     * the maxium height in term of block that this world can reach
-     */
-    public void setMaxHeight(int height) {
-        this.maxY = (height + Maths.abs(height) % Terrain.DIMY) / Terrain.DIMY;
-    }
-
-    public final int getMinHeight() {
+    private int getMinHeight() {
         return (this.minY * Terrain.DIMY);
     }
 
-    /**
-     * the minimum height in term of block that this world can reach
-     */
-    public void setMinHeight(int height) {
-        this.minY = (height + Maths.abs(height) % Terrain.DIMY) / Terrain.DIMY - 1;
-    }
-
-    public final int getMaxHeightIndex() {
+    private int getMaxHeightIndex() {
         return (this.maxY);
     }
 
     /**
      * the minimum height in term of block that this world can reach
      */
-    public void setMaxHeightIndex(int height) {
+    private void setMaxHeightIndex(int height) {
         this.maxY = height;
     }
 
-    public final int getMinHeightIndex() {
+    private int getMinHeightIndex() {
         return (this.minY);
     }
 
     /**
      * the minimum height in term of block that this world can reach
      */
-    public void setMinHeightIndex(int height) {
+    private void setMinHeightIndex(int height) {
         this.minY = height;
-    }
-
-    public boolean hasTerrain(Terrain terrain) {
-        return (this.terrains.containsValue(terrain));
     }
 
     /**
@@ -390,14 +368,14 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
     /**
      * return the topest terrain at the given (x, z) coordinates
      */
-    public Terrain getTop(Vector2i index2) {
+    private Terrain getTop(Vector2i index2) {
         return (this.topTerrains.get(index2));
     }
 
     /**
      * return the topest terrain at the given (x, z) coordinates
      */
-    public Terrain getBot(Vector2i index2) {
+    private Terrain getBot(Vector2i index2) {
         return (this.botTerrains.get(index2));
     }
 

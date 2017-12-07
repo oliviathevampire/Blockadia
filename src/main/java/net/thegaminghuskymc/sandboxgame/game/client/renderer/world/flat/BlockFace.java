@@ -6,9 +6,6 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainMeshVe
 
 import java.util.ArrayList;
 
-/**
- * represent a block face
- */
 public class BlockFace {
 
     // the block
@@ -26,11 +23,11 @@ public class BlockFace {
         this.vertices = vertices;
     }
 
-    public boolean hasSameTexture(BlockFace other) {
+    private boolean hasSameTexture(BlockFace other) {
         return (this.textureID == other.textureID);
     }
 
-    public boolean hasSameBrightness(BlockFace other) {
+    private boolean hasSameBrightness(BlockFace other) {
         return (this.vertices[0].brightness == other.vertices[0].brightness
                 && this.vertices[1].brightness == other.vertices[1].brightness
                 && this.vertices[2].brightness == other.vertices[2].brightness

@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class GameEngine {
 
-    private static final String MOD_ID = "game_engine";
+    private static final String MOD_ID = "sandbox_game";
 
     private static GameEngine INSTANCE;
     protected Side side;
@@ -116,7 +116,7 @@ public abstract class GameEngine {
         if (!gamepath.endsWith("/")) {
             gamepath = gamepath + "/";
         }
-        this.gameDir = new File(gamepath + "Game Engine");
+        this.gameDir = new File(gamepath + "Husky's Sandbox Game");
 
         Logger.get().log(Level.FINE, "Game directory is: " + this.gameDir.getAbsolutePath());
         if (!this.gameDir.exists()) {
@@ -138,6 +138,10 @@ public abstract class GameEngine {
         Logger.get().log(Level.FINE, "Loading config", filepath);
         cfg.load();
         return (cfg);
+    }
+
+    public String getModId() {
+        return MOD_ID;
     }
 
     protected abstract void onInitialized();
@@ -354,6 +358,18 @@ public abstract class GameEngine {
         this.loadedWorlds.add(world);
         world.load();
         return (world);
+    }
+
+    /**
+     * remove a world from the game logic loop
+     */
+    public final void unloadWorld(int worldID) {
+        World world = this.getResourceManager().getWorldManager().getWorld(worldID);
+        if (world == null) {
+            Logger.get().log(Level.ERROR, "Tried to unload an unknown world, with id", worldID);
+            return;
+        }
+        this.loadedWorlds.remove(world);
     }
 
     /**

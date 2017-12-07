@@ -129,12 +129,12 @@ public abstract class BlockRenderer {
         EDGES[11][0] = 3;
         EDGES[11][1] = 7;
 
-        /** edge directions */
+        /* edge directions */
         for (int i = 0; i < EDGES.length; i++) {
             EDGES_DIRECTIONS[i] = Vector3i.sub(VERTICES[EDGES[i][1]], VERTICES[EDGES[i][0]], null);
         }
 
-        /** left face */
+        /* left face */
         FACES_VERTICES[Face.LEFT][0] = 2;
         FACES_VERTICES[Face.LEFT][1] = 1;
         FACES_VERTICES[Face.LEFT][2] = 0;
@@ -156,7 +156,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.LEFT][3][1] = new Vector3i(-1, 0, -1);
         FACES_NEIGHBORS[Face.LEFT][3][2] = new Vector3i(-1, 1, -1);
 
-        /** right face */
+        /* right face */
         FACES_VERTICES[Face.RIGHT][0] = 7;
         FACES_VERTICES[Face.RIGHT][1] = 4;
         FACES_VERTICES[Face.RIGHT][2] = 5;
@@ -178,7 +178,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.RIGHT][3][1] = new Vector3i(1, 0, 1);
         FACES_NEIGHBORS[Face.RIGHT][3][2] = new Vector3i(1, 1, 1);
 
-        /** back face */
+        /* back face */
         FACES_VERTICES[Face.BACK][0] = 6;
         FACES_VERTICES[Face.BACK][1] = 5;
         FACES_VERTICES[Face.BACK][2] = 1;
@@ -200,7 +200,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.BACK][3][1] = new Vector3i(1, 0, -1);
         FACES_NEIGHBORS[Face.BACK][3][2] = new Vector3i(1, 1, -1);
 
-        /** front face */
+        /* front face */
         FACES_VERTICES[Face.FRONT][0] = 3;
         FACES_VERTICES[Face.FRONT][1] = 0;
         FACES_VERTICES[Face.FRONT][2] = 4;
@@ -222,7 +222,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.FRONT][3][1] = new Vector3i(-1, 0, 1);
         FACES_NEIGHBORS[Face.FRONT][3][2] = new Vector3i(-1, 1, 1);
 
-        /** bottom face */
+        /* bottom face */
         FACES_VERTICES[Face.BOT][0] = 0;
         FACES_VERTICES[Face.BOT][1] = 1;
         FACES_VERTICES[Face.BOT][2] = 5;
@@ -244,7 +244,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.BOT][3][1] = new Vector3i(-1, -1, 0);
         FACES_NEIGHBORS[Face.BOT][3][2] = new Vector3i(-1, -1, 1);
 
-        /** top face */
+        /* top face */
         FACES_VERTICES[Face.TOP][0] = 2;
         FACES_VERTICES[Face.TOP][1] = 3;
         FACES_VERTICES[Face.TOP][2] = 7;
@@ -266,7 +266,7 @@ public abstract class BlockRenderer {
         FACES_NEIGHBORS[Face.TOP][3][1] = new Vector3i(1, 1, 0);
         FACES_NEIGHBORS[Face.TOP][3][2] = new Vector3i(1, 1, 1);
 
-        /** vertices faces */
+        /* vertices faces */
         for (int vertexID = 0; vertexID < 8; vertexID++) {
             int faceID = 0;
             for (Face face : Face.faces) {
@@ -279,7 +279,7 @@ public abstract class BlockRenderer {
             }
         }
 
-        /** vertices id relatively to faces */
+        /* vertices id relatively to faces */
         for (int vertexID = 0; vertexID < 8; vertexID++) {
             for (int faceID = 0; faceID < Face.faces.length; faceID++) {
                 VERTICES_FACES_ID[vertexID][faceID] = -1;
@@ -357,8 +357,6 @@ public abstract class BlockRenderer {
      * get the offset of the neighbors block of the given faceID (0-5) and
      * faceVertexID (0-3)
      *
-     * @param faceID
-     * @return
      */
     public static Vector3i[] getNeighboors(int faceID, int faceVertexID) {
         return (BlockRenderer.FACES_NEIGHBORS[faceID][faceVertexID]);
@@ -383,7 +381,7 @@ public abstract class BlockRenderer {
     public abstract int getDefaultTextureID(int faceID);
 }
 
-/**
+/*
  * FACES_NEIGHBORS[Face.LEFT][0][0] = new Vector3i(0, 1, -1);
  * FACES_NEIGHBORS[Face.LEFT][0][1] = new Vector3i(1, 0, -1);
  * FACES_NEIGHBORS[Face.LEFT][0][2] = new Vector3i(1, 1, -1);

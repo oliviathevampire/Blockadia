@@ -10,9 +10,6 @@ import java.nio.ByteBuffer;
 
 public class TerrainMesh extends Mesh {
 
-    // TODO : optimize memory here
-    // (x, y, z, nx, ny, nz, atlasx, atlasy, uvx, uvy, color, brightness,
-    // durability)
     public static final int BYTES_PER_VERTEX = 13 * 4;
 
     /**

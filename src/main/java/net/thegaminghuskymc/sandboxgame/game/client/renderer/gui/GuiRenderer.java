@@ -12,6 +12,7 @@ import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.MainRenderer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.Renderer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.Gui;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiButton;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiLabel;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiView;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.parameters.GuiTextParameterTextCenterBox;
@@ -96,14 +97,14 @@ public class GuiRenderer extends Renderer {
     @Override
     public void initialize() {
         Logger.get().log(Logger.Level.FINE, "Initializing " + this.getClass().getSimpleName());
-        this.fonts = new HashMap<String, Font>();
+        this.fonts = new HashMap<>();
         this.programColoredQuad = new ProgramColoredQuad();
         this.programTexturedQuad = new ProgramTexturedQuad();
         this.programFont = new ProgramFont();
         this.mainGui = new GuiView();
         this.guiInputManager = new GuiInputManagerDesktop();
         this.guiInputManager.initialize(this.getMainRenderer().getGLFWWindow());
-        this.renderingList = new ArrayList<Gui>();
+        this.renderingList = new ArrayList<>();
         this.loadFonts();
     }
 
@@ -122,7 +123,6 @@ public class GuiRenderer extends Renderer {
      */
     private void loadFonts() {
         DEFAULT_FONT = this.getFont("Consolas");
-        // DEFAULT_FONT = this.getFont("Pokemon");
     }
 
     private Font registerFont(String name) {
@@ -192,15 +192,11 @@ public class GuiRenderer extends Renderer {
         updateGuis();
     }
 
-    private final void updateGuis() {
+    private void updateGuis() {
         this.renderingList.clear();
         this.addGuisToRenderingList(this.mainGui);
         this.renderingList.sort(Gui.LAYER_COMPARATOR);
         this.guiInputManager.update(this.renderingList);
-
-        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_K)) {
-            this.toast("hello world");
-        }
     }
 
     /**

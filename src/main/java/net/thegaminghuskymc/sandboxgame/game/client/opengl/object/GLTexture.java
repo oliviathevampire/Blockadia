@@ -1,17 +1,3 @@
-/**
- * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
- * *
- * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
- * *
- * *	PEREIRA Romain
- * *                                       4-----7
- * *                                      /|    /|
- * *                                     0-----3 |
- * *                                     | 5___|_6
- * *                                     |/    | /
- * *                                     1-----2
- */
-
 package net.thegaminghuskymc.sandboxgame.game.client.opengl.object;
 
 import org.lwjgl.BufferUtils;
@@ -124,7 +110,7 @@ public class GLTexture implements GLObject {
         GL11.glTexParameteri(target, pname, param);
     }
 
-    public final void parameterf(int target, int pname, float param) {
+    private void parameterf(int target, int pname, float param) {
         GL11.glTexParameterf(target, pname, param);
     }
 

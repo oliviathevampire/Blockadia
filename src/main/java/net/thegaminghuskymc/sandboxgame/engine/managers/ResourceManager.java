@@ -292,15 +292,7 @@ public abstract class ResourceManager {
             builder.append(File.separator);
         }
         builder.append(path);
-        Logger.get().log(Logger.Level.FINE, builder.toString().replace("/", File.separator));
         return (builder.toString().replace("/", File.separator));
-    }
-
-    /**
-     * get the config informations
-     */
-    public Config getConfig() {
-        return (this.config);
     }
 
     public class Config {

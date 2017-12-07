@@ -28,8 +28,8 @@ public class ModelRendererFactory extends RendererFactory {
 
     public ModelRendererFactory(MainRenderer mainRenderer) {
         super(mainRenderer);
-        this.renderingList = new HashMap<Model, ArrayList<ModelInstance>>();
-        this.modelInstances = new ArrayList<ModelInstance>();
+        this.renderingList = new HashMap<>();
+        this.modelInstances = new ArrayList<>();
     }
 
     public final CameraProjective getCamera() {
@@ -44,28 +44,17 @@ public class ModelRendererFactory extends RendererFactory {
     public void update(double dt) {
         this.renderingList.clear();
 
-        // for each entity of the world (maybe we can do better here?)
         for (ModelInstance modelInstance : this.modelInstances) {
             if (modelInstance == null || !modelInstance.getEntity().isVisible()) {
                 continue;
             }
             modelInstance.update();
 
-            // if entities is not too far and in frustum, then add it to the
-            // list
-            // if (Vector3f.distance(entity.getPosition(), camera.getPosition())
-            // > camera.getRenderDistance()
-            // || !camera.isBoxInFrustum(entity.getBoundingBox())) {
-            // continue;
-            // }
-
             ArrayList<ModelInstance> instances = this.renderingList.get(modelInstance.getModel());
             if (instances == null) {
-                instances = new ArrayList<ModelInstance>(1);
+                instances = new ArrayList<>(1);
                 this.renderingList.put(modelInstance.getModel(), instances);
             }
-            // GameEngineClient.instance().getRenderer().getWorldRenderer().getLineRenderer()
-            // .addBox(modelInstance.getEntity().getBoundingBox());
             instances.add(modelInstance);
         }
     }

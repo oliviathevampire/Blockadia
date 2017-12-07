@@ -21,7 +21,7 @@ public class WorldGeneratorHoles extends WorldGenerator {
                             (terrain.getWorldPos().y + y * Terrain.BLOCK_SIZE) / (64.0f * Terrain.BLOCK_SIZE),
                             (terrain.getWorldPos().z + z * Terrain.BLOCK_SIZE) / (128.0f * Terrain.BLOCK_SIZE));
                     if (d < 0.2f) {
-                        terrain.setBlockAt(Blocks.GRASS, x, y, z);
+                        terrain.setBlockAt(Blocks.DIRT, x, y, z);
                     } else {
                         terrain.setBlockAt(Blocks.AIR, x, y, z);
                     }

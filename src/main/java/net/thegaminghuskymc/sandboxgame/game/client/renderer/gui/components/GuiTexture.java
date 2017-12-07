@@ -21,16 +21,12 @@ public class GuiTexture extends Gui {
     }
 
     public final void setTexture(GLTexture glTexture, float ux, float uy, float vx, float vy) {
-        super.stackEvent(new GuiTextureEventTextureChanged<GuiTexture>(this, glTexture, ux, uy, vx, vy));
+        super.stackEvent(new GuiTextureEventTextureChanged<>(this, glTexture, ux, uy, vx, vy));
         this.glTexture = glTexture;
         this.ux = ux;
         this.uy = uy;
         this.vx = vx;
         this.vy = vy;
-    }
-
-    public final void setTexture(float ux, float uy, float vx, float vy) {
-        this.setTexture(this.glTexture, ux, uy, vx, vy);
     }
 
     public final void setTexture(GLTexture glTexture) {
@@ -65,4 +61,5 @@ public class GuiTexture extends Gui {
     public final float getVy() {
         return (this.vy);
     }
+
 }

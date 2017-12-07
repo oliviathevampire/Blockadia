@@ -15,7 +15,7 @@ public abstract class RendererFactorized extends Renderer {
 
     public RendererFactorized(MainRenderer mainRenderer) {
         super(mainRenderer);
-        this.factories = new ArrayList<RendererFactory>();
+        this.factories = new ArrayList<>();
     }
 
     @Override

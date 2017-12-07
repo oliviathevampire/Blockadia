@@ -24,11 +24,14 @@ import java.util.Stack;
 public class Terrain {
 
     public static final float BLOCK_SIZE = 1.0f;
+    public static final float SLAB_SIZE = 0.5f;
+    public static final float STAIR_TOP_SIZE = 0.5f;
     public static final float METER_TO_BLOCK = 4.0f / 1.0f; // 4 blocks = 1
     // (and use 1 as implicit value to
     // optimize calculations)
     public static final float BLOCK_DEMI_SIZE = BLOCK_SIZE / 2.0f;
-    public static final int DIMX = 16;
+    public static final int DIMX = 70;
+//    public static final int DIMX = 16;
     public static final int DIMY = 64;
     public static final int DIMZ = DIMX;
     public static final float SIZE_DIAGONAL3 = (float) Vector3f.distance(new Vector3f(0, 0, 0),

@@ -88,8 +88,8 @@ public abstract class Entity extends PhysicObject {
     public Entity(World world, float width, float height, float depth) {
         this.world = world;
 
-        this.forces = new ArrayList<Force<Entity>>();
-        this.controls = new ArrayList<Control<Entity>>();
+        this.forces = new ArrayList<>();
+        this.controls = new ArrayList<>();
 
         // look vector
         this.lookVec = new Vector3f();
@@ -107,7 +107,7 @@ public abstract class Entity extends PhysicObject {
         this.sz = depth;
 
         // aies
-        this.ais = new ArrayList<EntityAI>();
+        this.ais = new ArrayList<>();
         this.addAI(new EntityAIIdle(this));
 
         // default states
@@ -130,6 +130,7 @@ public abstract class Entity extends PhysicObject {
      * called when entity spawns
      */
     public void onSpawn(World world) {
+
     }
 
     /**
@@ -145,23 +146,19 @@ public abstract class Entity extends PhysicObject {
         this.onUpdate(dt);
     }
 
-    private final void updateBoundingBox() {
+    private void updateBoundingBox() {
 
     }
 
-    private final void updateAI(double dt) {
+    private void updateAI(double dt) {
         for (int i = 0; i < this.ais.size(); i++) {
             EntityAI ai = this.ais.get(i);
             ai.update(dt);
         }
     }
 
-    public final void addAI(EntityAI ai) {
+    private void addAI(EntityAI ai) {
         this.ais.add(ai);
-    }
-
-    public final void removeAI(EntityAI ai) {
-        this.ais.remove(ai);
     }
 
     /**
@@ -169,7 +166,7 @@ public abstract class Entity extends PhysicObject {
      *
      * @param dt
      */
-    private final void updateRotation(double dt) {
+    private void updateRotation(double dt) {
         // update looking vector
         double rx = Math.toRadians(this.getRotationX());
         double ry = Math.toRadians(this.getRotationY());
@@ -182,7 +179,7 @@ public abstract class Entity extends PhysicObject {
         Rotationable.rotate(this, dt);
     }
 
-    private final void updateSize(double dt) {
+    private void updateSize(double dt) {
         Sizeable.resize(this, dt);
     }
 
@@ -193,7 +190,7 @@ public abstract class Entity extends PhysicObject {
      * really basis of the physic engine: the acceleration vector is reset every
      * frame and has to be recalculated via 'Entity.addForce(Vector3f force)'
      */
-    private final void updatePosition(double dt) {
+    private void updatePosition(double dt) {
 
         // do the controls
         this.runControls(dt);
@@ -202,7 +199,7 @@ public abstract class Entity extends PhysicObject {
         this.runForces(dt);
     }
 
-    private final void runForces(double dt) {
+    private void runForces(double dt) {
         // simulate forces applied to this object
         Vector3f resultant = new Vector3f();
 
@@ -238,7 +235,7 @@ public abstract class Entity extends PhysicObject {
         }
     }
 
-    private final void runControls(double dt) {
+    private void runControls(double dt) {
         for (Control<Entity> control : this.controls) {
             control.run(this, dt);
         }
@@ -255,7 +252,7 @@ public abstract class Entity extends PhysicObject {
     /**
      * update the value of the block under this entity
      */
-    private final void updateBlockUnder() {
+    private void updateBlockUnder() {
         World world = this.getWorld();
         if (world == null) {
             this.blockUnder = null;
@@ -270,7 +267,7 @@ public abstract class Entity extends PhysicObject {
     /**
      * add a force to this entity
      */
-    public final void addForce(Force<Entity> force) {
+    private final void addForce(Force<Entity> force) {
         this.forces.add(force);
     }
 
@@ -325,17 +322,6 @@ public abstract class Entity extends PhysicObject {
         this.speed = speed;
     }
 
-    /**
-     * return true if the entity is moving
-     */
-    public final boolean isMoving() {
-        return (Positioneable.isMoving(this));
-    }
-
-    public final boolean isRotating() {
-        return (Rotationable.isRotating(this));
-    }
-
     @Override
     public final float getMass() {
         return (this.mass);
@@ -366,48 +352,9 @@ public abstract class Entity extends PhysicObject {
         this.state = this.state & ~state;
     }
 
-    public final void swapState(int state) {
-        this.state = this.state ^ state;
-    }
-
-    /**
-     * teleport the entity to the given position
-     */
-    public final void teleport(float x, float y, float z) {
-        this.setPosition(x, y, z);
-    }
-
-    public Block getBlockUnder() {
-        return (this.blockUnder);
-    }
-
-    public boolean isInAir() {
-        return (this.blockUnder == Blocks.AIR);
-    }
-
-    public boolean isFalling() {
-        return (this.getPositionVelocityY() < 0.0f);
-    }
-
-    /**
-     * play the sound at the entity position and velocity
-     */
-    public final void playSound(String soundName) {
-        EventEntityPlaySound event = new EventEntityPlaySound(this, soundName);
-        GameEngine.instance().getResourceManager().getEventManager().invokeEvent(event);
-    }
-
     public final boolean isVisible() {
         return (this.hasState(STATE_VISIBLE));
     }
-
-    public final boolean isJumping() {
-        return (this.getPositionAccelerationY() > 0.0f);
-    }
-
-    /***************************************************************************************/
-    /** position begins */
-    /***************************************************************************************/
 
     @Override
     public float getPositionX() {
@@ -499,10 +446,6 @@ public abstract class Entity extends PhysicObject {
         this.zAcceleration = az;
     }
 
-    /***************************************************************************************/
-    /** rotation begins */
-    /***************************************************************************************/
-
     @Override
     public float getRotationX() {
         return (this.rx);
@@ -592,10 +535,6 @@ public abstract class Entity extends PhysicObject {
     public void setRotationAccelerationZ(float az) {
         this.rzAcceleration = az;
     }
-
-    /***************************************************************************************/
-    /** position begins */
-    /***************************************************************************************/
 
     @Override
     public float getSizeX() {

@@ -204,6 +204,6 @@ public class Model {
     /**
      * draw callback
      */
-    protected void onDraw() {
+    private void onDraw() {
     }
 }

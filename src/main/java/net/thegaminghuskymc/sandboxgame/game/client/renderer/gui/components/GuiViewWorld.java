@@ -51,12 +51,7 @@ public class GuiViewWorld extends GuiView {
         this.addListener(new GuiListener<GuiEventAspectRatio<Gui>>() {
             @Override
             public void invoke(GuiEventAspectRatio<Gui> event) {
-                GameEngineClient.instance().addGLTask(new MainRenderer.GLTask() {
-                    @Override
-                    public void run() {
-                        worldRenderer.resizeFbo();
-                    }
-                });
+                GameEngineClient.instance().addGLTask(() -> worldRenderer.resizeFbo());
             }
         });
     }
@@ -78,7 +73,6 @@ public class GuiViewWorld extends GuiView {
         }
         this.worldRenderer.getCamera().update();
 
-        // TODO update this by setting world renderer viewport
         float aspect = GLH.glhGetWindow().getAspectRatio() * super.getTotalAspectRatio();
         this.worldRenderer.getCamera().setAspect(aspect);
     }

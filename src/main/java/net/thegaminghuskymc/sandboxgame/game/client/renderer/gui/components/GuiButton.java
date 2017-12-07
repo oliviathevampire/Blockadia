@@ -100,7 +100,7 @@ public class GuiButton extends GuiLabel {
         });
     }
 
-    public final float getTransition() {
+    private float getTransition() {
         return (this.transition);
     }
 
@@ -108,27 +108,23 @@ public class GuiButton extends GuiLabel {
         this.transition = dt;
     }
 
-    public final void setBGColor(Color color) {
+    private void setBGColor(Color color) {
         this.bg.setColor(color);
-    }
-
-    public final void setHoveredColor(float r, float g, float b, float a) {
-        this.hoveredColor.set(r, g, b, a);
     }
 
     public final void setOutColor(float r, float g, float b, float a) {
         this.outColor.set(r, g, b, a);
     }
 
-    public final void setPressedColor(float r, float g, float b, float a) {
+    private void setPressedColor(float r, float g, float b, float a) {
         this.pressedColor.set(r, g, b, a);
     }
 
-    public final void setDisabledColor(float r, float g, float b, float a) {
+    private void setDisabledColor(float r, float g, float b, float a) {
         this.disabledColor.set(r, g, b, a);
     }
 
-    public final Color getHoveredColor() {
+    private Color getHoveredColor() {
         return (this.hoveredColor);
     }
 
@@ -136,7 +132,7 @@ public class GuiButton extends GuiLabel {
         this.hoveredColor.set(color.getARGB());
     }
 
-    public final Color getOutColor() {
+    private Color getOutColor() {
         return (this.outColor);
     }
 
@@ -144,7 +140,7 @@ public class GuiButton extends GuiLabel {
         this.setOutColor(color.getR(), color.getG(), color.getB(), color.getA());
     }
 
-    public final Color getPressedColor() {
+    private Color getPressedColor() {
         return (this.pressedColor);
     }
 
@@ -152,7 +148,7 @@ public class GuiButton extends GuiLabel {
         this.setPressedColor(color.getR(), color.getG(), color.getB(), color.getA());
     }
 
-    public final Color getDisabledColor() {
+    private Color getDisabledColor() {
         return (this.disabledColor);
     }
 
@@ -173,4 +169,5 @@ public class GuiButton extends GuiLabel {
         this.setPressedColor(PRESSED_COLOR);
         this.setDisabledColor(DISABLED_COLOR);
     }
+
 }

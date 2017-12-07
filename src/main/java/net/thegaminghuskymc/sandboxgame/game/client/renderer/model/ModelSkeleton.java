@@ -16,14 +16,14 @@ public class ModelSkeleton {
     private ArrayList<Bone> rootBones;
 
     public ModelSkeleton() {
-        this.rootBones = new ArrayList<Bone>();
-        this.bonesMap = new HashMap<String, Bone>();
-        this.bonesList = new ArrayList<Bone>();
+        this.rootBones = new ArrayList<>();
+        this.bonesMap = new HashMap<>();
+        this.bonesList = new ArrayList<>();
     }
 
     public ModelSkeleton(ModelSkeleton skeleton) {
-        this.bonesMap = new HashMap<String, Bone>(skeleton.bonesMap);
-        this.bonesList = new ArrayList<Bone>(skeleton.bonesList);
+        this.bonesMap = new HashMap<>(skeleton.bonesMap);
+        this.bonesList = new ArrayList<>(skeleton.bonesList);
         this.rootBones = skeleton.rootBones;
     }
 

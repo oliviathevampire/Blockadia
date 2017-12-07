@@ -237,7 +237,7 @@ public class Sky implements Taskable {
      *********************************/
     /**********************************************************************************/
 
-    protected void calculateFog() {
+    private void calculateFog() {
         this.fogGradient = 4.0f;
         this.fogDensity = 0.004f;
 
@@ -344,7 +344,7 @@ public class Sky implements Taskable {
     }
 
     /** numbre of particles spawned per frames */
-    public void startRain(int particles) {
+    private void startRain(int particles) {
         this.rainStrengthMax = particles;
         this.rainStrength = 0;
         this.rainTimer = 60 * 16;

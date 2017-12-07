@@ -155,7 +155,7 @@ public abstract class Gui {
         this.params = null;
         this.animations = null;
         this.state = 0;
-        this.tasks = new ArrayList<GuiTask>();
+        this.tasks = new ArrayList<>();
         this.setVisible(true);
         this.setPressed(false);
         this.setSelected(false);
@@ -175,11 +175,11 @@ public abstract class Gui {
             return;
         }
         if (this.listeners == null) {
-            this.listeners = new HashMap<Class<?>, ArrayList<GuiListener<?>>>();
+            this.listeners = new HashMap<>();
         }
         ArrayList<GuiListener<?>> lst = this.listeners.get(listener.getEventClass());
         if (lst == null) {
-            lst = new ArrayList<GuiListener<?>>();
+            lst = new ArrayList<>();
             this.listeners.put(listener.getEventClass(), lst);
         }
 
@@ -210,7 +210,7 @@ public abstract class Gui {
      */
     public int startAnimation(GuiAnimation<? extends Gui> animation) {
         if (this.animations == null) {
-            this.animations = new ArrayList<GuiAnimation<Gui>>();
+            this.animations = new ArrayList<>();
         }
         this.animations.add((GuiAnimation<Gui>) animation);
         ((GuiAnimation<Gui>) animation).restart(this);
@@ -255,7 +255,7 @@ public abstract class Gui {
         this.setBoxPosition(x, y, true);
     }
 
-    protected void setBoxPosition(float x, float y, boolean runParameters) {
+    private void setBoxPosition(float x, float y, boolean runParameters) {
         this.setBox(x, y, this.getBoxWidth(), this.getBoxHeight(), this.getBoxRotation(), runParameters);
     }
 
@@ -266,20 +266,20 @@ public abstract class Gui {
         this.setBoxCenter(xcenter, ycenter, this.getBoxWidth(), this.getBoxHeight(), this.getBoxRotation());
     }
 
-    public final void setBoxCenter(float xcenter, float ycenter, float width, float height, float rot) {
+    private void setBoxCenter(float xcenter, float ycenter, float width, float height, float rot) {
         this.setBoxCenter(xcenter, ycenter, width, height, rot, true);
     }
 
-    public final void setBoxCenter(float xcenter, float ycenter, float width, float height, float rot,
+    private void setBoxCenter(float xcenter, float ycenter, float width, float height, float rot,
                                    boolean runParameters) {
         this.setBox(xcenter - width * 0.5f, ycenter - height * 0.5f, width, height, rot, runParameters);
     }
 
-    public void setBoxSize(float width, float height) {
+    private void setBoxSize(float width, float height) {
         this.setBoxSize(width, height, true);
     }
 
-    public final void setBoxSize(float width, float height, boolean runParameters) {
+    private void setBoxSize(float width, float height, boolean runParameters) {
         this.setBox(this.getBoxX(), this.getBoxY(), width, height, this.getBoxRotation(), runParameters);
     }
 
@@ -353,7 +353,7 @@ public abstract class Gui {
     /**
      * update transformation matrices
      */
-    private final void updateTransformationMatrices(Matrix4f parentTransform) {
+    private void updateTransformationMatrices(Matrix4f parentTransform) {
 
         // combine with parent transformation
         Matrix4f.mul(parentTransform, this.guiToParentChangeOfBasis, this.guiToWindowChangeOfBasis);
@@ -639,7 +639,7 @@ public abstract class Gui {
         return (this.hasState(STATE_LEFT_PRESSED));
     }
 
-    public final void setLeftPressed(boolean isPressed) {
+    private void setLeftPressed(boolean isPressed) {
         this.setState(STATE_LEFT_PRESSED, isPressed);
     }
 
@@ -664,7 +664,7 @@ public abstract class Gui {
 
     public void addParameter(GuiParameter<?> parameter) {
         if (this.params == null) {
-            this.params = new ArrayList<GuiParameter<Gui>>();
+            this.params = new ArrayList<>();
         }
         this.params.add((GuiParameter<Gui>) parameter);
         ((GuiParameter<Gui>) parameter).run(this);
@@ -823,13 +823,13 @@ public abstract class Gui {
         }
         gui.parent = this;
         if (this.children == null) {
-            this.children = new ArrayList<Gui>();
+            this.children = new ArrayList<>();
         }
         this.children.add(position, gui);
         gui.updateTransformationMatrices(this.guiToWindowChangeOfBasis);
         gui.updateAspectRatio(this.getTotalAspectRatio(), false);
         gui.setLayer(this.getLayer() + 1);
-        this.stackEvent(new GuiEventAddChild<Gui, Gui>(this, gui));
+        this.stackEvent(new GuiEventAddChild<>(this, gui));
     }
 
     /**
