@@ -18,10 +18,10 @@ public class WorldGeneratorHoles extends WorldGenerator {
                 for (int z = 0; z < Terrain.DIMZ; z++) {
                     double d = World.NOISE_OCTAVE.noise(
                             (terrain.getWorldPos().x + x * Terrain.BLOCK_SIZE) / (128.0f * Terrain.BLOCK_SIZE),
-                            (terrain.getWorldPos().y + y * Terrain.BLOCK_SIZE) / (64.0f * Terrain.BLOCK_SIZE),
+                            (terrain.getWorldPos().y + y * Terrain.BLOCK_SIZE) / (64.0f * Terrain.BLOCK_SIZE) - 50,
                             (terrain.getWorldPos().z + z * Terrain.BLOCK_SIZE) / (128.0f * Terrain.BLOCK_SIZE));
                     if (d < 0.2f) {
-                        terrain.setBlockAt(Blocks.DIRT, x, y, z);
+                        terrain.setBlockAt(Blocks.DIRT.get(0), x, y, z);
                     } else {
                         terrain.setBlockAt(Blocks.AIR, x, y, z);
                     }
@@ -43,25 +43,16 @@ public class WorldGeneratorHoles extends WorldGenerator {
                 if (d < -0.6) {
                     terrain.setBlock(Blocks.PLANTS.get(rng.nextInt(5)), x, y + 1, z);
                 }
-                terrain.setBlock(Blocks.GRASS, x, y, z);
+                terrain.setBlock(Blocks.GRASS.get(0), x, y, z);
 
             }
         }
 
-        int x = rng.nextInt(Terrain.DIMX);
-        int z = rng.nextInt(Terrain.DIMZ);
-        int y = terrain.getHeightAt(x, z);
+//        terrain.generateBigTree(Blocks.LOGS.get(0), Blocks.LEAVES.get(0));
 
-        if (y != -1) {
-            int max = 4 + rng.nextInt(4);
-            for (int i = 0; i < max; i++) {
-                terrain.setBlock(Blocks.LOGS.get(0), x, y + i, z);
-            }
-            for (int dx = -3; dx <= 3; dx++) {
-                for (int dz = -3; dz <= 3; dz++) {
-                    terrain.setBlock(Blocks.LEAVES.get(0), x + dx, y + max, z + dz);
-                }
-            }
+        for(int i = 0; i < 8; i++) {
+            terrain.generateHouse(Blocks.PLANKS.get(i), Blocks.LOGS.get(i));
         }
+
     }
 }

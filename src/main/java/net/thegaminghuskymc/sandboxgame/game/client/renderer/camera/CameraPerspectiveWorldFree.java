@@ -6,11 +6,10 @@ import org.lwjgl.glfw.GLFW;
 
 public class CameraPerspectiveWorldFree extends CameraPerspectiveWorld {
 
-    public static final int STATE_MOVE_FORWARD = 1;
-    public static final int STATE_MOVE_BACKWARD = 2;
-    public static final int STATE_MOVE_LEFT = 4;
-    public static final int STATE_MOVE_RIGHT = 8;
-    static int i = 0;
+    private static final int STATE_MOVE_FORWARD = 1;
+    private static final int STATE_MOVE_BACKWARD = 2;
+    private static final int STATE_MOVE_LEFT = 4;
+    private static final int STATE_MOVE_RIGHT = 8;
     private double _prevx = 200;
     private double _prevy = 200;
 
@@ -21,11 +20,11 @@ public class CameraPerspectiveWorldFree extends CameraPerspectiveWorld {
     @Override
     public void update() {
         super.update();
-        this.setSpeed(0.5f);
+        this.setSpeed(0.1f);
         this.updateMove();
     }
 
-    protected void updateMove() {
+    private void updateMove() {
         Vector3f vel = this.getPositionVelocity();
         if (this.hasState(STATE_MOVE_FORWARD)) {
             vel.setX(this.getViewVector().x);
@@ -49,7 +48,7 @@ public class CameraPerspectiveWorldFree extends CameraPerspectiveWorld {
             vel.setZ(0);
         }
 
-        this.move(vel.scale(2.0F));
+        this.move(vel.scale(1.0F));
     }
 
     @Override
@@ -81,9 +80,6 @@ public class CameraPerspectiveWorldFree extends CameraPerspectiveWorld {
         }
         if (key == GLFW.GLFW_KEY_S) {
             this.setState(STATE_MOVE_BACKWARD);
-        }
-        if (key == GLFW.GLFW_KEY_R) {
-
         }
     }
 

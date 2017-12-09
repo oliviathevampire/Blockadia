@@ -16,9 +16,6 @@ public class Blocks implements IModResource {
      * load default blocks
      */
     public static Block AIR;
-    public static Block DIRT;
-    public static Block GRASS;
-    public static Block LIGHT;
     public static Block WATER;
     public static Block COBBLESTONE;
     public static Block GLASS;
@@ -60,6 +57,9 @@ public class Blocks implements IModResource {
     public static LinkedList<Block> WOOL_SLABS = new LinkedList<>();
     public static LinkedList<Block> ORES = new LinkedList<>();
     public static LinkedList<Block> STORAGE_BLOCKS = new LinkedList<>();
+    public static LinkedList<Block> DIRT = new LinkedList<>();
+    public static LinkedList<Block> GRASS = new LinkedList<>();
+    public static LinkedList<Block> LIGHT = new LinkedList<>();
 
     public static Block getBlockByID(short blockID) {
         return (BlockManager.instance().getBlockByID(blockID));
@@ -73,9 +73,6 @@ public class Blocks implements IModResource {
 
     private void loadBlocks(BlockManager blockmanager) {
         Blocks.AIR = blockmanager.registerBlock(new BlockAir());
-        Blocks.DIRT = blockmanager.registerBlock(new BlockDirt(blockmanager.getNextID()));
-        Blocks.GRASS = blockmanager.registerBlock(new BlockGrass(blockmanager.getNextID()));
-        Blocks.LIGHT = blockmanager.registerBlock(new BlockLight(blockmanager.getNextID()));
         Blocks.WATER = blockmanager.registerBlock(new BlockWater(blockmanager.getNextID()));
         Blocks.COBBLESTONE = blockmanager.registerBlock(new BlockCobblestone(blockmanager.getNextID()));
 
@@ -114,13 +111,13 @@ public class Blocks implements IModResource {
         for (int i = 0; i < 7; i++) {
             Blocks.STONES.add(blockmanager.registerBlock(new BlockStone(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.WOOL.add(blockmanager.registerBlock(new BlockWool(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.STAINED_GLASS.add(blockmanager.registerBlock(new BlockStainedGlass(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.TERRACOTTA.add(blockmanager.registerBlock(new BlockTerracotta(blockmanager.getNextID())));
         }
         for (int i = 0; i < 3; i++) {
@@ -129,7 +126,7 @@ public class Blocks implements IModResource {
         for (int i = 0; i < 4; i++) {
             Blocks.CROPS.add(blockmanager.registerBlock(new BlockCrop(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.CORALS.add(blockmanager.registerBlock(new BlockCoral(blockmanager.getNextID())));
         }
         for (int i = 0; i < 8; i++) {
@@ -162,16 +159,16 @@ public class Blocks implements IModResource {
         for (int i = 0; i < 8; i++) {
             Blocks.FENCE_GATES.add(blockmanager.registerBlock(new BlockFenceGate(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.BED.add(blockmanager.registerBlock(new BlockBed(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.BANNERS.add(blockmanager.registerBlock(new BlockBanner(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.CARPETS.add(blockmanager.registerBlock(new BlockCarpet(blockmanager.getNextID())));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             Blocks.WOOL_SLABS.add(blockmanager.registerBlock(new BlockSlab(blockmanager.getNextID())));
         }
         for (int i = 0; i < 23; i++) {
@@ -179,6 +176,15 @@ public class Blocks implements IModResource {
         }
         for (int i = 0; i < 23; i++) {
             Blocks.STORAGE_BLOCKS.add(blockmanager.registerBlock(new BlockStorage(blockmanager.getNextID())));
+        }
+        for (int i = 0; i < 2; i++) {
+            Blocks.DIRT.add(blockmanager.registerBlock(new BlockDirt(blockmanager.getNextID())));
+        }
+        for (int i = 0; i < 5; i++) {
+            Blocks.GRASS.add(blockmanager.registerBlock(new BlockGrass(blockmanager.getNextID())));
+        }
+        for (int i = 0; i < 2; i++) {
+            Blocks.LIGHT.add(blockmanager.registerBlock(new BlockLight(blockmanager.getNextID())));
         }
     }
 

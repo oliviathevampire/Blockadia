@@ -24,22 +24,4 @@ public class ModPOT implements IMod {
 
     }
 
-	/*@Override
-	public void preInit(Mod mod) {
-		mod.addResource(new POTBlocks());
-		mod.addResource(new POTItems());
-		mod.addResource(new POTEntities());
-		mod.addResource(new POTWorlds());
-	}
-
-	@Override
-	public void init(Mod mod) {
-
-	}
-
-	@Override
-	public void postInit(Mod mod) {
-
-	}*/
-
 }

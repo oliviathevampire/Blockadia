@@ -79,8 +79,10 @@ public abstract class GameEngine {
         this.resources.initialize();
 
         // config
+        Config config1 = new Config(R.getResPath(MOD_ID, "config.json"));
+        config1.getString("graphicMode", "fancy");
         this.config = new HashMap<>();
-        this.loadConfig(MOD_ID, R.getResPath("config.json"));
+        this.config.getOrDefault("graphicMode", config1);
 
         this.modLoader = new ModLoader();
         this.tasks = new ArrayList<>(256);

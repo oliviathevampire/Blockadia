@@ -20,9 +20,9 @@ public class ClientBlockRenderers implements IModResource {
 
     // texture id
     public static int T_EMPTY;
-    public static int T_DIRT;
-    public static int T_GRASS_TOP;
-    public static int T_GRASS_SIDE;
+    public static int[] T_DIRT = new int[2];
+    public static int[] T_GRASS_TOP = new int[5];
+    public static int[] T_GRASS_SIDE = new int[5];
     public static int T_LIQUID;
     public static int T_LIGHT;
     public static int T_COBBLESTONE;
@@ -44,13 +44,13 @@ public class ClientBlockRenderers implements IModResource {
     public static int[] T_DOORS_BOTTOM = new int[8];
     public static int[] T_CHESTS = new int[8];
     public static int[] T_STONES = new int[7];
-    public static int[] T_WOOL = new int[16];
-    public static int[] T_STAINED_GLASS = new int[16];
-    public static int[] T_TERRACOTTA = new int[16];
-    public static int[] T_BED = new int[16];
-    public static int[] T_BANNER = new int[16];
-    public static int[] T_CARPET = new int[16];
-    public static int[] T_WOOL_SLAB = new int[16];
+    public static int[] T_WOOL = new int[18];
+    public static int[] T_STAINED_GLASS = new int[18];
+    public static int[] T_TERRACOTTA = new int[18];
+    public static int[] T_BED = new int[18];
+    public static int[] T_BANNER = new int[18];
+    public static int[] T_CARPET = new int[18];
+    public static int[] T_WOOL_SLAB = new int[18];
 
     public static Block getBlockByID(short blockID) {
         return (BlockManager.instance().getBlockByID(blockID));
@@ -64,12 +64,27 @@ public class ClientBlockRenderers implements IModResource {
 
     private void loadTextures(BlockRendererManager blockTextureManager) {
         T_EMPTY = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/empty.png"));
-        T_DIRT = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/dirt.png"));
-        T_GRASS_TOP = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
-        T_GRASS_SIDE = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
+        T_DIRT[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/dirt.png"));
+        T_GRASS_TOP[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+        T_GRASS_SIDE[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
         T_LIQUID = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/liquid.png"));
         T_LIGHT = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/light.png"));
         T_COBBLESTONE = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/cobblestone.png"));
+
+        T_DIRT[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/dirt.png"));
+        T_DIRT[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/course_dirt.png"));
+
+        T_GRASS_TOP[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+        T_GRASS_TOP[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+        T_GRASS_TOP[2] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+        T_GRASS_TOP[3] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+        T_GRASS_TOP[4] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_top.png"));
+
+        T_GRASS_SIDE[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
+        T_GRASS_SIDE[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
+        T_GRASS_SIDE[2] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
+        T_GRASS_SIDE[3] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
+        T_GRASS_SIDE[4] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/grass_side.png"));
 
         T_PLANTS[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/flower1.png"));
         T_PLANTS[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/flower2.png"));
@@ -166,24 +181,23 @@ public class ClientBlockRenderers implements IModResource {
         T_STONES[5] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_granite.png"));
         T_STONES[6] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_granite_smooth.png"));
 
-        T_WOOL[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone.png"));
-        T_STONES[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_diorite.png"));
-        T_STONES[2] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_diorite_smooth.png"));
-        T_STONES[3] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_andesite.png"));
-        T_STONES[4] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_andesite_smooth.png"));
-        T_STONES[5] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_granite.png"));
-        T_STONES[6] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/stone_granite_smooth.png"));
+        T_WOOL[0] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/red_wool.png"));
+        T_WOOL[1] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/green_wool.png"));
+        T_WOOL[2] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/blue_wool.png"));
+        T_WOOL[3] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/pink_wool.png"));
+        T_WOOL[4] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/purple_wool.png"));
+        T_WOOL[5] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/light_blue_wool.png"));
+        T_WOOL[6] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/green_wool.png"));
+        T_WOOL[7] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/black_wool.png"));
+        T_WOOL[8] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/white_wool.png"));
+        T_WOOL[9] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/yellow_wool.png"));
+        T_WOOL[10] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/cyan_wool.png"));
+        T_WOOL[11] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/gray_wool.png"));
+        T_WOOL[12] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/silver_wool.png"));
+        T_WOOL[13] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/orange_wool.png"));
+        T_WOOL[14] = blockTextureManager.registerBlockTexture(R.getResPath("textures/blocks/lime_wool.png"));
 
-        blockTextureManager.setBlockRenderer(Blocks.DIRT, new BlockRendererCube(ClientBlockRenderers.T_DIRT));
         blockTextureManager.setBlockRenderer(Blocks.COBBLESTONE, new BlockRendererCube(ClientBlockRenderers.T_COBBLESTONE));
-
-        blockTextureManager.setBlockRenderer(Blocks.GRASS,
-                new BlockRendererCube(Face.LEFT, ClientBlockRenderers.T_GRASS_SIDE, Face.RIGHT,
-                        ClientBlockRenderers.T_GRASS_SIDE, Face.FRONT, ClientBlockRenderers.T_GRASS_SIDE, Face.BACK,
-                        ClientBlockRenderers.T_GRASS_SIDE, Face.TOP, ClientBlockRenderers.T_GRASS_TOP, Face.BOT,
-                        ClientBlockRenderers.T_DIRT));
-
-        blockTextureManager.setBlockRenderer(Blocks.LIGHT, new BlockRendererCube(ClientBlockRenderers.T_LIGHT));
 
         blockTextureManager.setBlockRenderer(Blocks.WATER,
                 new BlockRendererLiquid(ClientBlockRenderers.T_LIQUID));
@@ -212,6 +226,10 @@ public class ClientBlockRenderers implements IModResource {
             blockTextureManager.setBlockRenderer(Blocks.STONES.get(i),
                     new BlockRendererCube(ClientBlockRenderers.T_STONES[i]));
         }
+        for (int i = 0; i < 15; i++) {
+            blockTextureManager.setBlockRenderer(Blocks.WOOL.get(i),
+                    new BlockRendererCube(ClientBlockRenderers.T_WOOL[i]));
+        }
         for (int i = 0; i < 8; i++) {
             blockTextureManager.setBlockRenderer(Blocks.LOGS.get(i),
                     new BlockRendererCube(Face.LEFT, ClientBlockRenderers.T_LOGS_SIDE[i], Face.RIGHT,
@@ -225,7 +243,22 @@ public class ClientBlockRenderers implements IModResource {
         }
         for (int i = 0; i < 8; i++) {
             blockTextureManager.setBlockRenderer(Blocks.DOORS.get(i),
-                    new BlockRendererCube(ClientBlockRenderers.T_PLANKS[i]));
+                    new BlockRendererCube(ClientBlockRenderers.T_DOORS_TOP[i]));
+        }
+        for (int i = 0; i < 2; i++) {
+            blockTextureManager.setBlockRenderer(Blocks.DIRT.get(i),
+                    new BlockRendererCube(ClientBlockRenderers.T_DIRT[i]));
+        }
+        for (int i = 0; i < 5; i++) {
+            blockTextureManager.setBlockRenderer(Blocks.GRASS.get(i),
+                    new BlockRendererCube(Face.LEFT, ClientBlockRenderers.T_GRASS_SIDE[i], Face.RIGHT,
+                            ClientBlockRenderers.T_GRASS_SIDE[i], Face.FRONT, ClientBlockRenderers.T_GRASS_SIDE[i], Face.BACK,
+                            ClientBlockRenderers.T_GRASS_SIDE[i], Face.TOP, ClientBlockRenderers.T_GRASS_TOP[i], Face.BOT,
+                            ClientBlockRenderers.T_DIRT[0]));
+        }
+        for (int i = 0; i < 2; i++) {
+            blockTextureManager.setBlockRenderer(Blocks.LIGHT.get(i),
+                    new BlockRendererCube(ClientBlockRenderers.T_LIGHT));
         }
     }
 

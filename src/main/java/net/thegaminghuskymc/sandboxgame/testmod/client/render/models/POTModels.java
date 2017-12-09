@@ -13,7 +13,6 @@ import net.thegaminghuskymc.sandboxgame.game.client.resources.ModelManager;
 import net.thegaminghuskymc.sandboxgame.game.client.resources.ResourceManagerClient;
 import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityBipedTest;
 import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityPlant;
-import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityTest;
 
 public class POTModels implements IModResource {
 
@@ -34,7 +33,6 @@ public class POTModels implements IModResource {
     @Override
     public void load(Mod mod, ResourceManager manager) {
         registerJSONModel(manager, R.getResPath("pot", "models/physicTest2/"), EntityBipedTest.class);
-        registerJSONModel(manager, R.getResPath("pot", "models/animTest/"), EntityTest.class);
         registerJSONModel(manager, R.getResPath("pot", "models/plant/"), EntityPlant.class);
     }
 

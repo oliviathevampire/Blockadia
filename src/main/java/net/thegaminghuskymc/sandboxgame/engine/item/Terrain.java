@@ -16,23 +16,20 @@ import net.thegaminghuskymc.sandboxgame.engine.world.World;
 import net.thegaminghuskymc.sandboxgame.engine.world.WorldFlatTerrainStorage;
 import net.thegaminghuskymc.sandboxgame.game.mod.Blocks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class Terrain {
 
     public static final float BLOCK_SIZE = 1.0f;
     public static final float SLAB_SIZE = 0.5f;
     public static final float STAIR_TOP_SIZE = 0.5f;
-    public static final float METER_TO_BLOCK = 4.0f / 1.0f; // 4 blocks = 1
+    public static final float METER_TO_BLOCK = 8.0f / 1.0f; // 4 blocks = 1
     // (and use 1 as implicit value to
     // optimize calculations)
     public static final float BLOCK_DEMI_SIZE = BLOCK_SIZE / 2.0f;
     public static final int DIMX = 70;
 //    public static final int DIMX = 16;
-    public static final int DIMY = 64;
+    public static final int DIMY = 74;
     public static final int DIMZ = DIMX;
     public static final float SIZE_DIAGONAL3 = (float) Vector3f.distance(new Vector3f(0, 0, 0),
             new Vector3f(DIMX * BLOCK_SIZE, DIMY * BLOCK_SIZE, DIMZ * BLOCK_SIZE));
@@ -64,7 +61,7 @@ public class Terrain {
     /**
      * blocks durability
      */
-    protected byte[] durability;
+    private byte[] durability;
     /**
      * block instances
      */
@@ -170,7 +167,7 @@ public class Terrain {
      * IN A SEPARATE THREAD. END HERE
      */
 
-    public boolean hasState(int state) {
+    private boolean hasState(int state) {
         return ((this.state & state) == state);
     }
 
@@ -178,7 +175,7 @@ public class Terrain {
         this.state = this.state | state;
     }
 
-    public void unsetState(int state) {
+    private void unsetState(int state) {
         this.state = this.state & ~(state);
     }
 
@@ -290,13 +287,6 @@ public class Terrain {
         }
         int index = this.getIndex(xyz[0], xyz[1], xyz[2]);
         return (terrain.setBlock(block, index, xyz[0], xyz[1], xyz[2]));
-    }
-
-    /**
-     * secure function to set a block relative to this terrain
-     */
-    public void setBlock(Block block, Vector3i pos) {
-        this.setBlock(block, pos.x, pos.y, pos.z);
     }
 
     public BlockInstance setBlock(Block block, int index) {
@@ -435,7 +425,7 @@ public class Terrain {
     /**
      * get sunlight value
      */
-    public final byte getSunLight(int xyz[]) {
+    private byte getSunLight(int xyz[]) {
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
             return (15);
@@ -450,7 +440,7 @@ public class Terrain {
     /**
      * get sunlight value
      */
-    public final byte getSunLight(int index) {
+    private byte getSunLight(int index) {
         if (this.lights == null) {
             return (0);
         }
@@ -765,7 +755,7 @@ public class Terrain {
     /**
      * set tje block light value
      */
-    private final void setBlockLight(byte val, int index) {
+    private void setBlockLight(byte val, int index) {
         if (this.lights == null) {
             // initialize it, fill it with 0
             this.lights = new byte[Terrain.MAX_BLOCK_INDEX];
@@ -781,12 +771,12 @@ public class Terrain {
     /**
      * add a light to the terrain
      */
-    public void addBlockLight(byte lightValue, int index) {
+    private void addBlockLight(byte lightValue, int index) {
         if (lightValue == 0) {
             return;
         }
         if (this.lightBlockAddQueue == null) {
-            this.lightBlockAddQueue = new Stack<LightNodeAdd>();
+            this.lightBlockAddQueue = new Stack<>();
         }
         this.lightBlockAddQueue.add(new LightNodeAdd(this, index));
         this.setBlockLight(lightValue, index);
@@ -802,7 +792,7 @@ public class Terrain {
     /**
      * remove the light at given index
      */
-    public void removeLight(int index) {
+    private void removeLight(int index) {
         this.removeLight(index, this.getBlockLight(index));
     }
 
@@ -813,7 +803,7 @@ public class Terrain {
         }
 
         if (this.lightBlockRemovalQueue == null) {
-            this.lightBlockRemovalQueue = new Stack<LightNodeRemoval>();
+            this.lightBlockRemovalQueue = new Stack<>();
         }
 
         this.lightBlockRemovalQueue.push(new LightNodeRemoval(this, index, value));
@@ -846,6 +836,184 @@ public class Terrain {
         // update meshes
         for (Terrain terrain : processedTerrains) {
             terrain.invokeEvent(new EventTerrainBlocklightUpdate(terrain));
+        }
+    }
+
+    public void generateTree(Block log, Block leaves) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 4 + rng.nextInt(4);
+            for (int i = 0; i < max; i++) {
+                setBlock(log, x, y + i, z);
+            }
+            for (int dx = -3; dx <= 3; dx++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(leaves, x + dx, y + max, z + dz);
+                }
+            }
+        }
+    }
+
+    public void generateBigTree(Block log, Block leaves) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 3 + rng.nextInt(3);
+            for (int i = 0; i < max + 2; i++) {
+                setBlock(log, x, y + i, z);
+            }
+            for (int dx = -3; dx <= 3; dx++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(leaves, x + dx, y + max, z + dz);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(leaves, x + dx - 1, y + max + 1, z + dz + 1);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 2, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 3, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 4, z + dz + 2);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(leaves, x + dx - 1, y + max + 5, z + dz + 1);
+                }
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(leaves, x + dx, y + max + 6, z + dz);
+                }
+            }
+        }
+    }
+
+    public void generateWell(Block main, Block fence) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 3 + rng.nextInt(3);
+            for (int i = 0; i < max + 2; i++) {
+                setBlock(main, x, y + i, z);
+            }
+            for (int dx = -3; dx <= 3; dx++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(fence, x + dx, y + max, z + dz);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(fence, x + dx - 1, y + max + 1, z + dz + 1);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(fence, x + dx - 2, y + max + 2, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(fence, x + dx - 2, y + max + 3, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(fence, x + dx - 2, y + max + 4, z + dz + 2);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(fence, x + dx - 1, y + max + 5, z + dz + 1);
+                }
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(fence, x + dx, y + max + 6, z + dz);
+                }
+            }
+        }
+    }
+
+    public void generateHouse(Block planks, Block log) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 8 + rng.nextInt(8);
+            for (int i = 0; i < max; i++) {
+                setBlock(log, x, y + i, z);
+            }
+            for (int i = 0; i < 5; i++) {
+                setBlock(planks, x, y + i, z);
+            }
+        }
+    }
+
+    public void generateChurch(Block main, Block glass) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 3 + rng.nextInt(3);
+            for (int i = 0; i < max + 2; i++) {
+                setBlock(main, x, y + i, z);
+            }
+            for (int dx = -3; dx <= 3; dx++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(glass, x + dx, y + max, z + dz);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(glass, x + dx - 1, y + max + 1, z + dz + 1);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(glass, x + dx - 2, y + max + 2, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(glass, x + dx - 2, y + max + 3, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(glass, x + dx - 2, y + max + 4, z + dz + 2);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(glass, x + dx - 1, y + max + 5, z + dz + 1);
+                }
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(glass, x + dx, y + max + 6, z + dz);
+                }
+            }
+        }
+    }
+
+    public void generateSmallTree(Block log, Block leaves) {
+        Random rng = new Random();
+        int x = rng.nextInt(DIMX);
+        int z = rng.nextInt(DIMZ);
+        int y = getHeightAt(x, z);
+        if (y != -1) {
+            int max = 3 + rng.nextInt(3);
+            for (int i = 0; i < max + 2; i++) {
+                setBlock(log, x, y + i, z);
+            }
+            for (int dx = -3; dx <= 3; dx++) {
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(leaves, x + dx, y + max, z + dz);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(leaves, x + dx - 1, y + max + 1, z + dz + 1);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 2, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 3, z + dz + 2);
+                }
+                for (int dz = -5; dz <= 5; dz++) {
+                    setBlock(leaves, x + dx - 2, y + max + 4, z + dz + 2);
+                }
+                for (int dz = -4; dz <= 4; dz++) {
+                    setBlock(leaves, x + dx - 1, y + max + 5, z + dz + 1);
+                }
+                for (int dz = -3; dz <= 3; dz++) {
+                    setBlock(leaves, x + dx, y + max + 6, z + dz);
+                }
+            }
         }
     }
 
@@ -1047,10 +1215,6 @@ public class Terrain {
      * LIGHTS ENDS HERE
      */
 
-    // @Override
-    // public int hashCode() {
-    // return (this.terrainLocation.hashCode() + this.world.hashCode());
-    // }
     public void requestFaceVisibilityUpdate() {
         this.unsetState(Terrain.STATE_FACE_VISIBILTY_UP_TO_DATE);
     }
@@ -1117,17 +1281,8 @@ public class Terrain {
         return (this.getIndex(xyz[0], xyz[1], xyz[2]));
     }
 
-    public final int getXFromIndex(int index) {
-        int z = this.getZFromIndex(index);
-        return (this.getXFromIndex(index, this.getYFromIndex(index, z), z));
-    }
-
     public final int getXFromIndex(int index, int y, int z) {
         return (index - Terrain.DIMX * (y + Terrain.DIMY * z));
-    }
-
-    public final int getYFromIndex(int index) {
-        return (this.getYFromIndex(index, this.getZFromIndex(index)));
     }
 
     public final int getYFromIndex(int index, int z) {
@@ -1138,19 +1293,11 @@ public class Terrain {
         return (index / (Terrain.DIMX * DIMY));
     }
 
-    public final int[] getPosFromIndex(int index) {
-        int xyz[] = new int[3];
-        xyz[2] = this.getZFromIndex(index);
-        xyz[1] = this.getYFromIndex(index, xyz[2]);
-        xyz[0] = this.getXFromIndex(index, xyz[1], xyz[2]);
-        return (xyz);
-    }
-
     /**
      * thoses functions return the left, right, top, bot, front or back terrain
      * to this one
      */
-    public Terrain getNeighbor(int id) {
+    private Terrain getNeighbor(int id) {
 
         if (this.world == null) {
             return (null);
@@ -1254,7 +1401,7 @@ public class Terrain {
         }
 
         // virtual stack
-        Stack<Vector3i> stack = new Stack<Vector3i>();
+        Stack<Vector3i> stack = new Stack<>();
         short[][][] flood = new short[Terrain.DIMX][Terrain.DIMY][Terrain.DIMZ];
         short color = 1;
         boolean[] touchedByFlood = new boolean[6];
@@ -1335,25 +1482,6 @@ public class Terrain {
         }
     }
 
-    /**
-     * return true if the given faces id can be seen from another
-     */
-    public final boolean canFaceBeSeenFrom(int faceA, int faceB) {
-        return (this.facesVisibility[faceA][faceB]);
-    }
-
-    /**
-     * this function updates the visibility of each face toward another using a
-     * flood fill algorythm for each cell which werent already visited: - use
-     * flood fill algorythm, and register which faces are touched by the flood -
-     * for each of touched faces, set the visibility linked with the others
-     * touched
-     */
-
-    public final boolean canFaceBeSeenFrom(Face faceA, Face faceB) {
-        return (this.canFaceBeSeenFrom(faceA.getID(), faceB.getID()));
-    }
-
     public final void destroy() {
         this.blocks = null;
         this.lights = null;
@@ -1366,7 +1494,7 @@ public class Terrain {
         this.onDestroyed();
     }
 
-    protected void onDestroyed() {
+    private void onDestroyed() {
 
     }
 
@@ -1375,13 +1503,6 @@ public class Terrain {
      */
     public final short[] getRawBlocks() {
         return (this.blocks);
-    }
-
-    /**
-     * get the raw light map
-     */
-    public final byte[] getRawLights() {
-        return (this.lights);
     }
 
     /**
@@ -1398,7 +1519,7 @@ public class Terrain {
      * @param durability : durability value (in range of ([{@link #MIN_DURABILITY} ,
      *                   {@link #MAX_DURABILITY} ])
      */
-    public final void setDurabilityAt(int index, byte durability) {
+    private void setDurabilityAt(int index, byte durability) {
         if (this.durability == null) {
             if (this.blocks == null) {
                 return;
@@ -1411,7 +1532,7 @@ public class Terrain {
         this.invokeEvent(new EventTerrainDurabilityChanged(this, old, index));
     }
 
-    public final void setDurabilityAt(int x, int y, int z, byte durability) {
+    private void setDurabilityAt(int x, int y, int z, byte durability) {
         this.setDurabilityAt(this.getIndex(x, y, z), durability);
     }
 
@@ -1419,7 +1540,7 @@ public class Terrain {
         this.setDurability(new int[]{x, y, z}, durability);
     }
 
-    public final void setDurability(int[] xyz, byte durability) {
+    private void setDurability(int[] xyz, byte durability) {
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
             return;
@@ -1428,43 +1549,21 @@ public class Terrain {
     }
 
     /**
-     * decrease the durabiltiy of a block
-     */
-    public final void decreaseDurability(int index) {
-        if (this.durability == null) {
-            return;
-        }
-        this.setDurabilityAt(index, (byte) (this.durability[index] + 1));
-    }
-
-    /**
-     * increase the durabiltiy of a block
-     */
-    public final void increaseDurability(int index) {
-        if (this.durability == null) {
-            return;
-        }
-        this.setDurabilityAt(index, (byte) (this.durability[index] - 1));
-    }
-
-    /**
      * get the durability of the block at given address
      *
-     * @param index
-     * @return
      */
-    public final byte getDurabilityAt(int index) {
+    private byte getDurabilityAt(int index) {
         if (this.durability == null) {
             return (Terrain.MIN_DURABILITY);
         }
         return (this.durability[index]);
     }
 
-    public final byte getDurabilityAt(int x, int y, int z) {
+    private byte getDurabilityAt(int x, int y, int z) {
         return (this.getDurabilityAt(this.getIndex(x, y, z)));
     }
 
-    public final byte getDurability(int xyz[]) {
+    private byte getDurability(int xyz[]) {
         Terrain terrain = this.getRelativeTerrain(xyz);
         if (terrain == null) {
             return (Terrain.MIN_DURABILITY);

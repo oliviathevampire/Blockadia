@@ -61,7 +61,7 @@ public abstract class ResourceManager {
         return (RESOURCE_MANAGER_INSTANCE);
     }
 
-    public static final HashMap<String, String> getConfigFile(String filepath, int defaultcapacity) {
+    public static HashMap<String, String> getConfigFile(String filepath, int defaultcapacity) {
         return (getConfigFile(filepath, new HashMap<>(defaultcapacity)));
     }
 
@@ -69,7 +69,7 @@ public abstract class ResourceManager {
      * a function which parse the given file and return a hashmap containing
      * 'key-values'
      */
-    public static final HashMap<String, String> getConfigFile(String filepath, HashMap<String, String> map) {
+    private static HashMap<String, String> getConfigFile(String filepath, HashMap<String, String> map) {
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
@@ -107,14 +107,14 @@ public abstract class ResourceManager {
         return (map);
     }
 
-    public static boolean fileExists(String filepath) {
+    private static boolean fileExists(String filepath) {
         return (new File(filepath).exists());
     }
 
     /**
      * export the map to the given filepath
      */
-    public static final void exportConfigFile(String filepath, HashMap<String, String> map) {
+    public static void exportConfigFile(String filepath, HashMap<String, String> map) {
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
@@ -179,7 +179,7 @@ public abstract class ResourceManager {
         this.addManager(this.langManager);
     }
 
-    public void addManager(GenericManager<?> manager) {
+    protected void addManager(GenericManager<?> manager) {
         this.managers.add(manager);
     }
 
@@ -300,7 +300,7 @@ public abstract class ResourceManager {
         /**
          * config file name
          */
-        public static final String CONFIG_FILE = ".config";
+        private static final String CONFIG_FILE = ".config";
 
         /**
          * config
@@ -309,7 +309,7 @@ public abstract class ResourceManager {
 
         public Config() {
 
-            this.config = new HashMap<String, String>(1024);
+            this.config = new HashMap<>(1024);
 
             // configuration stuff
             String configpath = R.getResPath(CONFIG_FILE);

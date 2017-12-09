@@ -12,6 +12,7 @@ import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLFWContext;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.MainRenderer;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.particles.ParticleRendererFactory;
 import net.thegaminghuskymc.sandboxgame.game.client.resources.ResourceManagerClient;
 import org.lwjgl.glfw.GLFW;
 
@@ -33,6 +34,8 @@ public class GameEngineClient extends GameEngine {
      * tasks to be run in a gl context
      */
     private ArrayList<MainRenderer.GLTask> glTasks;
+
+    private ParticleRendererFactory rendererFactory = new ParticleRendererFactory(renderer);
 
     public GameEngineClient() {
         super(Side.CLIENT);
@@ -104,8 +107,8 @@ public class GameEngineClient extends GameEngine {
                 getTimer().update();
 
                 try {
-                    // ensure 60 fps, not more, not less
-                    long toSleep = 1000 / (60 + 20) - (long) (getTimer().getDt() * 1000) + 1;
+                    // ensure 120 fps, not more, not less
+                    long toSleep = 1000 / (150 + 20) - (long) (getTimer().getDt() * 1000) + 1;
                     if (toSleep > 0 && toSleep < 20) {
                         Thread.sleep(toSleep);
                     }

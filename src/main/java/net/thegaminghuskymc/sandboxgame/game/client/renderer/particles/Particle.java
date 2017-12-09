@@ -102,12 +102,6 @@ public class Particle extends PhysicObject {
         Sizeable.resize(this, dt);
         Positioneable.position(this, dt);
 
-        // World world = GameEngineClient.instance().getWorld(0);
-        // if (world == null) {
-        // Positioneable.position(this, dt);
-        // } else {
-        // PhysicObject.move(world, this, dt);
-        // }
         this.health--;
         this.healthRatio = this.health / (float) this.maxhealth;
 
@@ -391,7 +385,7 @@ public class Particle extends PhysicObject {
     @Override
     public float getMass() {
         return (0.0001f); // ~ 10 grains of sand
-    }
+}
 
     @Override
     public void setMass(float mass) {

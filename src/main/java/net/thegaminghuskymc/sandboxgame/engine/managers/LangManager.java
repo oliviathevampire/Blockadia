@@ -1,5 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.managers;
 
+import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 
 import java.util.HashMap;
@@ -39,10 +40,10 @@ public class LangManager extends GenericManager<HashMap<String, String>> {
 
     @Override
     public void onLoaded() {
-        EN_US = this.registerLang("Husky's Sandbox Game", "en_US");
-        EN_UK = this.registerLang("Husky's Sandbox Game", "en_UK");
-        NO_NB = this.registerLang("Husky's Sandbox Game", "no_NB");
-        SW_SW = this.registerLang("Husky's Sandbox Game", "sw_SW");
+        EN_US = this.registerLang(GameEngine.instance().getModId(), "en_US");
+        EN_UK = this.registerLang(GameEngine.instance().getModId(), "en_UK");
+        NO_NB = this.registerLang(GameEngine.instance().getModId(), "no_NB");
+        SW_SW = this.registerLang(GameEngine.instance().getModId(), "sw_SW");
         this.setLang(EN_US);
     }
 
@@ -60,7 +61,7 @@ public class LangManager extends GenericManager<HashMap<String, String>> {
      * register a lang to the default voxel engine assets dir
      */
     private int registerLang(String langID) {
-        return (super.registerObject(ResourceManager.getConfigFile(R.getResPath("lang/" + langID + ".lang"), 1024)));
+        return (super.registerObject(ResourceManager.getConfigFile(R.getResPath(GameEngine.instance().getModId(), "lang/" + langID + ".lang"), 1024)));
     }
 
     /**
@@ -68,7 +69,7 @@ public class LangManager extends GenericManager<HashMap<String, String>> {
      *
      * @return the lang id
      */
-    public int registerLang(String modid, String langID) {
+    private int registerLang(String modid, String langID) {
         return (super.registerObject(
                 ResourceManager.getConfigFile(super.getResource(modid, "lang/" + langID + ".lang"), 1024)));
     }

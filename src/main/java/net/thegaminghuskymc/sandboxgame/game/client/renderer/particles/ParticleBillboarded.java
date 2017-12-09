@@ -1,17 +1,3 @@
-/**
- * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
- * *
- * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
- * *
- * *	PEREIRA Romain
- * *                                       4-----7
- * *                                      /|    /|
- * *                                     0-----3 |
- * *                                     | 5___|_6
- * *                                     |/    | /
- * *                                     1-----2
- */
-
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.particles;
 
 public class ParticleBillboarded extends Particle {
@@ -32,13 +18,13 @@ public class ParticleBillboarded extends Particle {
      * @param glows
      *            : if the particle glows
      */
-    public ParticleBillboarded(int health, TextureSprite sprite, boolean glows) {
+    private ParticleBillboarded(int health, TextureSprite sprite, boolean glows) {
         super(health);
         this.glows = glows;
         this._sprite = sprite;
     }
 
-    public ParticleBillboarded(int health, TextureSprite sprite) {
+    private ParticleBillboarded(int health, TextureSprite sprite) {
         this(health, sprite, false);
     }
 

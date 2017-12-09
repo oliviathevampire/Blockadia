@@ -17,8 +17,8 @@ public class ParticleRendererFactory extends RendererFactory {
 
     public ParticleRendererFactory(MainRenderer mainRenderer) {
         super(mainRenderer);
-        this.billboardedParticles = new ArrayList<ParticleBillboarded>();
-        this.cubeParticles = new ArrayList<ParticleCube>();
+        this.billboardedParticles = new ArrayList<>();
+        this.cubeParticles = new ArrayList<>();
     }
 
     public final CameraProjective getCamera() {
@@ -64,7 +64,7 @@ public class ParticleRendererFactory extends RendererFactory {
     /**
      * testing particles system :D
      */
-    private void ambientParticle() {
+    public void ambientParticle() {
         Random rng = new Random();
         ParticleCube cube = new ParticleCube();
         Vector3f campos = this.getCamera().getPosition();
@@ -89,7 +89,7 @@ public class ParticleRendererFactory extends RendererFactory {
     /**
      * testing particles system :D
      */
-    private void rainParticles(int strength) {
+    public void rainParticles(int strength) {
         Random rng = new Random();
         Vector3f campos = this.getCamera().getPosition();
 
@@ -124,30 +124,15 @@ public class ParticleRendererFactory extends RendererFactory {
     /**
      * add a particule to the update functions
      */
-    public final void spawnParticle(ParticleBillboarded particle) {
-        this.billboardedParticles.add(particle);
-    }
-
-    /**
-     * add a particule to the update functions
-     */
-    public final void spawnParticle(ParticleCube particle) {
+    private void spawnParticle(ParticleCube particle) {
         this.cubeParticles.add(particle);
     }
 
-    public final void removeAllParticles() {
-        this.cubeParticles.clear();
-        this.billboardedParticles.clear();
-        // this.cubeParticles.trimToSize();
-        // this.billboardedParticles.trimToSize();
-
-    }
-
-    public final ArrayList<ParticleBillboarded> getBillboadedParticles() {
+    private ArrayList<ParticleBillboarded> getBillboadedParticles() {
         return (this.billboardedParticles);
     }
 
-    public final ArrayList<ParticleCube> getCubeParticles() {
+    private ArrayList<ParticleCube> getCubeParticles() {
         return (this.cubeParticles);
     }
 
