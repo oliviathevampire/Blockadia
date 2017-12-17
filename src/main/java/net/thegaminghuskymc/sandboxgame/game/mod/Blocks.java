@@ -60,6 +60,7 @@ public class Blocks implements IModResource {
     public static LinkedList<Block> DIRT = new LinkedList<>();
     public static LinkedList<Block> GRASS = new LinkedList<>();
     public static LinkedList<Block> LIGHT = new LinkedList<>();
+    public static LinkedList<Block> SNOW_LAYERS = new LinkedList<>();
 
     public static Block getBlockByID(short blockID) {
         return (BlockManager.instance().getBlockByID(blockID));

@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.block;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.instance.BlockInstance;
+import net.thegaminghuskymc.sandboxgame.engine.block.state.IBlockState;
 import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 
 public abstract class Block {
@@ -50,4 +51,5 @@ public abstract class Block {
     public boolean bypassRaycast() {
         return (false);
     }
+
 }

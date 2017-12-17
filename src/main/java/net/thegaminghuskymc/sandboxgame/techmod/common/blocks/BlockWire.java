@@ -1,6 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.techmod.common.blocks;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.BlockCube;
+import net.thegaminghuskymc.sandboxgame.engine.block.state.IBlockState;
 
 public class BlockWire extends BlockCube {
 
@@ -32,4 +33,5 @@ public class BlockWire extends BlockCube {
     public boolean hasTransparency() {
         return false;
     }
+
 }

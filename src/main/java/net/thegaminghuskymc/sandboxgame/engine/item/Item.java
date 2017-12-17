@@ -1,6 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.engine.item;
 
+import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.world.entity.EntityLiving;
+
+import java.util.Random;
 
 public abstract class Item {
 
@@ -26,6 +29,10 @@ public abstract class Item {
      */
     public void onUnequipped(EntityLiving entity, int equipmentID) {
     }
+
+    public abstract String getUnlocolizedName();
+
+    public abstract String getRegistryName();
 
     /**
      * called when this item is equipped on a living entity at the given
