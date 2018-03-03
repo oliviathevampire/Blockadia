@@ -25,8 +25,9 @@ switch ( OperatingSystem.current() ) {
         break
 }
 
-project.ext.lwjglVersion = "3.1.5"
-project.ext.jomlVersion = "1.9.6"
+project.ext.lwjglVersion = "3.1.6"
+project.ext.jomlVersion = "1.9.8"
+project.ext.steamworks4jVersion = "1.7.0"
 
 repositories {
     mavenCentral()
@@ -120,7 +121,7 @@ dependencies {
     runtime "org.lwjgl:lwjgl-zstd:$lwjglVersion:$lwjglNatives"
     compile "org.joml:joml:${jomlVersion}"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    testCompile 'junit:junit:4.8.2'
+    compile 'junit:junit:4.8.2'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'io.netty', name: 'netty-all', version: '4.1.17.Final'
@@ -132,6 +133,9 @@ dependencies {
     compile group: 'org.l33tlabs.twl', name: 'pngdecoder', version: '1.0'
     compile group: 'org.clojars.aseipp', name: 'ibxm', version: '0.0.1'
     compile group: 'slick-util', name: 'slick-util', version: '1.0.0'
+    compile "org.json:json:20141113"
+    compile "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
+	compile "com.code-disaster.steamworks4j:steamworks4j-server:${steamworks4jVersion}"
 }
 
 compileKotlin {
