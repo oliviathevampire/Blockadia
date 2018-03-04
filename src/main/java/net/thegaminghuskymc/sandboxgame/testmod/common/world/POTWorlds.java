@@ -5,9 +5,7 @@ import net.thegaminghuskymc.sandboxgame.engine.modding.IModResource;
 import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 
 public class POTWorlds implements IModResource {
-    /**
-     * default world id
-     */
+
     public static int DEFAULT;
 
     @Override

@@ -4,7 +4,7 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiS
 
 public class GuiSpinnerEventRemoveAll<T extends GuiSpinner> extends GuiSpinnerEvent<T> {
 
-    public GuiSpinnerEventRemoveAll(T gui) {
-        super(gui);
-    }
+	public GuiSpinnerEventRemoveAll(T gui) {
+		super(gui);
+	}
 }

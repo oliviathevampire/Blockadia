@@ -2,48 +2,70 @@ package net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.Color;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.GuiRenderer;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiEventKeyPress;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiListener;
+import org.lwjgl.glfw.GLFW;
+
 
 public class GuiWindow extends Gui {
 
-    public static final Color COLOR_BACKGROUND = new Color(0.0f, 0.0f, 0.0f, 0.5f);
+	public static final Color COLOR_BACKGROUND = new Color(0.0f, 0.0f, 0.0f, 0.5f);
 
-    /**
-     * background texture
-     */
-    private final GuiColoredQuad bg;
+	private static final GuiListener<GuiEventKeyPress<GuiWindow>> GUI_LISTENER_ESC_CLOSE = new GuiListener<GuiEventKeyPress<GuiWindow>>() {
 
-    public GuiWindow() {
-        super();
-        this.bg = new GuiColoredQuad();
-        this.bg.setColor(COLOR_BACKGROUND);
-        this.addChild(bg);
-    }
+		@Override
+		public void invoke(GuiEventKeyPress<GuiWindow> event) {
+			System.out.println("pressed: " + event.getKey());
+			switch (event.getKey()) {
+			case GLFW.GLFW_KEY_ESCAPE:
+				event.getGui().close();
+				break;
+			default:
+				break;
+			}
+		}
 
-    @Override
-    protected void onUpdate() {
-    }
+	};
 
-    @Override
-    protected void onInitialized(GuiRenderer renderer) {
-    }
+	/** background texture */
+	private final GuiColoredQuad bg;
 
-    @Override
-    protected void onDeinitialized(GuiRenderer renderer) {
-    }
+	public GuiWindow() {
+		super();
+		this.bg = new GuiColoredQuad();
+		this.bg.setColor(COLOR_BACKGROUND);
+		this.bg.setHoverable(false);
+		this.addListener(ON_HOVERED_FOCUS_LISTENER);
+		this.addListener(GUI_LISTENER_ESC_CLOSE);
+		this.addChild(bg);
+	}
 
-    public final void open(Gui parent) {
-        parent.addChild(this);
-        this.setLayer(this.getTopestLayer() + 1);
-    }
+	@Override
+	protected void onUpdate() {
+	}
 
-    public final void close() {
-        super.addTask(new GuiTask() {
-            @Override
-            public final boolean run() {
-                pop();
-                return (true);
-            }
-        });
-    }
+	@Override
+	protected void onInitialized(GuiRenderer renderer) {
+	}
+
+	@Override
+	protected void onDeinitialized(GuiRenderer renderer) {
+	}
+
+	public final void open(Gui parent) {
+		parent.addChild(this);
+		this.setLayer(this.getTopestLayer() + 1);
+		this.requestFocus(true);
+	}
+
+	public final void close() {
+		super.addTask(new GuiTask() {
+			@Override
+			public final boolean run() {
+				pop();
+				return (true);
+			}
+		});
+	}
 
 }

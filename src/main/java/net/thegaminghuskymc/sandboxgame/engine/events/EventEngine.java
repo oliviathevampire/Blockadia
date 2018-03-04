@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.events;
 
-
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 
 public abstract class EventEngine extends Event {

@@ -11,7 +11,6 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.para
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiEventMouseEnter;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiEventMouseExit;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiListener;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.gui.GuiSliderBarEditor;
 
 public class TestGui {
 
@@ -29,14 +28,6 @@ public class TestGui {
 //				 this.addGuiLabel();
                 this.addGuiTextPrompt();
 //				 this.addGuiSliderBar();
-            }
-
-            private void addGuiSliderBar() {
-                GuiSliderBarEditor guiSliderBar = new GuiSliderBarEditor();
-                guiSliderBar.setBox(0.25f, 0.75f, 0.5f, 0.10f, 0.0f);
-                Float[] floats = GuiSliderBar.floatRange(0, 1000, 1001);
-                guiSliderBar.addValues(floats);
-                this.addChild(guiSliderBar);
             }
 
             private void addGuiTexture() {
@@ -86,11 +77,7 @@ public class TestGui {
         guiView.setBox(0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
         engine.getRenderer().getGuiRenderer().addGui(guiView);
 
-        try {
-            engine.loop();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        engine.loop();
         engine.deinitialize();
     }
 }

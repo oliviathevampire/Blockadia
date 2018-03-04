@@ -14,21 +14,14 @@ public class WorldDefault extends WorldFlat {
     @Override
     public void onLoaded() {
         this.setWorldGenerator(new WorldGeneratorHoles());
-        for (int y = 1; y > 0; y--) {
-            for (int x = -4; x < 4; x++) {
-                for (int z = -4; z < 4; z++) {
-                    this.generateTerrain(x, y, z);
+        for (int z = 1; z > 0; z--) {
+            for (int x = -2; x < 2; x++) {
+                for (int y = -2; y < 2; y++) {
+                    this.generateTerrain(x, y, 0);
                 }
             }
         }
 
-        for (int x = 0; x < 4; x++) {
-            for (int z = 0; z < 4; z++) {
-                EntityPlant entityTest = new EntityPlant(this);
-                entityTest.setPosition(x * 8.0f, 140.0f, z * 8.0f);
-                this.spawnEntity(entityTest);
-            }
-        }
     }
 
     @Override

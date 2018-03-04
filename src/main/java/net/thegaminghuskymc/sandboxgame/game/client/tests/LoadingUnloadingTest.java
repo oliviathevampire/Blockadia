@@ -14,11 +14,7 @@ public class LoadingUnloadingTest {
         // load resources (mods)
         engine.load();
 
-        try {
-            engine.loop();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        engine.loop();
         engine.deinitialize();
     }
 }

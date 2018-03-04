@@ -2,27 +2,26 @@ package net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor;
 
 import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 import net.thegaminghuskymc.sandboxgame.engine.world.WorldFlat;
-import net.thegaminghuskymc.sandboxgame.engine.world.generator.WorldGeneratorFlat;
 
 public class ModelEditorWorld extends WorldFlat {
 
-    public ModelEditorWorld() {
-        super();
-    }
+	public ModelEditorWorld() {
+		super();
+	}
 
-    @Override
-    public void onLoaded() {
-        this.setWorldGenerator(new WorldGeneratorFlat());
-        for (int x = -4; x < 4; x++) {
-            for (int z = -4; z < 4; z++) {
-                Terrain terrain = this.spawnTerrain(new Terrain(x, -1, z));
-                this.generateTerrain(terrain);
-            }
-        }
-    }
+	@Override
+	public void onLoaded() {
+		this.setWorldGenerator(new ModelEditorWorldGenerator());
+		for (int x = -4; x < 4; x++) {
+			for (int y = -4; y < 4; y++) {
+				Terrain terrain = this.spawnTerrain(new Terrain(x, y, -1));
+				this.generateTerrain(terrain);
+			}
+		}
+	}
 
-    @Override
-    public String getName() {
-        return ("ModelEditorWorld");
-    }
+	@Override
+	public String getName() {
+		return ("ModelEditorWorld");
+	}
 }

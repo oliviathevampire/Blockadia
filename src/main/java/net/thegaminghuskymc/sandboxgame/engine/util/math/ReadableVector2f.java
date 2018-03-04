@@ -35,13 +35,12 @@ package net.thegaminghuskymc.sandboxgame.engine.util.math;
  * @author foo
  */
 public interface ReadableVector2f extends ReadableVector {
-    /**
-     * @return x
-     */
-    float getX();
-
-    /**
-     * @return y
-     */
-    float getY();
+	/**
+	 * @return x
+	 */
+	float getX();
+	/**
+	 * @return y
+	 */
+	float getY();
 }

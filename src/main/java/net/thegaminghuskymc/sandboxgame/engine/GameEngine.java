@@ -2,13 +2,13 @@ package net.thegaminghuskymc.sandboxgame.engine;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger.Level;
 import net.thegaminghuskymc.sandboxgame.engine.events.*;
-import net.thegaminghuskymc.sandboxgame.engine.events.EventListener;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModLoader;
 import net.thegaminghuskymc.sandboxgame.engine.packets.INetwork;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
+import net.thegaminghuskymc.sandboxgame.game.client.defaultmod.GameEngineDefaultModClient;
 import net.thegaminghuskymc.sandboxgame.game.mod.DefaultMod;
 
 import java.io.File;
@@ -20,28 +20,52 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class GameEngine {
 
-    private static final String MOD_ID = "sandbox_game";
+    /** version */
+    public static final String VERSION = "0.0.1";
+    public static final String MOD_ID = "blockitect";
 
+    /** singleton */
     private static GameEngine INSTANCE;
-    protected Side side;
-    protected ResourceManager resources;
-    private ArrayList<Callable<Taskable>> tasks;
+    /** the tasks to run each frames */
+    private ArrayList<GameEngine.Callable<Taskable>> tasks;
+
+    /** executor service */
     private ExecutorService executor;
+
+    /** the resources directory */
     private File gameDir;
     private ArrayList<ResourcePack> assets;
+
+    /** side of the running engine */
+    protected Side side;
+
+    /** bools */
     private boolean isRunning;
     private boolean debug;
+
+    /** Mod loader */
     private ModLoader modLoader;
+
+    /** Resources */
+    protected ResourceManager resources;
+
+    /** networking */
     private INetwork network;
+
+    /** random number generator */
     private Random rng;
+
+    /** Timer */
     private Timer timer;
+
+    /** events */
     private EventPreLoop eventPreLoop;
-    private EventOnLoop eventOnLoop;
+    private EventLoop eventLoop;
     private EventPostLoop eventPostLoop;
-    /**
-     * loaded worlds
-     */
+
+    /** loaded worlds */
     private ArrayList<World> loadedWorlds;
+
     /**
      * config hashmap, key: filepath, value: config file
      */
@@ -79,10 +103,8 @@ public abstract class GameEngine {
         this.resources.initialize();
 
         // config
-        Config config1 = new Config(R.getResPath(MOD_ID, "config.json"));
-        config1.getString("graphicMode", "fancy");
         this.config = new HashMap<>();
-        this.config.getOrDefault("graphicMode", config1);
+        this.loadConfig(MOD_ID, R.getResPath("config.json"));
 
         this.modLoader = new ModLoader();
         this.tasks = new ArrayList<>(256);
@@ -91,9 +113,9 @@ public abstract class GameEngine {
         this.modLoader.injectMod(DefaultMod.class);
 
         // events
-        this.eventPreLoop = new EventPreLoop(this);
-        this.eventOnLoop = new EventOnLoop(this);
-        this.eventPostLoop = new EventPostLoop(this);
+        this.eventPreLoop = new EventPreLoop();
+        this.eventLoop = new EventLoop();
+        this.eventPostLoop = new EventPostLoop();
 
         // worlds
         this.loadedWorlds = new ArrayList<>();
@@ -118,7 +140,7 @@ public abstract class GameEngine {
         if (!gamepath.endsWith("/")) {
             gamepath = gamepath + "/";
         }
-        this.gameDir = new File(gamepath + "Husky's Sandbox Game");
+        this.gameDir = new File(gamepath + "Blockitect");
 
         Logger.get().log(Level.FINE, "Game directory is: " + this.gameDir.getAbsolutePath());
         if (!this.gameDir.exists()) {
@@ -196,7 +218,18 @@ public abstract class GameEngine {
         this.loadResources("./mods", "./mod", "./plugin", "./plugins");
     }
 
-    private void loadResources(String... folders) {
+    /** reload every game resources */
+    public final void reload(String... folders) {
+        this.unload();
+        this.load();
+    }
+
+    private final void unload() {
+        this.resources.unload();
+        this.modLoader.unload(this.getResourceManager());
+    }
+
+    private final void loadResources(String... folders) {
 
         for (String folder : folders) {
             this.modLoader.injectMods(folder);
@@ -209,9 +242,8 @@ public abstract class GameEngine {
     /**
      * make the engine loop
      *
-     * @throws InterruptedException
      */
-    public final void loop() throws InterruptedException {
+    public final void loop() {
 
         this.isRunning = true;
 
@@ -220,7 +252,7 @@ public abstract class GameEngine {
 
         while (this.isRunning()) {
             this.timer.update();
-            this.invokeEvent(this.eventOnLoop);
+            this.invokeEvent(this.eventLoop);
             this.updateTasks();
         }
 
@@ -234,7 +266,7 @@ public abstract class GameEngine {
         for (World world : this.loadedWorlds) {
             world.getTasks(this, this.tasks);
         }
-        this.invokeEvent(new EventGetTasks(this, this.tasks));
+        this.invokeEvent(new EventGetTasks(this.tasks));
         this.runTasks();
     }
 
@@ -296,7 +328,7 @@ public abstract class GameEngine {
         this.getResourceManager().getEventManager().invokeEvent(event);
     }
 
-    protected void registerEventCallback(EventListener<?> eventCallback) {
+    protected void registerEventCallback(Listener<?> eventCallback) {
         this.getResourceManager().getEventManager().addListener(eventCallback);
     }
 

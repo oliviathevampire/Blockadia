@@ -1,13 +1,14 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.particles;
 
+import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector4f;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.PhysicObject;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.Positioneable;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.Rotationable;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.Sizeable;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.Positioneable;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.Rotationable;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.Sizeable;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.WorldObject;
 
-public class Particle extends PhysicObject {
+public class Particle extends WorldObject {
 
     protected final Vector3f pos;
     protected final Vector3f rot;
@@ -24,6 +25,7 @@ public class Particle extends PhysicObject {
     protected float healthRatio;
 
     public Particle(int health) {
+        super(GameEngine.instance().getWorld(0));
         this.maxhealth = health;
         this.health = health;
         this.healthRatio = 1;

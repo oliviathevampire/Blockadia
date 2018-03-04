@@ -10,72 +10,77 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.json.JSONMode
 
 public class ModelEditor {
 
-    private static ModelEditor instance;
-    private GuiModelEditor guiModelEditor;
+	private static ModelEditor instance;
 
-    public static void main(String[] args) {
-        new ModelEditor().run();
-    }
+	public static void main(String[] args) {
+		new ModelEditor().run();
+	}
 
-    private void run() {
+	private GuiModelEditor guiModelEditor;
 
-        instance = this;
+	private void run() {
 
-        /* 1 */
-        // initialize engine
-        GameEngineClient engine = new GameEngineClient();
-        engine.initialize();
+		instance = this;
 
-        /* 2 */
-        // inject resources to be loaded
-        engine.getModLoader().injectMod(ModelEditorMod.class);
+		/* 1 */
+		// initialize engine
+		GameEngineClient engine = new GameEngineClient();
+		try {
+			engine.initialize();
 
-        // load resources (mods)
-        engine.load();
+			/* 2 */
+			// inject resources to be loaded
+			engine.getModLoader().injectMod(ModelEditorMod.class);
 
-        /* prepare engine before looping */
-        this.prepareEngine(engine);
+			// load resources (mods)
+			engine.load();
 
-        /* 3 */
-        // loop, every allocated memory will be released properly on program
-        // termination */
-        try {
-            engine.loop();
-        } catch (InterruptedException e) {
-            Logger.get().log(Logger.Level.ERROR, "That's unfortunate... VoxelEngine crashed.", e.getLocalizedMessage());
-            String path = R.getResPath("models/tmp/" + System.currentTimeMillis());
-            try {
-                Logger.get().log(Logger.Level.ERROR, "Trying to save model...", path);
-                JSONModelExporter.export(guiModelEditor.getSelectedModel(), path);
-            } catch (Exception exception) {
-                Logger.get().log(Logger.Level.ERROR, "Couldn't save model... sorry bro",
-                        exception.getLocalizedMessage());
-            }
-        }
-        engine.deinitialize();
-    }
+			/* prepare engine before looping */
+			this.prepareEngine(engine);
 
-    private void prepareEngine(GameEngineClient engine) {
+			/* 3 */
+			// loop, every allocated memory will be released properly on program
+			// termination */
 
-        engine.loadWorld(ModelEditorMod.WORLD_ID);
+			engine.loop();
+		} catch (Exception e) {
+			Logger.get().log(Logger.Level.ERROR,
+					"That's unfortunate... VoxelEngine crashed. Please send me the following crash report.");
+			Logger.get().log(Logger.Level.ERROR, e);
+			e.printStackTrace(Logger.get().getPrintStream());
+			String path = R.getResPath("models/tmp/" + System.currentTimeMillis());
+			try {
+				Logger.get().log(Logger.Level.ERROR, "Trying to save model", path);
+				JSONModelExporter.export(guiModelEditor.getSelectedModel(), path);
+			} catch (Exception exception) {
+				Logger.get().log(Logger.Level.ERROR, "Couldn't save model... sorry bro",
+						exception.getLocalizedMessage());
+			}
+		}
+		engine.deinitialize();
+	}
 
-        engine.getGLFWWindow().swapInterval(1);
-        engine.getGLFWWindow().setScreenPosition(100, 100);
+	private void prepareEngine(GameEngineClient engine) {
 
-        this.guiModelEditor = new GuiModelEditor();
-        this.guiModelEditor.setBox(0, 0, 1.0f, 1.0f, 0);
-        engine.getRenderer().getGuiRenderer().addGui(this.guiModelEditor);
-    }
+		engine.loadWorld(ModelEditorMod.WORLD_ID);
 
-    public final ModelEditor instance() {
-        return (instance);
-    }
+		engine.getGLFWWindow().swapInterval(1);
+		engine.getGLFWWindow().setScreenPosition(100, 100);
 
-    public final GuiToolbox getToolbox() {
-        return (this.guiModelEditor.getToolbox());
-    }
+		this.guiModelEditor = new GuiModelEditor();
+		this.guiModelEditor.setBox(0, 0, 1.0f, 1.0f, 0);
+		engine.getRenderer().getGuiRenderer().addGui(this.guiModelEditor);
+	}
 
-    public final GuiModelView getModelView() {
-        return (this.guiModelEditor.getModelView());
-    }
+	public final ModelEditor instance() {
+		return (instance);
+	}
+
+	public final GuiToolbox getToolbox() {
+		return (this.guiModelEditor.getToolbox());
+	}
+
+	public final GuiModelView getModelView() {
+		return (this.guiModelEditor.getModelView());
+	}
 }

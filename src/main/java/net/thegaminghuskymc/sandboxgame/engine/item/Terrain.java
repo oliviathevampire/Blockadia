@@ -21,16 +21,15 @@ import java.util.*;
 public class Terrain {
 
     public static final float BLOCK_SIZE = 1.0f;
-    public static final float SLAB_SIZE = 0.5f;
-    public static final float STAIR_TOP_SIZE = 0.5f;
-    public static final float METER_TO_BLOCK = 8.0f / 1.0f; // 4 blocks = 1
+    public static final float BLOCKS_PER_METER = 8.0f / BLOCK_SIZE; // 4 blocks = 1m
     // (and use 1 as implicit value to
     // optimize calculations)
     public static final float BLOCK_DEMI_SIZE = BLOCK_SIZE / 2.0f;
-    public static final int DIMX = 70;
+    public static Vector3f BLOCK_SIZE_VEC = new Vector3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+    public static final int DIMX = 16;
 //    public static final int DIMX = 16;
-    public static final int DIMY = 74;
-    public static final int DIMZ = DIMX;
+    public static final int DIMY = DIMX;
+    public static final int DIMZ = 16;
     public static final float SIZE_DIAGONAL3 = (float) Vector3f.distance(new Vector3f(0, 0, 0),
             new Vector3f(DIMX * BLOCK_SIZE, DIMY * BLOCK_SIZE, DIMZ * BLOCK_SIZE));
     private static final int STATE_FACE_VISIBILTY_UP_TO_DATE = 1;
@@ -106,7 +105,7 @@ public class Terrain {
     }
 
     public Terrain(int ix, int iy, int iz) {
-        this.index2 = new Vector2i(ix, iz);
+        this.index2 = new Vector2i(ix, iy);
         this.index3 = new Vector3i(ix, iy, iz);
         this.worldPos = new Vector3f(ix * Terrain.DIMX_SIZE, iy * Terrain.DIMY_SIZE, iz * Terrain.DIMZ_SIZE);
         this.worldPosCenter = new Vector3f(this.worldPos.x + Terrain.DEMI_DIMX_SIZE,
@@ -193,7 +192,7 @@ public class Terrain {
         if (xyz[0] < 0) {
             do {
                 xyz[0] += Terrain.DIMX;
-                terrain = terrain.getNeighbor(Face.FRONT);
+                terrain = terrain.getNeighbor(Face.BACK);
             } while (xyz[0] < 0);
             if (terrain == null) {
                 return (null);
@@ -201,7 +200,7 @@ public class Terrain {
         } else if (xyz[0] >= Terrain.DIMX) {
             do {
                 xyz[0] -= Terrain.DIMX;
-                terrain = terrain.getNeighbor(Face.BACK);
+                terrain = terrain.getNeighbor(Face.FRONT);
             } while (xyz[0] >= Terrain.DIMX);
             if (terrain == null) {
                 return (null);
@@ -212,7 +211,7 @@ public class Terrain {
         if (xyz[1] < 0) {
             do {
                 xyz[1] += Terrain.DIMY;
-                terrain = terrain.getNeighbor(Face.BOT);
+                terrain = terrain.getNeighbor(Face.LEFT);
             } while (xyz[1] < 0);
             if (terrain == null) {
                 return (null);
@@ -220,7 +219,7 @@ public class Terrain {
         } else if (xyz[1] >= Terrain.DIMY) {
             do {
                 xyz[1] -= Terrain.DIMY;
-                terrain = terrain.getNeighbor(Face.TOP);
+                terrain = terrain.getNeighbor(Face.RIGHT);
             } while (xyz[1] >= Terrain.DIMY);
             if (terrain == null) {
                 return (null);
@@ -231,7 +230,7 @@ public class Terrain {
         if (xyz[2] < 0) {
             do {
                 xyz[2] += Terrain.DIMZ;
-                terrain = terrain.getNeighbor(Face.LEFT);
+                terrain = terrain.getNeighbor(Face.BOT);
             } while (xyz[2] < 0);
             if (terrain == null) {
                 return (null);
@@ -239,7 +238,7 @@ public class Terrain {
         } else if (xyz[2] >= Terrain.DIMZ) {
             do {
                 xyz[2] -= Terrain.DIMZ;
-                terrain = terrain.getNeighbor(Face.RIGHT);
+                terrain = terrain.getNeighbor(Face.TOP);
             } while (xyz[2] >= Terrain.DIMZ);
             if (terrain == null) {
                 return (null);
@@ -348,20 +347,20 @@ public class Terrain {
         // update number of block set
         if (prevblock.getID() != Blocks.AIR_ID && block.getID() == Blocks.AIR_ID) {
             --this.blockCount;
-            int ymax = this.heightmap[x + Terrain.DIMZ * z];
-            while (ymax > 0 && this.blocks[this.getIndex(x, ymax - 1, z)] == Blocks.AIR_ID) {
-                --ymax;
+            int zmax = this.heightmap[x + Terrain.DIMY  * y];
+            while (zmax > 0 && this.blocks[this.getIndex(x, y, zmax - 1)] == Blocks.AIR_ID) {
+                --zmax;
             }
-            this.heightmap[x + Terrain.DIMX * z] = (byte) (ymax - 1);
+            this.heightmap[x + Terrain.DIMX * y] = (byte) (zmax - 1);
         } else if (prevblock.getID() == Blocks.AIR_ID && block.getID() != Blocks.AIR_ID) {
             ++this.blockCount;
             if (this.heightmap == null) {
                 this.heightmap = new byte[Terrain.DIMX * Terrain.DIMZ];
 
             }
-            int heightmapIndex = x + Terrain.DIMX * z;
-            if (this.heightmap[heightmapIndex] <= y) {
-                this.heightmap[heightmapIndex] = (byte) (y + 1);
+            int heightmapIndex = x + Terrain.DIMX * y;
+            if (this.heightmap[heightmapIndex] <= z) {
+                this.heightmap[heightmapIndex] = (byte) (z + 1);
             }
         }
 
@@ -560,7 +559,7 @@ public class Terrain {
             if (x > 0) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x - 1, y, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(Terrain.DIMX - 1, y, z), nextLightValue);
                 }
@@ -570,7 +569,7 @@ public class Terrain {
             if (y > 0) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x, y - 1, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(x, Terrain.DIMX - 1, z), nextLightValue);
                 }
@@ -580,7 +579,7 @@ public class Terrain {
             if (z > 0) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x, y, z - 1), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(x, y, Terrain.DIMZ - 1), nextLightValue);
                 }
@@ -590,7 +589,7 @@ public class Terrain {
             if (x < Terrain.DIMX - 1) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x + 1, y, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(0, y, z), nextLightValue);
                 }
@@ -600,7 +599,7 @@ public class Terrain {
             if (y < Terrain.DIMY - 1) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x, y + 1, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(x, 0, z), nextLightValue);
                 }
@@ -610,7 +609,7 @@ public class Terrain {
             if (z < Terrain.DIMZ - 1) {
                 nodeTerrain.floodFillSunlightAdd(nodeTerrain.getIndex(x, y, z + 1), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
                 if (terrain != null) {
                     terrain.floodFillSunlightAdd(terrain.getIndex(x, y, 0), nextLightValue);
                 }
@@ -654,7 +653,7 @@ public class Terrain {
             if (x > 0) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x - 1, y, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(Terrain.DIMX - 1, y, z), lightLevel);
                 }
@@ -664,7 +663,7 @@ public class Terrain {
             if (y > 0) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x, y - 1, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(x, Terrain.DIMY - 1, z), lightLevel);
                 }
@@ -674,7 +673,7 @@ public class Terrain {
             if (z > 0) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x, y, z - 1), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(x, y, Terrain.DIMZ - 1), lightLevel);
                 }
@@ -684,7 +683,7 @@ public class Terrain {
             if (x < Terrain.DIMX - 1) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x + 1, y, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(0, y, z), lightLevel);
                 }
@@ -694,7 +693,7 @@ public class Terrain {
             if (y < Terrain.DIMY - 1) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x, y + 1, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(x, 0, z), lightLevel);
                 }
@@ -704,7 +703,7 @@ public class Terrain {
             if (z < Terrain.DIMZ - 1) {
                 nodeTerrain.floodFillSunlightRemove(nodeTerrain.getIndex(x, y, z + 1), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
                 if (terrain != null) {
                     terrain.floodFillSunlightRemove(terrain.getIndex(x, y, 0), lightLevel);
                 }
@@ -1050,7 +1049,7 @@ public class Terrain {
             if (x > 0) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x - 1, y, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(Terrain.DIMX - 1, y, z), nextLightValue);
                 }
@@ -1060,7 +1059,7 @@ public class Terrain {
             if (y > 0) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x, y - 1, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(x, Terrain.DIMY - 1, z), nextLightValue);
                 }
@@ -1070,7 +1069,7 @@ public class Terrain {
             if (z > 0) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x, y, z - 1), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(x, y, Terrain.DIMZ - 1), nextLightValue);
                 }
@@ -1080,7 +1079,7 @@ public class Terrain {
             if (x < Terrain.DIMX - 1) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x + 1, y, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(0, y, z), nextLightValue);
                 }
@@ -1090,7 +1089,7 @@ public class Terrain {
             if (y < Terrain.DIMY - 1) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x, y + 1, z), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(x, 0, z), nextLightValue);
                 }
@@ -1100,7 +1099,7 @@ public class Terrain {
             if (z < Terrain.DIMZ - 1) {
                 nodeTerrain.floodFillLightAdd(nodeTerrain.getIndex(x, y, z + 1), nextLightValue);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
                 if (terrain != null) {
                     terrain.floodFillLightAdd(terrain.getIndex(x, y, 0), nextLightValue);
                 }
@@ -1144,7 +1143,7 @@ public class Terrain {
             if (x > 0) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x - 1, y, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(Terrain.DIMX - 1, y, z), lightLevel);
                 }
@@ -1154,7 +1153,7 @@ public class Terrain {
             if (y > 0) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x, y - 1, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(x, Terrain.DIMX - 1, z), lightLevel);
                 }
@@ -1164,7 +1163,7 @@ public class Terrain {
             if (z > 0) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x, y, z - 1), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.LEFT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.BOT);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(x, y, Terrain.DIMZ - 1), lightLevel);
                 }
@@ -1174,7 +1173,7 @@ public class Terrain {
             if (x < Terrain.DIMX - 1) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x + 1, y, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.BACK);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.FRONT);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(0, y, z), lightLevel);
                 }
@@ -1184,7 +1183,7 @@ public class Terrain {
             if (y < Terrain.DIMY - 1) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x, y + 1, z), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(x, 0, z), lightLevel);
                 }
@@ -1194,7 +1193,7 @@ public class Terrain {
             if (z < Terrain.DIMZ - 1) {
                 nodeTerrain.floodFillLightRemove(nodeTerrain.getIndex(x, y, z + 1), lightLevel);
             } else {
-                Terrain terrain = nodeTerrain.getNeighbor(Face.RIGHT);
+                Terrain terrain = nodeTerrain.getNeighbor(Face.TOP);
                 if (terrain != null) {
                     terrain.floodFillLightRemove(terrain.getIndex(x, y, 0), lightLevel);
                 }
@@ -1331,18 +1330,16 @@ public class Terrain {
         // if this terrain is the toppest, set sunlight to maximum for
         // toppest blocks
         for (int x = 0; x < Terrain.DIMX; x++) {
-            for (int z = 0; z < Terrain.DIMZ; z++) {
+            for (int y = 0; y < Terrain.DIMY; y++) {
                 // if this height is the toppest, set light value to max
                 WorldFlatTerrainStorage terrainStorage = (WorldFlatTerrainStorage) this.getWorld().getTerrainStorage();
-                Terrain terrain = terrainStorage.getTopestTerrainWithNonEmptyColumn(this.index2, x, z);
-                if (terrain != null) {
-                    int y = terrain.getHeightAt(x, z) + 1;
-                    if (y < Terrain.DIMY) {
+                Terrain terrain = terrainStorage.getTopestTerrainWithNonEmptyColumn(this.index2, x, y);
+                if (terrain == null) {
+                    int z = terrain.getHeightAt(x, y) + 1;
+                    if (z < Terrain.DIMZ) {
                         terrain.addSunLight((byte) 15, x, y, z);
                     }
                 }
-
-                // TODO : add light from differents terrain faces ?
             }
         }
     }
@@ -1364,11 +1361,11 @@ public class Terrain {
      * @return the y coordinate of the first air block in this column, (0 if the
      * column is full of air, 16 if column is full of blocks)
      */
-    public int getHeightAt(int x, int z) {
+    public int getHeightAt(int x, int y) {
         if (this.heightmap == null) {
             return (0);
         }
-        return (this.heightmap[x + Terrain.DIMX * z]);
+        return (this.heightmap[x + Terrain.DIMX * y]);
     }
 
     public World getWorld() {
@@ -1426,12 +1423,12 @@ public class Terrain {
                             }
 
                             if (pos.y < 0) {
-                                touchedByFlood[Face.BOT] = true;
+                                touchedByFlood[Face.LEFT] = true;
                                 continue;
                             }
 
                             if (pos.z < 0) {
-                                touchedByFlood[Face.LEFT] = true;
+                                touchedByFlood[Face.BOT] = true;
                                 continue;
                             }
 
@@ -1441,12 +1438,12 @@ public class Terrain {
                             }
 
                             if (pos.y >= Terrain.DIMY) {
-                                touchedByFlood[Face.TOP] = true;
+                                touchedByFlood[Face.RIGHT] = true;
                                 continue;
                             }
 
                             if (pos.z >= Terrain.DIMZ) {
-                                touchedByFlood[Face.RIGHT] = true;
+                                touchedByFlood[Face.TOP] = true;
                                 continue;
                             }
 

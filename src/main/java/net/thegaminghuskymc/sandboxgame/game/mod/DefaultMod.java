@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.game.mod;
 
-import net.thegaminghuskymc.sandboxgame.engine.events.Events;
 import net.thegaminghuskymc.sandboxgame.engine.modding.IMod;
 import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModInfo;
@@ -11,7 +10,6 @@ public class DefaultMod implements IMod {
     @Override
     public void initialize(Mod mod) {
         mod.addResource(new Blocks());
-        mod.addResource(new Events());
     }
 
     @Override

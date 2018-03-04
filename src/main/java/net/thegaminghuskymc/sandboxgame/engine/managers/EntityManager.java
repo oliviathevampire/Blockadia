@@ -1,9 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.engine.managers;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 
-public class EntityManager extends GenericManager<Class<? extends Entity>> {
+public class EntityManager extends GenericManager<Class<? extends WorldEntity>> {
 
     public EntityManager(ResourceManager resource_manager) {
         super(resource_manager);
@@ -12,7 +12,7 @@ public class EntityManager extends GenericManager<Class<? extends Entity>> {
     /**
      * register a new entity from it class
      */
-    public int registerEntity(Class<? extends Entity> entityclass) {
+    public int registerEntity(Class<? extends WorldEntity> entityclass) {
         if (super.hasObject(entityclass)) {
             Logger.get().log(Logger.Level.WARNING,
                     "Tried to register an already registered entity: " + entityclass.getSimpleName());
@@ -39,6 +39,6 @@ public class EntityManager extends GenericManager<Class<? extends Entity>> {
     }
 
     @Override
-    protected void onObjectRegistered(Class<? extends Entity> object) {
+    protected void onObjectRegistered(Class<? extends WorldEntity> object) {
     }
 }

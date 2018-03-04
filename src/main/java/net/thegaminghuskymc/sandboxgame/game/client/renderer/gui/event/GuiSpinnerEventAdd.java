@@ -1,3 +1,4 @@
+
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event;
 
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiSpinner;
@@ -8,26 +9,26 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiS
  */
 public class GuiSpinnerEventAdd<T extends GuiSpinner> extends GuiSpinnerEvent<T> {
 
-    private final int addedIndex;
-    private final Object addedObject;
-    private final String addedName;
+	private final int addedIndex;
+	private final Object addedObject;
+	private final String addedName;
 
-    public GuiSpinnerEventAdd(T gui, int addedIndex, Object addedObject, String addedName) {
-        super(gui);
-        this.addedIndex = addedIndex;
-        this.addedObject = addedObject;
-        this.addedName = addedName;
-    }
+	public GuiSpinnerEventAdd(T gui, int addedIndex, Object addedObject, String addedName) {
+		super(gui);
+		this.addedIndex = addedIndex;
+		this.addedObject = addedObject;
+		this.addedName = addedName;
+	}
 
-    public final int getAddedIndex() {
-        return (this.addedIndex);
-    }
+	public final int getAddedIndex() {
+		return (this.addedIndex);
+	}
 
-    public final Object getAddedObject() {
-        return (this.addedObject);
-    }
+	public final Object getAddedObject() {
+		return (this.addedObject);
+	}
 
-    public final String getAddedName() {
-        return (this.addedName);
-    }
+	public final String getAddedName() {
+		return (this.addedName);
+	}
 }

@@ -1,13 +1,32 @@
+/**
+**	This file is part of the project https://github.com/toss-dev/VoxelEngine
+**
+**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+**
+**	PEREIRA Romain
+**                                       4-----7          
+**                                      /|    /|
+**                                     0-----3 |
+**                                     | 5___|_6
+**                                     |/    | /
+**                                     1-----2
+*/
+
 package net.thegaminghuskymc.sandboxgame.game.client.renderer;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.Taskable;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Matrix4f;
 import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
+import net.thegaminghuskymc.sandboxgame.game.client.event.renderer.EventPostRender;
+import net.thegaminghuskymc.sandboxgame.game.client.event.renderer.EventPreRender;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
-import net.thegaminghuskymc.sandboxgame.game.client.opengl.object.GLVertexArray;
-import net.thegaminghuskymc.sandboxgame.game.client.opengl.object.GLVertexBuffer;
+import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLVertexArray;
+import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLVertexBuffer;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.event.GLFWEventWindowResize;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.event.GLFWListener;
@@ -21,309 +40,313 @@ import net.thegaminghuskymc.sandboxgame.game.client.resources.ResourceManagerCli
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
-import java.util.ArrayList;
 
 public class MainRenderer implements Taskable {
 
-    /**
-     * screen referentials (bottom left to top right) varies from
-     * <p>
-     * (0, 0) to (1,1) from window referential
-     * <p>
-     * -1, -1) to (1, 1) from openg referential
-     */
-    public static final Matrix4f WINDOW_TO_GL_BASIS = new Matrix4f();
-    public static final Matrix4f GL_TO_WINDOW_BASIS = new Matrix4f();
+	/**
+	 * screen referentials (bottom left to top right) varies from
+	 * 
+	 * (0, 0) to (1,1) from window referential
+	 * 
+	 * -1, -1) to (1, 1) from openg referential
+	 */
+	public static final Matrix4f WINDOW_TO_GL_BASIS = new Matrix4f();
 
-    static {
-        WINDOW_TO_GL_BASIS.translate(-1.0f, -1.0f, 0.0f);
-        WINDOW_TO_GL_BASIS.scale(2.0f, 2.0f, 1.0f);
-    }
+	static {
+		WINDOW_TO_GL_BASIS.translate(-1.0f, -1.0f, 0.0f);
+		WINDOW_TO_GL_BASIS.scale(2.0f, 2.0f, 1.0f);
+	}
 
-    static {
-        Matrix4f.invert(WINDOW_TO_GL_BASIS, GL_TO_WINDOW_BASIS);
-    }
+	public static final Matrix4f GL_TO_WINDOW_BASIS = new Matrix4f();
 
-    /**
-     * resource manager
-     */
-    private GameEngineClient engine;
+	static {
+		Matrix4f.invert(WINDOW_TO_GL_BASIS, GL_TO_WINDOW_BASIS);
+	}
 
-    /**
-     * custom renderers
-     */
-    private ArrayList<Renderer> customRenderers;
-    private ArrayList<Renderer> defaultRenderers;
+	/** resource manager */
+	private GameEngineClient engine;
 
-    /**
-     * GuiRenderer
-     */
-    private GuiRenderer guiRenderer;
+	/** custom renderers */
+	private ArrayList<Renderer> customRenderers;
+	private ArrayList<Renderer> defaultRenderers;
 
-    /**
-     * sky renderer
-     */
-    private SkyRenderer skyRenderer;
+	/** GuiRenderer */
+	private GuiRenderer guiRenderer;
 
-    /**
-     * line renderer
-     */
-    private LineRenderer lineRenderer;
+	/** sky renderer */
+	private SkyRenderer skyRenderer;
 
-    /**
-     * main terrain renderer
-     */
-    private TerrainRenderer terrainRenderer;
+	/** line renderer */
+	private LineRenderer lineRenderer;
 
-    /**
-     * model renderer
-     */
-    private ModelRenderer modelRenderer;
+	/** main terrain renderer */
+	private TerrainRenderer terrainRenderer;
 
-    /**
-     * particles renderer
-     */
-    private ParticleRenderer particleRenderer;
+	/** model renderer */
+	private ModelRenderer modelRenderer;
 
-    /**
-     * event instances (so we do not realloc them every frames
-     */
-    private EventPreRender preRenderEvent;
-    private EventPostRender postRenderEvent;
+	/** particles renderer */
+	private ParticleRenderer particleRenderer;
 
-    /**
-     * default and simple vao (to use geometry shaders)
-     */
-    private GLVertexArray defaultVao;
-    private GLVertexBuffer defaultVbo;
+	/** random number generator */
+	private Random rng;
 
-    private GLFWListener<GLFWEventWindowResize> windowResizeListener;
+	/** event instances (so we do not realloc them every frames */
+	private EventPreRender preRenderEvent;
+	private EventPostRender postRenderEvent;
 
-    public MainRenderer(GameEngineClient engine) {
-        this.engine = engine;
-    }
+	/** values */
+	private int verticesDrawn;
+	private int drawCalls;
 
-    /**
-     * called after resources where loaded
-     */
-    public void initialize() {
+	/** default and simple vao (to use geometry shaders) */
+	private GLVertexArray defaultVao;
+	private GLVertexBuffer defaultVbo;
 
-        GLH.glhCheckError("Pre mainrenderer initialization");
-        Logger.get().log(Logger.Level.FINE, "Initializing " + this.getClass().getSimpleName());
+	private boolean toggle = true;
 
-        this.customRenderers = new ArrayList<>();
-        this.defaultRenderers = new ArrayList<>();
+	private GLFWListener<GLFWEventWindowResize> windowResizeListener;
 
-        this.preRenderEvent = new EventPreRender(this);
-        this.postRenderEvent = new EventPostRender(this);
+	public MainRenderer(GameEngineClient engine) {
+		this.engine = engine;
+	}
 
-        this.initialiseDefaultVAO();
+	/** called after resources where loaded */
+	public void initialize() {
 
-        this.terrainRenderer = new TerrainRenderer(this);
-        this.defaultRenderers.add(this.terrainRenderer);
+		GLH.glhCheckError("Pre mainrenderer initialization");
+		Logger.get().log(Logger.Level.FINE, "Initializing " + this.getClass().getSimpleName());
 
-        this.skyRenderer = new SkyRenderer(this);
-        this.defaultRenderers.add(this.skyRenderer);
+		this.customRenderers = new ArrayList<Renderer>();
+		this.defaultRenderers = new ArrayList<Renderer>();
 
-        this.particleRenderer = new ParticleRenderer(this);
-        this.defaultRenderers.add(this.particleRenderer);
+		this.rng = new Random();
+		this.preRenderEvent = new EventPreRender(this);
+		this.postRenderEvent = new EventPostRender(this);
 
-        this.lineRenderer = new LineRenderer(this);
-        this.defaultRenderers.add(this.lineRenderer);
+		this.initialiseDefaultVAO();
 
-        this.modelRenderer = new ModelRenderer(this);
-        this.defaultRenderers.add(this.modelRenderer);
+		this.terrainRenderer = new TerrainRenderer(this);
+		this.defaultRenderers.add(this.terrainRenderer);
 
-        this.guiRenderer = new GuiRenderer(this);
-        this.defaultRenderers.add(this.guiRenderer);
+		this.skyRenderer = new SkyRenderer(this);
+		this.defaultRenderers.add(this.skyRenderer);
 
-        GLH.glhCheckError("pre renderer initialization");
-        for (Renderer renderer : this.defaultRenderers) {
-            renderer.initialize();
-            GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " initializes");
-        }
+		this.particleRenderer = new ParticleRenderer(this);
+		this.defaultRenderers.add(this.particleRenderer);
 
-        this.windowResizeListener = new GLFWListener<GLFWEventWindowResize>() {
-            @Override
-            public void invoke(GLFWEventWindowResize event) {
-                onWindowResize(event.getGLFWWindow());
-            }
-        };
-        this.getGLFWWindow().addListener(this.windowResizeListener);
-        this.onWindowResize(this.getGLFWWindow());
+		this.lineRenderer = new LineRenderer(this);
+		this.defaultRenderers.add(this.lineRenderer);
 
-        Logger.get().log(Logger.Level.FINE, "Done");
-        GLH.glhCheckError("post mainrenderer started");
-    }
+		this.modelRenderer = new ModelRenderer(this);
+		this.defaultRenderers.add(this.modelRenderer);
 
-    public void deinitialize() {
-        this.getGLFWWindow().removeListener(this.windowResizeListener);
+		this.guiRenderer = new GuiRenderer(this);
+		this.defaultRenderers.add(this.guiRenderer);
 
-        GLH.glhCheckError("pre renderer deinitialization");
-        for (Renderer renderer : this.defaultRenderers) {
-            renderer.deinitialize();
-            GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " deinitializes");
-        }
+		GLH.glhCheckError("pre renderer initialization");
+		for (Renderer renderer : this.defaultRenderers) {
+			renderer.initialize();
+			GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " initializes");
+		}
 
-        for (Renderer renderer : this.customRenderers) {
-            renderer.deinitialize();
-        }
+		this.windowResizeListener = new GLFWListener<GLFWEventWindowResize>() {
+			@Override
+			public void invoke(GLFWEventWindowResize event) {
+				onWindowResize(event.getGLFWWindow());
+			}
+		};
+		this.getGLFWWindow().addListener(this.windowResizeListener);
+		this.onWindowResize(this.getGLFWWindow());
 
-        GLH.glhDeleteObject(this.defaultVao);
-        this.defaultVao = null;
+		Logger.get().log(Logger.Level.FINE, "Done");
+		GLH.glhCheckError("post mainrenderer started");
+	}
 
-        GLH.glhDeleteObject(this.defaultVbo);
-        this.defaultVbo = null;
-    }
+	public void deinitialize() {
+		this.getGLFWWindow().removeListener(this.windowResizeListener);
 
-    private void initialiseDefaultVAO() {
-        GLH.glhCheckError("pre default vao");
+		GLH.glhCheckError("pre renderer deinitialization");
+		for (Renderer renderer : this.defaultRenderers) {
+			renderer.deinitialize();
+			GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " deinitializes");
+		}
 
-        this.defaultVao = GLH.glhGenVAO();
-        this.defaultVbo = GLH.glhGenVBO();
+		for (Renderer renderer : this.customRenderers) {
+			renderer.deinitialize();
+		}
 
-        this.defaultVao.bind();
-        this.defaultVbo.bind(GL15.GL_ARRAY_BUFFER);
-        this.defaultVao.enableAttribute(0);
-        this.defaultVao.setAttribute(0, 1, GL11.GL_FLOAT, false, 0, 0);
+		GLH.glhDeleteObject(this.defaultVao);
+		this.defaultVao = null;
 
-        float[] points = {0};
-        this.defaultVbo.bufferData(GL15.GL_ARRAY_BUFFER, points, GL15.GL_STATIC_DRAW);
+		GLH.glhDeleteObject(this.defaultVbo);
+		this.defaultVbo = null;
+	}
 
-        GLH.glhCheckError("post default vao");
-    }
+	private void initialiseDefaultVAO() {
+		GLH.glhCheckError("pre default vao");
 
-    /**
-     * called whenever the window is resized
-     */
-    private void onWindowResize(GLFWWindow window) {
-        for (Renderer renderer : this.defaultRenderers) {
-            renderer.onWindowResize(window);
-        }
+		this.defaultVao = GLH.glhGenVAO();
+		this.defaultVbo = GLH.glhGenVBO();
 
-        for (Renderer renderer : this.customRenderers) {
-            renderer.onWindowResize(window);
-        }
-    }
+		this.defaultVao.bind();
+		this.defaultVbo.bind(GL15.GL_ARRAY_BUFFER);
+		this.defaultVao.enableAttribute(0);
+		this.defaultVao.setAttribute(0, 1, GL11.GL_FLOAT, false, 0, 0);
 
-    /**
-     * return the default particle renderer
-     */
-    public final ParticleRenderer getParticleRenderer() {
-        return (this.particleRenderer);
-    }
+		float[] points = { 0 };
+		this.defaultVbo.bufferData(GL15.GL_ARRAY_BUFFER, points, GL15.GL_STATIC_DRAW);
 
-    /**
-     * terrain renderer
-     */
-    public final TerrainRenderer getTerrainRenderer() {
-        return (this.terrainRenderer);
-    }
+		GLH.glhCheckError("post default vao");
+	}
 
-    /**
-     * line renderer
-     */
-    public final LineRenderer getLineRenderer() {
-        return (this.lineRenderer);
-    }
+	/** called whenever the window is resized */
+	public void onWindowResize(GLFWWindow window) {
+		for (Renderer renderer : this.defaultRenderers) {
+			renderer.onWindowResize(window);
+		}
 
-    /**
-     * font renderer
-     */
-    public final GuiRenderer getGuiRenderer() {
-        return (this.guiRenderer);
-    }
+		for (Renderer renderer : this.customRenderers) {
+			renderer.onWindowResize(window);
+		}
+	}
 
-    /**
-     * model renderer
-     */
-    public final ModelRenderer getModelRenderer() {
-        return (this.modelRenderer);
-    }
+	/** return the default particle renderer */
+	public final ParticleRenderer getParticleRenderer() {
+		return (this.particleRenderer);
+	}
 
-    /**
-     * sky renderer
-     */
-    public final SkyRenderer getSkyRenderer() {
-        return (this.skyRenderer);
-    }
+	/** terrain renderer */
+	public final TerrainRenderer getTerrainRenderer() {
+		return (this.terrainRenderer);
+	}
 
-    /**
-     * main rendering function (screen is already cleared, and frame buffer will be
-     * swapped after this render
-     */
-    public void render() {
+	/** line renderer */
+	public final LineRenderer getLineRenderer() {
+		return (this.lineRenderer);
+	}
 
-        this.getResourceManager().getEventManager().invokeEvent(this.preRenderEvent);
+	/** font renderer */
+	public final GuiRenderer getGuiRenderer() {
+		return (this.guiRenderer);
+	}
 
-        this.getDefaultVAO().bind();
+	/** model renderer */
+	public final ModelRenderer getModelRenderer() {
+		return (this.modelRenderer);
+	}
 
-        // render
-        GLH.glhCheckError("pre main renderer render");
-        for (Renderer renderer : this.customRenderers) {
-            renderer.render();
-            GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + ".render()");
-        }
+	/** sky renderer */
+	public final SkyRenderer getSkyRenderer() {
+		return (this.skyRenderer);
+	}
 
-        GL11.glViewport(0, 0, this.getGLFWWindow().getWidth(), this.getGLFWWindow().getHeight());
-        this.guiRenderer.render();
+	/**
+	 * main rendering function (screen is already cleared, and frame buffer will be
+	 * swapped after this render
+	 */
+	public void render() {
 
-        GLH.glhCheckError("post gui renderer render");
+		// if renderer is not enabled, return
+		if (!this.toggle) {
+			return;
+		}
 
-        this.getResourceManager().getEventManager().invokeEvent(this.postRenderEvent);
-    }
+		// TODO move this somewhere else, if openal is thread safe
+		// if (this.getCamera() != null) {
+		// this.getCamera().update();
+		// this.engine.getResourceManager().getSoundManager().update(this.getCamera());
+		// }
 
-    /**
-     * return the default vertex array. It contains a single attribute (bound on 0)
-     * with a VBO which contains a single float (this float is 0.0f) you should use
-     * it as a default VAO for geometry
-     */
-    public GLVertexArray getDefaultVAO() {
-        return (this.defaultVao);
-    }
+		this.getResourceManager().getEventManager().invokeEvent(this.preRenderEvent);
 
-    /**
-     * get the resource manager
-     */
-    public ResourceManagerClient getResourceManager() {
-        return (this.engine.getResourceManager());
-    }
+		// reset these values before next rendering
+		this.drawCalls = GLH.glhGetContext().resetDrawCalls();
+		this.verticesDrawn = GLH.glhGetContext().resetDrawVertices();
 
-    /**
-     * get current window on which the main renderer is rendering
-     */
-    public GLFWWindow getGLFWWindow() {
-        return (this.engine.getGLFWWindow());
-    }
+		this.getDefaultVAO().bind();
 
-    public GameEngineClient getEngine() {
-        return (this.engine);
-    }
+		// render
+		GLH.glhCheckError("pre main renderer render");
+		for (Renderer renderer : this.customRenderers) {
+			renderer.render();
+			GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + ".render()");
+		}
 
-    @Override
-    public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
+		GL11.glViewport(0, 0, this.getGLFWWindow().getWidth(), this.getGLFWWindow().getHeight());
+		this.guiRenderer.render();
 
-        for (Renderer renderer : this.defaultRenderers) {
-            renderer.getTasks(engine, tasks);
-        }
+		GLH.glhCheckError("post gui renderer render");
 
-        for (Renderer renderer : this.customRenderers) {
-            renderer.getTasks(engine, tasks);
-        }
-    }
+		this.getResourceManager().getEventManager().invokeEvent(this.postRenderEvent);
+	}
 
-    /**
-     * add a renderer to be use on the main rendering loop
-     */
-    public final void addRenderer(Renderer renderer) {
-        this.customRenderers.add(renderer);
-    }
+	/**
+	 * return the default vertex array. It contains a single attribute (bound on 0)
+	 * with a VBO which contains a single float (this float is 0.0f) you should use
+	 * it as a default VAO for geometry
+	 */
+	public GLVertexArray getDefaultVAO() {
+		return (this.defaultVao);
+	}
 
-    /**
-     * OpenGL tasks to be realized in main thread
-     */
-    public interface GLTask {
-        void run();
-    }
+	/** return the draw calls for the last frame */
+	public int getDrawCalls() {
+		return (this.drawCalls);
+	}
+
+	/** return the vertices drawn for the last frame */
+	public int getVerticesDrawn() {
+		return (this.verticesDrawn);
+	}
+
+	/** get the resource manager */
+	public ResourceManagerClient getResourceManager() {
+		return (this.engine.getResourceManager());
+	}
+
+	/** OpenGL tasks to be realized in main thread */
+	public interface GLTask {
+		public void run();
+	}
+
+	/** get current window on which the main renderer is rendering */
+	public GLFWWindow getGLFWWindow() {
+		return (this.engine.getGLFWWindow());
+	}
+
+	public GameEngineClient getEngine() {
+		return (this.engine);
+	}
+
+	public Random getRNG() {
+		return (this.rng);
+	}
+
+	@Override
+	public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
+
+		for (Renderer renderer : this.defaultRenderers) {
+			renderer.getTasks(engine, tasks);
+		}
+
+		for (Renderer renderer : this.customRenderers) {
+			renderer.getTasks(engine, tasks);
+		}
+	}
+
+	/** add a renderer to be use on the main rendering loop */
+	public final void addRenderer(Renderer renderer) {
+		this.customRenderers.add(renderer);
+	}
+
+	public final void removeRenderer(Renderer renderer) {
+		this.customRenderers.remove(renderer);
+	}
+
+	/** set to true of false weather you want to render or not */
+	public void toggle(boolean b) {
+		this.toggle = b;
+	}
 
 }

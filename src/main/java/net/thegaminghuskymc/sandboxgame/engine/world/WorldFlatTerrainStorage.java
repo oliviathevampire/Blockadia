@@ -81,7 +81,7 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
             return (previous);
         }
 
-        int height = terrain.getWorldIndex3().y;
+        int height = terrain.getWorldIndex3().z;
         if (height > this.getMaxHeightIndex()) {
             Logger.get().log(Logger.Level.WARNING, "Tried to spawn a terrain above the current maximum height! " + height
                     + " / " + this.getMaxHeightIndex());
@@ -101,12 +101,12 @@ public class WorldFlatTerrainStorage extends WorldTerrainStorage {
 
         Vector2i index2 = terrain.getWorldIndex2();
         Terrain top = this.topTerrains.get(index2);
-        if (top == null || top.getWorldIndex3().y < terrain.getWorldIndex3().y) {
+        if (top == null || top.getWorldIndex3().z < terrain.getWorldIndex3().z) {
             this.topTerrains.put(index2, terrain);
         }
 
         Terrain bot = this.botTerrains.get(index2);
-        if (bot == null || bot.getWorldIndex3().y > terrain.getWorldIndex3().y) {
+        if (bot == null || bot.getWorldIndex3().z > terrain.getWorldIndex3().z) {
             this.botTerrains.put(index2, terrain);
         }
 

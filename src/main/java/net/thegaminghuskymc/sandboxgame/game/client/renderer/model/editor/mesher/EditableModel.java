@@ -1,5 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.mesher;
 
+import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
+import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.Model;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.ModelInitializer;
 
@@ -7,95 +9,101 @@ import java.util.HashMap;
 
 public class EditableModel extends Model {
 
-    /**
-     * the mesher to be used for this model
-     */
-    private final ModelMesher modelMesher;
+	/** blocks data : first key is the layer, value is the blocks data */
+	private HashMap<String, EditableModelLayer> blocksDataLayers;
 
-    /**
-     * blocks data : first key is the layer, value is the blocks data
-     */
-    private HashMap<String, EditableModelLayer> blocksDataLayers;
+	/** a boolean set to true if mesh should be rebuild */
+	private boolean meshUpToDate;
+	private final EditableModelMeshingEvent meshingEvent;
 
-    private boolean meshUpToDate;
+	/** center coordinate of this model, vertices are translated before export */
+	private final Vector3f origin;
 
-    public EditableModel() {
-        this(null);
-    }
+	public EditableModel() {
+		this(null);
+	}
 
-    public EditableModel(ModelInitializer modelInitializer) {
-        super(modelInitializer);
-        this.blocksDataLayers = new HashMap<String, EditableModelLayer>();
-        this.modelMesher = new ModelMesherCull();
-    }
+	public EditableModel(ModelInitializer modelInitializer) {
+		super(modelInitializer);
+		this.blocksDataLayers = new HashMap<String, EditableModelLayer>();
+		this.meshingEvent = new EditableModelMeshingEvent(this);
+		this.origin = new Vector3f(0, 0, 0);
+	}
 
-    /**
-     * return raw blocks data
-     */
-    public final HashMap<String, EditableModelLayer> getRawLayers() {
-        return (this.blocksDataLayers);
-    }
+	public final Vector3f getOrigin() {
+		return (this.origin);
+	}
 
-    /**
-     * set raw blocks data
-     */
-    public final void setRawLayers(HashMap<String, EditableModelLayer> blockLayers) {
-        this.blocksDataLayers = blockLayers;
-    }
+	public final void setOrigin(float x, float y, float z) {
+		this.origin.set(x, y, z);
+	}
 
-    /**
-     * return a new deep copy of raw blocks data
-     */
-    public final HashMap<String, EditableModelLayer> getRawLayersCopy() {
-        HashMap<String, EditableModelLayer> layers = new HashMap<String, EditableModelLayer>();
-        for (String layerName : this.blocksDataLayers.keySet()) {
-            EditableModelLayer layer = this.blocksDataLayers.get(layerName);
-            layers.put(layerName, layer.clone());
-        }
-        return (layers);
-    }
+	/** return raw blocks data */
+	public final HashMap<String, EditableModelLayer> getRawLayers() {
+		return (this.blocksDataLayers);
+	}
 
-    public final EditableModelLayer getLayer(String layerName) {
-        return (this.blocksDataLayers.get(layerName));
-    }
+	/** return a new deep copy of raw blocks data */
+	public final HashMap<String, EditableModelLayer> getRawLayersCopy() {
+		HashMap<String, EditableModelLayer> layers = new HashMap<String, EditableModelLayer>();
+		for (String layerName : this.blocksDataLayers.keySet()) {
+			EditableModelLayer layer = this.blocksDataLayers.get(layerName);
+			layers.put(layerName, layer.clone());
+		}
+		return (layers);
+	}
 
-    public final void setLayer(EditableModelLayer editableModelLayer) {
-        this.blocksDataLayers.put(editableModelLayer.getName(), editableModelLayer);
-    }
+	public final EditableModelLayer getLayer(String layerName) {
+		return (this.blocksDataLayers.get(layerName));
+	}
 
-    @Override
-    public final void onBound() {
-        super.onBound();
-        if (!this.isMeshUpToDate()) {
-            this.setMeshUpToDate();
-            this.generate();
-        }
-    }
+	public void removeLayer(String layerName) {
+		this.blocksDataLayers.remove(layerName);
+	}
 
-    public final void generate() {
-        this.modelMesher.generate(this);
-    }
+	public void removeLayer(EditableModelLayer layer) {
+		this.blocksDataLayers.remove(layer.getName());
+	}
 
-    private final void setMeshUpToDate() {
-        this.meshUpToDate = true;
-    }
+	public final void setLayer(EditableModelLayer editableModelLayer) {
+		this.blocksDataLayers.put(editableModelLayer.getName(), editableModelLayer);
+	}
 
-    private final boolean isMeshUpToDate() {
-        return (this.meshUpToDate);
-    }
+	/** set raw blocks data */
+	public final void setRawLayers(HashMap<String, EditableModelLayer> blockLayers) {
+		this.blocksDataLayers = blockLayers;
+	}
 
-    public final void requestMeshUpdate() {
-        this.meshUpToDate = false;
-    }
+	@Override
+	public final void onBound() {
+		super.onBound();
+		if (!this.isMeshUpToDate()) {
+			this.setMeshUpToDate();
+			this.meshingEvent.process();
+			GameEngineClient.instance().getResourceManager().getEventManager().invokeEvent(this.meshingEvent);
+		}
+	}
 
-    /**
-     * @return : return number of set blocks
-     */
-    public final int getBlockDataCount() {
-        int sum = 0;
-        for (EditableModelLayer layer : this.blocksDataLayers.values()) {
-            sum += layer.getBlockDataCount();
-        }
-        return (sum);
-    }
+	private final void setMeshUpToDate() {
+		this.meshUpToDate = true;
+	}
+
+	private final boolean isMeshUpToDate() {
+		return (this.meshUpToDate);
+	}
+
+	public final void requestMeshUpdate() {
+		this.meshUpToDate = false;
+	}
+
+	/**
+	 * @return : return number of set blocks
+	 */
+	public final int getBlockDataCount() {
+		int sum = 0;
+		for (EditableModelLayer layer : this.blocksDataLayers.values()) {
+			sum += layer.getBlockDataCount();
+		}
+		return (sum);
+	}
 }

@@ -1,3 +1,17 @@
+/**
+**	This file is part of the project https://github.com/toss-dev/VoxelEngine
+**
+**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+**
+**	PEREIRA Romain
+**                                       4-----7          
+**                                      /|    /|
+**                                     0-----3 |
+**                                     | 5___|_6
+**                                     |/    | /
+**                                     1-----2
+*/
+
 package net.thegaminghuskymc.sandboxgame.engine.faces;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
@@ -5,67 +19,97 @@ import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3i;
 
 public interface Face {
 
-    int NULL = -1;
+	public static final int NULL = -1;
 
-    int LEFT = 0;
+	/** z + */
+	public static final int TOP = 0;
 
-    int RIGHT = 1;
+	/** z - */
+	public static final int BOT = 1;
 
-    int TOP = 2;
+	/** y + */
+	public static final int RIGHT = 2;
 
-    int BOT = 3;
+	/** y - */
+	public static final int LEFT = 3;
 
-    int FRONT = 4;
+	/** x + */
+	public static final int FRONT = 4;
 
-    int BACK = 5;
+	/** x - */
+	public static final int BACK = 5;
 
-    Face[] faces = {new FaceLeft(), new FaceRight(), new FaceTop(), new FaceBot(), new FaceFront(),
-            new FaceBack(),};
+	public static final Face[] faces = new Face[] { new FaceTop(), new FaceBot(), new FaceRight(), new FaceLeft(),
+			new FaceFront(), new FaceBack()
 
-    Face F_LEFT = Face.get(LEFT);
-    Face F_RIGHT = Face.get(RIGHT);
-    Face F_TOP = Face.get(TOP);
-    Face F_BOT = Face.get(BOT);
-    Face F_FRONT = Face.get(FRONT);
+	};
 
-    static Face get(int index) {
-        return (faces[index]);
-    }
+	public static final Face F_TOP = Face.get(TOP);
+	public static final Face F_BOT = Face.get(BOT);
+	public static final Face F_RIGHT = Face.get(RIGHT);
+	public static final Face F_LEFT = Face.get(LEFT);
+	public static final Face F_FRONT = Face.get(FRONT);
+	public static final Face F_BACK = Face.get(BACK);
 
-    static Face[] values() {
-        return (faces);
-    }
+	public static Face get(int index) {
+		return (faces[index]);
+	}
 
-    static Face fromVec(Vector3i vec) {
-        if (vec.x > 0 && vec.x > vec.y && vec.x > vec.z) {
-            return (Face.get(Face.BACK));
-        }
-        if (vec.x < 0 && vec.x < vec.y && vec.x < vec.z) {
-            return (Face.get(Face.FRONT));
-        }
-        if (vec.y > 0 && vec.y > vec.x && vec.y > vec.z) {
-            return (Face.get(Face.TOP));
-        }
-        if (vec.y < 0 && vec.y < vec.x && vec.y < vec.z) {
-            return (Face.get(Face.BOT));
-        }
-        if (vec.z > 0 && vec.z > vec.x && vec.z > vec.y) {
-            return (Face.get(Face.RIGHT));
-        }
-        return (Face.get(Face.LEFT));
-    }
+	public static Face[] values() {
+		return (faces);
+	}
 
-    String getName();
+	public String getName();
 
-    Vector3f getNormal();
+	public Vector3f getNormal();
 
-    Vector3i getVector();
+	public Vector3i getVector();
 
-    Face getOpposite();
+	public Face getOpposite();
 
-    int getID();
+	public int getID();
 
-    float getFaceFactor();
+	public abstract float getFaceFactor();
 
-    Vector3i getAllowedTranslation();
+	public static Face fromVec(Vector3f vec) {
+		if (vec.x > 0 && vec.x > vec.y && vec.x > vec.z) {
+			return (Face.get(Face.FRONT));
+		}
+		if (vec.x < 0 && vec.x < vec.y && vec.x < vec.z) {
+			return (Face.get(Face.BACK));
+		}
+		if (vec.y > 0 && vec.y > vec.x && vec.y > vec.z) {
+			return (Face.get(Face.RIGHT));
+		}
+		if (vec.y < 0 && vec.y < vec.x && vec.y < vec.z) {
+			return (Face.get(Face.LEFT));
+		}
+		if (vec.z > 0 && vec.z > vec.x && vec.z > vec.y) {
+			return (Face.get(Face.TOP));
+		}
+		return (Face.get(Face.BOT));
+	}
+
+	public static Face fromVec(Vector3i vec) {
+		if (vec.x > 0 && vec.x > vec.y && vec.x > vec.z) {
+			return (Face.get(Face.FRONT));
+		}
+		if (vec.x < 0 && vec.x < vec.y && vec.x < vec.z) {
+			return (Face.get(Face.BACK));
+		}
+		if (vec.y > 0 && vec.y > vec.x && vec.y > vec.z) {
+			return (Face.get(Face.RIGHT));
+		}
+		if (vec.y < 0 && vec.y < vec.x && vec.y < vec.z) {
+			return (Face.get(Face.LEFT));
+		}
+		if (vec.z > 0 && vec.z > vec.x && vec.z > vec.y) {
+			return (Face.get(Face.TOP));
+		}
+		return (Face.get(Face.BOT));
+	}
+
+	public Vector3i getAllowedTranslation();
+
+	public Vector3i[] getNeighbors();
 }

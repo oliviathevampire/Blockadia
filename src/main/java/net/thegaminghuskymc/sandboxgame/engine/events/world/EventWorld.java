@@ -3,17 +3,16 @@ package net.thegaminghuskymc.sandboxgame.engine.events.world;
 import net.thegaminghuskymc.sandboxgame.engine.events.Event;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
 
-/**
- * represents a world event
- */
+/** represents a world event */
 public abstract class EventWorld extends Event {
-    private World _world;
+	private final World world;
 
-    public EventWorld(World world) {
-        this._world = world;
-    }
+	public EventWorld(World world) {
+		super();
+		this.world = world;
+	}
 
-    public World getWorld() {
-        return (this._world);
-    }
+	public final World getWorld() {
+		return (this.world);
+	}
 }

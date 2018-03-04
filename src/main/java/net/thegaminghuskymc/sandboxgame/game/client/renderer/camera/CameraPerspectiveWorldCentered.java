@@ -1,90 +1,96 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.camera;
 
+import net.thegaminghuskymc.sandboxgame.engine.util.math.Maths;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 
-/**
- * a camera which follow the given entity, 3rd perso view
- */
+/** a camera which follow the given entity, 3rd perso view */
 public class CameraPerspectiveWorldCentered extends CameraPerspectiveWorld {
 
-    private Vector3f center;
+	private Vector3f center;
+	private float r;
+	private float theta;
+	private float phi;
 
-    /**
-     * distance from the entity
-     */
-    private float distanceFromCenter;
+	public CameraPerspectiveWorldCentered(GLFWWindow window) {
+		super(window);
+		this.center = new Vector3f();
+		this.r = 16;
+		this.phi = 0;
+		this.theta = 0;
+	}
 
-    /**
-     * angle around the entity
-     */
-    private float angleAroundCenter;
-    private Vector3f vecbuffer = new Vector3f();
+	@Override
+	public void update() {
+		super.update();
+		this.calculateCameraPosition(this.r);
+	}
 
-    public CameraPerspectiveWorldCentered(GLFWWindow window) {
-        super(window);
-        this.center = new Vector3f();
-        this.distanceFromCenter = 16;
-        this.angleAroundCenter = 0;
-        this.increasePitch(15);
-    }
+	public final void setCenter(Vector3f center) {
+		this.center.set(center);
+	}
 
-    @Override
-    public void update() {
-        super.update();
-        this.calculateCameraPosition();
-    }
+	public final void setCenter(float x, float y, float z) {
+		this.center.set(x, y, z);
+	}
 
-    public double getAngleAroundCenter() {
-        return (this.angleAroundCenter);
-    }
+	public final float getTheta() {
+		return (this.theta);
+	}
 
-    public void setAngleAroundCenter(float angle) {
-        this.angleAroundCenter = angle;
-    }
+	public final void setTheta(float theta) {
+		this.theta = theta;
+	}
 
-    public void increaseAngleAroundCenter(float inc) {
-        this.angleAroundCenter += inc;
-    }
+	public final void increaseTheta(float x) {
+		this.setTheta(this.theta + x);
+	}
 
-    public void increaseDistanceFromCenter(float inc) {
-        this.distanceFromCenter += inc;
-    }
+	public final float getPhi() {
+		return (this.phi);
+	}
 
-    public void setCenter(float x, float y, float z) {
-        this.center.set(x, y, z);
-    }
+	public final void setPhi(float phi) {
+		this.phi = phi;
+	}
 
-    public float getDistanceFromCenter() {
-        return (this.distanceFromCenter);
-    }
+	public final void increasePhi(float y) {
+		this.setPhi(this.phi + y);
+	}
 
-    public void setDistanceFromCenter(float distance) {
-        this.distanceFromCenter = distance;
-    }
+	public final void setR(float r) {
+		this.r = r;
+	}
 
-    public Vector3f getCenter() {
-        return (this.center);
-    }
+	public final float getR() {
+		return (this.r);
+	}
 
-    public void setCenter(Vector3f center) {
-        this.center.set(center);
-    }
+	public final void increaseR(float dr) {
+		this.setR(this.r + dr);
+	}
 
-    private void calculateCameraPosition() {
-        Vector3f center = vecbuffer.set(this.center);
+	public final Vector3f getCenter() {
+		return (this.center);
+	}
 
-        double horizontal = (this.distanceFromCenter * Math.cos(Math.toRadians(this.getPitch())));
-        double vertical = (this.distanceFromCenter * Math.sin(Math.toRadians(this.getPitch())));
-        double angle = this.angleAroundCenter;
-        float offx = (float) (horizontal * Math.sin(Math.toRadians(angle)));
-        float offz = (float) (horizontal * Math.cos(Math.toRadians(angle)));
+	/**
+	 * calculate camera world position depending on r, theta and phi (which are
+	 * relative to the center)
+	 */
+	protected void calculateCameraPosition(float distance) {
 
-        float x = center.x - offx;
-        float y = (float) (center.y + vertical);
-        float z = center.z - offz;
+		float x = (float) (this.center.x + distance * Math.cos(this.getTheta()) * Math.sin(this.getPhi()));
+		float y = (float) (this.center.y + distance * Math.cos(this.getTheta()) * Math.cos(this.getPhi()));
+		float z = (float) (this.center.z + distance * Math.sin(this.getTheta()));
+		super.setPosition(x, y, z);
 
-        super.setPosition(x, y, z);
-        super.setYaw((float) (180 - (this.angleAroundCenter)));
-    }
+		// this.setRotX(this.theta + Maths.PI);
+		// this.setRotY(0);
+		// this.setRotZ(this.phi + Maths.PI);
+
+		this.setRotX(this.theta - Maths.PI_2);
+		this.setRotY(0);
+		this.setRotZ(this.phi - Maths.PI);
+	}
 }

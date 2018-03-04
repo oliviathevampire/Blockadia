@@ -4,7 +4,7 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiS
 
 public class GuiSpinnerEventExpanded<T extends GuiSpinner> extends GuiSpinnerEvent<T> {
 
-    public GuiSpinnerEventExpanded(T gui) {
-        super(gui);
-    }
+	public GuiSpinnerEventExpanded(T gui) {
+		super(gui);
+	}
 }

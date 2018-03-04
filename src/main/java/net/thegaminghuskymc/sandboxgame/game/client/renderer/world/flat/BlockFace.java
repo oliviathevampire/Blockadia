@@ -6,66 +6,73 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainMeshVe
 
 import java.util.ArrayList;
 
+/** represent a block face */
 public class BlockFace {
 
-    // the block
-    public final Block block;
+	// the block
+	public final Block block;
 
-    // the vertices
-    public TerrainMeshVertex[] vertices;
+	// the durability
+	public final byte durability;
 
-    // the texture id
-    public int textureID;
+	// the vertices
+	public TerrainMeshVertex[] vertices;
 
-    public BlockFace(Block block, int textureID, TerrainMeshVertex... vertices) {
-        this.block = block;
-        this.textureID = textureID;
-        this.vertices = vertices;
-    }
+	// the texture id
+	public int textureID;
 
-    private boolean hasSameTexture(BlockFace other) {
-        return (this.textureID == other.textureID);
-    }
+	public BlockFace(Block block, int textureID, byte durability, TerrainMeshVertex... vertices) {
+		this.block = block;
+		this.textureID = textureID;
+		this.vertices = vertices;
+		this.durability = durability;
+	}
 
-    private boolean hasSameBrightness(BlockFace other) {
-        return (this.vertices[0].brightness == other.vertices[0].brightness
-                && this.vertices[1].brightness == other.vertices[1].brightness
-                && this.vertices[2].brightness == other.vertices[2].brightness
-                && this.vertices[3].brightness == other.vertices[3].brightness);
-    }
+	public boolean hasSameTexture(BlockFace other) {
+		return (this.textureID == other.textureID);
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (object == null || !(object instanceof BlockFace)) {
-            return (false);
-        }
+	public boolean hasSameBrightness(BlockFace other) {
+		return (this.vertices[0].brightness == other.vertices[0].brightness
+				&& this.vertices[1].brightness == other.vertices[1].brightness
+				&& this.vertices[2].brightness == other.vertices[2].brightness
+				&& this.vertices[3].brightness == other.vertices[3].brightness);
+	}
 
-        BlockFace other = (BlockFace) object;
+	@Override
+	public boolean equals(Object object) {
+		if (object == null || !(object instanceof BlockFace)) {
+			return (false);
+		}
 
-        return (this.hasSameTexture(other) && this.hasSameBrightness(other));
-    }
+		BlockFace other = (BlockFace) object;
 
-    /**
-     * push this face vertices to the stack
-     */
-    public void pushVertices(ArrayList<TerrainMeshTriangle> stack) {
+		return (this.hasSameTexture(other) && this.hasSameBrightness(other) && this.hasSameDurability(other));
+	}
 
-        TerrainMeshVertex v0 = this.vertices[0];
-        TerrainMeshVertex v1 = this.vertices[1];
-        TerrainMeshVertex v2 = this.vertices[2];
-        TerrainMeshVertex v3 = this.vertices[3];
+	private boolean hasSameDurability(BlockFace other) {
+		return (other.durability == this.durability);
+	}
 
-        if (v0.ao + v2.ao < v1.ao + v3.ao) {
-            stack.add(new TerrainMeshTriangle(v0, v1, v2));
-            stack.add(new TerrainMeshTriangle(v0, v2, v3));
-        } else {
-            // flip quad
-            stack.add(new TerrainMeshTriangle(v1, v2, v3));
-            stack.add(new TerrainMeshTriangle(v1, v3, v0));
-        }
-    }
+	/** push this face vertices to the stack */
+	public void pushVertices(ArrayList<TerrainMeshTriangle> stack) {
 
-    public final Block getBlock() {
-        return (this.block);
-    }
+		TerrainMeshVertex v0 = this.vertices[0];
+		TerrainMeshVertex v1 = this.vertices[1];
+		TerrainMeshVertex v2 = this.vertices[2];
+		TerrainMeshVertex v3 = this.vertices[3];
+
+		if (v0.ao + v2.ao < v1.ao + v3.ao) {
+			stack.add(new TerrainMeshTriangle(v0, v1, v2));
+			stack.add(new TerrainMeshTriangle(v0, v2, v3));
+		} else {
+			// flip quad
+			stack.add(new TerrainMeshTriangle(v1, v2, v3));
+			stack.add(new TerrainMeshTriangle(v1, v3, v0));
+		}
+	}
+
+	public final Block getBlock() {
+		return (this.block);
+	}
 }

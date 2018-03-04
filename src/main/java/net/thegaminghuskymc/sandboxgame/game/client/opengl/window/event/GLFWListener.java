@@ -4,16 +4,16 @@ import java.lang.reflect.ParameterizedType;
 
 public abstract class GLFWListener<T extends GLFWEvent> {
 
-    private Class<? extends GLFWEvent> clazz;
+	private Class<? extends GLFWEvent> clazz;
 
-    @SuppressWarnings("unchecked")
-    public GLFWListener() {
-        this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-    }
+	@SuppressWarnings("unchecked")
+	public GLFWListener() {
+		this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+	}
 
-    public Class<? extends GLFWEvent> getEventClass() {
-        return (this.clazz);
-    }
+	public Class<? extends GLFWEvent> getEventClass() {
+		return (this.clazz);
+	}
 
-    public abstract void invoke(T event);
+	public abstract void invoke(T event);
 }

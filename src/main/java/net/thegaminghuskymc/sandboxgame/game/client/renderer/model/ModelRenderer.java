@@ -1,3 +1,17 @@
+/**
+**	This file is part of the project https://github.com/toss-dev/VoxelEngine
+**
+**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+**
+**	PEREIRA Romain
+**                                       4-----7          
+**                                      /|    /|
+**                                     0-----3 |
+**                                     | 5___|_6
+**                                     |/    | /
+**                                     1-----2
+*/
+
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.model;
 
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
@@ -15,66 +29,62 @@ import java.util.HashMap;
 
 public class ModelRenderer extends Renderer {
 
-    /**
-     * the rendering program
-     */
-    private ProgramModel programModel;
+	/** the rendering program */
+	private ProgramModel programModel;
 
-    public ModelRenderer(MainRenderer mainRenderer) {
-        super(mainRenderer);
-    }
+	public ModelRenderer(MainRenderer mainRenderer) {
+		super(mainRenderer);
+	}
 
-    @Override
-    public void initialize() {
-        this.programModel = new ProgramModel();
-    }
+	@Override
+	public void initialize() {
+		this.programModel = new ProgramModel();
+	}
 
-    @Override
-    public void deinitialize() {
+	@Override
+	public void deinitialize() {
 
-        GLH.glhDeleteObject(this.programModel);
-        this.programModel = null;
-    }
+		GLH.glhDeleteObject(this.programModel);
+		this.programModel = null;
+	}
 
-    /**
-     * render world terrains
-     */
-    public void render(CameraProjective camera, HashMap<Model, ArrayList<ModelInstance>> renderingList) {
+	/** render world terrains */
+	public void render(CameraProjective camera, HashMap<Model, ArrayList<ModelInstance>> renderingList) {
 
-        if (this.getMainRenderer().getGLFWWindow().isKeyPressed(GLFW.GLFW_KEY_F)) {
-            GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
-        }
+		if (this.getMainRenderer().getGLFWWindow().isKeyPressed(GLFW.GLFW_KEY_F)) {
+			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+		}
 
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-        // enable model program
-        this.programModel.useStart();
-        {
-            // load global uniforms
-            this.programModel.loadCamera(camera);
+		// enable model program
+		this.programModel.useStart();
+		{
+			// load global uniforms
+			this.programModel.loadCamera(camera);
 
-            // for each entity to render
-            for (ArrayList<ModelInstance> models : renderingList.values()) {
-                if (models.size() > 0) {
-                    Model model = models.get(0).getModel();
-                    model.bind();
-                    this.programModel.loadModel(model);
-                    for (ModelInstance instance : models) {
-                        this.programModel.loadModelInstance(instance);
-                        model.draw();
-                    }
-                }
-            }
-        }
-        this.programModel.useStop();
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
-    }
+			// for each entity to render
+			for (ArrayList<ModelInstance> models : renderingList.values()) {
+				if (models.size() > 0) {
+					Model model = models.get(0).getModel();
+					model.bind();
+					this.programModel.loadModel(model);
+					for (ModelInstance instance : models) {
+						this.programModel.loadModelInstance(instance);
+						model.draw();
+					}
+				}
+			}
+		}
+		this.programModel.useStop();
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+	}
 
-    @Override
-    public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
-    }
+	@Override
+	public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
+	}
 }

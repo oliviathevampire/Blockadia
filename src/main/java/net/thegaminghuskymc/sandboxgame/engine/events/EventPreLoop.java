@@ -1,14 +1,28 @@
 package net.thegaminghuskymc.sandboxgame.engine.events;
 
 
-import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
+/** an event which is called right before the main loop ends */
+public class EventPreLoop extends Event {
 
-/**
- * an event which is called right before the main loop ends
- */
-public class EventPreLoop extends EventEngine {
+	public EventPreLoop() {
+		super();
+	}
 
-    public EventPreLoop(GameEngine engine) {
-        super(engine);
-    }
+	@Override
+	protected void process() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void unprocess() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void onReset() {
+		// TODO Auto-generated method stub
+
+	}
 }

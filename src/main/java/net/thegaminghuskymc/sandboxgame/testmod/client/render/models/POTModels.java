@@ -5,7 +5,7 @@ import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.modding.IModResource;
 import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.Model;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.ModelInitializer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.json.JSONModelInitializer;
@@ -17,12 +17,12 @@ import net.thegaminghuskymc.sandboxgame.testmod.common.entities.EntityPlant;
 public class POTModels implements IModResource {
 
     private static int registerJSONModel(ResourceManager manager, String dirpath,
-                                         Class<? extends Entity> entityClass) {
+                                         Class<? extends WorldEntity> entityClass) {
         return (registerModel(manager, new JSONModelInitializer(dirpath), entityClass));
     }
 
     private static int registerModel(ResourceManager manager, ModelInitializer modelInitializer,
-                                     Class<? extends Entity> entityClass) {
+                                     Class<? extends WorldEntity> entityClass) {
         Model model = new Model(modelInitializer);
         ModelManager modelManager = ((ResourceManagerClient) manager).getModelManager();
         int modelID = modelManager.registerModel(model);

@@ -1,27 +1,25 @@
 package net.thegaminghuskymc.sandboxgame.engine.world.entity.ai;
 
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 
-/**
- * a simple idle ai, to test the system
- */
-public class EntityAIIdle extends EntityAI {
+/** a simple idle ai, to test the system */
+public class EntityAIIdle<T extends WorldEntity> extends EntityAI<T> {
 
-    public EntityAIIdle(Entity entity) {
-        super(entity);
-        super.setUpdateTime(1000);
-    }
+	public EntityAIIdle() {
+		super();
+		super.setUpdateTime(1000);
+	}
 
-    @Override
-    protected void onUpdate(double dt) {
+	@Override
+	protected void onUpdate(T entity, double dt) {
+	}
 
-    }
+	@Override
+	protected void onTimedUpdate(WorldEntity entity) {
 
-    @Override
-    protected void onTimedUpdate() {
-        // if (!super.getEntity().isInAir()) {
-        // super.getEntity().jump();
-        // }
-    }
+		// if (!entity.isInAir()) {
+		// entity.jump();
+		// }
+	}
 
 }

@@ -8,21 +8,21 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.font.FontModel;
  * the text or the font size
  */
 public class GuiTextParameterTextCenterYBox extends GuiParameter<GuiText> {
-    private final float offset;
+	private final float offset;
 
-    public GuiTextParameterTextCenterYBox() {
-        this(0.0f);
-    }
+	public GuiTextParameterTextCenterYBox() {
+		this(0.0f);
+	}
 
-    public GuiTextParameterTextCenterYBox(float offset) {
-        super();
-        this.offset = offset;
-    }
+	public GuiTextParameterTextCenterYBox(float offset) {
+		super();
+		this.offset = offset;
+	}
 
-    @Override
-    public void run(GuiText guiText) {
-        FontModel fontModel = guiText.getFontModel();
-        float y = 2.0f * guiText.getBoxCenterY() - guiText.getTextHeight() - 1.0f + offset;
-        fontModel.setPosition(fontModel.getX(), y, 1.0f);
-    }
+	@Override
+	public void run(GuiText guiText) {
+		FontModel fontModel = guiText.getFontModel();
+		float y = 2.0f * guiText.getBoxCenterY() - guiText.getTextHeight() - 1.0f + offset;
+		fontModel.setPosition(fontModel.getX(), y, 1.0f);
+	}
 }

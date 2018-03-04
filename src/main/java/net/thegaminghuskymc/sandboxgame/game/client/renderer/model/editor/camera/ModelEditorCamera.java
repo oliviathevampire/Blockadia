@@ -1,5 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.camera;
 
+import java.util.Stack;
+
+import net.thegaminghuskymc.sandboxgame.engine.util.Color;
+import net.thegaminghuskymc.sandboxgame.engine.util.math.Maths;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraPerspectiveWorldCentered;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.GuiRenderer;
@@ -11,165 +15,186 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.mesher
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.mesher.EditableModelLayer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.instance.ModelInstance;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.Stack;
+;
 
 public class ModelEditorCamera extends CameraPerspectiveWorldCentered {
 
-    /**
-     * maximum number of step that can be canceled
-     */
-    private static final int HISTORIC_MAX_DEPTH = 16;
-    private CameraTool[] tools;
-    private int toolID;
-    private Stack<ModelEditorState> oldStates;
+	private CameraTool[] tools;
+	private int toolID;
 
-    public ModelEditorCamera(GLFWWindow window) {
-        super(window);
-        super.setPosition(0, 16, 0);
-        super.setPositionVelocity(0, 0, 0);
-        super.setRotationVelocity(0, 0, 0);
-        super.setPitch(0);
-        super.setYaw(0);
-        super.setRoll(0);
-        super.setSpeed(0.2f);
-        super.setRotSpeed(1);
-//        super.setFarDistance(Float.MAX_VALUE);
-        super.setRenderDistance(Float.MAX_VALUE);
-        super.setDistanceFromCenter(16);
-        super.setAngleAroundCenter(-45);
-        this.oldStates = new Stack<>();
-    }
+	/** maximum number of step that can be canceled */
+	private static final int HISTORIC_MAX_DEPTH = 16;
+	private Stack<ModelEditorState> oldStates;
 
-    @Override
-    public void update() {
-        super.update();
-        this.tools[this.toolID].update();
-    }
+	public ModelEditorCamera(GLFWWindow window) {
+		super(window);
+		super.setPosition(0, 0, 16);
+		super.setRotX(-Maths.PI_4);
+		super.setRotY(0);
+		super.setRotZ(0);
+		super.setFarDistance(Float.MAX_VALUE);
+		super.setRenderDistance(Float.MAX_VALUE);
+		this.oldStates = new Stack<ModelEditorState>();
+	}
 
-    ;
+	private interface ModelEditorState {
+		public void restoreState();
+	};
 
-    public void onRightReleased() {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onRightReleased();
-        }
-    }
+	@Override
+	public void update() {
+		super.update();
+		if (this.getTool() != null) {
+			this.getTool().update();
+		}
+	}
 
-    public void onMouseMove() {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onMouseMove();
-        }
-    }
+	public final void setTool(int toolID) {
+		this.toolID = toolID;
+	}
 
-    public void onMouseScroll(GuiEventMouseScroll<GuiModelView> event) {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onMouseScroll(event);
-        }
-    }
+	public final CameraTool getTool() {
+		return (this.tools != null ? this.tools[this.toolID] : null);
+	}
 
-    public void onRightPressed() {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onRightPressed();
-        }
-    }
+	public final int getToolID() {
+		return (this.toolID);
+	}
 
-    public void onLeftReleased() {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onLeftReleased();
-        }
-    }
+	public void onRightReleased() {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onRightReleased();
+		}
+	}
 
-    public void onLeftPressed() {
-        if (this.tools[this.toolID] != null) {
-            this.tools[this.toolID].onLeftPressed();
-        }
-    }
+	public void onMouseMove() {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onMouseMove();
+		}
+	}
 
-    protected final void stackState(ModelEditorState state) {
-        this.oldStates.push(state);
-    }
+	public void onMouseScroll(GuiEventMouseScroll<GuiModelView> event) {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onMouseScroll(event);
+		}
+	}
 
-    protected final void unstackState() {
-        if (this.oldStates.size() == 0) {
-            return;
-        }
-        ModelEditorState state = this.oldStates.pop();
-        state.restoreState();
-    }
+	public void onRightPressed() {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onRightPressed();
+		}
+	}
 
-    public void onKeyPress(GuiEventKeyPress<GuiModelView> event) {
-        ModelInstance modelInstance = event.getGui().getSelectedModelInstance();
-        EditableModelLayer modelLayer = event.getGui().getSelectedModelLayer();
+	public void onLeftReleased() {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onLeftReleased();
+		}
+	}
 
-        if (modelInstance == null || modelLayer == null) {
-            return;
-        }
-        EditableModel model = ((EditableModel) modelInstance.getModel());
+	public void onLeftPressed() {
+		if (this.getTool() != null) {
+			this.getTool().getCameraSelector().onLeftPressed();
+		}
+	}
 
-        if (this.tools[this.toolID] != null) {
-            if (event.getKey() == GLFW.GLFW_KEY_Z) {
-                // do a deep copy of the current model block data
+	protected final void stackState(ModelEditorState state) {
+		this.oldStates.push(state);
+	}
 
-                final EditableModelLayer layerCopy = modelLayer.clone();
+	protected final void unstackState() {
+		if (this.oldStates.size() == 0) {
+			return;
+		}
+		ModelEditorState state = this.oldStates.pop();
+		state.restoreState();
+	}
 
-                ModelEditorState state = new ModelEditorState() {
-                    @Override
-                    public void restoreState() {
-                        model.setLayer(layerCopy);
-                        model.requestMeshUpdate();
-                    }
-                };
+	public void onKeyPress(GuiEventKeyPress<GuiModelView> event) {
 
-                if (this.tools[this.toolID].action(modelInstance, modelLayer)) {
-                    // generate mesh, save
-                    while (this.oldStates.size() >= HISTORIC_MAX_DEPTH) {
-                        this.oldStates.pop();
-                    }
-                    this.stackState(state);
-                    modelLayer.requestPlanesUpdate();
-                    model.requestMeshUpdate();
-                }
-            }
-        }
+		GuiToolboxModel modelPanel = event.getGui().getToolbox().getModelToolbox();
+		if (modelPanel != null) {
+			if (event.getKey() == GLFW.GLFW_KEY_E) {
+				modelPanel.getGuiToolboxModelPanelBuild().selectNextTool();
+			} else if (event.getKey() == GLFW.GLFW_KEY_Q) {
+				modelPanel.getGuiToolboxModelPanelBuild().selectPreviousTool();
+			} else if (event.getKey() == GLFW.GLFW_KEY_D) {
+				modelPanel.selectNextPanel();
+			} else if (event.getKey() == GLFW.GLFW_KEY_A) {
+				modelPanel.selectPreviousPanel();
+			} else if (event.getKey() == GLFW.GLFW_KEY_W
+					&& event.getGLFWWindow().isKeyPressed(GLFW.GLFW_KEY_LEFT_CONTROL)) {
+				if (this.oldStates.size() > 0) {
+					ModelEditorState state = this.oldStates.pop();
+					state.restoreState();
+					event.getGui().getToolbox().refresh();
+				} else {
+					GuiRenderer guiRenderer = event.getGui().getWorldRenderer().getMainRenderer().getGuiRenderer();
+					guiRenderer.toast(event.getGui(), "Nothing to be canceled", false);
+				}
+			}
+		}
 
-        GuiToolboxModel modelPanel = event.getGui().getToolbox().getModelToolbox();
-        if (modelPanel != null) {
-            if (event.getKey() == GLFW.GLFW_KEY_E) {
-                modelPanel.getGuiToolboxModelPanelBuild().selectNextTool();
-            } else if (event.getKey() == GLFW.GLFW_KEY_Q) {
-                modelPanel.getGuiToolboxModelPanelBuild().selectPreviousTool();
-            } else if (event.getKey() == GLFW.GLFW_KEY_D) {
-                modelPanel.selectNextPanel();
-            } else if (event.getKey() == GLFW.GLFW_KEY_A) {
-                modelPanel.selectPreviousPanel();
-            } else if (event.getKey() == GLFW.GLFW_KEY_W
-                    && event.getGLFWWindow().isKeyPressed(GLFW.GLFW_KEY_LEFT_CONTROL)) {
-                if (this.oldStates.size() > 0) {
-                    ModelEditorState state = this.oldStates.pop();
-                    state.restoreState();
-                } else {
-                    GuiRenderer guiRenderer = event.getGui().getWorldRenderer().getMainRenderer().getGuiRenderer();
-                    guiRenderer.toast(event.getGui(), "Nothing to be canceled", false);
-                }
-            }
-        }
-    }
+		ModelInstance modelInstance = event.getGui().getSelectedModelInstance();
+		EditableModelLayer modelLayer = event.getGui().getSelectedModelLayer();
 
-    public final void loadTools(GuiModelView guiModelView) {
-        this.tools = new CameraTool[]{new CameraToolPlace(guiModelView), new CameraToolPaint(guiModelView),
-                new CameraToolRemove(guiModelView), new CameraToolExtrude(guiModelView),
-                new CameraToolRigging(guiModelView)};
-    }
+		if (modelInstance != null && modelLayer != null) {
 
-    public CameraTool getTool() {
-        return (this.tools != null ? this.tools[this.toolID] : null);
-    }
+			EditableModel model = ((EditableModel) modelInstance.getModel());
 
-    public void setTool(int toolID) {
-        this.toolID = toolID;
-    }
+			if (this.tools[this.toolID] != null) {
+				if (event.getKey() == GLFW.GLFW_KEY_Z) {
+					// do a deep copy of the current model block data
 
-    private interface ModelEditorState {
-        public void restoreState();
-    }
+					final EditableModelLayer layerCopy = modelLayer.clone();
+
+					ModelEditorState state = new ModelEditorState() {
+						@Override
+						public void restoreState() {
+							model.setLayer(layerCopy);
+							model.requestMeshUpdate();
+						}
+					};
+
+					if (this.getTool().getCameraAction().action(this.getTool().getCameraSelector())) {
+						// generate mesh, save
+						while (this.oldStates.size() >= HISTORIC_MAX_DEPTH) {
+							this.oldStates.pop();
+						}
+						this.stackState(state);
+						modelLayer.requestPlanesUpdate();
+						model.requestMeshUpdate();
+						event.getGui().getToolbox().refresh();
+					}
+				}
+			}
+		}
+	}
+
+	public static final String[] TOOLS_NAME = { "Place", "Remove", "Paint", "Fill Surface", "Extrude", "Rigging" };
+
+	public static final Color[] TOOLS_COLOR = { Color.BLUE, Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW,
+			Color.GREEN };
+
+	public static final CameraAction[] TOOLS_ACTIONS = { new CameraActionPlace(), new CameraActionRemove(),
+			new CameraActionPaint(), new CameraActionFillSurface(), new CameraActionExtrude(),
+			new CameraActionRigging() };
+
+	public static final Class<?>[] TOOLS_SELECTORS = { CameraSelectorBlockFace.class, CameraSelectorBlock.class,
+			CameraSelectorFace.class, CameraSelectorFace.class, CameraSelectorFace.class, CameraSelectorFace.class };
+
+	public final void loadTools(GuiModelView guiModelView) {
+		this.tools = new CameraTool[TOOLS_NAME.length];
+		for (int i = 0; i < this.tools.length; i++) {
+			Class<?> selector = TOOLS_SELECTORS[i];
+			CameraSelector cameraSelector;
+			try {
+				cameraSelector = (CameraSelector) selector.getConstructor(GuiModelView.class, Color.class)
+						.newInstance(guiModelView, TOOLS_COLOR[i]);
+				this.tools[i] = new CameraTool(TOOLS_ACTIONS[i], cameraSelector);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

@@ -8,15 +8,16 @@ import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Maths;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3i;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntityStorage;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.PhysicObject;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.collision.PhysicObjectBlock;
 import net.thegaminghuskymc.sandboxgame.engine.world.generator.WorldGenerator;
 import net.thegaminghuskymc.sandboxgame.engine.world.generator.WorldGeneratorEmpty;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.WorldObject;
+import net.thegaminghuskymc.sandboxgame.engine.world.physic.WorldObjectBlock;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 
 /**
  * TODO Main world class, may change to a "Planet" class, and a new World class
@@ -24,286 +25,266 @@ import java.util.Random;
  */
 public abstract class World implements Taskable {
 
-    private static final int seed = 42;
-    public static final SimplexNoiseOctave NOISE_OCTAVE = new SimplexNoiseOctave(seed);
-    public static final SimplexNoiseOctave[] NOISE_OCTAVES = {new SimplexNoiseOctave(seed + 1),
-            new SimplexNoiseOctave(seed + 2), new SimplexNoiseOctave(seed + 3), new SimplexNoiseOctave(seed + 4)};
-    /**
-     * every loaded terrain are in
-     */
-    private final WorldTerrainStorage terrains;
-    /**
-     * every world entities.
-     */
-    private final WorldEntityStorage entities;
-    /**
-     * rng
-     */
-    private final Random rng;
-    /**
-     * the world generator
-     */
-    private WorldGenerator generator;
-    /**
-     * number of updates which was made for the world
-     */
-    private long tick;
+	// public static final int seed = (int) System.currentTimeMillis();
+	public static final int seed = 42;
+	public static final SimplexNoiseOctave NOISE_OCTAVE = new SimplexNoiseOctave(seed);
+	public static final SimplexNoiseOctave[] NOISE_OCTAVES = { new SimplexNoiseOctave(seed + 1),
+			new SimplexNoiseOctave(seed + 2), new SimplexNoiseOctave(seed + 3), new SimplexNoiseOctave(seed + 4) };
 
-    public World() {
-        this.terrains = this.instanciateTerrainStorage();
-        this.entities = new WorldEntityStorage(this);
-        this.rng = new Random();
-        this.tick = 0;
-        this.setWorldGenerator(new WorldGeneratorEmpty());
-    }
+	/** the world generator */
+	private WorldGenerator generator;
 
-    /**
-     * save the given world to the given folder
-     */
+	/** every loaded terrain are in */
+	private final WorldTerrainStorage terrains;
 
-    public static void save(World world, String filepath) {
-    }
+	/** every world entities. */
+	private final WorldEntityStorage entities;
 
-    /**
-     * load the given folder as a world
-     */
-    public static World load(String filepath) {
-        return (null);
-    }
+	/** rng */
+	private final Random rng;
 
-    /**
-     * create the terrain storage of this world (can be null)
-     */
-    protected abstract WorldTerrainStorage instanciateTerrainStorage();
+	/** number of updates which was made for the world */
+	private long tick;
 
-    /**
-     * tasks to be run to update the world
-     */
-    @Override
-    public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
-        this.entities.getTasks(engine, tasks);
-        this.terrains.getTasks(engine, tasks);
-        this.onTasksGet(engine, tasks);
-        this.tick();
-    }
+	public World() {
+		this.terrains = this.instanciateTerrainStorage();
+		this.entities = new WorldEntityStorage(this);
+		this.rng = new Random();
+		this.tick = 0;
+		this.setWorldGenerator(new WorldGeneratorEmpty());
+	}
 
-    /**
-     * call back to add tasks to run
-     */
-    protected void onTasksGet(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
-    }
+	/** create the terrain storage of this world (can be null) */
+	protected abstract WorldTerrainStorage instanciateTerrainStorage();
 
-    /**
-     * generate the terrain for the given coordinates, spawn it if un-existant
-     */
-    protected Terrain generateTerrain(int x, int y, int z) {
-        Terrain terrain = this.getTerrain(x, y, z);
-        if (terrain == null) {
-            terrain = new Terrain(x, y, z);
-            this.spawnTerrain(terrain);
-        }
-        return (this.generateTerrain(terrain));
-    }
+	/** tasks to be run to update the world */
+	@Override
+	public void getTasks(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
+		this.entities.getTasks(engine, tasks);
+		this.terrains.getTasks(engine, tasks);
+		this.onTasksGet(engine, tasks);
+		this.tick();
+	}
 
-    protected Terrain generateTerrain(Terrain terrain) {
-        terrain.preGenerated();
-        this.generator.generate(terrain);
-        terrain.postGenerated();
-        return (terrain);
-    }
+	/** call back to add tasks to run */
+	protected void onTasksGet(GameEngine engine, ArrayList<GameEngine.Callable<Taskable>> tasks) {
+	}
 
-    /**
-     * set the world generator
-     */
-    protected void setWorldGenerator(WorldGenerator worldgen) {
-        this.generator = worldgen;
-    }
+	/**
+	 * generate the terrain for the given coordinates, spawn it if un-existant
+	 */
+	public Terrain generateTerrain(int x, int y, int z) {
+		Terrain terrain = this.getTerrain(x, y, z);
+		if (terrain == null) {
+			terrain = new Terrain(x, y, z);
+			this.spawnTerrain(terrain);
+		}
+		return (this.generateTerrain(terrain));
+	}
 
-    /**
-     * get the rng
-     */
-    public final Random getRNG() {
-        return (this.rng);
-    }
+	public Terrain generateTerrain(Terrain terrain) {
+		terrain.preGenerated();
+		this.generator.generate(terrain);
+		terrain.postGenerated();
+		return (terrain);
+	}
 
-    /**
-     * delete the world : de-allocate every allocated memory
-     */
-    public final void delete() {
-        this.entities.delete();
-        this.terrains.delete();
-        this.onDelete();
-    }
+	/** set the world generator */
+	public void setWorldGenerator(WorldGenerator worldgen) {
+		this.generator = worldgen;
+	}
 
-    private void onDelete() {
+	/** get the rng */
+	public final Random getRNG() {
+		return (this.rng);
+	}
 
-    }
+	/** delete the world : de-allocate every allocated memory */
+	public final void delete() {
+		this.entities.delete();
+		this.terrains.delete();
+		this.onDelete();
+	}
 
-    /**
-     * return the terrain with the given location, or null if the terrain doesnt
-     * exists / is empty
-     */
-    public WorldTerrainStorage getTerrainStorage() {
-        return (this.terrains);
-    }
+	protected void onDelete() {
 
-    public WorldEntityStorage getEntityStorage() {
-        return (this.entities);
-    }
+	}
 
-    /**
-     * get the block at the given world relative position
-     */
-    public Block getBlock(float x, float y, float z) {
-        return (this.terrains.getBlock(x, y, z));
-    }
+	/**
+	 * return the terrain with the given location, or null if the terrain doesnt
+	 * exists / is empty
+	 */
+	public WorldTerrainStorage getTerrainStorage() {
+		return (this.terrains);
+	}
 
-    /**
-     * world position
-     */
-    public Block getBlock(Vector3f pos) {
-        return (this.terrains.getBlock(pos.x, pos.y, pos.z));
-    }
+	public WorldEntityStorage getEntityStorage() {
+		return (this.entities);
+	}
 
-    /**
-     * set the block at the given world coordinates
-     */
-    public Terrain setBlock(Block block, float x, float y, float z) {
-        return (this.terrains.setBlock(block, x, y, z));
-    }
+	/**
+	 * set the block durabiltiy at the given world relative position
+	 *
+	 */
+	public final void setBlockDurability(byte durability, float x, float y, float z) {
+		this.terrains.setBlockDurability(durability, x, y, z);
+	}
 
-    public byte getBlockLight(Vector3f pos) {
-        return (this.terrains.getBlockLight(pos.x, pos.y, pos.z));
-    }
+	/** get the block at the given world relative position */
+	public Block getBlock(float x, float y, float z) {
+		return (this.terrains.getBlock(x, y, z));
+	}
 
-    /**
-     * return the terrain at the given index
-     */
-    public Terrain getTerrain(int x, int y, int z) {
-        return (this.terrains.get(x, y, z));
-    }
+	/** world position */
+	public Block getBlock(Vector3f pos) {
+		return (this.terrains.getBlock(pos.x, pos.y, pos.z));
+	}
 
-    /**
-     * return the terrain at the given index
-     */
-    public Terrain getTerrain(Vector3i pos) {
-        return (this.terrains.get(pos));
-    }
+	/** set the block at the given world coordinates */
+	public Terrain setBlock(Block block, float x, float y, float z) {
+		return (this.terrains.setBlock(block, x, y, z));
+	}
 
-    /**
-     * return true if the given terrain is loaded
-     */
-    public boolean isTerrainLoaded(Terrain terrain) {
-        return (this.terrains.isLoaded(terrain));
-    }
+	public byte getBlockLight(Vector3f pos) {
+		return (this.terrains.getBlockLight(pos.x, pos.y, pos.z));
+	}
 
-    /**
-     * get every loaded terrains
-     */
-    public Terrain[] getLoadedTerrains() {
-        return (this.terrains.getLoaded());
-    }
+	/** return the terrain at the given index */
+	public Terrain getTerrain(int x, int y, int z) {
+		return (this.terrains.get(x, y, z));
+	}
 
-    /**
-     * get the terrain index for the given world position
-     */
-    public Vector3i getTerrainIndex(Vector3f position) {
-        return (this.getTerrainIndex(position, new Vector3i()));
-    }
+	/** return the terrain at the given index */
+	public Terrain getTerrain(Vector3i pos) {
+		return (this.terrains.get(pos));
+	}
 
-    public Vector3i getTerrainIndex(Vector3f position, Vector3i world_index) {
-        return (this.terrains.getIndex(position, world_index));
-    }
+	/** return true if the given terrain is loaded */
+	public boolean isTerrainLoaded(Terrain terrain) {
+		return (this.terrains.isLoaded(terrain));
+	}
 
-    /**
-     * spawn a terrain
-     */
-    public final Terrain spawnTerrain(Terrain terrain) {
-        return (this.terrains.add(terrain));
-    }
+	/** get every loaded terrains */
+	public Terrain[] getLoadedTerrains() {
+		return (this.terrains.getLoaded());
+	}
 
-    /**
-     * spawn an entity into the world
-     */
-    public final Entity spawnEntity(Entity entity) {
-        return (this.entities.spawn(entity));
-    }
+	/** get the terrain index for the given world position */
+	public Vector3i getTerrainIndex(Vector3f position) {
+		return (this.getTerrainIndex(position, new Vector3i()));
+	}
 
-    /**
-     * tick the world once
-     */
-    public void tick() {
-        this.tick++;
-    }
+	public Vector3i getTerrainIndex(Vector3f position, Vector3i world_index) {
+		return (this.terrains.getIndex(position, world_index));
+	}
 
-    public long getTick() {
-        return (this.tick);
-    }
+	/** return true if this world can hold this terrain */
+	public boolean canHoldTerrain(Terrain terrain) {
+		return (this.terrains.canHold(terrain));
+	}
 
-    @Override
-    public String toString() {
-        return ("World: " + this.getName());
-    }
-    // TODO: save and load
+	/** spawn a terrain */
+	public final Terrain spawnTerrain(Terrain terrain) {
+		return (this.terrains.add(terrain));
+	}
 
-    /**
-     * return world name
-     */
-    public abstract String getName();
+	/** spawn an entity into the world */
+	public final WorldEntity spawnEntity(WorldEntity entity) {
+		return (this.entities.spawn(entity));
+	}
 
-    /**
-     * world location
-     */
-    public BlockInstance getBlockInstance(float x, float y, float z) {
-        return (this.terrains.getBlockInstance(x, y, z));
-    }
+	/** tick the world once */
+	public void tick() {
+		this.tick++;
 
-    public final void load() {
-        this.onLoaded();
-    }
+		// if (tick % 40 == 0) {
+		// int count = 0;
+		// long gain = 0;
+		// Terrain[] t = this.terrains.get();
+		// for (Terrain terrain : t) {
+		// if (terrain.hasState(Terrain.STATE_BLOCK_COMPRESSED)) {
+		// count++;
+		// gain += terrain.gainBlock;
+		// gain += terrain.gainLight;
+		// }
+		// }
+		// Logger.get().log(Logger.Level.DEBUG, count, t.length, gain);
+		// }
+	}
 
-    /**
-     * called when this world is loaded
-     */
-    protected void onLoaded() {
+	public long getTick() {
+		return (this.tick);
+	}
 
-    }
+	@Override
+	public String toString() {
+		return ("World: " + this.getName());
+	}
 
-    public final void unload() {
-        this.onUnloaded();
-    }
+	/** return world name */
+	public abstract String getName();
 
-    private void onUnloaded() {
-    }
+	/** world location */
+	public BlockInstance getBlockInstance(float x, float y, float z) {
+		return (this.terrains.getBlockInstance(x, y, z));
+	}
+	// TODO: save and load
 
-    /**
-     * get the PhysicObjects (blocks and entities) colliding with the
-     * PhysicObject
-     *
-     * @return : the physic object list
-     */
-    public final ArrayList<PhysicObject> getCollidingPhysicObjects(PhysicObject exclude, float minx, float miny,
-                                                                   float minz, float maxx, float maxy, float maxz) {
-        ArrayList<PhysicObject> lst = new ArrayList<PhysicObject>();
+	/**
+	 * save the given world to the given folder
+	 */
 
-        int mx = Maths.floor(minx);
-        int Mx = Maths.ceil(maxx);
-        int my = Maths.floor(miny);
-        int My = Maths.ceil(maxy);
-        int mz = Maths.floor(minz);
-        int Mz = Maths.ceil(maxz);
+	public static final void save(World world, String filepath) {
+	}
 
-        // iterate though each blocks
-        for (int x = mx; x < Mx; x++) {
-            for (int y = my; y < My; y++) {
-                for (int z = mz; z < Mz; z++) {
-                    Block block = this.getBlock(x, y, z);
-                    if (!block.isCrossable()) {
-                        lst.add(new PhysicObjectBlock(block, x, y, z));
-                    }
-                }
-            }
-        }
-        return (lst);
-    }
+	/** load the given folder as a world */
+	public static final World load(String filepath) {
+		return (null);
+	}
+
+	public final void load() {
+		this.onLoaded();
+	}
+
+	/** called when this world is loaded */
+	protected void onLoaded() {
+
+	}
+
+	public final void unload() {
+		this.onUnloaded();
+	}
+
+	private void onUnloaded() {
+	}
+
+	/**
+	 * get the PhysicObjects (blocks and entities) colliding with the PhysicObject
+	 *
+	 * @return : the physic object list
+	 */
+	public final ArrayList<WorldObject> getCollidingPhysicObjects(WorldObject exclude, float minx, float miny,
+																  float minz, float maxx, float maxy, float maxz) {
+		ArrayList<WorldObject> lst = new ArrayList<WorldObject>();
+
+		int mx = Maths.floor(minx);
+		int Mx = Maths.ceil(maxx);
+		int my = Maths.floor(miny);
+		int My = Maths.ceil(maxy);
+		int mz = Maths.floor(minz);
+		int Mz = Maths.ceil(maxz);
+
+		// iterate though each blocks
+		for (int x = mx; x < Mx; x++) {
+			for (int y = my; y < My; y++) {
+				for (int z = mz; z < Mz; z++) {
+					Block block = this.getBlock(x, y, z);
+					if (!block.isCrossable()) {
+						lst.add(new WorldObjectBlock(this, block, x, y, z));
+					}
+				}
+			}
+		}
+		return (lst);
+	}
 }

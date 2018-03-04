@@ -1,191 +1,196 @@
+/**
+**	This file is part of the project https://github.com/toss-dev/VoxelEngine
+**
+**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+**
+**	PEREIRA Romain
+**                                       4-----7          
+**                                      /|    /|
+**                                     0-----3 |
+**                                     | 5___|_6
+**                                     |/    | /
+**                                     1-----2
+*/
+
 package net.thegaminghuskymc.sandboxgame.game.client.renderer;
+
+import java.nio.ByteBuffer;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Matrix4f;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
-import net.thegaminghuskymc.sandboxgame.game.client.opengl.object.GLVertexArray;
-import net.thegaminghuskymc.sandboxgame.game.client.opengl.object.GLVertexBuffer;
+import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLVertexArray;
+import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLVertexBuffer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.Camera;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainMesher;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
-import java.nio.ByteBuffer;
 
 public abstract class Mesh {
 
-    /**
-     * opengl
-     */
-    protected GLVertexArray vao;
-    protected GLVertexBuffer vbo;
-    /**
-     * terrain meshes
-     */
-    private int vertexCount;
-    private Vector3f rotation;
-    private Vector3f position;
-    private Vector3f scale;
+	/** terrain meshes */
+	private int vertexCount;
 
-    private Matrix4f transfMatrix;
+	/** opengl */
+	protected GLVertexArray vao;
+	protected GLVertexBuffer vbo;
 
-    public Mesh() {
-        this.transfMatrix = new Matrix4f();
-        this.rotation = new Vector3f();
-        this.position = new Vector3f();
-        this.scale = new Vector3f(1.0f, 1.0f, 1.0f);
-        this.updateTransformationMatrix();
-    }
+	private Vector3f rotation;
+	private Vector3f position;
+	private Vector3f scale;
 
-    /**
-     * initialize opengl stuff (vao, vbo)
-     */
-    public void initialize() {
+	private Matrix4f transfMatrix;
 
-        if (this.isInitialized()) {
-            Logger.get().log(Logger.Level.WARNING, "tried to initialized a mesh that was already initialized!!");
-            return;
-        }
+	public Mesh() {
+		this.transfMatrix = new Matrix4f();
+		this.rotation = new Vector3f();
+		this.position = new Vector3f();
+		this.scale = new Vector3f(1.0f, 1.0f, 1.0f);
+		this.updateTransformationMatrix();
+	}
 
-        this.vao = GLH.glhGenVAO();
-        this.vbo = GLH.glhGenVBO();
+	/** initialize opengl stuff (vao, vbo) */
+	public void initialize() {
 
-        this.vao.bind();
-        this.vbo.bind(GL15.GL_ARRAY_BUFFER);
+		if (this.isInitialized()) {
+			Logger.get().log(Logger.Level.WARNING, "tried to initialized a mesh that was already initialized!!");
+			return;
+		}
 
-        this.setAttributes(this.vao, this.vbo);
+		this.vao = GLH.glhGenVAO();
+		this.vbo = GLH.glhGenVBO();
 
-        // this.vbo.unbind(GL15.GL_ARRAY_BUFFER);
-        // this.vao.unbind();
-    }
+		this.vao.bind();
+		this.vbo.bind(GL15.GL_ARRAY_BUFFER);
 
-    public final boolean isInitialized() {
-        return (this.vao != null);
-    }
+		this.setAttributes(this.vao, this.vbo);
 
-    public final void deinitialize() {
-        GLH.glhDeleteObject(this.vao);
-        GLH.glhDeleteObject(this.vbo);
+		// this.vbo.unbind(GL15.GL_ARRAY_BUFFER);
+		// this.vao.unbind();
+	}
 
-        this.vao = null;
-        this.vbo = null;
+	public final boolean isInitialized() {
+		return (this.vao != null);
+	}
 
-        this.onDeinitialized();
-    }
+	public final void deinitialize() {
+		GLH.glhDeleteObject(this.vao);
+		GLH.glhDeleteObject(this.vbo);
 
-    protected void onDeinitialized() {
-    }
+		this.vao = null;
+		this.vbo = null;
 
-    protected abstract void setAttributes(GLVertexArray vao, GLVertexBuffer vbo);
+		this.onDeinitialized();
+	}
 
-    public final GLVertexArray getVAO() {
-        return (this.vao);
-    }
+	protected void onDeinitialized() {
+	}
 
-    public final GLVertexBuffer getVBO() {
-        return (this.vbo);
-    }
+	protected abstract void setAttributes(GLVertexArray vao, GLVertexBuffer vbo);
 
-    public final ByteBuffer getVertices() {
-        if (this.vbo == null) {
-            return (null);
-        }
-        return (this.vbo.getContent(0));
-    }
+	public final GLVertexArray getVAO() {
+		return (this.vao);
+	}
 
-    public void bind() {
-        if (!this.isInitialized()) {
-            this.initialize();
-        }
-        this.vao.bind();
-    }
+	public final GLVertexBuffer getVBO() {
+		return (this.vbo);
+	}
 
-    /**
-     * called in the rendering thread
-     */
-    public final void draw() {
-        this.preDraw();
-        this.vao.draw(GL11.GL_TRIANGLES, 0, this.vertexCount);
-        this.postDraw();
-    }
+	public final ByteBuffer getVertices() {
+		if (this.vbo == null) {
+			return (null);
+		}
+		return (this.vbo.getContent(0));
+	}
 
-    protected void preDraw() {
-    }
+	public void bind() {
+		if (!this.isInitialized()) {
+			this.initialize();
+		}
+		this.vao.bind();
+	}
 
-    protected void postDraw() {
-    }
+	/** called in the rendering thread */
+	public final void draw() {
+		this.preDraw();
+		this.vao.draw(GL11.GL_TRIANGLES, 0, this.vertexCount);
+		this.postDraw();
+	}
 
-    /**
-     * draw with index buffer
-     */
-    public final void drawElements(int indexCount, int indiceType) {
-        GLH.glhDrawElements(GL11.GL_TRIANGLES, indexCount, indiceType, 0);
-    }
+	protected void preDraw() {
+	}
 
-    public final void drawInstanced(int primcount) {
-        this.vao.drawInstanced(GL11.GL_TRIANGLES, 0, this.vertexCount, primcount);
-    }
+	protected void postDraw() {
+	}
 
-    public final int getVertexCount() {
-        return (this.vertexCount);
-    }
+	/** draw with index buffer */
+	public final void drawElements(int indexCount, int indiceType) {
+		GLH.glhDrawElements(GL11.GL_TRIANGLES, indexCount, indiceType, 0);
+	}
 
-    /**
-     * returnt rue if the mesh has been regenerated
-     */
-    public boolean update(TerrainMesher mesher, Camera camera) {
-        return (false);
-    }
+	public final void drawInstanced(int primcount) {
+		this.vao.drawInstanced(GL11.GL_TRIANGLES, 0, this.vertexCount, primcount);
+	}
 
-    protected final void setVertices(ByteBuffer buffer, int bytesPerVertex) {
-        if (buffer == null || buffer.capacity() == 0) {
-            if (this.isInitialized()) {
-                this.deinitialize();
-            }
-            return;
-        }
+	public final int getVertexCount() {
+		return (this.vertexCount);
+	}
 
-        if (!this.isInitialized()) {
-            this.initialize();
-        }
-        this.vertexCount = buffer.capacity() / bytesPerVertex;
-        this.vbo.bind(GL15.GL_ARRAY_BUFFER);
-        this.vbo.bufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-    }
+	/** returnt rue if the mesh has been regenerated */
+	public boolean update(TerrainMesher mesher, Camera camera) {
+		return (false);
+	}
 
-    protected final void updateTransformationMatrix() {
-        Matrix4f.createTransformationMatrix(this.transfMatrix, this.getPosition(), this.getRotation(), this.getScale());
-    }
+	protected final void setVertices(ByteBuffer buffer, int bytesPerVertex) {
+		if (buffer == null || buffer.capacity() == 0) {
+			if (this.isInitialized()) {
+				this.deinitialize();
+			}
+			return;
+		}
 
-    public final Vector3f getPosition() {
-        return (this.position);
-    }
+		if (!this.isInitialized()) {
+			this.initialize();
+		}
+		this.vertexCount = buffer.capacity() / bytesPerVertex;
+		this.vbo.bind(GL15.GL_ARRAY_BUFFER);
+		this.vbo.bufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+	}
 
-    public final Vector3f getRotation() {
-        return (this.rotation);
-    }
+	protected final void updateTransformationMatrix() {
+		Matrix4f.createTransformationMatrix(this.transfMatrix, this.getPosition(), this.getRotation(), this.getScale());
+	}
 
-    public final Vector3f getScale() {
-        return (this.scale);
-    }
+	public final Vector3f getPosition() {
+		return (this.position);
+	}
 
-    public final void setPosition(float x, float y, float z) {
-        this.position.set(x, y, z);
-        this.updateTransformationMatrix();
-    }
+	public final Vector3f getRotation() {
+		return (this.rotation);
+	}
 
-    public final void setRotation(float x, float y, float z) {
-        this.rotation.set(x, y, z);
-        this.updateTransformationMatrix();
-    }
+	public final Vector3f getScale() {
+		return (this.scale);
+	}
 
-    public final void setScale(float x, float y, float z) {
-        this.scale.set(x, y, z);
-        this.updateTransformationMatrix();
-    }
+	public final void setPosition(float x, float y, float z) {
+		this.position.set(x, y, z);
+		this.updateTransformationMatrix();
+	}
 
-    public final Matrix4f getTransformationMatrix() {
-        return (this.transfMatrix);
-    }
+	public final void setRotation(float x, float y, float z) {
+		this.rotation.set(x, y, z);
+		this.updateTransformationMatrix();
+	}
+
+	public final void setScale(float x, float y, float z) {
+		this.scale.set(x, y, z);
+		this.updateTransformationMatrix();
+	}
+
+	public final Matrix4f getTransformationMatrix() {
+		return (this.transfMatrix);
+	}
 }

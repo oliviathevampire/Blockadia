@@ -8,40 +8,32 @@ import java.util.ArrayList;
 
 public class CLH {
 
-    /**
-     * lists of every allocated gl objects
-     */
-    private static ArrayList<CLObject> _cl_objects;
+	/** lists of every allocated gl objects */
+	private static ArrayList<CLObject> clObjects;
 
-    /**
-     * initialize OpenCL
-     */
-    public static final void clhInit() {
-        Logger.get().log(Logger.Level.FINE, "Initializing OpenCL.");
-        _cl_objects = new ArrayList<CLObject>();
-    }
+	/** initialize OpenCL */
+	public static final void clhInit() {
+		Logger.get().log(Logger.Level.FINE, "Initializing OpenCL.");
+		clObjects = new ArrayList<CLObject>();
+	}
 
-    /**
-     * stop opencl properly
-     */
-    public static final void clhStop() {
-        for (CLObject object : _cl_objects) {
-            object.delete();
-        }
-        _cl_objects.clear();
-    }
+	/** stop opencl properly */
+	public static final void clhStop() {
+		for (CLObject object : clObjects) {
+			object.delete();
+		}
+		clObjects.clear();
+	}
 
-    /**
-     * check the open al error in the current context : print and returns it
-     */
-    public static int clhCheckError(String label, int err) {
+	/** check the open al error in the current context : print and returns it */
+	public static int clhCheckError(String label, int err) {
 
-        if (err == 0) {
-            return (0);
-        }
+		if (err == 0) {
+			return (0);
+		}
 
-        Logger.get().log(Logger.Level.WARNING, label + " : OpenCL error occured : " + err);
-        return (err);
-    }
+		Logger.get().log(Logger.Level.WARNING, label + " : OpenCL error occured : " + err);
+		return (err);
+	}
 
 }

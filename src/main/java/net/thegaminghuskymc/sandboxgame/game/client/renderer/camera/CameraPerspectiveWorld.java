@@ -8,268 +8,341 @@ import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 
 public class CameraPerspectiveWorld extends CameraProjectiveWorld {
 
-    public static final int TERRAIN_RENDER_DISTANCE = 32;
-    public static final float RENDER_DISTANCE = Terrain.DIMX_SIZE * TERRAIN_RENDER_DISTANCE;
-    private static final int PLANE_TOP = 0;
-    private static final int PLANE_BOT = 1;
-    private static final int PLANE_LEFT = 2;
-    private static final int PLANE_RIGHT = 3;
-    private static final int PLANE_NEAR = 4;
-    private static final int PLANE_FAR = 5;
-    /**
-     * recalculate the frustum planes
-     */
-    Vector3f nc = new Vector3f();
-    Vector3f ntl = new Vector3f();
-    Vector3f ntr = new Vector3f();
-    Vector3f nbl = new Vector3f();
-    Vector3f nbr = new Vector3f();
-    Vector3f fc = new Vector3f();
-    Vector3f ftl = new Vector3f();
-    Vector3f ftr = new Vector3f();
-    Vector3f fbl = new Vector3f();
-    Vector3f fbr = new Vector3f();
-    /**
-     * planes attributes
-     */
-    private float fov;
-    private float nearDistance;
-    private float farDistance;
-    private CameraPlane[] planes;
+	public static final int TERRAIN_RENDER_DISTANCE = 32;
+	public static final float RENDER_DISTANCE = Terrain.DIMX_SIZE * TERRAIN_RENDER_DISTANCE;
+	public static final float FAR_DISTANCE = RENDER_DISTANCE * 1.2f;
+	/** planes attributes */
+	private float fov;
 
-    public CameraPerspectiveWorld(GLFWWindow window) {
-        super(window);
-        super.setPosition(0, 16, 0);
-        super.setPositionVelocity(0, 0, 0);
-        super.setRotationVelocity(0, 0, 0);
-        super.setPitch(0);
-        super.setYaw(0);
-        super.setRoll(0);
-        super.setSpeed(0.2f);
-        super.setRotSpeed(1);
+	private float nearDistance;
+	private float farDistance;
 
-        this.planes = new CameraPlane[6];
-        for (int i = 0; i < this.planes.length; i++) {
-            this.planes[i] = new CameraPlane();
-        }
+	class CameraPlane {
 
-        this.setFov(70);
-        this.setNearDistance(0.01f);
-        this.setFarDistance(RENDER_DISTANCE);
-        this.setRenderDistance(RENDER_DISTANCE);
-    }
+		Vector3f normal;
+		Vector3f point;
+		float d;
 
-    @Override
-    public Camera clone() {
-        CameraPerspectiveWorld camera = new CameraPerspectiveWorld(null);
-        camera.setAspect(this.getAspect());
-        camera.setPitch(this.getPitch());
-        camera.setYaw(this.getYaw());
-        camera.setRoll(this.getRoll());
-        camera.setFov(this.getFov());
-        camera.setNearDistance(this.getNearDistance());
-        camera.setFarDistance(this.getFarDistance());
-        camera.setPosition(this.getPosition());
-        camera.setRenderDistance(this.getRenderDistance());
-        camera.setWorld(this.getWorld());
-        return (camera);
-    }
+		CameraPlane() {
+			this.normal = new Vector3f();
+			this.point = new Vector3f();
+		}
 
-    @Override
-    public void update() {
-        super.update();
-        this.createPlanes();
-    }
+		void set(Vector3f a, Vector3f b, Vector3f c) {
 
-    @Override
-    protected void createProjectionMatrix(Matrix4f dst) {
-        Matrix4f.perspective(dst, this.getAspect(), (float) Math.toRadians(this.getFov()), this.getNearDistance(),
-                this.getFarDistance());
-    }
+			Vector3f aux1 = Vector3f.sub(a, b, null);
+			Vector3f aux2 = Vector3f.sub(c, b, null);
+			Vector3f.cross(aux2, aux1, this.normal);
+			this.normal.normalise();
+			this.point.set(b);
+			this.d = -(Vector3f.dot(this.normal, this.point));
+		}
 
-    /**
-     * a function which creates the perspective view planes represented by the
-     * camera
-     */
-    private void createPlanes() {
+		public float distance(float x, float y, float z) {
+			return (d + Vector3f.dot(this.normal, x, y, z));
+		}
 
-        Vector3f up = Vector3f.AXIS_Y;
-        Vector3f forward = this.getViewVector();
-        Vector3f right = Vector3f.cross(forward, up, null);
+		public float distance(Vector3f point) {
+			return (this.distance(point.x, point.y, point.z));
+		}
+	}
 
-        up.normalise();
-        forward.normalise();
-        right.normalise();
+	private static final int PLANE_TOP = 0;
+	private static final int PLANE_BOT = 1;
+	private static final int PLANE_LEFT = 2;
+	private static final int PLANE_RIGHT = 3;
+	private static final int PLANE_NEAR = 4;
+	private static final int PLANE_FAR = 5;
+	private CameraPlane[] planes;
 
-        float tang = (float) Math.tan(Math.toRadians(this.getFov() * 0.5f));
+	public CameraPerspectiveWorld(GLFWWindow window) {
+		super(window);
+		super.setPosition(0, 0, 16);
+		this.setRotX(0);
+		this.setRotY(0);
+		this.setRotZ(0);
 
-        float nh = this.nearDistance * tang;
-        float nw = nh * this.getAspect();
+		this.planes = new CameraPlane[6];
+		for (int i = 0; i < this.planes.length; i++) {
+			this.planes[i] = new CameraPlane();
+		}
 
-        float fh = this.farDistance * tang;
-        float fw = fh * this.getAspect();
+		this.setFov(70);
+		this.setNearDistance(0.01f);
+		this.setFarDistance(RENDER_DISTANCE);
+		this.setRenderDistance(RENDER_DISTANCE);
+	}
 
-        nc.x = this.getPosition().x + forward.x * this.getNearDistance();
-        nc.y = this.getPosition().y + forward.y * this.getNearDistance();
-        nc.z = this.getPosition().z + forward.z * this.getNearDistance();
+	@Override
+	public Camera clone() {
+		CameraPerspectiveWorld camera = new CameraPerspectiveWorld(null);
+		camera.setAspect(this.getAspect());
+		camera.setRot(this.getRot());
+		camera.setFov(this.getFov());
+		camera.setNearDistance(this.getNearDistance());
+		camera.setFarDistance(this.getFarDistance());
+		camera.setPosition(this.getPosition());
+		camera.setRenderDistance(this.getRenderDistance());
+		camera.setWorld(this.getWorld());
+		return (camera);
+	}
 
-        fc.x = this.getPosition().x + forward.x * this.getFarDistance();
-        fc.y = this.getPosition().y + forward.y * this.getFarDistance();
-        fc.z = this.getPosition().z + forward.z * this.getFarDistance();
+	@Override
+	public void update() {
+		super.update();
+		this.createPlanes();
+	}
 
-        // calculate rectangle planes corners (ftl = far, top, left) (nbr =
-        // near, bot, right)
-        // near plane corner
-        ntl.x = nc.x + (up.x * nh) - (right.x * nw);
-        ntl.y = nc.y + (up.y * nh) - (right.y * nw);
-        ntl.z = nc.z + (up.z * nh) - (right.z * nw);
+	@Override
+	protected void createProjectionMatrix(Matrix4f dst) {
+		Matrix4f.perspective(dst, this.getAspect(), (float) Math.toRadians(this.getFov()), this.getNearDistance(),
+				this.getFarDistance());
+	}
 
-        ntr.x = nc.x + (up.x * nh) + (right.x * nw);
-        ntr.y = nc.y + (up.y * nh) + (right.y * nw);
-        ntr.z = nc.z + (up.z * nh) + (right.z * nw);
+	/** recalculate the frustum planes */
+	Vector3f nc = new Vector3f();
 
-        nbl.x = nc.x - (up.x * nh) - (right.x * nw);
-        nbl.y = nc.y - (up.y * nh) - (right.y * nw);
-        nbl.z = nc.z - (up.z * nh) - (right.z * nw);
+	Vector3f ntl = new Vector3f();
+	Vector3f ntr = new Vector3f();
+	Vector3f nbl = new Vector3f();
+	Vector3f nbr = new Vector3f();
 
-        nbr.x = nc.x - (up.x * nh) + (right.x * nw);
-        nbr.y = nc.y - (up.y * nh) + (right.y * nw);
-        nbr.z = nc.z - (up.z * nh) + (right.z * nw);
+	Vector3f fc = new Vector3f();
 
-        // far plane corners
-        ftl.x = fc.x + (up.x * fh) - (right.x * fw);
-        ftl.y = fc.y + (up.y * fh) - (right.y * fw);
-        ftl.z = fc.z + (up.z * fh) - (right.z * fw);
+	Vector3f ftl = new Vector3f();
+	Vector3f ftr = new Vector3f();
+	Vector3f fbl = new Vector3f();
+	Vector3f fbr = new Vector3f();
 
-        ftr.x = fc.x + (up.x * fh) + (right.x * fw);
-        ftr.y = fc.y + (up.y * fh) + (right.y * fw);
-        ftr.z = fc.z + (up.z * fh) + (right.z * fw);
+	/**
+	 * a function which creates the perspective view planes represented by the
+	 * camera
+	 */
+	private void createPlanes() {
 
-        fbl.x = fc.x - (up.x * fh) - (right.x * fw);
-        fbl.y = fc.y - (up.y * fh) - (right.y * fw);
-        fbl.z = fc.z - (up.z * fh) - (right.z * fw);
+		Vector3f up = Vector3f.AXIS_Y;
+		Vector3f forward = this.getViewVector();
+		Vector3f right = Vector3f.cross(forward, up, null);
 
-        fbr.x = fc.x - (up.x * fh) + (right.x * fw);
-        fbr.y = fc.y - (up.y * fh) + (right.y * fw);
-        fbr.z = fc.z - (up.z * fh) + (right.z * fw);
+		up.normalise();
+		forward = forward.normalise(null);
+		right.normalise();
 
-        // set the planes
-        this.planes[PLANE_TOP].set(ntr, ntl, ftl);
-        this.planes[PLANE_BOT].set(nbl, nbr, fbr);
-        this.planes[PLANE_LEFT].set(ntl, nbl, fbl);
-        this.planes[PLANE_RIGHT].set(nbr, ntr, fbr);
-        this.planes[PLANE_NEAR].set(ntl, ntr, nbr);
-        this.planes[PLANE_FAR].set(ftr, ftl, fbl);
-    }
+		float tang = (float) Math.tan(Math.toRadians(this.getFov() * 0.5f));
 
-    private float getNearDistance() {
-        return (this.nearDistance);
-    }
+		float nh = this.nearDistance * tang;
+		float nw = nh * this.getAspect();
 
-    private void setNearDistance(float f) {
-        this.nearDistance = f;
-    }
+		float fh = this.farDistance * tang;
+		float fw = fh * this.getAspect();
 
-    private float getFarDistance() {
-        return (this.farDistance);
-    }
+		nc.x = this.getPosition().x + forward.x * this.getNearDistance();
+		nc.y = this.getPosition().y + forward.y * this.getNearDistance();
+		nc.z = this.getPosition().z + forward.z * this.getNearDistance();
 
-    private void setFarDistance(float f) {
-        this.farDistance = f;
-    }
+		fc.x = this.getPosition().x + forward.x * this.getFarDistance();
+		fc.y = this.getPosition().y + forward.y * this.getFarDistance();
+		fc.z = this.getPosition().z + forward.z * this.getFarDistance();
 
-    private float getFov() {
-        return (this.fov);
-    }
+		// calculate rectangle planes corners (ftl = far, top, left) (nbr =
+		// near, bot, right)
+		// near plane corner
+		ntl.x = nc.x + (up.x * nh) - (right.x * nw);
+		ntl.y = nc.y + (up.y * nh) - (right.y * nw);
+		ntl.z = nc.z + (up.z * nh) - (right.z * nw);
 
-    private void setFov(float f) {
-        this.fov = f;
-    }
+		ntr.x = nc.x + (up.x * nh) + (right.x * nw);
+		ntr.y = nc.y + (up.y * nh) + (right.y * nw);
+		ntr.z = nc.z + (up.z * nh) + (right.z * nw);
 
-    @Override
-    public boolean isPointInFrustum(float x, float y, float z) {
-        long t = System.nanoTime();
-        for (int i = 0; i < 6; i++) {
-            if (this.planes[i].distance(x, y, z) < 0) {
-                Logger.get().log(Logger.Level.DEBUG, "out: " + (System.nanoTime() - t));
-                return (false);
-            }
-        }
-        Logger.get().log(Logger.Level.DEBUG, "in: " + (System.nanoTime() - t));
-        return (true);
-    }
+		nbl.x = nc.x - (up.x * nh) - (right.x * nw);
+		nbl.y = nc.y - (up.y * nh) - (right.y * nw);
+		nbl.z = nc.z - (up.z * nh) - (right.z * nw);
 
-    @Override
-    public boolean isBoxInFrustum(float x, float y, float z, float sx, float sy, float sz) {
+		nbr.x = nc.x - (up.x * nh) + (right.x * nw);
+		nbr.y = nc.y - (up.y * nh) + (right.y * nw);
+		nbr.z = nc.z - (up.z * nh) + (right.z * nw);
 
-        for (int i = 0; i < 6; i++) {
+		// far plane corners
+		ftl.x = fc.x + (up.x * fh) - (right.x * fw);
+		ftl.y = fc.y + (up.y * fh) - (right.y * fw);
+		ftl.z = fc.z + (up.z * fh) - (right.z * fw);
 
-            CameraPlane plane = this.planes[i];
+		ftr.x = fc.x + (up.x * fh) + (right.x * fw);
+		ftr.y = fc.y + (up.y * fh) + (right.y * fw);
+		ftr.z = fc.z + (up.z * fh) + (right.z * fw);
 
-            if (plane.distance(this.getVertexP(plane.normal, x, y, z, sx, sy, sz)) < 0) {
-                return (false); // outside
-            }
-        }
-        return (true); // fully inside
-    }
+		fbl.x = fc.x - (up.x * fh) - (right.x * fw);
+		fbl.y = fc.y - (up.y * fh) - (right.y * fw);
+		fbl.z = fc.z - (up.z * fh) - (right.z * fw);
 
-    private Vector3f getVertexP(Vector3f normal, float x, float y, float z, float sx, float sy, float sz) {
-        Vector3f res = new Vector3f(x, y, z);
-        if (normal.x > 0) {
-            res.x += sx;
-        }
-        if (normal.y > 0) {
-            res.y += sy;
-        }
-        if (normal.z > 0) {
-            res.z += sz;
-        }
-        return (res);
-    }
+		fbr.x = fc.x - (up.x * fh) + (right.x * fw);
+		fbr.y = fc.y - (up.y * fh) + (right.y * fw);
+		fbr.z = fc.z - (up.z * fh) + (right.z * fw);
 
-    @Override
-    public boolean isSphereInFrustum(Vector3f center, float radius) {
+		// set the planes
+		this.planes[PLANE_TOP].set(ntr, ntl, ftl);
+		this.planes[PLANE_BOT].set(nbl, nbr, fbr);
+		this.planes[PLANE_LEFT].set(ntl, nbl, fbl);
+		this.planes[PLANE_RIGHT].set(nbr, ntr, fbr);
+		this.planes[PLANE_NEAR].set(ntl, ntr, nbr);
+		this.planes[PLANE_FAR].set(ftr, ftl, fbl);
+	}
 
-        for (int i = 0; i < 6; i++) {
-            float distance = this.planes[i].distance(center);
-            if (distance < -radius) {
-                return (false);
-            }
-            if (distance < radius) {
-                return (true); // intersect
-            }
-        }
-        return (true); // inside
-    }
+	public void setNearDistance(float f) {
+		this.nearDistance = f;
+	}
 
-    class CameraPlane {
+	public void setFarDistance(float f) {
+		this.farDistance = f;
+	}
 
-        Vector3f normal;
-        Vector3f point;
-        float d;
+	public void setFov(float f) {
+		this.fov = f;
+	}
 
-        CameraPlane() {
-            this.normal = new Vector3f();
-            this.point = new Vector3f();
-        }
+	public float getNearDistance() {
+		return (this.nearDistance);
+	}
 
-        void set(Vector3f a, Vector3f b, Vector3f c) {
+	public float getFarDistance() {
+		return (this.farDistance);
+	}
 
-            Vector3f aux1 = Vector3f.sub(a, b, null);
-            Vector3f aux2 = Vector3f.sub(c, b, null);
-            Vector3f.cross(aux2, aux1, this.normal);
-            this.normal.normalise();
-            this.point.set(b);
-            this.d = -(Vector3f.dot(this.normal, this.point));
-        }
+	public float getFov() {
+		return (this.fov);
+	}
 
-        public float distance(float x, float y, float z) {
-            return (d + Vector3f.dot(this.normal, x, y, z));
-        }
+	@Override
+	public boolean isPointInFrustum(float x, float y, float z) {
+		long t = System.nanoTime();
+		for (int i = 0; i < 6; i++) {
+			if (this.planes[i].distance(x, y, z) < 0) {
+				Logger.get().log(Logger.Level.DEBUG, "out: " + (System.nanoTime() - t));
+				return (false);
+			}
+		}
+		Logger.get().log(Logger.Level.DEBUG, "in: " + (System.nanoTime() - t));
+		return (true);
+	}
 
-        public float distance(Vector3f point) {
-            return (this.distance(point.x, point.y, point.z));
-        }
-    }
+	@Override
+	public boolean isBoxInFrustum(float x, float y, float z, float sx, float sy, float sz) {
+		for (int i = 0; i < 6; i++) {
+			CameraPlane plane = this.planes[i];
+			if (plane.distance(this.getVertexP(plane.normal, x, y, z, sx, sy, sz)) < 10) {
+				return (false); // outside
+			}
+			if (plane.distance(this.getVertexN(plane.normal, x, y, z, sx, sy, sz)) < 0) {
+				return (true); // intersect
+			}
+		}
+		return (true); // fully inside
+	}
 
+	private Vector3f getVertexP(Vector3f normal, float x, float y, float z, float sx, float sy, float sz) {
+		Vector3f res = new Vector3f(x, y, z);
+		if (normal.x >= 0) {
+			res.x += sx;
+		}
+		if (normal.y >= 0) {
+			res.y += sy;
+		}
+		if (normal.z >= 0) {
+			res.z += sz;
+		}
+		return (res);
+	}
+
+	private Vector3f getVertexN(Vector3f normal, float x, float y, float z, float sx, float sy, float sz) {
+
+		Vector3f res = new Vector3f(x, y, z);
+		if (normal.x <= 0) {
+			res.x += sx;
+		}
+		if (normal.y <= 0) {
+			res.y += sy;
+		}
+		if (normal.z <= 0) {
+			res.z += sz;
+		}
+		return (res);
+	}
+
+	@Override
+	public boolean isSphereInFrustum(Vector3f center, float radius) {
+
+		for (int i = 0; i < 6; i++) {
+			float distance = this.planes[i].distance(center);
+			if (distance < -radius) {
+				return (false);
+			}
+			if (distance < radius) {
+				return (true); // intersect
+			}
+		}
+		return (true); // inside
+	}
+
+	// UNDER HERE ARE MY OLD FASHION WAY TO CULL POINTS, MUCH SLOWER THAN THE
+	// NEW
+	// METHOD VIA PLANES
+
+	// @Override
+	// public boolean isBoxInFrustum(float x, float y, float z, float sx, float
+	// sy, float sz) {
+	// return (this.isPointInFrustum(x, y, z) || this.isPointInFrustum(x + sx,
+	// y, z)
+	// || this.isPointInFrustum(x, y, z + sz) || this.isPointInFrustum(x + sx,
+	// y, z + sz)
+	// || this.isPointInFrustum(x, y + sy, z) || this.isPointInFrustum(x + sx, y
+	// + sy, z)
+	// || this.isPointInFrustum(x, y + sy, z + sz) || this.isPointInFrustum(x +
+	// sx, y + sy, z + sz));
+	// }
+	//
+	// @Override
+	// public boolean isSphereInFrustum(Vector3f center, float radius) {
+	// return (this.isPointInFrustum(center));
+	// }
+	//
+	// @Override
+	// public boolean isPointInFrustum(float x, float y, float z) {
+	//
+	// // get the vector which point to the given point
+	// float vx = x - this.getPosition().x;
+	// float vy = y - this.getPosition().y;
+	// float vz = z - this.getPosition().z;
+	//
+	// // get it length
+	// float length = Vector3f.length(vx, vy, vz);
+	//
+	// // normalize the vector
+	// vx /= length;
+	// vy /= length;
+	// vz /= length;
+	//
+	// double dot = vx * this.getViewVector().x + vy * this.getViewVector().y +
+	// vz * this.getViewVector().z;
+	// double angle = Math.toDegrees(Math.acos(dot));
+	// return (angle < this.getFov() / 2);
+	// }
+	//
+	// @Override
+	// public boolean isBoxInFrustum(float x, float y, float z, float sx, float
+	// sy, float sz) {
+	// return (this.isPointInFrustum(x, y, z) || this.isPointInFrustum(x + sx,
+	// y, z)
+	// || this.isPointInFrustum(x, y, z + sz) || this.isPointInFrustum(x + sx,
+	// y, z + sz)
+	// || this.isPointInFrustum(x, y + sy, z) || this.isPointInFrustum(x + sx, y
+	// + sy, z)
+	// || this.isPointInFrustum(x, y + sy, z + sz) || this.isPointInFrustum(x +
+	// sx, y + sy, z + sz));
+	// }
+	//
+	// @Override
+	// public boolean isSphereInFrustum(Vector3f center, float radius) {
+	// return (this.isPointInFrustum(center));
+	// }
 }

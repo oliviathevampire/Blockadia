@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.block.state;
 
-import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.block.material.EnumPushReaction;
 import net.thegaminghuskymc.sandboxgame.engine.block.material.MapColor;
 import net.thegaminghuskymc.sandboxgame.engine.block.material.Material;
@@ -14,8 +13,8 @@ import net.thegaminghuskymc.sandboxgame.engine.util.math.RayTraceResult;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vec3d;
 import net.thegaminghuskymc.sandboxgame.engine.world.IBlockAccess;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.EntityPlayer;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntityLiving;
 
 import java.util.List;
 import javax.annotation.Nullable;
@@ -26,7 +25,7 @@ public interface IBlockProperties
 
     boolean isFullBlock();
 
-    boolean canEntitySpawn(Entity entityIn);
+    boolean canEntitySpawn(WorldEntity entityIn);
 
     @Deprecated //Forge location aware version below
     int getLightOpacity();
@@ -78,7 +77,7 @@ public interface IBlockProperties
 
     float getBlockHardness(World worldIn, BlockPos pos);
 
-    float getPlayerRelativeBlockHardness(EntityPlayer player, World worldIn, BlockPos pos);
+    float getPlayerRelativeBlockHardness(WorldEntityLiving player, World worldIn, BlockPos pos);
 
     int getStrongPower(IBlockAccess blockAccess, BlockPos pos, EnumFacing side);
 
@@ -95,7 +94,7 @@ public interface IBlockProperties
     @Nullable
     AxisAlignedBB getCollisionBoundingBox(IBlockAccess worldIn, BlockPos pos);
 
-    void addCollisionBoxToList(World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185908_6_);
+    void addCollisionBoxToList(World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable WorldEntity entityIn, boolean p_185908_6_);
 
     AxisAlignedBB getBoundingBox(IBlockAccess blockAccess, BlockPos pos);
 

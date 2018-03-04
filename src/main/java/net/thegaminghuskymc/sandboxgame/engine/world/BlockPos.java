@@ -10,7 +10,7 @@ import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
 import net.thegaminghuskymc.sandboxgame.engine.util.Rotation;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.MathHelper;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vec3d;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +39,7 @@ public class BlockPos extends Vec3i
         super(x, y, z);
     }
 
-    public BlockPos(Entity source)
+    public BlockPos(WorldEntity source)
     {
         this(source.getPositionX(), source.getPositionY(), source.getPositionZ());
     }
@@ -524,7 +524,7 @@ public class BlockPos extends Vec3i
                 return this.setPos(MathHelper.floor(xIn), MathHelper.floor(yIn), MathHelper.floor(zIn));
             }
 
-            public BlockPos.MutableBlockPos setPos(Entity entityIn)
+            public BlockPos.MutableBlockPos setPos(WorldEntity entityIn)
             {
                 return this.setPos(entityIn.getPositionX(), entityIn.getPositionY(), entityIn.getPositionZ());
             }
@@ -633,7 +633,7 @@ public class BlockPos extends Vec3i
                 return (BlockPos.PooledMutableBlockPos)super.setPos(xIn, yIn, zIn);
             }
 
-            public BlockPos.PooledMutableBlockPos setPos(Entity entityIn)
+            public BlockPos.PooledMutableBlockPos setPos(WorldEntity entityIn)
             {
                 return (BlockPos.PooledMutableBlockPos)super.setPos(entityIn);
             }

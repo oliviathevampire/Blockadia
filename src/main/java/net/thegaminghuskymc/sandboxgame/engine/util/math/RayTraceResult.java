@@ -1,7 +1,7 @@
 package net.thegaminghuskymc.sandboxgame.engine.util.math;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 
 public class RayTraceResult {
     public int subHit = -1;
@@ -10,7 +10,7 @@ public class RayTraceResult {
     public RayTraceResult.Type typeOfHit;
     public EnumFacing sideHit;
     public Vec3d hitVec;
-    public Entity entityHit;
+    public WorldEntity entityHit;
     private BlockPos blockPos;
 
     public RayTraceResult(Vec3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
@@ -28,7 +28,7 @@ public class RayTraceResult {
         this.hitVec = new Vec3d(hitVecIn.x, hitVecIn.y, hitVecIn.z);
     }
 
-    public RayTraceResult(Entity entityHitIn, Vec3d hitVecIn) {
+    public RayTraceResult(WorldEntity entityHitIn, Vec3d hitVecIn) {
         this.typeOfHit = RayTraceResult.Type.ENTITY;
         this.entityHit = entityHitIn;
         this.hitVec = hitVecIn;

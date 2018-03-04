@@ -1,9 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.testmod.common.entities;
 
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.EntityLiving;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntityLiving;
 
-public class EntityPlant extends EntityLiving {
+public class EntityPlant extends WorldEntityLiving {
 
     public EntityPlant(World world) {
         super(world);

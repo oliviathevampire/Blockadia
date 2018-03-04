@@ -1,17 +1,18 @@
 package net.thegaminghuskymc.sandboxgame.engine.events.world.entity;
 
 import net.thegaminghuskymc.sandboxgame.engine.events.Event;
-import net.thegaminghuskymc.sandboxgame.engine.world.entity.Entity;
+import net.thegaminghuskymc.sandboxgame.engine.world.entity.WorldEntity;
 
 public abstract class EventEntity extends Event {
-    private Entity _entity;
+	private final WorldEntity entity;
 
-    public EventEntity(Entity entity) {
-        this._entity = entity;
-    }
+	public EventEntity(WorldEntity entity) {
+		super();
+		this.entity = entity;
+	}
 
-    public Entity getEntity() {
-        return (this._entity);
-    }
+	public final WorldEntity getEntity() {
+		return (this.entity);
+	}
 
 }

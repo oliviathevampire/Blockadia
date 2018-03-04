@@ -3,10 +3,8 @@ package net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.par
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.Gui;
 
 public abstract class GuiParameter<T extends Gui> {
-
-    /**
-     * run the param to the given gui
-     */
-    public abstract void run(T gui);
+	
+	/** run the param to the given gui */
+	public abstract void run(T gui);
 
 }
