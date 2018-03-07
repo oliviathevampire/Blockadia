@@ -2,8 +2,7 @@ package net.thegaminghuskymc.sandboxgame.engine.world;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.text.ITextComponent;
 
-public interface IWorldNameable
-{
+public interface IWorldNameable {
     /**
      * Get the name of this object. For players this returns their username
      */

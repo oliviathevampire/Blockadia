@@ -4,15 +4,15 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiS
 
 public class GuiSliderBarEvent<T extends GuiSliderBar> extends GuiEvent<T> {
 
-	private final float percent;
+    private final float percent;
 
-	public GuiSliderBarEvent(T gui) {
-		super(gui);
-		this.percent = gui.getPercent();
-	}
+    public GuiSliderBarEvent(T gui) {
+        super(gui);
+        this.percent = gui.getPercent();
+    }
 
-	public final float getPercent() {
-		return (this.percent);
-	}
+    public final float getPercent() {
+        return (this.percent);
+    }
 
 }

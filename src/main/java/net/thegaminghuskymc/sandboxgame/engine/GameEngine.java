@@ -3,13 +3,13 @@ package net.thegaminghuskymc.sandboxgame.engine;
 import net.thegaminghuskymc.sandboxgame.engine.Logger.Level;
 import net.thegaminghuskymc.sandboxgame.engine.events.*;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
+import net.thegaminghuskymc.sandboxgame.engine.modding.LoaderState;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModLoader;
 import net.thegaminghuskymc.sandboxgame.engine.packets.INetwork;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
-import net.thegaminghuskymc.sandboxgame.game.client.defaultmod.GameEngineDefaultModClient;
-import net.thegaminghuskymc.sandboxgame.game.mod.DefaultMod;
+import net.thegaminghuskymc.sandboxgame.game.mod.Blockitect;
 
 import java.io.File;
 import java.util.*;
@@ -20,50 +20,70 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class GameEngine {
 
-    /** version */
-    public static final String VERSION = "0.0.1";
-    public static final String MOD_ID = "blockitect";
+    /**
+     * version
+     */
+    private static final String MOD_ID = "blockitect";
 
-    /** singleton */
+    /**
+     * singleton
+     */
     private static GameEngine INSTANCE;
-    /** the tasks to run each frames */
+    /**
+     * side of the running engine
+     */
+    protected Side side;
+    /**
+     * Resources
+     */
+    protected ResourceManager resources;
+    /**
+     * the tasks to run each frames
+     */
     private ArrayList<GameEngine.Callable<Taskable>> tasks;
-
-    /** executor service */
+    /**
+     * executor service
+     */
     private ExecutorService executor;
-
-    /** the resources directory */
+    /**
+     * the resources directory
+     */
     private File gameDir;
     private ArrayList<ResourcePack> assets;
-
-    /** side of the running engine */
-    protected Side side;
-
-    /** bools */
+    /**
+     * bools
+     */
     private boolean isRunning;
     private boolean debug;
-
-    /** Mod loader */
+    /**
+     * Mod loader
+     */
     private ModLoader modLoader;
-
-    /** Resources */
-    protected ResourceManager resources;
-
-    /** networking */
+    /**
+     * networking
+     */
     private INetwork network;
 
-    /** random number generator */
+    /**
+     * random number generator
+     */
     private Random rng;
 
-    /** Timer */
+    /**
+     * Timer
+     */
     private Timer timer;
 
-    /** events */
+    /**
+     * events
+     */
     private EventPreLoop eventPreLoop;
     private EventLoop eventLoop;
     private EventPostLoop eventPostLoop;
 
-    /** loaded worlds */
+    /**
+     * loaded worlds
+     */
     private ArrayList<World> loadedWorlds;
 
     /**
@@ -88,7 +108,7 @@ public abstract class GameEngine {
      */
     public final void initialize() {
 
-        Logger.get().log(Level.FINE, "Initializing engine...");
+        Logger.get().log(Level.FINE, LoaderState.ModState.INITIALIZED + "Engine...");
 
         this.debug(true);
 
@@ -99,7 +119,7 @@ public abstract class GameEngine {
         this.loadGamedir();
         this.assets = new ArrayList<>();
 
-        this.resources = this.instanciateResourceManager();
+        this.resources = this.makeInstanceOfResourceManager();
         this.resources.initialize();
 
         // config
@@ -110,7 +130,7 @@ public abstract class GameEngine {
         this.tasks = new ArrayList<>(256);
 
         // inject default mod
-        this.modLoader.injectMod(DefaultMod.class);
+        this.modLoader.injectMod(Blockitect.class);
 
         // events
         this.eventPreLoop = new EventPreLoop();
@@ -143,25 +163,20 @@ public abstract class GameEngine {
         this.gameDir = new File(gamepath + "Blockitect");
 
         Logger.get().log(Level.FINE, "Game directory is: " + this.gameDir.getAbsolutePath());
-        if (!this.gameDir.exists()) {
-            this.gameDir.mkdirs();
-        } else if (!this.gameDir.canWrite()) {
-            this.gameDir.setWritable(true);
-        }
     }
 
     /**
      * load config
      */
-    private Config loadConfig(String id, String filepath) {
+    private void loadConfig(String id, String filepath) {
         if (this.config.containsKey(id)) {
-            return (this.config.get(id));
+            this.config.get(id);
+            return;
         }
         Config cfg = new Config(filepath);
         this.config.put(id, cfg);
         Logger.get().log(Level.FINE, "Loading config", filepath);
         cfg.load();
-        return (cfg);
     }
 
     public String getModId() {
@@ -173,7 +188,7 @@ public abstract class GameEngine {
     /**
      * deallocate the engine properly
      */
-    public final void deinitialize() {
+    public final void uninitialized() {
 
         Logger.get().log(Level.FINE, "Deinitializing engine...");
 
@@ -195,7 +210,7 @@ public abstract class GameEngine {
         this.resources.deinitialize();
         this.resources = null;
 
-        this.modLoader.deinitialize(this.resources);
+        this.modLoader.deinitialize();
         this.modLoader = null;
 
         if (this.network != null) {
@@ -204,12 +219,12 @@ public abstract class GameEngine {
         }
         Logger.get().log(Level.FINE, "Stopped");
 
-        this.onDeinitialized();
+        this.onUninitialized();
     }
 
-    protected abstract void onDeinitialized();
+    protected abstract void onUninitialized();
 
-    protected abstract ResourceManager instanciateResourceManager();
+    protected abstract ResourceManager makeInstanceOfResourceManager();
 
     /**
      * load resources
@@ -218,18 +233,12 @@ public abstract class GameEngine {
         this.loadResources("./mods", "./mod", "./plugin", "./plugins");
     }
 
-    /** reload every game resources */
-    public final void reload(String... folders) {
-        this.unload();
-        this.load();
-    }
-
-    private final void unload() {
+    private void unload() {
         this.resources.unload();
         this.modLoader.unload(this.getResourceManager());
     }
 
-    private final void loadResources(String... folders) {
+    private void loadResources(String... folders) {
 
         for (String folder : folders) {
             this.modLoader.injectMods(folder);
@@ -241,7 +250,6 @@ public abstract class GameEngine {
 
     /**
      * make the engine loop
-     *
      */
     public final void loop() {
 

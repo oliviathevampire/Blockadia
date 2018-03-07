@@ -9,20 +9,20 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.font.FontModel;
  */
 public class GuiTextParameterTextAlignLeft extends GuiParameter<GuiText> {
 
-	private final float offset;
+    private final float offset;
 
-	public GuiTextParameterTextAlignLeft() {
-		this(0.0f);
-	}
+    public GuiTextParameterTextAlignLeft() {
+        this(0.0f);
+    }
 
-	public GuiTextParameterTextAlignLeft(float offset) {
-		super();
-		this.offset = offset;
-	}
+    public GuiTextParameterTextAlignLeft(float offset) {
+        super();
+        this.offset = offset;
+    }
 
-	@Override
-	public void run(GuiText guiText) {
-		FontModel fontModel = guiText.getFontModel();
-		fontModel.setPosition(-1.0f + this.offset, fontModel.getY(), 1.0f);
-	}
+    @Override
+    public void run(GuiText guiText) {
+        FontModel fontModel = guiText.getFontModel();
+        fontModel.setPosition(-1.0f + this.offset, fontModel.getY(), 1.0f);
+    }
 }

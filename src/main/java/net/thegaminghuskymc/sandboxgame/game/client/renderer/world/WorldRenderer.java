@@ -1,21 +1,18 @@
 /**
-**	This file is part of the project https://github.com/toss-dev/VoxelEngine
-**
-**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
-**
-**	PEREIRA Romain
-**                                       4-----7          
-**                                      /|    /|
-**                                     0-----3 |
-**                                     | 5___|_6
-**                                     |/    | /
-**                                     1-----2
-*/
+ * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
+ * *
+ * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+ * *
+ * *	PEREIRA Romain
+ * *                                       4-----7
+ * *                                      /|    /|
+ * *                                     0-----3 |
+ * *                                     | 5___|_6
+ * *                                     |/    | /
+ * *                                     1-----2
+ */
 
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.world;
-
-import java.nio.ByteBuffer;
-import java.util.HashMap;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
@@ -32,215 +29,210 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL30;
 
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+
 public abstract class WorldRenderer<T extends World> extends RendererFactorized {
 
-	/** world to render */
-	private T world;
+    private final LineRendererFactory lineFactory;
+    private final ParticleRendererFactory particleFactory;
+    private final EventPreWorldRender preRenderEvent;
+    private final EventPostWorldRender postRenderEvent;
+    private final HashMap<WorldEntity, Integer> BB = new HashMap<WorldEntity, Integer>();
+    /** world to render */
+    private T world;
+    /** camera used to render the world */
+    private CameraProjective camera;
+    /** post processing shaders programs */
+    private GLProgramPostProcessing postProcessingProgram;
+    /** fbo */
+    private GLFrameBuffer fbo;
+    private GLTexture fboTexture;
+    private GLRenderBuffer fboDepthBuffer;
+    /** the gui to match (so it optimizes the viewport) */
+    private int width;
+    private int height;
 
-	/** camera used to render the world */
-	private CameraProjective camera;
+    public WorldRenderer(MainRenderer mainRenderer) {
+        super(mainRenderer);
 
-	/** post processing shaders programs */
-	private GLProgramPostProcessing postProcessingProgram;
+        this.lineFactory = new LineRendererFactory(mainRenderer);
+        this.particleFactory = new ParticleRendererFactory(mainRenderer);
 
-	/** fbo */
-	private GLFrameBuffer fbo;
-	private GLTexture fboTexture;
-	private GLRenderBuffer fboDepthBuffer;
+        super.addFactory(this.lineFactory);
+        super.addFactory(this.particleFactory);
 
-	/** the gui to match (so it optimizes the viewport) */
-	private int width;
-	private int height;
+        this.preRenderEvent = new EventPreWorldRender(this);
+        this.postRenderEvent = new EventPostWorldRender(this);
+    }
 
-	private final LineRendererFactory lineFactory;
-	private final ParticleRendererFactory particleFactory;
+    @Override
+    protected void onInitialized() {
+        Logger.get().log(Logger.Level.DEBUG, "Initializing " + this.getClass().getSimpleName());
 
-	private final EventPreWorldRender preRenderEvent;
+        GLH.glhCheckError("pre worldrenderer fbo creation");
+        this.fbo = GLH.glhGenFBO();
+        this.fbo.bind();
+        this.fbo.createDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
 
-	private final EventPostWorldRender postRenderEvent;
+        this.fboTexture = GLH.glhGenTexture();
+        this.fboTexture.bind(GL11.GL_TEXTURE_2D);
+        this.fboTexture.parameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+        this.fboTexture.parameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
+        this.fbo.createTextureAttachment(this.fboTexture, GL30.GL_COLOR_ATTACHMENT0);
 
-	public WorldRenderer(MainRenderer mainRenderer) {
-		super(mainRenderer);
+        this.fboDepthBuffer = GLH.glhGenRBO();
+        this.fboDepthBuffer.bind();
+        this.fboDepthBuffer.attachToFBO(GL30.GL_FRAMEBUFFER, GL30.GL_DEPTH_ATTACHMENT);
 
-		this.lineFactory = new LineRendererFactory(mainRenderer);
-		this.particleFactory = new ParticleRendererFactory(mainRenderer);
+        this.fbo.unbind();
 
-		super.addFactory(this.lineFactory);
-		super.addFactory(this.particleFactory);
+        this.resizeFbo();
 
-		this.preRenderEvent = new EventPreWorldRender(this);
-		this.postRenderEvent = new EventPostWorldRender(this);
-	}
+        GLH.glhCheckError("post worldrenderer fbo creation");
 
-	@Override
-	protected void onInitialized() {
-		Logger.get().log(Logger.Level.DEBUG, "Initializing " + this.getClass().getSimpleName());
+        this.setPostProcessingProgram(null);
+    }
 
-		GLH.glhCheckError("pre worldrenderer fbo creation");
-		this.fbo = GLH.glhGenFBO();
-		this.fbo.bind();
-		this.fbo.createDrawBuffer(GL30.GL_COLOR_ATTACHMENT0);
+    @Override
+    protected void onDeinitialized() {
 
-		this.fboTexture = GLH.glhGenTexture();
-		this.fboTexture.bind(GL11.GL_TEXTURE_2D);
-		this.fboTexture.parameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-		this.fboTexture.parameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-		this.fbo.createTextureAttachment(this.fboTexture, GL30.GL_COLOR_ATTACHMENT0);
+        Logger.get().log(Logger.Level.DEBUG, "Deinitializing " + this.getClass().getSimpleName());
 
-		this.fboDepthBuffer = GLH.glhGenRBO();
-		this.fboDepthBuffer.bind();
-		this.fboDepthBuffer.attachToFBO(GL30.GL_FRAMEBUFFER, GL30.GL_DEPTH_ATTACHMENT);
+        // remove fbo
+        GLH.glhDeleteObject(this.fbo);
+        GLH.glhDeleteObject(this.fboTexture);
+        GLH.glhDeleteObject(this.fboDepthBuffer);
+        this.fbo = null;
+        this.fboTexture = null;
+        this.fboDepthBuffer = null;
+    }
 
-		this.fbo.unbind();
+    // TODO : take size as parameter
+    public final void resizeFbo() {
+        int W = this.getMainRenderer().getGLFWWindow().getWidth();
+        int H = this.getMainRenderer().getGLFWWindow().getHeight();
+        this.width = W;
+        this.height = H;
 
-		this.resizeFbo();
+        this.fboTexture.bind(GL11.GL_TEXTURE_2D);
+        this.fboTexture.image2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, this.width, this.height, 0, GL11.GL_RGB,
+                GL11.GL_UNSIGNED_BYTE, (ByteBuffer) null);
+        this.fboDepthBuffer.bind();
+        this.fboDepthBuffer.storage(GL11.GL_DEPTH_COMPONENT, this.width, this.height);
+    }
 
-		GLH.glhCheckError("post worldrenderer fbo creation");
+    // TODO : remove this
+    private final void renderEntitiesAABB() {
+        // for (Entity e : this.world.getEntityStorage().getEntities()) {
+        // if (!BB.containsKey(e)) {
+        // BB.put(e, this.lineFactory.addBox(e, e));
+        // } else {
+        // this.lineFactory.setBox(e, e, BB.get(e), Color.BLUE);
+        // }
+        // }
+    }
 
-		this.setPostProcessingProgram(null);
-	}
+    /** render the given world */
+    @Override
+    public void render() {
 
-	@Override
-	protected void onDeinitialized() {
+        this.getMainRenderer().getResourceManager().getEventManager().invokeEvent(this.preRenderEvent);
 
-		Logger.get().log(Logger.Level.DEBUG, "Deinitializing " + this.getClass().getSimpleName());
+        this.renderEntitiesAABB();
 
-		// remove fbo
-		GLH.glhDeleteObject(this.fbo);
-		GLH.glhDeleteObject(this.fboTexture);
-		GLH.glhDeleteObject(this.fboDepthBuffer);
-		this.fbo = null;
-		this.fboTexture = null;
-		this.fboDepthBuffer = null;
-	}
+        // if there is a world
+        if (this.getWorld() != null && this.getCamera() != null) {
+            // refresh fbo
+            this.getFBO().bind();
+            this.getFBO().clear();
 
-	// TODO : take size as parameter
-	public final void resizeFbo() {
-		int W = this.getMainRenderer().getGLFWWindow().getWidth();
-		int H = this.getMainRenderer().getGLFWWindow().getHeight();
-		this.width = W;
-		this.height = H;
+            // change viewport here to have it modular
+            this.getFBO().viewport(0, 0, this.width, this.height);
 
-		this.fboTexture.bind(GL11.GL_TEXTURE_2D);
-		this.fboTexture.image2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, this.width, this.height, 0, GL11.GL_RGB,
-				GL11.GL_UNSIGNED_BYTE, (ByteBuffer) null);
-		this.fboDepthBuffer.bind();
-		this.fboDepthBuffer.storage(GL11.GL_DEPTH_COMPONENT, this.width, this.height);
-	}
+            super.render();
 
-	private final HashMap<WorldEntity, Integer> BB = new HashMap<WorldEntity, Integer>();
+            // post processing effects
+            this.renderPostProcessingEffects();
 
-	// TODO : remove this
-	private final void renderEntitiesAABB() {
-		// for (Entity e : this.world.getEntityStorage().getEntities()) {
-		// if (!BB.containsKey(e)) {
-		// BB.put(e, this.lineFactory.addBox(e, e));
-		// } else {
-		// this.lineFactory.setBox(e, e, BB.get(e), Color.BLUE);
-		// }
-		// }
-	}
+            // unbind the fbo
+            this.getFBO().unbind();
+        }
 
-	/** render the given world */
-	@Override
-	public void render() {
+        this.getMainRenderer().getResourceManager().getEventManager().invokeEvent(this.postRenderEvent);
 
-		this.getMainRenderer().getResourceManager().getEventManager().invokeEvent(this.preRenderEvent);
+    }
 
-		this.renderEntitiesAABB();
+    private void renderPostProcessingEffects() {
 
-		// if there is a world
-		if (this.getWorld() != null && this.getCamera() != null) {
-			// refresh fbo
-			this.getFBO().bind();
-			this.getFBO().clear();
+        if (this.postProcessingProgram != null) {
+            // bind the fbo texture to texture attachment 0
+            this.getFBOTexture().bind(GL13.GL_TEXTURE0, GL11.GL_TEXTURE_2D);
 
-			// change viewport here to have it modular
-			this.getFBO().viewport(0, 0, this.width, this.height);
+            this.postProcessingProgram.useStart();
+            this.postProcessingProgram.loadUniforms((float) super.getTimer().getTime());
+            this.getMainRenderer().getDefaultVAO().bind();
+            GLH.glhDrawArrays(GL11.GL_POINTS, 0, 1);
+            this.postProcessingProgram.useStop();
+        }
+    }
 
-			super.render();
+    @Override
+    public void onWindowResize(GLFWWindow window) {
+        this.resizeFbo();
+    }
 
-			// post processing effects
-			this.renderPostProcessingEffects();
+    public final void setPostProcessingProgram(GLProgramPostProcessing program) {
+        this.postProcessingProgram = program;
+    }
 
-			// unbind the fbo
-			this.getFBO().unbind();
-		}
+    public final GLFrameBuffer getFBO() {
+        return (this.fbo);
+    }
 
-		this.getMainRenderer().getResourceManager().getEventManager().invokeEvent(this.postRenderEvent);
+    public final GLTexture getFBOTexture() {
+        return (this.fboTexture);
+    }
 
-	}
+    public final void setWorld(T world) {
+        this.world = world;
+        this.onWorldSet();
+    }
 
-	private void renderPostProcessingEffects() {
+    protected void onWorldSet() {
 
-		if (this.postProcessingProgram != null) {
-			// bind the fbo texture to texture attachment 0
-			this.getFBOTexture().bind(GL13.GL_TEXTURE0, GL11.GL_TEXTURE_2D);
+    }
 
-			this.postProcessingProgram.useStart();
-			this.postProcessingProgram.loadUniforms((float) super.getTimer().getTime());
-			this.getMainRenderer().getDefaultVAO().bind();
-			GLH.glhDrawArrays(GL11.GL_POINTS, 0, 1);
-			this.postProcessingProgram.useStop();
-		}
-	}
+    protected void onCameraSet() {
+    }
 
-	@Override
-	public void onWindowResize(GLFWWindow window) {
-		this.resizeFbo();
-	}
+    /** the world to be rendered */
+    public final T getWorld() {
+        return (this.world);
+    }
 
-	public final void setPostProcessingProgram(GLProgramPostProcessing program) {
-		this.postProcessingProgram = program;
-	}
+    @SuppressWarnings("unchecked")
+    public final void setWorld(int worldID) {
+        this.setWorld((T) this.getMainRenderer().getResourceManager().getWorldManager().getWorld(worldID));
+    }
 
-	public final GLFrameBuffer getFBO() {
-		return (this.fbo);
-	}
+    /** the camera use to render this world */
+    public final CameraProjective getCamera() {
+        return (this.camera);
+    }
 
-	public final GLTexture getFBOTexture() {
-		return (this.fboTexture);
-	}
+    public final void setCamera(CameraProjective camera) {
+        this.camera = camera;
+        this.lineFactory.setCamera(camera);
+        this.particleFactory.setCamera(camera);
+        this.onCameraSet();
+    }
 
-	public final void setWorld(T world) {
-		this.world = world;
-		this.onWorldSet();
-	}
+    public final LineRendererFactory getLineRendererFactory() {
+        return (this.lineFactory);
+    }
 
-	protected void onWorldSet() {
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public final void setWorld(int worldID) {
-		this.setWorld((T) this.getMainRenderer().getResourceManager().getWorldManager().getWorld(worldID));
-	}
-
-	public final void setCamera(CameraProjective camera) {
-		this.camera = camera;
-		this.lineFactory.setCamera(camera);
-		this.particleFactory.setCamera(camera);
-		this.onCameraSet();
-	}
-
-	protected void onCameraSet() {
-	}
-
-	/** the world to be rendered */
-	public final T getWorld() {
-		return (this.world);
-	}
-
-	/** the camera use to render this world */
-	public final CameraProjective getCamera() {
-		return (this.camera);
-	}
-
-	public final LineRendererFactory getLineRendererFactory() {
-		return (this.lineFactory);
-	}
-
-	public final ParticleRendererFactory getParticleRendererFactory() {
-		return (this.particleFactory);
-	}
+    public final ParticleRendererFactory getParticleRendererFactory() {
+        return (this.particleFactory);
+    }
 }

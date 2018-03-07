@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -35,16 +36,16 @@ public class ModLoader {
         File folder = new File(filepath);
 
         if (!folder.exists()) {
-            Logger.get().log(Logger.Level.WARNING, "Mod folder doesnt exists: " + filepath);
+            Logger.get().log(Logger.Level.WARNING, "Mod folder doesn't exists: " + filepath);
             return;
         }
 
         if (!folder.isDirectory()) {
-            Logger.get().log(Logger.Level.WARNING, "Mod folder ... isnt a folder? " + filepath);
+            Logger.get().log(Logger.Level.WARNING, "Mod folder ... isn't a folder? " + filepath);
             return;
         }
 
-        for (File file : folder.listFiles()) {
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
             if (file.isDirectory()) {
                 this.injectMods(file.getAbsolutePath());
                 continue;
@@ -84,10 +85,8 @@ public class ModLoader {
      *
      * @param modClass : the mod class, which should implement the interface
      *                 "IMod.class" and the annotation "ModInfo.class"
-     * @return true if the mod could be injected
-     * @throws ClassNotFoundException
      */
-    public boolean injectMod(Class<?> modClass) {
+    public void injectMod(Class<?> modClass) {
 
         Class<?>[] interfaces = modClass.getInterfaces();
         boolean isMod = false;
@@ -101,13 +100,13 @@ public class ModLoader {
         if (!isMod) {
             Logger.get().log(Logger.Level.ERROR, modClass.getSimpleName(),
                     "doesn't implement IMod interface! It can't be registered has a mod.");
-            return (false);
+            return;
         }
 
         if (!modClass.isAnnotationPresent(ModInfo.class)) {
             Logger.get().log(Logger.Level.ERROR, modClass.getSimpleName(),
                     "doesn't implement the ModInfo annotation. It can't be registered has a mod.");
-            return (false);
+            return;
         }
 
         ModInfo modInfo = modClass.getAnnotation(ModInfo.class);
@@ -136,17 +135,15 @@ public class ModLoader {
             mod.initialize();
             this.mods.add(mod);
             Logger.get().log(Logger.Level.FINE, "Adding mod", mod);
-            return (true);
         } catch (Exception e) {
             e.printStackTrace(Logger.get().getPrintStream());
-            return (false);
         }
     }
 
     /**
      * deinitialize every mods and clean the mod list
      */
-    public void deinitialize(ResourceManager manager) {
+    public void deinitialize() {
         for (Mod mod : this.mods) {
             mod.deinitialize();
         }

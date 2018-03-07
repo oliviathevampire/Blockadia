@@ -4,7 +4,7 @@ import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Maths;
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
 import net.thegaminghuskymc.sandboxgame.engine.world.WorldFlat;
-import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
+import net.thegaminghuskymc.sandboxgame.game.client.BlockitectEngineClient;
 import net.thegaminghuskymc.sandboxgame.game.mod.Blocks;
 
 public class WorldTests {
@@ -15,7 +15,7 @@ public class WorldTests {
 
     public void testWorld() {
 
-        GameEngineClient engine = new GameEngineClient();
+        BlockitectEngineClient engine = new BlockitectEngineClient();
         engine.initialize();
 
         World world = new WorldFlat() {
@@ -39,6 +39,6 @@ public class WorldTests {
 		Assert.assertEquals(world.getBlock(-e, 1.0f, -e), Blocks.AIR);
 		Assert.assertEquals(world.getBlock(1.0f - e, 1.0f, 1.0f - e), Blocks.DIRT);*/
 
-        engine.deinitialize();
+        engine.uninitialized();
     }
 }

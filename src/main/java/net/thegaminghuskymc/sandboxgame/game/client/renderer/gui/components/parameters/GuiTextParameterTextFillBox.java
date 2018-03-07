@@ -9,37 +9,37 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.font.FontModel;
  */
 public class GuiTextParameterTextFillBox extends GuiParameter<GuiText> {
 
-	private final float correction;
+    private final float correction;
 
-	public GuiTextParameterTextFillBox(float correction) {
-		super();
-		this.correction = correction;
-	}
+    public GuiTextParameterTextFillBox(float correction) {
+        super();
+        this.correction = correction;
+    }
 
-	public GuiTextParameterTextFillBox() {
-		this(1.0f);
-	}
+    public GuiTextParameterTextFillBox() {
+        this(1.0f);
+    }
 
-	@Override
-	public void run(GuiText guiText) {
-		FontModel fontModel = guiText.getFontModel();
+    @Override
+    public void run(GuiText guiText) {
+        FontModel fontModel = guiText.getFontModel();
 
-		if (fontModel.getTextWidth() == 0 || fontModel.getTextHeight() == 0) {
-			return;
-		}
+        if (fontModel.getTextWidth() == 0 || fontModel.getTextHeight() == 0) {
+            return;
+        }
 
-		float scalex = 2.0f * guiText.getBoxWidth() / fontModel.getTextWidth();
-		float scaley = 2.0f * guiText.getBoxHeight() / fontModel.getTextHeight();
-		float scale = (scalex < scaley ? scalex : scaley) * this.correction;
+        float scalex = 2.0f * guiText.getBoxWidth() / fontModel.getTextWidth();
+        float scaley = 2.0f * guiText.getBoxHeight() / fontModel.getTextHeight();
+        float scale = (scalex < scaley ? scalex : scaley) * this.correction;
 
-		float rot = guiText.getBoxRotation();
+        float rot = guiText.getBoxRotation();
 
-		float x = 2.0f * guiText.getBoxX() - 1.0f;
-		float y = 2.0f * guiText.getBoxY() - 1.0f;
+        float x = 2.0f * guiText.getBoxX() - 1.0f;
+        float y = 2.0f * guiText.getBoxY() - 1.0f;
 
-		float rcx = 2.0f * guiText.getBoxCenterX() - 1.0f;
-		float rcy = 2.0f * guiText.getBoxCenterY() - 1.0f;
-		float rcz = 0;
-		fontModel.set(x, y, 0.0f, scale, scale, 1.0f, 0.0f, 0.0f, rot, rcx, rcy, rcz);
-	}
+        float rcx = 2.0f * guiText.getBoxCenterX() - 1.0f;
+        float rcy = 2.0f * guiText.getBoxCenterY() - 1.0f;
+        float rcz = 0;
+        fontModel.set(x, y, 0.0f, scale, scale, 1.0f, 0.0f, 0.0f, rot, rcx, rcy, rcz);
+    }
 }

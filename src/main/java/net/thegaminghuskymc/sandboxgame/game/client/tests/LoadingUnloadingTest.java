@@ -1,6 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.game.client.tests;
 
-import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
+import net.thegaminghuskymc.sandboxgame.game.client.BlockitectEngineClient;
 
 public class LoadingUnloadingTest {
 
@@ -8,13 +8,13 @@ public class LoadingUnloadingTest {
 
         /* 1 */
         // initialize engine
-        GameEngineClient engine = new GameEngineClient();
+        BlockitectEngineClient engine = new BlockitectEngineClient();
         engine.initialize();
 
         // load resources (mods)
         engine.load();
 
         engine.loop();
-        engine.deinitialize();
+        engine.uninitialized();
     }
 }

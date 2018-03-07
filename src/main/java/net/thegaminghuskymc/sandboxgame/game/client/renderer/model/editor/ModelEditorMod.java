@@ -6,27 +6,27 @@ import net.thegaminghuskymc.sandboxgame.engine.modding.IModResource;
 import net.thegaminghuskymc.sandboxgame.engine.modding.Mod;
 import net.thegaminghuskymc.sandboxgame.engine.modding.ModInfo;
 
-@ModInfo(name = "Model Editor Module", author = "rpereira-dev", version = "0.0.0.a", modid = "mem")
+@ModInfo(name = "Model Editor Module", creator = "rpereira-dev", version = "0.0.0.a", modid = "mem")
 public class ModelEditorMod implements IMod, IModResource {
 
-	@Override
-	public void initialize(Mod mod) {
-		mod.addResource(this);
-	}
+    public static int WORLD_ID = 0;
 
-	@Override
-	public void deinitialize(Mod mod) {
-	}
+    @Override
+    public void initialize(Mod mod) {
+        mod.addResource(this);
+    }
 
-	public static int WORLD_ID = 0;
+    @Override
+    public void deinitialize(Mod mod) {
+    }
 
-	@Override
-	public void load(Mod mod, ResourceManager manager) {
-		WORLD_ID = manager.getWorldManager().registerWorld(new ModelEditorWorld());
-	}
+    @Override
+    public void load(Mod mod, ResourceManager manager) {
+        WORLD_ID = manager.getWorldManager().registerWorld(new ModelEditorWorld());
+    }
 
-	@Override
-	public void unload(Mod mod, ResourceManager manager) {
+    @Override
+    public void unload(Mod mod, ResourceManager manager) {
 
-	}
+    }
 }

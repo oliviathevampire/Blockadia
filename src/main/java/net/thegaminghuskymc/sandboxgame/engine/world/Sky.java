@@ -24,49 +24,71 @@ import java.util.Random;
 
 public class Sky implements Taskable {
 
-    /** time constants */
+    /**
+     * time constants
+     */
     public static final float DAY_START = 0;
     public static final float DAY_END = 0.45f;
     public static final float NIGHT_START = 0.55f;
     public static final float NIGHT_END = 0.9f;
     public static final int MAX_RAIN_STRENGTH = 128;
     public static final int MIN_RAIN_STRENGTH = 8;
-    /** minutes for a full day / night cycle */
+    /**
+     * minutes for a full day / night cycle
+     */
     private static final float MINUTE_PER_CYCLE = 15.0f;
     private static final long MILLIS_PER_CYCLE = (long) (1000 * 60 * MINUTE_PER_CYCLE);
-    /** sky data */
+    /**
+     * sky data
+     */
     private static final Vector3f SKY_COLOR_DAY = new Vector3f(0.4f, 0.71f, 0.99f);
     private static final Vector3f SKY_COLOR_NIGHT = new Vector3f(0.01f, 0.14f, 0.19f);
-    /** sun color */
+    /**
+     * sun color
+     */
     private static final Vector3f SUN_RISE_COLOR = new Vector3f(1, 1, 1);
     private static final float DAY_AMBIENT = 0.6f;
     private static final float NIGHT_AMBIENT = 0.15f;
-    /** state */
+    /**
+     * state
+     */
     private int state;
     private Random rng;
-    /** time [0.0 ; 1.0] */
+    /**
+     * time [0.0 ; 1.0]
+     */
     private float cycleRatio;
     private int cycleCount;
-    /** time in millis [0.0 ; MILLIS_PER_CYCLE] */
+    /**
+     * time in millis [0.0 ; MILLIS_PER_CYCLE]
+     */
     private long _cycle_millis;
     private long _prev_millis;
     private Vector3f skyColor;
-    /** sun light */
+    /**
+     * sun light
+     */
     private PointLight sun;
     private float ambientLight;
-    /** fog data */
+    /**
+     * fog data
+     */
     private Vector3f fogColor;
     private float fogDensity;
     private float fogGradient;
     private int rainStrength;
     private int rainStrengthMax;
     private int rainTimer;
-    /** weather factors */
+    /**
+     * weather factors
+     */
     private float humidity;
     private float temperature;
     private float wind;
 
-    /** Weather constructor */
+    /**
+     * Weather constructor
+     */
     public Sky() {
         this.setCycleRatio(Sky.DAY_START);
         this.state = 0;
@@ -83,7 +105,9 @@ public class Sky implements Taskable {
         this.fogGradient = 2.5f;
     }
 
-    /** ACUALLY CALLED IN WORLD RENDERER! */
+    /**
+     * ACUALLY CALLED IN WORLD RENDERER!
+     */
     public void update() {
         this.updateTime();
         this.calculateSunPosition();
@@ -93,7 +117,9 @@ public class Sky implements Taskable {
         this.calculateLights();
     }
 
-    /** update the weather (mb use a 1D noise for rains, storm ...) */
+    /**
+     * update the weather (mb use a 1D noise for rains, storm ...)
+     */
 
     private void calculateLights() {
         if (this.hasState(WeatherState.DAY_ENDING)) {
@@ -343,7 +369,9 @@ public class Sky implements Taskable {
         this.startRain((int) (f * (Sky.MAX_RAIN_STRENGTH - Sky.MIN_RAIN_STRENGTH) + Sky.MIN_RAIN_STRENGTH));
     }
 
-    /** numbre of particles spawned per frames */
+    /**
+     * numbre of particles spawned per frames
+     */
     private void startRain(int particles) {
         this.rainStrengthMax = particles;
         this.rainStrength = 0;

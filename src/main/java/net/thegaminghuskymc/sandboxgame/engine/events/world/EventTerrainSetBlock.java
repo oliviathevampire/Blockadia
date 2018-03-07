@@ -5,39 +5,39 @@ import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
 
 public class EventTerrainSetBlock extends EventTerrain {
 
-	private final Block block;
-	private final int index;
+    private final Block block;
+    private final int index;
 
-	public EventTerrainSetBlock(Terrain terrain, Block block, int index) {
-		super(terrain);
-		this.block = block;
-		this.index = index;
-	}
+    public EventTerrainSetBlock(Terrain terrain, Block block, int index) {
+        super(terrain);
+        this.block = block;
+        this.index = index;
+    }
 
-	public final int getIndex() {
-		return (this.index);
-	}
+    public final int getIndex() {
+        return (this.index);
+    }
 
-	public final Block getBlock() {
-		return (this.block);
-	}
+    public final Block getBlock() {
+        return (this.block);
+    }
 
-	@Override
-	protected void process() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void process() {
+        // TODO Auto-generated method stub
 
-	@Override
-	protected void unprocess() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	protected void onReset() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void unprocess() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void onReset() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

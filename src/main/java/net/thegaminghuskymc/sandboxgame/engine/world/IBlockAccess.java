@@ -3,10 +3,7 @@ package net.thegaminghuskymc.sandboxgame.engine.world;
 import net.thegaminghuskymc.sandboxgame.engine.block.state.IBlockState;
 import net.thegaminghuskymc.sandboxgame.engine.util.EnumFacing;
 
-import javax.annotation.Nullable;
-
-public interface IBlockAccess
-{
+public interface IBlockAccess {
 
     int getCombinedLight(BlockPos pos, int lightValue);
 
@@ -23,8 +20,8 @@ public interface IBlockAccess
     /**
      * FORGE: isSideSolid, pulled up from {@link World}
      *
-     * @param pos Position
-     * @param side Side
+     * @param pos      Position
+     * @param side     Side
      * @param _default default return value
      * @return if the block is solid on the side
      */

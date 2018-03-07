@@ -55,10 +55,8 @@ public class PacketManager extends GenericManager<PacketData> {
      * register a listener to the given packet (which will be called when the
      * packet is received)
      *
-     * @param packetID
-     *            : the packet
-     * @param listener
-     *            : the listener
+     * @param packetID : the packet
+     * @param listener : the listener
      */
     public void addListenerToPacket(int packetID, PacketListener<? extends Packet> listener) {
         if (listener == null) {
@@ -75,7 +73,9 @@ public class PacketManager extends GenericManager<PacketData> {
         data.addListener(listener);
     }
 
-    /** called whenever a packet is received */
+    /**
+     * called whenever a packet is received
+     */
     public void onPacketReceived(Packet packet) {
         PacketData data = super.getObjectByID(packet.getPacketID());
         if (data == null) {
@@ -85,7 +85,9 @@ public class PacketManager extends GenericManager<PacketData> {
         data.onReceive(packet);
     }
 
-    /** generate a new packet from it ID and the given bytebuffer */
+    /**
+     * generate a new packet from it ID and the given bytebuffer
+     */
     public Packet getFromPacketID(int packetID, ByteBuf byteBuffer)
             throws NoSuchPacketException, WrongPacketFormatException {
         Class<? extends Packet> packet_class;
@@ -104,7 +106,9 @@ public class PacketManager extends GenericManager<PacketData> {
         }
     }
 
-    /** Returns an instance of a packet from byteBuffer */
+    /**
+     * Returns an instance of a packet from byteBuffer
+     */
     public Packet fromByteBuffer(ByteBuf byteBuffer) throws NoSuchPacketException, WrongPacketFormatException {
         return (this.getFromPacketID(byteBuffer.readInt(), byteBuffer));
     }

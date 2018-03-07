@@ -49,7 +49,7 @@ public abstract class BlockLiquid extends Block {
 
     @Override
     public boolean bypassRaycast() {
-        return (true);
+        return (false);
     }
 
 }

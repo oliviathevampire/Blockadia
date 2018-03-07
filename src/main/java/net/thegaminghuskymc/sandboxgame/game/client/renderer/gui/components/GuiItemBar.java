@@ -5,160 +5,192 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiItemBa
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/** a slider bar */
+/**
+ * a slider bar
+ */
 public class GuiItemBar extends GuiSliderBar {
-	/** the objects hold */
-	private final ArrayList<Object> values;
+    /**
+     * the objects hold
+     */
+    private final ArrayList<Object> values;
 
-	/** selected index */
-	private int selectedIndex;
+    /**
+     * selected index
+     */
+    private int selectedIndex;
 
-	public GuiItemBar() {
-		super();
-		this.selectedIndex = 0;
-		this.values = new ArrayList<Object>();
-		this.addListener(ON_PRESS_FOCUS_LISTENER);
-	}
+    public GuiItemBar() {
+        super();
+        this.selectedIndex = 0;
+        this.values = new ArrayList<Object>();
+        this.addListener(ON_PRESS_FOCUS_LISTENER);
+    }
 
-	/** add all values to the list */
-	public final void addValues(Object... objects) {
-		for (Object object : objects) {
-			this.addValue(object);
-		}
-	}
+    /**
+     * VALUES HELPER
+     */
+    public static final Integer[] intRange(int min, int max) {
+        return (intRange(min, max, 1));
+    }
 
-	public final void addValuesArray(Object[] objects) {
-		for (Object object : objects) {
-			this.addValue(object);
-		}
-	}
+    public static final Integer[] intRange(int min, int max, int step) {
+        int n = (max - min) / step;
+        Integer[] values = new Integer[n + 1];
+        int i = 0;
+        while (min <= max) {
+            values[i++] = new Integer(min);
+            min += step;
+        }
+        return (values);
+    }
 
-	/** add a value to the list */
-	public final void addValue(Object object) {
-		if (this.values.size() == 0) {
-			this.select(0);
-		}
-		this.values.add(object);
-	}
+    public static final Float[] floatRange(float min, float max, float step) {
+        return (floatRange(min, max, (int) ((max - min) / step)));
+    }
 
-	/** remove all values from the list */
-	public final void removeValues(Object... objects) {
-		for (Object object : objects) {
-			this.removeValue(object);
-		}
-	}
+    public static final Float[] floatRange(float min, float max, int n) {
+        float step = (max - min) / (float) (n - 1);
+        Float[] values = new Float[n];
+        for (int i = 0; i < n; i++) {
+            values[i] = new Float(min + i * step);
+        }
+        return (values);
+    }
 
-	/** remove a value from the list */
-	public final void removeValue(Object object) {
-		this.values.remove(object);
-	}
+    /**
+     * add all values to the list
+     */
+    public final void addValues(Object... objects) {
+        for (Object object : objects) {
+            this.addValue(object);
+        }
+    }
 
-	/** remove all values from the list */
-	public final void removeValues() {
-		this.values.clear();
-	}
+    public final void addValuesArray(Object[] objects) {
+        for (Object object : objects) {
+            this.addValue(object);
+        }
+    }
 
-	/** sort the values */
-	public final void sort(Comparator<Object> cmp) {
-		this.values.sort(cmp);
-	}
+    /**
+     * add a value to the list
+     */
+    public final void addValue(Object object) {
+        if (this.values.size() == 0) {
+            this.select(0);
+        }
+        this.values.add(object);
+    }
 
-	/** get all values from the list */
-	public final ArrayList<Object> getValues() {
-		return (this.values);
-	}
+    /**
+     * remove all values from the list
+     */
+    public final void removeValues(Object... objects) {
+        for (Object object : objects) {
+            this.removeValue(object);
+        }
+    }
 
-	public final Object getValue(int index) {
-		return (this.values.get(index));
-	}
+    /**
+     * remove a value from the list
+     */
+    public final void removeValue(Object object) {
+        this.values.remove(object);
+    }
 
-	/** select the value at given index */
-	public final Object select(int selectedIndex) {
-		if (this.values.size() == 0) {
-			return (null);
-		}
-		if (selectedIndex < 0) {
-			selectedIndex = 0;
-		} else if (selectedIndex >= this.values.size()) {
-			selectedIndex = this.values.size() - 1;
-		} else if (selectedIndex != this.selectedIndex) {
-			int prevIndex = this.selectedIndex;
-			this.selectedIndex = selectedIndex;
-			super.stackEvent(new GuiItemBarEventValueChanged<GuiItemBar>(this, prevIndex, this.getValue(prevIndex)));
-		}
+    /**
+     * remove all values from the list
+     */
+    public final void removeValues() {
+        this.values.clear();
+    }
 
-		super.select((this.selectedIndex + 1) / (float) this.values.size());
-		return (this.getSelectedValue());
-	}
+    /**
+     * sort the values
+     */
+    public final void sort(Comparator<Object> cmp) {
+        this.values.sort(cmp);
+    }
 
-	public final Object select(Object object) {
-		return (this.select(this.values.indexOf(object)));
-	}
+    /**
+     * get all values from the list
+     */
+    public final ArrayList<Object> getValues() {
+        return (this.values);
+    }
 
-	/** select the value at given index */
-	public final Object select(float percent) {
-		return (this.select((int) (this.values.size() * percent)));
-	}
+    public final Object getValue(int index) {
+        return (this.values.get(index));
+    }
 
-	/** @see GuiSliderBarValues#select(float) */
-	public final Object select(double percent) {
-		return (this.select((float) percent));
-	}
+    /**
+     * select the value at given index
+     */
+    public final Object select(int selectedIndex) {
+        if (this.values.size() == 0) {
+            return (null);
+        }
+        if (selectedIndex < 0) {
+            selectedIndex = 0;
+        } else if (selectedIndex >= this.values.size()) {
+            selectedIndex = this.values.size() - 1;
+        } else if (selectedIndex != this.selectedIndex) {
+            int prevIndex = this.selectedIndex;
+            this.selectedIndex = selectedIndex;
+            super.stackEvent(new GuiItemBarEventValueChanged<GuiItemBar>(this, prevIndex, this.getValue(prevIndex)));
+        }
 
-	@Override
-	public float getPercent() {
-		if (this.values.size() == 0) {
-			return (0.5f);
-		}
-		return ((this.selectedIndex + 1) / (float) this.values.size());
-	}
+        super.select((this.selectedIndex + 1) / (float) this.values.size());
+        return (this.getSelectedValue());
+    }
 
-	/** get the selected value */
-	public final Object getSelectedValue() {
-		if (this.selectedIndex < 0 || this.selectedIndex >= this.values.size()) {
-			return (null);
-		}
-		return (this.values.get(this.selectedIndex));
-	}
+    public final Object select(Object object) {
+        return (this.select(this.values.indexOf(object)));
+    }
 
-	/** get the selected value */
-	public final int getSelectedIndex() {
-		return (this.selectedIndex);
-	}
+    /**
+     * select the value at given index
+     */
+    public final Object select(float percent) {
+        return (this.select((int) (this.values.size() * percent)));
+    }
 
-	@Override
-	protected void onInputUpdate() {
-		if (super.isPressed() && super.hasFocus() && super.isEnabled()) {
-			this.select(this.getMouseX());
-		}
-	}
+    /**
+     * @see GuiSliderBarValues#select(float)
+     */
+    public final Object select(double percent) {
+        return (this.select((float) percent));
+    }
 
-	/** VALUES HELPER */
-	public static final Integer[] intRange(int min, int max) {
-		return (intRange(min, max, 1));
-	}
+    @Override
+    public float getPercent() {
+        if (this.values.size() == 0) {
+            return (0.5f);
+        }
+        return ((this.selectedIndex + 1) / (float) this.values.size());
+    }
 
-	public static final Integer[] intRange(int min, int max, int step) {
-		int n = (max - min) / step;
-		Integer[] values = new Integer[n + 1];
-		int i = 0;
-		while (min <= max) {
-			values[i++] = new Integer(min);
-			min += step;
-		}
-		return (values);
-	}
+    /**
+     * get the selected value
+     */
+    public final Object getSelectedValue() {
+        if (this.selectedIndex < 0 || this.selectedIndex >= this.values.size()) {
+            return (null);
+        }
+        return (this.values.get(this.selectedIndex));
+    }
 
-	public static final Float[] floatRange(float min, float max, float step) {
-		return (floatRange(min, max, (int) ((max - min) / step)));
-	}
+    /**
+     * get the selected value
+     */
+    public final int getSelectedIndex() {
+        return (this.selectedIndex);
+    }
 
-	public static final Float[] floatRange(float min, float max, int n) {
-		float step = (max - min) / (float) (n - 1);
-		Float[] values = new Float[n];
-		for (int i = 0; i < n; i++) {
-			values[i] = new Float(min + i * step);
-		}
-		return (values);
-	}
+    @Override
+    protected void onInputUpdate() {
+        if (super.isPressed() && super.hasFocus() && super.isEnabled()) {
+            this.select(this.getMouseX());
+        }
+    }
 }

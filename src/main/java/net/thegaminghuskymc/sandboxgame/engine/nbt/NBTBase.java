@@ -4,31 +4,14 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public abstract class NBTBase
-{
-    public static final String[] NBT_TYPES = new String[] {"END", "BYTE", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "BYTE[]", "STRING", "LIST", "COMPOUND", "INT[]", "LONG[]"};
-
-    /**
-     * Write the actual data contents of the tag, implemented in NBT extension classes
-     */
-    abstract void write(DataOutput output) throws IOException;
-
-    abstract void read(DataInput input, int depth, NBTSizeTracker sizeTracker) throws IOException;
-
-    public abstract String toString();
-
-    /**
-     * Gets the type byte for the tag.
-     */
-    public abstract byte getId();
+public abstract class NBTBase {
+    public static final String[] NBT_TYPES = new String[]{"END", "BYTE", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "BYTE[]", "STRING", "LIST", "COMPOUND", "INT[]", "LONG[]"};
 
     /**
      * Creates a new NBTBase object that corresponds with the passed in id.
      */
-    protected static NBTBase createNewByType(byte id)
-    {
-        switch (id)
-        {
+    protected static NBTBase createNewByType(byte id) {
+        switch (id) {
             case 0:
                 return new NBTTagEnd();
             case 1:
@@ -60,10 +43,8 @@ public abstract class NBTBase
         }
     }
 
-    public static String getTagTypeName(int p_193581_0_)
-    {
-        switch (p_193581_0_)
-        {
+    public static String getTagTypeName(int p_193581_0_) {
+        switch (p_193581_0_) {
             case 0:
                 return "TAG_End";
             case 1:
@@ -98,6 +79,20 @@ public abstract class NBTBase
     }
 
     /**
+     * Write the actual data contents of the tag, implemented in NBT extension classes
+     */
+    abstract void write(DataOutput output) throws IOException;
+
+    abstract void read(DataInput input, int depth, NBTSizeTracker sizeTracker) throws IOException;
+
+    public abstract String toString();
+
+    /**
+     * Gets the type byte for the tag.
+     */
+    public abstract byte getId();
+
+    /**
      * Creates a clone of the tag.
      */
     public abstract NBTBase copy();
@@ -105,23 +100,19 @@ public abstract class NBTBase
     /**
      * Return whether this compound has no tags.
      */
-    public boolean hasNoTags()
-    {
+    public boolean hasNoTags() {
         return false;
     }
 
-    public boolean equals(Object p_equals_1_)
-    {
-        return p_equals_1_ instanceof NBTBase && this.getId() == ((NBTBase)p_equals_1_).getId();
+    public boolean equals(Object p_equals_1_) {
+        return p_equals_1_ instanceof NBTBase && this.getId() == ((NBTBase) p_equals_1_).getId();
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.getId();
     }
 
-    protected String getString()
-    {
+    protected String getString() {
         return this.toString();
     }
 }

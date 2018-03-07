@@ -1,7 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.resourcepacks;
 
 import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
-import net.thegaminghuskymc.sandboxgame.engine.managers.LangManager;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 
 /**

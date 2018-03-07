@@ -3,8 +3,7 @@ package net.thegaminghuskymc.sandboxgame.engine.tileentity;
 
 import net.thegaminghuskymc.sandboxgame.engine.world.World;
 
-public interface IHopper
-{
+public interface IHopper {
     /**
      * Returns the worldObj for this tileEntity.
      */

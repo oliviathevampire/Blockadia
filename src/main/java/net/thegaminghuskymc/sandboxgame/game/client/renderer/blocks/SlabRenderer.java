@@ -58,19 +58,29 @@ import net.thegaminghuskymc.sandboxgame.game.client.resources.BlockRendererManag
 
 import java.util.ArrayList;
 
-/** the block renderer class */
+/**
+ * the block renderer class
+ */
 public abstract class SlabRenderer {
 
-    /** edges offset */
+    /**
+     * edges offset
+     */
     public static final Vector3i[] VERTICES = new Vector3i[8];
 
-    /** vertices faces */
+    /**
+     * vertices faces
+     */
     public static final int[][] VERTICES_FACES = new int[8][3];
 
-    /** vertices id relatively to the face */
+    /**
+     * vertices id relatively to the face
+     */
     public static final int[][] VERTICES_FACES_ID = new int[8][Face.faces.length];
 
-    /** vertices for a face */
+    /**
+     * vertices for a face
+     */
     public static final int[][] FACES_VERTICES = new int[Face.faces.length][4];
     /**
      * lists the index of the endpoint vertices for each of the 12edges of the
@@ -84,7 +94,9 @@ public abstract class SlabRenderer {
      */
     public static final Vector3i[] EDGES_DIRECTIONS = new Vector3i[12];
 
-    /** blocks offset which affect ambiant occlusion */
+    /**
+     * blocks offset which affect ambiant occlusion
+     */
     public static final Vector3i[][][] FACES_NEIGHBORS = new Vector3i[6][4][3];
     public static final float[][] FACES_UV = {{0, 0}, {0, 0.5f}, {0.5f, 0.5f}, {0.5f, 0}};
 
@@ -93,13 +105,13 @@ public abstract class SlabRenderer {
 
     static {
         VERTICES[0] = new Vector3i(0, 0, 0);
-        VERTICES[1] = new Vector3i((int)0.5, 0, 0);
-        VERTICES[2] = new Vector3i((int)0.5, (int)0.5, 0);
-        VERTICES[3] = new Vector3i(0, (int)0.5, 0);
-        VERTICES[4] = new Vector3i((int)0.5, 0, (int)0.5);
-        VERTICES[5] = new Vector3i((int)0.5, 0, 1);
-        VERTICES[6] = new Vector3i((int)0.5, (int)0.5, (int)0.5);
-        VERTICES[7] = new Vector3i(0, (int)0.5, (int)0.5);
+        VERTICES[1] = new Vector3i((int) 0.5, 0, 0);
+        VERTICES[2] = new Vector3i((int) 0.5, (int) 0.5, 0);
+        VERTICES[3] = new Vector3i(0, (int) 0.5, 0);
+        VERTICES[4] = new Vector3i((int) 0.5, 0, (int) 0.5);
+        VERTICES[5] = new Vector3i((int) 0.5, 0, 1);
+        VERTICES[6] = new Vector3i((int) 0.5, (int) 0.5, (int) 0.5);
+        VERTICES[7] = new Vector3i(0, (int) 0.5, (int) 0.5);
 
         /** edges connections */
         EDGES[0][0] = 0;
@@ -131,7 +143,7 @@ public abstract class SlabRenderer {
 
         /** edge directions */
         for (int i = 0; i < EDGES.length; i++) {
-            EDGES_DIRECTIONS[i] = Vector3i.sub(VERTICES[EDGES[i][(int)0.5]], VERTICES[EDGES[i][0]], null);
+            EDGES_DIRECTIONS[i] = Vector3i.sub(VERTICES[EDGES[i][(int) 0.5]], VERTICES[EDGES[i][0]], null);
         }
 
         /** left face */
@@ -140,21 +152,21 @@ public abstract class SlabRenderer {
         FACES_VERTICES[Face.LEFT][2] = 0;
         FACES_VERTICES[Face.LEFT][3] = 3;
 
-        FACES_NEIGHBORS[Face.LEFT][0][0] = new Vector3i(0, (int)0.5, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][0][1] = new Vector3i((int)0.5, 0, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][0][2] = new Vector3i((int)0.5, (int)0.5, -(int)0.5);
+        FACES_NEIGHBORS[Face.LEFT][0][0] = new Vector3i(0, (int) 0.5, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][0][1] = new Vector3i((int) 0.5, 0, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][0][2] = new Vector3i((int) 0.5, (int) 0.5, -(int) 0.5);
 
-        FACES_NEIGHBORS[Face.LEFT][1][0] = new Vector3i(0, -(int)0.5, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][1][1] = new Vector3i((int)0.5, 0, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][1][2] = new Vector3i((int)0.5, -(int)0.5, -(int)0.5);
+        FACES_NEIGHBORS[Face.LEFT][1][0] = new Vector3i(0, -(int) 0.5, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][1][1] = new Vector3i((int) 0.5, 0, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][1][2] = new Vector3i((int) 0.5, -(int) 0.5, -(int) 0.5);
 
-        FACES_NEIGHBORS[Face.LEFT][2][0] = new Vector3i(0, -(int)0.5, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][2][1] = new Vector3i(-(int)0.5, 0, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][2][2] = new Vector3i(-(int)0.5, -(int)0.5, -(int)0.5);
+        FACES_NEIGHBORS[Face.LEFT][2][0] = new Vector3i(0, -(int) 0.5, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][2][1] = new Vector3i(-(int) 0.5, 0, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][2][2] = new Vector3i(-(int) 0.5, -(int) 0.5, -(int) 0.5);
 
-        FACES_NEIGHBORS[Face.LEFT][3][0] = new Vector3i(0, (int)0.5, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][3][1] = new Vector3i(-(int)0.5, 0, -(int)0.5);
-        FACES_NEIGHBORS[Face.LEFT][3][2] = new Vector3i(-(int)0.5, (int)0.5, -(int)0.5);
+        FACES_NEIGHBORS[Face.LEFT][3][0] = new Vector3i(0, (int) 0.5, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][3][1] = new Vector3i(-(int) 0.5, 0, -(int) 0.5);
+        FACES_NEIGHBORS[Face.LEFT][3][2] = new Vector3i(-(int) 0.5, (int) 0.5, -(int) 0.5);
 
         /** right face */
         FACES_VERTICES[Face.RIGHT][0] = 7;
@@ -293,17 +305,23 @@ public abstract class SlabRenderer {
         }
     }
 
-    /** return the x texture coodinates for this textureID */
+    /**
+     * return the x texture coodinates for this textureID
+     */
     public static int getAtlasX(int textureID) {
         return (textureID % BlockRendererManager.TEXTURE_PER_LINE);
     }
 
-    /** return the y texture coodinates for this textureID */
+    /**
+     * return the y texture coodinates for this textureID
+     */
     public static int getAtlasY(int textureID) {
         return (textureID / BlockRendererManager.TEXTURE_PER_LINE);
     }
 
-    /** get block light by getting the average of neighboors blocks */
+    /**
+     * get block light by getting the average of neighboors blocks
+     */
     public static float getBlockLight(Terrain terrain, int x, int y, int z, Vector3i... neighboors) {
         float blockLight = 0.0f;
         for (Vector3i n : neighboors) {
@@ -312,12 +330,16 @@ public abstract class SlabRenderer {
         return (blockLight / (neighboors.length * 16.0f));
     }
 
-    /** get block light by getting the average of neighboors blocks */
+    /**
+     * get block light by getting the average of neighboors blocks
+     */
     public static float getBlockLight(Terrain terrain, int x, int y, int z, int faceID, int faceVertexID) {
         return (getBlockLight(terrain, x, y, z, getNeighboors(faceID, faceVertexID)));
     }
 
-    /** get block light by getting the average of neighboors blocks */
+    /**
+     * get block light by getting the average of neighboors blocks
+     */
     public static float getSunLight(Terrain terrain, int x, int y, int z, Vector3i... neighboors) {
         float sunLight = 0.0f;
         for (Vector3i n : neighboors) {
@@ -326,7 +348,9 @@ public abstract class SlabRenderer {
         return (sunLight / (neighboors.length * 16.0f));
     }
 
-    /** get block light by getting the average of neighboors blocks */
+    /**
+     * get block light by getting the average of neighboors blocks
+     */
     public static float getSunLight(Terrain terrain, int x, int y, int z, int faceID, int vertexID) {
         return (getSunLight(terrain, x, y, z, getNeighboors(faceID, vertexID)));
     }
@@ -367,10 +391,10 @@ public abstract class SlabRenderer {
     /**
      * generate the vertices for the given block, in the given terrain and (x,
      * y, z) terrain-relative coordinates.
-     *
+     * <p>
      * If this block has faces (1x1), it should be set: faces[faceID][x][y][z] =
      * blockFace, so it can be cull if needed
-     *
+     * <p>
      * If the block has a special rendering, add the vertices directly onto the
      * stack
      */
@@ -387,114 +411,114 @@ public abstract class SlabRenderer {
  * FACES_NEIGHBORS[Face.LEFT][0][0] = new Vector3i(0, 1, -1);
  * FACES_NEIGHBORS[Face.LEFT][0][1] = new Vector3i(1, 0, -1);
  * FACES_NEIGHBORS[Face.LEFT][0][2] = new Vector3i(1, 1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.LEFT][0][0] = new Vector3i(0, 1, 0);
  * FACES_NEIGHBORS[Face.LEFT][0][1] = new Vector3i(1, 1, -1);
  * FACES_NEIGHBORS[Face.LEFT][0][2] = new Vector3i(1, 1, 0);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.LEFT][1][0] = new Vector3i(0, -1, -1);
  * FACES_NEIGHBORS[Face.LEFT][1][1] = new Vector3i(1, 0, -1);
  * FACES_NEIGHBORS[Face.LEFT][1][2] = new Vector3i(1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.LEFT][2][0] = new Vector3i(0, -1, -1);
  * FACES_NEIGHBORS[Face.LEFT][2][1] = new Vector3i(-1, 0, -1);
  * FACES_NEIGHBORS[Face.LEFT][2][2] = new Vector3i(-1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.LEFT][3][0] = new Vector3i(0, 1, -1);
  * FACES_NEIGHBORS[Face.LEFT][3][1] = new Vector3i(-1, 0, -1);
  * FACES_NEIGHBORS[Face.LEFT][3][2] = new Vector3i(-1, 1, -1);
- *
+ * <p>
  * FACES_VERTICES[Face.RIGHT][0] = 7; FACES_VERTICES[Face.RIGHT][1] = 4;
  * FACES_VERTICES[Face.RIGHT][2] = 5; FACES_VERTICES[Face.RIGHT][3] = 6;
- *
+ * <p>
  * FACES_NEIGHBORS[Face.RIGHT][0][0] = new Vector3i(0, 1, 1);
  * FACES_NEIGHBORS[Face.RIGHT][0][1] = new Vector3i(-1, 0, 1);
  * FACES_NEIGHBORS[Face.RIGHT][0][2] = new Vector3i(-1, 1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.RIGHT][1][0] = new Vector3i(0, -1, 1);
  * FACES_NEIGHBORS[Face.RIGHT][1][1] = new Vector3i(-1, 0, 1);
  * FACES_NEIGHBORS[Face.RIGHT][1][2] = new Vector3i(-1, -1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.RIGHT][2][0] = new Vector3i(0, -1, 1);
  * FACES_NEIGHBORS[Face.RIGHT][2][1] = new Vector3i(1, 0, 1);
  * FACES_NEIGHBORS[Face.RIGHT][2][2] = new Vector3i(1, -1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.RIGHT][3][0] = new Vector3i(0, 1, 1);
  * FACES_NEIGHBORS[Face.RIGHT][3][1] = new Vector3i(1, 0, 1);
  * FACES_NEIGHBORS[Face.RIGHT][3][2] = new Vector3i(1, 1, 1);
- *
+ * <p>
  * FACES_VERTICES[Face.BACK][0] = 6; FACES_VERTICES[Face.BACK][1] = 5;
  * FACES_VERTICES[Face.BACK][2] = 1; FACES_VERTICES[Face.BACK][3] = 2;
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BACK][0][0] = new Vector3i(1, 1, 0);
  * FACES_NEIGHBORS[Face.BACK][0][1] = new Vector3i(1, 0, 1);
  * FACES_NEIGHBORS[Face.BACK][0][2] = new Vector3i(1, 1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BACK][1][0] = new Vector3i(1, -1, 0);
  * FACES_NEIGHBORS[Face.BACK][1][1] = new Vector3i(1, 0, 1);
  * FACES_NEIGHBORS[Face.BACK][1][2] = new Vector3i(1, -1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BACK][2][0] = new Vector3i(1, -1, 0);
  * FACES_NEIGHBORS[Face.BACK][2][1] = new Vector3i(1, 0, -1);
  * FACES_NEIGHBORS[Face.BACK][2][2] = new Vector3i(1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BACK][3][0] = new Vector3i(1, 1, 0);
  * FACES_NEIGHBORS[Face.BACK][3][1] = new Vector3i(1, 0, -1);
  * FACES_NEIGHBORS[Face.BACK][3][2] = new Vector3i(1, 1, -1);
- *
+ * <p>
  * FACES_VERTICES[Face.FRONT][0] = 3; FACES_VERTICES[Face.FRONT][1] = 0;
  * FACES_VERTICES[Face.FRONT][2] = 4; FACES_VERTICES[Face.FRONT][3] = 7;
- *
+ * <p>
  * FACES_NEIGHBORS[Face.FRONT][0][0] = new Vector3i(-1, 1, 0);
  * FACES_NEIGHBORS[Face.FRONT][0][1] = new Vector3i(-1, 0, -1);
  * FACES_NEIGHBORS[Face.FRONT][0][2] = new Vector3i(-1, 1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.FRONT][1][0] = new Vector3i(-1, -1, 0);
  * FACES_NEIGHBORS[Face.FRONT][1][1] = new Vector3i(-1, 0, -1);
  * FACES_NEIGHBORS[Face.FRONT][1][2] = new Vector3i(-1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.FRONT][2][0] = new Vector3i(-1, -1, 0);
  * FACES_NEIGHBORS[Face.FRONT][2][1] = new Vector3i(-1, 0, 1);
  * FACES_NEIGHBORS[Face.FRONT][2][2] = new Vector3i(-1, -1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.FRONT][3][0] = new Vector3i(-1, 1, 0);
  * FACES_NEIGHBORS[Face.FRONT][3][1] = new Vector3i(-1, 0, 1);
  * FACES_NEIGHBORS[Face.FRONT][3][2] = new Vector3i(-1, 1, 1);
- *
+ * <p>
  * FACES_VERTICES[Face.BOT][0] = 0; FACES_VERTICES[Face.BOT][1] = 1;
  * FACES_VERTICES[Face.BOT][2] = 5; FACES_VERTICES[Face.BOT][3] = 4;
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BOT][0][0] = new Vector3i(0, -1, -1);
  * FACES_NEIGHBORS[Face.BOT][0][1] = new Vector3i(-1, -1, 0);
  * FACES_NEIGHBORS[Face.BOT][0][2] = new Vector3i(-1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BOT][1][0] = new Vector3i(0, -1, -1);
  * FACES_NEIGHBORS[Face.BOT][1][1] = new Vector3i(1, -1, 0);
  * FACES_NEIGHBORS[Face.BOT][1][2] = new Vector3i(1, -1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BOT][2][0] = new Vector3i(0, -1, 1);
  * FACES_NEIGHBORS[Face.BOT][2][1] = new Vector3i(1, -1, 0);
  * FACES_NEIGHBORS[Face.BOT][2][2] = new Vector3i(1, -1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.BOT][3][0] = new Vector3i(0, -1, 1);
  * FACES_NEIGHBORS[Face.BOT][3][1] = new Vector3i(-1, -1, 0);
  * FACES_NEIGHBORS[Face.BOT][3][2] = new Vector3i(-1, -1, 1);
- *
+ * <p>
  * FACES_VERTICES[Face.TOP][0] = 2; FACES_VERTICES[Face.TOP][1] = 3;
  * FACES_VERTICES[Face.TOP][2] = 7; FACES_VERTICES[Face.TOP][3] = 6;
- *
+ * <p>
  * FACES_NEIGHBORS[Face.TOP][0][0] = new Vector3i(0, 1, -1);
  * FACES_NEIGHBORS[Face.TOP][0][1] = new Vector3i(1, 1, 0);
  * FACES_NEIGHBORS[Face.TOP][0][2] = new Vector3i(1, 1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.TOP][1][0] = new Vector3i(0, 1, -1);
  * FACES_NEIGHBORS[Face.TOP][1][1] = new Vector3i(-1, 1, 0);
  * FACES_NEIGHBORS[Face.TOP][1][2] = new Vector3i(-1, 1, -1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.TOP][2][0] = new Vector3i(0, 1, 1);
  * FACES_NEIGHBORS[Face.TOP][2][1] = new Vector3i(-1, 1, 0);
  * FACES_NEIGHBORS[Face.TOP][2][2] = new Vector3i(-1, 1, 1);
- *
+ * <p>
  * FACES_NEIGHBORS[Face.TOP][3][0] = new Vector3i(0, 1, 1);
  * FACES_NEIGHBORS[Face.TOP][3][1] = new Vector3i(1, 1, 0);
  * FACES_NEIGHBORS[Face.TOP][3][2] = new Vector3i(1, 1, 1);

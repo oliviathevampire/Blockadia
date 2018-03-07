@@ -7,8 +7,8 @@ import net.thegaminghuskymc.sandboxgame.engine.world.World;
  */
 public class WorldEntityItem extends WorldEntityStatic {
 
-	public WorldEntityItem(World world) {
-		super(world);
-	}
+    public WorldEntityItem(World world) {
+        super(world);
+    }
 
 }

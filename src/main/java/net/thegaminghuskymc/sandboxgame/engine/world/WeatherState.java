@@ -1,7 +1,9 @@
 package net.thegaminghuskymc.sandboxgame.engine.world;
 
 public class WeatherState {
-    /** weather states */
+    /**
+     * weather states
+     */
     public static final int DAY = (1 << 0);
     public static final int NIGHT = (1 << 1);
     public static final int DAY_ENDING = (1 << 2);

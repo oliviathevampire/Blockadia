@@ -2,12 +2,13 @@ package net.thegaminghuskymc.sandboxgame.engine.managers;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
+import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 
 public class BlockManager extends GenericManager<Block> {
 
     private static BlockManager BLOCK_MANAGER_INSTANCE;
 
-    protected BlockManager(ResourceManager manager) {
+    BlockManager(ResourceManager manager) {
         super(manager);
         BLOCK_MANAGER_INSTANCE = this;
     }
@@ -16,10 +17,9 @@ public class BlockManager extends GenericManager<Block> {
         return (BLOCK_MANAGER_INSTANCE);
     }
 
-    public Block registerBlock(Block block) {
-        Logger.get().log(Logger.Level.FINE, "Registering a block: " + block.toString());
-        super.registerObject(block);
-        return (block);
+    public static void registerBlock(int id, ResourceLocation textualID, Block block_)
+    {
+        Block.REGISTRY.register(id, textualID, block_);
     }
 
     public Block getBlockByID(int id) {

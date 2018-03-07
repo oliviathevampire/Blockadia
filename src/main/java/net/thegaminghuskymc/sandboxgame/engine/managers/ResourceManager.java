@@ -102,7 +102,7 @@ public abstract class ResourceManager {
             reader.close();
 
         } catch (IOException e) {
-            Logger.get().log(Logger.Level.ERROR, "Couldnt read config file: " + filepath);
+            Logger.get().log(Logger.Level.ERROR, "Couldn't read config file: " + filepath);
         }
         return (map);
     }
@@ -131,7 +131,7 @@ public abstract class ResourceManager {
             writer.close();
 
         } catch (IOException e) {
-            Logger.get().log(Logger.Level.ERROR, "Couldnt read config file: " + filepath);
+            Logger.get().log(Logger.Level.ERROR, "Couldn't read config file: " + filepath);
         }
 
     }

@@ -23,6 +23,7 @@ public class RunnableMessageHandler implements Runnable {
 
     private Queue<PacketClientDataWrapper> messageQueue;
     private boolean shouldStop;
+
     public RunnableMessageHandler() {
         this.messageQueue = new LinkedList<PacketClientDataWrapper>();
         this.shouldStop = false;

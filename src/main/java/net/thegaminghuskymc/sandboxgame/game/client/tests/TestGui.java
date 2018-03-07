@@ -2,10 +2,13 @@ package net.thegaminghuskymc.sandboxgame.game.client.tests;
 
 import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
-import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
+import net.thegaminghuskymc.sandboxgame.game.client.BlockitectEngineClient;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.GuiRenderer;
-import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.*;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiLabel;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiPrompt;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiTexture;
+import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiView;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.parameters.GuiTextParameterTextCenterBox;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.parameters.GuiTextParameterTextFillBox;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.event.GuiEventMouseEnter;
@@ -16,7 +19,7 @@ public class TestGui {
 
     public static void main(String[] args) {
 
-        GameEngineClient engine = new GameEngineClient();
+        BlockitectEngineClient engine = new BlockitectEngineClient();
         engine.initialize();
         engine.load();
 
@@ -78,6 +81,6 @@ public class TestGui {
         engine.getRenderer().getGuiRenderer().addGui(guiView);
 
         engine.loop();
-        engine.deinitialize();
+        engine.uninitialized();
     }
 }

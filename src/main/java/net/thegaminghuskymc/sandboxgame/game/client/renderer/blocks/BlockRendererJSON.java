@@ -8,40 +8,43 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainMesher
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.flat.BlockFace;
 
 import java.util.ArrayList;
-/** the default cube renderer */
+
+/**
+ * the default cube renderer
+ */
 public class BlockRendererJSON extends BlockRenderer {
 
-	private final ArrayList<TerrainMeshTriangle> triangles;
+    private final ArrayList<TerrainMeshTriangle> triangles;
 
-	public BlockRendererJSON(String filepath) {
-		super();
-		this.triangles = new ArrayList<TerrainMeshTriangle>();
-		// TODO : parse the file and generate local triangles
-	}
+    public BlockRendererJSON(String filepath) {
+        super();
+        this.triangles = new ArrayList<TerrainMeshTriangle>();
+        // TODO : parse the file and generate local triangles
+    }
 
-	@Override
-	public void generateBlockVertices(TerrainMesher terrainMesher, Terrain terrain, Block block, int x, int y, int z,
+    @Override
+    public void generateBlockVertices(TerrainMesher terrainMesher, Terrain terrain, Block block, int x, int y, int z,
                                       BlockFace[][][][] faces, ArrayList<TerrainMeshTriangle> stack) {
-		for (TerrainMeshTriangle triangle : this.triangles) {
-			TerrainMeshTriangle clone = (TerrainMeshTriangle) triangle.clone();
-			this.offsetVertex(clone.v0, x, y, z);
-			this.offsetVertex(clone.v1, x, y, z);
-			this.offsetVertex(clone.v2, x, y, z);
-			stack.add(clone);
-		}
-	}
+        for (TerrainMeshTriangle triangle : this.triangles) {
+            TerrainMeshTriangle clone = (TerrainMeshTriangle) triangle.clone();
+            this.offsetVertex(clone.v0, x, y, z);
+            this.offsetVertex(clone.v1, x, y, z);
+            this.offsetVertex(clone.v2, x, y, z);
+            stack.add(clone);
+        }
+    }
 
-	private final void offsetVertex(TerrainMeshVertex v, int x, int y, int z) {
-		// offset position
-		v.posx = (v.posx + x) * Terrain.BLOCK_SIZE;
-		v.posy = (v.posy + y) * Terrain.BLOCK_SIZE;
-		v.posz = (v.posz + z) * Terrain.BLOCK_SIZE;
+    private final void offsetVertex(TerrainMeshVertex v, int x, int y, int z) {
+        // offset position
+        v.posx = (v.posx + x) * Terrain.BLOCK_SIZE;
+        v.posy = (v.posy + y) * Terrain.BLOCK_SIZE;
+        v.posz = (v.posz + z) * Terrain.BLOCK_SIZE;
 
-		// TODO : light (using vertex normal)
-	}
+        // TODO : light (using vertex normal)
+    }
 
-	@Override
-	public int getDefaultTextureID(int faceID) {
-		return (0);
-	}
+    @Override
+    public int getDefaultTextureID(int faceID) {
+        return (0);
+    }
 }

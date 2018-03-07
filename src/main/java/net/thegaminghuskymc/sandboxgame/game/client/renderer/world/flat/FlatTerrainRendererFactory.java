@@ -1,13 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.world.flat;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-
-import com.sun.javafx.property.adapter.PropertyDescriptor;
-import net.thegaminghuskymc.sandboxgame.engine.GameEngine;
 import net.thegaminghuskymc.sandboxgame.engine.Timer;
 import net.thegaminghuskymc.sandboxgame.engine.events.Listener;
 import net.thegaminghuskymc.sandboxgame.engine.events.world.*;
@@ -16,7 +8,7 @@ import net.thegaminghuskymc.sandboxgame.engine.managers.EventManager;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 import net.thegaminghuskymc.sandboxgame.engine.world.WorldFlat;
-import net.thegaminghuskymc.sandboxgame.game.client.GameEngineClient;
+import net.thegaminghuskymc.sandboxgame.game.client.BlockitectEngineClient;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.MainRenderer;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.RendererFactory;
@@ -27,337 +19,346 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainMesher
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.world.TerrainRenderer;
 import org.lwjgl.glfw.GLFW;
 
-/** a factory class which create terrain renderer lists */
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+
+/**
+ * a factory class which create terrain renderer lists
+ */
 public class FlatTerrainRendererFactory extends RendererFactory {
 
-	class TerrainRenderingData {
+    public static boolean LIGHT = true;
+    static double DT = 0;
+    static int COUNT = 0;
+    static int MAX_COUNT = 16;
+    /**
+     * array list of terrain to render
+     */
+    private HashMap<Terrain, TerrainRenderingData> terrainsRenderingData;
+    /**
+     * next rendering list
+     */
+    private ArrayList<TerrainMesh> opaqueRenderingList;
+    private ArrayList<TerrainMesh> transparentRenderingList;
+    /**
+     * the world on which terrain should be considered
+     */
+    private WorldFlat world;
+    private CameraProjective camera;
+    private final Comparator<? super TerrainMesh> DISTANCE_DESC_SORT = new Comparator<TerrainMesh>() {
+        @Override
+        public int compare(TerrainMesh o1, TerrainMesh o2) {
+            return ((int) (Vector3f.distanceSquare(o2.getPosition(), camera.getPosition())
+                    - Vector3f.distanceSquare(o1.getPosition(), camera.getPosition())));
+        }
+    };
+    private TerrainMesher mesher;
+    public FlatTerrainRendererFactory(MainRenderer mainRenderer) {
+        super(mainRenderer);
 
-		final Terrain terrain;
-		boolean meshUpToDate;
-		final TerrainMesh opaqueMesh; // mesh holding opaque blocks
-		final TerrainMesh transparentMesh; // mesh holding transparent blocks
-		final ArrayList<TerrainMeshTriangle> opaqueTriangles;
-		final ArrayList<TerrainMeshTriangle> transparentTriangles;
-		ByteBuffer vertices;
-		boolean isInFrustrum;
-		Vector3f lastCameraPos;
-		Timer timer;
-		private float distance;
+        this.terrainsRenderingData = new HashMap<Terrain, TerrainRenderingData>(4096);
+        // this.mesher = new MarchingCubesTerrainMesher();
+        this.mesher = new FlatTerrainMesherGreedy();
+        // this.mesher = new FlatTerrainMesherCull();
+        this.opaqueRenderingList = new ArrayList<TerrainMesh>();
+        this.transparentRenderingList = new ArrayList<TerrainMesh>();
 
-		TerrainRenderingData(Terrain terrain) {
-			this.terrain = terrain;
-			this.opaqueMesh = new TerrainMesh(terrain);
-			this.transparentMesh = new TerrainMesh(terrain);
-			this.opaqueTriangles = new ArrayList<TerrainMeshTriangle>();
-			this.transparentTriangles = new ArrayList<TerrainMeshTriangle>();
-			this.meshUpToDate = false;
-			this.lastCameraPos = new Vector3f();
-			this.timer = new Timer();
-		}
+        EventManager eventManager = ResourceManager.instance().getEventManager();
+        eventManager.addListener(new Listener<EventTerrainDespawn>() {
 
-		void requestUpdate() {
-			this.meshUpToDate = false;
-		}
+            @Override
+            public void pre(EventTerrainDespawn event) {
 
-		void deinitialize() {
-			this.opaqueMesh.deinitialize();
-			this.transparentMesh.deinitialize();
-		}
+            }
 
-		void update(CameraProjective camera) {
-			this.timer.update();
-			// calculate square distance from camera
-			Vector3f center = this.terrain.getWorldPosCenter();
-			this.distance = (float) Vector3f.distanceSquare(center, camera.getPosition());
-			this.isInFrustrum = (this.distance < camera.getSquaredRenderDistance()
-					&& camera.isBoxInFrustum(terrain.getWorldPos(), Terrain.TERRAIN_SIZE));
-		}
+            @Override
+            public void post(EventTerrainDespawn event) {
+                Terrain terrain = event.getTerrain();
+                if (terrain.getWorld() != world) {
+                    return;
+                }
+                TerrainRenderingData terrainRenderingData = terrainsRenderingData.get(terrain);
+                if (terrainRenderingData != null) {
+                    terrainRenderingData.deinitialize();
+                    terrainsRenderingData.remove(terrain);
+                }
+            }
+        });
 
-		boolean isInFrustrum() {
-			return (this.isInFrustrum || true);
-		}
+        eventManager.addListener(new Listener<EventTerrainSetBlock>() {
 
-		void glUpdate() {
-			if (COUNT == MAX_COUNT || this.meshUpToDate) {
-				return;
-			}
-			++COUNT;
-			this.meshUpToDate = true;
-			mesher.pushVerticesToStacks(this.terrain, this.opaqueMesh, this.transparentMesh, this.opaqueTriangles,
-					this.transparentTriangles);
-			mesher.setMeshVertices(this.opaqueMesh, this.opaqueTriangles);
-			mesher.setMeshVertices(this.transparentMesh, this.transparentTriangles);
-			this.opaqueTriangles.clear();
-			this.transparentTriangles.clear();
-			// this.opaqueMesh.cull(true);
+            @Override
+            public void pre(EventTerrainSetBlock event) {
+            }
 
-			// TODO : can this be done more properly?
-			// if there is transparent triangles, and camera moved
-			// if (this.transparentTriangles.size() > 0 &&
-			// !camera.getPosition().equals(this.lastCameraPos)
-			// && this.timer.getTime() > 0.5d) {
-			// this.timer.restart();
-			// // sort them back to front of the camera
-			// for (TerrainMeshTriangle triangle : this.transparentTriangles) {
-			// triangle.calculateCameraDistance(camera);
-			// }
-			// this.transparentTriangles.sort(TRIANGLE_SORT);
-			// // update vbo
-			// mesher.setMeshVertices(this.transparentMesh,
-			// this.transparentTriangles);
-			// this.lastCameraPos.set(camera.getPosition());
-			// }
-		}
+            @Override
+            public void post(EventTerrainSetBlock event) {
+                if (event.getTerrain().getWorld() != world) {
+                    return;
+                }
+                requestMeshUpdate(event.getTerrain());
+            }
+        });
 
-		Comparator<TerrainMeshTriangle> TRIANGLE_SORT = new Comparator<TerrainMeshTriangle>() {
-			@Override
-			public int compare(TerrainMeshTriangle t1, TerrainMeshTriangle t2) {
-				return (int) (t2.cameraDistance - t1.cameraDistance);
-			}
-		};
-	}
+        eventManager.addListener(new Listener<EventTerrainBlocklightUpdate>() {
 
-	/** array list of terrain to render */
-	private HashMap<Terrain, TerrainRenderingData> terrainsRenderingData;
+            @Override
+            public void pre(EventTerrainBlocklightUpdate event) {
+            }
 
-	/** next rendering list */
-	private ArrayList<TerrainMesh> opaqueRenderingList;
-	private ArrayList<TerrainMesh> transparentRenderingList;
+            @Override
+            public void post(EventTerrainBlocklightUpdate event) {
+                if (event.getTerrain().getWorld() != world) {
+                    return;
+                }
+                requestMeshUpdate(event.getTerrain());
+            }
+        });
 
-	/** the world on which terrain should be considered */
-	private WorldFlat world;
-	private CameraProjective camera;
+        eventManager.addListener(new Listener<EventTerrainSunlightUpdate>() {
 
-	private TerrainMesher mesher;
+            @Override
+            public void pre(EventTerrainSunlightUpdate event) {
+            }
 
-	public FlatTerrainRendererFactory(MainRenderer mainRenderer) {
-		super(mainRenderer);
+            @Override
+            public void post(EventTerrainSunlightUpdate event) {
+                if (event.getTerrain().getWorld() != world) {
+                    return;
+                }
+                requestMeshUpdate(event.getTerrain());
+            }
+        });
 
-		this.terrainsRenderingData = new HashMap<Terrain, TerrainRenderingData>(4096);
-		// this.mesher = new MarchingCubesTerrainMesher();
-		this.mesher = new FlatTerrainMesherGreedy();
-		// this.mesher = new FlatTerrainMesherCull();
-		this.opaqueRenderingList = new ArrayList<TerrainMesh>();
-		this.transparentRenderingList = new ArrayList<TerrainMesh>();
+        eventManager.addListener(new Listener<EventTerrainDurabilityChanged>() {
+            @Override
+            public void pre(EventTerrainDurabilityChanged event) {
+            }
 
-		EventManager eventManager = ResourceManager.instance().getEventManager();
-		eventManager.addListener(new Listener<EventTerrainDespawn>() {
+            @Override
+            public void post(EventTerrainDurabilityChanged event) {
+                if (event.getTerrain().getWorld() != world) {
+                    return;
+                }
+                requestMeshUpdate(event.getTerrain());
+            }
+        });
+    }
 
-			@Override
-			public void pre(EventTerrainDespawn event) {
-
-			}
-
-			@Override
-			public void post(EventTerrainDespawn event) {
-				Terrain terrain = event.getTerrain();
-				if (terrain.getWorld() != world) {
-					return;
-				}
-				TerrainRenderingData terrainRenderingData = terrainsRenderingData.get(terrain);
-				if (terrainRenderingData != null) {
-					terrainRenderingData.deinitialize();
-					terrainsRenderingData.remove(terrain);
-				}
-			}
-		});
-
-		eventManager.addListener(new Listener<EventTerrainSetBlock>() {
-
-			@Override
-			public void pre(EventTerrainSetBlock event) {
-			}
-
-			@Override
-			public void post(EventTerrainSetBlock event) {
-				if (event.getTerrain().getWorld() != world) {
-					return;
-				}
-				requestMeshUpdate(event.getTerrain());
-			}
-		});
-
-		eventManager.addListener(new Listener<EventTerrainBlocklightUpdate>() {
-
-			@Override
-			public void pre(EventTerrainBlocklightUpdate event) {
-			}
-
-			@Override
-			public void post(EventTerrainBlocklightUpdate event) {
-				if (event.getTerrain().getWorld() != world) {
-					return;
-				}
-				requestMeshUpdate(event.getTerrain());
-			}
-		});
-
-		eventManager.addListener(new Listener<EventTerrainSunlightUpdate>() {
-
-			@Override
-			public void pre(EventTerrainSunlightUpdate event) {
-			}
-
-			@Override
-			public void post(EventTerrainSunlightUpdate event) {
-				if (event.getTerrain().getWorld() != world) {
-					return;
-				}
-				requestMeshUpdate(event.getTerrain());
-			}
-		});
-
-		eventManager.addListener(new Listener<EventTerrainDurabilityChanged>() {
-			@Override
-			public void pre(EventTerrainDurabilityChanged event) {
-			}
-
-			@Override
-			public void post(EventTerrainDurabilityChanged event) {
-				if (event.getTerrain().getWorld() != world) {
-					return;
-				}
-				requestMeshUpdate(event.getTerrain());
-			}
-		});
-	}
-
-	@Override
-	public final void deinitialize() {
-		/** destroy every currently set meshes */
-		Collection<TerrainRenderingData> terrainsRenderingData = this.terrainsRenderingData.values();
-		GameEngineClient.instance().addGLTask(() -> {
+    @Override
+    public final void deinitialize() {
+        /** destroy every currently set meshes */
+        Collection<TerrainRenderingData> terrainsRenderingData = this.terrainsRenderingData.values();
+        BlockitectEngineClient.instance().addGLTask(() -> {
             for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
                 if (terrainRenderingData != null) {
                     terrainRenderingData.deinitialize();
                 }
             }
         });
-		this.terrainsRenderingData.clear();
+        this.terrainsRenderingData.clear();
 
-	}
+    }
 
-	static double DT = 0;
-	static int COUNT = 0;
-	static int MAX_COUNT = 16;
+    @Override
+    public void update(double dt) {
+        COUNT = 0;
+        this.updateLoadedMeshes();
+        this.updateRenderingList();
 
-	@Override
-	public void update(double dt) {
-		COUNT = 0;
-		this.updateLoadedMeshes();
-		this.updateRenderingList();
+        if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_X)) {
+            for (TerrainRenderingData terrainRenderingData : terrainsRenderingData.values()) {
+                terrainRenderingData.requestUpdate();
+            }
+        }
+    }
 
-		if (GLH.glhGetWindow().isKeyPressed(GLFW.GLFW_KEY_X)) {
-			for (TerrainRenderingData terrainRenderingData : terrainsRenderingData.values()) {
-				terrainRenderingData.requestUpdate();
-			}
-		}
-	}
+    private final void updateRenderingList() {
+        this.opaqueRenderingList.clear();
+        this.transparentRenderingList.clear();
+        Collection<TerrainRenderingData> collection = this.terrainsRenderingData.values();
+        TerrainRenderingData[] terrainsRenderingData = collection.toArray(new TerrainRenderingData[collection.size()]);
 
-	public static boolean LIGHT = true;
-	private final Comparator<? super TerrainMesh> DISTANCE_DESC_SORT = new Comparator<TerrainMesh>() {
-		@Override
-		public int compare(TerrainMesh o1, TerrainMesh o2) {
-			return ((int) (Vector3f.distanceSquare(o2.getPosition(), camera.getPosition())
-					- Vector3f.distanceSquare(o1.getPosition(), camera.getPosition())));
-		}
-	};
+        // update meshes and add opaques one first (to be rendered first)
+        for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
+            terrainRenderingData.update(this.getCamera());
+            if (terrainRenderingData.isInFrustrum() && terrainRenderingData.opaqueMesh.getVertexCount() > 0) {
+                this.opaqueRenderingList.add(terrainRenderingData.opaqueMesh);
+            }
+        }
+        this.opaqueRenderingList.sort(DISTANCE_DESC_SORT);
 
-	private final void updateRenderingList() {
-		this.opaqueRenderingList.clear();
-		this.transparentRenderingList.clear();
-		Collection<TerrainRenderingData> collection = this.terrainsRenderingData.values();
-		TerrainRenderingData[] terrainsRenderingData = collection.toArray(new TerrainRenderingData[collection.size()]);
+        // add the transparent meshes (to be rendered after opaque ones)
+        for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
+            if (terrainRenderingData.isInFrustrum() && terrainRenderingData.transparentMesh.getVertexCount() > 0) {
+                this.transparentRenderingList.add(terrainRenderingData.transparentMesh);
+            }
+        }
 
-		// update meshes and add opaques one first (to be rendered first)
-		for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
-			terrainRenderingData.update(this.getCamera());
-			if (terrainRenderingData.isInFrustrum() && terrainRenderingData.opaqueMesh.getVertexCount() > 0) {
-				this.opaqueRenderingList.add(terrainRenderingData.opaqueMesh);
-			}
-		}
-		this.opaqueRenderingList.sort(DISTANCE_DESC_SORT);
+        BlockitectEngineClient.instance().addGLTask(new MainRenderer.GLTask() {
+            @Override
+            public void run() {
+                for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
+                    terrainRenderingData.glUpdate();
+                }
+            }
+        });
+    }
 
-		// add the transparent meshes (to be rendered after opaque ones)
-		for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
-			if (terrainRenderingData.isInFrustrum() && terrainRenderingData.transparentMesh.getVertexCount() > 0) {
-				this.transparentRenderingList.add(terrainRenderingData.transparentMesh);
-			}
-		}
+    private final void requestMeshUpdate(Terrain terrain) {
+        TerrainRenderingData terrainRenderingData = this.terrainsRenderingData.get(terrain);
+        if (terrainRenderingData == null) {
+            return;
+        }
+        terrainRenderingData.requestUpdate();
+    }
 
-		GameEngineClient.instance().addGLTask(new MainRenderer.GLTask() {
-			@Override
-			public void run() {
-				for (TerrainRenderingData terrainRenderingData : terrainsRenderingData) {
-					terrainRenderingData.glUpdate();
-				}
-			}
-		});
-	}
+    /**
+     * unload the meshes
+     */
+    private final void updateLoadedMeshes() {
 
-	private final void requestMeshUpdate(Terrain terrain) {
-		TerrainRenderingData terrainRenderingData = this.terrainsRenderingData.get(terrain);
-		if (terrainRenderingData == null) {
-			return;
-		}
-		terrainRenderingData.requestUpdate();
-	}
+        // for each terrain in the factory
+        ArrayList<TerrainRenderingData> oldTerrainsRenderingData = new ArrayList<TerrainRenderingData>();
+        for (Terrain terrain : this.terrainsRenderingData.keySet()) {
+            // if this terrain isnt loaded anymore
+            if (!this.getWorld().isTerrainLoaded(terrain)) {
+                // then remove it from the factory
+                TerrainRenderingData terrainRenderingData = this.terrainsRenderingData.remove(terrain);
+                oldTerrainsRenderingData.add(terrainRenderingData);
+            }
+        }
 
-	/** unload the meshes */
-	private final void updateLoadedMeshes() {
+        // for every loaded terrains
+        Terrain[] terrains = this.getWorld().getLoadedTerrains();
+        for (Terrain terrain : terrains) {
+            // add it to the factory if it hasnt already been added
+            if (!this.terrainsRenderingData.containsKey(terrain)) {
+                this.terrainsRenderingData.put(terrain, new TerrainRenderingData(terrain));
+            }
+        }
 
-		// for each terrain in the factory
-		ArrayList<TerrainRenderingData> oldTerrainsRenderingData = new ArrayList<TerrainRenderingData>();
-		for (Terrain terrain : this.terrainsRenderingData.keySet()) {
-			// if this terrain isnt loaded anymore
-			if (!this.getWorld().isTerrainLoaded(terrain)) {
-				// then remove it from the factory
-				TerrainRenderingData terrainRenderingData = this.terrainsRenderingData.remove(terrain);
-				oldTerrainsRenderingData.add(terrainRenderingData);
-			}
-		}
+        BlockitectEngineClient.instance().addGLTask(new MainRenderer.GLTask() {
+            @Override
+            public void run() {
+                for (TerrainRenderingData terrainRenderingData : oldTerrainsRenderingData) {
+                    terrainRenderingData.deinitialize();
+                }
+            }
+        });
+    }
 
-		// for every loaded terrains
-		Terrain[] terrains = this.getWorld().getLoadedTerrains();
-		for (Terrain terrain : terrains) {
-			// add it to the factory if it hasnt already been added
-			if (!this.terrainsRenderingData.containsKey(terrain)) {
-				this.terrainsRenderingData.put(terrain, new TerrainRenderingData(terrain));
-			}
-		}
+    @Override
+    public void render() {
+        MainRenderer mainRenderer = this.getMainRenderer();
+        TerrainRenderer terrainRenderer = mainRenderer.getTerrainRenderer();
+        terrainRenderer.render(this.getCamera(), this.getWorld(), this.opaqueRenderingList,
+                this.transparentRenderingList);
+    }
 
-		GameEngineClient.instance().addGLTask(new MainRenderer.GLTask() {
-			@Override
-			public void run() {
-				for (TerrainRenderingData terrainRenderingData : oldTerrainsRenderingData) {
-					terrainRenderingData.deinitialize();
-				}
-			}
-		});
-	}
+    public final WorldFlat getWorld() {
+        return (this.world);
+    }
 
-	@Override
-	public void render() {
-		MainRenderer mainRenderer = this.getMainRenderer();
-		TerrainRenderer terrainRenderer = mainRenderer.getTerrainRenderer();
-		terrainRenderer.render(this.getCamera(), this.getWorld(), this.opaqueRenderingList,
-				this.transparentRenderingList);
-	}
+    public final void setWorld(WorldFlat world) {
+        this.world = world;
+    }
 
-	public final WorldFlat getWorld() {
-		return (this.world);
-	}
+    public final CameraProjective getCamera() {
+        return (this.camera);
+    }
 
-	public final CameraProjective getCamera() {
-		return (this.camera);
-	}
+    public final void setCamera(CameraProjective camera) {
+        this.camera = camera;
+    }
 
-	public final void setWorld(WorldFlat world) {
-		this.world = world;
-	}
+    class TerrainRenderingData {
 
-	public final void setCamera(CameraProjective camera) {
-		this.camera = camera;
-	}
+        final Terrain terrain;
+        final TerrainMesh opaqueMesh; // mesh holding opaque blocks
+        final TerrainMesh transparentMesh; // mesh holding transparent blocks
+        final ArrayList<TerrainMeshTriangle> opaqueTriangles;
+        final ArrayList<TerrainMeshTriangle> transparentTriangles;
+        boolean meshUpToDate;
+        ByteBuffer vertices;
+        boolean isInFrustrum;
+        Vector3f lastCameraPos;
+        Timer timer;
+        Comparator<TerrainMeshTriangle> TRIANGLE_SORT = new Comparator<TerrainMeshTriangle>() {
+            @Override
+            public int compare(TerrainMeshTriangle t1, TerrainMeshTriangle t2) {
+                return (int) (t2.cameraDistance - t1.cameraDistance);
+            }
+        };
+        private float distance;
+
+        TerrainRenderingData(Terrain terrain) {
+            this.terrain = terrain;
+            this.opaqueMesh = new TerrainMesh(terrain);
+            this.transparentMesh = new TerrainMesh(terrain);
+            this.opaqueTriangles = new ArrayList<TerrainMeshTriangle>();
+            this.transparentTriangles = new ArrayList<TerrainMeshTriangle>();
+            this.meshUpToDate = false;
+            this.lastCameraPos = new Vector3f();
+            this.timer = new Timer();
+        }
+
+        void requestUpdate() {
+            this.meshUpToDate = false;
+        }
+
+        void deinitialize() {
+            this.opaqueMesh.deinitialize();
+            this.transparentMesh.deinitialize();
+        }
+
+        void update(CameraProjective camera) {
+            this.timer.update();
+            // calculate square distance from camera
+            Vector3f center = this.terrain.getWorldPosCenter();
+            this.distance = (float) Vector3f.distanceSquare(center, camera.getPosition());
+            this.isInFrustrum = (this.distance < camera.getSquaredRenderDistance()
+                    && camera.isBoxInFrustum(terrain.getWorldPos(), Terrain.TERRAIN_SIZE));
+        }
+
+        boolean isInFrustrum() {
+            return (this.isInFrustrum || true);
+        }
+
+        void glUpdate() {
+            if (COUNT == MAX_COUNT || this.meshUpToDate) {
+                return;
+            }
+            ++COUNT;
+            this.meshUpToDate = true;
+            mesher.pushVerticesToStacks(this.terrain, this.opaqueMesh, this.transparentMesh, this.opaqueTriangles,
+                    this.transparentTriangles);
+            mesher.setMeshVertices(this.opaqueMesh, this.opaqueTriangles);
+            mesher.setMeshVertices(this.transparentMesh, this.transparentTriangles);
+            this.opaqueTriangles.clear();
+            this.transparentTriangles.clear();
+            // this.opaqueMesh.cull(true);
+
+            // TODO : can this be done more properly?
+            // if there is transparent triangles, and camera moved
+            // if (this.transparentTriangles.size() > 0 &&
+            // !camera.getPosition().equals(this.lastCameraPos)
+            // && this.timer.getTime() > 0.5d) {
+            // this.timer.restart();
+            // // sort them back to front of the camera
+            // for (TerrainMeshTriangle triangle : this.transparentTriangles) {
+            // triangle.calculateCameraDistance(camera);
+            // }
+            // this.transparentTriangles.sort(TRIANGLE_SORT);
+            // // update vbo
+            // mesher.setMeshVertices(this.transparentMesh,
+            // this.transparentTriangles);
+            // this.lastCameraPos.set(camera.getPosition());
+            // }
+        }
+    }
 
 }

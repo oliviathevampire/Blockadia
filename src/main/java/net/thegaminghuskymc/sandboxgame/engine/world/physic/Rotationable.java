@@ -2,76 +2,88 @@ package net.thegaminghuskymc.sandboxgame.engine.world.physic;
 
 public interface Rotationable {
 
-	/** rotation */
-	public float getRotationX();
+    /**
+     * @see Rotationable#rotate(Rotationable, float)
+     */
+    public static void rotate(Rotationable rotateable, double dt) {
+        rotate(rotateable, (float) dt);
+    }
 
-	public float getRotationY();
+    /**
+     * rotate the rotateable objects depending on the elasped time 'dt' and set
+     * acceleration and velocities
+     *
+     * @param rotateable : the rotateable object
+     * @param dt         : elasped time
+     */
+    public static void rotate(Rotationable rotateable, float dt) {
+        rotateable.setRotationVelocityX(rotateable.getRotationVelocityX() + rotateable.getRotationAccelerationX() * dt);
+        rotateable.setRotationVelocityY(rotateable.getRotationVelocityY() + rotateable.getRotationAccelerationY() * dt);
+        rotateable.setRotationVelocityZ(rotateable.getRotationVelocityZ() + rotateable.getRotationAccelerationZ() * dt);
+        rotateable.setRotationX(rotateable.getRotationX() + rotateable.getRotationVelocityX() * dt);
+        rotateable.setRotationY(rotateable.getRotationY() + rotateable.getRotationVelocityY() * dt);
+        rotateable.setRotationZ(rotateable.getRotationZ() + rotateable.getRotationVelocityZ() * dt);
+    }
 
-	public float getRotationZ();
+    /**
+     * @return true if this rotateable objects is rotating
+     */
+    public static boolean isRotating(Rotationable rotateable) {
+        return (rotateable.getRotationVelocityX() != 0 || rotateable.getRotationVelocityY() != 0
+                || rotateable.getRotationVelocityZ() != 0);
+    }
 
-	/** rotation velocity */
-	public float getRotationVelocityX();
+    /**
+     * rotation
+     */
+    public float getRotationX();
 
-	public float getRotationVelocityY();
+    /**
+     * rotation
+     */
+    public void setRotationX(float x);
 
-	public float getRotationVelocityZ();
+    public float getRotationY();
 
-	/** rotation acceleration */
-	public float getRotationAccelerationX();
+    public void setRotationY(float y);
 
-	public float getRotationAccelerationY();
+    public float getRotationZ();
 
-	public float getRotationAccelerationZ();
+    public void setRotationZ(float z);
 
-	/** rotation */
-	public void setRotationX(float x);
+    /**
+     * rotation velocity
+     */
+    public float getRotationVelocityX();
 
-	public void setRotationY(float y);
+    /**
+     * rotation velocity
+     */
+    public void setRotationVelocityX(float vx);
 
-	public void setRotationZ(float z);
+    public float getRotationVelocityY();
 
-	/** rotation velocity */
-	public void setRotationVelocityX(float vx);
+    public void setRotationVelocityY(float vy);
 
-	public void setRotationVelocityY(float vy);
+    public float getRotationVelocityZ();
 
-	public void setRotationVelocityZ(float vz);
+    public void setRotationVelocityZ(float vz);
 
-	/** rotation acceleration */
-	public void setRotationAccelerationX(float ax);
+    /**
+     * rotation acceleration
+     */
+    public float getRotationAccelerationX();
 
-	public void setRotationAccelerationY(float ay);
+    /**
+     * rotation acceleration
+     */
+    public void setRotationAccelerationX(float ax);
 
-	public void setRotationAccelerationZ(float az);
+    public float getRotationAccelerationY();
 
-	/**
-	 * @see Rotationable#rotate(Rotationable, float)
-	 */
-	public static void rotate(Rotationable rotateable, double dt) {
-		rotate(rotateable, (float) dt);
-	}
+    public void setRotationAccelerationY(float ay);
 
-	/**
-	 * rotate the rotateable objects depending on the elasped time 'dt' and set
-	 * acceleration and velocities
-	 * 
-	 * @param rotateable
-	 *            : the rotateable object
-	 * @param dt
-	 *            : elasped time
-	 */
-	public static void rotate(Rotationable rotateable, float dt) {
-		rotateable.setRotationVelocityX(rotateable.getRotationVelocityX() + rotateable.getRotationAccelerationX() * dt);
-		rotateable.setRotationVelocityY(rotateable.getRotationVelocityY() + rotateable.getRotationAccelerationY() * dt);
-		rotateable.setRotationVelocityZ(rotateable.getRotationVelocityZ() + rotateable.getRotationAccelerationZ() * dt);
-		rotateable.setRotationX(rotateable.getRotationX() + rotateable.getRotationVelocityX() * dt);
-		rotateable.setRotationY(rotateable.getRotationY() + rotateable.getRotationVelocityY() * dt);
-		rotateable.setRotationZ(rotateable.getRotationZ() + rotateable.getRotationVelocityZ() * dt);
-	}
+    public float getRotationAccelerationZ();
 
-	/** @return true if this rotateable objects is rotating */
-	public static boolean isRotating(Rotationable rotateable) {
-		return (rotateable.getRotationVelocityX() != 0 || rotateable.getRotationVelocityY() != 0
-				|| rotateable.getRotationVelocityZ() != 0);
-	}
+    public void setRotationAccelerationZ(float az);
 }

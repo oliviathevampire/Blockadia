@@ -4,30 +4,34 @@ import net.thegaminghuskymc.sandboxgame.game.client.resources.ResourceManagerCli
 
 public abstract class RendererFactory {
 
-	private final MainRenderer mainRenderer;
+    private final MainRenderer mainRenderer;
 
-	public RendererFactory(MainRenderer mainRenderer) {
-		this.mainRenderer = mainRenderer;
-	}
+    public RendererFactory(MainRenderer mainRenderer) {
+        this.mainRenderer = mainRenderer;
+    }
 
-	public final MainRenderer getMainRenderer() {
-		return (this.mainRenderer);
-	}
+    public final MainRenderer getMainRenderer() {
+        return (this.mainRenderer);
+    }
 
-	public final ResourceManagerClient getResourceManager() {
-		return (this.getMainRenderer().getResourceManager());
-	}
+    public final ResourceManagerClient getResourceManager() {
+        return (this.getMainRenderer().getResourceManager());
+    }
 
-	/** update the factory to generate rendering lists */
-	public abstract void update(double dt);
+    /**
+     * update the factory to generate rendering lists
+     */
+    public abstract void update(double dt);
 
-	/** render */
-	public abstract void render();
+    /**
+     * render
+     */
+    public abstract void render();
 
-	public void deinitialize() {
-	}
+    public void deinitialize() {
+    }
 
-	public void initialize() {
+    public void initialize() {
 
-	}
+    }
 }

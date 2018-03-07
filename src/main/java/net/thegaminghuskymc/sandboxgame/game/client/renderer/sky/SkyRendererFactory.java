@@ -7,36 +7,36 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.camera.CameraProjec
 
 public class SkyRendererFactory extends RendererFactory {
 
-	private CameraProjective camera;
-	private Sky sky;
+    private CameraProjective camera;
+    private Sky sky;
 
-	public SkyRendererFactory(MainRenderer mainRenderer) {
-		super(mainRenderer);
-	}
+    public SkyRendererFactory(MainRenderer mainRenderer) {
+        super(mainRenderer);
+    }
 
-	@Override
-	public void update(double dt) {
+    @Override
+    public void update(double dt) {
 
-	}
+    }
 
-	public final CameraProjective getCamera() {
-		return (this.camera);
-	}
+    public final CameraProjective getCamera() {
+        return (this.camera);
+    }
 
-	public final Sky getSky() {
-		return (this.sky);
-	}
+    public final void setCamera(CameraProjective camera) {
+        this.camera = camera;
+    }
 
-	public final void setCamera(CameraProjective camera) {
-		this.camera = camera;
-	}
+    public final Sky getSky() {
+        return (this.sky);
+    }
 
-	public final void setSky(Sky sky) {
-		this.sky = sky;
-	}
+    public final void setSky(Sky sky) {
+        this.sky = sky;
+    }
 
-	@Override
-	public void render() {
-		this.getMainRenderer().getSkyRenderer().render(this.getCamera(), this.getSky());
-	}
+    @Override
+    public void render() {
+        this.getMainRenderer().getSkyRenderer().render(this.getCamera(), this.getSky());
+    }
 }

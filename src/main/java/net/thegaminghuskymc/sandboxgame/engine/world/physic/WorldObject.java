@@ -12,228 +12,239 @@ import java.util.ArrayList;
 
 /**
  * Abstract class for a World object (coordinates should be world-relative)
- * 
- * @author Romain
  *
+ * @author Romain
  */
 public abstract class WorldObject implements Positioneable, Rotationable, Sizeable {
 
-	private World world;
+    private World world;
 
-	public WorldObject(World world) {
-		this.setWorld(world);
-	}
+    public WorldObject(World world) {
+        this.setWorld(world);
+    }
 
-	public final World getWorld() {
-		return (this.world);
-	}
+    /**
+     * move the given physic object in the given world, moving at velocity (vx, vy,
+     * vz) for a time of 'dt'
+     *
+     * @param world
+     * @param physicObject
+     * @param dt
+     */
+    public static final void move(World world, WorldObject physicObject, double dt) {
+        // swept
+        float x = physicObject.getPositionX();
+        float y = physicObject.getPositionY();
+        float z = physicObject.getPositionZ();
+        float vx = physicObject.getPositionVelocityX();
+        float vy = physicObject.getPositionVelocityY();
+        float vz = physicObject.getPositionVelocityZ();
+        float sx = physicObject.getSizeX();
+        float sy = physicObject.getSizeY();
+        float sz = physicObject.getSizeZ();
+        float dx = (float) (vx * dt);
+        float dy = (float) (vy * dt);
+        float dz = (float) (vz * dt);
 
-	public final void setWorld(World world) {
-		this.onWorldSet(world, this.world);
-		this.world = world;
-	}
+        float minx, miny, minz;
+        float maxx, maxy, maxz;
 
-	/**
-	 * called when the world of this object changes
-	 * 
-	 * @param newWorld
-	 * @param oldWorld
-	 */
-	protected void onWorldSet(World newWorld, World oldWorld) {
-	}
+        if (dx >= 0) {
+            minx = x;
+            maxx = x + sx + dx;
+        } else {
+            minx = x + dx - sx;
+            maxx = x + sx;
+        }
 
-	/**
-	 * @return the physic object mass in kg
-	 */
-	public abstract float getMass();
+        if (dy >= 0) {
+            miny = y;
+            maxy = y + sy + dy;
+        } else {
+            miny = y + dy - sy;
+            maxy = y + sy;
+        }
 
-	/** set the mass for this object */
-	public abstract void setMass(float mass);
+        if (dz >= 0) {
+            minz = z;
+            maxz = z + sz + dz;
+        } else {
+            minz = z + dz - sz;
+            maxz = z + sz;
+        }
 
-	/** an update method, called right after the JBullet world update */
-	protected void postWorldUpdate(double dt) {
-	}
+        // Logger.get().log(Level.DEBUG, minx, miny, minz, maxx, maxy, maxz);
+        int i = 0;
+        while (dt > Maths.ESPILON) {
+            ArrayList<WorldObject> objects = world.getCollidingPhysicObjects(physicObject, minx, miny, minz, maxx, maxy,
+                    maxz);
+            CollisionDetection collisionDetection = CollisionDetection.detect(physicObject, objects, dt);
+            // if no collision, move
+            // System.out.println(collisionResponse);;
 
-	/** an update method, called right before the JBullet world update */
-	protected void preWorldUpdate(double dt) {
-	}
+            if (collisionDetection == null || collisionDetection.dt >= dt) {
+                Positioneable.position(physicObject, dt);
+                break;
+            }
 
-	/** position */
-	public final void setPosition(Vector3f pos) {
-		this.setPosition(pos.x, pos.y, pos.z);
-	}
+            // if collision, move just before it collides
+            Positioneable.position(physicObject, collisionDetection.dt);
 
-	public void setPosition(float x, float y, float z) {
-		this.setPositionX(x);
-		this.setPositionY(y);
-		this.setPositionZ(z);
-	}
+            // dt now contains the remaning time
+            dt -= collisionDetection.dt;
 
-	public void setPositionVelocity(Vector3f size) {
-		this.setPositionVelocity(size.x, size.y, size.z);
-	}
+            // stick right before collision, and continue collisions
+            CollisionResponse.deflects(physicObject, collisionDetection, 0.00001f);
+            // CollisionResponse.push(physicObject, collisionDetection);
 
-	public void setPositionVelocity(float x, float y, float z) {
-		this.setPositionVelocityX(x);
-		this.setPositionVelocityY(y);
-		this.setPositionVelocityZ(z);
-	}
+            if (++i >= 5) {
+                Logger.get().log(Logger.Level.WARNING,
+                        "Did 5 iterations when moving physic object... position may be wrong", physicObject);
+                break;
+            }
+        }
+    }
 
-	public void setPositionAcceleration(Vector3f size) {
-		this.setPositionAcceleration(size.x, size.y, size.z);
-	}
+    public final World getWorld() {
+        return (this.world);
+    }
 
-	public void setPositionAcceleration(float x, float y, float z) {
-		this.setPositionAccelerationX(x);
-		this.setPositionAccelerationY(y);
-		this.setPositionAccelerationZ(z);
-	}
+    public final void setWorld(World world) {
+        this.onWorldSet(world, this.world);
+        this.world = world;
+    }
 
-	/** rotation */
-	public void setRotation(Vector3f rot) {
-		this.setRotation(rot.x, rot.y, rot.z);
-	}
+    /**
+     * called when the world of this object changes
+     *
+     * @param newWorld
+     * @param oldWorld
+     */
+    protected void onWorldSet(World newWorld, World oldWorld) {
+    }
 
-	public void setRotation(float x, float y, float z) {
-		this.setRotationX(x);
-		this.setRotationY(y);
-		this.setRotationZ(z);
-	}
+    /**
+     * @return the physic object mass in kg
+     */
+    public abstract float getMass();
 
-	public final void setRotationVelocity(Vector3f size) {
-		this.setRotationVelocity(size.x, size.y, size.z);
-	}
+    /**
+     * set the mass for this object
+     */
+    public abstract void setMass(float mass);
 
-	public final void setRotationVelocity(float x, float y, float z) {
-		this.setRotationVelocityX(x);
-		this.setRotationVelocityY(y);
-		this.setRotationVelocityZ(z);
-	}
+    /**
+     * an update method, called right after the JBullet world update
+     */
+    protected void postWorldUpdate(double dt) {
+    }
 
-	public final void setRotationAcceleration(Vector3f size) {
-		this.setRotationAcceleration(size.x, size.y, size.z);
-	}
+    /**
+     * an update method, called right before the JBullet world update
+     */
+    protected void preWorldUpdate(double dt) {
+    }
 
-	public final void setRotationAcceleration(float x, float y, float z) {
-		this.setRotationAccelerationX(x);
-		this.setRotationAccelerationY(y);
-		this.setRotationAccelerationZ(z);
-	}
+    /**
+     * position
+     */
+    public final void setPosition(Vector3f pos) {
+        this.setPosition(pos.x, pos.y, pos.z);
+    }
 
-	/** size */
-	public final void setSize(Vector3f size) {
-		this.setSize(size.x, size.y, size.z);
-	}
+    public void setPosition(float x, float y, float z) {
+        this.setPositionX(x);
+        this.setPositionY(y);
+        this.setPositionZ(z);
+    }
 
-	public void setSize(float x, float y, float z) {
-		this.setSizeX(x);
-		this.setSizeY(y);
-		this.setSizeZ(z);
-	}
+    public void setPositionVelocity(float x, float y, float z) {
+        this.setPositionVelocityX(x);
+        this.setPositionVelocityY(y);
+        this.setPositionVelocityZ(z);
+    }
 
-	public final void setSizeVelocity(Vector3f size) {
-		this.setSizeVelocity(size.x, size.y, size.z);
-	}
+    public void setPositionAcceleration(Vector3f size) {
+        this.setPositionAcceleration(size.x, size.y, size.z);
+    }
 
-	public final void setSizeVelocity(float x, float y, float z) {
-		this.setSizeVelocityX(x);
-		this.setSizeVelocityY(y);
-		this.setSizeVelocityZ(z);
-	}
+    public void setPositionAcceleration(float x, float y, float z) {
+        this.setPositionAccelerationX(x);
+        this.setPositionAccelerationY(y);
+        this.setPositionAccelerationZ(z);
+    }
 
-	public final void setSizeAcceleration(Vector3f size) {
-		this.setSizeAcceleration(size.x, size.y, size.z);
-	}
+    /**
+     * rotation
+     */
+    public void setRotation(Vector3f rot) {
+        this.setRotation(rot.x, rot.y, rot.z);
+    }
 
-	public final void setSizeAcceleration(float x, float y, float z) {
-		this.setSizeAccelerationX(x);
-		this.setSizeAccelerationY(y);
-		this.setSizeAccelerationZ(z);
-	}
+    public void setRotation(float x, float y, float z) {
+        this.setRotationX(x);
+        this.setRotationY(y);
+        this.setRotationZ(z);
+    }
 
-	/**
-	 * move the given physic object in the given world, moving at velocity (vx, vy,
-	 * vz) for a time of 'dt'
-	 * 
-	 * @param world
-	 * @param physicObject
-	 * @param dt
-	 */
-	public static final void move(World world, WorldObject physicObject, double dt) {
-		// swept
-		float x = physicObject.getPositionX();
-		float y = physicObject.getPositionY();
-		float z = physicObject.getPositionZ();
-		float vx = physicObject.getPositionVelocityX();
-		float vy = physicObject.getPositionVelocityY();
-		float vz = physicObject.getPositionVelocityZ();
-		float sx = physicObject.getSizeX();
-		float sy = physicObject.getSizeY();
-		float sz = physicObject.getSizeZ();
-		float dx = (float) (vx * dt);
-		float dy = (float) (vy * dt);
-		float dz = (float) (vz * dt);
+    public final void setRotationVelocity(Vector3f size) {
+        this.setRotationVelocity(size.x, size.y, size.z);
+    }
 
-		float minx, miny, minz;
-		float maxx, maxy, maxz;
+    public final void setRotationVelocity(float x, float y, float z) {
+        this.setRotationVelocityX(x);
+        this.setRotationVelocityY(y);
+        this.setRotationVelocityZ(z);
+    }
 
-		if (dx >= 0) {
-			minx = x;
-			maxx = x + sx + dx;
-		} else {
-			minx = x + dx - sx;
-			maxx = x + sx;
-		}
+    public final void setRotationAcceleration(Vector3f size) {
+        this.setRotationAcceleration(size.x, size.y, size.z);
+    }
 
-		if (dy >= 0) {
-			miny = y;
-			maxy = y + sy + dy;
-		} else {
-			miny = y + dy - sy;
-			maxy = y + sy;
-		}
+    public final void setRotationAcceleration(float x, float y, float z) {
+        this.setRotationAccelerationX(x);
+        this.setRotationAccelerationY(y);
+        this.setRotationAccelerationZ(z);
+    }
 
-		if (dz >= 0) {
-			minz = z;
-			maxz = z + sz + dz;
-		} else {
-			minz = z + dz - sz;
-			maxz = z + sz;
-		}
+    /**
+     * size
+     */
+    public final void setSize(Vector3f size) {
+        this.setSize(size.x, size.y, size.z);
+    }
 
-		// Logger.get().log(Level.DEBUG, minx, miny, minz, maxx, maxy, maxz);
-		int i = 0;
-		while (dt > Maths.ESPILON) {
-			ArrayList<WorldObject> objects = world.getCollidingPhysicObjects(physicObject, minx, miny, minz, maxx, maxy,
-					maxz);
-			CollisionDetection collisionDetection = CollisionDetection.detect(physicObject, objects, dt);
-			// if no collision, move
-			// System.out.println(collisionResponse);;
+    public void setSize(float x, float y, float z) {
+        this.setSizeX(x);
+        this.setSizeY(y);
+        this.setSizeZ(z);
+    }
 
-			if (collisionDetection == null || collisionDetection.dt >= dt) {
-				Positioneable.position(physicObject, dt);
-				break;
-			}
+    public final void setSizeVelocity(Vector3f size) {
+        this.setSizeVelocity(size.x, size.y, size.z);
+    }
 
-			// if collision, move just before it collides
-			Positioneable.position(physicObject, collisionDetection.dt);
+    public final void setSizeVelocity(float x, float y, float z) {
+        this.setSizeVelocityX(x);
+        this.setSizeVelocityY(y);
+        this.setSizeVelocityZ(z);
+    }
 
-			// dt now contains the remaning time
-			dt -= collisionDetection.dt;
+    public final void setSizeAcceleration(Vector3f size) {
+        this.setSizeAcceleration(size.x, size.y, size.z);
+    }
 
-			// stick right before collision, and continue collisions
-			CollisionResponse.deflects(physicObject, collisionDetection, 0.00001f);
-			// CollisionResponse.push(physicObject, collisionDetection);
+    public final void setSizeAcceleration(float x, float y, float z) {
+        this.setSizeAccelerationX(x);
+        this.setSizeAccelerationY(y);
+        this.setSizeAccelerationZ(z);
+    }
 
-			if (++i >= 5) {
-				Logger.get().log(Logger.Level.WARNING,
-						"Did 5 iterations when moving physic object... position may be wrong", physicObject);
-				break;
-			}
-		}
-	}
+    public final float getPositionVelocity() {
+        return (Vector3f.length(this.getPositionVelocityX(), this.getPositionVelocityY(), this.getPositionVelocityZ()));
+    }
 
-	public final float getPositionVelocity() {
-		return (Vector3f.length(this.getPositionVelocityX(), this.getPositionVelocityY(), this.getPositionVelocityZ()));
-	}
+    public void setPositionVelocity(Vector3f size) {
+        this.setPositionVelocity(size.x, size.y, size.z);
+    }
 }

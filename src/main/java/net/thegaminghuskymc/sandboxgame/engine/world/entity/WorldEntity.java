@@ -1,16 +1,16 @@
 /**
-**	This file is part of the project https://github.com/toss-dev/VoxelEngine
-**
-**	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
-**
-**	PEREIRA Romain
-**                                       4-----7          
-**                                      /|    /|
-**                                     0-----3 |
-**                                     | 5___|_6
-**                                     |/    | /
-**                                     1-----2
-*/
+ * *	This file is part of the project https://github.com/toss-dev/VoxelEngine
+ * *
+ * *	License is available here: https://raw.githubusercontent.com/toss-dev/VoxelEngine/master/LICENSE.md
+ * *
+ * *	PEREIRA Romain
+ * *                                       4-----7
+ * *                                      /|    /|
+ * *                                     0-----3 |
+ * *                                     | 5___|_6
+ * *                                     |/    | /
+ * *                                     1-----2
+ */
 
 package net.thegaminghuskymc.sandboxgame.engine.world.entity;
 
@@ -32,227 +32,221 @@ import java.util.ArrayList;
 
 public abstract class WorldEntity extends WorldObjectEntity {
 
-	/** block under the entity */
-	private Block blockUnder;
+    /** world id */
+    public static final int DEFAULT_ENTITY_ID = 0;
+    private static final int STATE_VISIBLE = (1 << 0);
+    /** entity AI */
+    private final ArrayList<EntityAI<WorldEntity>> ais;
+    /** entity forces */
+    private final ArrayList<Force<WorldEntity>> forces;
+    /** entity controls */
+    private final ArrayList<Control<WorldEntity>> controls;
+    /** block under the entity */
+    private Block blockUnder;
+    /** entity state */
+    private int state;
+    private int id = DEFAULT_ENTITY_ID;
 
-	private static final int STATE_VISIBLE = (1 << 0);
+    public WorldEntity(World world, float mass, float width, float height, float depth) {
+        super(world, mass, width, height, depth);
 
-	/** entity state */
-	private int state;
+        this.forces = new ArrayList<>();
+        this.controls = new ArrayList<>();
 
-	/** entity AI */
-	private final ArrayList<EntityAI<WorldEntity>> ais;
+        // aies
+        this.ais = new ArrayList<>();
+        this.addAI(new EntityAIIdle<>());
 
-	/** entity forces */
-	private final ArrayList<Force<WorldEntity>> forces;
+        // default states
+        this.setState(WorldEntity.STATE_VISIBLE);
+    }
 
-	/** entity controls */
-	private final ArrayList<Control<WorldEntity>> controls;
+    public WorldEntity(World world) {
+        this(world, 1.0f, 1.0f, 1.0f, 1.0f);
+    }
 
-	/** world id */
-	public static final int DEFAULT_ENTITY_ID = 0;
-	private int id = DEFAULT_ENTITY_ID;
+    public WorldEntity() {
+        this(null);
+    }
 
-	public WorldEntity(World world, float mass, float width, float height, float depth) {
-		super(world, mass, width, height, depth);
+    /** called when entity spawns */
+    public void onSpawn(World world) {
+    }
 
-		this.forces = new ArrayList<>();
-		this.controls = new ArrayList<>();
+    @Override
+    public void preWorldUpdate(double dt) {
+        super.preWorldUpdate(dt);
+        this.update(dt);
+    }
 
-		// aies
-		this.ais = new ArrayList<>();
-		this.addAI(new EntityAIIdle<>());
+    /** update the entity */
+    public void update(double dt) {
+        this.updateAI(dt);
+        this.runControls(dt);
+        this.runForces(dt);
+        this.updateBlockUnder();
+        this.onUpdate(dt);
+    }
 
-		// default states
-		this.setState(WorldEntity.STATE_VISIBLE);
-	}
+    @Override
+    public void postWorldUpdate(double dt) {
+        super.postWorldUpdate(dt);
+        this.updateBlockUnder();
+    }
 
-	public WorldEntity(World world) {
-		this(world, 1.0f, 1.0f, 1.0f, 1.0f);
-	}
+    private final void updateAI(double dt) {
+        for (int i = 0; i < this.ais.size(); i++) {
+            EntityAI<WorldEntity> ai = this.ais.get(i);
+            ai.update(this, dt);
+        }
+    }
 
-	public WorldEntity() {
-		this(null);
-	}
+    public final void addAI(EntityAI<WorldEntity> ai) {
+        this.ais.add(ai);
+    }
 
-	/** called when entity spawns */
-	public void onSpawn(World world) {
-	}
+    public final void removeAI(EntityAI<WorldEntity> ai) {
+        this.ais.remove(ai);
+    }
 
-	@Override
-	public void preWorldUpdate(double dt) {
-		super.preWorldUpdate(dt);
-		this.update(dt);
-	}
+    private final void runForces(double dt) {
+        // add constant forces
+        this.addForce(Force.GRAVITY);
+        this.addForce(Force.FRICTION);
 
-	/** update the entity */
-	public void update(double dt) {
-		this.updateAI(dt);
-		this.runControls(dt);
-		this.runForces(dt);
-		this.updateBlockUnder();
-		this.onUpdate(dt);
-	}
+        // calculate resultant of the applied forces
+        Vector3f resultant = new Vector3f();
+        for (Force<WorldEntity> force : this.forces) {
+            force.updateResultant(this, resultant);
+        }
+        this.forces.clear();
 
-	@Override
-	public void postWorldUpdate(double dt) {
-		super.postWorldUpdate(dt);
-		this.updateBlockUnder();
-	}
+        // m.a = F
+        float m = this.getMass();
+        float ax = resultant.x * Terrain.BLOCKS_PER_METER / m;
+        float ay = resultant.y * Terrain.BLOCKS_PER_METER / m;
+        float az = resultant.z * Terrain.BLOCKS_PER_METER / m;
+        this.setPositionAccelerationX(ax);
+        this.setPositionAccelerationY(ay);
+        this.setPositionAccelerationZ(az);
 
-	private final void updateAI(double dt) {
-		for (int i = 0; i < this.ais.size(); i++) {
-			EntityAI<WorldEntity> ai = this.ais.get(i);
-			ai.update(this, dt);
-		}
-	}
+        // // update velocity of this entity (integrate)
+        // Positioneable.velocity(this, dt);
+        // // this.setPosition(0, 0, 16);
+        // // if this entity is part of a world
+        // if (this.getWorld() != null) {
+        // // move with collision detection
+        // WorldObject.move(this.getWorld(), this, (float) dt);
+        // } else {
+        // Positioneable.position(this, dt);
+        // }
+    }
 
-	public final void addAI(EntityAI<WorldEntity> ai) {
-		this.ais.add(ai);
-	}
+    private final void runControls(double dt) {
+        for (Control<WorldEntity> control : this.controls) {
+            control.run(this, dt);
+        }
+        this.controls.clear();
+    }
 
-	public final void removeAI(EntityAI<WorldEntity> ai) {
-		this.ais.remove(ai);
-	}
+    /** make the entity jump */
+    public final void jump() {
+        this.forces.add(Force.JUMP);
+    }
 
-	private final void runForces(double dt) {
-		// add constant forces
-		this.addForce(Force.GRAVITY);
-		this.addForce(Force.FRICTION);
+    /** update the value of the block under this entity */
+    private final void updateBlockUnder() {
+        World world = this.getWorld();
+        if (world == null) {
+            this.blockUnder = null;
+            return;
+        }
+        float x = this.getPositionX() + this.getSizeX() * 0.5f;
+        float y = this.getPositionY() - 1.0f;
+        float z = this.getPositionZ() + this.getSizeX() * 0.5f;
+        this.blockUnder = world.getBlock(x, y, z);
+    }
 
-		// calculate resultant of the applied forces
-		Vector3f resultant = new Vector3f();
-		for (Force<WorldEntity> force : this.forces) {
-			force.updateResultant(this, resultant);
-		}
-		this.forces.clear();
+    /** add a force to this entity */
+    public final void addForce(Force<WorldEntity> force) {
+        this.forces.add(force);
+    }
 
-		// m.a = F
-		float m = this.getMass();
-		float ax = resultant.x * Terrain.BLOCKS_PER_METER / m;
-		float ay = resultant.y * Terrain.BLOCKS_PER_METER / m;
-		float az = resultant.z * Terrain.BLOCKS_PER_METER / m;
-		this.setPositionAccelerationX(ax);
-		this.setPositionAccelerationY(ay);
-		this.setPositionAccelerationZ(az);
+    public final void removeForce(Force<WorldEntity> force) {
+        this.forces.remove(force);
+    }
 
-		// // update velocity of this entity (integrate)
-		// Positioneable.velocity(this, dt);
-		// // this.setPosition(0, 0, 16);
-		// // if this entity is part of a world
-		// if (this.getWorld() != null) {
-		// // move with collision detection
-		// WorldObject.move(this.getWorld(), this, (float) dt);
-		// } else {
-		// Positioneable.position(this, dt);
-		// }
-	}
+    public final void addControl(Control<WorldEntity> control) {
+        this.controls.add(control);
+    }
 
-	private final void runControls(double dt) {
-		for (Control<WorldEntity> control : this.controls) {
-			control.run(this, dt);
-		}
-		this.controls.clear();
-	}
+    /**
+     * update the entity
+     *
+     * @param dt
+     */
+    protected abstract void onUpdate(double dt);
 
-	/** make the entity jump */
-	public final void jump() {
-		this.forces.add(Force.JUMP);
-	}
+    public final int getEntityID() {
+        return (this.id);
+    }
 
-	/** update the value of the block under this entity */
-	private final void updateBlockUnder() {
-		World world = this.getWorld();
-		if (world == null) {
-			this.blockUnder = null;
-			return;
-		}
-		float x = this.getPositionX() + this.getSizeX() * 0.5f;
-		float y = this.getPositionY() - 1.0f;
-		float z = this.getPositionZ() + this.getSizeX() * 0.5f;
-		this.blockUnder = world.getBlock(x, y, z);
-	}
+    /** world ID for this entity, this is set on spawn */
+    public final void setEntityID(int id) {
+        this.id = id;
+    }
 
-	/** add a force to this entity */
-	public final void addForce(Force<WorldEntity> force) {
-		this.forces.add(force);
-	}
+    public final boolean hasState(int state) {
+        return ((this.state & state) == state);
+    }
 
-	public final void removeForce(Force<WorldEntity> force) {
-		this.forces.remove(force);
-	}
+    public final void setState(int state) {
+        this.state = this.state | state;
+    }
 
-	public final void addControl(Control<WorldEntity> control) {
-		this.controls.add(control);
-	}
+    public final void setState(int state, boolean enabled) {
+        if (enabled) {
+            this.setState(state);
+        } else {
+            this.unsetState(state);
+        }
+    }
 
-	/**
-	 * update the entity
-	 * 
-	 * @param dt
-	 */
-	protected abstract void onUpdate(double dt);
+    public final void unsetState(int state) {
+        this.state = this.state & ~state;
+    }
 
-	/** world ID for this entity, this is set on spawn */
-	public final void setEntityID(int id) {
-		this.id = id;
-	}
+    public final void swapState(int state) {
+        this.state = this.state ^ state;
+    }
 
-	public final int getEntityID() {
-		return (this.id);
-	}
+    public Block getBlockUnder() {
+        return (this.blockUnder);
+    }
 
-	public final boolean hasState(int state) {
-		return ((this.state & state) == state);
-	}
+    public boolean isInAir() {
+        return (this.blockUnder == Blocks.AIR);
+    }
 
-	public final void setState(int state) {
-		this.state = this.state | state;
-	}
+    public boolean isFalling() {
+        return (this.getPositionVelocityY() < 0.0f);
+    }
 
-	public final void setState(int state, boolean enabled) {
-		if (enabled) {
-			this.setState(state);
-		} else {
-			this.unsetState(state);
-		}
-	}
+    /** play the sound at the entity position and velocity */
+    public final void playSound(String soundName) {
+        EventEntityPlaySound event = new EventEntityPlaySound(this, soundName);
+        EventManager.instance().invokeEvent(event);
+    }
 
-	public final void unsetState(int state) {
-		this.state = this.state & ~state;
-	}
+    public final boolean isVisible() {
+        return (this.hasState(STATE_VISIBLE));
+    }
 
-	public final void swapState(int state) {
-		this.state = this.state ^ state;
-	}
+    public final boolean isJumping() {
+        return (this.getPositionAccelerationY() > 0.0f);
+    }
 
-	public Block getBlockUnder() {
-		return (this.blockUnder);
-	}
-
-	public boolean isInAir() {
-		return (this.blockUnder == Blocks.AIR);
-	}
-
-	public boolean isFalling() {
-		return (this.getPositionVelocityY() < 0.0f);
-	}
-
-	/** play the sound at the entity position and velocity */
-	public final void playSound(String soundName) {
-		EventEntityPlaySound event = new EventEntityPlaySound(this, soundName);
-		EventManager.instance().invokeEvent(event);
-	}
-
-	public final boolean isVisible() {
-		return (this.hasState(STATE_VISIBLE));
-	}
-
-	public final boolean isJumping() {
-		return (this.getPositionAccelerationY() > 0.0f);
-	}
-
-	public final float getSpeed() {
-		return (1.0f);
-	}
+    public final float getSpeed() {
+        return (1.0f);
+    }
 }

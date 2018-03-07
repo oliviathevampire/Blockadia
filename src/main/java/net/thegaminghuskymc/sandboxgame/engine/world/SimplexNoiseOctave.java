@@ -3,22 +3,22 @@ package net.thegaminghuskymc.sandboxgame.engine.world;
 import java.util.Random;
 
 
-        /*
-         * A speed-improved simplex noise algorithm for 2D, 3D and 4D in Java.
-         *
-         * Based on example code by Stefan Gustavson (stegu@itn.liu.se).
-         * Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
-         * Better rank ordering method by Stefan Gustavson in 2012.
-         *
-         * This could be speeded up even further, but it's useful as it is.
-         *
-         * Version 2012-03-09
-         *
-         * This code was placed in the public domain by its original author,
-         * Stefan Gustavson. You may use it as you see fit, but
-         * attribution is appreciated.
-         *
-         */
+/*
+ * A speed-improved simplex noise algorithm for 2D, 3D and 4D in Java.
+ *
+ * Based on example code by Stefan Gustavson (stegu@itn.liu.se).
+ * Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
+ * Better rank ordering method by Stefan Gustavson in 2012.
+ *
+ * This could be speeded up even further, but it's useful as it is.
+ *
+ * Version 2012-03-09
+ *
+ * This code was placed in the public domain by its original author,
+ * Stefan Gustavson. You may use it as you see fit, but
+ * attribution is appreciated.
+ *
+ */
 
 public class SimplexNoiseOctave {  // Simplex noise in 2D, 3D and 4D
 
@@ -59,6 +59,7 @@ public class SimplexNoiseOctave {  // Simplex noise in 2D, 3D and 4D
     // To remove the need for index wrapping, double the permutation table length
     private short perm[] = new short[512];
     private short permMod12[] = new short[512];
+
     public SimplexNoiseOctave(int seed) {
         p = p_supply.clone();
 
@@ -86,6 +87,7 @@ public class SimplexNoiseOctave {  // Simplex noise in 2D, 3D and 4D
             permMod12[i] = (short) (perm[i] % 12);
         }
     }
+
     public SimplexNoiseOctave() {
         this((int) System.currentTimeMillis());
     }

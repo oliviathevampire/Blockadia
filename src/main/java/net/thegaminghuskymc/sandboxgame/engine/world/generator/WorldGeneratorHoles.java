@@ -38,7 +38,7 @@ public class WorldGeneratorHoles extends WorldGenerator {
 
                 double d = World.NOISE_OCTAVE.noise(
                         (terrain.getWorldPos().x + x * Terrain.BLOCK_SIZE) / (16.0f * Terrain.BLOCK_SIZE),
-                        (terrain.getWorldPos().y+ y * Terrain.BLOCK_SIZE) / (16.0f * Terrain.BLOCK_SIZE));
+                        (terrain.getWorldPos().y + y * Terrain.BLOCK_SIZE) / (16.0f * Terrain.BLOCK_SIZE));
 
                 if (d < -0.6) {
                     terrain.setBlock(Blocks.PLANTS.get(rng.nextInt(Blocks.PLANTS.size())), x, y, z + 1);

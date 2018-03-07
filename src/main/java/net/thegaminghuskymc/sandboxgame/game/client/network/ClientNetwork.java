@@ -85,14 +85,18 @@ public class ClientNetwork implements INetwork {
 
 class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
-    /** on connect */
+    /**
+     * on connect
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // onConnect
         // new PacketString("Hello World").send(ctx.channel());
     }
 
-    /** on exception caught */
+    /**
+     * on exception caught
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();

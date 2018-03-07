@@ -3,16 +3,24 @@ package net.thegaminghuskymc.sandboxgame.engine.world;
 import net.thegaminghuskymc.sandboxgame.engine.util.math.Vector3f;
 
 public abstract class Light {
-    /** light world position */
+    /**
+     * light world position
+     */
     private Vector3f _position;
 
-    /** light color */
+    /**
+     * light color
+     */
     private Vector3f _color;
 
-    /** intensed color */
+    /**
+     * intensed color
+     */
     private Vector3f _intensed_color;
 
-    /** light intensity */
+    /**
+     * light intensity
+     */
     private float _intensity;
 
     public Light(Vector3f pos, Vector3f color, float intensity) {

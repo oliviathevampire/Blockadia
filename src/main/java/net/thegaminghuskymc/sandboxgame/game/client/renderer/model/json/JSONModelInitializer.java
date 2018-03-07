@@ -1,9 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.model.json;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -22,271 +18,284 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.animation.Key
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.model.animation.ModelSkeletonAnimation;
 import org.lwjgl.BufferUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 
 public class JSONModelInitializer implements ModelInitializer {
 
-	protected final String dirpath;
+    protected final String dirpath;
 
-	public JSONModelInitializer(String dirpath) {
-		this.dirpath = dirpath.endsWith(File.separator) ? dirpath : dirpath + File.separator;
-	}
+    public String meshpath;
 
-	/** initializer override */
-	@Override
-	public final void onInitialized(Model model) {
+    public JSONModelInitializer(String dirpath) {
+        this.dirpath = dirpath.endsWith(File.separator) ? dirpath : dirpath + File.separator;
+    }
 
-		try {
-			// get the info file
-			String infoFile = JSONHelper.readFile(this.dirpath + "info.json");
-			JsonObject json = new JsonObject();
-			json.get(infoFile);
-			this.parseJSON(model, json);
-		} catch (Exception exception) {
-			exception.printStackTrace(Logger.get().getPrintStream());
-		}
-	}
+    /**
+     * initializer override
+     */
+    @Override
+    public final void onInitialized(Model model) {
 
-	protected void parseJSON(Model model, JsonObject jsonInfo) throws JsonParseException, IOException {
+        try {
+            // get the info file
+            String infoFile = JSONHelper.readFile(this.dirpath + "info.json");
+            JsonObject json = new JsonObject();
+            json.get(infoFile);
+            this.parseJSON(model, json);
+        } catch (Exception exception) {
+            exception.printStackTrace(Logger.get().getPrintStream());
+        }
+    }
 
-		Logger.get().log(Logger.Level.FINE, "Parsing JSON Model", this.dirpath);
+    protected void parseJSON(Model model, JsonObject jsonInfo) throws JsonParseException, IOException {
 
-		// model name
-		this.parseJSONName(model, jsonInfo);
+        Logger.get().log(Logger.Level.FINE, "Parsing JSON Model", this.dirpath);
 
-		// get skeleton
-		this.parseJSONSkeleton(model, jsonInfo);
+        // model name
+        this.parseJSONName(model, jsonInfo);
 
-		// get the mesh
-		this.parseJSONMesh(model, jsonInfo);
+        // get skeleton
+//		this.parseJSONSkeleton(model, jsonInfo);
 
-		// get skins
-		this.parseJSONSkins(model, jsonInfo);
+        // get the mesh
+        this.parseJSONMesh(model, jsonInfo);
 
-		// get animations
-		this.parseJSONAnimations(model, jsonInfo);
-	}
+        // get skins
+//		this.parseJSONSkins(model, jsonInfo);
 
-	protected void parseJSONName(Model model, JsonObject jsonInfo) {
-		String modelName = jsonInfo.has("name") ? jsonInfo.get("name").getAsString() : null;
-		model.setName(modelName);
-	}
+        // get animations
+//		this.parseJSONAnimations(model, jsonInfo);
+    }
 
-	protected void parseJSONSkeleton(Model model, JsonObject jsonInfo) {
-		String skeletonPath = this.dirpath + jsonInfo.get("skeleton").getAsString();
-		try {
+    protected void parseJSONName(Model model, JsonObject jsonInfo) {
+        String modelName = jsonInfo.has("name") ? jsonInfo.get("name").getAsString() : null;
+        model.setName(modelName);
+    }
 
-			ModelSkeleton modelSkeleton = model.getSkeleton();
-			JsonObject skeleton = new JsonObject();
-			skeleton.get(JSONHelper.readFile(skeletonPath));
+    protected void parseJSONSkeleton(Model model, JsonObject jsonInfo) {
+        String skeletonPath = this.dirpath + jsonInfo.get("skeleton").toString();
+        System.out.print(skeletonPath);
+        try {
 
-			// get all bones
-			JsonArray jsonBones = skeleton.getAsJsonArray("bones");
-			for (int i = 0; i < jsonBones.getAsInt(); i++) {
-				JsonObject jsonBone = jsonBones.getAsJsonObject();
-				jsonBone.equals(i);
-				String boneName = jsonBone.get("name").getAsString();
-				float x = 0.0f, y = 0.0f, z = 0.0f, rx = 0.0f, ry = 0.0f, rz = 0.0f, rw = 1.0f;
-				if (jsonBone.has("localBindTransform")) {
+            ModelSkeleton modelSkeleton = model.getSkeleton();
+            JsonObject skeleton = new JsonObject();
+            skeleton.get(JSONHelper.readFile(skeletonPath));
 
-					JsonObject jsonBindTransform = jsonBone.getAsJsonObject("localBindTransform");
+            // get all bones
+            JsonArray jsonBones = skeleton.getAsJsonArray("bones");
+            for (int i = 0; i < jsonBones.getAsInt(); i++) {
+                JsonObject jsonBone = jsonBones.getAsJsonObject();
+                jsonBone.equals(i);
+                String boneName = jsonBone.get("name").getAsString();
+                float x = 0.0f, y = 0.0f, z = 0.0f, rx = 0.0f, ry = 0.0f, rz = 0.0f, rw = 1.0f;
+                if (jsonBone.has("localBindTransform")) {
 
-					JsonObject jsonBindTransformTranslation = jsonBindTransform.getAsJsonObject("translation");
-					x = (float) jsonBindTransformTranslation.get("x").getAsDouble();
-					y = (float) jsonBindTransformTranslation.get("y").getAsDouble();
-					z = (float) jsonBindTransformTranslation.get("z").getAsDouble();
+                    JsonObject jsonBindTransform = jsonBone.getAsJsonObject("localBindTransform");
 
-					JsonObject jsonBindTransformRotation = jsonBindTransform.getAsJsonObject("rotation");
-					rx = (float) jsonBindTransformRotation.get("x").getAsDouble();
-					ry = (float) jsonBindTransformRotation.get("y").getAsDouble();
-					rz = (float) jsonBindTransformRotation.get("z").getAsDouble();
-					rw = (float) jsonBindTransformRotation.get("w").getAsDouble();
-				}
+                    JsonObject jsonBindTransformTranslation = jsonBindTransform.getAsJsonObject("translation");
+                    x = (float) jsonBindTransformTranslation.get("x").getAsDouble();
+                    y = (float) jsonBindTransformTranslation.get("y").getAsDouble();
+                    z = (float) jsonBindTransformTranslation.get("z").getAsDouble();
 
-				String boneParentName = jsonBone.has("parentName") ? jsonBone.get("parentName").getAsString() : null;
+                    JsonObject jsonBindTransformRotation = jsonBindTransform.getAsJsonObject("rotation");
+                    rx = (float) jsonBindTransformRotation.get("x").getAsDouble();
+                    ry = (float) jsonBindTransformRotation.get("y").getAsDouble();
+                    rz = (float) jsonBindTransformRotation.get("z").getAsDouble();
+                    rw = (float) jsonBindTransformRotation.get("w").getAsDouble();
+                }
 
-				// add the bone
-				Bone bone = new Bone(modelSkeleton, boneName);
-				bone.setParent(boneParentName);
-				bone.setLocalBindTransform(x, y, z, rx, ry, rz, rw);
-				modelSkeleton.addBone(bone);
+                String boneParentName = jsonBone.has("parentName") ? jsonBone.get("parentName").getAsString() : null;
 
-				// set children
-				JsonArray childrenNames = jsonBone.has("childrenNames") ? jsonBone.getAsJsonArray("childrenNames") : null;
+                // add the bone
+                Bone bone = new Bone(modelSkeleton, boneName);
+                bone.setParent(boneParentName);
+                bone.setLocalBindTransform(x, y, z, rx, ry, rz, rw);
+                modelSkeleton.addBone(bone);
 
-				if (childrenNames != null) {
-					for (int j = 0; j < childrenNames.getAsInt(); j++) {
-						bone.addChild(childrenNames.get(j).getAsString());
-					}
-				}
-			}
+                // set children
+                JsonArray childrenNames = jsonBone.has("childrenNames") ? jsonBone.getAsJsonArray("childrenNames") : null;
 
-			// finally, calculate bind matrices recursively
-			for (Bone bone : modelSkeleton.getRootBones()) {
-				bone.calcInverseBindTransform(Matrix4f.IDENTITY);
-			}
+                if (childrenNames != null) {
+                    for (int j = 0; j < childrenNames.getAsInt(); j++) {
+                        bone.addChild(childrenNames.get(j).getAsString());
+                    }
+                }
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace(Logger.get().getPrintStream());
-		}
-	}
+            // finally, calculate bind matrices recursively
+            for (Bone bone : modelSkeleton.getRootBones()) {
+                bone.calcInverseBindTransform(Matrix4f.IDENTITY);
+            }
 
-	private void parseJSONMesh(Model model, JsonObject jsonInfo) {
-		String meshpath = this.dirpath + jsonInfo.get("mesh").getAsString();
-		try {
-			JsonObject mesh = new JsonObject();
-			mesh.get(JSONHelper.readFile(meshpath));
-			JsonArray vertices = mesh.getAsJsonArray("vertices");
-			ByteBuffer verticesBuffer = BufferUtils.createByteBuffer(vertices.getAsInt() * 4);
-			int i = 0;
-			while (i < vertices.getAsInt()) {
+        } catch (Exception e) {
+            e.printStackTrace(Logger.get().getPrintStream());
+        }
+    }
 
-				float x = (float) vertices.get(i++).getAsDouble();
-				float y = (float) vertices.get(i++).getAsDouble();
-				float z = (float) vertices.get(i++).getAsDouble();
+    private void parseJSONMesh(Model model, JsonObject jsonInfo) {
+        try {
+            meshpath = this.dirpath + jsonInfo.get("mesh").getAsJsonObject().getAsString();
+        } catch (NullPointerException ex) {
+            System.out.print(ex + "Variable Content:" + meshpath);
+        }
+        try {
+            JsonObject mesh = new JsonObject();
+            mesh.get(JSONHelper.readFile(meshpath));
+            JsonArray vertices = mesh.getAsJsonArray("vertices");
+            ByteBuffer verticesBuffer = BufferUtils.createByteBuffer(vertices.getAsInt() * 4);
+            int i = 0;
+            while (i < vertices.getAsInt()) {
 
-				float uvx = (float) vertices.get(i++).getAsDouble();
-				float uvy = (float) vertices.get(i++).getAsDouble();
+                float x = (float) vertices.get(i++).getAsDouble();
+                float y = (float) vertices.get(i++).getAsDouble();
+                float z = (float) vertices.get(i++).getAsDouble();
 
-				float nx = (float) vertices.get(i++).getAsDouble();
-				float ny = (float) vertices.get(i++).getAsDouble();
-				float nz = (float) vertices.get(i++).getAsDouble();
+                float uvx = (float) vertices.get(i++).getAsDouble();
+                float uvy = (float) vertices.get(i++).getAsDouble();
 
-				int j1 = this.getBoneID(model, vertices.get(i++).getAsString());
-				int j2 = this.getBoneID(model, vertices.get(i++).getAsString());
-				int j3 = this.getBoneID(model, vertices.get(i++).getAsString());
+                float nx = (float) vertices.get(i++).getAsDouble();
+                float ny = (float) vertices.get(i++).getAsDouble();
+                float nz = (float) vertices.get(i++).getAsDouble();
 
-				float w1 = (float) vertices.get(i++).getAsDouble();
-				float w2 = (float) vertices.get(i++).getAsDouble();
-				float w3 = (float) vertices.get(i++).getAsDouble();
+                int j1 = this.getBoneID(model, vertices.get(i++).getAsString());
+                int j2 = this.getBoneID(model, vertices.get(i++).getAsString());
+                int j3 = this.getBoneID(model, vertices.get(i++).getAsString());
 
-				float ao = (float) vertices.get(i++).getAsDouble();
+                float w1 = (float) vertices.get(i++).getAsDouble();
+                float w2 = (float) vertices.get(i++).getAsDouble();
+                float w3 = (float) vertices.get(i++).getAsDouble();
 
-				verticesBuffer.putFloat(x);
-				verticesBuffer.putFloat(y);
-				verticesBuffer.putFloat(z);
+                float ao = (float) vertices.get(i++).getAsDouble();
 
-				verticesBuffer.putFloat(uvx);
-				verticesBuffer.putFloat(uvy);
+                verticesBuffer.putFloat(x);
+                verticesBuffer.putFloat(y);
+                verticesBuffer.putFloat(z);
 
-				verticesBuffer.putFloat(nx);
-				verticesBuffer.putFloat(ny);
-				verticesBuffer.putFloat(nz);
+                verticesBuffer.putFloat(uvx);
+                verticesBuffer.putFloat(uvy);
 
-				verticesBuffer.putInt(j1);
-				verticesBuffer.putInt(j2);
-				verticesBuffer.putInt(j3);
+                verticesBuffer.putFloat(nx);
+                verticesBuffer.putFloat(ny);
+                verticesBuffer.putFloat(nz);
 
-				verticesBuffer.putFloat(w1);
-				verticesBuffer.putFloat(w2);
-				verticesBuffer.putFloat(w3);
+                verticesBuffer.putInt(j1);
+                verticesBuffer.putInt(j2);
+                verticesBuffer.putInt(j3);
 
-				verticesBuffer.putFloat(ao);
-			}
+                verticesBuffer.putFloat(w1);
+                verticesBuffer.putFloat(w2);
+                verticesBuffer.putFloat(w3);
 
-			verticesBuffer.flip();
-			model.getMesh().setVertices(verticesBuffer);
+                verticesBuffer.putFloat(ao);
+            }
 
-			JsonArray indices = mesh.getAsJsonArray("indices");
-			// short buffer
-			ByteBuffer indicesBuffer = BufferUtils.createByteBuffer(indices.getAsInt() * 2);
-			i = 0;
-			while (i < indices.getAsInt()) {
-				indicesBuffer.putShort((short) indices.get(i++).getAsInt());
-			}
-			indicesBuffer.flip();
-			model.getMesh().setIndices(indicesBuffer);
+            verticesBuffer.flip();
+            model.getMesh().setVertices(verticesBuffer);
 
-		} catch (Exception e) {
-			e.printStackTrace(Logger.get().getPrintStream());
-		}
-	}
+            JsonArray indices = mesh.getAsJsonArray("indices");
+            // short buffer
+            ByteBuffer indicesBuffer = BufferUtils.createByteBuffer(indices.getAsInt() * 2);
+            i = 0;
+            while (i < indices.getAsInt()) {
+                indicesBuffer.putShort((short) indices.get(i++).getAsInt());
+            }
+            indicesBuffer.flip();
+            model.getMesh().setIndices(indicesBuffer);
 
-	protected int getBoneID(Model model, String boneName) {
-		Bone bone = model.getSkeleton().getBone(boneName);
-		return (bone == null ? 0 : bone.getID());
-	}
+        } catch (Exception e) {
+            e.printStackTrace(Logger.get().getPrintStream());
+        }
+    }
 
-	protected void parseJSONSkins(Model model, JsonObject jsonInfo) {
-		JsonArray skins = jsonInfo.getAsJsonArray("skins");
-		for (int i = 0; i < skins.getAsInt(); i++) {
-			String skinpath = this.dirpath + skins.get(i).getAsString();
-			try {
-				JsonObject skin = new JsonObject();
-				skin.get(JSONHelper.readFile(skinpath));
-				String name = skin.get("name").getAsString();
-				String texture = this.dirpath + skin.get("texture").getAsString();
-				model.addSkin(new ModelSkin(name, texture));
-			} catch (Exception e) {
-				e.printStackTrace(Logger.get().getPrintStream());
-			}
-		}
-	}
+    protected int getBoneID(Model model, String boneName) {
+        Bone bone = model.getSkeleton().getBone(boneName);
+        return (bone == null ? 0 : bone.getID());
+    }
 
-	protected void parseJSONAnimations(Model model, JsonObject jsonInfo) {
+    protected void parseJSONSkins(Model model, JsonObject jsonInfo) {
+        JsonArray skins = jsonInfo.getAsJsonArray("skins");
+        for (int i = 0; i < skins.getAsInt(); i++) {
+            String skinpath = this.dirpath + skins.get(i).getAsString();
+            try {
+                JsonObject skin = new JsonObject();
+                skin.get(JSONHelper.readFile(skinpath));
+                String name = skin.get("name").getAsString();
+                String texture = this.dirpath + skin.get("texture").getAsString();
+                model.addSkin(new ModelSkin(name, texture));
+            } catch (Exception e) {
+                e.printStackTrace(Logger.get().getPrintStream());
+            }
+        }
+    }
 
-		JsonArray animations = jsonInfo.getAsJsonArray("animations");
-		for (int i = 0; i < animations.getAsInt(); i++) {
-			String animpath = this.dirpath + animations.get(i).getAsString();
-			JsonObject animation;
-			try {
-				animation = new JsonObject();
-				animation.get(JSONHelper.readFile(animpath));
-			} catch (Exception e) {
-				e.printStackTrace(Logger.get().getPrintStream());
-				continue;
-			}
-			String name = animation.get("name").getAsString();
-			JsonArray jsonKeyFrames = animation.getAsJsonArray("keyFrames");
-			ModelSkeletonAnimation modelAnimation = new ModelSkeletonAnimation(name);
+    protected void parseJSONAnimations(Model model, JsonObject jsonInfo) {
 
-			for (int j = 0; j < jsonKeyFrames.getAsInt(); j++) {
-				KeyFrame keyFrame = new KeyFrame();
+        JsonArray animations = jsonInfo.getAsJsonArray("animations");
+        for (int i = 0; i < animations.getAsInt(); i++) {
+            String animpath = this.dirpath + animations.get(i).getAsString();
+            JsonObject animation;
+            try {
+                animation = new JsonObject();
+                animation.get(JSONHelper.readFile(animpath));
+            } catch (Exception e) {
+                e.printStackTrace(Logger.get().getPrintStream());
+                continue;
+            }
+            String name = animation.get("name").getAsString();
+            JsonArray jsonKeyFrames = animation.getAsJsonArray("keyFrames");
+            ModelSkeletonAnimation modelAnimation = new ModelSkeletonAnimation(name);
 
-				JsonObject jsonKeyFrame = jsonKeyFrames.get(j).getAsJsonObject();
-				long time = jsonKeyFrame.get("time").getAsLong();
-				keyFrame.setTime(time);
+            for (int j = 0; j < jsonKeyFrames.getAsInt(); j++) {
+                KeyFrame keyFrame = new KeyFrame();
 
-				JsonArray pose = jsonKeyFrame.getAsJsonArray("pose");
-				for (int k = 0; k < pose.getAsInt(); k++) {
-					JsonObject bonePose = pose.get(k).getAsJsonObject();
-					String boneName = bonePose.get("bone").getAsString();
-					JsonObject jsonTransform = bonePose.get("transform").getAsJsonObject();
-					JsonObject jsonPosition = jsonTransform.get("position").getAsJsonObject();
+                JsonObject jsonKeyFrame = jsonKeyFrames.get(j).getAsJsonObject();
+                long time = jsonKeyFrame.get("time").getAsLong();
+                keyFrame.setTime(time);
 
-					float x, y, z, w;
+                JsonArray pose = jsonKeyFrame.getAsJsonArray("pose");
+                for (int k = 0; k < pose.getAsInt(); k++) {
+                    JsonObject bonePose = pose.get(k).getAsJsonObject();
+                    String boneName = bonePose.get("bone").getAsString();
+                    JsonObject jsonTransform = bonePose.get("transform").getAsJsonObject();
+                    JsonObject jsonPosition = jsonTransform.get("position").getAsJsonObject();
 
-					x = (float) jsonPosition.get("x").getAsDouble();
-					y = (float) jsonPosition.get("y").getAsDouble();
-					z = (float) jsonPosition.get("z").getAsDouble();
+                    float x, y, z, w;
 
-					Vector3f position = new Vector3f(x, y, z);
+                    x = (float) jsonPosition.get("x").getAsDouble();
+                    y = (float) jsonPosition.get("y").getAsDouble();
+                    z = (float) jsonPosition.get("z").getAsDouble();
 
-					JsonObject jsonQuaternion = jsonTransform.getAsJsonObject("rotation");
-					x = (float) jsonQuaternion.get("x").getAsDouble();
-					y = (float) jsonQuaternion.get("y").getAsDouble();
-					z = (float) jsonQuaternion.get("z").getAsDouble();
-					w = (float) jsonQuaternion.get("w").getAsDouble();
+                    Vector3f position = new Vector3f(x, y, z);
 
-					Quaternion rotation = new Quaternion(x, y, z, w);
+                    JsonObject jsonQuaternion = jsonTransform.getAsJsonObject("rotation");
+                    x = (float) jsonQuaternion.get("x").getAsDouble();
+                    y = (float) jsonQuaternion.get("y").getAsDouble();
+                    z = (float) jsonQuaternion.get("z").getAsDouble();
+                    w = (float) jsonQuaternion.get("w").getAsDouble();
 
-					BoneTransform boneTransform = new BoneTransform(position, rotation);
-					keyFrame.setBoneTransform(boneName, boneTransform);
-				}
+                    Quaternion rotation = new Quaternion(x, y, z, w);
 
-				modelAnimation.addKeyFrame(keyFrame);
-			}
+                    BoneTransform boneTransform = new BoneTransform(position, rotation);
+                    keyFrame.setBoneTransform(boneName, boneTransform);
+                }
 
-			model.addAnimation(modelAnimation);
-		}
-	}
+                modelAnimation.addKeyFrame(keyFrame);
+            }
 
-	@Override
-	public String toString() {
-		return (this.getClass().getSimpleName() + " : " + this.dirpath);
-	}
+            model.addAnimation(modelAnimation);
+        }
+    }
 
-	public String getDirpath() {
-		return (this.dirpath);
-	}
+    @Override
+    public String toString() {
+        return (this.getClass().getSimpleName() + " : " + this.dirpath);
+    }
+
+    public String getDirpath() {
+        return (this.dirpath);
+    }
 
 }

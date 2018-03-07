@@ -1,7 +1,6 @@
 package net.thegaminghuskymc.sandboxgame.engine.profiler;
 
-public interface ISnooperInfo
-{
+public interface ISnooperInfo {
     void addServerStatsToSnooper(Snooper playerSnooper);
 
     void addServerTypeToSnooper(Snooper playerSnooper);

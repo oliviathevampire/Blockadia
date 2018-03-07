@@ -21,7 +21,6 @@ import io.netty.channel.ChannelHandlerContext;
  * This should contain all the data needed from clients
  *
  * @author Primate
- *
  */
 public class ClientData {
     private Channel channel;

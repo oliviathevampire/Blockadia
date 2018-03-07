@@ -5,19 +5,19 @@ import net.thegaminghuskymc.sandboxgame.game.client.opengl.window.GLFWWindow;
 import net.thegaminghuskymc.sandboxgame.game.client.renderer.MainRenderer;
 
 public abstract class EventRender extends Event {
-	private final MainRenderer renderer;
+    private final MainRenderer renderer;
 
-	public EventRender(MainRenderer renderer) {
-		super();
-		this.renderer = renderer;
-	}
+    public EventRender(MainRenderer renderer) {
+        super();
+        this.renderer = renderer;
+    }
 
-	public MainRenderer getRenderer() {
-		return (this.renderer);
-	}
+    public MainRenderer getRenderer() {
+        return (this.renderer);
+    }
 
-	public GLFWWindow getGLFWWindow() {
-		return (this.renderer.getGLFWWindow());
-	}
+    public GLFWWindow getGLFWWindow() {
+        return (this.renderer.getGLFWWindow());
+    }
 
 }

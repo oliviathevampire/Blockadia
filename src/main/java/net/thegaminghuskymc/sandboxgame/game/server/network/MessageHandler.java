@@ -29,20 +29,26 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
         this._user_register = new UserRegister();
     }
 
-    /** OnConnect */
+    /**
+     * OnConnect
+     */
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         this._user_register.onUserConnect(ctx);
     }
 
-    /** OnMessageReceived */
+    /**
+     * OnMessageReceived
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         this._user_register.onMessageReceived(ResourceManager.instance().getPacketManager(), ctx, (ByteBuf) msg);
     }
 
 
-    /** OnDisconnect */
+    /**
+     * OnDisconnect
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         this._user_register.onUserDisconnect(ctx);

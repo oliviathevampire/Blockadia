@@ -10,7 +10,7 @@ public class GameEngineServer extends GameEngine {
     }
 
     @Override
-    protected ResourceManager instanciateResourceManager() {
+    protected ResourceManager makeInstanceOfResourceManager() {
         return (new ResourceManagerServer(this));
     }
 
@@ -19,7 +19,7 @@ public class GameEngineServer extends GameEngine {
     }
 
     @Override
-    protected void onDeinitialized() {
+    protected void onUninitialized() {
     }
 
     @SuppressWarnings("unchecked")

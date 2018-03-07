@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class EventManager extends GenericManager<EventHandler> {
 
     private static EventManager instance;
@@ -24,13 +24,17 @@ public class EventManager extends GenericManager<EventHandler> {
         return (instance);
     }
 
-    /** raise an event */
+    /**
+     * raise an event
+     */
     public void invokeEvent(Event event) {
         ArrayList<Listener> listeners = this.eventListeners.get(event.getClass());
         event.run(listeners);
     }
 
-    /** a listener to the mouse hovering the gui */
+    /**
+     * a listener to the mouse hovering the gui
+     */
     public final <T extends Event> void addListener(Listener<T> listener) {
         if (listener == null) {
             return;
@@ -47,7 +51,9 @@ public class EventManager extends GenericManager<EventHandler> {
                 + listener.getEventClass().getSimpleName());
     }
 
-    /** remove a listener */
+    /**
+     * remove a listener
+     */
     public <T extends Event> void removeListener(Listener<T> callback) {
         ArrayList<Listener> event = this.eventListeners.get(callback.getEventClass());
         if (event == null) {
@@ -85,7 +91,7 @@ public class EventManager extends GenericManager<EventHandler> {
     }
 }
 
-@SuppressWarnings({ "rawtypes" })
+@SuppressWarnings({"rawtypes"})
 class EventHandler {
 
     private final ArrayList<Listener> callbacks;

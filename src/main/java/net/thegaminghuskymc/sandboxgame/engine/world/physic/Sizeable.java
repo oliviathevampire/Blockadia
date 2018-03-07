@@ -2,76 +2,88 @@ package net.thegaminghuskymc.sandboxgame.engine.world.physic;
 
 public interface Sizeable {
 
-	/** size */
-	public float getSizeX();
+    /**
+     * @see Sizeable#resize(Sizeable, float)
+     */
+    public static void resize(Sizeable sizeable, double dt) {
+        resize(sizeable, (float) dt);
+    }
 
-	public float getSizeY();
+    /**
+     * resize the sizeable objects depending on the elasped time 'dt' and set
+     * acceleration and velocities
+     *
+     * @param sizeable : the sizeable object
+     * @param dt       : elasped time
+     */
+    public static void resize(Sizeable sizeable, float dt) {
+        sizeable.setSizeVelocityX(sizeable.getSizeVelocityX() + sizeable.getSizeAccelerationX() * dt);
+        sizeable.setSizeVelocityY(sizeable.getSizeVelocityY() + sizeable.getSizeAccelerationY() * dt);
+        sizeable.setSizeVelocityZ(sizeable.getSizeVelocityZ() + sizeable.getSizeAccelerationZ() * dt);
+        sizeable.setSizeX(sizeable.getSizeX() + sizeable.getSizeVelocityX() * dt);
+        sizeable.setSizeY(sizeable.getSizeY() + sizeable.getSizeVelocityY() * dt);
+        sizeable.setSizeZ(sizeable.getSizeZ() + sizeable.getSizeVelocityZ() * dt);
+    }
 
-	public float getSizeZ();
+    /**
+     * @return true if this sizeable objects is rotating
+     */
+    public static boolean isResizing(Sizeable sizeable) {
+        return (sizeable.getSizeVelocityX() != 0 || sizeable.getSizeVelocityY() != 0
+                || sizeable.getSizeVelocityZ() != 0);
+    }
 
-	/** size velocity */
-	public float getSizeVelocityX();
+    /**
+     * size
+     */
+    public float getSizeX();
 
-	public float getSizeVelocityY();
+    /**
+     * size
+     */
+    public void setSizeX(float x);
 
-	public float getSizeVelocityZ();
+    public float getSizeY();
 
-	/** size acceleration */
-	public float getSizeAccelerationX();
+    public void setSizeY(float y);
 
-	public float getSizeAccelerationY();
+    public float getSizeZ();
 
-	public float getSizeAccelerationZ();
+    public void setSizeZ(float z);
 
-	/** size */
-	public void setSizeX(float x);
+    /**
+     * size velocity
+     */
+    public float getSizeVelocityX();
 
-	public void setSizeY(float y);
+    /**
+     * size velocity
+     */
+    public void setSizeVelocityX(float vx);
 
-	public void setSizeZ(float z);
+    public float getSizeVelocityY();
 
-	/** size velocity */
-	public void setSizeVelocityX(float vx);
+    public void setSizeVelocityY(float vy);
 
-	public void setSizeVelocityY(float vy);
+    public float getSizeVelocityZ();
 
-	public void setSizeVelocityZ(float vz);
+    public void setSizeVelocityZ(float vz);
 
-	/** size acceleration */
-	public void setSizeAccelerationX(float ax);
+    /**
+     * size acceleration
+     */
+    public float getSizeAccelerationX();
 
-	public void setSizeAccelerationY(float ay);
+    /**
+     * size acceleration
+     */
+    public void setSizeAccelerationX(float ax);
 
-	public void setSizeAccelerationZ(float az);
+    public float getSizeAccelerationY();
 
-	/**
-	 * @see Sizeable#resize(Sizeable, float)
-	 */
-	public static void resize(Sizeable sizeable, double dt) {
-		resize(sizeable, (float) dt);
-	}
+    public void setSizeAccelerationY(float ay);
 
-	/**
-	 * resize the sizeable objects depending on the elasped time 'dt' and set
-	 * acceleration and velocities
-	 * 
-	 * @param sizeable
-	 *            : the sizeable object
-	 * @param dt
-	 *            : elasped time
-	 */
-	public static void resize(Sizeable sizeable, float dt) {
-		sizeable.setSizeVelocityX(sizeable.getSizeVelocityX() + sizeable.getSizeAccelerationX() * dt);
-		sizeable.setSizeVelocityY(sizeable.getSizeVelocityY() + sizeable.getSizeAccelerationY() * dt);
-		sizeable.setSizeVelocityZ(sizeable.getSizeVelocityZ() + sizeable.getSizeAccelerationZ() * dt);
-		sizeable.setSizeX(sizeable.getSizeX() + sizeable.getSizeVelocityX() * dt);
-		sizeable.setSizeY(sizeable.getSizeY() + sizeable.getSizeVelocityY() * dt);
-		sizeable.setSizeZ(sizeable.getSizeZ() + sizeable.getSizeVelocityZ() * dt);
-	}
+    public float getSizeAccelerationZ();
 
-	/** @return true if this sizeable objects is rotating */
-	public static boolean isResizing(Sizeable sizeable) {
-		return (sizeable.getSizeVelocityX() != 0 || sizeable.getSizeVelocityY() != 0
-				|| sizeable.getSizeVelocityZ() != 0);
-	}
+    public void setSizeAccelerationZ(float az);
 }

@@ -387,7 +387,7 @@ public class Particle extends WorldObject {
     @Override
     public float getMass() {
         return (0.0001f); // ~ 10 grains of sand
-}
+    }
 
     @Override
     public void setMass(float mass) {

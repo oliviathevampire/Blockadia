@@ -1,4 +1,3 @@
-
 package net.thegaminghuskymc.sandboxgame.game.client.renderer.model.editor.gui;
 
 import net.thegaminghuskymc.sandboxgame.engine.util.Color;
@@ -11,27 +10,27 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.para
 
 public class GuiWindowNewSkin extends GuiPopUp {
 
-	public final GuiPrompt name;
+    public final GuiPrompt name;
 
-	public GuiWindowNewSkin(GuiPopUpCallback<GuiWindowNewSkin> callback) {
-		super(callback);
+    public GuiWindowNewSkin(GuiPopUpCallback<GuiWindowNewSkin> callback) {
+        super(callback);
 
-		super.setBox(0.3f, 0.3f, 0.4f, 0.4f, 0.0f);
+        super.setBox(0.3f, 0.3f, 0.4f, 0.4f, 0.0f);
 
-		GuiParameter<GuiText> txtSize = new GuiTextParameterTextFillBox(0.75f);
-		GuiParameter<GuiText> txtCenter = new GuiTextParameterTextCenterBox();
+        GuiParameter<GuiText> txtSize = new GuiTextParameterTextFillBox(0.75f);
+        GuiParameter<GuiText> txtCenter = new GuiTextParameterTextCenterBox();
 
-		float w = 0.2f;
-		float h = w / 1.6f;
+        float w = 0.2f;
+        float h = w / 1.6f;
 
-		super.getInfoText().setText("Please enter the name of the new skin");
+        super.getInfoText().setText("Please enter the name of the new skin");
 
-		this.name = new GuiPrompt();
-		this.name.setHint("enter skin name");
-		this.name.setBox(0.4f, 0.65f, w, h, 0.0f);
-		this.name.setHeldTextColor(Color.WHITE);
-		this.name.addTextParameter(txtSize);
-		this.name.addTextParameter(txtCenter);
-		this.addChild(this.name);
-	}
+        this.name = new GuiPrompt();
+        this.name.setHint("enter skin name");
+        this.name.setBox(0.4f, 0.65f, w, h, 0.0f);
+        this.name.setHeldTextColor(Color.WHITE);
+        this.name.addTextParameter(txtSize);
+        this.name.addTextParameter(txtCenter);
+        this.addChild(this.name);
+    }
 }

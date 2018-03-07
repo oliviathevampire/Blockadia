@@ -7,11 +7,12 @@ import java.lang.reflect.Type;
 import java.util.Locale;
 
 public class ResourceLocation implements Comparable<ResourceLocation> {
+
     protected final String resourceDomain;
     protected final String resourcePath;
 
     protected ResourceLocation(int unused, String... resourceName) {
-        this.resourceDomain = org.apache.commons.lang3.StringUtils.isEmpty(resourceName[0]) ? "minecraft" : resourceName[0].toLowerCase(Locale.ROOT);
+        this.resourceDomain = org.apache.commons.lang3.StringUtils.isEmpty(resourceName[0]) ? "blockitect" : resourceName[0].toLowerCase(Locale.ROOT);
         this.resourcePath = resourceName[1].toLowerCase(Locale.ROOT);
         Validate.notNull(this.resourcePath);
     }
@@ -29,7 +30,7 @@ public class ResourceLocation implements Comparable<ResourceLocation> {
      * length 2. If no colon is present in the passed value the returned array will contain {null, toSplit}.
      */
     public static String[] splitObjectName(String toSplit) {
-        String[] astring = new String[]{"minecraft", toSplit};
+        String[] astring = new String[]{"blockitect", toSplit};
         int i = toSplit.indexOf(58);
 
         if (i >= 0) {

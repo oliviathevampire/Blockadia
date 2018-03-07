@@ -17,7 +17,9 @@ package net.thegaminghuskymc.sandboxgame.engine.modding;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 
 public interface IModResource {
-    /** load the resources */
+    /**
+     * load the resources
+     */
     public void load(Mod mod, ResourceManager manager);
 
     /**

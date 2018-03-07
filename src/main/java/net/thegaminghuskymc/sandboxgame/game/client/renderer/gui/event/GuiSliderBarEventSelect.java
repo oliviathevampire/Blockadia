@@ -4,8 +4,8 @@ import net.thegaminghuskymc.sandboxgame.game.client.renderer.gui.components.GuiS
 
 public class GuiSliderBarEventSelect<T extends GuiSliderBar> extends GuiSliderBarEvent<T> {
 
-	public GuiSliderBarEventSelect(T gui) {
-		super(gui);
-	}
+    public GuiSliderBarEventSelect(T gui) {
+        super(gui);
+    }
 
 }

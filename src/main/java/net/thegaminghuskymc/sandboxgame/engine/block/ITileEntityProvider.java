@@ -5,8 +5,7 @@ import net.thegaminghuskymc.sandboxgame.engine.world.World;
 
 import javax.annotation.Nullable;
 
-public interface ITileEntityProvider
-{
+public interface ITileEntityProvider {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */

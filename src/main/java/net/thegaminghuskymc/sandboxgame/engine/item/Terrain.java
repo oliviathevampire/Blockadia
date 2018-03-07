@@ -25,10 +25,9 @@ public class Terrain {
     // (and use 1 as implicit value to
     // optimize calculations)
     public static final float BLOCK_DEMI_SIZE = BLOCK_SIZE / 2.0f;
-    public static Vector3f BLOCK_SIZE_VEC = new Vector3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     public static final int DIMX = 16;
-//    public static final int DIMX = 16;
-    public static final int DIMY = DIMX;
+    //    public static final int DIMX = 16;
+    public static final int DIMY = 16;
     public static final int DIMZ = 16;
     public static final float SIZE_DIAGONAL3 = (float) Vector3f.distance(new Vector3f(0, 0, 0),
             new Vector3f(DIMX * BLOCK_SIZE, DIMY * BLOCK_SIZE, DIMZ * BLOCK_SIZE));
@@ -39,6 +38,7 @@ public class Terrain {
      */
     private static final byte MIN_DURABILITY = 0;
     private static final byte MAX_DURABILITY = 7;
+    public static Vector3f BLOCK_SIZE_VEC = new Vector3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     public static float DIMX_SIZE = DIMX * BLOCK_SIZE;
     private static float DIMY_SIZE = DIMY * BLOCK_SIZE;
     private static float DIMZ_SIZE = DIMZ * BLOCK_SIZE;
@@ -347,7 +347,7 @@ public class Terrain {
         // update number of block set
         if (prevblock.getID() != Blocks.AIR_ID && block.getID() == Blocks.AIR_ID) {
             --this.blockCount;
-            int zmax = this.heightmap[x + Terrain.DIMY  * y];
+            int zmax = this.heightmap[x + Terrain.DIMY * y];
             while (zmax > 0 && this.blocks[this.getIndex(x, y, zmax - 1)] == Blocks.AIR_ID) {
                 --zmax;
             }
@@ -1547,7 +1547,6 @@ public class Terrain {
 
     /**
      * get the durability of the block at given address
-     *
      */
     private byte getDurabilityAt(int index) {
         if (this.durability == null) {
