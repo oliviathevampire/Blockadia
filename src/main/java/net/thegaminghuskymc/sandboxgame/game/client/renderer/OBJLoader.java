@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class OBJLoader {
 
-    public static RawModel loadObjModel(String blockOrItem, String fileName, Loader loader) {
+    public static RawModel loadObjModel(String fileName, Loader loader) {
         FileReader fr = null;
         try {
-            fr = new FileReader(new File("src/main/resources/assets/blockitect/models/" + blockOrItem + fileName + ".obj"));
+            fr = new FileReader(new File("src/main/resources/assets/blockitect/models/" + fileName + ".obj"));
         } catch (FileNotFoundException e) {
             System.out.println("Couldn't load file!");
             e.printStackTrace();

@@ -4,16 +4,7 @@ public class BlockPressurPlate extends BlockCube {
 
     public BlockPressurPlate(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("pressure_plate");
     }
 
     @Override

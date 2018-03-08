@@ -137,6 +137,13 @@ public abstract class GameEngine {
         this.eventLoop = new EventLoop();
         this.eventPostLoop = new EventPostLoop();
 
+        for (Map.Entry<String, Config> entry : this.config.entrySet()) {
+            Config cfg = entry.getValue();
+            Logger.get().log(Level.FINE, "\t\t", entry.getKey(), cfg.getFilepath());
+            cfg.getValues().addProperty("Test", "Test");
+            cfg.save();
+        }
+
         // worlds
         this.loadedWorlds = new ArrayList<>();
 

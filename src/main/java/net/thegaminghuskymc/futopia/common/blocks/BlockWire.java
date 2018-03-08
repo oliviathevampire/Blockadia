@@ -6,11 +6,7 @@ public class BlockWire extends BlockCube {
 
     public BlockWire(int ID) {
         super(ID);
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("wire");
     }
 
     @Override

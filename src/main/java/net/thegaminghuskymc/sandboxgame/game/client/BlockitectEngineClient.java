@@ -8,6 +8,7 @@ import net.thegaminghuskymc.sandboxgame.engine.events.Listener;
 import net.thegaminghuskymc.sandboxgame.engine.managers.ResourceManager;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.R;
 import net.thegaminghuskymc.sandboxgame.engine.resourcepacks.ResourcePack;
+import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 import net.thegaminghuskymc.sandboxgame.game.client.opencl.CLH;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLFWContext;
 import net.thegaminghuskymc.sandboxgame.game.client.opengl.GLH;
@@ -19,6 +20,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class BlockitectEngineClient extends GameEngine {
@@ -37,8 +39,6 @@ public class BlockitectEngineClient extends GameEngine {
      * tasks to be run in a gl context
      */
     private ArrayList<MainRenderer.GLTask> glTasks;
-
-    private ParticleRendererFactory rendererFactory = new ParticleRendererFactory(renderer);
 
     public BlockitectEngineClient() {
         super(Side.CLIENT);
@@ -72,7 +72,7 @@ public class BlockitectEngineClient extends GameEngine {
         this.renderer = new MainRenderer(this);
         this.renderer.initialize();
 
-        this.glTasks = new ArrayList<MainRenderer.GLTask>();
+        this.glTasks = new ArrayList<>();
     }
 
     @Override
@@ -80,8 +80,8 @@ public class BlockitectEngineClient extends GameEngine {
         super.load();
 
         // set icon
-        File[] files = new File(R.getResPath("textures/blocks/")).listFiles();
-        this.getGLFWWindow().setIcon(files[new Random().nextInt(files.length)]);
+        File[] files = new File(R.getResPath("icons/")).listFiles();
+        this.getGLFWWindow().setIcon(files[new Random().nextInt(Objects.requireNonNull(files).length)]);
 
         // event callback
         this.registerEventCallback(new Listener<EventLoop>() {

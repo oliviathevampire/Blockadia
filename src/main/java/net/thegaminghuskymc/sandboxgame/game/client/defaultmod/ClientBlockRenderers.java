@@ -234,11 +234,11 @@ public class ClientBlockRenderers implements IModResource {
                     new BlockRendererCube(ClientBlockRenderers.T_DOORS_TOP[i]));
         }
         for (int i = 0; i < 2; i++) {
-            blockTextureManager.setBlockRenderer(Blocks.DIRT.get(i),
+            blockTextureManager.setBlockRenderer(Blocks.DIRT,
                     new BlockRendererCube(ClientBlockRenderers.T_DIRT));
         }
         for (int i = 0; i < 5; i++) {
-            blockTextureManager.setBlockRenderer(Blocks.GRASS.get(i),
+            blockTextureManager.setBlockRenderer(Blocks.GRASS_BLOCK,
                     new BlockRendererCube(Face.LEFT, ClientBlockRenderers.T_GRASS_SIDE, Face.RIGHT,
                             ClientBlockRenderers.T_GRASS_SIDE, Face.FRONT, ClientBlockRenderers.T_GRASS_SIDE, Face.BACK,
                             ClientBlockRenderers.T_GRASS_SIDE, Face.TOP, ClientBlockRenderers.T_GRASS_TOP, Face.BOT,

@@ -113,7 +113,7 @@ public class MainRenderer implements Taskable {
     /** called after resources where loaded */
     public void initialize() {
 
-        GLH.glhCheckError("Pre mainrenderer initialization");
+        GLH.glhCheckError("Pre MainRenderer initialization");
         Logger.get().log(Logger.Level.FINE, "Initializing " + this.getClass().getSimpleName());
 
         this.customRenderers = new ArrayList<>();
@@ -159,16 +159,16 @@ public class MainRenderer implements Taskable {
         this.onWindowResize(this.getGLFWWindow());
 
         Logger.get().log(Logger.Level.FINE, "Done");
-        GLH.glhCheckError("post mainrenderer started");
+        GLH.glhCheckError("post MainRenderer started");
     }
 
     public void deinitialize() {
         this.getGLFWWindow().removeListener(this.windowResizeListener);
 
-        GLH.glhCheckError("pre renderer deinitialization");
+        GLH.glhCheckError("pre renderer deinitialize");
         for (Renderer renderer : this.defaultRenderers) {
             renderer.deinitialize();
-            GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " deinitializes");
+            GLH.glhCheckError("post " + renderer.getClass().getSimpleName() + " deinitialize");
         }
 
         for (Renderer renderer : this.customRenderers) {

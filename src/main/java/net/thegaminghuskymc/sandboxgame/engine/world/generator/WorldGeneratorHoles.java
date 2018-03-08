@@ -19,7 +19,7 @@ public class WorldGeneratorHoles extends WorldGenerator {
                             (terrain.getWorldPos().y + y * Terrain.BLOCK_SIZE) / (32.0f * Terrain.BLOCK_SIZE),
                             (terrain.getWorldPos().z + z * Terrain.BLOCK_SIZE) / (64.0f * Terrain.BLOCK_SIZE));
                     if (d < 0.2f) {
-                        terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, z);
+                        terrain.setBlockAt(Blocks.DIRT, x, y, z);
                     } else {
                         terrain.setBlockAt(Blocks.AIR, x, y, z);
                     }
@@ -43,7 +43,7 @@ public class WorldGeneratorHoles extends WorldGenerator {
                 if (d < -0.6) {
                     terrain.setBlock(Blocks.PLANTS.get(rng.nextInt(Blocks.PLANTS.size())), x, y, z + 1);
                 }
-                terrain.setBlock(Blocks.GRASS.getFirst(), x, y, z);
+                terrain.setBlock(Blocks.GRASS_BLOCK, x, y, z);
 
             }
         }

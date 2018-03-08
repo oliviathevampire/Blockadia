@@ -100,7 +100,7 @@ public class GLFWWindow implements GLObject {
 
         this.windowPtr = GLFW.glfwCreateWindow(width, height, title, 0, 0);
         if (this.windowPtr == 0) {
-            System.err.println("Couldnt create glfw window");
+            System.err.println("Couldn't create glfw window");
             return;
         }
 
@@ -124,7 +124,7 @@ public class GLFWWindow implements GLObject {
         this.initEvents();
     }
 
-    private final void initEvents() {
+    private void initEvents() {
         this.initWindowEvents();
         this.initKeyEvents();
         this.initMouseEvents();
@@ -145,7 +145,7 @@ public class GLFWWindow implements GLObject {
      * @param cursor
      */
     public final void setCursor(GLCursor cursor) {
-        if (this.cursor != cursor || this.cursor.getID() != cursor.getID()) {
+        if (this.cursor != cursor) {
             GLFW.glfwSetCursor(this.windowPtr, cursor.getID());
             this.cursor = cursor;
         }
@@ -164,7 +164,7 @@ public class GLFWWindow implements GLObject {
         GLFW.glfwSetInputMode(this.windowPtr, GLFW.GLFW_CURSOR, value);
     }
 
-    private final void initWindowEvents() {
+    private void initWindowEvents() {
         this.callback_resize = new GLFWWindowSizeCallback() {
             @Override
             public void invoke(long window, int width, int height) {
@@ -226,7 +226,7 @@ public class GLFWWindow implements GLObject {
         }
     }
 
-    private final void initKeyEvents() {
+    private void initKeyEvents() {
 
         this.callback_char = new GLFWCharCallback() {
             @Override
@@ -249,7 +249,7 @@ public class GLFWWindow implements GLObject {
         GLFW.glfwSetKeyCallback(this.windowPtr, this.callback_key);
     }
 
-    private final void initMouseEvents() {
+    private void initMouseEvents() {
         this.callback_scroll = new GLFWScrollCallback() {
 
             @Override
@@ -292,7 +292,7 @@ public class GLFWWindow implements GLObject {
         GLFW.glfwSetWindowPos(this.getPointer(), px, py);
     }
 
-    public boolean isCursorEnabled() {
+    private boolean isCursorEnabled() {
         return (GLFW.glfwGetInputMode(this.windowPtr, GLFW.GLFW_CURSOR) != GLFW.GLFW_CURSOR_DISABLED);
     }
 
@@ -302,13 +302,8 @@ public class GLFWWindow implements GLObject {
     }
 
     /** set cursor position */
-    public void setCursorPos(double x, double y) {
+    private void setCursorPos(double x, double y) {
         GLFW.glfwSetCursorPos(this.windowPtr, x, y);
-    }
-
-    /** set window title */
-    public void setTitle(String title) {
-        GLFW.glfwSetWindowTitle(this.windowPtr, title);
     }
 
     /** enable or disable vsync (0 == disable, 1 == enable) */
@@ -340,16 +335,12 @@ public class GLFWWindow implements GLObject {
         return (this.height);
     }
 
-    public void setClearColor(float r, float g, float b, float a) {
-        GL11.glClearColor(r, g, b, a);
-    }
-
     /** should be call before rendering */
     public void clearScreen() {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
     }
 
-    public final boolean isHovered() {
+    private boolean isHovered() {
         return (this.hasState(STATE_HOVERED));
     }
 
@@ -379,7 +370,7 @@ public class GLFWWindow implements GLObject {
         }
     }
 
-    private final void updateFpsCounter() {
+    private void updateFpsCounter() {
         if (System.currentTimeMillis() - this.prevFrame >= 1000) {
             this.fps = this.fps_counter;
             this.fps_counter = 0;
@@ -433,21 +424,8 @@ public class GLFWWindow implements GLObject {
         return (this.mouseY - this.prevmouseY);
     }
 
-    /** get total frames flushed */
-    public final long getTotalFramesFlushed() {
-        return (this.frames);
-    }
-
     public final boolean isKeyPressed(int key) {
         return (GLFW.glfwGetKey(this.getPointer(), key) == GLFW.GLFW_PRESS);
-    }
-
-    public final boolean isKeyReleased(int key) {
-        return (GLFW.glfwGetKey(this.getPointer(), key) == GLFW.GLFW_RELEASE);
-    }
-
-    public final boolean isMousePressed(int button) {
-        return (GLFW.glfwGetMouseButton(this.getPointer(), button) == GLFW.GLFW_PRESS);
     }
 
     public final boolean isMouseRightPressed() {
@@ -462,23 +440,8 @@ public class GLFWWindow implements GLObject {
         return (this.fps);
     }
 
-    public final void setSize(int width, int height) {
-        GLFW.glfwSetWindowSize(this.getPointer(), width, height);
-    }
-
     public final void close() {
         GLFW.glfwSetWindowShouldClose(this.windowPtr, true);
-    }
-
-    public final boolean hasFocus() {
-        return (this.hasState(STATE_FOCUSED));
-    }
-
-    public final void focus(boolean focus) {
-        if (focus) {
-            GLFW.glfwFocusWindow(this.getPointer());
-        }
-        this.setState(STATE_FOCUSED, focus);
     }
 
     /** set the icon of this window */
@@ -487,25 +450,25 @@ public class GLFWWindow implements GLObject {
     }
 
     /** set the icon of this window */
-    public final void setIcon(String filepath) {
+    private void setIcon(String filepath) {
         GLIcon glIcon = GLH.glhCreateIcon(filepath);
         this.setIcon(glIcon);
         GLH.glhDeleteObject(glIcon);
     }
 
-    public final void setIcon(GLIcon glIcon) {
+    private void setIcon(GLIcon glIcon) {
         GLFW.glfwSetWindowIcon(this.windowPtr, glIcon.getBuffer());
     }
 
-    private final boolean hasState(int state) {
+    private boolean hasState(int state) {
         return ((this.state & state) == state);
     }
 
-    private final void setState(int state) {
+    private void setState(int state) {
         this.state = this.state | state;
     }
 
-    private final void setState(int state, boolean enabled) {
+    private void setState(int state, boolean enabled) {
         if (enabled) {
             this.setState(state);
         } else {
@@ -513,12 +476,12 @@ public class GLFWWindow implements GLObject {
         }
     }
 
-    private final void unsetState(int state) {
+    private void unsetState(int state) {
         this.state = this.state & ~state;
     }
 
     @SuppressWarnings("unused")
-    private final void swapState(int state) {
+    private void swapState(int state) {
         this.state = this.state ^ state;
     }
 

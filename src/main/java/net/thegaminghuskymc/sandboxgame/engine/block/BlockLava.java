@@ -7,16 +7,12 @@ public class BlockLava extends BlockLiquid {
 
     public BlockLava(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getRegistryName() {
-        return "lava";
+        setRegistryName("lava");
     }
 
     @Override
     public String getUnlocalizedName() {
-        return "Lava";
+        return getRegistryName().getResourcePath();
     }
 
     @Override

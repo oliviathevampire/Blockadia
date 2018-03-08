@@ -13,7 +13,7 @@ public class WorldGeneratorFlat extends WorldGenerator {
     public void generate(Terrain terrain) {
         for (int x = 0; x < Terrain.DIMX; x++) {
             for (int y = 0; y < Terrain.DIMY; y++) {
-                terrain.setBlockAt(Blocks.GRASS.getFirst(), x, y, 4);
+                terrain.setBlockAt(Blocks.GRASS_BLOCK, x, y, 4);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, 3);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, 2);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, 1);

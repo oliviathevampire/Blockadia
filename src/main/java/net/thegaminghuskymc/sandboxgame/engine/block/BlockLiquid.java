@@ -9,10 +9,8 @@ public abstract class BlockLiquid extends Block {
 
     public BlockLiquid(int blockID) {
         super(blockID);
+        setRegistryName("liquid");
     }
-
-    @Override
-    public abstract String getRegistryName();
 
     @Override
     public abstract String getUnlocalizedName();

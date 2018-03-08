@@ -4,16 +4,7 @@ public class BlockCarpet extends BlockCube {
 
     public BlockCarpet(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("carpet");
     }
 
     @Override

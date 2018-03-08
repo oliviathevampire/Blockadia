@@ -29,7 +29,7 @@ public class ResourceLocation implements Comparable<ResourceLocation> {
      * Splits an object name (such as minecraft:apple) into the domain and path parts and returns these as an array of
      * length 2. If no colon is present in the passed value the returned array will contain {null, toSplit}.
      */
-    public static String[] splitObjectName(String toSplit) {
+    private static String[] splitObjectName(String toSplit) {
         String[] astring = new String[]{"blockitect", toSplit};
         int i = toSplit.indexOf(58);
 

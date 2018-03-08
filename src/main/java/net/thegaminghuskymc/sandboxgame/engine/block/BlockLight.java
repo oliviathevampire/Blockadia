@@ -21,15 +21,11 @@ public class BlockLight extends BlockCubeOpaque {
 
     public BlockLight(int blockID) {
         super(blockID);
+        setRegistryName("light");
     }
 
     @Override
     public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
         return null;
     }
 

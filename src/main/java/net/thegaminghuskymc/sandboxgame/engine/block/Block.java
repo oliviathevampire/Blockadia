@@ -2,14 +2,9 @@ package net.thegaminghuskymc.sandboxgame.engine.block;
 
 import net.thegaminghuskymc.sandboxgame.engine.block.instance.BlockInstance;
 import net.thegaminghuskymc.sandboxgame.engine.item.Terrain;
-import net.thegaminghuskymc.sandboxgame.engine.registries.GameData;
-import net.thegaminghuskymc.sandboxgame.engine.registries.IForgeRegistryEntry;
-import net.thegaminghuskymc.sandboxgame.engine.registry.RegistryNamespacedDefaultedByKey;
 import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 
-public class Block extends IForgeRegistryEntry.Impl<Block> {
-
-    public static final RegistryNamespacedDefaultedByKey<ResourceLocation, Block> REGISTRY = GameData.getWrapperDefaulted(Block.class);
+public class Block {
 
     private final short id;
 
@@ -26,6 +21,22 @@ public class Block extends IForgeRegistryEntry.Impl<Block> {
 
     public String getUnlocalizedName() {
         return unlocalizedName;
+    }
+
+    public ResourceLocation getRegistryName() {
+        return registryName;
+    }
+
+    public void setRegistryName(ResourceLocation registryName) {
+        this.registryName = registryName;
+    }
+
+    public void setRegistryName(String name) {
+        this.registryName = new ResourceLocation(name);
+    }
+
+    public void setRegistryName(String modId, String name) {
+        this.registryName = new ResourceLocation(modId, name);
     }
 
     public String setUnlocolizedName(String name) {
@@ -75,16 +86,6 @@ public class Block extends IForgeRegistryEntry.Impl<Block> {
 
     public boolean bypassRaycast() {
         return (true);
-    }
-
-    public static int getIdFromBlock(Block blockIn)
-    {
-        return REGISTRY.getIDForObject(blockIn);
-    }
-
-    public static Block getBlockById(int id)
-    {
-        return REGISTRY.getObjectById(id);
     }
 
 }

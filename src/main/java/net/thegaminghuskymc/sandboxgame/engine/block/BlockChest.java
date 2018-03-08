@@ -4,16 +4,7 @@ public class BlockChest extends BlockCube {
 
     public BlockChest(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("chest");
     }
 
     @Override

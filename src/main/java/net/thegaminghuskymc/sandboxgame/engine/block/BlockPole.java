@@ -4,16 +4,7 @@ public class BlockPole extends BlockCube {
 
     public BlockPole(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("pole");
     }
 
     @Override

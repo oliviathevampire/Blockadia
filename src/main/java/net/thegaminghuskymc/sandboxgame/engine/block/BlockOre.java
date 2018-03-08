@@ -4,16 +4,7 @@ public class BlockOre extends BlockCube {
 
     public BlockOre(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("ore");
     }
 
     @Override

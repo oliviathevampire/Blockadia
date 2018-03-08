@@ -3,32 +3,8 @@ package net.thegaminghuskymc.sandboxgame.engine.block;
 public class BlockStone extends BlockCube {
 
     public BlockStone(int blockID) {
-        super(blockID);
-    }
+        super(blockID);        setRegistryName("stone");
 
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
-    }
-
-    @Override
-    public boolean isOpaque() {
-        return (false);
-    }
-
-    @Override
-    public boolean hasTransparency() {
-        return (true);
-    }
-
-    @Override
-    public boolean isVisible() {
-        return (true);
     }
 
 }

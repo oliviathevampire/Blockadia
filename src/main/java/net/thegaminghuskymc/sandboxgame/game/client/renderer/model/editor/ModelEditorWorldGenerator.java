@@ -12,7 +12,7 @@ public class ModelEditorWorldGenerator extends WorldGenerator {
             for (int y = 0; y < Terrain.DIMY; y++) {
                 // terrain.setBlockAt((x + z) % 2 == 0 ? Blocks.GRASS :
                 // Blocks.LOG, x, 4, z);
-                terrain.setBlockAt(Blocks.GRASS.getFirst(), x, y, Terrain.DIMZ - 1);
+                terrain.setBlockAt(Blocks.GRASS_BLOCK, x, y, Terrain.DIMZ - 1);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, Terrain.DIMZ - 2);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, Terrain.DIMZ - 3);
                 terrain.setBlockAt(Blocks.STONES.getFirst(), x, y, Terrain.DIMZ - 4);

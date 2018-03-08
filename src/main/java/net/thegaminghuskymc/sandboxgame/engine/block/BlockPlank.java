@@ -4,16 +4,7 @@ public class BlockPlank extends BlockCube {
 
     public BlockPlank(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("plank");
     }
 
     @Override

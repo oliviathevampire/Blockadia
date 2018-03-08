@@ -1,6 +1,5 @@
 package net.thegaminghuskymc.sandboxgame.engine.managers;
 
-import net.thegaminghuskymc.sandboxgame.engine.Logger;
 import net.thegaminghuskymc.sandboxgame.engine.block.Block;
 import net.thegaminghuskymc.sandboxgame.engine.util.ResourceLocation;
 
@@ -19,7 +18,7 @@ public class BlockManager extends GenericManager<Block> {
 
     public static void registerBlock(int id, ResourceLocation textualID, Block block_)
     {
-        Block.REGISTRY.register(id, textualID, block_);
+
     }
 
     public Block getBlockByID(int id) {

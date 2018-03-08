@@ -4,16 +4,7 @@ public class BlockChair extends BlockCube {
 
     public BlockChair(int blockID) {
         super(blockID);
-    }
-
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public String getRegistryName() {
-        return null;
+        setRegistryName("chair");
     }
 
     @Override
