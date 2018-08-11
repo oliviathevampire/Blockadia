@@ -2,7 +2,6 @@ plugins {
     id 'java-gradle-plugin'
     id 'idea'
     id 'java'
-    id 'net.hdt.husky_gradle.MainPlugin'
 }
 
 import org.gradle.internal.os.OperatingSystem
