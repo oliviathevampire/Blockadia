@@ -1,13 +1,12 @@
-package team.hdt.sandboxgame.game_engine.util.textures.extra;
+package team.hdt.sandboxgame.game_engine.client.rendering;
 
 import org.lwjgl.opengl.GL11;
-import textures.ModelTexture;
+import team.hdt.sandboxgame.game_engine.client.model.RawModel;
 
 public class TexturedModel {
 
     private RawModel rawModel;
     private ModelTexture texture;
-
 
     public TexturedModel(RawModel model, ModelTexture texture) {
         this.rawModel = model;

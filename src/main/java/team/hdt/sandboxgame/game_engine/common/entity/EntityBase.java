@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.client.entity;
+package team.hdt.sandboxgame.game_engine.common.entity;
 
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;

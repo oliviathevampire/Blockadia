@@ -1,11 +1,10 @@
 package team.hdt.sandboxgame.game_engine.client.shaders;
 
 
-import custom.gameutils.core.vectors.Matrix4fs;
-import custom.gameutils.core.vectors.Vectors3f;
-import entities.Camera;
-import entities.Light;
-import toolbox.Maths;
+import team.hdt.sandboxgame.game_engine.client.entity.Camera;
+import team.hdt.sandboxgame.game_engine.common.util.math.Maths;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Matrix4fs;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
 public class StaticShader extends ShaderProgram {
 
@@ -60,10 +59,10 @@ public class StaticShader extends ShaderProgram {
         super.loadMatrix(location_transformationMatrix, matrix);
     }
 
-    public void loadLight(Light light) {
+    /*public void loadLight(Light light) {
         super.loadVector(location_lightPosition, light.getPosition());
         super.loadVector(location_lightColour, light.getColour());
-    }
+    }*/
 
     public void loadViewMatrix(Camera camera) {
         Matrix4fs viewMatrix = Maths.createViewMatrix(camera);

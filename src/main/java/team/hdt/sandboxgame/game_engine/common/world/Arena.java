@@ -2,6 +2,7 @@ package team.hdt.sandboxgame.game_engine.common.world;
 
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
+import team.hdt.sandboxgame.game_engine.common.world.block.Block;
 
 
 public class Arena {

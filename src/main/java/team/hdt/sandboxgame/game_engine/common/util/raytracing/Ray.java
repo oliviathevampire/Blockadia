@@ -5,7 +5,7 @@
  * To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/.
  */
 
-package team.hdt.sandboxgame.game_engine.common.util;
+package team.hdt.sandboxgame.game_engine.common.util.raytracing;
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 

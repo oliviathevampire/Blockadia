@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.util.textures.extra;
+package team.hdt.sandboxgame.game_engine.client.rendering;
 
 public class ModelTexture {
 

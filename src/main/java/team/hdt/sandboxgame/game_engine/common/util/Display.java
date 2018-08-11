@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
 
 import java.nio.IntBuffer;

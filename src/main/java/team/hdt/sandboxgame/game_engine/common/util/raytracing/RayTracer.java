@@ -1,7 +1,8 @@
-package team.hdt.sandboxgame.game_engine.common.util;
+package team.hdt.sandboxgame.game_engine.common.util.raytracing;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import team.hdt.sandboxgame.game_engine.common.util.Display;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
 import java.nio.FloatBuffer;
