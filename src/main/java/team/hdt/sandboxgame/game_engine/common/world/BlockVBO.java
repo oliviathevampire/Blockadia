@@ -5,11 +5,7 @@ import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-<<<<<<< HEAD:src/main/java/team/hdt/sandboxgame/game_engine/world/BlockVBO.java
-import team.hdt.sandboxgame.game_engine.util.textures.TextureLoader;
-=======
 import team.hdt.sandboxgame.game_engine.common.util.TextureLoader;
->>>>>>> 5bec22ea62a387dda18722b6fe1cd871fe060dbe:src/main/java/team/hdt/sandboxgame/game_engine/common/world/BlockVBO.java
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
