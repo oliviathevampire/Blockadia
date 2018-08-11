@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.util;
+package team.hdt.sandboxgame.game_engine.util.textures;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;

@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.util;
+package team.hdt.sandboxgame.game_engine.util.textures;
 
 import java.nio.ByteBuffer;
 

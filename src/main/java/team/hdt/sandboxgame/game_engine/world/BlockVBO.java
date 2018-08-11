@@ -5,7 +5,7 @@ import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import team.hdt.sandboxgame.game_engine.util.TextureLoader;
+import team.hdt.sandboxgame.game_engine.util.textures.TextureLoader;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
