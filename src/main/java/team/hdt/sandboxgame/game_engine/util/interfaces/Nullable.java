@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.util.math;
+package team.hdt.sandboxgame.game_engine.util.interfaces;
 
 
 import java.lang.annotation.*;
