@@ -1,6 +1,9 @@
-apply plugin: 'idea'
-apply plugin: 'java'
-apply plugin: 'net.hdt.husky_gradle.MainPlugin'
+plugins {
+    id 'java-gradle-plugin'
+    id 'idea'
+    id 'java'
+    id 'net.hdt.husky_gradle.MainPlugin'
+}
 
 import org.gradle.internal.os.OperatingSystem
 
