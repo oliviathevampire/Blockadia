@@ -1,4 +1,4 @@
-package models;
+package team.hdt.sandboxgame.game_engine.client.model;
 
 public class RawModel {
 

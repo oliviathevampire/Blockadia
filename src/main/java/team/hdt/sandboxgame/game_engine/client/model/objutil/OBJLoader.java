@@ -1,17 +1,15 @@
 package team.hdt.sandboxgame.game_engine.client.model.objutil;
 
 
+import team.hdt.sandboxgame.game_engine.util.math.vectors.Vectors2f;
+import team.hdt.sandboxgame.game_engine.util.math.vectors.Vectors3f;
 
-import models.RawModel;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OBJLoader {
 
-    public static RawModel loadObjModel(String fileName, Loader loader) {
+    //TODO: need loader
+    /*public static RawModel loadObjModel(String fileName, Loader loader) {
         InputStreamReader inobj = new InputStreamReader(Class.class.getResourceAsStream("/res/" + fileName + ".obj"));
         BufferedReader reader = new BufferedReader(inobj);
         String line;
@@ -83,7 +81,7 @@ public class OBJLoader {
         }
         return loader.loadToVAO(verticesArray, textureArray, normalsArray, indicesArray);
 
-    }
+    }*/
 
     private static void processVertex(String[] vertexData, List<Integer> indices,
                                       List<Vectors2f> textures, List<Vectors3f> normals, float[] textureArray,
