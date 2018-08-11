@@ -1,21 +1,7 @@
 package team.hdt.sandboxgame.game_engine.client.rendering;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import team.hdt.sandboxgame.game_engine.client.model.RawModel;
-
-import java.io.IOException;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Loader {
+    /*
 
     private List<Integer> vaos = new ArrayList<>();
     private List<Integer> vbos = new ArrayList<>();
@@ -142,5 +128,5 @@ public class Loader {
         return buffer;
     }
 
-
+*/
 }
