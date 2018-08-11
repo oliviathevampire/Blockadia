@@ -33,4 +33,10 @@ public class TODOLIST
      *      furniture dlc) only after modding dlc
      *
      */
+    //=========================================================================
+    /**
+     * when items been done put here:
+     *
+     *
+     */
 }
