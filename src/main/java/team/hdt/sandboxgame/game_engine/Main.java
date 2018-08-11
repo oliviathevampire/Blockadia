@@ -1,6 +1,6 @@
-package net.thegaminghuskymc.sandboxgame.game_engine;
+package team.hdt.sandboxgame.game_engine;
 
-import net.thegaminghuskymc.sandboxgame.game_engine.util.Display;
+import team.hdt.sandboxgame.game_engine.util.Display;
 
 public class Main {
 

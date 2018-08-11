@@ -1,4 +1,4 @@
-package net.thegaminghuskymc.sandboxgame.game_engine.util;
+package team.hdt.sandboxgame.game_engine.util;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
