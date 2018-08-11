@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import team.hdt.sandboxgame.game_engine.world.Arena;
 
 import java.nio.IntBuffer;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class Display {
     private long window;
     private static int width;
     private static int height;
+    private Arena arena;
 
     public Display(String title, int windowWidth, int windowHeight) {
         width = windowWidth;
@@ -62,8 +64,24 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
+        arena = new Arena();
+        arena.genDemoBlocks();
+        TextureLoader.loadTextures(false);
+        TextureLoader.bind(TextureLoader.Textures.SHEET);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glShadeModel(GL_SMOOTH);
+            glClearColor(0.53f, 0.8f, 0.98f, 0.0f); // Sky blue
+            glClearDepth(1.0);
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LEQUAL);
+            // Transparency
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_ALPHA_TEST);
+            glAlphaFunc(GL_GREATER, 0.0f);
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+            arena.render();
             glfwSwapBuffers(window);
             glfwPollEvents();
         }

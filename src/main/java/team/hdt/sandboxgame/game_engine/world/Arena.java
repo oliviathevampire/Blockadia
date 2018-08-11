@@ -6,7 +6,7 @@ import team.hdt.sandboxgame.game_engine.util.math.vectors.Vectors3f;
 
 public class Arena {
 
-	public final int X_SIZE = 20, Y_SIZE = 20, Z_SIZE = 20;
+	public final int X_SIZE = 10, Y_SIZE = 10, Z_SIZE = 10;
 	final int CUBE_LENGTH = 1;
 	public Block[][][] blocks;
 
@@ -30,20 +30,11 @@ public class Arena {
 		for (int x = 0; x < X_SIZE; x++)
 			for (int y = 0; y < Y_SIZE; y++)
 				for (int z = 0; z < Z_SIZE; z++) {
-					if ((y == Y_SIZE - 1 && x == 5 && z == 5) || (y == 15 && x == 10 && z == 10) || (y == Y_SIZE - 6 && x == 10 && z == 11)
-							|| (y == 11 && x == 1 && z == 1) || (y == 10 && x == 2 && z == 1))
+					if (y == Y_SIZE - 1 && x == 5 && z == 5)
 						type = Block.BlockType.GRASS;
-					else if (y > 9 && ((x == 0 || x == X_SIZE - 1) || (z == 0 || z == Z_SIZE - 1))) {
-						type = Block.BlockType.DIRT;
-					}
-					else if (y < 5 || (y == 12 && x == 1 && z == 2))
+					else if (y < 5)
 						type = Block.BlockType.STONE;
-					else if (y < Y_SIZE / 2 - 1)
-						type = Block.BlockType.DIRT;
-					else if (y < Y_SIZE / 2)
-						type = Block.BlockType.GRASS;
-					else
-						type = Block.BlockType.AIR;
+					else type = Block.BlockType.AIR;
 					blocks[x][y][z] = new Block(x, y, z, type);
 				}
 		System.out.println("Done building Arena");
@@ -56,15 +47,15 @@ public class Arena {
 				switch (i) {
 					case 0:
 					case 1:
-						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.DIRT);
+						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.SAND);
 						break;
 					case 2:
 					case 3:
-						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.GRASS);
+						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.DIRT);
 						break;
 					case 4:
 					case 5:
-						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.STONE);
+						blocks[i][0][j] = new Block(i, 0, j, Block.BlockType.WOOD);
 						break;
 				}
 			}
@@ -79,7 +70,7 @@ public class Arena {
 				for (int z = 0; z < Z_SIZE; z++) {
 					if (y > 4) {
 						blocks[x][y][z] = new Block(x, y, z, Block.BlockType.AIR);
-					} else if ((x == 2 || x == 3) && z > 2 && z < 18 && y > 0)
+					} else if ((x == 2 || x == 3) && z > 2 && y > 0)
 						blocks[x][y][z] = new Block(x, y, z, Block.BlockType.WATER);
 					else
 						blocks[x][y][z] = new Block(x, y, z, Block.BlockType.DIRT);
