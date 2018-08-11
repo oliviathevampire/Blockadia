@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.util.world;
+package team.hdt.sandboxgame.game_engine.common.world;
 
 import java.util.Random;
 

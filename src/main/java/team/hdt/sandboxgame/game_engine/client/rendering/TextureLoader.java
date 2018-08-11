@@ -48,9 +48,7 @@ public class TextureLoader {
     }
 
     public static void unbind() {
-
         glBindTexture(GL_TEXTURE_2D, 0);
-
     }
 
     public static void loadTextures(boolean blur) {
