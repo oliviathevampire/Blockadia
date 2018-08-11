@@ -1,11 +1,11 @@
 package team.hdt.sandboxgame.game_engine.client.model.objutil;
 
 
-import team.hdt.sandboxgame.game_engine.util.math.vectors.Vectors3f;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
 public class Vertex {
 
-    private static final int NO_INDEX = - 1;
+    private static final int NO_INDEX = -1;
 
     private Vectors3f position;
     private int textureIndex = NO_INDEX;

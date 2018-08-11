@@ -1,15 +1,16 @@
 package team.hdt.sandboxgame.game_engine.client.entity.util;
 
-import team.hdt.sandboxgame.game_engine.util.interfaces.Nullable;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nullable;
 
 public class AllEntityAspects {
     //to help set height
-    public static float sale = 1.0F;
+    public static float scale = 1.0F;
     @Nullable
     // dose it live in water or not
     public static boolean liveInWater;
+
     //is it hostile or peaceful
-    enum TYPE{
+    enum TYPE {
         HOSTILE,
         PEACEFUL
     }
