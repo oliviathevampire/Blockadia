@@ -1,9 +1,10 @@
 package team.hdt.sandboxgame.game_engine.client.entity;
 
 
-import team.hdt.sandboxgame.game_engine.util.math.vectors.Vectors3f;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
 public class EntityBase {
+
     //TODO: all modeling
     public Vectors3f position;
     private float rotX, rotY, rotZ;
@@ -89,8 +90,6 @@ public class EntityBase {
     public double getZ() {
         return this.position.z;
     }
-
-
 
 }
 
