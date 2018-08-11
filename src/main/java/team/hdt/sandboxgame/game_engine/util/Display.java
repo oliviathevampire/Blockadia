@@ -17,15 +17,19 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Display {
 
     private long window;
+    private static int width;
+    private static int height;
 
-    public Display(String title, int width, int height) {
+    public Display(String title, int windowWidth, int windowHeight) {
+        width = windowWidth;
+        height = windowHeight;
         GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit())
             throw new IllegalStateException("Unable to initialize GLFW");
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        window = glfwCreateWindow(width, height, title, NULL, NULL);
+        window = glfwCreateWindow(windowWidth, windowHeight, title, NULL, NULL);
         if (window == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
@@ -46,6 +50,14 @@ public class Display {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
+    }
+
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
     }
 
     private void loop() {
