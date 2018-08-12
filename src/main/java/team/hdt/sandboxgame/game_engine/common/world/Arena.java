@@ -27,7 +27,7 @@ public class Arena {
 
     public void genArena() {
         blocks = new Block[X_SIZE][Y_SIZE][Z_SIZE];
-        Block.BlockType type = null;
+        Block.BlockType type;
         for (int x = 0; x < X_SIZE; x++)
             for (int y = 0; y < Y_SIZE; y++)
                 for (int z = 0; z < Z_SIZE; z++) {

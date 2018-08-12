@@ -73,7 +73,7 @@ public class BlockVBO {
 
     private static FloatBuffer createTextureFloatBuffer(Block.BlockType type) {
         FloatBuffer fBuf = BufferUtils.createFloatBuffer(2 * 4 * 6);
-        float[] arr = null;
+        float[] arr;
         switch (type) {
             case DIRT:
                 arr = createSymmetricTextureFloatArray(0, 0, TEXTURE_SIZE);
@@ -164,7 +164,7 @@ public class BlockVBO {
     }
 
     public void render(Block.BlockType type, float x, float y, float z) {
-        TextureLoader.bind(TextureLoader.Texture.SHEET);
+        TextureLoader.bind(TextureLoader.Textures.SHEET);
         int vertID = this.blockVertexBufferID, texID;
         switch (type) {
             case DIRT:

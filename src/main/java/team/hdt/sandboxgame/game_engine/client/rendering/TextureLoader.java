@@ -1,5 +1,6 @@
 package team.hdt.sandboxgame.game_engine.client.rendering;
 
+import de.matthiasmann.twl.utils.PNGDecoder;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -12,14 +13,14 @@ public class TextureLoader {
 
     public static final String TEXTURE_PATH = "src/main/resources/assets/sandboxgame/textures/";
     public static final String TEXTURE_TYPE = "matte";
-    private static int dirt, grassSide, grassTop, stone, textureSheet;
+    private static int dirt, grassSide, grassTop, stone, textureSheet, mainMenuLogo, mainMenuBackground;
     private static boolean loaded = false;
 
     private TextureLoader() {
 
     }
 
-    public static void bind(Texture texture) {
+    public static void bind(Textures texture) {
         int tex = 0;
         switch (texture) {
             case DIRT:
@@ -36,6 +37,12 @@ public class TextureLoader {
                 break;
             case SHEET:
                 tex = textureSheet;
+                break;
+            case MAIN_MENU_LOGO:
+                tex = mainMenuLogo;
+                break;
+            case MAIN_MENU_BACKGROUND:
+                tex = mainMenuBackground;
                 break;
         }
         if (tex == 0)
@@ -61,6 +68,8 @@ public class TextureLoader {
             grassSide = GL11.glGenTextures();
             stone = GL11.glGenTextures();
             textureSheet = GL11.glGenTextures();
+            mainMenuLogo = GL11.glGenTextures();
+            mainMenuBackground = GL11.glGenTextures();
             loadTexture(decodeImage("sheet.png"), textureSheet, filter, filter);
             System.out.println("Successfully loaded textures");
             loaded = true;
@@ -91,7 +100,7 @@ public class TextureLoader {
             System.out.println(TEXTURE_PATH + TEXTURE_TYPE + tex);
             decoder = new PNGDecoder(in);
             buffer = BufferUtils.createByteBuffer(4 * decoder.getWidth() * decoder.getHeight());
-            decoder.decode(buffer, decoder.getWidth() * 4, Format.RGBA);
+            decoder.decode(buffer, decoder.getWidth() * 4, PNGDecoder.Format.RGBA);
         } catch (IOException e) {
             System.err.println("Could not load texture at: " + TEXTURE_PATH + TEXTURE_TYPE + tex);
             e.printStackTrace();
@@ -108,7 +117,7 @@ public class TextureLoader {
         return new Texture(buffer, decoder.getWidth(), decoder.getHeight());
     }
 
-    public enum Texture {
-        DIRT, GRASS_SIDE, GRASS_TOP, STONE, SHEET
+    public enum Textures {
+        DIRT, GRASS_SIDE, GRASS_TOP, STONE, SHEET, MAIN_MENU_LOGO, MAIN_MENU_BACKGROUND
     }
 }
