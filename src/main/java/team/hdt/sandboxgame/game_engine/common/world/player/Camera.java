@@ -3,7 +3,8 @@
  * 
  * This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
  * To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/.
- */
+ *//*
+
 
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
@@ -96,7 +97,9 @@ public class Camera {
 		glMatrixMode(GL_MODELVIEW);
 	}
 	
-	/** Applies the camera translations and rotations to GL_MODELVIEW. */
+	*/
+/** Applies the camera translations and rotations to GL_MODELVIEW. *//*
+
 	public void update() {
 		glPushAttrib(GL_TRANSFORM_BIT);
 		glMatrixMode(GL_MODELVIEW);
@@ -182,3 +185,4 @@ public class Camera {
 		this.y += dy * (float) sin(toRadians(pitch - 90)) + dz * sin(toRadians(pitch));
 	}
 }
+*/
