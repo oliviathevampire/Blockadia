@@ -7,6 +7,7 @@ import team.hdt.sandboxgame.game_engine.common.state.IngameState;
  * Controls the state of the game
  */
 public class GameController {
+
     private GameState state = new IngameState();
 
     public void setup() {
@@ -29,4 +30,5 @@ public class GameController {
     public void drop() {
         this.state.drop();
     }
+
 }

@@ -57,12 +57,21 @@ public class Player extends Entity {
         x = curBlockVec.x;
         y = curBlockVec.y;
         z = curBlockVec.z;
+<<<<<<< HEAD
         return null;
     }
 
     private Vectors3f getBlock(Ray ray) {
         int i = 0;
         while (ray.distance < 10) {
+=======
+		return null;
+	}
+
+	private Vectors3f getBlock(Ray ray) {
+		int i = 0;
+		while (ray.distance < 10) {
+>>>>>>> 1c133b654df8467239ebdf4914e4f36c2f361cf8
             for (BlockType[][] blockX : arena.blocks) {
                 for (BlockType[] blockY : blockX) {
                     for (BlockType block : blockY) {
