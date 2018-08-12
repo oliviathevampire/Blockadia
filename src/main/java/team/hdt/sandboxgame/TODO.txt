@@ -1,5 +1,5 @@
 Priority:
-    Get world and player world working
+    Get world and player moving around world working
 
 Stuff to add go down in list:
     Working hitbox system,

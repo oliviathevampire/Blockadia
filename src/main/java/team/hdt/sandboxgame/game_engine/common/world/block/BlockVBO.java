@@ -164,7 +164,7 @@ public class BlockVBO {
     }
 
     public void render(Block.BlockType type, float x, float y, float z) {
-        TextureLoader.bind(TextureLoader.Textures.SHEET);
+        TextureLoader.bind(TextureLoader.Texture.SHEET);
         int vertID = this.blockVertexBufferID, texID;
         switch (type) {
             case DIRT:

@@ -68,7 +68,7 @@ public class Display {
         arena = new Arena();
         arena.genDemoBlocks();
         TextureLoader.loadTextures(false);
-        TextureLoader.bind(TextureLoader.Textures.SHEET);
+        TextureLoader.bind(TextureLoader.Texture.SHEET);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glShadeModel(GL_SMOOTH);
