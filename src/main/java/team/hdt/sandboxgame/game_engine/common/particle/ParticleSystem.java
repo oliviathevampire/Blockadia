@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.common.partical;
+package team.hdt.sandboxgame.game_engine.common.particle;
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Matrix4fs;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
@@ -17,10 +17,10 @@ public class ParticleSystem {
 
     private Random random = new Random();
 
-    public ParticleSystem(float pps, float speed, float gravityComplient, float lifeLength, float scale) {
+    public ParticleSystem(float pps, float speed, float gravityCompliant, float lifeLength, float scale) {
         this.pps = pps;
         this.averageSpeed = speed;
-        this.gravityComplient = gravityComplient;
+        this.gravityComplient = gravityCompliant;
         this.averageLifeLength = lifeLength;
         this.averageScale = scale;
     }
@@ -41,11 +41,11 @@ public class ParticleSystem {
             float rotateAngle = (float) Math.acos(Vectors3f.dot(coneDirection, new Vectors3f(0, 0, 1)));
             Matrix4fs rotationMatrix = new Matrix4fs();
             rotationMatrix.rotate(- rotateAngle, rotateAxis);
-            //Matrix4fs.transform(rotationMatrix, direction, direction);
+            Matrix4fs.transform(rotationMatrix, direction, direction);
         } else if (coneDirection.z == - 1) {
-            /*direction z*/ *= - 1;
+            z *= - 1;
         }
-        return new Vectors3f(/*direction*/ 0,0,0);
+        return new Vectors3f(x, y, z);
     }
 
     public void setDirection(Vectors3f direction, float deviation) {

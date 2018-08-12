@@ -1,4 +1,4 @@
-package team.hdt.sandboxgame.game_engine.common.partical;
+package team.hdt.sandboxgame.game_engine.common.particle;
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
