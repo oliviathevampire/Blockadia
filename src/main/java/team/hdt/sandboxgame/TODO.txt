@@ -3,6 +3,7 @@ Priority:
 
 Stuff to add go down in list:
 
+    Biomes,
     Working hitbox system,
     Entities,
     Particle System,
@@ -13,7 +14,6 @@ Stuff to add go down in list:
     Mob ai,
     Tree's,
     Grass,
-    Biomes,
     Gui's,
     Weather(rain, wind, snow, etc),
     Seasons,
