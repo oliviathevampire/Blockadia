@@ -2,16 +2,19 @@ Priority:
     Get world and player moving around world working
 
 Stuff to add go down in list:
+
     Working hitbox system,
     Entities,
-    Gui's,
     Particle System,
+    world gen,
     Fluids,
+    clouds,
     Day/night cycle,
     Mob ai,
     Tree's,
     Grass,
     Biomes,
+    Gui's,
     Weather(rain, wind, snow, etc),
     Seasons,
     Cities, small villages and also npcs.
