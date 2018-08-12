@@ -1,3 +1,4 @@
+/*
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -46,3 +47,4 @@ public class Projectile extends Entity {
 	}
 	
 }
+*/
