@@ -10,7 +10,6 @@ import java.nio.ByteBuffer;
 
 public class TextureLoader {
 
-    //TODO: needs decoder + formatter ? (it's causing 7 errors)
     public static final String TEXTURE_PATH = "src/main/resources/assets/sandboxgame/textures/";
     public static final String TEXTURE_TYPE = "matte";
     private static int dirt, grassSide, grassTop, stone, textureSheet;
