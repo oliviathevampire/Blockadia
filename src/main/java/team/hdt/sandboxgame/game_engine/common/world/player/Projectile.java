@@ -1,23 +1,20 @@
-/*
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
-import org.lwjgl.util.vector.Vector3f;
-
-import net.adam_keenan.voxel.utils.GLShapes;
-import net.adam_keenan.voxel.utils.RayTracer;
-import net.adam_keenan.voxel.world.Entity;
-import net.adam_keenan.voxel.world.Physics;
-import net.adam_keenan.voxel.world.Block.BlockType;
-import net.adam_keenan.voxel.world.player.BendingStyle.Element;
+import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
+import team.hdt.sandboxgame.game_engine.common.entity.Entity;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
+import team.hdt.sandboxgame.game_engine.common.util.raytracing.RayTracer;
+import team.hdt.sandboxgame.game_engine.common.world.Physics;
+import team.hdt.sandboxgame.game_engine.common.world.block.Block;
 
 public class Projectile extends Entity {
 	
 	Player player;
-	Element type;
+	BendingStyle.Element type;
 	
 	boolean attached;
 	
-	public Projectile(Player player, Element type) {
+	public Projectile(Player player, BendingStyle.Element type) {
 		super(player.x, player.y + 1.5f, player.z);
 		this.player = player;
 		this.arena = this.player.arena;
@@ -29,7 +26,7 @@ public class Projectile extends Entity {
 	public void update() {
 		if (attached) {
 			fallSpeed = 0;
-			Vector3f dir = RayTracer.getScreenCenterRay().dir;
+			Vectors3f dir = RayTracer.getScreenCenterRay().dir;
 			this.x = this.player.x + dir.x;
 			this.y = this.player.y + 1.5f + dir.y;
 			this.z = this.player.z + dir.z;
@@ -43,8 +40,7 @@ public class Projectile extends Entity {
 	
 	@Override
 	public void render() {
-		GLShapes.drawCube(BlockType.FIRE, x, y, z);
+		GLShapes.drawCube(Block.BlockType.FIRE, x, y, z);
 	}
 	
 }
-*/
