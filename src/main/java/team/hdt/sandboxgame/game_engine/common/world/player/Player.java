@@ -9,50 +9,51 @@ import team.hdt.sandboxgame.game_engine.common.util.raytracing.RayTracer;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
 import team.hdt.sandboxgame.game_engine.common.world.Entity;
 import team.hdt.sandboxgame.game_engine.common.world.Physics;
-import team.hdt.sandboxgame.game_engine.common.world.block.Block;
+import team.hdt.sandboxgame.game_engine.common.world.block.BlockType;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glEnd;
 
 public class Player extends Entity {
-	
+
 	BendingStyle style;
-	
+
 	private final boolean FLY = false;
-	
+
 	private Camera camera;
-	
+
 	private boolean jumped;
 	private boolean mouseChanged, keyboardChanged;
-	
-	Block curBlock;
+
+	BlockType curBlock;
 	Vectors3f curBlockVec;
 	private int lastSearch;
-	
+
 	Projectile projectile;
 	private int power;
-	
+
 	private int x1 = 0, y1 = 0, z1 = 0;
 	private final int SIZE = 1;
-	
+
 	public Player(BendingStyle.Element type, Arena arena, int x, int y, int z) {
 		super(x + .5f, y, z + .5f);
 		this.arena = arena;
 		this.camera = new Camera(this, x, y, z);
 		this.camera.setup();
-		curBlock = new Block(0, 0, 0, null);
+		// TODO
+//		curBlock = new BlockType(0, 0, 0, null);
 		curBlockVec = new Vectors3f();
 		this.style = new BendingStyle(this, type);
 		this.projectile = this.style.conjure();
 		arena.addProjectile(projectile);
 	}
-	
+
 	public Camera getCamera() {
 		return camera;
 	}
-	
-	private Block getBlockLookedAt() {
+
+	private BlockType getBlockLookedAt() {
 		lastSearch++;
 		if ((mouseChanged || keyboardChanged) && lastSearch > 5) {
 			curBlockVec = getBlock(RayTracer.getScreenCenterRay());
@@ -65,26 +66,33 @@ public class Player extends Entity {
 		/*camera.drawString(10, 150, String.format("(%s, %s, %s)", x, y, z));
 		camera.drawString(10, 170, String.format("(%s, %s, %s)", (int) x, (int) y, (int) z));
 		if (x != -1 && y != -1 && z != -1 && arena.inBounds((int) x, (int) y, (int) z)) {
-			camera.drawString(400, 170, arena.blocks[(int) x][(int) y][(int) z].getType().toString());
+			camera.drawString(400, 170, arena.blocks[(int) x][(int) y][(int) z].toString());
 			return arena.blocks[(int) x][(int) y][(int) z];
+<<<<<<< HEAD
 		}*/
 		return new Block(-1, -1, -1, Block.BlockType.OUTLINE);
+=======
+		}
+		return null;
+//		return new BlockType(-1, -1, -1, BlockType.BlockType.OUTLINE);
+>>>>>>> 8a7a66410377c5bdaa9f4f8968ca41df18976ce7
 	}
-	
+
 	private Vectors3f getBlock(Ray ray) {
 		int i = 0;
 		lbl: while (ray.distance < 10) {
-			for (Block[][] blockX : arena.blocks) {
-				for (Block[] blockY : blockX) {
-					for (Block block : blockY) {
-						if (!block.isWalkThroughable())
-							if (block.contains(ray.pos)) {
-								i++;
-								break lbl;
-							} else if (!arena.contains(ray.pos)) {
-								ray.pos.set(-1, -1, -1);
-								break lbl;
-							}
+			for (BlockType[][] blockX : arena.blocks) {
+				for (BlockType[] blockY : blockX) {
+					for (BlockType block : blockY) {
+						// TODO
+//						if (!block.isWalkThroughable())
+//							if (block.contains(ray.pos)) {
+//								i++;
+//								break lbl;
+//							} else if (!arena.contains(ray.pos)) {
+//								ray.pos.set(-1, -1, -1);
+//								break lbl;
+//							}
 					}
 				}
 			}
@@ -102,9 +110,9 @@ public class Player extends Entity {
 		}
 		return ray.pos;
 	}
-	
+
 	public void processKeyboard(int delta) {
-		
+
 		if (glfwGetMouseButton(Main.display.window, GLFW_KEY_O) == GLFW_PRESS && this.projectile.attached) {
 			this.projectile.attached = false;
 			this.projectile.momentum = new Vectors3f((float)power / 20, (float)power / 20, (float)power / 20);
@@ -167,7 +175,7 @@ public class Player extends Entity {
 			camera.moveFromLook(dx, dy, dz);
 		}*/
 	}
-	
+
 	private void move(float dx, float dz) {
 		if (dx == 0 && dz == 0) {
 			keyboardChanged = false;
@@ -176,10 +184,10 @@ public class Player extends Entity {
 		keyboardChanged = true;
 		Physics.moveWithCollisions(this, dx, dz, null);
 	}
-	
+
 	public void processMouse() {
 		if (glfwGetMouseButton(Main.display.window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-			curBlock.move(0, -.1f, 0);
+//			curBlock.move(0, -.1f, 0);
 		if (glfwGetMouseButton(Main.display.window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
 			this.projectile.attached = false;
 			this.projectile.momentum = RayTracer.getScreenCenterRay().dir;
@@ -197,16 +205,16 @@ public class Player extends Entity {
 		mouseChanged = camera.processMouse(.75f, 90, -80);
 		this.yaw = camera.yaw;
 	}
-	
+
 	@Override
 	public void update() {
 		camera.x = this.x;
 		camera.y = this.y + 1.62f;
 		camera.z = this.z;
 		camera.update();
-		
+
 	}
-	
+
 	@Override
 	public void render() {
 		curBlock = getBlockLookedAt();
@@ -228,10 +236,10 @@ public class Player extends Entity {
 		camera.drawString(Display.getWidth() - 200, Display.getHeight() - 20, String.format("Power: %s", power));*/
 		HUD.drawCrosshairs();
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("(%s, %s, %s)", x, y, z);
 	}
-	
+
 }

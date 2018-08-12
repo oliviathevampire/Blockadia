@@ -5,12 +5,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
-import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
-import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
-import team.hdt.sandboxgame.game_engine.common.world.Arena;
-import team.hdt.sandboxgame.game_engine.common.world.block.Block;
-import team.hdt.sandboxgame.game_engine.common.world.player.BendingStyle;
-import team.hdt.sandboxgame.game_engine.common.world.player.Player;
+import team.hdt.sandboxgame.game_engine.common.state.GameState;
+import team.hdt.sandboxgame.game_engine.common.state.IngameState;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
@@ -24,13 +20,11 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
 
-    private static State gameState = State.IN_GAME;
+    private static GameState gameState = new IngameState();
 
     private static int width;
     private static int height;
     public long window;
-    private Arena arena;
-    private Player player;
     DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
 
@@ -76,40 +70,10 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
-        if(gameState == State.IN_GAME) {
-            arena = new Arena();
-            arena.genDemoBlocks();
-            player = new Player(BendingStyle.Element.FIRE, arena, 10, 17, 10);
-            player.processMouse();
-            TextureLoader.loadTextures(false);
-            TextureLoader.bind(TextureLoader.Textures.SHEET);
-            GLShapes.drawCube(Block.BlockType.GRASS, 0, 0, 0);
-        }
-        if(gameState == State.MAIN_MENU) {
-            TextureLoader.loadTextures(false);
-            TextureLoader.bind(TextureLoader.Textures.MAIN_MENU_LOGO);
-        }
+        gameState.setup();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            if(gameState == State.IN_GAME) {
-                glShadeModel(GL_SMOOTH);
-                glClearColor(0.53f, 0.8f, 0.98f, 0.0f); // Sky blue
-                glClearDepth(1.0);
-                glEnable(GL_DEPTH_TEST);
-                glDepthFunc(GL_LEQUAL);
-                // Transparency
-                glEnable(GL_BLEND);
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                glEnable(GL_ALPHA_TEST);
-                glAlphaFunc(GL_GREATER, 0.0f);
-                glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-                player.update();
-
-                arena.update();
-                arena.render();
-
-                player.render();
-            }
+            gameState.render();
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
