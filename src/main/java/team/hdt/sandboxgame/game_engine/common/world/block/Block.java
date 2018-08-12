@@ -1,6 +1,7 @@
 package team.hdt.sandboxgame.game_engine.common.world.block;
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
+import team.hdt.sandboxgame.game_engine.common.world.Entity;
 
 public class Block extends Entity {
 

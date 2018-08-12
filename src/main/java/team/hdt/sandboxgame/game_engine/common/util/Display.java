@@ -9,6 +9,8 @@ import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
 import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
 import team.hdt.sandboxgame.game_engine.common.world.block.Block;
+import team.hdt.sandboxgame.game_engine.common.world.player.BendingStyle;
+import team.hdt.sandboxgame.game_engine.common.world.player.Player;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
@@ -28,6 +30,7 @@ public class Display {
     private static int height;
     public long window;
     private Arena arena;
+    private Player player;
     DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
     DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
 
@@ -76,6 +79,8 @@ public class Display {
         if(gameState == State.IN_GAME) {
             arena = new Arena();
             arena.genDemoBlocks();
+            player = new Player(BendingStyle.Element.FIRE, arena, 10, 17, 10);
+            player.processMouse();
             TextureLoader.loadTextures(false);
             TextureLoader.bind(TextureLoader.Textures.SHEET);
             GLShapes.drawCube(Block.BlockType.GRASS, 0, 0, 0);
@@ -98,7 +103,12 @@ public class Display {
                 glEnable(GL_ALPHA_TEST);
                 glAlphaFunc(GL_GREATER, 0.0f);
                 glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+                player.update();
+
+                arena.update();
                 arena.render();
+
+                player.render();
             }
             glfwSwapBuffers(window);
             glfwPollEvents();
