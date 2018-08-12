@@ -5,8 +5,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import team.hdt.sandboxgame.game_engine.common.Identifier;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 

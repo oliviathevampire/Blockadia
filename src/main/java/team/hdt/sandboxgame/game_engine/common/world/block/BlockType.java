@@ -2,8 +2,7 @@ package team.hdt.sandboxgame.game_engine.common.world.block;
 
 import team.hdt.sandboxgame.game_engine.common.Identifier;
 import team.hdt.sandboxgame.game_engine.common.registry.RegistryEntry;
-
-import javax.annotation.Nonnull;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nonnull;
 
 public class BlockType implements RegistryEntry {
     private Identifier registryIdentifier;

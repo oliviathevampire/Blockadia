@@ -1,6 +1,6 @@
 package team.hdt.sandboxgame.game_engine.common;
 
-import javax.annotation.Nonnull;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nonnull;
 
 public class Identifier {
     public static final String DEFAULT_NAMESPACE = "default";
