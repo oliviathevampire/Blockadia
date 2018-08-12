@@ -172,8 +172,5 @@ public class Camera {
         this.x -= dx * (float) sin(toRadians(yaw - 90)) + dz * sin(toRadians(yaw));
         this.y += dy * (float) sin(toRadians(pitch - 90)) + dz * sin(toRadians(pitch));
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 1c133b654df8467239ebdf4914e4f36c2f361cf8
