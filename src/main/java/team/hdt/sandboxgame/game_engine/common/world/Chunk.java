@@ -39,6 +39,6 @@ public class Chunk {
     }
 
     public BlockType getBlock(int x, int y, int z) {
-        return this.storage.getBlockUnchecked(x & CHUNK_MASK, y & CHUNK_MASK,  z & CHUNK_MASK);
+        return this.storage.getBlockUnchecked(x & CHUNK_MASK, y & CHUNK_MASK, z & CHUNK_MASK);
     }
 }

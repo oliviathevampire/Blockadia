@@ -6,13 +6,11 @@ public enum Side {
     SERVER,
     UNIVERSAL;
 
-    public boolean isServer()
-    {
+    public boolean isServer() {
         return !this.isClient();
     }
 
-    public boolean isClient()
-    {
+    public boolean isClient() {
         return this == CLIENT;
     }
 

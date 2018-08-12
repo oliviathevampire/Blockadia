@@ -26,14 +26,14 @@ public abstract class Button implements IButton {
     }
 
     public void checkHover() {
-        if (! isHidden) {
+        if (!isHidden) {
             Vectors2f location = guiTexture.getPosition();
             Vectors2f scale = guiTexture.getScale();
             Vectors2f mouseCoordinates = null;//mouse.getMousePoint(null);
-            if (location.y + scale.y > - mouseCoordinates.y && location.y - scale.y < - mouseCoordinates.y
+            if (location.y + scale.y > -mouseCoordinates.y && location.y - scale.y < -mouseCoordinates.y
                     && location.x + scale.x > mouseCoordinates.x && location.x - scale.x < mouseCoordinates.x) {
                 whileHover();
-                if (! isHovering) {
+                if (!isHovering) {
                     isHovering = true;
                     startHover();
                 }

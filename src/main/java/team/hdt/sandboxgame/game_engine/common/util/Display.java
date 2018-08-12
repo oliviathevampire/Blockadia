@@ -97,8 +97,8 @@ public class Display {
         return yBuffer.get(0);
     }
 
-    private enum State {
-        MAIN_MENU, IN_GAME, PAUSE_MENU, SETTINGS
+    public boolean shouldClose() {
+        return glfwWindowShouldClose(window);
     }
 
 }

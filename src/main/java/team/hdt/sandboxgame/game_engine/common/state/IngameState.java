@@ -22,6 +22,18 @@ public class IngameState implements GameState {
     }
 
     @Override
+    public void drop() {
+    }
+
+    @Override
+    public GameState update() {
+        this.player.update();
+        this.arena.update();
+
+        return this;
+    }
+
+    @Override
     public void render() {
         glShadeModel(GL_SMOOTH);
         glClearColor(0.53f, 0.8f, 0.98f, 0.0f); // Sky blue
@@ -34,11 +46,8 @@ public class IngameState implements GameState {
         glEnable(GL_ALPHA_TEST);
         glAlphaFunc(GL_GREATER, 0.0f);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-        this.player.update();
 
-        this.arena.update();
         this.arena.render();
-
         this.player.render();
     }
 }
