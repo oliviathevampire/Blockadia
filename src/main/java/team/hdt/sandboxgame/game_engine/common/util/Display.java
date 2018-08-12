@@ -97,4 +97,8 @@ public class Display {
         return yBuffer.get(0);
     }
 
+    public boolean shouldClose() {
+        return glfwWindowShouldClose(window);
+    }
+
 }

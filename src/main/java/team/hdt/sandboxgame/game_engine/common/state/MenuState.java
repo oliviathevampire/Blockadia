@@ -8,6 +8,15 @@ public class MenuState implements GameState {
     }
 
     @Override
+    public void drop() {
+    }
+
+    @Override
+    public GameState update() {
+        return this;
+    }
+
+    @Override
     public void render() {
         TextureLoader.loadTextures(false);
         TextureLoader.bind(TextureLoader.Textures.MAIN_MENU_LOGO);
