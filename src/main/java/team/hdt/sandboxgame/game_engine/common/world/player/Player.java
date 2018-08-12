@@ -3,16 +3,15 @@ package team.hdt.sandboxgame.game_engine.common.world.player;
 import org.lwjgl.opengl.GL11;
 import team.hdt.sandboxgame.game_engine.client.hud.HUD;
 import team.hdt.sandboxgame.game_engine.common.Main;
-import team.hdt.sandboxgame.game_engine.common.entity.Entity;
 import team.hdt.sandboxgame.game_engine.common.util.Display;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.sandboxgame.game_engine.common.util.raytracing.Ray;
 import team.hdt.sandboxgame.game_engine.common.util.raytracing.RayTracer;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
+import team.hdt.sandboxgame.game_engine.common.world.Entity;
 import team.hdt.sandboxgame.game_engine.common.world.Physics;
 import team.hdt.sandboxgame.game_engine.common.world.block.Block;
 
-import static com.codedisaster.steamworks.SteamController.Source.Mouse;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glEnd;
@@ -48,9 +47,6 @@ public class Player extends Entity {
 		this.style = new BendingStyle(this, type);
 		this.projectile = this.style.conjure();
 		arena.addProjectile(projectile);
-		
-//		JBulletPhysics.addCube(1);
-		
 	}
 	
 	public Camera getCamera() {
@@ -96,7 +92,6 @@ public class Player extends Entity {
 			ray.next();
 		}
 		if (i > 0) {
-//			System.out.println("Found block! " + arena.blocks[(int) ray.pos.x][(int) ray.pos.y][(int) ray.pos.z].getType()+ray.pos);
 			x1 = (int) ray.pos.x;
 			y1 = (int) ray.pos.y;
 			z1 = (int) ray.pos.z;
@@ -122,7 +117,7 @@ public class Player extends Entity {
 				arena.addProjectile(this.projectile);
 			}
 		}
-		while (Keyboard.next()) {
+		/*while (Keyboard.next()) {
 			if (Keyboard.getEventKeyState()) {
 				if (Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 					power -= power == 0 ? 0 : 1;
@@ -131,7 +126,7 @@ public class Player extends Entity {
 			}
 		}
 		
-		boolean keyUp = false, keyDown = false, keyRight = false, keyLeft = false, keySpace = false, keyShift = false;
+		boolean keyUp, keyDown, keyRight, keyLeft, keySpace, keyShift;
 		
 		keyUp = Keyboard.isKeyDown(Keyboard.KEY_W);
 		keyDown = Keyboard.isKeyDown(Keyboard.KEY_S);
@@ -140,10 +135,8 @@ public class Player extends Entity {
 		keySpace = Keyboard.isKeyDown(Keyboard.KEY_SPACE);
 		keyShift = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 		
-		float dx = 0, dy = 0, dz = 0;
+		float dx = 0, dy, dz = 0;
 		float amount = delta * .003f;
-//		if (jumped)
-//			amount = delta * .0015f;
 		dx += keyRight ? amount : 0;
 		dx += keyLeft ? -amount : 0;
 		dz += keyUp ? -amount : 0;
@@ -173,7 +166,7 @@ public class Player extends Entity {
 			this.y += dy;
 			this.z += dz;
 			camera.moveFromLook(dx, dy, dz);
-		}
+		}*/
 	}
 	
 	private void move(float dx, float dz) {

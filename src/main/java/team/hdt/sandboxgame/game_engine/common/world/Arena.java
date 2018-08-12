@@ -1,18 +1,26 @@
 package team.hdt.sandboxgame.game_engine.common.world;
 
-
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.sandboxgame.game_engine.common.world.block.Block;
+import team.hdt.sandboxgame.game_engine.common.world.player.Projectile;
 
+import java.util.ArrayList;
 
 public class Arena {
 
     public final int X_SIZE = 10, Y_SIZE = 10, Z_SIZE = 10;
     final int CUBE_LENGTH = 1;
     public Block[][][] blocks;
+    private ArrayList<Projectile> projectiles;
 
     public Arena() {
 
+    }
+
+    public void addProjectile(Projectile proj) {
+        if (projectiles == null)
+            projectiles = new ArrayList<Projectile>();
+        projectiles.add(proj);
     }
 
     public void genTwoBlocks() {
@@ -83,12 +91,21 @@ public class Arena {
         blocks[5][5][5] = new Block(5, 5, 5, Block.BlockType.GRASS);
     }
 
+    public void update() {
+        if (projectiles != null)
+            for (Projectile projectile : projectiles)
+                projectile.update();
+    }
+
     public void render() {
         for (Block[][] blockX : blocks)
             for (Block[] blockY : blockX)
                 for (Block block : blockY)
                     if (block.getType() != Block.BlockType.AIR)
                         block.render();
+        if (projectiles != null)
+            for (Projectile projectile : projectiles)
+                projectile.render();
     }
 
     public boolean contains(Vectors3f pos) {

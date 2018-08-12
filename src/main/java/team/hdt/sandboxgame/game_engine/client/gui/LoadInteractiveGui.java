@@ -1,6 +1,6 @@
 package team.hdt.sandboxgame.game_engine.client.gui;
 
-public class LoadIntacativeGuis {
+public class LoadInteractiveGui {
 
     public static void load() {
         //TODO: add loader
