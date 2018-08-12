@@ -57,7 +57,6 @@ public class Player extends Entity {
         x = curBlockVec.x;
         y = curBlockVec.y;
         z = curBlockVec.z;
-<<<<<<< HEAD
         return null;
     }
 
