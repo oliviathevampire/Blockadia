@@ -1,6 +1,7 @@
 package team.hdt.sandboxgame.game_engine.common.util;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL12;
 
 import java.nio.IntBuffer;
 
@@ -214,7 +215,7 @@ public class Util {
      */
     protected static int glGetIntegerv(int what) {
         scratch.rewind();
-        glGetIntegerv(what, scratch);
+        GL12.glGetIntegerv(what, scratch);
         return scratch.get();
     }
 

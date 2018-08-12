@@ -1,7 +1,7 @@
 package team.hdt.sandboxgame.game_engine.common.world.storage;
 
-import team.hdt.sandboxgame.game_engine.common.world.block.BlockTypes;
 import team.hdt.sandboxgame.game_engine.common.world.block.BlockType;
+import team.hdt.sandboxgame.game_engine.common.world.block.BlockTypes;
 
 public class RawIdBlockStorage implements RawBlockStorage {
     private final byte[] data;

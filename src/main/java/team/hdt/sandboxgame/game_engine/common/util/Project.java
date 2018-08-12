@@ -6,8 +6,7 @@ import org.lwjgl.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import static org.lwjgl.opengl.GL11.glScalef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL11.*;
 
 
 /**
@@ -275,7 +274,7 @@ public class Project extends Util {
 
         float sine, cotangent, deltaZ;
 
-        float radians = fovy / 2 * GLU.PI / 180;
+        float radians = fovy / 2 * (float) Math.PI / 180;
 
 
         deltaZ = zFar - zNear;
@@ -286,31 +285,16 @@ public class Project extends Util {
         if ((deltaZ == 0) || (sine == 0) || (aspect == 0)) {
 
             return;
-
         }
-
-
         cotangent = (float) Math.cos(radians) / sine;
-
-
         __gluMakeIdentityf(matrix);
-
-
         matrix.put(0 * 4 + 0, cotangent / aspect);
-
         matrix.put(1 * 4 + 1, cotangent);
 
         matrix.put(2 * 4 + 2, -(zFar + zNear) / deltaZ);
 
-        matrix.put(2 * 4 + 3, -1);
-
-        matrix.put(3 * 4 + 2, -2 * zNear * zFar / deltaZ);
-
-        matrix.put(3 * 4 + 3, 0);
-
-
-        glMultMatrix(matrix);
-
+        matrix.put(2 * 4 + 3, 1);
+        glMultMatrixf(matrix);
     }
 
 
@@ -409,7 +393,7 @@ public class Project extends Util {
         matrix.put(2 * 4 + 2, -forward[2]);
 
 
-        glMultMatrix(matrix);
+        glMultMatrixf(matrix);
 
         glTranslatef(-eyex, -eyey, -eyez);
 
@@ -547,7 +531,7 @@ public class Project extends Util {
 
         // Map x and y from window coordinates
 
-        in[0] = (in[0] - viewport.get(viewport.position() + 0)) / viewport.get(viewport.position() + 2);
+        in[0] = (in[0] - viewport.get(viewport.position())) / viewport.get(viewport.position() + 2);
 
         in[1] = (in[1] - viewport.get(viewport.position() + 1)) / viewport.get(viewport.position() + 3);
 

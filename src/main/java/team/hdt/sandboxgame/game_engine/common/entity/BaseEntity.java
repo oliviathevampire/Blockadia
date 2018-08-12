@@ -7,6 +7,7 @@ import team.hdt.sandboxgame.game_engine.client.rendering.TexturedModel;
 import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nullable;
 
 public class BaseEntity {
+    public static int ID;
     public float positionX;
     public float positionY;
     public float positionZ;
@@ -14,7 +15,6 @@ public class BaseEntity {
     public float rotationXY;
     public float rotationZY;
     public TexturedModel model;
-    public static int ID;
     public boolean CanburnInDay;
     @Nullable
     public boolean IsAquatic;
@@ -23,7 +23,7 @@ public class BaseEntity {
     public BaseEntity(TexturedModel model, int id, String type) {
         this.model = model;
         this.ID = id;
-        switch (type){
+        switch (type) {
             case ("hostile"):
                 setHostileDefalt();
             case ("peaceful"):
@@ -31,6 +31,7 @@ public class BaseEntity {
         }
 
     }
+
     public BaseEntity(TexturedModel model, int id, boolean canburnInDay, boolean isAquatic) {
         this.model = model;
         this.ID = id;
@@ -38,21 +39,28 @@ public class BaseEntity {
         this.IsAquatic = isAquatic;
 
     }
+
+    public static int getID() {
+        return ID;
+    }
+
     public void setPassiveDefalt() {
         this.CanburnInDay = SharePeacefulAspects.burnInDay;
         this.IsAquatic = SharePeacefulAspects.liveInWater;
     }
-    public void setHostileDefalt(){
+
+    public void setHostileDefalt() {
         this.CanburnInDay = SharedHostileAspects.burnInDay;
         this.IsAquatic = SharedHostileAspects.liveInWater;
     }
-    public void move(float x,float y , float z){
+
+    public void move(float x, float y, float z) {
         this.positionX = x;
         this.positionY = y;
         this.positionZ = z;
     }
 
-    public void rotation(float rotationXY,float rotationXZ, float rotationZY) {
+    public void rotation(float rotationXY, float rotationXZ, float rotationZY) {
         this.rotationXY = rotationXY;
         this.rotationXZ = rotationXZ;
         this.rotationZY = rotationZY;
@@ -60,10 +68,6 @@ public class BaseEntity {
 
     public TexturedModel getModel() {
         return model;
-    }
-
-    public static int getID() {
-        return ID;
     }
 
     public boolean CanburnInDay() {
