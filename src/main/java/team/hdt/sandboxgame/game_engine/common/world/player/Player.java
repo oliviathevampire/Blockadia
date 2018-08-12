@@ -1,6 +1,5 @@
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
-import jdk.nashorn.internal.ir.Block;
 import org.lwjgl.opengl.GL11;
 import team.hdt.sandboxgame.game_engine.client.hud.HUD;
 import team.hdt.sandboxgame.game_engine.common.Main;
@@ -34,7 +33,7 @@ public class Player extends Entity {
     public Player(BendingStyle.Element type, Arena arena, int x, int y, int z) {
         super(x + .5f, y, z + .5f);
         this.arena = arena;
-        this.camera = new Camera(x, y, z);
+        this.camera = new Camera(this, x, y, z);
         this.camera.setup();
         // TODO
 //		curBlock = new BlockType(0, 0, 0, null);
@@ -58,64 +57,21 @@ public class Player extends Entity {
         x = curBlockVec.x;
         y = curBlockVec.y;
         z = curBlockVec.z;
-		/*camera.drawString(10, 150, String.format("(%s, %s, %s)", x, y, z));
-		camera.drawString(10, 170, String.format("(%s, %s, %s)", (int) x, (int) y, (int) z));
-		if (x != -1 && y != -1 && z != -1 && arena.inBounds((int) x, (int) y, (int) z)) {
-			camera.drawString(400, 170, arena.blocks[(int) x][(int) y][(int) z].toString());
-			return arena.blocks[(int) x][(int) y][(int) z];
-		}*/
-<<<<<<< HEAD
-		return new Block(-1, -1, -1, Block.BlockType.OUTLINE);
-
-		}
 		return null;
-//		return new BlockType(-1, -1, -1, BlockType.BlockType.OUTLINE);
 	}
 
 	private Vectors3f getBlock(Ray ray) {
 		int i = 0;
-		lbl: while (ray.distance < 10) {
-			for (BlockType[][] blockX : arena.blocks) {
-				for (BlockType[] blockY : blockX) {
-					for (BlockType block : blockY) {
-						// TODO
-=======
-        return null;
-    }
-
-    private Vectors3f getBlock(Ray ray) {
-        int i = 0;
-        lbl:
-        while (ray.distance < 10) {
+		while (ray.distance < 10) {
             for (BlockType[][] blockX : arena.blocks) {
                 for (BlockType[] blockY : blockX) {
                     for (BlockType block : blockY) {
                         // TODO
->>>>>>> a6859962d2e014880f5e830844c233ba0aaf3a6d
-//						if (!block.isWalkThroughable())
-//							if (block.contains(ray.pos)) {
-//								i++;
-//								break lbl;
-//							} else if (!arena.contains(ray.pos)) {
-//								ray.pos.set(-1, -1, -1);
-//								break lbl;
-//							}
                     }
                 }
             }
-            ray.next();
         }
-        if (i > 0) {
-            x1 = (int) ray.pos.x;
-            y1 = (int) ray.pos.y;
-            z1 = (int) ray.pos.z;
-        } else {
-            x1 = 0;
-            y1 = 0;
-            z1 = 0;
-            ray.pos.set(-1, -1, -1);
-        }
-        return ray.pos;
+        return null;
     }
 
     public void processKeyboard(int delta) {
@@ -131,56 +87,6 @@ public class Player extends Entity {
                 arena.addProjectile(this.projectile);
             }
         }
-		/*while (Keyboard.next()) {
-			if (Keyboard.getEventKeyState()) {
-				if (Keyboard.getEventKey() == Keyboard.KEY_DOWN)
-					power -= power == 0 ? 0 : 1;
-				if (Keyboard.getEventKey() == Keyboard.KEY_UP)
-					power += power == 10 ? 0 : 1;
-			}
-		}
-		
-		boolean keyUp, keyDown, keyRight, keyLeft, keySpace, keyShift;
-		
-		keyUp = Keyboard.isKeyDown(Keyboard.KEY_W);
-		keyDown = Keyboard.isKeyDown(Keyboard.KEY_S);
-		keyLeft = Keyboard.isKeyDown(Keyboard.KEY_A);
-		keyRight = Keyboard.isKeyDown(Keyboard.KEY_D);
-		keySpace = Keyboard.isKeyDown(Keyboard.KEY_SPACE);
-		keyShift = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
-		
-		float dx = 0, dy, dz = 0;
-		float amount = delta * .003f;
-		dx += keyRight ? amount : 0;
-		dx += keyLeft ? -amount : 0;
-		dz += keyUp ? -amount : 0;
-		dz += keyDown ? amount : 0;
-		if (!FLY) {
-			if (keySpace && !jumped) {
-				jumped = true;
-				System.out.println("Pressed jumped");
-				fallSpeed = -.15f;
-			}
-			if (Physics.gravity(this)) {
-				keyboardChanged = true;
-				fallSpeed += fallSpeed > 1.5f ? 0 : .01f;
-				jumped = true;
-			} else {
-				keyboardChanged = false;
-				fallSpeed = 0;
-				jumped = false;
-			}
-			move(dx, dz);
-		} else {
-			if (keySpace)
-				this.y += .1f;
-			if (keyShift)
-				this.y -= .1f;
-			this.x += dx;
-			this.y += dy;
-			this.z += dz;
-			camera.moveFromLook(dx, dy, dz);
-		}*/
     }
 
     private void move(float dx, float dz) {
@@ -193,23 +99,11 @@ public class Player extends Entity {
     }
 
     public void processMouse() {
-        if (glfwGetMouseButton(Main.display.window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-//			curBlock.move(0, -.1f, 0);
-            if (glfwGetMouseButton(Main.display.window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
-                this.projectile.attached = false;
-                this.projectile.momentum = RayTracer.getScreenCenterRay().dir;
-                this.projectile.speed = (float) power / 20;
-            }
-		/*if (Mouse.hasWheel()) {
-			int wheel = Mouse.getDWheel();
-			if (wheel != 0)
-//			System.out.println(wheel);
-			if (wheel < 0)
-				power -= power == 0 ? 0 : 1;
-			if (wheel > 0)
-				power += power == 10 ? 0 : 1;
-		}*/
-        mouseChanged = camera.processMouse();
+        if (glfwGetMouseButton(Main.display.window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+            this.projectile.attached = false;
+            this.projectile.momentum = RayTracer.getScreenCenterRay().dir;
+            this.projectile.speed = (float) power / 20;
+        }
         this.yaw = camera.yaw;
     }
 
