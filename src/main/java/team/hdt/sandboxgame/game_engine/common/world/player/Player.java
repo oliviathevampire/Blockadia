@@ -3,7 +3,6 @@ package team.hdt.sandboxgame.game_engine.common.world.player;
 import org.lwjgl.opengl.GL11;
 import team.hdt.sandboxgame.game_engine.client.hud.HUD;
 import team.hdt.sandboxgame.game_engine.common.Main;
-import team.hdt.sandboxgame.game_engine.common.util.Display;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.sandboxgame.game_engine.common.util.raytracing.Ray;
 import team.hdt.sandboxgame.game_engine.common.util.raytracing.RayTracer;
@@ -64,14 +63,19 @@ public class Player extends Entity {
 		x = curBlockVec.x;
 		y = curBlockVec.y;
 		z = curBlockVec.z;
-		camera.drawString(10, 150, String.format("(%s, %s, %s)", x, y, z));
+		/*camera.drawString(10, 150, String.format("(%s, %s, %s)", x, y, z));
 		camera.drawString(10, 170, String.format("(%s, %s, %s)", (int) x, (int) y, (int) z));
 		if (x != -1 && y != -1 && z != -1 && arena.inBounds((int) x, (int) y, (int) z)) {
 			camera.drawString(400, 170, arena.blocks[(int) x][(int) y][(int) z].toString());
 			return arena.blocks[(int) x][(int) y][(int) z];
+<<<<<<< HEAD
+		}*/
+		return new Block(-1, -1, -1, Block.BlockType.OUTLINE);
+=======
 		}
 		return null;
 //		return new BlockType(-1, -1, -1, BlockType.BlockType.OUTLINE);
+>>>>>>> 8a7a66410377c5bdaa9f4f8968ca41df18976ce7
 	}
 
 	private Vectors3f getBlock(Ray ray) {
@@ -227,9 +231,9 @@ public class Player extends Entity {
 				glEnd();
 			}
 		GL11.glColor3f(1, 1, 1);
-		camera.drawDebug();
+		/*camera.drawDebug();
 		camera.drawString(100, 300, String.format("%f, %f, %f", projectile.x, projectile.y, projectile.z));
-		camera.drawString(Display.getWidth() - 200, Display.getHeight() - 20, String.format("Power: %s", power));
+		camera.drawString(Display.getWidth() - 200, Display.getHeight() - 20, String.format("Power: %s", power));*/
 		HUD.drawCrosshairs();
 	}
 
