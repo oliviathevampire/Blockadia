@@ -83,6 +83,7 @@ dependencies {
   compile "org.lwjgl.osgi:org.lwjgl.yoga:3.2.0"
   compile "org.lwjgl.osgi:org.lwjgl.zstd:3.2.0"
   compile "org.joml:joml:1.9.10"
+  compile "org.jdom:jdom2:2.0.6"
   compile "com.code-disaster.steamworks4j:steamworks4j:1.7.0"
   compile "com.code-disaster.steamworks4j:steamworks4j-server:1.7.0"
   compile 'junit:junit:4.8.2'

@@ -5,6 +5,15 @@ import team.hdt.sandboxgame.game_engine.common.world.storage.RawBlockStorage;
 import team.hdt.sandboxgame.game_engine.common.world.storage.RawIdBlockStorage;
 
 public class Chunk {
+
+    public CHUNK_TYPE getType() {
+        return TYPE;
+    }
+
+    public enum CHUNK_TYPE {
+        HORIZONTAL, VERTICAL
+    }
+
     public static final int CHUNK_SIZE = 32;
     public static final int CHUNK_MASK = CHUNK_SIZE - 1;
     public static final int CHUNK_SHIFT = 5;
@@ -12,14 +21,16 @@ public class Chunk {
     private final int chunkX;
     private final int chunkY;
     private final int chunkZ;
+    private final CHUNK_TYPE TYPE;
 
     private final RawBlockStorage storage;
 
-    public Chunk(int chunkX, int chunkY, int chunkZ) {
+    public Chunk(int chunkX, int chunkY, int chunkZ, CHUNK_TYPE type) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
         this.chunkZ = chunkZ;
         this.storage = new RawIdBlockStorage(CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE);
+        this.TYPE = type;
     }
 
     public int getChunkX() {
