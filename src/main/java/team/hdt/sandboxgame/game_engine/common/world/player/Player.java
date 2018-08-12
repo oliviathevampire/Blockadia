@@ -34,7 +34,7 @@ public class Player extends Entity {
     public Player(BendingStyle.Element type, Arena arena, int x, int y, int z) {
         super(x + .5f, y, z + .5f);
         this.arena = arena;
-        this.camera = new Camera(this, x, y, z);
+        this.camera = new Camera(x, y, z);
         this.camera.setup();
         // TODO
 //		curBlock = new BlockType(0, 0, 0, null);
@@ -209,7 +209,7 @@ public class Player extends Entity {
 			if (wheel > 0)
 				power += power == 10 ? 0 : 1;
 		}*/
-        mouseChanged = camera.processMouse(.75f, 90, -80);
+        mouseChanged = camera.processMouse();
         this.yaw = camera.yaw;
     }
 
