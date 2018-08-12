@@ -3,7 +3,8 @@
  * 
  * This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit
  * http://creativecommons.org/licenses/by-sa/3.0/.
- */
+ *//*
+
 
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
@@ -16,17 +17,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
-
-
-import net.adam_keenan.voxel.hud.HUD;
-import net.adam_keenan.voxel.utils.Ray;
-import net.adam_keenan.voxel.utils.RayTracer;
-import net.adam_keenan.voxel.world.Arena;
-import net.adam_keenan.voxel.world.Block;
-import net.adam_keenan.voxel.world.Entity;
-import net.adam_keenan.voxel.world.Physics;
-import net.adam_keenan.voxel.world.Block.BlockType;
-import net.adam_keenan.voxel.world.player.BendingStyle.Element;
 
 public class Player extends Entity {
 	
@@ -259,3 +249,4 @@ public class Player extends Entity {
 	}
 	
 }
+*/
