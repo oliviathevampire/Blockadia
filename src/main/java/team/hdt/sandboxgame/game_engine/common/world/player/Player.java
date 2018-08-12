@@ -64,14 +64,6 @@ public class Player extends Entity {
     private Vectors3f getBlock(Ray ray) {
         int i = 0;
         while (ray.distance < 10) {
-=======
-		return null;
-	}
-
-	private Vectors3f getBlock(Ray ray) {
-		int i = 0;
-		while (ray.distance < 10) {
->>>>>>> 1c133b654df8467239ebdf4914e4f36c2f361cf8
             for (BlockType[][] blockX : arena.blocks) {
                 for (BlockType[] blockY : blockX) {
                     for (BlockType block : blockY) {
@@ -90,7 +82,7 @@ public class Player extends Entity {
             this.projectile.momentum = new Vectors3f((float) power / 20, (float) power / 20, (float) power / 20);
         }
         if (glfwGetMouseButton(Main.display.window, GLFW_KEY_P) == GLFW_PRESS) {
-//			projectile.attached = true;
+////			projectile.attached = true;
             if (!this.projectile.attached) {
                 this.projectile = this.style.conjure();
                 arena.addProjectile(this.projectile);

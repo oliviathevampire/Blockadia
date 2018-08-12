@@ -14,7 +14,6 @@ public class Camera {
 
     //private Player player;
 
-
     public Camera(/*Player player*/) {
 
     }
