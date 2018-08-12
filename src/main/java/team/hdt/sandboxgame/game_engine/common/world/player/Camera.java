@@ -1,23 +1,19 @@
-/*
- * Adam Keenan, 2013
- * 
- * This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
- * To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/.
- *//*
-
-
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
 import org.lwjgl.BufferUtils;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import team.hdt.sandboxgame.game_engine.common.Main;
 import team.hdt.sandboxgame.game_engine.common.util.Display;
 
 import java.awt.*;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.text.DecimalFormat;
 
 import static java.lang.Math.*;
+import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Camera {
@@ -77,14 +73,13 @@ public class Camera {
 			font.loadGlyphs();
 		} catch (SlickException e) {
 			e.printStackTrace();
-			Display.destroy();
 			System.exit(1);
 		}
 	}
 	
 	public void drawString(int x, int y, String string) {
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrix(orthographicProjectionMatrix);
+		glLoadMatrixf(orthographicProjectionMatrix);
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -93,12 +88,9 @@ public class Camera {
 		glPopAttrib();
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrix(perspectiveProjectionMatrix);
+		glLoadMatrixf(perspectiveProjectionMatrix);
 		glMatrixMode(GL_MODELVIEW);
 	}
-	
-	*/
-/** Applies the camera translations and rotations to GL_MODELVIEW. *//*
 
 	public void update() {
 		glPushAttrib(GL_TRANSFORM_BIT);
@@ -122,8 +114,8 @@ public class Camera {
 	public void processMouse() {
 		final float MAX_LOOK_UP = 100;
 		final float MAX_LOOK_DOWN = -90;
-		float mouseDX = Mouse.getDX() * 0.16f;
-		float mouseDY = Mouse.getDY() * 0.16f;
+		float mouseDX = (float) (Main.display.getMouseX() * 0.16f);
+		float mouseDY = (float) (Main.display.getMouseY() * 0.16f);
 		if (yaw + mouseDX >= 360) {
 			yaw = yaw + mouseDX - 360;
 		} else if (yaw + mouseDX < 0) {
@@ -141,12 +133,10 @@ public class Camera {
 	}
 	
 	public boolean processMouse(float mouseSpeed, float maxLookUp, float maxLookDown) {
-		float mouseDX = Mouse.getDX() * mouseSpeed * 0.16f;
-		float mouseDY = Mouse.getDY() * mouseSpeed * 0.16f;
+		float mouseDX = (float) (Main.display.getMouseX() * mouseSpeed * 0.16f);
+		float mouseDY = (float) (Main.display.getMouseY() * mouseSpeed * 0.16f);
 		if (mouseDX == 0 && mouseDY == 0)
 			return false;
-//		else
-//			System.out.println(mouseDX / mouseSpeed / .16f + " " + mouseDY / mouseSpeed / .16f);
 		yaw = (yaw + mouseDX) % 360;
 		if (yaw < 0)
 			yaw += 360;
@@ -185,4 +175,3 @@ public class Camera {
 		this.y += dy * (float) sin(toRadians(pitch - 90)) + dz * sin(toRadians(pitch));
 	}
 }
-*/

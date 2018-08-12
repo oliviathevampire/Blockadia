@@ -1,12 +1,16 @@
 package team.hdt.sandboxgame.game_engine.common.util;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
 import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
+import team.hdt.sandboxgame.game_engine.common.world.block.Block;
 
+import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
 import java.util.Objects;
 
@@ -22,8 +26,10 @@ public class Display {
 
     private static int width;
     private static int height;
-    private long window;
+    public long window;
     private Arena arena;
+    DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
+    DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
 
     public Display(String title, int windowWidth, int windowHeight) {
         width = windowWidth;
@@ -72,6 +78,7 @@ public class Display {
             arena.genDemoBlocks();
             TextureLoader.loadTextures(false);
             TextureLoader.bind(TextureLoader.Textures.SHEET);
+            GLShapes.drawCube(Block.BlockType.GRASS, 0, 0, 0);
         }
         if(gameState == State.MAIN_MENU) {
             TextureLoader.loadTextures(false);
@@ -104,6 +111,16 @@ public class Display {
         glfwDestroyWindow(window);
         glfwTerminate();
         glfwSetErrorCallback(null).free();
+    }
+
+    public double getMouseX() {
+        glfwGetCursorPos(window, xBuffer, yBuffer);
+        return xBuffer.get(0);
+    }
+
+    public double getMouseY() {
+        glfwGetCursorPos(window, xBuffer, yBuffer);
+        return yBuffer.get(0);
     }
 
     private enum State {
