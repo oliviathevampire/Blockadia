@@ -1,5 +1,6 @@
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
+import jdk.nashorn.internal.ir.Block;
 import org.lwjgl.opengl.GL11;
 import team.hdt.sandboxgame.game_engine.client.hud.HUD;
 import team.hdt.sandboxgame.game_engine.common.Main;
@@ -68,14 +69,12 @@ public class Player extends Entity {
 		if (x != -1 && y != -1 && z != -1 && arena.inBounds((int) x, (int) y, (int) z)) {
 			camera.drawString(400, 170, arena.blocks[(int) x][(int) y][(int) z].toString());
 			return arena.blocks[(int) x][(int) y][(int) z];
-<<<<<<< HEAD
 		}*/
 		return new Block(-1, -1, -1, Block.BlockType.OUTLINE);
-=======
+
 		}
 		return null;
 //		return new BlockType(-1, -1, -1, BlockType.BlockType.OUTLINE);
->>>>>>> 8a7a66410377c5bdaa9f4f8968ca41df18976ce7
 	}
 
 	private Vectors3f getBlock(Ray ray) {
