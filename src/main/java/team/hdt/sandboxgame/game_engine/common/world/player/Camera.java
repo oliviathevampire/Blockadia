@@ -8,12 +8,10 @@ import team.hdt.sandboxgame.game_engine.common.Main;
 import team.hdt.sandboxgame.game_engine.common.util.Display;
 
 import java.awt.*;
-import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.text.DecimalFormat;
 
 import static java.lang.Math.*;
-import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Camera {
@@ -37,7 +35,7 @@ public class Camera {
 	private DecimalFormat formatter = new DecimalFormat("#.##");
 	
 	public Camera(Player player, int x, int y, int z) {
-		setUpFonts();
+//		setUpFonts();
 		this.aspectRatio = (float) Main.WINDOW_WIDTH / Main.WINDOW_HEIGHT;
 		this.player = player;
 		this.x = x + .5f;
@@ -49,7 +47,7 @@ public class Camera {
 		glPushAttrib(GL_TRANSFORM_BIT);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-//		GLU.gluPerspective(fov, aspectRatio, zNear, zFar);
+		gluPerspective(fov, aspectRatio, zNear, zFar);
 		glPopAttrib();
 		
 		glGetFloatv(GL_PROJECTION_MATRIX, perspectiveProjectionMatrix);
@@ -75,6 +73,25 @@ public class Camera {
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+
+	public static void gluPerspective(float fovy, float aspect, float zNear, float zFar) {
+		float sine, cotangent, deltaZ;
+		float radians = fovy / 2 * GLU.PI / 180;
+		deltaZ = zFar - zNear;
+		sine = (float) Math.sin(radians);
+		if ((deltaZ == 0) || (sine == 0) || (aspect == 0)) {
+			return;
+		}
+		cotangent = (float) Math.cos(radians) / sine;
+		__gluMakeIdentityf(matrix);
+		matrix.put(0 * 4 + 0, cotangent / aspect);
+		matrix.put(1 * 4 + 1, cotangent);
+		matrix.put(2 * 4 + 2, - (zFar + zNear) / deltaZ);
+		matrix.put(2 * 4 + 3, -1);
+		matrix.put(3 * 4 + 2, -2 * zNear * zFar / deltaZ);
+		matrix.put(3 * 4 + 3, 0);
+		glMultMatrix(matrix);
 	}
 	
 	public void drawString(int x, int y, String string) {
@@ -108,7 +125,6 @@ public class Camera {
 		drawString(10, 50, "Flat Arena with a floating block for 360 degree view");
 		drawString(10, 30, "Click to grab mouse, right click to release");
 		drawString(10, 10, "WASD to move");
-		
 	}
 	
 	public void processMouse() {
