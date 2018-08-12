@@ -1,11 +1,9 @@
 package team.hdt.sandboxgame.game_engine.common.world.player;
 
-import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.sandboxgame.game_engine.common.util.raytracing.RayTracer;
 import team.hdt.sandboxgame.game_engine.common.world.Entity;
 import team.hdt.sandboxgame.game_engine.common.world.Physics;
-import team.hdt.sandboxgame.game_engine.common.world.block.Block;
 
 public class Projectile extends Entity {
 	
@@ -39,7 +37,7 @@ public class Projectile extends Entity {
 	
 	@Override
 	public void render() {
-		GLShapes.drawCube(Block.BlockType.FIRE, x, y, z);
+//		GLShapes.drawCube(BlockType.BlockType.FIRE, x, y, z);
 	}
 	
 }

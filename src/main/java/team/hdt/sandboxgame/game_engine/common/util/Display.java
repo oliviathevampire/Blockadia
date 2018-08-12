@@ -5,11 +5,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
-import team.hdt.sandboxgame.game_engine.client.rendering.GLShapes;
 import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
 import team.hdt.sandboxgame.game_engine.common.world.Arena;
-import team.hdt.sandboxgame.game_engine.common.world.block.Block;
-import team.hdt.sandboxgame.game_engine.common.world.player.BendingStyle;
 import team.hdt.sandboxgame.game_engine.common.world.player.Player;
 
 import java.nio.DoubleBuffer;
@@ -76,15 +73,15 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
-        if(gameState == State.IN_GAME) {
-            arena = new Arena();
-            arena.genDemoBlocks();
-            player = new Player(BendingStyle.Element.FIRE, arena, 10, 17, 10);
-            player.processMouse();
-            TextureLoader.loadTextures(false);
-            TextureLoader.bind(TextureLoader.Textures.SHEET);
-            GLShapes.drawCube(Block.BlockType.GRASS, 0, 0, 0);
-        }
+//        if(gameState == State.IN_GAME) {
+//            arena = new Arena();
+//            arena.genDemoBlocks();
+//            player = new Player(BendingStyle.Element.FIRE, arena, 10, 17, 10);
+//            player.processMouse();
+//            TextureLoader.loadTextures(false);
+//            TextureLoader.bind(TextureLoader.Textures.SHEET);
+//            GLShapes.drawCube(BlockType.BlockType.GRASS, 0, 0, 0);
+//        }
         if(gameState == State.MAIN_MENU) {
             TextureLoader.loadTextures(false);
             TextureLoader.bind(TextureLoader.Textures.MAIN_MENU_LOGO);

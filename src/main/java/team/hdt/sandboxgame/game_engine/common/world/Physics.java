@@ -1,7 +1,7 @@
 package team.hdt.sandboxgame.game_engine.common.world;
 
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
-import team.hdt.sandboxgame.game_engine.common.world.block.Block;
+import team.hdt.sandboxgame.game_engine.common.world.block.BlockType;
 
 import static java.lang.Math.*;
 
@@ -26,22 +26,23 @@ public class Physics {
             return false;
         float xAm = -(dx * (float) sin(toRadians(camEntity.yaw - 90)) + dz * (float) sin(toRadians(camEntity.yaw)));
         float zAm = dx * (float) cos(toRadians(camEntity.yaw - 90)) + dz * (float) cos(toRadians(camEntity.yaw));
-        Block testBlock = arena.blocks[(int) (entity.x + xAm)][(int) entity.y][(int) (entity.z + zAm)];
-        if (testBlock.isWalkThroughable() ||
-                (int) testBlock.x == (int) entity.x && (int) testBlock.y == (int) entity.y - 1 && (int) testBlock.z == (int) entity.z) {
-            entity.x += xAm;
-            entity.z += zAm;
-        } else {
-            if ((int) (entity.x + xAm) < (int) entity.x)
-                entity.x = (int) entity.x;
-            else if ((int) (entity.x + xAm) > (int) entity.x)
-                entity.x = (int) entity.x + .99f;
-            if ((int) (entity.z + zAm) < (int) entity.z)
-                entity.z = (int) entity.z;
-            else if ((int) (entity.z + zAm) > (int) entity.z)
-                entity.z = (int) entity.z + .99f;
-            return true;
-        }
+        BlockType testBlock = arena.blocks[(int) (entity.x + xAm)][(int) entity.y][(int) (entity.z + zAm)];
+        // TODO
+//        if (testBlock.isWalkThroughable() ||
+//                (int) testBlock.x == (int) entity.x && (int) testBlock.y == (int) entity.y - 1 && (int) testBlock.z == (int) entity.z) {
+//            entity.x += xAm;
+//            entity.z += zAm;
+//        } else {
+//            if ((int) (entity.x + xAm) < (int) entity.x)
+//                entity.x = (int) entity.x;
+//            else if ((int) (entity.x + xAm) > (int) entity.x)
+//                entity.x = (int) entity.x + .99f;
+//            if ((int) (entity.z + zAm) < (int) entity.z)
+//                entity.z = (int) entity.z;
+//            else if ((int) (entity.z + zAm) > (int) entity.z)
+//                entity.z = (int) entity.z + .99f;
+//            return true;
+//        }
         return false;
     }
 
@@ -62,21 +63,22 @@ public class Physics {
     public static boolean gravity(Entity entity) {
         float fallSpeed = entity.fallSpeed + entity.momentum.y * entity.speed;
         Arena arena = entity.arena;
-        Block blockUnder = arena.blocks[(int) entity.x][(int) entity.y - 1][(int) entity.z];
-        if (!blockUnder.isWalkThroughable()) {
-            if (fallSpeed < 0) {
-                entity.y -= fallSpeed;
-                return true;
-            }
-            if ((int) blockUnder.x == (int) entity.x && (int) blockUnder.y == (int) entity.y - 1 && (int) blockUnder.z == (int) entity.z) {
-                if (entity.y - fallSpeed < blockUnder.y + 1 || entity.y == blockUnder.y + 1) {    // If it will be put underground or it is on the ground
-                    entity.y = blockUnder.y + 1;                                                // Then put it on the ground
-                    return false;
-                }
-            } else {
-                System.out.println("else " + fallSpeed);
-            }
-        }
+        BlockType blockUnder = arena.blocks[(int) entity.x][(int) entity.y - 1][(int) entity.z];
+        // TODO
+//        if (!blockUnder.isWalkThroughable()) {
+//            if (fallSpeed < 0) {
+//                entity.y -= fallSpeed;
+//                return true;
+//            }
+//            if ((int) blockUnder.x == (int) entity.x && (int) blockUnder.y == (int) entity.y - 1 && (int) blockUnder.z == (int) entity.z) {
+//                if (entity.y - fallSpeed < blockUnder.y + 1 || entity.y == blockUnder.y + 1) {    // If it will be put underground or it is on the ground
+//                    entity.y = blockUnder.y + 1;                                                // Then put it on the ground
+//                    return false;
+//                }
+//            } else {
+//                System.out.println("else " + fallSpeed);
+//            }
+//        }
         entity.y -= fallSpeed;
         return true;
     }

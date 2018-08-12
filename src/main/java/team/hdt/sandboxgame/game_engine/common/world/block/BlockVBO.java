@@ -3,9 +3,6 @@ package team.hdt.sandboxgame.game_engine.common.world.block;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import team.hdt.sandboxgame.game_engine.client.rendering.TextureLoader;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -30,9 +27,9 @@ public class BlockVBO {
             instance = new BlockVBO();
             instance.bufferData(instance.blockVertexBufferID, createVertexFloatBuffer(1));
             instance.bufferData(instance.projectileVBOID, createItemVertexFloatBuffer(.1f));
-            instance.bufferData(instance.dirtTextureID, createTextureFloatBuffer(Block.BlockType.DIRT));
-            instance.bufferData(instance.stoneTextureID, createTextureFloatBuffer(Block.BlockType.STONE));
-            instance.bufferData(instance.grassTextureID, createTextureFloatBuffer(Block.BlockType.GRASS));
+//            instance.bufferData(instance.dirtTextureID, createTextureFloatBuffer(BlockType.BlockType.DIRT));
+//            instance.bufferData(instance.stoneTextureID, createTextureFloatBuffer(BlockType.BlockType.STONE));
+//            instance.bufferData(instance.grassTextureID, createTextureFloatBuffer(BlockType.BlockType.GRASS));
             instance.bufferElementData(instance.indexBufferID, createIndexBuffer());
         }
         return instance;
@@ -71,24 +68,24 @@ public class BlockVBO {
                 x + size, y, z + size, x + size, y, z, x + size, y + size, z, x + size, y + size, z + size};
     }
 
-    private static FloatBuffer createTextureFloatBuffer(Block.BlockType type) {
+    private static FloatBuffer createTextureFloatBuffer(BlockType type) {
         FloatBuffer fBuf = BufferUtils.createFloatBuffer(2 * 4 * 6);
-        float[] arr;
-        switch (type) {
-            case DIRT:
-                arr = createSymmetricTextureFloatArray(0, 0, TEXTURE_SIZE);
-                break;
-            case STONE:
-                arr = createSymmetricTextureFloatArray(1, 1, TEXTURE_SIZE);
-                break;
-            case GRASS:
-                arr = createGrassTextureFloatArray(3, 0, 0, 0, 2, 0, TEXTURE_SIZE);
-                break;
-            default:
-                arr = createSymmetricTextureFloatArray(0, 1, TEXTURE_SIZE);
-                break;
-        }
-        fBuf.put(arr);
+//        float[] arr;
+//        switch (type) {
+//            case DIRT:
+//                arr = createSymmetricTextureFloatArray(0, 0, TEXTURE_SIZE);
+//                break;
+//            case STONE:
+//                arr = createSymmetricTextureFloatArray(1, 1, TEXTURE_SIZE);
+//                break;
+//            case GRASS:
+//                arr = createGrassTextureFloatArray(3, 0, 0, 0, 2, 0, TEXTURE_SIZE);
+//                break;
+//            default:
+//                arr = createSymmetricTextureFloatArray(0, 1, TEXTURE_SIZE);
+//                break;
+//        }
+//        fBuf.put(arr);
         fBuf.flip();
         return fBuf;
     }
@@ -163,51 +160,51 @@ public class BlockVBO {
         }
     }
 
-    public void render(Block.BlockType type, float x, float y, float z) {
-        TextureLoader.bind(TextureLoader.Textures.SHEET);
-        int vertID = this.blockVertexBufferID, texID;
-        switch (type) {
-            case DIRT:
-                texID = dirtTextureID;
-                break;
-            case STONE:
-                texID = stoneTextureID;
-                break;
-            case GRASS:
-                texID = grassTextureID;
-                break;
-            case AIR:
-                texID = 0;
-                break;
-            case FIRE:
-                texID = grassTextureID;
-                vertID = this.projectileVBOID;
-                break;
-            default:
-                texID = stoneTextureID;
-                break;
-        }
-        if (texID == 0)
-            return;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(x, y, z);
-        GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-        GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-        // Vertex array
-        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, vertID);
-        GL11.glVertexPointer(3, GL11.GL_FLOAT, 0, 0);
-        // Texture array
-        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, texID);
-        GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 0, 0);
-        // Index array
-        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ELEMENT_ARRAY_BUFFER_ARB, indexBufferID);
-        // Draw 'em up
-        GL12.glDrawRangeElements(GL11.GL_QUADS, 0, 6 * 4, 6 * 4, GL11.GL_UNSIGNED_INT, 0);
-        GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-        GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
-        GL11.glPopMatrix();
-        TextureLoader.unbind();
-    }
+//    public void render(BlockType.BlockType type, float x, float y, float z) {
+//        TextureLoader.bind(TextureLoader.Textures.SHEET);
+//        int vertID = this.blockVertexBufferID, texID;
+//        switch (type) {
+//            case DIRT:
+//                texID = dirtTextureID;
+//                break;
+//            case STONE:
+//                texID = stoneTextureID;
+//                break;
+//            case GRASS:
+//                texID = grassTextureID;
+//                break;
+//            case AIR:
+//                texID = 0;
+//                break;
+//            case FIRE:
+//                texID = grassTextureID;
+//                vertID = this.projectileVBOID;
+//                break;
+//            default:
+//                texID = stoneTextureID;
+//                break;
+//        }
+//        if (texID == 0)
+//            return;
+//        GL11.glPushMatrix();
+//        GL11.glTranslatef(x, y, z);
+//        GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
+//        GL11.glEnableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+//        // Vertex array
+//        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, vertID);
+//        GL11.glVertexPointer(3, GL11.GL_FLOAT, 0, 0);
+//        // Texture array
+//        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, texID);
+//        GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 0, 0);
+//        // Index array
+//        ARBVertexBufferObject.glBindBufferARB(ARBVertexBufferObject.GL_ELEMENT_ARRAY_BUFFER_ARB, indexBufferID);
+//        // Draw 'em up
+//        GL12.glDrawRangeElements(GL11.GL_QUADS, 0, 6 * 4, 6 * 4, GL11.GL_UNSIGNED_INT, 0);
+//        GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
+//        GL11.glDisableClientState(GL11.GL_TEXTURE_COORD_ARRAY);
+//        GL11.glPopMatrix();
+//        TextureLoader.unbind();
+//    }
 
     private void bufferData(int id, FloatBuffer buffer) {
 
