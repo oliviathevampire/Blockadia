@@ -4,8 +4,8 @@ import team.hdt.sandboxgame.game_engine.client.rendering.shaders.*;
 
 public class FontShader extends ShaderProgram {
 	
-	private static final String VERTEX_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontVertex.glsl";
-	private static final String FRAGMENT_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontFragment.glsl";
+	private static final String VERTEX_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontVertex.txt";
+	private static final String FRAGMENT_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontFragment.txt";
 	
 	protected UniformVec4 colour = new UniformVec4("colour");
 	protected UniformSampler fontTexture = new UniformSampler("fontTexture");

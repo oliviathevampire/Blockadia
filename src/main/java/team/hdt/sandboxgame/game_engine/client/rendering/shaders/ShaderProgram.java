@@ -12,8 +12,8 @@ public class ShaderProgram {
 	private int programID;
 
 	public ShaderProgram(String vertexFile, String fragmentFile) {
-		int vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
-		int fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
+		int vertexShaderID = loadShader(vertexFile, 0x8B31);
+		int fragmentShaderID = loadShader(fragmentFile, 0x8B30);
 		programID = GL20.glCreateProgram();
 		GL20.glAttachShader(programID, vertexShaderID);
 		GL20.glAttachShader(programID, fragmentShaderID);
@@ -44,31 +44,6 @@ public class ShaderProgram {
 		GL20.glDeleteProgram(programID);
 	}
 
-	/*private int loadShader(MyFile file, int type) {
-		StringBuilder shaderSource = new StringBuilder();
-		try {
-			BufferedReader reader = file.getReader();
-			String line;
-			while ((line = reader.readLine()) != null) {
-				shaderSource.append(line).append("//\n");
-			}
-			reader.close();
-		} catch (Exception e) {
-			System.err.println("Could not read file.");
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		int shaderID = GL20.glCreateShader(type);
-		GL20.glShaderSource(shaderID, shaderSource);
-		GL20.glCompileShader(shaderID);
-		if (GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-			System.out.println(GL20.glGetShaderInfoLog(shaderID, 500));
-			System.err.println("Could not compile shader "+ file);
-			System.exit(-1);
-		}
-		return shaderID;
-	}*/
-
 	private static int loadShader(String file, int type) {
 		StringBuilder shaderSource = new StringBuilder();
 		try {
@@ -82,8 +57,7 @@ public class ShaderProgram {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		int shaderID = GL20.glCreateShader(type);
-		GL20.glShaderSource(shaderID, shaderSource);
+        int shaderID = GL20.glCreateShader(type);
 		GL20.glCompileShader(shaderID);
 		if (GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
 			System.out.println(GL20.glGetShaderInfoLog(shaderID, 500));
