@@ -222,7 +222,7 @@ public class Matrix2fs extends Matrixs implements Serializable {
         src.m11 = 0.0f;
         return src;
     }
-    
+
     public float determinant() {
         return m00 * m11 - m01*m10;
     }
