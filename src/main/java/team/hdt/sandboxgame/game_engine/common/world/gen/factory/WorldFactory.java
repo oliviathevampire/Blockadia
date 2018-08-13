@@ -16,8 +16,6 @@ public class WorldFactory {
      */
     public static final int START_SIZE = 100;
 
-//TODO: gen x lines, make it select 2 biometypes, from x-1 chunk and y-1 chunk, and grab random one
-
     protected enum GEN_MODE{
         POSxPOSz, NEGxPOSz, POSxNEGz, NEGxNEGz
     }
