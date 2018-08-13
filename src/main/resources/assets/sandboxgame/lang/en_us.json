@@ -1,0 +1,6 @@
+{
+  "gui.mainMenu.singlePlayer": "Singleplayer",
+  "gui.mainMenu.multiPlayer": "Multiplayer",
+  "gui.mainMenu.settings": "Settings",
+  "gui.mainMenu.quitGame": "Quit Game"
+}

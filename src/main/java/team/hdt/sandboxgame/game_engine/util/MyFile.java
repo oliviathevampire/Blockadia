@@ -56,7 +56,7 @@ public class MyFile {
 		return this.getClass().getResource(path);
 	}
 
-	public BufferedReader getReader() throws Exception {
+	public BufferedReader getReader() {
 		try {
 			InputStreamReader isr = new InputStreamReader(getInputStream());
 			BufferedReader reader = new BufferedReader(isr);
