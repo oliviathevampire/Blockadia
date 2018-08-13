@@ -1,5 +1,7 @@
 package team.hdt.blockadia.test;
 
+import team.hdt.blockadia.test.idk.DummyGame;
+
 public class Main {
 
     public static final int WIDTH = 856, HEIGHT = 480;

@@ -1,29 +1,53 @@
 package team.hdt.blockadia.test;
 
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class GameItem {
 
-    private final Mesh mesh;
-    
+    private boolean selected;
+
+    private Mesh[] meshes;
+
     private final Vector3f position;
-    
+
     private float scale;
 
-    private final Vector3f rotation;
+    private final Quaternionf rotation;
 
-    public GameItem(Mesh mesh) {
-        this.mesh = mesh;
+    private int textPos;
+
+    public GameItem() {
+        selected = false;
         position = new Vector3f(0, 0, 0);
         scale = 1;
-        rotation = new Vector3f(0, 0, 0);
+        rotation = new Quaternionf();
+        textPos = 0;
+    }
+
+    public GameItem(Mesh mesh) {
+        this();
+        this.meshes = new Mesh[]{mesh};
+    }
+
+    public GameItem(Mesh[] meshes) {
+        this();
+        this.meshes = meshes;
     }
 
     public Vector3f getPosition() {
         return position;
     }
 
-    public void setPosition(float x, float y, float z) {
+    public int getTextPos() {
+        return textPos;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public final void setPosition(float x, float y, float z) {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
@@ -33,21 +57,46 @@ public class GameItem {
         return scale;
     }
 
-    public void setScale(float scale) {
+    public final void setScale(float scale) {
         this.scale = scale;
     }
 
-    public Vector3f getRotation() {
+    public Quaternionf getRotation() {
         return rotation;
     }
 
-    public void setRotation(float x, float y, float z) {
-        this.rotation.x = x;
-        this.rotation.y = y;
-        this.rotation.z = z;
+    public final void setRotation(Quaternionf q) {
+        this.rotation.set(q);
     }
-    
+
     public Mesh getMesh() {
-        return mesh;
+        return meshes[0];
+    }
+
+    public Mesh[] getMeshes() {
+        return meshes;
+    }
+
+    public void setMeshes(Mesh[] meshes) {
+        this.meshes = meshes;
+    }
+
+    public void setMesh(Mesh mesh) {
+        this.meshes = new Mesh[]{mesh};
+    }
+
+    public void cleanup() {
+        int numMeshes = this.meshes != null ? this.meshes.length : 0;
+        for (int i = 0; i < numMeshes; i++) {
+            this.meshes[i].cleanUp();
+        }
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public void setTextPos(int textPos) {
+        this.textPos = textPos;
     }
 }

@@ -5,9 +5,7 @@ import team.hdt.blockadia.game_engine.util.BinaryReader;
 import team.hdt.blockadia.game_engine.util.BinaryWriter;
 
 public interface IGameCam extends CameraInterface {
-	
-	
-	
+
 	public void loadState(BinaryReader reader) throws Exception;
 
 	public void saveState(BinaryWriter writer);

@@ -1,3 +1,4 @@
+/*
 package team.hdt.blockadia.test;
 
 import org.jdom2.output.Format;
@@ -92,7 +93,7 @@ public class DummyGame implements IGameLogic {
     }
 
     @Override
-    public void update(float interval, MouseInput mouseInput) {
+    public void update(float interval, MouseInput mouseInput, Window window) {
         // Update camera position
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
@@ -116,4 +117,4 @@ public class DummyGame implements IGameLogic {
         }
     }
 
-}
+}*/
