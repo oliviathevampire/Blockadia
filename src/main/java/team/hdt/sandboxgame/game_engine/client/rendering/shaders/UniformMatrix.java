@@ -1,10 +1,10 @@
 package team.hdt.sandboxgame.game_engine.client.rendering.shaders;
 
-import java.nio.FloatBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.util.vector.Matrix4f;
+import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Matrix4fs;
+
+import java.nio.FloatBuffer;
 
 public class UniformMatrix extends Uniform{
 	
@@ -14,7 +14,7 @@ public class UniformMatrix extends Uniform{
 		super(name);
 	}
 	
-	public void loadMatrix(Matrix4f matrix){
+	public void loadMatrix(Matrix4fs matrix){
 		matrix.store(matrixBuffer);
 		matrixBuffer.flip();
 		GL20.glUniformMatrix4fv(super.getLocation(), false, matrixBuffer);

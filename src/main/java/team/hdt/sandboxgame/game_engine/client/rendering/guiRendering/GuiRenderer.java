@@ -1,9 +1,8 @@
 package team.hdt.sandboxgame.game_engine.client.rendering.guiRendering;
 
-import basics.Loader;
-import basics.MasterRenderer;
 import org.lwjgl.opengl.GL11;
 import team.hdt.sandboxgame.game_engine.client.guis.GuiTexture;
+import team.hdt.sandboxgame.game_engine.common.Loader;
 import team.hdt.sandboxgame.game_engine.util.toolbox.OpenglUtils;
 
 import java.util.List;
@@ -46,7 +45,7 @@ public class GuiRenderer {
 			return;
 		}
 		OpenglUtils.bindTextureToBank(gui.getTexture().getID(), 0);
-		OpenglUtils.bindTextureToBank(MasterRenderer.getOutputTexture(), 1);
+//		OpenglUtils.bindTextureToBank(MasterRenderer.getOutputTexture(), 1);
 		setScissorTest(gui.getClippingBounds());
 		if(gui.isAdditive()){
 			OpenglUtils.enableAdditiveBlending();

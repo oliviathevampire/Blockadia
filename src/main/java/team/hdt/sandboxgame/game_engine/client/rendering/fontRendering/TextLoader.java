@@ -1,7 +1,7 @@
 package team.hdt.sandboxgame.game_engine.client.rendering.fontRendering;
 
-import basics.Loader;
-import team.hdt.sandboxgame.game_engine.client.rendering.Texture;
+import team.hdt.sandboxgame.game_engine.client.rendering.textures.Texture;
+import team.hdt.sandboxgame.game_engine.common.Loader;
 import team.hdt.sandboxgame.game_engine.util.MyFile;
 
 import java.util.ArrayList;

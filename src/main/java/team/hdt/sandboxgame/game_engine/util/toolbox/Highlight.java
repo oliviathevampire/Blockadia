@@ -10,7 +10,6 @@ public class Highlight {
 	private Vectors3f info;
 	private Colour colour;
 	private boolean show = false;
-	private Transformation targetTransform;
 
 	public Highlight() {
 		info = new Vectors3f();
@@ -27,7 +26,6 @@ public class Highlight {
 
 	public void hide() {
 		this.show = false;
-		this.targetTransform = null;
 	}
 
 	/*public void followEntity(Entity entity, Colour newColour) {
@@ -42,11 +40,11 @@ public class Highlight {
 	}
 
 	public void update() {
-		if (targetTransform != null) {
+		/*if (targetTransform != null) {
 			Vectors3f position = targetTransform.getPosition();
 			info.x = position.x;
 			info.y = position.z;
-		}
+		}*/
 	}
 
 	public Colour getColour() {

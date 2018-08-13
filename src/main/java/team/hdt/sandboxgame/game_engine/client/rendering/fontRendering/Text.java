@@ -1,7 +1,7 @@
 package team.hdt.sandboxgame.game_engine.client.rendering.fontRendering;
 
-import basics.Loader;
 import team.hdt.sandboxgame.game_engine.client.guis.GuiComponent;
+import team.hdt.sandboxgame.game_engine.common.Loader;
 import team.hdt.sandboxgame.game_engine.common.Main;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
