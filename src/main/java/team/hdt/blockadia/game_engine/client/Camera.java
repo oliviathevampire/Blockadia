@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.client;
 
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 
 import static org.lwjgl.opengl.GL11.*;

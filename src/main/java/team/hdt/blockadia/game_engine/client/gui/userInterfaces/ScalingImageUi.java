@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.client.gui.userInterfaces;
 
 import team.hdt.blockadia.game_engine.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.SinWaveDriver;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.ValueDriver;

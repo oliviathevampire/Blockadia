@@ -1,18 +1,12 @@
-package team.hdt.blockadia.game_engine.common;
+package team.hdt.blockadia.game_engine.client;
 
-import team.hdt.blockadia.game_engine.client.glRequestProcessing.GlRequestProcessor;
-import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
-import team.hdt.blockadia.game_engine.common.gameManaging.GameManager;
 import team.hdt.blockadia.game_engine.common.util.Display;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.util.FileUtils;
 import team.hdt.blockadia.game_engine.util.MyFile;
 
 import java.util.Calendar;
 
-import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
-
-public class Main {
+public class ClientMain {
 
     private static final int FRAME_RATE = 60;
     private static final int TICK_RATE = 20;
@@ -41,24 +35,6 @@ public class Main {
     public static float TIME_SPEED = 1;
 
     public static void main(String[] args) {
-
-        BlockTypes.register();
-
-        EngineMaster.init(Camera.getCamera());
-        /*FirstScreenUi screen = new FirstScreenUi();
-        GuiMaster.addComponent(screen, 0, 0, 1, 1);
-        while (!screen.isReady()) {
-            GuiMaster.updateGuis();
-            MasterRenderer.renderGuis();
-            EngineMaster.update();
-        }*/
-        GameManager.init();
-        GlRequestProcessor.completeAllRequests();
-        while (!glfwWindowShouldClose(display.window)) {
-            GameManager.update();
-            GameManager.render();
-        }
-        GameManager.cleanUp();
     }
 
     public static int getWidth() {

@@ -3,7 +3,7 @@ package team.hdt.blockadia.game_engine.common.gameManaging;
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.resourceManagement.ParticleAtlasCache;
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.time.Calendar;
 import team.hdt.blockadia.game_engine.common.world.World;
 

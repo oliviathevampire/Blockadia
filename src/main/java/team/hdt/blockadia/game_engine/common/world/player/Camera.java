@@ -4,7 +4,7 @@ import org.lwjgl.BufferUtils;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.Display;
 
 import java.awt.*;

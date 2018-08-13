@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.client.guis;
 
 import team.hdt.blockadia.game_engine.client.rendering.fontRendering.Text;
 import team.hdt.blockadia.game_engine.client.rendering.guiRendering.GuiRenderData;
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 

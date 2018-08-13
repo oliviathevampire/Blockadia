@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.client.rendering.fontRendering;
 
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.util.MyFile;
 
 import java.io.BufferedReader;

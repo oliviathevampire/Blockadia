@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;

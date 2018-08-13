@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.common.util.math.interpolation;
 
-import team.hdt.blockadia.game_engine.common.Main;
+import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 
 public class Timer {
