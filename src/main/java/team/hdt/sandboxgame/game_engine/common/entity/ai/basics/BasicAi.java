@@ -1,9 +1,9 @@
 package team.hdt.sandboxgame.game_engine.common.entity.ai.basics;
 
-import aiComponent.Ai;
-import aiComponent.AiProvidingComponent;
+import team.hdt.sandboxgame.game_engine.common.entity.ai.Ai;
+import team.hdt.sandboxgame.game_engine.common.entity.ai.AiProvidingComponent;
 
-public class BasicAi implements Ai{
+public class BasicAi implements Ai {
 	
 	private final AiRoutine aiRoutine;
 	
