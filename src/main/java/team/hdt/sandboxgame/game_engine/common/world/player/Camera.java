@@ -9,7 +9,6 @@ import team.hdt.sandboxgame.game_engine.common.util.Display;
 
 import java.awt.*;
 import java.nio.FloatBuffer;
-import java.text.DecimalFormat;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -33,10 +32,8 @@ public class Camera {
     private UnicodeFont font;
     private FloatBuffer perspectiveProjectionMatrix = BufferUtils.createFloatBuffer(16);
     private FloatBuffer orthographicProjectionMatrix = BufferUtils.createFloatBuffer(16);
-    private DecimalFormat formatter = new DecimalFormat("#.##");
 
     public Camera(Player player, int x, int y, int z) {
-//		setUpFonts();
         this.aspectRatio = (float) Main.WINDOW_WIDTH / Main.WINDOW_HEIGHT;
         this.player = player;
         this.x = x + .5f;
@@ -76,21 +73,6 @@ public class Camera {
         }
     }
 
-	/*public void drawString(int x, int y, String string) {
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf(orthographicProjectionMatrix);
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glPushAttrib(GL_ALL_ATTRIB_BITS);
-		glLoadIdentity();
-		font.drawString(x, y, string);
-		glPopAttrib();
-		glPopMatrix();
-		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf(perspectiveProjectionMatrix);
-		glMatrixMode(GL_MODELVIEW);
-	}*/
-
     public void update() {
         glPushAttrib(GL_TRANSFORM_BIT);
         glMatrixMode(GL_MODELVIEW);
@@ -98,15 +80,6 @@ public class Camera {
         glRotatef(yaw, 0, 1, 0);
         glTranslatef(-x, -y, -z);
         glPopAttrib();
-    }
-
-    public void drawDebug() {
-		/*drawString(10, 110, "Pitch: " + pitch + " Yaw: " + yaw);
-		drawString(10, 90, "Player[x=" + formatter.format(player.x) + ",y=" + formatter.format(player.y) + ",z=" + formatter.format(player.z) + "]");
-		drawString(10, 70, "Location: Cam[x=" + formatter.format(x) + ",y=" + formatter.format(y) + ",z=" + formatter.format(z) + "]");
-		drawString(10, 50, "Flat Arena with a floating block for 360 degree view");
-		drawString(10, 30, "Click to grab mouse, right click to release");
-		drawString(10, 10, "WASD to move");*/
     }
 
     public void processMouse() {
