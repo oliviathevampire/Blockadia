@@ -17,7 +17,6 @@ public class ChunkFactory {
 
     public static Random random = new Random();
     private IBiome IBiome;
-    static int currentY;
 
      public void initFactory(@Nullable IBiome biome, boolean chooseOwn){
          if(chooseOwn) {
@@ -37,18 +36,18 @@ public class ChunkFactory {
          }
     }
 
-    public Chunk getChunk(){
-         Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,300,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL, IBiome);
-         do {
-             ILayer layer = IBiome.getLayer(currentY, random);
-             for (int x = 0; x < Chunk.CHUNK_SIZE; x++) {
-                for (int z = 0; z < Chunk.CHUNK_SIZE; z++){
-                    chunk.setBlock(x, currentY, z, layer.getBlockAtPos(x, z));
+    public Chunk getChunk() {
+        Chunk chunk = new Chunk(Chunk.CHUNK_SIZE, 100, Chunk.CHUNK_SIZE, Chunk.ChunkType.HORIZONTAL, IBiome);
+
+            for (int x = 0; x < Chunk.CHUNK_SIZE; x++) {
+                for (int y = 0; y < 100; y++) {
+                    ILayer layer = IBiome.getLayer(y, random);
+                    for (int z = 0; z < Chunk.CHUNK_SIZE; z++) {
+                        chunk.setBlock(x, y, z, layer.getBlockAtPos(x, z));
+                    }
                 }
-             }
-             currentY++;
-         } while (currentY < 300);
-         return chunk;
+            }
+        return chunk;
     }
 
     public void getNeighbourFactory(){
