@@ -17,7 +17,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
 
-    private static final float MOUSE_SENSITIVITY = 0.2f;
+    private static final float MOUSE_SENSITIVITY = 0.5f;
 
     private final Vector3f cameraInc;
 
