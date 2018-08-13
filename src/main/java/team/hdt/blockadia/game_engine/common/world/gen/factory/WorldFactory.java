@@ -16,7 +16,7 @@ public class WorldFactory {
      */
     public static final int START_SIZE = 100;
 
-    protected enum GEN_MODE{
+    protected enum GenMode {
         POSxPOSz, NEGxPOSz, POSxNEGz, NEGxNEGz
     }
 
@@ -26,10 +26,10 @@ public class WorldFactory {
 
     public World generateWorld(){
         World world = new World();
-        WorldGenComponent worldGenComponent1 = new WorldGenComponent(GEN_MODE.POSxPOSz, true, null);
-        WorldGenComponent worldGenComponent2 = new WorldGenComponent(GEN_MODE.NEGxPOSz, true, null);
-        WorldGenComponent worldGenComponent3 = new WorldGenComponent(GEN_MODE.POSxNEGz, true, null);
-        WorldGenComponent worldGenComponent4 = new WorldGenComponent(GEN_MODE.NEGxNEGz, true, null);
+        WorldGenComponent worldGenComponent1 = new WorldGenComponent(GenMode.POSxPOSz, true, null);
+        WorldGenComponent worldGenComponent2 = new WorldGenComponent(GenMode.NEGxPOSz, true, null);
+        WorldGenComponent worldGenComponent3 = new WorldGenComponent(GenMode.POSxNEGz, true, null);
+        WorldGenComponent worldGenComponent4 = new WorldGenComponent(GenMode.NEGxNEGz, true, null);
         WorldGenComponent[] worldGenComponents = {
                 worldGenComponent1, worldGenComponent2, worldGenComponent3, worldGenComponent4
         };
@@ -47,11 +47,11 @@ public class WorldFactory {
 
     private class WorldGenComponent implements Runnable{
 
-        private GEN_MODE mode;
+        private GenMode mode;
         private IBiome type;
         private boolean first;
 
-        protected WorldGenComponent(GEN_MODE mode, boolean first, @Nullable IBiome type){
+        protected WorldGenComponent(GenMode mode, boolean first, @Nullable IBiome type){
             this.mode = mode;
             this.type = type;
             this.first = first;
