@@ -99,13 +99,6 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return this;
     }
 
-    /**
-     * Add two matrices together and place the result in a third matrix.
-     * @param left The left source matrix
-     * @param right The right source matrix
-     * @param dest The destination matrix, or null if a new one is to be created
-     * @return the destination matrix
-     */
     public static Matrix3fs add(Matrix3fs left, Matrix3fs right, Matrix3fs dest) {
         if (dest == null)
             dest = new Matrix3fs();
@@ -123,13 +116,6 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    /**
-     * Subtract the right matrix from the left and place the result in a third matrix.
-     * @param left The left source matrix
-     * @param right The right source matrix
-     * @param dest The destination matrix, or null if a new one is to be created
-     * @return the destination matrix
-     */
     public static Matrix3fs sub(Matrix3fs left, Matrix3fs right, Matrix3fs dest) {
         if (dest == null)
             dest = new Matrix3fs();
@@ -147,13 +133,6 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    /**
-     * Multiply the right matrix by the left and place the result in a third matrix.
-     * @param left The left source matrix
-     * @param right The right source matrix
-     * @param dest The destination matrix, or null if a new one is to be created
-     * @return the destination matrix
-     */
     public static Matrix3fs mul(Matrix3fs left, Matrix3fs right, Matrix3fs dest) {
         if (dest == null)
             dest = new Matrix3fs();
@@ -209,13 +188,13 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return transpose(this, this);
     }
 
-    public Matrix3f transpose(Matrix3f dest) {
+    public Matrix3fs transpose(Matrix3fs dest) {
         return transpose(this, dest);
     }
 
-    public static Matrix3f transpose(Matrix3f src, Matrix3f dest) {
+    public static Matrix3fs transpose(Matrix3fs src, Matrix3fs dest) {
         if (dest == null)
-            dest = new Matrix3f();
+            dest = new Matrix3fs();
         float m00 = src.m00;
         float m01 = src.m10;
         float m02 = src.m20;
@@ -238,9 +217,6 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    /**
-     * @return the determinant of the matrix
-     */
     public float determinant() {
         float f =
                 m00 * (m11 * m22 - m12 * m21)
@@ -249,9 +225,6 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return f;
     }
 
-    /**
-     * Returns a string representation of this matrix
-     */
     public String toString() {
         StringBuilder buf = new StringBuilder();
         buf.append(m00).append(' ').append(m10).append(' ').append(m20).append(' ').append('\n');
@@ -260,26 +233,17 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return buf.toString();
     }
 
-    /**
-     * Invert this matrix
-     * @return this if successful, null otherwise
-     */
-    public Matrix invert() {
+    public Matrixs invert() {
         return invert(this, this);
     }
 
-    /**
-     * Invert the source matrix and put the result into the destination matrix
-     * @param src The source matrix to be inverted
-     * @param dest The destination matrix, or null if a new one is to be created
-     * @return The inverted matrix if successful, null otherwise
-     */
-    public static Matrix3f invert(Matrix3f src, Matrix3f dest) {
+
+    public static Matrix3fs invert(Matrix3fs src, Matrix3fs dest) {
         float determinant = src.determinant();
 
         if (determinant != 0) {
             if (dest == null)
-                dest = new Matrix3f();
+                dest = new Matrix3fs();
             /* do it the ordinary way
              *
              * inv(A) = 1/det(A) * adj(T), where adj(T) = transpose(Conjugate Matrix)
@@ -315,33 +279,17 @@ public class Matrix3fs extends Matrixs implements Serializable {
             return null;
     }
 
-
-    /**
-     * Negate this matrix
-     * @return this
-     */
-    public Matrix negate() {
+    public Matrixs negate() {
         return negate(this);
     }
 
-    /**
-     * Negate this matrix and place the result in a destination matrix.
-     * @param dest The destination matrix, or null if a new matrix is to be created
-     * @return the negated matrix
-     */
-    public Matrix3f negate(Matrix3f dest) {
+    public Matrix3fs negate(Matrix3fs dest) {
         return negate(this, dest);
     }
 
-    /**
-     * Negate the source matrix and place the result in the destination matrix.
-     * @param src The source matrix
-     * @param dest The destination matrix, or null if a new matrix is to be created
-     * @return the negated matrix
-     */
-    public static Matrix3f negate(Matrix3f src, Matrix3f dest) {
+    public static Matrix3fs negate(Matrix3fs src, Matrix3fs dest) {
         if (dest == null)
-            dest = new Matrix3f();
+            dest = new Matrix3fs();
 
         dest.m00 = -src.m00;
         dest.m01 = -src.m02;
@@ -355,20 +303,11 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    /**
-     * Set this matrix to be the identity matrix.
-     * @return this
-     */
-    public Matrix setIdentity() {
+    public Matrixs setIdentity() {
         return setIdentity(this);
     }
 
-    /**
-     * Set the matrix to be the identity matrix.
-     * @param m The matrix to be set to the identity
-     * @return m
-     */
-    public static Matrix3f setIdentity(Matrix3f m) {
+    public static Matrix3fs setIdentity(Matrix3fs m) {
         m.m00 = 1.0f;
         m.m01 = 0.0f;
         m.m02 = 0.0f;
@@ -381,20 +320,11 @@ public class Matrix3fs extends Matrixs implements Serializable {
         return m;
     }
 
-    /**
-     * Set this matrix to 0.
-     * @return this
-     */
-    public Matrix setZero() {
+    public Matrixs setZero() {
         return setZero(this);
     }
 
-    /**
-     * Set the matrix matrix to 0.
-     * @param m The matrix to be set to 0
-     * @return m
-     */
-    public static Matrix3f setZero(Matrix3f m) {
+    public static Matrix3fs setZero(Matrix3fs m) {
         m.m00 = 0.0f;
         m.m01 = 0.0f;
         m.m02 = 0.0f;
