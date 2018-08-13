@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomeFlatlands implements IBiome {
+public class BiomeDesert implements IBiome {
 
     @Override
     public ILayer getLayer(int y, Random random) {
@@ -25,8 +25,8 @@ public class BiomeFlatlands implements IBiome {
     @Override
     public Map<IBiome, Integer> getChanceMap() {
         HashMap<IBiome, Integer> chanceMap = new HashMap<>();
-        chanceMap.put(Biomes.flatlands, 1);
         chanceMap.put(Biomes.desert, 1);
+        chanceMap.put(Biomes.flatlands, 1);
         return chanceMap;
     }
 

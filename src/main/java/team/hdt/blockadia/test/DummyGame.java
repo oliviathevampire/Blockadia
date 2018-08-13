@@ -5,6 +5,9 @@ import org.joml.Vector3f;
 import team.hdt.blockadia.game_engine.common.registry.BiomeRegistry;
 import team.hdt.blockadia.game_engine.common.world.ChunkPos;
 import team.hdt.blockadia.game_engine.common.world.World;
+import team.hdt.blockadia.game_engine.common.world.biomes.BiomeFlatlands;
+import team.hdt.blockadia.game_engine.common.world.biomes.Biomes;
+import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.common.world.gen.factory.WorldFactory;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
 
@@ -30,14 +33,14 @@ public class DummyGame implements IGameLogic {
         renderer = new Renderer();
         camera = new Camera();
         cameraInc = new Vector3f(0, 0, 0);
-        IBiome biome;
-
-
-        world = WorldFactory.generate();
     }
 
     @Override
     public void init(Window window) throws Exception {
+        BlockTypes.register();
+        Biomes.register();
+        world = WorldFactory.generate();
+        System.out.println(world.toXML().toString());
         renderer.init(window);
         // Create the Mesh
         float[] positions = new float[]{
@@ -138,8 +141,6 @@ public class DummyGame implements IGameLogic {
         gameItem4.setScale(0.5f);
         gameItem4.setPosition(0.5f, 0, -2.5f);
         gameItems = new GameItem[]{gameItem1, gameItem2, gameItem3, gameItem4};
-
-        world.getChunk(new ChunkPos(0, 0)).getChunk().getBlock(5, 0, 0);
     }
 
     @Override
