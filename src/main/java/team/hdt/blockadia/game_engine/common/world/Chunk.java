@@ -53,11 +53,11 @@ public class Chunk {
     }
 
     public void setBlock(int x, int y, int z, BlockType type) {
-        this.storage.setBlockUnchecked(x & CHUNK_MASK, y & CHUNK_MASK, z & CHUNK_MASK, type);
+        this.storage.setBlockUnchecked(x, y, z, type);
     }
 
     public BlockType getBlock(int x, int y, int z) {
-        return this.storage.getBlockUnchecked(x & CHUNK_MASK, y & CHUNK_MASK, z & CHUNK_MASK);
+        return this.storage.getBlockUnchecked(x, y, z);
     }
 
 }
