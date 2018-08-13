@@ -1,5 +1,6 @@
 package team.hdt.blockadia.game_engine.common;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.guis.GuiMaster;
 import team.hdt.blockadia.game_engine.common.gameManaging.GameManager;
 import team.hdt.blockadia.game_engine.common.gameManaging.GameState;
@@ -11,7 +12,6 @@ import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.util.BinaryReader;
 import team.hdt.blockadia.game_engine.util.BinaryWriter;
 import team.hdt.blockadia.game_engine.util.toolbox.Maths;
-import team.hdt.blockadia.test.Main;
 
 public class Camera2 implements IGameCam {
 
@@ -246,8 +246,8 @@ public class Camera2 implements IGameCam {
 		this.targetMoved = false;
 		Vectors2f speeds = getSpeedFromInputs();
 		if (targetMoved) {
-			float forwardDistance = speeds.x * Main.getDeltaSeconds();
-			float sideDistance = speeds.y * Main.getDeltaSeconds();
+			float forwardDistance = speeds.x * ClientMain.getDeltaSeconds();
+			float sideDistance = speeds.y * ClientMain.getDeltaSeconds();
 			float dx = (float) (forwardDistance * Math.sin(Math.toRadians(yaw.get())));
 			float dz = (float) (forwardDistance * Math.cos(Math.toRadians(yaw.get())));
 			float sideDx = (float) (sideDistance * Math.sin(Math.toRadians(yaw.get() + 90)));
@@ -259,7 +259,7 @@ public class Camera2 implements IGameCam {
 				posTarget.y = height + HEIGHT_OFFSET;
 			}*/
 		}
-		position.update(Main.getDeltaSeconds());
+		position.update(ClientMain.getDeltaSeconds());
 	}
 
 	private void updateTargetPoint() {
@@ -276,7 +276,7 @@ public class Camera2 implements IGameCam {
 
 	private void updateTargetPosition() {
 		Vectors3f offset = Vectors3f.sub(followTarget, target, null);
-		offset.scale(Main.getDeltaSeconds() * TO_TARGET_AGILITY);
+		offset.scale(ClientMain.getDeltaSeconds() * TO_TARGET_AGILITY);
 		Vectors3f.add(target, offset, target);
 	}
 
@@ -296,7 +296,7 @@ public class Camera2 implements IGameCam {
 			wheel = 0.005f;
 		}*/
 		if(animationStarted){
-			animProgress += Main.getDeltaSeconds();
+			animProgress += ClientMain.getDeltaSeconds();
 			float factor = 1f - animProgress / ANIM_TIME;
 			if(GameManager.getGameState() == GameState.GAME_MENU){
 				animProgress = 0;
@@ -316,7 +316,7 @@ public class Camera2 implements IGameCam {
 			this.distanceFromTarget.increaseTarget(-zoomLevel);
 			distanceFromTarget.clampTarget(MIN_ZOOM, MAX_ZOOM);
 		}
-		distanceFromTarget.update(Main.getDeltaSeconds());
+		distanceFromTarget.update(ClientMain.getDeltaSeconds());
 		if (!distanceFromTarget.reached()) {
 			updatePosition = true;
 		}
@@ -350,8 +350,8 @@ public class Camera2 implements IGameCam {
 			yaw.cancelTarget();
 			pitch.cancelTarget();
 		}*/
-		yaw.update(Main.getDeltaSeconds());
-		pitch.update(Main.getDeltaSeconds());
+		yaw.update(ClientMain.getDeltaSeconds());
+		pitch.update(ClientMain.getDeltaSeconds());
 		if (!yaw.reached() || !pitch.reached()) {
 			updatePosition = true;
 		}

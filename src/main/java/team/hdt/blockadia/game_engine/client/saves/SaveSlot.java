@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.client.saves;
 
-import team.hdt.blockadia.game_engine.common.util.UserConfigs;
+import team.hdt.blockadia.game_engine.common.gameManaging.UserConfigs;
 import team.hdt.blockadia.game_engine.util.BinaryReader;
 import team.hdt.blockadia.game_engine.util.BinaryWriter;
 import team.hdt.blockadia.game_engine.util.FileUtils;

@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.client.particles;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.common.CameraInterface;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
@@ -190,21 +190,21 @@ public class Particle {
 		}
 		distance = Vectors3f.sub(camera.getPosition(), position, null).lengthSquared();
 		if (decays) {
-			elapsedTime += Main.getGameSeconds();
+			elapsedTime += ClientMain.getGameSeconds();
 		}
 		return !decays || elapsedTime < lifeLength;
 	}
 
 	private void moveParticleNaturally() {
-		velocity.y += EnvironmentVariables.GRAVITY * gravityEffect * Main.getGameSeconds();
+		velocity.y += EnvironmentVariables.GRAVITY * gravityEffect * ClientMain.getGameSeconds();
 		Vectors3f change = new Vectors3f(velocity);
-		change.scale(Main.getGameSeconds());
+		change.scale(ClientMain.getGameSeconds());
 		Vectors3f.add(change, position, position);
 	}
 	
 	private void rotate(){
 		if(rotate3D){
-			rotX += Main.getGameSeconds() * rotXSpeed;
+			rotX += ClientMain.getGameSeconds() * rotXSpeed;
 		}
 	}
 

@@ -1,9 +1,9 @@
 package team.hdt.blockadia.game_engine.common.gameManaging;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.resourceManagement.ParticleAtlasCache;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.time.Calendar;
 import team.hdt.blockadia.game_engine.common.world.World;
 
@@ -42,11 +42,11 @@ public class GameManager {
 	}
 
 	public static float getGameSeconds() {
-		return Main.getDeltaSeconds() * TIME_SPEED;
+		return ClientMain.getDeltaSeconds() * TIME_SPEED;
 	}
 	
 	public static float getDeltaHours() {
-		return (Main.getDeltaSeconds() * TIME_SPEED) / Calendar.HOUR_LENGTH;
+		return (ClientMain.getDeltaSeconds() * TIME_SPEED) / Calendar.HOUR_LENGTH;
 	}
 	
 	public static float getGameTime(){

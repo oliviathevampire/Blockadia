@@ -1,6 +1,5 @@
 package team.hdt.blockadia.game_engine.client;
 
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -40,8 +39,8 @@ public class Camera {
     }
 
     public static void acceptInputRotate(float delta) {
-        float mouseDX = (float) Main.display.getMouseX();
-        float mouseDY = -(float) Main.display.getMouseY();
+        float mouseDX = (float) ClientMain.display.getMouseX();
+        float mouseDY = -(float) ClientMain.display.getMouseY();
         rotation.y += mouseDX * mouseSensitivity * delta;
         rotation.x += mouseDY * mouseSensitivity * delta;
         rotation.x = Math.max(-maxLook, Math.min(maxLook, rotation.x));

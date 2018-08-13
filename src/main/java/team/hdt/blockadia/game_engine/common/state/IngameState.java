@@ -1,22 +1,13 @@
 package team.hdt.blockadia.game_engine.common.state;
 
 import team.hdt.blockadia.game_engine.client.rendering.TextureLoader;
-import team.hdt.blockadia.game_engine.common.world.Arena;
-import team.hdt.blockadia.game_engine.common.world.player.BendingStyle;
-import team.hdt.blockadia.game_engine.common.world.player.Player;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class IngameState implements GameState {
-    private Arena arena;
-    private Player player;
 
     @Override
     public void setup() {
-        this.arena = new Arena();
-        this.arena.genDemoBlocks();
-        this.player = new Player(BendingStyle.Element.FIRE, this.arena, 10, 17, 10);
-        this.player.processMouse();
         TextureLoader.loadTextures(false);
         TextureLoader.bind(TextureLoader.Textures.SHEET);
     }
@@ -27,9 +18,6 @@ public class IngameState implements GameState {
 
     @Override
     public GameState update() {
-        this.player.update();
-        this.arena.update();
-
         return this;
     }
 
@@ -46,8 +34,5 @@ public class IngameState implements GameState {
         glEnable(GL_ALPHA_TEST);
         glAlphaFunc(GL_GREATER, 0.0f);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-        this.arena.render();
-        this.player.render();
     }
 }

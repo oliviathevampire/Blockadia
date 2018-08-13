@@ -1,12 +1,12 @@
 package team.hdt.blockadia.game_engine.client.gui.userInterfaces;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine.client.gui.mainGuis.UiSettings;
 import team.hdt.blockadia.game_engine.client.guis.GuiComponent;
 import team.hdt.blockadia.game_engine.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine.client.rendering.guiRendering.GuiRenderData;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.ConstantDriver;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.SinWaveDriver;
@@ -133,7 +133,7 @@ public class GuiButton extends GuiComponent {
 		if (!locked) {
 			checkClickEvent();
 		}
-		currentScale = scaleDriver.update(Main.getDeltaSeconds());
+		currentScale = scaleDriver.update(ClientMain.getDeltaSeconds());
 		updatePositions();
 	}
 

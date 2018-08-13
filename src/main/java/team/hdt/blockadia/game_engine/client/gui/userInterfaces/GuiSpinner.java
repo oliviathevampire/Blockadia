@@ -1,12 +1,12 @@
 package team.hdt.blockadia.game_engine.client.gui.userInterfaces;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine.client.gui.mainGuis.GuiRepository;
 import team.hdt.blockadia.game_engine.client.guis.GuiComponent;
 import team.hdt.blockadia.game_engine.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine.client.rendering.fontRendering.Text;
 import team.hdt.blockadia.game_engine.client.rendering.guiRendering.GuiRenderData;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.toolbox.Colour;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.SlideDriver;
@@ -94,8 +94,8 @@ public class GuiSpinner extends GuiComponent {
 	
 	private void updateReleasedText(){
 		if(releasedText!=null){
-			releasedTime += Main.getDeltaSeconds();
-			releasedText.increaseRelativeX(-SLIDE_SPEED * Main.getDeltaSeconds());
+			releasedTime += ClientMain.getDeltaSeconds();
+			releasedText.increaseRelativeX(-SLIDE_SPEED * ClientMain.getDeltaSeconds());
 			if(releasedTime > FADE_TIME){
 				super.deleteText(releasedText);
 				releasedText = null;

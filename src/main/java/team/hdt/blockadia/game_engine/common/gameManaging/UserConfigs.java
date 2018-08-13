@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.common.gameManaging;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.saves.SaveSlot;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.util.BinaryReader;
 import team.hdt.blockadia.game_engine.util.BinaryWriter;
 import team.hdt.blockadia.game_engine.util.languages.Language;
@@ -15,7 +15,7 @@ public class UserConfigs {
 	private static int presetId = 3;
 	private static int[] corruptSlots= new int[0];
 
-	private static final File CONFIGS_FILE = new File(Main.version + "_UserConfigs.dat");
+	private static final File CONFIGS_FILE = new File(ClientMain.version + "_UserConfigs.dat");
 
 	public static void loadConfigs() {
 		try {

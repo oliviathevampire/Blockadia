@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.client.guis;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.toolbox.Colour;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.ConstantDriver;
@@ -49,7 +49,7 @@ public class GuiTexture {
 	}
 	
 	public void update(){
-		alpha = alphaDriver.update(Main.getDeltaSeconds());
+		alpha = alphaDriver.update(ClientMain.getDeltaSeconds());
 	}
 	
 	public boolean hasOverrideColour(){

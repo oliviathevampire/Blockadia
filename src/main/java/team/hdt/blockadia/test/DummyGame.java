@@ -134,7 +134,7 @@ public class DummyGame implements IGameLogic {
         gameItem4.setPosition(0.5f, 0, -2.5f);
         gameItems = new GameItem[]{gameItem1, gameItem2, gameItem3, gameItem4};
 
-        world.getChunk(new ChunkPos(0, 0)).getChunk().getBlock(0, 0, 0);
+        world.getChunk(new ChunkPos(0, 0)).getChunk().getBlock(5, 0, 0);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package team.hdt.blockadia.game_engine.util.toolbox;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.common.CameraInterface;
 import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Matrix4fs;
@@ -123,8 +124,8 @@ public class MousePicker {
 	}
 
 	private void updateMouseRay() {
-		float mouseX = (float) Main.display.getMouseX();
-		float mouseY = (float) Main.display.getMouseY();
+		float mouseX = (float) ClientMain.display.getMouseX();
+		float mouseY = (float) ClientMain.display.getMouseY();
 		Vectors2f normalizedCoords = getNormalisedDeviceCoordinates(mouseX, mouseY);
 		if (pickCenterScreen) {
 			normalizedCoords.set(0, -0f);

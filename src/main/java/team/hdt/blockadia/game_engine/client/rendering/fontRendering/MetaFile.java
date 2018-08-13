@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.client.rendering.fontRendering;
 
-import team.hdt.blockadia.test.Main;
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.util.MyFile;
 
 import java.io.BufferedReader;
@@ -137,7 +137,7 @@ public class MetaFile {
 		processNextLine();
 		int lineHeightPixels = getValueOfVariable("lineHeight") - paddingHeight;
 		verticalPerPixelSize = TextLoader.LINE_HEIGHT / (double) lineHeightPixels;
-		horizontalPerPixelSize = verticalPerPixelSize / Main.getAspectRatio();
+		horizontalPerPixelSize = verticalPerPixelSize / ClientMain.getAspectRatio();
 	}
 
 	private void loadCharacterData(int imageWidth) {

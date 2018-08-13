@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.client.saves;
 
-import team.hdt.blockadia.test.Main;
+import team.hdt.blockadia.game_engine.client.ClientMain;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Saves {
 
-	public static final File SAVES_FOLDER = new File(Main.version + "_Saves");
+	public static final File SAVES_FOLDER = new File(ClientMain.version + "_Saves");
 
-	protected static String SAVE_FILE_NAME = Main.version;
+	protected static String SAVE_FILE_NAME = ClientMain.version;
 	protected static String SAVE_FILE_EXT = ".dat";
 
 	private SaveSlot[] slots;

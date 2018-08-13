@@ -1,10 +1,10 @@
 package team.hdt.blockadia.game_engine.client.skybox;
 
 import org.lwjgl.opengl.GL11;
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
@@ -53,7 +53,7 @@ public class SkyboxRenderer {
 		GL11.glDepthMask(false);
 		OpenglUtils.bindTextureToBank(skyTexture.getID(), 0);
 		shader.start();
-		time += Main.getGameSeconds() * STAR_SPEED;
+		time += ClientMain.getGameSeconds() * STAR_SPEED;
 		time %= 1;
 		shader.time.loadFloat(time);
 		shader.starBrightness.loadFloat(EnvironmentVariables.starBrightness);

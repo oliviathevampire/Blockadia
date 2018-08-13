@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.client.gui.userInterfaces;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.guis.GuiComponent;
-import team.hdt.blockadia.test.Main;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.*;
 
@@ -161,7 +161,7 @@ public abstract class GuiClickable extends GuiComponent {
 			checkClickEvent();
 			checkHotkey();
 		}
-		currentScale = scaleDriver.update(Main.getDeltaSeconds());
+		currentScale = scaleDriver.update(ClientMain.getDeltaSeconds());
 		updatePositions();
 	}
 

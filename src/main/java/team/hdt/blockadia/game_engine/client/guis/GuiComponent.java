@@ -1,5 +1,6 @@
 package team.hdt.blockadia.game_engine.client.guis;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.rendering.fontRendering.Text;
 import team.hdt.blockadia.game_engine.client.rendering.guiRendering.GuiRenderData;
 import team.hdt.blockadia.test.Main;
@@ -387,8 +388,8 @@ public abstract class GuiComponent {
 		if (!GuiMaster.isMouseInteractionEnabled()) {
 			return false;
 		}
-		if (Main.display.getMouseX() >= position.x && Main.display.getMouseX() <= position.x + scale.x) {
-			if (Main.display.getMouseY() >= position.y && Main.display.getMouseY() <= position.y + scale.y) {
+		if (ClientMain.display.getMouseX() >= position.x && ClientMain.display.getMouseX() <= position.x + scale.x) {
+			if (ClientMain.display.getMouseY() >= position.y && ClientMain.display.getMouseY() <= position.y + scale.y) {
 				return true;
 			}
 		}
@@ -404,11 +405,11 @@ public abstract class GuiComponent {
 	}
 
 	public float getRelativeMouseX() {
-		return (float) ((Main.display.getMouseX() - position.x) / scale.x);
+		return (float) ((ClientMain.display.getMouseX() - position.x) / scale.x);
 	}
 
 	public float getRelativeMouseY() {
-		return (float) ((Main.display.getMouseY() - position.y) / scale.y);
+		return (float) ((ClientMain.display.getMouseY() - position.y) / scale.y);
 	}
 
 	protected void setClippingBounds(float x, float y, float width, float height) {
@@ -629,7 +630,7 @@ public abstract class GuiComponent {
 		}
 		textsToRemove.clear();
 		for (Text text : componentTexts.keySet()) {
-			text.update(Main.getDeltaSeconds());
+			text.update(ClientMain.getDeltaSeconds());
 		}
 	}
 
@@ -687,13 +688,13 @@ public abstract class GuiComponent {
 	}
 
 	private float convertToScreenWidthCoords(float heightCoord) {
-		heightCoord /= Main.getAspectRatio();
+		heightCoord /= ClientMain.getAspectRatio();
 		heightCoord *= preferredAspect;
 		return heightCoord;
 	}
 
 	private float convertToScreenHeightCoords(float widthCoord) {
-		widthCoord *= Main.getAspectRatio();
+		widthCoord *= ClientMain.getAspectRatio();
 		widthCoord /= preferredAspect;
 		return widthCoord;
 	}

@@ -1,5 +1,6 @@
 package team.hdt.blockadia.game_engine.common;
 
+import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine.client.gui.userInterfaces.GuiImage;
 import team.hdt.blockadia.game_engine.client.guis.GuiComponent;
@@ -13,7 +14,6 @@ import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.MyFile;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.ConstantDriver;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.SlideDriver;
-import team.hdt.blockadia.test.Main;
 
 public class FirstScreenUi extends GuiComponent {
 
@@ -96,7 +96,7 @@ public class FirstScreenUi extends GuiComponent {
 	@Override
 	protected void updateSelf() {
 		background.update();
-		time += Main.getDeltaSeconds();
+		time += ClientMain.getDeltaSeconds();
 		if (!logoFadingIn && time > START) {
 			startAnimation();
 		}
@@ -132,7 +132,7 @@ public class FirstScreenUi extends GuiComponent {
 
 	private void slideLogo() {
 		float difference = END_HEIGHT - logo.getRelativeY();
-		float change = difference * Main.getDeltaSeconds() * SLIDE_SPEED;
+		float change = difference * ClientMain.getDeltaSeconds() * SLIDE_SPEED;
 		logo.setRelativeY(logo.getRelativeY() + change);
 	}
 
