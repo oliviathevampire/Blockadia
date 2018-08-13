@@ -45,6 +45,6 @@ public class ChunkHolder {
         Element blockdata = new Element("blockdata");
         blockdata = chunkIn.storage.toXML(blockdata);
         element.addContent(blockdata);
-        return null;
+        return element;
     }
 }

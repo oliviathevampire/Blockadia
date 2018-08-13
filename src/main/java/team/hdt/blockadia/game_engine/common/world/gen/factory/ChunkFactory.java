@@ -27,14 +27,18 @@ public class ChunkFactory {
                  int i = biomeList.size();
                  biomeList.put(i, IBiome);
              });
+             if (biomeList.size() > 1)
              IBiome = biomeList.get(random.nextInt(biomeList.size()-1));
+             else{
+                 IBiome = biomeList.get(biomeList.size()-1);
+             }
          } else {
              this.IBiome = biome;
          }
     }
 
     public Chunk getChunk(){
-         Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL, IBiome);
+         Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,300,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL, IBiome);
          do {
              ILayer layer = IBiome.getLayer(currentY, random);
              for (int x = 0; x < Chunk.CHUNK_SIZE; x++) {
@@ -56,7 +60,11 @@ public class ChunkFactory {
                 list.put(index2, IBiome);
             }
         });
-        IBiome = list.get(random.nextInt(list.size()-1));
+        if(list.size() > 1){
+            IBiome = list.get(random.nextInt(list.size()-1));
+        } else {
+            IBiome = list.get(list.size()-1);
+        }
     }
 
 }
