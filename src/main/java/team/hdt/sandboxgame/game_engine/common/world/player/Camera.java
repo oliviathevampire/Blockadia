@@ -34,7 +34,7 @@ public class Camera {
     private FloatBuffer orthographicProjectionMatrix = BufferUtils.createFloatBuffer(16);
 
     public Camera(Player player, int x, int y, int z) {
-        this.aspectRatio = (float) Main.WINDOW_WIDTH / Main.WINDOW_HEIGHT;
+        this.aspectRatio = (float) Main.WIDTH / Main.HEIGHT;
         this.player = player;
         this.x = x + .5f;
         this.y = y + 1.5f;
