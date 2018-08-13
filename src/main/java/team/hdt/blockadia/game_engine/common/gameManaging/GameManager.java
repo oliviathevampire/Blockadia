@@ -1,6 +1,7 @@
 package team.hdt.blockadia.game_engine.common.gameManaging;
 
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
+import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.resourceManagement.ParticleAtlasCache;
 import team.hdt.blockadia.game_engine.common.Main;
 import team.hdt.blockadia.game_engine.common.util.time.Calendar;
@@ -61,6 +62,7 @@ public class GameManager {
 		if(!MyKeyboard.getKeyboard().isKeyDown(Keyboard.KEY_H)){
 			MasterRenderer.renderGuis();
 		}*/
+		MasterRenderer.renderGuis();
 		EngineMaster.update();
 	}
 

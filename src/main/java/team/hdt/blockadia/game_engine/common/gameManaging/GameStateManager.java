@@ -6,7 +6,7 @@ import team.hdt.blockadia.game_engine.common.Camera;
 public class GameStateManager {
 
 	private GameState currentGameState = null;
-	private GameState nextGameState = GameState.SPLASH_SCREEN;
+	private GameState nextGameState = GameState.CAMERA;
 	private GameState suggestedGameState;
 
 	public void setState(GameState state) {

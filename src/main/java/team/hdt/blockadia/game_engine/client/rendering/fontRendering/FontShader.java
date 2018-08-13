@@ -1,12 +1,12 @@
-package team.hdt.sandboxgame.game_engine.client.rendering.fontRendering;
+package team.hdt.blockadia.game_engine.client.rendering.fontRendering;
 
-import team.hdt.sandboxgame.game_engine.client.rendering.shaders.*;
-import team.hdt.sandboxgame.game_engine.util.MyFile;
+import team.hdt.blockadia.game_engine.client.rendering.shaders.*;
+import team.hdt.blockadia.game_engine.util.MyFile;
 
 public class FontShader extends ShaderProgram {
 	
-	private static final MyFile VERTEX_SHADER = new MyFile("src/main/resources/assets/blockania/shaders/fontVertex.txt");
-	private static final MyFile FRAGMENT_SHADER = new MyFile("src/main/resources/assets/blockania/shaders/fontFragment.txt");
+	private static final MyFile VERTEX_SHADER = new MyFile("src/main/resources/assets/blockania/shaders/");
+	private static final MyFile FRAGMENT_SHADER = new MyFile("src/main/resources/assets/blockania/shaders/");
 	
 	protected UniformVec4 colour = new UniformVec4("colour");
 	protected UniformSampler fontTexture = new UniformSampler("fontTexture");
@@ -16,7 +16,7 @@ public class FontShader extends ShaderProgram {
 	protected UniformVec2 edgeData = new UniformVec2("edgeData");
 
 	public FontShader() {
-		super(VERTEX_SHADER, FRAGMENT_SHADER);
+		super(VERTEX_SHADER + "fontVertex.txt", FRAGMENT_SHADER + "fontFragment.txt");
 		super.storeAllUniformLocations(colour, fontTexture, transform, borderColour, borderSizes, edgeData);
 	}
 

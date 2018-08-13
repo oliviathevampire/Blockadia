@@ -172,12 +172,12 @@ public class FirstScreenUi extends GuiComponent {
 
 	private void initMenu() {
 		whiteFlash.getTexture().setAlphaDriver(new SlideDriver(1, 0, FLASH_TIME));
-		tmLogo.remove();
-		jgLogo.remove();
-		logo.remove();
-		dsLogo.remove();
-		GameManager.gameState.setState(GameState.GAME_MENU);
-		endPhase = true;
+//		tmLogo.remove();
+//		jgLogo.remove();
+//		logo.remove();
+//		dsLogo.remove();
+		GameManager.gameState.setState(GameState.CAMERA);
+//		endPhase = true;
 	}
 
 }

@@ -2,6 +2,7 @@ package team.hdt.blockadia.game_engine.client.rendering;
 
 import team.hdt.blockadia.game_engine.client.glRequestProcessing.GlRequestProcessor;
 import team.hdt.blockadia.game_engine.client.guis.GuiMaster;
+import team.hdt.blockadia.game_engine.client.particles.ParticleMaster;
 import team.hdt.blockadia.game_engine.client.rendering.textures.TextureManager;
 import team.hdt.blockadia.game_engine.client.resourceProcessing.RequestProcessor;
 import team.hdt.blockadia.game_engine.common.CameraInterface;
@@ -22,11 +23,12 @@ public class EngineMaster {
      */
     public static void init(CameraInterface camera) {
         sceneCamera = camera;
-        Display display = new Display("Blockadia", Main.WIDTH, Main.HEIGHT);
-        display.run();
 //        UserConfigs.loadConfigs();
 //        GameText.init(UserConfigs.getLanguage().ordinal());
+        Display display = new Display("Blockadia", Main.WIDTH, Main.HEIGHT);
+        display.run();
         MasterRenderer.init(camera);
+        ParticleMaster.init(MasterRenderer.getProjectionMatrix());
     }
 
     /**
@@ -43,6 +45,7 @@ public class EngineMaster {
         sceneCamera.moveCamera();
         EnvironmentVariables.getVariables().update();
         GuiMaster.updateGuis();
+        ParticleMaster.update(sceneCamera);
     }
 
     /**
