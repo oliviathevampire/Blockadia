@@ -12,23 +12,27 @@ import java.util.Random;
 
 public class ChunkFactory {
 
-    private ChunkFactory(){}
+    public ChunkFactory(){}
 
     private static Random random = new Random();
-    private static IBiome IBiome;
+    private IBiome IBiome;
     static int currentY;
 
-     public static void initFactory(){
-        Map<Identifier, IBiome> biomes = BiomeRegistry.registries.registry;
-        Map<Integer, IBiome> biomeList = new HashMap<>();
-        biomes.forEach((identifier, IBiome) -> {
-            int i = biomeList.size();
-            biomeList.put(i, IBiome);
-        });
-        IBiome = biomeList.get(random.nextInt(biomeList.size()-1));
+     public void initFactory(IBiome biome, boolean chooseOwn){
+         if(chooseOwn) {
+             Map<Identifier, IBiome> biomes = BiomeRegistry.registries.registry;
+             Map<Integer, IBiome> biomeList = new HashMap<>();
+             biomes.forEach((identifier, IBiome) -> {
+                 int i = biomeList.size();
+                 biomeList.put(i, IBiome);
+             });
+             IBiome = biomeList.get(random.nextInt(biomeList.size()-1));
+         } else {
+             this.IBiome = biome;
+         }
     }
 
-    public static Chunk getChunk(){
+    public Chunk getChunk(){
          Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL);
          do {
              ILayer layer = IBiome.getLayer(currentY, random);
@@ -42,7 +46,7 @@ public class ChunkFactory {
          return chunk;
     }
 
-    public static void getNeighbourFactory(){
+    public void getNeighbourFactory(){
         Map<IBiome, Integer> map = IBiome.getChanceMap();
         Map<Integer, IBiome> list = new HashMap<>();
         map.forEach((iBiome, i) -> {

@@ -1,19 +1,25 @@
 package team.hdt.sandboxgame.game_engine.common.world.storage;
 
 import org.jdom2.Element;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nonnull;
 import team.hdt.sandboxgame.game_engine.common.world.Chunk;
+import team.hdt.sandboxgame.game_engine.common.world.ChunkPos;
 
 public class ChunkHolder {
 
     Chunk chunkIn;
-    int[] pos;
+    long[] pos;
 
-    public ChunkHolder(Chunk chunk, int x, int y){
+    public ChunkHolder(Chunk chunk, long x, long y){
         this.chunkIn = chunk;
-        this.pos = new int[]{
+        this.pos = new long[]{
                 x,
                 y
         };
+    }
+
+    public ChunkHolder(Chunk chunk, @Nonnull ChunkPos pos){
+        this(chunk, pos.getPosX(), pos.getPosZ());
     }
 
     /**
@@ -26,7 +32,7 @@ public class ChunkHolder {
     /**
      * @return the chunk pos in an array; { x, y }
      */
-    public int[] getPos() {
+    public long[] getPos() {
         return pos;
     }
 
@@ -37,7 +43,8 @@ public class ChunkHolder {
         data.setAttribute("y",pos[1] + "");
         element.addContent(data);
         Element blockdata = new Element("blockdata");
-
+        blockdata = chunkIn.storage.toXML(blockdata);
+        element.addContent(blockdata);
         return null;
     }
 }

@@ -23,7 +23,7 @@ public class Chunk {
     private final int chunkZ;
     private final ChunkType chunkType;
 
-    private final RawBlockStorage storage;
+    public final RawBlockStorage storage;
 
     public Chunk(int chunkX, int chunkY, int chunkZ, ChunkType chunkType) {
         this.chunkX = chunkX;

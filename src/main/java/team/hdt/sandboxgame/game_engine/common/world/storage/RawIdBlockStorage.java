@@ -44,6 +44,7 @@ public class RawIdBlockStorage implements RawBlockStorage {
         return this.sizeZ;
     }
 
+    @Override
     public Element toXML(Element element){
         element.setAttribute("sizeX",sizeX + "");
         element.setAttribute("sizeY",sizeY + "");
