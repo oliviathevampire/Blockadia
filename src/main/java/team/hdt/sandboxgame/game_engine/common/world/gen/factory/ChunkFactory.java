@@ -2,6 +2,7 @@ package team.hdt.sandboxgame.game_engine.common.world.gen.factory;
 
 import team.hdt.sandboxgame.game_engine.common.Identifier;
 import team.hdt.sandboxgame.game_engine.common.registry.BiomeRegistry;
+import team.hdt.sandboxgame.game_engine.common.util.interfaces.Nullable;
 import team.hdt.sandboxgame.game_engine.common.world.Chunk;
 import team.hdt.sandboxgame.game_engine.common.world.gen.interfaces.IBiome;
 import team.hdt.sandboxgame.game_engine.common.world.gen.interfaces.ILayer;
@@ -14,11 +15,11 @@ public class ChunkFactory {
 
     public ChunkFactory(){}
 
-    private static Random random = new Random();
+    public static Random random = new Random();
     private IBiome IBiome;
     static int currentY;
 
-     public void initFactory(IBiome biome, boolean chooseOwn){
+     public void initFactory(@Nullable IBiome biome, boolean chooseOwn){
          if(chooseOwn) {
              Map<Identifier, IBiome> biomes = BiomeRegistry.registries.registry;
              Map<Integer, IBiome> biomeList = new HashMap<>();
@@ -33,7 +34,7 @@ public class ChunkFactory {
     }
 
     public Chunk getChunk(){
-         Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL);
+         Chunk chunk = new Chunk(Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.CHUNK_SIZE,Chunk.ChunkType.HORIZONTAL, IBiome);
          do {
              ILayer layer = IBiome.getLayer(currentY, random);
              for (int x = 0; x < Chunk.CHUNK_SIZE; x++) {

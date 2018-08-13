@@ -29,4 +29,13 @@ public class ChunkPos {
     public long getPosZ() {
         return posZ;
     }
+
+    public ChunkPos[] getSurroundings(){
+        return new ChunkPos[]{
+          new ChunkPos(posX-1, posZ),
+          new ChunkPos(posX+1, posZ),
+          new ChunkPos(posX, posZ+1),
+          new ChunkPos(posX, posZ-1)
+        };
+    }
 }

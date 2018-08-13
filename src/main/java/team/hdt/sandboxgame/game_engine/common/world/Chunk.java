@@ -1,6 +1,7 @@
 package team.hdt.sandboxgame.game_engine.common.world;
 
 import team.hdt.sandboxgame.game_engine.common.world.block.BlockType;
+import team.hdt.sandboxgame.game_engine.common.world.gen.interfaces.IBiome;
 import team.hdt.sandboxgame.game_engine.common.world.storage.RawBlockStorage;
 import team.hdt.sandboxgame.game_engine.common.world.storage.RawIdBlockStorage;
 
@@ -8,6 +9,10 @@ public class Chunk {
 
     public ChunkType getType() {
         return chunkType;
+    }
+
+    public IBiome getBiome() {
+        return BIOME;
     }
 
     public enum ChunkType {
@@ -22,15 +27,17 @@ public class Chunk {
     private final int chunkY;
     private final int chunkZ;
     private final ChunkType chunkType;
+    private final IBiome BIOME;
 
     public final RawBlockStorage storage;
 
-    public Chunk(int chunkX, int chunkY, int chunkZ, ChunkType chunkType) {
+    public Chunk(int chunkX, int chunkY, int chunkZ, ChunkType chunkType, IBiome biome) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
         this.chunkZ = chunkZ;
         this.storage = new RawIdBlockStorage(CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE);
         this.chunkType = chunkType;
+        this.BIOME = biome;
     }
 
     public int getChunkX() {
