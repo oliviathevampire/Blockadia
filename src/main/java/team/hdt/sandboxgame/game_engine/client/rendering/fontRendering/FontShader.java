@@ -1,12 +1,11 @@
 package team.hdt.sandboxgame.game_engine.client.rendering.fontRendering;
 
 import team.hdt.sandboxgame.game_engine.client.rendering.shaders.*;
-import team.hdt.sandboxgame.game_engine.util.MyFile;
 
 public class FontShader extends ShaderProgram {
 	
-	private static final MyFile VERTEX_SHADER = new MyFile("fontRendering", "fontVertex.glsl");
-	private static final MyFile FRAGMENT_SHADER = new MyFile("fontRendering", "fontFragment.glsl");
+	private static final String VERTEX_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontVertex.glsl";
+	private static final String FRAGMENT_SHADER = "src/main/resources/assets/sandboxgame/shaders/fontFragment.glsl";
 	
 	protected UniformVec4 colour = new UniformVec4("colour");
 	protected UniformSampler fontTexture = new UniformSampler("fontTexture");

@@ -18,7 +18,7 @@ public class GuiShader extends ShaderProgram {
 	public UniformSampler guiTexture = new UniformSampler("guiTexture");
 
 	public GuiShader() {
-		super(VERTEX_SHADER, FRAGMENT_SHADER);
+		super(VERTEX_SHADER.getPath(), FRAGMENT_SHADER.getPath());
 		super.storeAllUniformLocations(transform, alpha, flipTexture, overrideColour, useOverrideColour, blurTexture, guiTexture, usesBlur);
 		super.start();
 		guiTexture.loadTexUnit(0);

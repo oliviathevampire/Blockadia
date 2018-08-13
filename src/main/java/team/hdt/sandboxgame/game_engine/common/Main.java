@@ -1,11 +1,14 @@
 package team.hdt.sandboxgame.game_engine.common;
 
-import org.lwjgl.opengl.GL11;
+import team.hdt.sandboxgame.game_engine.client.guis.GuiMaster;
+import team.hdt.sandboxgame.game_engine.client.rendering.EngineMaster;
+import team.hdt.sandboxgame.game_engine.client.rendering.MasterRenderer;
+import team.hdt.sandboxgame.game_engine.common.gameManaging.GameManager;
 import team.hdt.sandboxgame.game_engine.common.util.Display;
-import team.hdt.sandboxgame.game_engine.common.util.TickRegulator;
-import team.hdt.sandboxgame.game_engine.common.world.block.BlockTypes;
 import team.hdt.sandboxgame.game_engine.util.FileUtils;
 import team.hdt.sandboxgame.game_engine.util.MyFile;
+
+import java.util.Calendar;
 
 public class Main {
 
@@ -18,6 +21,8 @@ public class Main {
 
     private static final float STABLE_DELTA_TIME = 2;
 
+    public static String version = "0.0.1";
+
     private static final int TITLE_TEXT_ID = 1;
     private static final MyFile ICON16_FILE = new MyFile(FileUtils.RES_FOLDER, "icon16.png");
     private static final MyFile ICON32_FILE = new MyFile(FileUtils.RES_FOLDER, "icon32.png");
@@ -28,39 +33,25 @@ public class Main {
     private static float aspectRatio;
     private static float delta;
     private static float time = 0;
+    private static int ticker = 0;
+    private static boolean error = false;
 
+    public static float TIME_SPEED = 1;
 
     public static void main(String[] args) {
-        // TODO: Some centralised place for registration of everything
-        GL11.glViewport(0, 0, WIDTH, HEIGHT);
-        aspectRatio = (float) WIDTH / (float) HEIGHT;
-        delta = 1f / FPS_CAP;
-        BlockTypes.register();
 
-        GameController controller = new GameController();
-        controller.setup();
+        EngineMaster.init(Camera.getCamera());
 
-        display = new Display("Husky's Sandbox Game", WIDTH, HEIGHT);
-
-        TickRegulator tickRegulator = new TickRegulator(1000000000L / TICK_RATE);
-        TickRegulator frameRegulator = new TickRegulator(1000000000L / FRAME_RATE);
-
-        tickRegulator.start();
-        frameRegulator.start();
-
-        while (!display.shouldClose()) {
-            // TODO: This setup is not ideal.
-            int scheduledFrames = frameRegulator.getScheduledTicks();
-            for (int i = 0; i < scheduledFrames; i++) {
-                controller.render();
-            }
-            int scheduledTicks = tickRegulator.getScheduledTicks();
-            for (int i = 0; i < scheduledTicks; i++) {
-                controller.update();
-            }
+        FirstScreenUi screen = new FirstScreenUi();
+        GuiMaster.addComponent(screen, 0, 0, 1, 1);
+        while (!screen.isReady()) {
+            GuiMaster.updateGuis();
+            MasterRenderer.renderGuis();
+            EngineMaster.update();
         }
-        display.run();
-        controller.drop();
+
+        GameManager.init();
+
     }
 
     public static int getWidth() {
@@ -89,6 +80,18 @@ public class Main {
      * @return The game time.
      */
     public static float getTime() {
+        return time;
+    }
+
+    public static float getGameSeconds() {
+        return getDeltaSeconds() * TIME_SPEED;
+    }
+
+    public static float getDeltaHours() {
+        return (getDeltaSeconds() * TIME_SPEED) / Calendar.HOUR;
+    }
+
+    public static float getGameTime(){
         return time;
     }
 

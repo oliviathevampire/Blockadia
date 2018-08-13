@@ -26,6 +26,4 @@ void main(void){
 
     out_colour = vec4(overallColour, overallAlpha);
     out_colour.a *= colour.a;
-
-	
 }
