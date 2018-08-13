@@ -11,7 +11,7 @@ public class RawIdBlockStorage implements RawBlockStorage {
     private final int sizeZ;
 
     public RawIdBlockStorage(int sizeX, int sizeY, int sizeZ) {
-        this.data = new byte[sizeX][300][sizeZ];
+        this.data = new byte[sizeX][sizeY][sizeZ];
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.sizeZ = sizeZ;
@@ -45,18 +45,18 @@ public class RawIdBlockStorage implements RawBlockStorage {
     }
 
     @Override
-    public Element toXML(Element element){
-        element.setAttribute("sizeX",sizeX + "");
-        element.setAttribute("sizeY",300 + "");
-        element.setAttribute("sizeZ",sizeZ + "");
+    public Element toXML(Element element) {
+        element.setAttribute("sizeX", sizeX + "");
+        element.setAttribute("sizeY", 300 + "");
+        element.setAttribute("sizeZ", sizeZ + "");
         Element data = new Element("data");
-        for (int x =0; x < sizeX; x++){
-            for (int y =0; y < 300; y++){
-                for (int z =0; z < sizeZ; z++){
+        for (int x = 0; x < sizeX; x++) {
+            for (int y = 0; y < 300; y++) {
+                for (int z = 0; z < sizeZ; z++) {
                     Element block = new Element("block");
-                    block.setAttribute("x", x+"");
-                    block.setAttribute("y", y+"");
-                    block.setAttribute("z", z+"");
+                    block.setAttribute("x", x + "");
+                    block.setAttribute("y", y + "");
+                    block.setAttribute("z", z + "");
                     block.setText(this.data[x][y][z] + "");
                     data.addContent(block);
                 }
