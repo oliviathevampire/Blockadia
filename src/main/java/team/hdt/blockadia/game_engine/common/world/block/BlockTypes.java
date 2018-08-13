@@ -14,6 +14,7 @@ public class BlockTypes {
     public static final BlockType SAND = new BlockBuilder().withTranslationKey("sand").withMaterial(BlockMaterials.SAND).build();
     public static final BlockType WOOD = new BlockBuilder().withTranslationKey("wood").withMaterial(BlockMaterials.WOOD).build();
     public static final BlockType PLANKS = new BlockBuilder().withTranslationKey("planks").withMaterial(BlockMaterials.WOOD).build();
+    public static final BlockType BEDROCK = new BlockBuilder().withTranslationKey("bedrock").withMaterial(BlockMaterials.METAL).build();
 
     public static final IdRegistry<BlockType> REGISTRY = new DefaultedHashIdRegistry<BlockType>()
             .withDefaultEntry(AIR);
@@ -26,6 +27,7 @@ public class BlockTypes {
         registerBlockType("sand", SAND, 4);
         registerBlockType("wood", WOOD, 5);
         registerBlockType("planks", PLANKS, 6);
+        registerBlockType("bedrock", BEDROCK, 7);
     }
 
     private static void registerBlockType(String registryName, BlockType type, int id) {
