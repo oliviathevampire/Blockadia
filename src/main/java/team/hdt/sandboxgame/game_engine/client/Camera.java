@@ -3,9 +3,7 @@ package team.hdt.sandboxgame.game_engine.client;
 import team.hdt.sandboxgame.game_engine.common.Main;
 import team.hdt.sandboxgame.game_engine.common.util.math.vectors.Vectors3f;
 
-import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Camera {
     public static float moveSpeed = 0.5f;
