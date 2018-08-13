@@ -46,10 +46,6 @@ public class DummyGame implements IGameLogic {
         BlockTypes.register();
         Biomes.register();
         world = WorldFactory.generate();
-        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-        File f = new File("world.xml");
-        f.createNewFile();
-        outputter.output(world.toXML(), new FileWriter(f));
         renderer.init(window);
         // Create the Mesh
         float[] positions = new float[]{
