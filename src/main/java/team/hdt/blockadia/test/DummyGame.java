@@ -1,5 +1,7 @@
 package team.hdt.blockadia.test;
 
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import team.hdt.blockadia.game_engine.common.registry.BiomeRegistry;
@@ -10,6 +12,10 @@ import team.hdt.blockadia.game_engine.common.world.biomes.Biomes;
 import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.common.world.gen.factory.WorldFactory;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.OutputStream;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -40,7 +46,10 @@ public class DummyGame implements IGameLogic {
         BlockTypes.register();
         Biomes.register();
         world = WorldFactory.generate();
-        System.out.println(world.toXML().toString());
+        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+        File f = new File("world.xml");
+        f.createNewFile();
+        outputter.output(world.toXML(), new FileWriter(f));
         renderer.init(window);
         // Create the Mesh
         float[] positions = new float[]{

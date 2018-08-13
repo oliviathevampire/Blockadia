@@ -30,7 +30,7 @@ public class BiomeDesert implements IBiome {
         return chanceMap;
     }
 
-    private Identifier identifier = new Identifier("biome_flatland");
+    private Identifier identifier = new Identifier("biome_desert");
 
     @Override
     public Identifier getIdentifier() {

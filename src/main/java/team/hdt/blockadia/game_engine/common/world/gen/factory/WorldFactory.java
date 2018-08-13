@@ -14,7 +14,7 @@ public class WorldFactory {
     /**
      * world will be x amount of chunks into every direction on creation
      */
-    public static final int START_SIZE = 100;
+    public static final int START_SIZE = 2;
 
     protected enum GenMode {
         POSxPOSz, NEGxPOSz, POSxNEGz, NEGxNEGz
@@ -36,11 +36,6 @@ public class WorldFactory {
         for(WorldGenComponent component : worldGenComponents){
             component.onChunkGen((pos, chunk) -> world.CHUNKS.put(pos, chunk));
             component.run();
-        }
-        try {
-            wait(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return world;
     }
