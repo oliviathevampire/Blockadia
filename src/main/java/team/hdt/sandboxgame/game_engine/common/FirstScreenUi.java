@@ -62,7 +62,6 @@ public class FirstScreenUi extends GuiComponent {
 
 	public FirstScreenUi() {
 		background = new GuiTexture(BACK_TEX);
-		//background.setAlphaDriver(new SlideDriver(0, 1, 0.3f));
 
 		logo = createImage(LOGO_TEX);
 		this.tmLogo = createImage(TM_LOGO);

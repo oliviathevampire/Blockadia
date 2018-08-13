@@ -22,7 +22,7 @@ public class MasterRenderer {
 
     public static void init(CameraInterface camera) {
         createProjectionMatrix(camera);
-        fontRenderer = new FontRenderer();
+//        fontRenderer = new FontRenderer();
         guiRenderer = new GuiRenderer();
     }
 
@@ -31,7 +31,7 @@ public class MasterRenderer {
      * closes.
      */
     public static void cleanUp() {
-        fontRenderer.cleanUp();
+//        fontRenderer.cleanUp();
         guiRenderer.cleanUp();
     }
 
@@ -54,7 +54,7 @@ public class MasterRenderer {
         for(GuiRenderData.GuiRenderLevelData renderLevel : renderData.getRenderData()){
             if(!renderLevel.isEmpty()){
                 guiRenderer.render(renderLevel.getTextures());
-                fontRenderer.render(renderLevel.getTexts());
+//                fontRenderer.render(renderLevel.getTexts());
             }
         }
     }

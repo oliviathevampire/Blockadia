@@ -1,5 +1,6 @@
 package team.hdt.sandboxgame.game_engine.common;
 
+import team.hdt.sandboxgame.game_engine.client.glRequestProcessing.GlRequestProcessor;
 import team.hdt.sandboxgame.game_engine.client.guis.GuiMaster;
 import team.hdt.sandboxgame.game_engine.client.rendering.EngineMaster;
 import team.hdt.sandboxgame.game_engine.client.rendering.MasterRenderer;
@@ -9,6 +10,8 @@ import team.hdt.sandboxgame.game_engine.util.FileUtils;
 import team.hdt.sandboxgame.game_engine.util.MyFile;
 
 import java.util.Calendar;
+
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class Main {
 
@@ -39,9 +42,7 @@ public class Main {
     public static float TIME_SPEED = 1;
 
     public static void main(String[] args) {
-
         EngineMaster.init(Camera.getCamera());
-
         FirstScreenUi screen = new FirstScreenUi();
         GuiMaster.addComponent(screen, 0, 0, 1, 1);
         while (!screen.isReady()) {
@@ -49,9 +50,13 @@ public class Main {
             MasterRenderer.renderGuis();
             EngineMaster.update();
         }
-
         GameManager.init();
-
+        GlRequestProcessor.completeAllRequests();
+        while (!glfwWindowShouldClose(display.window)) {
+            GameManager.update();
+            GameManager.render();
+        }
+        GameManager.cleanUp();
     }
 
     public static int getWidth() {

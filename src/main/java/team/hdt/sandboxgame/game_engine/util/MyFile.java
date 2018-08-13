@@ -11,7 +11,7 @@ public class MyFile {
 	private String name;
 
 	public MyFile(String path) {
-		this.path = FileUtils.FILE_SEPARATOR + path;
+		this.path = path;
 		String[] dirs = path.split(FileUtils.FILE_SEPARATOR);
 		this.name = dirs[dirs.length - 1];
 	}

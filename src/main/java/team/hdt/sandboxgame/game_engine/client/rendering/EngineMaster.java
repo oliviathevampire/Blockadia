@@ -6,9 +6,9 @@ import team.hdt.sandboxgame.game_engine.client.rendering.textures.TextureManager
 import team.hdt.sandboxgame.game_engine.client.resourceProcessing.RequestProcessor;
 import team.hdt.sandboxgame.game_engine.common.CameraInterface;
 import team.hdt.sandboxgame.game_engine.common.Loader;
-import team.hdt.sandboxgame.game_engine.common.util.UserConfigs;
+import team.hdt.sandboxgame.game_engine.common.Main;
+import team.hdt.sandboxgame.game_engine.common.util.Display;
 import team.hdt.sandboxgame.game_engine.common.world.misc.EnvironmentVariables;
-import team.hdt.sandboxgame.game_engine.util.languages.GameText;
 
 public class EngineMaster {
 
@@ -22,8 +22,10 @@ public class EngineMaster {
      */
     public static void init(CameraInterface camera) {
         sceneCamera = camera;
-        UserConfigs.loadConfigs();
-        GameText.init(UserConfigs.getLanguage().ordinal());
+        Display display = new Display("Blockadia", Main.WIDTH, Main.HEIGHT);
+        display.run();
+//        UserConfigs.loadConfigs();
+//        GameText.init(UserConfigs.getLanguage().ordinal());
         MasterRenderer.init(camera);
     }
 

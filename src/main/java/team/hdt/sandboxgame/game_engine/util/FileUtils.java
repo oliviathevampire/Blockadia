@@ -11,7 +11,7 @@ public class FileUtils {
 	
 	public static final String FILE_SEPARATOR = "/";
 	public static final String SEPARATOR = ";";
-	public static MyFile RES_FOLDER = new MyFile("assets/sandboxgame");
+	public static MyFile RES_FOLDER = new MyFile("assets/blockania");
 	public static final int TRUE = 1;
 	public static final int FALSE = 0;
 	

@@ -5,8 +5,6 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
-import team.hdt.sandboxgame.game_engine.common.state.GameState;
-import team.hdt.sandboxgame.game_engine.common.state.IngameState;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
@@ -20,7 +18,6 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
 
-    private static GameState gameState = new IngameState();
 
     private static int width;
     private static int height;
@@ -70,10 +67,8 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
-        gameState.setup();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            gameState.render();
             glfwSwapBuffers(window);
             glfwPollEvents();
         }

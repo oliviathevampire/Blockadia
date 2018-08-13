@@ -14,7 +14,7 @@ public class ParticleColourShader extends ShaderProgram {
 	protected UniformVec3 lighting = new UniformVec3("lighting");
 	
 	public ParticleColourShader() {
-		super(VERTEX_SHADER.getPath(), FRAGMENT_SHADER.getPath());
+		super(VERTEX_SHADER, FRAGMENT_SHADER);
 		super.storeAllUniformLocations(projectionMatrix, lighting);
 	}
 	

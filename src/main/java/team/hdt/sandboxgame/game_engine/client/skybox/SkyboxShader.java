@@ -1,11 +1,12 @@
 package team.hdt.sandboxgame.game_engine.client.skybox;
 
 import team.hdt.sandboxgame.game_engine.client.rendering.shaders.*;
+import team.hdt.sandboxgame.game_engine.util.MyFile;
 
 public class SkyboxShader extends ShaderProgram {
 	
-	private static final String VERTEX_SHADER = "src/main/java/team/hdt/sandboxgame/game_engine/client/skybox/skyVertex.glsl";
-	private static final String FRAGMENT_SHADER = "src/main/java/team/hdt/sandboxgame/game_engine/client/skybox/skyFragment.glsl";
+	private static final MyFile VERTEX_SHADER = new MyFile("src/main/java/team/hdt/sandboxgame/game_engine/client/skybox/skyVertex.glsl");
+	private static final MyFile FRAGMENT_SHADER = new MyFile("src/main/java/team/hdt/sandboxgame/game_engine/client/skybox/skyFragment.glsl");
 	
 	protected UniformMatrix pvMatrix = new UniformMatrix("pvMatrix");
 	protected UniformVec3 horizonColour = new UniformVec3("horizonColour");
