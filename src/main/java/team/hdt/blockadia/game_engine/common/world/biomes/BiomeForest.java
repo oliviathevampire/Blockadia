@@ -4,21 +4,19 @@ import team.hdt.blockadia.game_engine.common.Identifier;
 import team.hdt.blockadia.game_engine.common.world.block.BlockType;
 import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
+import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IForest;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.ILayer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomePlanes extends Biome implements IBiome {
+public class BiomeForest implements IBiome, IForest {
 
-    public BiomePlanes() {
-        super((new Biome.BiomeProperties("Plains")).baseHeight(0.125F).heightVariation(0.05F).temperature(0.8F).rainfall(0.4F));
-    }
-
+    //TODO: finish tree gen.
     @Override
     public ILayer getLayer(int y, Random random) {
-        return y < 50 ? new LayerSolid(BlockTypes.ROCK) : new ILayer.LayerAir(32, 32);
+        return y < 50 ? new BiomeForest.LayerSolid(BlockTypes.PLANKS) : new ILayer.LayerAir(32, 32);
     }
 
     /**
@@ -29,12 +27,12 @@ public class BiomePlanes extends Biome implements IBiome {
     @Override
     public Map<IBiome, Integer> getChanceMap() {
         HashMap<IBiome, Integer> chanceMap = new HashMap<>();
-        chanceMap.put(Biomes.PLAINS, 1);
-        chanceMap.put(Biomes.DESERT, 1);
+        chanceMap.put(Biomes.flatlands, 1);
+        chanceMap.put(Biomes.desert, 1);
         return chanceMap;
     }
 
-    public Identifier identifier = new Identifier("biome_flatland");
+    public Identifier identifier = new Identifier("biome_forest");
 
     @Override
     public Identifier getIdentifier() {
@@ -44,6 +42,31 @@ public class BiomePlanes extends Biome implements IBiome {
     @Override
     public void setIdentifier(Identifier identifier) {
         this.identifier = identifier;
+    }
+
+    @Override
+    public void getTreeType() {
+
+    }
+
+    @Override
+    public void setTreeType(Enum Treetype) {
+
+    }
+
+    @Override
+    public void getTreeGen(Class tree) {
+
+    }
+
+    @Override
+    public void getTreeDenscity() {
+
+    }
+
+    @Override
+    public float setTreeDenscity(float treeDenscity) {
+        return 0;
     }
 
     private class LayerSolid implements ILayer{
@@ -69,4 +92,5 @@ public class BiomePlanes extends Biome implements IBiome {
             return type;
         }
     }
+
 }
