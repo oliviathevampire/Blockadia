@@ -3,7 +3,7 @@ package team.hdt.blockadia.test.engine.graph;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import team.hdt.blockadia.test.engine.graph.item.GameItem;
+import team.hdt.blockadia.test.engine.item.GameItem;
 
 public class Transformation {
 

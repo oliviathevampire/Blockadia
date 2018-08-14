@@ -4,11 +4,11 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import team.hdt.blockadia.test.engine.*;
-import team.hdt.blockadia.test.engine.graph.item.GameItem;
-import team.hdt.blockadia.test.engine.graph.item.SkyBox;
 import team.hdt.blockadia.test.engine.graph.light.DirectionalLight;
 import team.hdt.blockadia.test.engine.graph.light.PointLight;
 import team.hdt.blockadia.test.engine.graph.light.SpotLight;
+import team.hdt.blockadia.test.engine.item.GameItem;
+import team.hdt.blockadia.test.engine.item.SkyBox;
 
 import java.util.List;
 import java.util.Map;
@@ -303,7 +303,7 @@ public class Renderer {
             if (viewMatrix != null) {
                 shader.setUniform("material", mesh.getMaterial());
                 glActiveTexture(GL_TEXTURE2);
-                glBindTexture(GL_TEXTURE_2D, shadowMap.getDepthMapTexture().getId());
+//                glBindTexture(GL_TEXTURE_2D, shadowMap.getDepthMapTexture().getId());
             }
             mesh.renderListInstanced(mapMeshes.get(mesh), transformation, viewMatrix, lightViewMatrix);
         }

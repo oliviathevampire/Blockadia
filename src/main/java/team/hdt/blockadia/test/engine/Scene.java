@@ -2,9 +2,9 @@ package team.hdt.blockadia.test.engine;
 
 import team.hdt.blockadia.test.engine.graph.InstancedMesh;
 import team.hdt.blockadia.test.engine.graph.Mesh;
-import team.hdt.blockadia.test.engine.graph.item.GameItem;
-import team.hdt.blockadia.test.engine.graph.item.SkyBox;
 import team.hdt.blockadia.test.engine.graph.weather.Fog;
+import team.hdt.blockadia.test.engine.item.GameItem;
+import team.hdt.blockadia.test.engine.item.SkyBox;
 
 import java.util.ArrayList;
 import java.util.HashMap;

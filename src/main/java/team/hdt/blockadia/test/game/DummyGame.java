@@ -11,10 +11,11 @@ import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.common.world.gen.factory.WorldFactory;
 import team.hdt.blockadia.test.engine.*;
 import team.hdt.blockadia.test.engine.graph.*;
-import team.hdt.blockadia.test.engine.graph.item.GameItem;
-import team.hdt.blockadia.test.engine.graph.item.SkyBox;
 import team.hdt.blockadia.test.engine.graph.light.DirectionalLight;
 import team.hdt.blockadia.test.engine.graph.weather.Fog;
+import team.hdt.blockadia.test.engine.item.GameItem;
+import team.hdt.blockadia.test.engine.item.SkyBox;
+import team.hdt.blockadia.test.engine.item.Terrain;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,9 +33,10 @@ public class DummyGame implements IGameLogic {
     private Hud hud;
     private GameItem[] gameItems;
     private World world;
+    private Terrain terrain;
     private float angleInc;
-
     private float lightAngle;
+    private MouseBoxSelectionDetector selectDetector;
 
     public DummyGame() {
         renderer = new Renderer();
@@ -62,19 +64,24 @@ public class DummyGame implements IGameLogic {
 
         float blockScale = 0.5f;
         float skyBoxScale = 100.0f;
+        float extension = 2.0f;
 
+//        float startX = extension * (-skyBoxScale + blockScale);
+//        float startZ = extension * (skyBoxScale - blockScale);
         float startX = 0;
         float startZ = 0;
         float startY = -1.0f;
 
-        float inc = blockScale * 1;
+        float inc = blockScale * 2;
 
         float posX = startX;
         float posZ = startZ;
         float incy = 0.0f;
 
-        int x = 10000;
-        int z = 10000;
+        selectDetector = new MouseBoxSelectionDetector();
+
+        int x = 40;
+        int z = 40;
 
         int instances = x * z;
         Mesh mesh = OBJLoader.loadMesh("/models/cube.obj", instances);
@@ -116,7 +123,7 @@ public class DummyGame implements IGameLogic {
         camera.getRotation().x = 25;
         camera.getRotation().y = -1;
 
-        hud = new Hud("DEMO");
+        hud = new Hud("Test");
     }
 
     private void setupLights() {
@@ -174,7 +181,14 @@ public class DummyGame implements IGameLogic {
         }
 
         // Update camera position
+        Vector3f prevPos = new Vector3f(camera.getPosition());
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        // Check if there has been a collision. If true, set the y position to
+        // the maximum height
+        float height = terrain != null ? terrain.getHeight(camera.getPosition()) : -Float.MAX_VALUE;
+        if (camera.getPosition().y <= height) {
+            camera.setPosition(prevPos.x, prevPos.y, prevPos.z);
+        }
 
         lightAngle += angleInc;
         if (lightAngle < 0) {
@@ -192,6 +206,10 @@ public class DummyGame implements IGameLogic {
 
         // Update view matrix
         camera.updateViewMatrix();
+
+        if (mouseInput.isLeftButtonPressed()) {
+            this.selectDetector.selectGameItem(gameItems, window, mouseInput.getCurrentPos(), camera);
+        }
     }
 
     @Override

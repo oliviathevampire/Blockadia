@@ -1,20 +1,28 @@
 package team.hdt.blockadia.game_engine.common.registry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import team.hdt.blockadia.game_engine.common.Identifier;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class BiomeRegistry implements Registry<IBiome> {
 
     public static BiomeRegistry registries = new BiomeRegistry();
     public Map<Identifier, IBiome> registry = new HashMap<>();
+    private Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void register(Identifier identifier, IBiome value) {
-        registry.put(identifier, value);
-        System.out.println(String.format("Registering a biome called %s", identifier.getNamespace() + ":" + identifier.getPath()));
+        if(identifier != null && value != null) {
+            registry.put(identifier, value);
+            LOGGER.info(String.format("Registering a biome called %s", Objects.requireNonNull(identifier).getNamespace() + ":" + identifier.getPath()));
+        } else {
+            LOGGER.error(String.format("Could not register a biome called %s", Objects.requireNonNull(identifier).getNamespace() + ":" + identifier.getPath()));
+        }
     }
 
     @Override

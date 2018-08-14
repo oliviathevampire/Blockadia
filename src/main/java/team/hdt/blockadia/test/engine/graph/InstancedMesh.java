@@ -2,7 +2,7 @@ package team.hdt.blockadia.test.engine.graph;
 
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
-import team.hdt.blockadia.test.engine.graph.item.GameItem;
+import team.hdt.blockadia.test.engine.item.GameItem;
 
 import java.nio.FloatBuffer;
 import java.util.List;
