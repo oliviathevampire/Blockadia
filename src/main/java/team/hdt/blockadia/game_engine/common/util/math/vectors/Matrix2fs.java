@@ -17,10 +17,6 @@ public class Matrix2fs extends Matrixs implements Serializable {
         load(src);
     }
 
-    public Matrix2fs load(Matrix2fs src) {
-        return load(src, this);
-    }
-
     public static Matrix2fs load(Matrix2fs src, Matrix2fs dest) {
         if (dest == null)
             dest = new Matrix2fs();
@@ -31,42 +27,6 @@ public class Matrix2fs extends Matrixs implements Serializable {
         dest.m11 = src.m11;
 
         return dest;
-    }
-
-    public Matrixs load(FloatBuffer buf) {
-
-        m00 = buf.get();
-        m01 = buf.get();
-        m10 = buf.get();
-        m11 = buf.get();
-
-        return this;
-    }
-
-    public Matrixs loadTranspose(FloatBuffer buf) {
-
-        m00 = buf.get();
-        m10 = buf.get();
-        m01 = buf.get();
-        m11 = buf.get();
-
-        return this;
-    }
-
-    public Matrixs store(FloatBuffer buf) {
-        buf.put(m00);
-        buf.put(m01);
-        buf.put(m10);
-        buf.put(m11);
-        return this;
-    }
-
-    public Matrixs storeTranspose(FloatBuffer buf) {
-        buf.put(m00);
-        buf.put(m10);
-        buf.put(m01);
-        buf.put(m11);
-        return this;
     }
 
     public static Matrix2fs add(Matrix2fs left, Matrix2fs right, Matrix2fs dest) {
@@ -123,14 +83,6 @@ public class Matrix2fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    public Matrixs transpose() {
-        return transpose(this);
-    }
-
-    public Matrix2fs transpose(Matrix2fs dest) {
-        return transpose(this, dest);
-    }
-
     public static Matrix2fs transpose(Matrix2fs src, Matrix2fs dest) {
         if (dest == null)
             dest = new Matrix2fs();
@@ -144,10 +96,6 @@ public class Matrix2fs extends Matrixs implements Serializable {
         return dest;
     }
 
-    public Matrixs invert() {
-        return invert(this, this);
-    }
-
     public static Matrix2fs invert(Matrix2fs src, Matrix2fs dest) {
         /*
          *inv(A) = 1/det(A) * adj(A);
@@ -157,11 +105,11 @@ public class Matrix2fs extends Matrixs implements Serializable {
         if (determinant != 0) {
             if (dest == null)
                 dest = new Matrix2fs();
-            float determinant_inv = 1f/determinant;
-            float t00 =  src.m11*determinant_inv;
-            float t01 = -src.m01*determinant_inv;
-            float t11 =  src.m00*determinant_inv;
-            float t10 = -src.m10*determinant_inv;
+            float determinant_inv = 1f / determinant;
+            float t00 = src.m11 * determinant_inv;
+            float t01 = -src.m01 * determinant_inv;
+            float t11 = src.m00 * determinant_inv;
+            float t10 = -src.m10 * determinant_inv;
 
             dest.m00 = t00;
             dest.m01 = t01;
@@ -170,6 +118,86 @@ public class Matrix2fs extends Matrixs implements Serializable {
             return dest;
         } else
             return null;
+    }
+
+    public static Matrix2fs negate(Matrix2fs src, Matrix2fs dest) {
+        if (dest == null)
+            dest = new Matrix2fs();
+
+        dest.m00 = -src.m00;
+        dest.m01 = -src.m01;
+        dest.m10 = -src.m10;
+        dest.m11 = -src.m11;
+
+        return dest;
+    }
+
+    public static Matrix2fs setIdentity(Matrix2fs src) {
+        src.m00 = 1.0f;
+        src.m01 = 0.0f;
+        src.m10 = 0.0f;
+        src.m11 = 1.0f;
+        return src;
+    }
+
+    public static Matrix2fs setZero(Matrix2fs src) {
+        src.m00 = 0.0f;
+        src.m01 = 0.0f;
+        src.m10 = 0.0f;
+        src.m11 = 0.0f;
+        return src;
+    }
+
+    public Matrix2fs load(Matrix2fs src) {
+        return load(src, this);
+    }
+
+    public Matrixs load(FloatBuffer buf) {
+
+        m00 = buf.get();
+        m01 = buf.get();
+        m10 = buf.get();
+        m11 = buf.get();
+
+        return this;
+    }
+
+    public Matrixs loadTranspose(FloatBuffer buf) {
+
+        m00 = buf.get();
+        m10 = buf.get();
+        m01 = buf.get();
+        m11 = buf.get();
+
+        return this;
+    }
+
+    public Matrixs store(FloatBuffer buf) {
+        buf.put(m00);
+        buf.put(m01);
+        buf.put(m10);
+        buf.put(m11);
+        return this;
+    }
+
+    public Matrixs storeTranspose(FloatBuffer buf) {
+        buf.put(m00);
+        buf.put(m10);
+        buf.put(m01);
+        buf.put(m11);
+        return this;
+    }
+
+    public Matrixs transpose() {
+        return transpose(this);
+    }
+
+    public Matrix2fs transpose(Matrix2fs dest) {
+        return transpose(this, dest);
+    }
+
+    public Matrixs invert() {
+        return invert(this, this);
     }
 
     public String toString() {
@@ -187,43 +215,15 @@ public class Matrix2fs extends Matrixs implements Serializable {
         return negate(this, dest);
     }
 
-    public static Matrix2fs negate(Matrix2fs src, Matrix2fs dest) {
-        if (dest == null)
-            dest = new Matrix2fs();
-
-        dest.m00 = -src.m00;
-        dest.m01 = -src.m01;
-        dest.m10 = -src.m10;
-        dest.m11 = -src.m11;
-
-        return dest;
-    }
-
     public Matrixs setIdentity() {
         return setIdentity(this);
-    }
-
-    public static Matrix2fs setIdentity(Matrix2fs src) {
-        src.m00 = 1.0f;
-        src.m01 = 0.0f;
-        src.m10 = 0.0f;
-        src.m11 = 1.0f;
-        return src;
     }
 
     public Matrixs setZero() {
         return setZero(this);
     }
 
-    public static Matrix2fs setZero(Matrix2fs src) {
-        src.m00 = 0.0f;
-        src.m01 = 0.0f;
-        src.m10 = 0.0f;
-        src.m11 = 0.0f;
-        return src;
-    }
-
     public float determinant() {
-        return m00 * m11 - m01*m10;
+        return m00 * m11 - m01 * m10;
     }
 }

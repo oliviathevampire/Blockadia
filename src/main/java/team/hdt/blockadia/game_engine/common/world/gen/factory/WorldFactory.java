@@ -10,21 +10,17 @@ import java.util.function.BiConsumer;
 
 public class WorldFactory {
 
-    private static WorldFactory INSTANCE = new WorldFactory();
     /**
      * world will be x amount of chunks into every direction on creation
      */
     public static final int START_SIZE = 2;
+    private static WorldFactory INSTANCE = new WorldFactory();
 
-    protected enum GenMode {
-        POSxPOSz, NEGxPOSz, POSxNEGz, NEGxNEGz
-    }
-
-    public static World generate(){
+    public static World generate() {
         return INSTANCE.generateWorld();
     }
 
-    public World generateWorld(){
+    public World generateWorld() {
         World world = new World();
         WorldGenComponent worldGenComponent1 = new WorldGenComponent(GenMode.POSxPOSz, true, null);
         WorldGenComponent worldGenComponent2 = new WorldGenComponent(GenMode.NEGxPOSz, true, null);
@@ -33,26 +29,29 @@ public class WorldFactory {
         WorldGenComponent[] worldGenComponents = {
                 worldGenComponent1, worldGenComponent2, worldGenComponent3, worldGenComponent4
         };
-        for(WorldGenComponent component : worldGenComponents){
+        for (WorldGenComponent component : worldGenComponents) {
             component.onChunkGen((pos, chunk) -> world.CHUNKS.put(pos, chunk));
             component.run();
         }
         return world;
     }
 
-    private class WorldGenComponent implements Runnable{
+    protected enum GenMode {
+        POSxPOSz, NEGxPOSz, POSxNEGz, NEGxNEGz
+    }
+
+    private class WorldGenComponent implements Runnable {
 
         private GenMode mode;
         private IBiome type;
         private boolean first;
+        private BiConsumer<ChunkPos, Chunk> consumer;
 
-        protected WorldGenComponent(GenMode mode, boolean first, @Nullable IBiome type){
+        protected WorldGenComponent(GenMode mode, boolean first, @Nullable IBiome type) {
             this.mode = mode;
             this.type = type;
             this.first = first;
         }
-
-        private BiConsumer<ChunkPos, Chunk> consumer;
 
         /**
          * When an object implementing interface <code>Runnable</code> is used
@@ -69,34 +68,34 @@ public class WorldFactory {
         public void run() {
             ChunkFactory factory = new ChunkFactory();
             factory.initFactory(first ? null : type, first);
-            switch (mode){
+            switch (mode) {
                 case POSxPOSz:
-                    for(long x = 0; x < START_SIZE; x++){
-                        for(long z = 0; z < START_SIZE; z++){
+                    for (long x = 0; x < START_SIZE; x++) {
+                        for (long z = 0; z < START_SIZE; z++) {
                             consumer.accept(new ChunkPos(x, z), factory.getChunk());
                             factory.getNeighbourFactory();
                         }
                     }
                     break;
                 case NEGxPOSz:
-                    for(long x = 0; (x > START_SIZE * -1); x--){
-                        for(long z = 0; z < START_SIZE; z++){
+                    for (long x = 0; (x > START_SIZE * -1); x--) {
+                        for (long z = 0; z < START_SIZE; z++) {
                             consumer.accept(new ChunkPos(x, z), factory.getChunk());
                             factory.getNeighbourFactory();
                         }
                     }
                     break;
                 case POSxNEGz:
-                    for(long x = 0; x < START_SIZE; x++){
-                        for(long z = 0; (z > START_SIZE * -1); z--){
+                    for (long x = 0; x < START_SIZE; x++) {
+                        for (long z = 0; (z > START_SIZE * -1); z--) {
                             consumer.accept(new ChunkPos(x, z), factory.getChunk());
                             factory.getNeighbourFactory();
                         }
                     }
                     break;
                 case NEGxNEGz:
-                    for(long x = 0; (x > START_SIZE * -1); x--){
-                        for(long z = 0; (z > START_SIZE * -1); z--){
+                    for (long x = 0; (x > START_SIZE * -1); x--) {
+                        for (long z = 0; (z > START_SIZE * -1); z--) {
                             consumer.accept(new ChunkPos(x, z), factory.getChunk());
                             factory.getNeighbourFactory();
                         }
@@ -105,7 +104,7 @@ public class WorldFactory {
             }
         }
 
-        public void onChunkGen(BiConsumer<ChunkPos, Chunk> consumer){
+        public void onChunkGen(BiConsumer<ChunkPos, Chunk> consumer) {
             this.consumer = consumer;
         }
     }

@@ -19,8 +19,7 @@
 
 package team.hdt.blockadia.game_engine.common.world.block.properties;
 
-public interface IUnlistedProperty<V>
-{
+public interface IUnlistedProperty<V> {
     String getName();
 
     boolean isValid(V value);

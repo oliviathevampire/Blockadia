@@ -15,6 +15,8 @@ import java.util.Random;
 
 public class BiomeForest extends Biome implements IBiome, IForest {
 
+    public Identifier identifier = new Identifier("biome_forest");
+
     public BiomeForest() {
         super(new BiomeProperties("Forest"));
     }
@@ -38,8 +40,6 @@ public class BiomeForest extends Biome implements IBiome, IForest {
         return chanceMap;
     }
 
-    public Identifier identifier = new Identifier("biome_forest");
-
     @Override
     public Identifier getIdentifier() {
         return identifier;
@@ -60,11 +60,11 @@ public class BiomeForest extends Biome implements IBiome, IForest {
         return new BasicTree(BlockTypes.OAK_LOG, BlockTypes.OAK_LEAVES);
     }
 
-    private class LayerSolid implements ILayer{
+    private class LayerSolid implements ILayer {
 
         BlockType type;
 
-        LayerSolid(BlockType type){
+        LayerSolid(BlockType type) {
             this.type = type;
         }
 

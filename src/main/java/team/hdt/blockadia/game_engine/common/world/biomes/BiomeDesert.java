@@ -12,6 +12,8 @@ import java.util.Random;
 
 public class BiomeDesert extends Biome implements IBiome {
 
+    private Identifier identifier = new Identifier("biome_desert");
+
     public BiomeDesert() {
         super((new Biome.BiomeProperties("Desert")).baseHeight(0.125F).heightVariation(0.05F).temperature(2.0F).rainfall(0.0F).rainDisabled());
     }
@@ -34,8 +36,6 @@ public class BiomeDesert extends Biome implements IBiome {
         return chanceMap;
     }
 
-    private Identifier identifier = new Identifier("biome_desert");
-
     @Override
     public Identifier getIdentifier() {
         return identifier;
@@ -50,7 +50,7 @@ public class BiomeDesert extends Biome implements IBiome {
 
         BlockType type;
 
-        public LayerSolid(BlockType type){
+        public LayerSolid(BlockType type) {
             this.type = type;
         }
 

@@ -22,7 +22,7 @@ public class Biomes {
     public static final BiomeDesert MESA = new BiomeDesert();
     public static final BiomeForest FOREST = new BiomeForest();
 
-    public static void register(){
+    public static void register() {
         registerBiome("planes", PLAINS);
         registerBiome("desert", DESERT);
         registerBiome("nether", NETHER);

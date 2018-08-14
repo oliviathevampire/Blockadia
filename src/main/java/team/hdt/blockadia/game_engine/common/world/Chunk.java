@@ -20,7 +20,7 @@ public class Chunk {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
         this.chunkZ = chunkZ;
-        this.storage = new RawIdBlockStorage(CHUNK_SIZE, 100, CHUNK_SIZE);
+        this.storage = new RawIdBlockStorage(CHUNK_SIZE, 300, CHUNK_SIZE);
         this.chunkType = chunkType;
         this.BIOME = biome;
     }

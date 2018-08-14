@@ -10,7 +10,7 @@ public class ChunkHolder {
     Chunk chunkIn;
     long[] pos;
 
-    public ChunkHolder(Chunk chunk, long x, long y){
+    public ChunkHolder(Chunk chunk, long x, long y) {
         this.chunkIn = chunk;
         this.pos = new long[]{
                 x,
@@ -18,7 +18,7 @@ public class ChunkHolder {
         };
     }
 
-    public ChunkHolder(Chunk chunk, @Nonnull ChunkPos pos){
+    public ChunkHolder(Chunk chunk, @Nonnull ChunkPos pos) {
         this(chunk, pos.getPosX(), pos.getPosZ());
     }
 
@@ -36,11 +36,11 @@ public class ChunkHolder {
         return pos;
     }
 
-    public Element toXML(){
+    public Element toXML() {
         Element element = new Element("chunk");
         Element data = new Element("data");
-        data.setAttribute("x",pos[0] + "");
-        data.setAttribute("y",pos[1] + "");
+        data.setAttribute("x", pos[0] + "");
+        data.setAttribute("y", pos[1] + "");
         element.addContent(data);
         Element blockdata = new Element("blockdata");
         blockdata = chunkIn.storage.toXML(blockdata);
