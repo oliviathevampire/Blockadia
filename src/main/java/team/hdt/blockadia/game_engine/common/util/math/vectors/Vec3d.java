@@ -1,6 +1,10 @@
-package team.hdt.blockadia.game_engine.common.util.math;
+package team.hdt.blockadia.game_engine.common.util.math.vectors;
 
-import javax.annotation.Nullable;
+
+import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
+import team.hdt.blockadia.game_engine.common.util.math.MathHelper;
+import team.hdt.blockadia.game_engine.common.util.math.Vec2f;
+import team.hdt.blockadia.game_engine.common.util.math.Vec3i;
 
 public class Vec3d {
     public static final Vec3d ZERO = new Vec3d(0.0D, 0.0D, 0.0D);
