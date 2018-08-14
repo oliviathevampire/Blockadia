@@ -63,7 +63,7 @@ public class MetaFile {
 
 	/**
 	 * Read in the next line and store the variable values.
-	 * @return {@code true} if the end of the file hasn't been reached.
+	 * @return {@code true} if the END of the file hasn't been reached.
 	 */
 	private boolean processNextLine() {
 		values.clear();

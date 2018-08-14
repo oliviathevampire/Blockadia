@@ -95,7 +95,7 @@ public @interface Mod {
     /**
      * The acceptable range of minecraft versions that this mod will load and run in
      * The default ("empty string") indicates that the currently RUNNING minecraft version is acceptable.
-     * This means ANY version that the end user adds the mod to. Modders PLEASE set this.
+     * This means ANY version that the END user adds the mod to. Modders PLEASE set this.
      * FML will refuse to run with an error if the minecraft version is not in this range across all mods.
      *
      * @return A version range as specified by the maven version range specification or the empty string
@@ -160,7 +160,7 @@ public @interface Mod {
 
     /**
      * An optional URL to a JSON file that will be checked once per launch to determine if there is an updated
-     * version of this mod and notify the end user. For more information see ForgeVersion.
+     * version of this mod and notify the END user. For more information see ForgeVersion.
      * Format is defined here: https://gist.github.com/LexManos/7aacb9aa991330523884
      *
      * @return URL to update metadata json

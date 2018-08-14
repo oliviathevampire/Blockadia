@@ -10,7 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomeFlatlands implements IBiome {
+public class BiomeNether extends Biome implements IBiome {
+
+    public BiomeNether() {
+        super((new BiomeProperties("Nether")).baseHeight(0.125F).heightVariation(0.05F).temperature(2.0F).rainfall(0.0F).rainDisabled());
+    }
 
     @Override
     public ILayer getLayer(int y, Random random) {
@@ -25,12 +29,12 @@ public class BiomeFlatlands implements IBiome {
     @Override
     public Map<IBiome, Integer> getChanceMap() {
         HashMap<IBiome, Integer> chanceMap = new HashMap<>();
-        chanceMap.put(Biomes.flatlands, 1);
-        chanceMap.put(Biomes.desert, 1);
+        chanceMap.put(Biomes.DESERT, 0);
+            chanceMap.put(Biomes.PLAINS, 0);
         return chanceMap;
     }
 
-    private Identifier identifier = new Identifier("biome_flatland");
+    private Identifier identifier = new Identifier("biome_nether");
 
     @Override
     public Identifier getIdentifier() {
@@ -42,7 +46,7 @@ public class BiomeFlatlands implements IBiome {
         this.identifier = identifier;
     }
 
-    private class LayerSolid implements ILayer{
+    private class LayerSolid implements ILayer {
 
         BlockType type;
 
@@ -65,4 +69,5 @@ public class BiomeFlatlands implements IBiome {
             return type;
         }
     }
+
 }

@@ -67,7 +67,7 @@ public class Calendar {
 	}
 	
 	/**
-	 * @return The time as a number between 0 and 1, where 0 is the very start of the day (00:00) and 1 is the very end (24:00). 
+	 * @return The time as a number between 0 and 1, where 0 is the very start of the day (00:00) and 1 is the very END (24:00).
 	 */
 	public float getRawTime(){
 		return time;

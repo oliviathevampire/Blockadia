@@ -47,11 +47,11 @@ public class RawIdBlockStorage implements RawBlockStorage {
     @Override
     public Element toXML(Element element) {
         element.setAttribute("sizeX", sizeX + "");
-        element.setAttribute("sizeY", 300 + "");
+        element.setAttribute("sizeY", 100 + "");
         element.setAttribute("sizeZ", sizeZ + "");
         Element data = new Element("data");
         for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < 300; y++) {
+            for (int y = 0; y < 100; y++) {
                 for (int z = 0; z < sizeZ; z++) {
                     Element block = new Element("block");
                     block.setAttribute("x", x + "");

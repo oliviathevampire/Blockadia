@@ -1,4 +1,6 @@
-package team.hdt.blockadia.test;
+package team.hdt.blockadia.test.engine;
+
+import team.hdt.blockadia.test.game.IGameLogic;
 
 public class GameEngine implements Runnable {
 
@@ -16,9 +18,20 @@ public class GameEngine implements Runnable {
 
     private final MouseInput mouseInput;
 
-    public GameEngine(String windowTitle, int width, int height, boolean vSync, IGameLogic gameLogic) throws Exception {
+    private double lastFps;
+
+    private int fps;
+
+    private String windowTitle;
+
+    public GameEngine(String windowTitle, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) throws Exception {
+        this(windowTitle, 0, 0, vSync, opts, gameLogic);
+    }
+
+    public GameEngine(String windowTitle, int width, int height, boolean vSync, Window.WindowOptions opts, IGameLogic gameLogic) {
+        this.windowTitle = windowTitle;
         gameLoopThread = new Thread(this, "GAME_LOOP_THREAD");
-        window = new Window(windowTitle, width, height, vSync);
+        window = new Window(windowTitle, width, height, vSync, opts);
         mouseInput = new MouseInput();
         this.gameLogic = gameLogic;
         timer = new Timer();
@@ -50,6 +63,8 @@ public class GameEngine implements Runnable {
         timer.init();
         mouseInput.init(window);
         gameLogic.init(window);
+        lastFps = timer.getTime();
+        fps = 0;
     }
 
     protected void gameLoop() {
@@ -80,7 +95,7 @@ public class GameEngine implements Runnable {
     protected void cleanup() {
         gameLogic.cleanup();
     }
-    
+
     private void sync() {
         float loopSlot = 1f / TARGET_FPS;
         double endTime = timer.getLastLoopTime() + loopSlot;
@@ -98,11 +113,18 @@ public class GameEngine implements Runnable {
     }
 
     protected void update(float interval) {
-        gameLogic.update(interval, mouseInput);
+        gameLogic.update(interval, mouseInput, window);
     }
 
     protected void render() {
+        if ( window.getWindowOptions().showFps && timer.getLastLoopTime() - lastFps > 1 ) {
+            lastFps = timer.getLastLoopTime();
+            window.setWindowTitle(windowTitle + " - " + fps + " FPS");
+            fps = 0;
+        }
+        fps++;
         gameLogic.render(window);
         window.update();
     }
+
 }

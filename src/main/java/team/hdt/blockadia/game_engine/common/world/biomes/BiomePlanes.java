@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomeDesert extends Biome implements IBiome {
+public class BiomePlanes extends Biome implements IBiome {
 
-    public BiomeDesert() {
-        super((new Biome.BiomeProperties("Desert")).baseHeight(0.125F).heightVariation(0.05F).temperature(2.0F).rainfall(0.0F).rainDisabled());
+    public BiomePlanes() {
+        super((new Biome.BiomeProperties("Plains")).baseHeight(0.125F).heightVariation(0.05F).temperature(0.8F).rainfall(0.4F));
     }
 
     @Override
@@ -29,12 +29,12 @@ public class BiomeDesert extends Biome implements IBiome {
     @Override
     public Map<IBiome, Integer> getChanceMap() {
         HashMap<IBiome, Integer> chanceMap = new HashMap<>();
-        chanceMap.put(Biomes.DESERT, 1);
         chanceMap.put(Biomes.PLAINS, 1);
+        chanceMap.put(Biomes.DESERT, 1);
         return chanceMap;
     }
 
-    private Identifier identifier = new Identifier("biome_desert");
+    private Identifier identifier = new Identifier("biome_flatland");
 
     @Override
     public Identifier getIdentifier() {
@@ -46,7 +46,7 @@ public class BiomeDesert extends Biome implements IBiome {
         this.identifier = identifier;
     }
 
-    private class LayerSolid implements ILayer {
+    private class LayerSolid implements ILayer{
 
         BlockType type;
 
@@ -69,5 +69,4 @@ public class BiomeDesert extends Biome implements IBiome {
             return type;
         }
     }
-
 }

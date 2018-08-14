@@ -23,7 +23,7 @@ public class Word {
 	}
 	
 	/**
-	 * Adds a character to the end of the current word and increases the screen-space width of the word.
+	 * Adds a character to the END of the current word and increases the screen-space width of the word.
 	 * @param character - the character to be added.
 	 */
 	protected void addCharacter(Character character){

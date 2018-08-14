@@ -14,10 +14,12 @@ public class BiomeRegistry implements Registry<IBiome> {
     @Override
     public void register(Identifier identifier, IBiome value) {
         registry.put(identifier, value);
+        System.out.println(String.format("Registering a biome called %s", identifier.getNamespace() + ":" + identifier.getPath()));
     }
 
     @Override
     public IBiome get(Identifier identifier) {
         return registry.get(identifier);
     }
+
 }
