@@ -3,8 +3,8 @@ package team.hdt.blockadia.game_engine.common.util;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
