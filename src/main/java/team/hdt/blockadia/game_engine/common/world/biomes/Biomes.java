@@ -20,6 +20,7 @@ public class Biomes {
     public static final BiomeDesert SWAMP = new BiomeDesert();
     public static final BiomeDesert PLAIN_HILLS = new BiomeDesert();
     public static final BiomeDesert MESA = new BiomeDesert();
+    public static final BiomeForest FOREST = new BiomeForest();
 
     public static void register(){
         registerBiome("planes", PLAINS);
@@ -36,6 +37,7 @@ public class Biomes {
         registerBiome("swamp", SWAMP);
         registerBiome("plain_hills", PLAIN_HILLS);
         registerBiome("mesa", MESA);
+        registerBiome("forest", FOREST);
     }
 
     private static void registerBiome(String name, IBiome biome) {

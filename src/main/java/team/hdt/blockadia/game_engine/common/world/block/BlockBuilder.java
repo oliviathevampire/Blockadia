@@ -32,7 +32,7 @@ public class BlockBuilder {
     }
 
     public BlockType build() {
-        return new BlockType();
+        return new BlockType(material, mapColor);
     }
 
 }

@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class BiomeForest extends Biome implements IBiome, IForest {
 
-    public BiomeForest(BiomeProperties properties) {
-        super(properties);
+    public BiomeForest() {
+        super(new BiomeProperties("Forest"));
     }
 
     //TODO: finish tree gen.
