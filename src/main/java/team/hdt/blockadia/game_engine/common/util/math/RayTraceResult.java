@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.common.util.math;
 
 import team.hdt.blockadia.game_engine.common.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.common.util.EnumFacing;
-import team.hdt.blockadia.game_engine.common.util.math.vectors.Vec3d;
+import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3d;
 
 public class RayTraceResult {
     /**
@@ -22,33 +22,33 @@ public class RayTraceResult {
     /**
      * The vector position of the hit
      */
-    public Vec3d hitVec;
+    public Vectors3d hitVec;
     /**
      * The hit entity
      */
     public BaseEntity entityHit;
     private BlockPos blockPos;
 
-    public RayTraceResult(Vec3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
+    public RayTraceResult(Vectors3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
         this(RayTraceResult.Type.BLOCK, hitVecIn, sideHitIn, blockPosIn);
     }
 
-    public RayTraceResult(Vec3d hitVecIn, EnumFacing sideHitIn) {
+    public RayTraceResult(Vectors3d hitVecIn, EnumFacing sideHitIn) {
         this(RayTraceResult.Type.BLOCK, hitVecIn, sideHitIn, BlockPos.ORIGIN);
     }
 
     public RayTraceResult(BaseEntity entityIn) {
-        this(entityIn, new Vec3d(entityIn.positionX, entityIn.positionY, entityIn.positionZ));
+        this(entityIn, new Vectors3d(entityIn.positionX, entityIn.positionY, entityIn.positionZ));
     }
 
-    public RayTraceResult(RayTraceResult.Type typeIn, Vec3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
+    public RayTraceResult(RayTraceResult.Type typeIn, Vectors3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
         this.typeOfHit = typeIn;
         this.blockPos = blockPosIn;
         this.sideHit = sideHitIn;
-        this.hitVec = new Vec3d(hitVecIn.x, hitVecIn.y, hitVecIn.z);
+        this.hitVec = new Vectors3d(hitVecIn.x, hitVecIn.y, hitVecIn.z);
     }
 
-    public RayTraceResult(BaseEntity entityHitIn, Vec3d hitVecIn) {
+    public RayTraceResult(BaseEntity entityHitIn, Vectors3d hitVecIn) {
         this.typeOfHit = RayTraceResult.Type.ENTITY;
         this.entityHit = entityHitIn;
         this.hitVec = hitVecIn;

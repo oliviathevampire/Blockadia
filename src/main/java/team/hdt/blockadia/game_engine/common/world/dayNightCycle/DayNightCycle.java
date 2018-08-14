@@ -1,8 +1,8 @@
 package team.hdt.blockadia.game_engine.common.world.dayNightCycle;
 
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
 import team.hdt.blockadia.game_engine.util.toolbox.Colour;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 
 public class DayNightCycle {
 

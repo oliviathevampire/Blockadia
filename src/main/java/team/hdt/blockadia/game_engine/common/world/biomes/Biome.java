@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
 import team.hdt.blockadia.game_engine.common.util.math.BlockPos;
-import team.hdt.blockadia.game_engine.common.util.math.MathHelper;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.world.gen.NoiseGeneratorPerlin;
 
 import java.util.Random;
@@ -70,8 +70,8 @@ public abstract class Biome {
      */
     public int getSkyColorByTemp(float currentTemperature) {
         currentTemperature = currentTemperature / 3.0F;
-        currentTemperature = MathHelper.clamp(currentTemperature, -1.0F, 1.0F);
-        return MathHelper.hsvToRGB(0.62222224F - currentTemperature * 0.05F, 0.5F + currentTemperature * 0.1F, 1.0F);
+        currentTemperature = Maths.clamp(currentTemperature, -1.0F, 1.0F);
+        return Maths.hsvToRGB(0.62222224F - currentTemperature * 0.05F, 0.5F + currentTemperature * 0.1F, 1.0F);
     }
 
     /**

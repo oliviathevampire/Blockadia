@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.common.world.gen;
 
-import team.hdt.blockadia.game_engine.common.util.math.MathHelper;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 
 import java.util.Random;
 
@@ -39,8 +39,8 @@ public class NoiseGeneratorOctaves extends NoiseGenerator {
             double d0 = (double) xOffset * d3 * xScale;
             double d1 = (double) yOffset * d3 * yScale;
             double d2 = (double) zOffset * d3 * zScale;
-            long k = MathHelper.lfloor(d0);
-            long l = MathHelper.lfloor(d2);
+            long k = Maths.lfloor(d0);
+            long l = Maths.lfloor(d2);
             d0 = d0 - (double) k;
             d2 = d2 - (double) l;
             k = k % 16777216L;

@@ -1,14 +1,16 @@
-package team.hdt.blockadia.game_engine.common.util.math;
+package team.hdt.blockadia.game_engine.common.util.math.vectors.interfaces;
 
 import com.google.common.base.MoreObjects;
+import team.hdt.blockadia.game_engine.common.util.interfaces.Immutable;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 
 
 @Immutable
-public class Vec3i implements Comparable<Vec3i> {
+public class Vectors3i implements Comparable<Vectors3i> {
     /**
      * An immutable vector with zero as all coordinates.
      */
-    public static final Vec3i NULL_VECTOR = new Vec3i(0, 0, 0);
+    public static final Vectors3i NULL_VECTOR = new Vectors3i(0, 0, 0);
     /**
      * X coordinate
      */
@@ -22,30 +24,30 @@ public class Vec3i implements Comparable<Vec3i> {
      */
     private final int z;
 
-    public Vec3i(int xIn, int yIn, int zIn) {
+    public Vectors3i(int xIn, int yIn, int zIn) {
         this.x = xIn;
         this.y = yIn;
         this.z = zIn;
     }
 
-    public Vec3i(double xIn, double yIn, double zIn) {
-        this(MathHelper.floor(xIn), MathHelper.floor(yIn), MathHelper.floor(zIn));
+    public Vectors3i(double xIn, double yIn, double zIn) {
+        this(Maths.floor(xIn), Maths.floor(yIn), Maths.floor(zIn));
     }
 
     public boolean equals(Object p_equals_1_) {
         if (this == p_equals_1_) {
             return true;
-        } else if (!(p_equals_1_ instanceof Vec3i)) {
+        } else if (!(p_equals_1_ instanceof Vectors3i)) {
             return false;
         } else {
-            Vec3i vec3i = (Vec3i) p_equals_1_;
+            Vectors3i vectors3I = (Vectors3i) p_equals_1_;
 
-            if (this.getX() != vec3i.getX()) {
+            if (this.getX() != vectors3I.getX()) {
                 return false;
-            } else if (this.getY() != vec3i.getY()) {
+            } else if (this.getY() != vectors3I.getY()) {
                 return false;
             } else {
-                return this.getZ() == vec3i.getZ();
+                return this.getZ() == vectors3I.getZ();
             }
         }
     }
@@ -54,7 +56,7 @@ public class Vec3i implements Comparable<Vec3i> {
         return (this.getY() + this.getZ() * 31) * 31 + this.getX();
     }
 
-    public int compareTo(Vec3i p_compareTo_1_) {
+    public int compareTo(Vectors3i p_compareTo_1_) {
         if (this.getY() == p_compareTo_1_.getY()) {
             return this.getZ() == p_compareTo_1_.getZ() ? this.getX() - p_compareTo_1_.getX() : this.getZ() - p_compareTo_1_.getZ();
         } else {
@@ -86,8 +88,8 @@ public class Vec3i implements Comparable<Vec3i> {
     /**
      * Calculate the cross product of this and the given Vector
      */
-    public Vec3i crossProduct(Vec3i vec) {
-        return new Vec3i(this.getY() * vec.getZ() - this.getZ() * vec.getY(), this.getZ() * vec.getX() - this.getX() * vec.getZ(), this.getX() * vec.getY() - this.getY() * vec.getX());
+    public Vectors3i crossProduct(Vectors3i vec) {
+        return new Vectors3i(this.getY() * vec.getZ() - this.getZ() * vec.getY(), this.getZ() * vec.getX() - this.getX() * vec.getZ(), this.getX() * vec.getY() - this.getY() * vec.getX());
     }
 
     public double getDistance(int xIn, int yIn, int zIn) {
@@ -120,7 +122,7 @@ public class Vec3i implements Comparable<Vec3i> {
     /**
      * Calculate squared distance to the given Vector
      */
-    public double distanceSq(Vec3i to) {
+    public double distanceSq(Vectors3i to) {
         return this.distanceSq((double) to.getX(), (double) to.getY(), (double) to.getZ());
     }
 
