@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomePlanes extends Biome implements IBiome {
+public class BiomePlains extends Biome implements IBiome {
 
-    public BiomePlanes() {
+    public BiomePlains() {
         super((new Biome.BiomeProperties("Plains")).baseHeight(0.125F).heightVariation(0.05F).temperature(0.8F).rainfall(0.4F));
     }
 
@@ -34,7 +34,7 @@ public class BiomePlanes extends Biome implements IBiome {
         return chanceMap;
     }
 
-    public Identifier identifier = new Identifier("biome_flatland");
+    public Identifier identifier = new Identifier("biome_plains");
 
     @Override
     public Identifier getIdentifier() {

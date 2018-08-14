@@ -6,7 +6,7 @@ import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
 
 public class Biomes {
 
-    public static final BiomePlanes PLAINS = new BiomePlanes();
+    public static final BiomePlains PLAINS = new BiomePlains();
     public static final BiomeDesert DESERT = new BiomeDesert();
     public static final BiomeDesert NETHER = new BiomeDesert();
     public static final BiomeDesert END = new BiomeDesert();
