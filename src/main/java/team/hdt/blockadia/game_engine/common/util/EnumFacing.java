@@ -4,8 +4,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
-import team.hdt.blockadia.game_engine.common.util.math.MathHelper;
-import team.hdt.blockadia.game_engine.common.util.math.Vec3i;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.common.util.math.vectors.interfaces.Vectors3i;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.Random;
 
 public enum EnumFacing {
-    DOWN(0, 1, -1, "down", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.Y, new Vec3i(0, -1, 0)),
-    UP(1, 0, -1, "up", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.Y, new Vec3i(0, 1, 0)),
-    NORTH(2, 3, 2, "north", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.Z, new Vec3i(0, 0, -1)),
-    SOUTH(3, 2, 0, "south", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.Z, new Vec3i(0, 0, 1)),
-    WEST(4, 5, 1, "west", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.X, new Vec3i(-1, 0, 0)),
-    EAST(5, 4, 3, "east", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.X, new Vec3i(1, 0, 0));
+    DOWN(0, 1, -1, "down", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.Y, new Vectors3i(0, -1, 0)),
+    UP(1, 0, -1, "up", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.Y, new Vectors3i(0, 1, 0)),
+    NORTH(2, 3, 2, "north", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.Z, new Vectors3i(0, 0, -1)),
+    SOUTH(3, 2, 0, "south", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.Z, new Vectors3i(0, 0, 1)),
+    WEST(4, 5, 1, "west", EnumFacing.AxisDirection.NEGATIVE, EnumFacing.Axis.X, new Vectors3i(-1, 0, 0)),
+    EAST(5, 4, 3, "east", EnumFacing.AxisDirection.POSITIVE, EnumFacing.Axis.X, new Vectors3i(1, 0, 0));
 
     /**
      * All facings in D-U-N-S-W-E order
@@ -60,9 +60,9 @@ public enum EnumFacing {
     /**
      * Normalized Vector that points in the direction of this Facing
      */
-    private final Vec3i directionVec;
+    private final Vectors3i directionVec;
 
-    private EnumFacing(int indexIn, int oppositeIn, int horizontalIndexIn, String nameIn, EnumFacing.AxisDirection axisDirectionIn, EnumFacing.Axis axisIn, Vec3i directionVecIn) {
+    private EnumFacing(int indexIn, int oppositeIn, int horizontalIndexIn, String nameIn, EnumFacing.AxisDirection axisDirectionIn, EnumFacing.Axis axisIn, Vectors3i directionVecIn) {
         this.index = indexIn;
         this.horizontalIndex = horizontalIndexIn;
         this.opposite = oppositeIn;
@@ -85,7 +85,7 @@ public enum EnumFacing {
      * D-U-N-S-W-E.
      */
     public static EnumFacing byIndex(int index) {
-        return VALUES[MathHelper.abs(index % VALUES.length)];
+        return VALUES[Maths.absi(index % VALUES.length)];
     }
 
     /**
@@ -93,7 +93,7 @@ public enum EnumFacing {
      * The order is S-W-N-E.
      */
     public static EnumFacing byHorizontalIndex(int horizontalIndexIn) {
-        return HORIZONTALS[MathHelper.abs(horizontalIndexIn % HORIZONTALS.length)];
+        return HORIZONTALS[Maths.absi(horizontalIndexIn % HORIZONTALS.length)];
     }
 
     /**
@@ -101,7 +101,7 @@ public enum EnumFacing {
      * An angle of 0 is SOUTH, an angle of 90 would be WEST.
      */
     public static EnumFacing fromAngle(double angle) {
-        return byHorizontalIndex(MathHelper.floor(angle / 90.0D + 0.5D) & 3);
+        return byHorizontalIndex(Maths.floor(angle / 90.0D + 0.5D) & 3);
     }
 
     /**
@@ -343,7 +343,7 @@ public enum EnumFacing {
     /**
      * Get a normalized Vector that points in the direction of this Facing.
      */
-    public Vec3i getDirectionVec() {
+    public Vectors3i getDirectionVec() {
         return this.directionVec;
     }
 
@@ -371,7 +371,6 @@ public enum EnumFacing {
         /**
          * Get the axis specified by the given name
          */
-        @Nullable
         public static EnumFacing.Axis byName(String name) {
             return name == null ? null : (EnumFacing.Axis) NAME_LOOKUP.get(name.toLowerCase(Locale.ROOT));
         }

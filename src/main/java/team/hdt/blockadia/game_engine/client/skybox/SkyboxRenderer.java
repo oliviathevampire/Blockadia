@@ -5,12 +5,12 @@ import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine.client.rendering.textures.Texture;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
 import team.hdt.blockadia.game_engine.util.FileUtils;
 import team.hdt.blockadia.game_engine.util.MyFile;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 import team.hdt.blockadia.game_engine.util.toolbox.OpenglUtils;
 
 public class SkyboxRenderer {

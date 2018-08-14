@@ -7,10 +7,10 @@ import team.hdt.blockadia.game_engine.client.guis.GuiComponent;
 import team.hdt.blockadia.game_engine.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine.client.rendering.fontRendering.Text;
 import team.hdt.blockadia.game_engine.client.rendering.guiRendering.GuiRenderData;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.util.languages.GameText;
 import team.hdt.blockadia.game_engine.util.toolbox.Colour;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 import team.hdt.blockadia.game_engine.util.visualFxDrivers.ConstantDriver;
 
 public class ProgressBarUi extends GuiComponent {

@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.client.particleSpawns;
 
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors4f;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 
 public class CuboidSpawn implements ParticleSpawn {
 

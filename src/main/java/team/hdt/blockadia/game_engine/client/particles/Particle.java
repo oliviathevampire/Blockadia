@@ -2,11 +2,11 @@ package team.hdt.blockadia.game_engine.client.particles;
 
 import team.hdt.blockadia.game_engine.client.ClientMain;
 import team.hdt.blockadia.game_engine.common.CameraInterface;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
 import team.hdt.blockadia.game_engine.util.toolbox.Colour;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 
 public class Particle {
 
