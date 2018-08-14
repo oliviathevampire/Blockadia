@@ -6,17 +6,23 @@ import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IForest;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.ILayer;
+import team.hdt.blockadia.game_engine.common.world.gen.interfaces.ITree;
+import team.hdt.blockadia.game_engine.common.world.gen.trees.BasicTree;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class BiomeForest implements IBiome, IForest {
+public class BiomeForest extends Biome implements IBiome, IForest {
+
+    public BiomeForest(BiomeProperties properties) {
+        super(properties);
+    }
 
     //TODO: finish tree gen.
     @Override
     public ILayer getLayer(int y, Random random) {
-        return y < 50 ? new BiomeForest.LayerSolid(BlockTypes.PLANKS) : new ILayer.LayerAir(32, 32);
+        return y < 50 ? new BiomeForest.LayerSolid(BlockTypes.OAK_PLANKS) : new ILayer.LayerAir(32, 32);
     }
 
     /**
@@ -27,8 +33,8 @@ public class BiomeForest implements IBiome, IForest {
     @Override
     public Map<IBiome, Integer> getChanceMap() {
         HashMap<IBiome, Integer> chanceMap = new HashMap<>();
-        chanceMap.put(Biomes.flatlands, 1);
-        chanceMap.put(Biomes.desert, 1);
+        chanceMap.put(Biomes.PLAINS, 1);
+        chanceMap.put(Biomes.DESERT, 1);
         return chanceMap;
     }
 
@@ -45,28 +51,13 @@ public class BiomeForest implements IBiome, IForest {
     }
 
     @Override
-    public void getTreeType() {
-
+    public float getTreeDensity() {
+        return 1.0f;
     }
 
     @Override
-    public void setTreeType(Enum Treetype) {
-
-    }
-
-    @Override
-    public void getTreeGen(Class tree) {
-
-    }
-
-    @Override
-    public void getTreeDenscity() {
-
-    }
-
-    @Override
-    public float setTreeDenscity(float treeDenscity) {
-        return 0;
+    public ITree getTreeGen() {
+        return new BasicTree(BlockTypes.OAK_LOG, BlockTypes.OAK_LEAVES);
     }
 
     private class LayerSolid implements ILayer{

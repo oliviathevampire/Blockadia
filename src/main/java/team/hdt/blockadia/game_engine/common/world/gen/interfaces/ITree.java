@@ -1,18 +1,16 @@
 package team.hdt.blockadia.game_engine.common.world.gen.interfaces;
 
+import team.hdt.blockadia.game_engine.common.world.block.BlockType;
 import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
 
 public interface ITree {
 
-    public float setTreeHeight(float height);
+    float getTreeHeight();
 
-    public void getTreeHeight();
+    BlockType getLeafBlockType();
 
-    public void setLeafBlock(Class leaf);
+    BlockType getLogBlockType();
 
-    public void setWoodBlock(Class wood);
+    BlockType blockCanGrowOn(BlockTypes blockTypes);
 
-    public void getTreeModel();
-
-    public BlockTypes blockCanGrowOn(BlockTypes blockTypes);
 }
