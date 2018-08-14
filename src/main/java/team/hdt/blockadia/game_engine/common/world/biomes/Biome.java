@@ -2,12 +2,18 @@ package team.hdt.blockadia.game_engine.common.world.biomes;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import team.hdt.blockadia.game_engine.common.util.math.BlockPos;
+import team.hdt.blockadia.game_engine.common.util.math.MathHelper;
+import team.hdt.blockadia.game_engine.common.world.gen.NoiseGeneratorPerlin;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public abstract class Biome {
 
     private static final Logger LOGGER = LogManager.getLogger();
+    protected static final NoiseGeneratorPerlin TEMPERATURE_NOISE = new NoiseGeneratorPerlin(new Random(1234L), 1);
+    protected static final NoiseGeneratorPerlin GRASS_COLOR_NOISE = new NoiseGeneratorPerlin(new Random(2345L), 1);
     private final String biomeName;
     /** The base height of this biome. Default 0.1. */
     private final float baseHeight;
@@ -38,6 +44,128 @@ public abstract class Biome {
         this.enableSnow = properties.enableSnow;
         this.enableRain = properties.enableRain;
         this.baseBiomeRegName = properties.baseBiomeRegName;
+    }
+
+    public boolean isMutation()
+    {
+        return this.baseBiomeRegName != null;
+    }
+
+    /**
+     * takes temperature, returns color
+     */
+    public int getSkyColorByTemp(float currentTemperature)
+    {
+        currentTemperature = currentTemperature / 3.0F;
+        currentTemperature = MathHelper.clamp(currentTemperature, -1.0F, 1.0F);
+        return MathHelper.hsvToRGB(0.62222224F - currentTemperature * 0.05F, 0.5F + currentTemperature * 0.1F, 1.0F);
+    }
+
+    /**
+     * Returns true if the biome have snowfall instead a normal rain.
+     */
+    public boolean getEnableSnow()
+    {
+        return this.isSnowyBiome();
+    }
+
+    /**
+     * Check if rain can occur in biome
+     */
+    public boolean canRain()
+    {
+        return !this.isSnowyBiome() && this.enableRain;
+    }
+
+    /**
+     * Checks to see if the rainfall level of the biome is extremely high
+     */
+    public boolean isHighHumidity()
+    {
+        return this.getRainfall() > 0.85F;
+    }
+
+    /**
+     * returns the chance a creature has to spawn.
+     */
+    public float getSpawningChance()
+    {
+        return 0.1F;
+    }
+
+    /**
+     * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
+     * position, and {@linkplain #TEMPERATURE_NOISE} some random perlin noise.
+     */
+    public final float getTemperature(BlockPos pos)
+    {
+        if (BlockPos.getY() > 64)
+        {
+            float f = (float)(TEMPERATURE_NOISE.getValue((double)(BlockPos.getX() / 8.0F), (double)(BlockPos.getZ() / 8.0F)) * 4.0D);
+            return this.getDefaultTemperature() - (f + BlockPos.getY() - 64.0F) * 0.05F / 30.0F;
+        }
+        else
+        {
+            return this.getDefaultTemperature();
+        }
+    }
+
+    public Class <? extends Biome > getBiomeClass()
+    {
+        return this.getClass();
+    }
+
+    public Biome.TempCategory getTempCategory()
+    {
+        if ((double)this.getDefaultTemperature() < 0.2D)
+        {
+            return Biome.TempCategory.COLD;
+        }
+        else
+        {
+            return (double)this.getDefaultTemperature() < 1.0D ? Biome.TempCategory.MEDIUM : Biome.TempCategory.WARM;
+        }
+    }
+
+    public boolean ignorePlayerSpawnSuitability()
+    {
+        return false;
+    }
+
+    public final float getBaseHeight()
+    {
+        return this.baseHeight;
+    }
+
+    /**
+     * Gets a floating point representation of this biome's rainfall
+     */
+    public final float getRainfall()
+    {
+        return this.rainfall;
+    }
+
+    public final String getBiomeName()
+    {
+        return this.biomeName;
+    }
+
+    public final float getHeightVariation()
+    {
+        return this.heightVariation;
+    }
+
+    /**
+     * Gets the constant default temperature for this biome.
+     */
+    public final float getDefaultTemperature()
+    {
+        return this.temperature;
+    }
+
+    public final boolean isSnowyBiome()
+    {
+        return this.enableSnow;
     }
 
     public static class BiomeProperties {

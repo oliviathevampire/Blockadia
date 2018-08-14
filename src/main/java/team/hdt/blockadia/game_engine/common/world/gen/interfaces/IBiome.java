@@ -7,12 +7,12 @@ import java.util.Random;
 
 public interface  IBiome extends RegistryEntry  {
 
-    public abstract ILayer getLayer(int y, Random random);
+    ILayer getLayer(int y, Random random);
 
     /**
-     * Get's the chancemap for the chance of getting a {@link IBiome} generated next to this biome
+     * Get's the chance of getting a {@link IBiome} generated next to this biome
      * @return a {@link java.util.HashMap} with all the possible neighbour biomes and their chances.
      */
-    public abstract Map<IBiome, Integer> getChanceMap();
+    Map<IBiome, Integer> getChanceMap();
 
 }

@@ -26,7 +26,7 @@ public class BiomeForest extends Biome implements IBiome, IForest {
     }
 
     /**
-     * Get's the chancemap for the chance of getting a {@link IBiome} generated next to this biome
+     * Get's the chance of getting a {@link IBiome} generated next to this biome
      *
      * @return a {@link HashMap} with all the possible neighbour biomes and their chances.
      */
@@ -64,7 +64,7 @@ public class BiomeForest extends Biome implements IBiome, IForest {
 
         BlockType type;
 
-        public LayerSolid(BlockType type){
+        LayerSolid(BlockType type){
             this.type = type;
         }
 
