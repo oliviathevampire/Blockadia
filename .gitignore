@@ -61,3 +61,5 @@ jars
 src/main/java/com/*
 src/main/java/idk/*
 classes/*
+world.xml
+world.xml
