@@ -1,8 +1,8 @@
 package team.hdt.blockadia.game_engine.common.world.misc;
 
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
 
 public class HeightFinder {
 

@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.util.visualFxDrivers;
 
-import team.hdt.blockadia.game_engine.util.toolbox.Maths;
+import team.hdt.blockadia.game_engine.common.util.math.Maths;
 
 public class BounceDriver extends ValueDriver {
 
