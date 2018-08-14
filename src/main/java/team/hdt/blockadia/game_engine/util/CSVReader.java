@@ -7,108 +7,108 @@ import java.io.IOException;
 
 public class CSVReader {
 
-	private final String SEPARATOR;
-	private BufferedReader reader;
-	private LineSplitter splitter;
-	
-	public CSVReader(MyFile file) throws Exception {
-		this.reader = file.getReader();
-		SEPARATOR = FileUtils.SEPARATOR;
-	}
+    private final String SEPARATOR;
+    private BufferedReader reader;
+    private LineSplitter splitter;
 
-	public String nextLine() {
-		String line = null;
-		try {
-			line = reader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (line != null) {
-			this.splitter = new LineSplitter(line, SEPARATOR);
-			return line;
-		} else {
-			return null;
-		}
-	}
+    public CSVReader(MyFile file) throws Exception {
+        this.reader = file.getReader();
+        SEPARATOR = FileUtils.SEPARATOR;
+    }
 
-	public String getNextString() {
-		return splitter.getNextString();
-	}
-	
-	public String getNextLabelString() {
-		getNextString();
-		return getNextString();
-	}
-	
-	public float getNextLabelFloat() {
-		getNextString();
-		return getNextFloat();
-	}
+    public String nextLine() {
+        String line = null;
+        try {
+            line = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (line != null) {
+            this.splitter = new LineSplitter(line, SEPARATOR);
+            return line;
+        } else {
+            return null;
+        }
+    }
 
-	public int getNextInt() {
-		return splitter.getNextInt();
-	}
+    public String getNextString() {
+        return splitter.getNextString();
+    }
 
-	public long getNextLong() {
-		return splitter.getNextLong();
-	}
+    public String getNextLabelString() {
+        getNextString();
+        return getNextString();
+    }
 
-	public float getNextFloat() {
-		return splitter.getNextFloat();
-	}
-	
-	public int[] getNextLabelIntArray(){
-		getNextString();
-		int count = getNextInt();
-		int[] array = new int[count];
-		for(int i=0;i<count;i++){
-			array[i] = getNextInt();
-		}
-		return array;
-	}
-	
-	public float[] getNextLabelFloatArray(){
-		getNextString();
-		int count = getNextInt();
-		float[] array = new float[count];
-		for(int i=0;i<count;i++){
-			array[i] = getNextFloat();
-		}
-		return array;
-	}
-	
-	public Vectors3f getNextLabelVector(){
-		getNextString();
-		return getNextVector();
-	}
-	
-	public Vectors3f getNextVector(){
-		float x = splitter.getNextFloat();
-		float y = splitter.getNextFloat();
-		float z = splitter.getNextFloat();
-		return new Vectors3f(x, y, z);
-	}
+    public float getNextLabelFloat() {
+        getNextString();
+        return getNextFloat();
+    }
 
-	public boolean isEndOfLine() {
-		return !splitter.hasMoreValues();
-	}
+    public int getNextInt() {
+        return splitter.getNextInt();
+    }
 
-	public boolean getNextBool() {
-		return splitter.getNextBool();
-	}
-	
-	public boolean getNextLabelBool() {
-		getNextString();
-		return getNextBool();
-	}
-	
-	public int getNextLabelInt() {
-		getNextString();
-		return getNextInt();
-	}
+    public long getNextLong() {
+        return splitter.getNextLong();
+    }
 
-	public void close() {
-		FileUtils.closeBufferedReader(reader);
-	}
+    public float getNextFloat() {
+        return splitter.getNextFloat();
+    }
+
+    public int[] getNextLabelIntArray() {
+        getNextString();
+        int count = getNextInt();
+        int[] array = new int[count];
+        for (int i = 0; i < count; i++) {
+            array[i] = getNextInt();
+        }
+        return array;
+    }
+
+    public float[] getNextLabelFloatArray() {
+        getNextString();
+        int count = getNextInt();
+        float[] array = new float[count];
+        for (int i = 0; i < count; i++) {
+            array[i] = getNextFloat();
+        }
+        return array;
+    }
+
+    public Vectors3f getNextLabelVector() {
+        getNextString();
+        return getNextVector();
+    }
+
+    public Vectors3f getNextVector() {
+        float x = splitter.getNextFloat();
+        float y = splitter.getNextFloat();
+        float z = splitter.getNextFloat();
+        return new Vectors3f(x, y, z);
+    }
+
+    public boolean isEndOfLine() {
+        return !splitter.hasMoreValues();
+    }
+
+    public boolean getNextBool() {
+        return splitter.getNextBool();
+    }
+
+    public boolean getNextLabelBool() {
+        getNextString();
+        return getNextBool();
+    }
+
+    public int getNextLabelInt() {
+        getNextString();
+        return getNextInt();
+    }
+
+    public void close() {
+        FileUtils.closeBufferedReader(reader);
+    }
 
 }

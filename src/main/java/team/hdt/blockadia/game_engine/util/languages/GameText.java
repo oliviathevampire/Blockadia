@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class GameText {
 
-	public static final MyFile LANGUAGE_FILE = new MyFile(FileUtils.RES_FOLDER, "languageSheet.csv");
-	
-	private static Map<Integer, List<String>> gameTexts = new HashMap<>();
-	private static int languageId;
+    public static final MyFile LANGUAGE_FILE = new MyFile(FileUtils.RES_FOLDER, "languageSheet.csv");
 
-	public static void init(int langId) {
-		languageId = langId;
+    private static Map<Integer, List<String>> gameTexts = new HashMap<>();
+    private static int languageId;
+
+    public static void init(int langId) {
+        languageId = langId;
 		/*try {
 			CSVReader reader = new CSVReader(LANGUAGE_FILE);
 			reader.nextLine();
@@ -34,21 +34,21 @@ public class GameText {
 			System.err.println("Problem loading language text file!");
 			System.exit(-1);
 		}*/
-	}
-	
-	public static ComplexString getComplexText(int id){
-		return new ComplexString(getText(id));
-	}
+    }
 
-	public static String getText(int id) {
-		List<String> text = gameTexts.get(id);
-		if (text != null) {
-			return text.get(languageId);
-		} else {
-			System.err.println("No game text with the ID " + id);
-			System.exit(-1);
-			return null;
-		}
-	}
+    public static ComplexString getComplexText(int id) {
+        return new ComplexString(getText(id));
+    }
+
+    public static String getText(int id) {
+        List<String> text = gameTexts.get(id);
+        if (text != null) {
+            return text.get(languageId);
+        } else {
+            System.err.println("No game text with the ID " + id);
+            System.exit(-1);
+            return null;
+        }
+    }
 
 }

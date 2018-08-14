@@ -35,15 +35,15 @@ public class ParticleSystem {
         float y = (float) (rootOneMinusZSquared * Math.sin(theta));
 
         Vectors4f direction = new Vectors4f(x, y, z, 1);
-        if (coneDirection.x != 0 || coneDirection.y != 0 || (coneDirection.z != 1 && coneDirection.z != - 1)) {
+        if (coneDirection.x != 0 || coneDirection.y != 0 || (coneDirection.z != 1 && coneDirection.z != -1)) {
             Vectors3f rotateAxis = Vectors3f.cross(coneDirection, new Vectors3f(0, 0, 1), null);
             rotateAxis.normalise();
             float rotateAngle = (float) Math.acos(Vectors3f.dot(coneDirection, new Vectors3f(0, 0, 1)));
             Matrix4fs rotationMatrix = new Matrix4fs();
-            rotationMatrix.rotate(- rotateAngle, rotateAxis);
+            rotationMatrix.rotate(-rotateAngle, rotateAxis);
             Matrix4fs.transform(rotationMatrix, direction, direction);
-        } else if (coneDirection.z == - 1) {
-            z *= - 1;
+        } else if (coneDirection.z == -1) {
+            z *= -1;
         }
         return new Vectors3f(x, y, z);
     }

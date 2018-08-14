@@ -6,16 +6,11 @@ import team.hdt.blockadia.test.engine.graph.Mesh;
 
 public class GameItem {
 
-    private boolean selected;
-
-    private Mesh[] meshes;
-
     private final Vector3f position;
-
-    private float scale;
-
     private final Quaternionf rotation;
-
+    private boolean selected;
+    private Mesh[] meshes;
+    private float scale;
     private int textPos;
 
     public GameItem() {
@@ -44,8 +39,16 @@ public class GameItem {
         return textPos;
     }
 
+    public void setTextPos(int textPos) {
+        this.textPos = textPos;
+    }
+
     public boolean isSelected() {
         return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public final void setPosition(float x, float y, float z) {
@@ -74,6 +77,10 @@ public class GameItem {
         return meshes[0];
     }
 
+    public void setMesh(Mesh mesh) {
+        this.meshes = new Mesh[]{mesh};
+    }
+
     public Mesh[] getMeshes() {
         return meshes;
     }
@@ -82,22 +89,10 @@ public class GameItem {
         this.meshes = meshes;
     }
 
-    public void setMesh(Mesh mesh) {
-        this.meshes = new Mesh[]{mesh};
-    }
-
     public void cleanup() {
         int numMeshes = this.meshes != null ? this.meshes.length : 0;
         for (int i = 0; i < numMeshes; i++) {
             this.meshes[i].cleanUp();
         }
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public void setTextPos(int textPos) {
-        this.textPos = textPos;
     }
 }

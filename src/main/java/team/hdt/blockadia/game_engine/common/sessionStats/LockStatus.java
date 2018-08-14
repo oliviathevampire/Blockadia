@@ -8,39 +8,39 @@ import java.util.Set;
 
 public class LockStatus {
 
-	private Set<Integer> unlockedBlueprints = new HashSet<Integer>();
+    private Set<Integer> unlockedBlueprints = new HashSet<Integer>();
 
-	public static LockStatus loadLockStatus(BinaryReader reader) throws Exception {
-		LockStatus lockStatus = new LockStatus();
-		int count = reader.readInt();
-		for (int i = 0; i < count; i++) {
-			int blueprintID = reader.readInt();
-			lockStatus.unlockedBlueprints.add(blueprintID);
-		}
-		return lockStatus;
-	}
+    private LockStatus() {
+    }
 
-	public static LockStatus newLockStatus() {
-		LockStatus lock = new LockStatus();
-		return lock;
-	}
+    public static LockStatus loadLockStatus(BinaryReader reader) throws Exception {
+        LockStatus lockStatus = new LockStatus();
+        int count = reader.readInt();
+        for (int i = 0; i < count; i++) {
+            int blueprintID = reader.readInt();
+            lockStatus.unlockedBlueprints.add(blueprintID);
+        }
+        return lockStatus;
+    }
 
-	private LockStatus() {
-	}
+    public static LockStatus newLockStatus() {
+        LockStatus lock = new LockStatus();
+        return lock;
+    }
 
-	public int getUnlockedCount(){
-		return unlockedBlueprints.size();
-	}
-	
-	public Set<Integer> getUnlockedSpecies(){
-		return unlockedBlueprints;
-	}
+    public int getUnlockedCount() {
+        return unlockedBlueprints.size();
+    }
 
-	public void export(BinaryWriter writer) {
-		writer.writeInt(unlockedBlueprints.size());
-		for (Integer id : unlockedBlueprints) {
-			writer.writeInt(id);
-		}
-	}
+    public Set<Integer> getUnlockedSpecies() {
+        return unlockedBlueprints;
+    }
+
+    public void export(BinaryWriter writer) {
+        writer.writeInt(unlockedBlueprints.size());
+        for (Integer id : unlockedBlueprints) {
+            writer.writeInt(id);
+        }
+    }
 
 }

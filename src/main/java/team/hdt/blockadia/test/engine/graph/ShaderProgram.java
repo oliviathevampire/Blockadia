@@ -18,14 +18,10 @@ import static org.lwjgl.opengl.GL20.*;
 public class ShaderProgram {
 
     private final int programId;
-
-    private int vertexShaderId;
-
-    private int fragmentShaderId;
-
-    private int geometryShaderId;
-
     private final Map<String, Integer> uniforms;
+    private int vertexShaderId;
+    private int fragmentShaderId;
+    private int geometryShaderId;
 
     public ShaderProgram() throws Exception {
         programId = glCreateProgram();

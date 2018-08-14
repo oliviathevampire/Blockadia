@@ -20,9 +20,18 @@ public enum EnumVisualColor {
     BLACK(15, "black", 1908001);
 
     private static final EnumVisualColor[] META_LOOKUP = new EnumVisualColor[values().length];
+
+    static {
+        for (EnumVisualColor enumdyecolor : values()) {
+            META_LOOKUP[enumdyecolor.getMetadata()] = enumdyecolor;
+        }
+    }
+
     private final int meta;
     private final String name;
-    /** An int containing the corresponding RGB color for this dye color. */
+    /**
+     * An int containing the corresponding RGB color for this dye color.
+     */
     private final int colorValue;
     /**
      * An array containing 3 floats ranging from 0.0 to 1.0: the red, green, and blue components of the corresponding
@@ -30,32 +39,36 @@ public enum EnumVisualColor {
      */
     private final float[] colorComponentValues;
 
-    EnumVisualColor(int metaIn, String nameIn, int colorValueIn)
-    {
+    EnumVisualColor(int metaIn, String nameIn, int colorValueIn) {
         this.meta = metaIn;
         this.name = nameIn;
         this.colorValue = colorValueIn;
         int i = (colorValueIn & 16711680) >> 16;
         int j = (colorValueIn & 65280) >> 8;
         int k = (colorValueIn & 255);
-        this.colorComponentValues = new float[] {(float)i / 255.0F, (float)j / 255.0F, (float)k / 255.0F};
+        this.colorComponentValues = new float[]{(float) i / 255.0F, (float) j / 255.0F, (float) k / 255.0F};
     }
 
-    public int getMetadata()
-    {
+    public static EnumVisualColor byMetadata(int meta) {
+        if (meta < 0 || meta >= META_LOOKUP.length) {
+            meta = 0;
+        }
+
+        return META_LOOKUP[meta];
+    }
+
+    public int getMetadata() {
         return this.meta;
     }
 
-    public String getColorName()
-    {
+    public String getColorName() {
         return this.name;
     }
 
     /**
      * Gets the RGB color corresponding to this dye color.
      */
-    public int getColorValue()
-    {
+    public int getColorValue() {
         return this.colorValue;
     }
 
@@ -63,36 +76,15 @@ public enum EnumVisualColor {
      * Gets an array containing 3 floats ranging from 0.0 to 1.0: the red, green, and blue components of the
      * corresponding color.
      */
-    public float[] getColorComponentValues()
-    {
+    public float[] getColorComponentValues() {
         return this.colorComponentValues;
     }
 
-    public static EnumVisualColor byMetadata(int meta)
-    {
-        if (meta < 0 || meta >= META_LOOKUP.length)
-        {
-            meta = 0;
-        }
-
-        return META_LOOKUP[meta];
-    }
-
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
-    }
-
-    static
-    {
-        for (EnumVisualColor enumdyecolor : values())
-        {
-            META_LOOKUP[enumdyecolor.getMetadata()] = enumdyecolor;
-        }
     }
 }

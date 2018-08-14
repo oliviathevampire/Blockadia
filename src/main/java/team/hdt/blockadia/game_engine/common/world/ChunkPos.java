@@ -2,16 +2,16 @@ package team.hdt.blockadia.game_engine.common.world;
 
 public class ChunkPos {
 
-    private long posX,posZ;
+    private long posX, posZ;
 
-    public ChunkPos(long x, long z){
+    public ChunkPos(long x, long z) {
         this.posX = x;
         this.posZ = z;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ChunkPos){
+        if (obj instanceof ChunkPos) {
             return (((ChunkPos) obj).posX == this.posX) && (((ChunkPos) obj).posZ == this.posZ);
         }
         return false;
@@ -19,7 +19,7 @@ public class ChunkPos {
 
     @Override
     public int hashCode() {
-        return 3 * 2 * (int)(posX+posZ);
+        return 3 * 2 * (int) (posX + posZ);
     }
 
     public long getPosX() {
@@ -30,12 +30,12 @@ public class ChunkPos {
         return posZ;
     }
 
-    public ChunkPos[] getSurroundings(){
+    public ChunkPos[] getSurroundings() {
         return new ChunkPos[]{
-          new ChunkPos(posX-1, posZ),
-          new ChunkPos(posX+1, posZ),
-          new ChunkPos(posX, posZ+1),
-          new ChunkPos(posX, posZ-1)
+                new ChunkPos(posX - 1, posZ),
+                new ChunkPos(posX + 1, posZ),
+                new ChunkPos(posX, posZ + 1),
+                new ChunkPos(posX, posZ - 1)
         };
     }
 }

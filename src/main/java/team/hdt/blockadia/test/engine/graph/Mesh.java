@@ -138,6 +138,18 @@ public class Mesh {
         }
     }
 
+    protected static float[] createEmptyFloatArray(int length, float defaultValue) {
+        float[] result = new float[length];
+        Arrays.fill(result, defaultValue);
+        return result;
+    }
+
+    protected static int[] createEmptyIntArray(int length, int defaultValue) {
+        int[] result = new int[length];
+        Arrays.fill(result, defaultValue);
+        return result;
+    }
+
     public Material getMaterial() {
         return material;
     }
@@ -163,7 +175,7 @@ public class Mesh {
             glBindTexture(GL_TEXTURE_2D, texture.getId());
         }
         Texture normalMap = material.getNormalMap();
-        if ( normalMap != null ) {
+        if (normalMap != null) {
             // Activate first texture bank
             glActiveTexture(GL_TEXTURE1);
             // Bind the texture
@@ -244,17 +256,5 @@ public class Mesh {
         // Delete the VAO
         glBindVertexArray(0);
         glDeleteVertexArrays(vaoId);
-    }
-
-    protected static float[] createEmptyFloatArray(int length, float defaultValue) {
-        float[] result = new float[length];
-        Arrays.fill(result, defaultValue);
-        return result;
-    }
-
-    protected static int[] createEmptyIntArray(int length, int defaultValue) {
-        int[] result = new int[length];
-        Arrays.fill(result, defaultValue);
-        return result;
     }
 }

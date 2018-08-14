@@ -7,9 +7,9 @@ import team.hdt.blockadia.game_engine.client.rendering.textures.TextureManager;
 import team.hdt.blockadia.game_engine.client.resourceProcessing.RequestProcessor;
 import team.hdt.blockadia.game_engine.common.CameraInterface;
 import team.hdt.blockadia.game_engine.common.Loader;
-import team.hdt.blockadia.test.game.Main;
 import team.hdt.blockadia.game_engine.common.util.Display;
 import team.hdt.blockadia.game_engine.common.world.misc.EnvironmentVariables;
+import team.hdt.blockadia.test.game.Main;
 
 public class EngineMaster {
 
@@ -18,8 +18,7 @@ public class EngineMaster {
     /**
      * Initialise the engine. Carries out any necessary initialisations.
      *
-     * @param camera
-     *            - The camera being used in-game.
+     * @param camera - The camera being used in-game.
      */
     public static void init(CameraInterface camera) {
         sceneCamera = camera;

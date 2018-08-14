@@ -61,7 +61,7 @@ public class OBJLoader {
     }
 
     private static Mesh reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Face> facesList, int instances) {
+                                     List<Vector3f> normList, List<Face> facesList, int instances) {
 
         List<Integer> indices = new ArrayList();
         // Create position array in the order it has been declared
@@ -94,8 +94,8 @@ public class OBJLoader {
     }
 
     private static void processFaceVertex(IdxGroup indices, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Integer> indicesList,
-            float[] texCoordArr, float[] normArr) {
+                                          List<Vector3f> normList, List<Integer> indicesList,
+                                          float[] texCoordArr, float[] normArr) {
 
         // Set index for vertex coordinates
         int posIndex = indices.idxPos;

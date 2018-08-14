@@ -44,6 +44,10 @@ public class Scene {
         return renderShadows;
     }
 
+    public void setRenderShadows(boolean renderShadows) {
+        this.renderShadows = renderShadows;
+    }
+
     public void setGameItems(GameItem[] gameItems) {
         // Create a map of meshes to speed up rendering
         int numGameItems = gameItems != null ? gameItems.length : 0;
@@ -56,7 +60,7 @@ public class Scene {
                 if (list == null) {
                     list = new ArrayList<>();
                     if (instancedMesh) {
-                        instancedMeshMap.put((InstancedMesh)mesh, list);
+                        instancedMeshMap.put((InstancedMesh) mesh, list);
                     } else {
                         meshMap.put(mesh, list);
                     }
@@ -77,10 +81,6 @@ public class Scene {
 
     public SkyBox getSkyBox() {
         return skyBox;
-    }
-
-    public void setRenderShadows(boolean renderShadows) {
-        this.renderShadows = renderShadows;
     }
 
     public void setSkyBox(SkyBox skyBox) {

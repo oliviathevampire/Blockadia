@@ -2,11 +2,13 @@ package team.hdt.blockadia.test.engine.graph;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import de.matthiasmann.twl.utils.PNGDecoder.Format;
+
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL12.*;
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 public class Texture {
 
@@ -23,8 +25,8 @@ public class Texture {
     /**
      * Creates an empty texture.
      *
-     * @param width Width of the texture
-     * @param height Height of the texture
+     * @param width       Width of the texture
+     * @param height      Height of the texture
      * @param pixelFormat Specifies the format of the pixel data (GL_RGBA, etc.)
      */
     public Texture(int width, int height, int pixelFormat) {
@@ -43,7 +45,7 @@ public class Texture {
         this(Texture.class.getResourceAsStream(fileName));
     }
 
-    public Texture(String fileName, int numCols, int numRows) throws Exception  {
+    public Texture(String fileName, int numCols, int numRows) throws Exception {
         this(fileName);
         this.numCols = numCols;
         this.numRows = numRows;

@@ -1,31 +1,30 @@
 package team.hdt.blockadia.game_engine.util.visualFxDrivers;
 
 public class KeyFrame {
-	
-	private float value;
-	private float time;
-	
-	public KeyFrame(float time, float value){
-		this.time = time;
-		this.value = value;
-	}
 
-	protected float getValue() {
-		return value;
-	}
+    private float value;
+    private float time;
 
-	protected void setValue(float value) {
-		this.value = value;
-	}
+    public KeyFrame(float time, float value) {
+        this.time = time;
+        this.value = value;
+    }
 
-	protected float getTime() {
-		return time;
-	}
+    protected float getValue() {
+        return value;
+    }
 
-	protected void setTime(float time) {
-		this.time = time;
-	}
-	
-	
+    protected void setValue(float value) {
+        this.value = value;
+    }
+
+    protected float getTime() {
+        return time;
+    }
+
+    protected void setTime(float time) {
+        this.time = time;
+    }
+
 
 }

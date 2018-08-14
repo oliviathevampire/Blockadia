@@ -10,117 +10,117 @@ import java.io.IOException;
 
 public class SaveSlot {
 
-	private String name;
-	private int number;
-	private File saveFile;
-	private SaveSlotInfo info;
-	private boolean corrupt = false;
+    private String name;
+    private int number;
+    private File saveFile;
+    private SaveSlotInfo info;
+    private boolean corrupt = false;
 
-	protected SaveSlot(int number) {
-		this.number = number;
-		generateDefaultName();
-		setUpFile();
-		loadInfo();
-		UserConfigs.checkCorruption(this);
-	}
+    protected SaveSlot(int number) {
+        this.number = number;
+        generateDefaultName();
+        setUpFile();
+        loadInfo();
+        UserConfigs.checkCorruption(this);
+    }
 
-	protected SaveSlot(int number, String name) {
-		this.number = number;
-		this.name = name;
-		setUpFile();
-		loadInfo();
-		UserConfigs.checkCorruption(this);
-	}
+    protected SaveSlot(int number, String name) {
+        this.number = number;
+        this.name = name;
+        setUpFile();
+        loadInfo();
+        UserConfigs.checkCorruption(this);
+    }
 
-	public void setCorrupt(){
-		corrupt = true;
-	}
-	
-	public int getNumber() {
-		return number;
-	}
+    public void setCorrupt() {
+        corrupt = true;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-		File oldFile = saveFile;
-		setUpFile();
-		FileUtils.renameFile(oldFile, saveFile);
-	}
+    public int getNumber() {
+        return number;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public BinaryWriter getWriter() {
-		BinaryWriter writer = new BinaryWriter(saveFile);
-		writer.writeBoolean(corrupt);
-		info.save(writer);
-		return writer;
-	}
+    public void setName(String name) {
+        this.name = name;
+        File oldFile = saveFile;
+        setUpFile();
+        FileUtils.renameFile(oldFile, saveFile);
+    }
 
-	public BinaryReader getReader() throws Exception {
-		BinaryReader reader = new BinaryReader(saveFile);
-		reader.readBoolean();
-		info.load(reader);
-		return reader;
-	}
-	
-	public boolean isCorrupt(){
-		return corrupt;
-	}
+    public BinaryWriter getWriter() {
+        BinaryWriter writer = new BinaryWriter(saveFile);
+        writer.writeBoolean(corrupt);
+        info.save(writer);
+        return writer;
+    }
 
-	public boolean isEmpty() {
-		return !saveFile.exists();
-	}
+    public BinaryReader getReader() throws Exception {
+        BinaryReader reader = new BinaryReader(saveFile);
+        reader.readBoolean();
+        info.load(reader);
+        return reader;
+    }
 
-	public void delete() {
-		FileUtils.deleteFile(saveFile);
-		info = null;
-		corrupt = false;
-		generateDefaultName();
-		setUpFile();
-	}
+    public boolean isCorrupt() {
+        return corrupt;
+    }
 
-	public SaveSlotInfo getInfo() {
-		return info;
-	}
+    public boolean isEmpty() {
+        return !saveFile.exists();
+    }
 
-	protected void createFile() {
-		if (isEmpty()) {
-			try {
-				saveFile.createNewFile();
-				info = new SaveSlotInfo();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    public void delete() {
+        FileUtils.deleteFile(saveFile);
+        info = null;
+        corrupt = false;
+        generateDefaultName();
+        setUpFile();
+    }
 
-	private void generateDefaultName() {
-		this.name = "Save " + (number + 1);
-	}
+    public SaveSlotInfo getInfo() {
+        return info;
+    }
 
-	private void setUpFile() {
-		String fileName = name.replaceAll(" ", "_");
-		this.saveFile = new File(Saves.SAVES_FOLDER, Saves.SAVE_FILE_NAME + "-" + number + "-" + fileName + Saves.SAVE_FILE_EXT);
-	}
+    protected void createFile() {
+        if (isEmpty()) {
+            try {
+                saveFile.createNewFile();
+                info = new SaveSlotInfo();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	private void loadInfo() {
-		if (!isEmpty()) {
-			info = new SaveSlotInfo();
-			BinaryReader reader = null;
-			try {
-				reader = new BinaryReader(saveFile);
-				reader.readBoolean();
-				info.load(reader);
-				reader.close();
-			} catch (Exception e) {
-				reader.close();
-				e.printStackTrace();
-				this.corrupt = true;
-				System.err.println("Couldn't load save slot info for slot "+number);
-			}
-		}
-	}
+    private void generateDefaultName() {
+        this.name = "Save " + (number + 1);
+    }
+
+    private void setUpFile() {
+        String fileName = name.replaceAll(" ", "_");
+        this.saveFile = new File(Saves.SAVES_FOLDER, Saves.SAVE_FILE_NAME + "-" + number + "-" + fileName + Saves.SAVE_FILE_EXT);
+    }
+
+    private void loadInfo() {
+        if (!isEmpty()) {
+            info = new SaveSlotInfo();
+            BinaryReader reader = null;
+            try {
+                reader = new BinaryReader(saveFile);
+                reader.readBoolean();
+                info.load(reader);
+                reader.close();
+            } catch (Exception e) {
+                reader.close();
+                e.printStackTrace();
+                this.corrupt = true;
+                System.err.println("Couldn't load save slot info for slot " + number);
+            }
+        }
+    }
 
 }

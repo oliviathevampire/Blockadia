@@ -51,8 +51,8 @@ public class MasterRenderer {
 
     public static void renderGuis() {
         GuiRenderData renderData = GuiMaster.getRenderData();
-        for(GuiRenderData.GuiRenderLevelData renderLevel : renderData.getRenderData()){
-            if(!renderLevel.isEmpty()){
+        for (GuiRenderData.GuiRenderLevelData renderLevel : renderData.getRenderData()) {
+            if (!renderLevel.isEmpty()) {
                 guiRenderer.render(renderLevel.getTextures());
                 fontRenderer.render(renderLevel.getTexts());
             }
@@ -73,8 +73,7 @@ public class MasterRenderer {
      * Creates the projection matrix based on the view frustum described by the
      * camera.
      *
-     * @param camera
-     *            - the camera to be used in the creation of the view frustum.
+     * @param camera - the camera to be used in the creation of the view frustum.
      */
     private static void createProjectionMatrix(CameraInterface camera) {
         float farPlane = camera.getFarPlane();

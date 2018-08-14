@@ -8,13 +8,13 @@ import team.hdt.blockadia.test.engine.graph.light.SpotLight;
 public class SceneLight {
 
     private Vector3f ambientLight;
-    
+
     private Vector3f skyBoxLight;
 
     private PointLight[] pointLightList;
-    
+
     private SpotLight[] spotLightList;
-    
+
     private DirectionalLight directionalLight;
 
     public Vector3f getAmbientLight() {
@@ -56,5 +56,5 @@ public class SceneLight {
     public void setSkyBoxLight(Vector3f skyBoxLight) {
         this.skyBoxLight = skyBoxLight;
     }
-    
+
 }

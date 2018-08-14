@@ -2,52 +2,52 @@ package team.hdt.blockadia.game_engine.client.resourceProcessing;
 
 public class RequestProcessor extends Thread {
 
-	private static RequestProcessor PROCESSOR = new RequestProcessor();
+    private static RequestProcessor PROCESSOR = new RequestProcessor();
 
-	private RequestQueue requestQueue = new RequestQueue();
-	private boolean running = true;
+    private RequestQueue requestQueue = new RequestQueue();
+    private boolean running = true;
 
-	public static void sendRequest(ResourceRequest request) {
-		PROCESSOR.addRequestToQueue(request);
-	}
+    private RequestProcessor() {
+        this.start();
+    }
 
-	public static void cleanUp() {
-		PROCESSOR.kill();
-	}
+    public static void sendRequest(ResourceRequest request) {
+        PROCESSOR.addRequestToQueue(request);
+    }
 
-	public synchronized void run() {
-		while (running || requestQueue.hasRequests()) {
-			if (requestQueue.hasRequests()) {
-				requestQueue.acceptNextRequest().doResourceRequest();
-			} else {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+    public static void cleanUp() {
+        PROCESSOR.kill();
+    }
 
-	private void kill() {
-		running = false;
-		indicateNewRequests();
-	}
+    public synchronized void run() {
+        while (running || requestQueue.hasRequests()) {
+            if (requestQueue.hasRequests()) {
+                requestQueue.acceptNextRequest().doResourceRequest();
+            } else {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-	private synchronized void indicateNewRequests() {
-		notify();
-	}
+    private void kill() {
+        running = false;
+        indicateNewRequests();
+    }
 
-	private RequestProcessor() {
-		this.start();
-	}
+    private synchronized void indicateNewRequests() {
+        notify();
+    }
 
-	private void addRequestToQueue(ResourceRequest request) {
-		boolean isPaused = !requestQueue.hasRequests();
-		requestQueue.addRequest(request);
-		if (isPaused) {
-			indicateNewRequests();
-		}
-	}
+    private void addRequestToQueue(ResourceRequest request) {
+        boolean isPaused = !requestQueue.hasRequests();
+        requestQueue.addRequest(request);
+        if (isPaused) {
+            indicateNewRequests();
+        }
+    }
 
 }

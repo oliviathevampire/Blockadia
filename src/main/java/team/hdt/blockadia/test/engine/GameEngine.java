@@ -39,7 +39,7 @@ public class GameEngine implements Runnable {
 
     public void start() {
         String osName = System.getProperty("os.name");
-        if ( osName.contains("Mac") ) {
+        if (osName.contains("Mac")) {
             gameLoopThread.run();
         } else {
             gameLoopThread.start();
@@ -86,7 +86,7 @@ public class GameEngine implements Runnable {
 
             render();
 
-            if ( !window.isvSync() ) {
+            if (!window.isvSync()) {
                 sync();
             }
         }
@@ -117,7 +117,7 @@ public class GameEngine implements Runnable {
     }
 
     protected void render() {
-        if ( window.getWindowOptions().showFps && timer.getLastLoopTime() - lastFps > 1 ) {
+        if (window.getWindowOptions().showFps && timer.getLastLoopTime() - lastFps > 1) {
             lastFps = timer.getLastLoopTime();
             window.setWindowTitle(windowTitle + " - " + fps + " FPS");
             fps = 0;

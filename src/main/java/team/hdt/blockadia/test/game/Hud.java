@@ -31,12 +31,12 @@ public class Hud implements IHud {
     public void setStatusText(String statusText) {
         this.statusTextItem.setText(statusText);
     }
-    
+
     @Override
     public GameItem[] getGameItems() {
         return gameItems;
     }
-   
+
     public void updateSize(Window window) {
         this.statusTextItem.setPosition(10f, window.getHeight() - 50f, 0);
     }

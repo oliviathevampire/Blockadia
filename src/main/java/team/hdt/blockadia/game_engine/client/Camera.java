@@ -20,9 +20,9 @@ public class Camera {
     }
 
     public static void apply() {
-        if(rotation.y / 360 > 1) {
+        if (rotation.y / 360 > 1) {
             rotation.y -= 360;
-        } else if(rotation.y / 360 < -1) {
+        } else if (rotation.y / 360 < -1) {
             rotation.y += 360;
         }
         glLoadIdentity();
@@ -153,107 +153,107 @@ public class Camera {
         moveSpeed = speed;
     }
 
-    public static void setPos(Vectors3f pos) {
-        Camera.pos = pos;
-    }
-
     public static Vectors3f getPos() {
         return pos;
     }
 
-    public static void setX(float x) {
-        pos.x = x;
+    public static void setPos(Vectors3f pos) {
+        Camera.pos = pos;
     }
 
     public static float getX() {
         return pos.x;
     }
 
-    public static void addToX(float x) {
-        pos.x += x;
+    public static void setX(float x) {
+        pos.x = x;
     }
 
-    public static void setY(float y) {
-        pos.y = y;
+    public static void addToX(float x) {
+        pos.x += x;
     }
 
     public static float getY() {
         return pos.y;
     }
 
-    public static void addToY(float y) {
-        pos.y += y;
+    public static void setY(float y) {
+        pos.y = y;
     }
 
-    public static void setZ(float z) {
-        pos.z = z;
+    public static void addToY(float y) {
+        pos.y += y;
     }
 
     public static float getZ() {
         return pos.z;
     }
 
-    public static void addToZ(float z) {
-        pos.z += z;
+    public static void setZ(float z) {
+        pos.z = z;
     }
 
-    public static void setRotation(Vectors3f rotation) {
-        Camera.rotation = rotation;
+    public static void addToZ(float z) {
+        pos.z += z;
     }
 
     public static Vectors3f getRotation() {
         return rotation;
     }
 
-    public static void setRotationX(float x) {
-        rotation.x = x;
+    public static void setRotation(Vectors3f rotation) {
+        Camera.rotation = rotation;
     }
 
     public static float getRotationX() {
         return rotation.x;
     }
 
-    public static void addToRotationX(float x) {
-        rotation.x += x;
+    public static void setRotationX(float x) {
+        rotation.x = x;
     }
 
-    public static void setRotationY(float y) {
-        rotation.y = y;
+    public static void addToRotationX(float x) {
+        rotation.x += x;
     }
 
     public static float getRotationY() {
         return rotation.y;
     }
 
-    public static void addToRotationY(float y) {
-        rotation.y += y;
+    public static void setRotationY(float y) {
+        rotation.y = y;
     }
 
-    public static void setRotationZ(float z) {
-        rotation.z = z;
+    public static void addToRotationY(float y) {
+        rotation.y += y;
     }
 
     public static float getRotationZ() {
         return rotation.z;
     }
 
-    public static void addToRotationZ(float z) {
-        rotation.z += z;
+    public static void setRotationZ(float z) {
+        rotation.z = z;
     }
 
-    public static void setMaxLook(float maxLook) {
-        Camera.maxLook = maxLook;
+    public static void addToRotationZ(float z) {
+        rotation.z += z;
     }
 
     public static float getMaxLook() {
         return maxLook;
     }
 
-    public static void setMouseSensitivity(float mouseSensitivity) {
-        Camera.mouseSensitivity = mouseSensitivity;
+    public static void setMaxLook(float maxLook) {
+        Camera.maxLook = maxLook;
     }
 
     public static float getMouseSensitivity() {
         return mouseSensitivity;
+    }
+
+    public static void setMouseSensitivity(float mouseSensitivity) {
+        Camera.mouseSensitivity = mouseSensitivity;
     }
 }

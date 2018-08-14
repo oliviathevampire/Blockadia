@@ -3,7 +3,7 @@ package team.hdt.blockadia.game_engine.common.particle;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 
 public class Particle {
-    private static final float GRAVITY = - 50;
+    private static final float GRAVITY = -50;
     private Vectors3f position;
     private Vectors3f velocity;
     private float gravityEffects;

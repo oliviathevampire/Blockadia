@@ -24,23 +24,14 @@ import static org.lwjgl.glfw.GLFW.*;
 public class DummyGame implements IGameLogic {
 
     private static final float MOUSE_SENSITIVITY = 0.5f;
-
-    private final Vector3f cameraInc;
-
-    private final Renderer renderer;
-
-    private final Camera camera;
-
-    private Scene scene;
-
-    private Hud hud;
-
-    private GameItem[] gameItems;
-
-    private World world;
-
     private static final float CAMERA_POS_STEP = 0.05f;
-
+    private final Vector3f cameraInc;
+    private final Renderer renderer;
+    private final Camera camera;
+    private Scene scene;
+    private Hud hud;
+    private GameItem[] gameItems;
+    private World world;
     private float angleInc;
 
     private float lightAngle;
@@ -91,8 +82,8 @@ public class DummyGame implements IGameLogic {
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
         gameItems = new GameItem[instances];
-        for(int i = 0; i < x; i++) {
-            for(int j = 0; j < z; j++) {
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < z; j++) {
                 GameItem grassBlock = new GameItem(mesh);
                 grassBlock.setScale(blockScale);
                 grassBlock.setPosition(posX, startY + incy, posZ);

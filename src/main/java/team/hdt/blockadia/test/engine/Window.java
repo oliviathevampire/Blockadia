@@ -160,7 +160,7 @@ public class Window {
     }
 
     public Matrix4f updateProjectionMatrix() {
-        float aspectRatio = (float)width / (float)height;
+        float aspectRatio = (float) width / (float) height;
         return projectionMatrix.setPerspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
     }
 

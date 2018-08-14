@@ -26,20 +26,13 @@ public class Renderer {
     private static final int MAX_SPOT_LIGHTS = 5;
 
     private final Transformation transformation;
-
-    private ShadowMap shadowMap;
-
-    private ShaderProgram depthShaderProgram;
-
-    private ShaderProgram sceneShaderProgram;
-
-    private ShaderProgram hudShaderProgram;
-
-    private ShaderProgram skyBoxShaderProgram;
-
-    private ShaderProgram particlesShaderProgram;
-
     private final float specularPower;
+    private ShadowMap shadowMap;
+    private ShaderProgram depthShaderProgram;
+    private ShaderProgram sceneShaderProgram;
+    private ShaderProgram hudShaderProgram;
+    private ShaderProgram skyBoxShaderProgram;
+    private ShaderProgram particlesShaderProgram;
 
     public Renderer() {
         transformation = new Transformation();

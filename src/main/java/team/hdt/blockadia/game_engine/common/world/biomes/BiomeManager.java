@@ -1,22 +1,3 @@
-/*
- * Minecraft Forge
- * Copyright (c) 2016-2018.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation version 2.1
- * of the License.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 package team.hdt.blockadia.game_engine.common.world.biomes;
 
 import com.google.common.collect.ImmutableList;
@@ -31,10 +12,10 @@ public class BiomeManager
 {
     private static TrackedList<BiomeEntry>[] biomes = setupBiomes();
 
-    public static List<Biome> oceanBiomes = new ArrayList<Biome>();
+    public static List<Biome> oceanBiomes = new ArrayList<>();
 
-    public static ArrayList<Biome> strongHoldBiomes = new ArrayList<Biome>();
-    public static ArrayList<Biome> strongHoldBiomesBlackList = new ArrayList<Biome>();
+    public static ArrayList<Biome> strongHoldBiomes = new ArrayList<>();
+    public static ArrayList<Biome> strongHoldBiomesBlackList = new ArrayList<>();
 
     static
     {
@@ -98,22 +79,6 @@ public class BiomeManager
         }
     }
 
-    public static void addSpawnBiome(Biome biome)
-    {
-        if (!BiomeProvider.allowedBiomes.contains(biome))
-        {
-            BiomeProvider.allowedBiomes.add(biome);
-        }
-    }
-
-    public static void removeSpawnBiome(Biome biome)
-    {
-        if (BiomeProvider.allowedBiomes.contains(biome))
-        {
-            BiomeProvider.allowedBiomes.remove(biome);
-        }
-    }
-
     public static void addBiome(BiomeType type, BiomeEntry entry)
     {
         int idx = type.ordinal();
@@ -151,16 +116,13 @@ public class BiomeManager
         return false;
     }
 
-    public static enum BiomeType
-    {
+    public enum BiomeType {
         DESERT, WARM, COOL, ICY;
 
-        public static BiomeType getType(String name)
-        {
+        public static BiomeType getType(String name) {
             name = name.toUpperCase();
 
-            for (BiomeType t : values())
-            {
+            for (BiomeType t : values()) {
                 if (t.name().equals(name)) return t;
             }
 

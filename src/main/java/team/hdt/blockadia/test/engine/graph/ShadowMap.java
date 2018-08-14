@@ -1,6 +1,10 @@
 package team.hdt.blockadia.test.engine.graph;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_COMPONENT;
+import static org.lwjgl.opengl.GL11.GL_NONE;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glDrawBuffer;
+import static org.lwjgl.opengl.GL11.glReadBuffer;
 import static org.lwjgl.opengl.GL30.*;
 
 public class ShadowMap {

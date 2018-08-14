@@ -1,14 +1,11 @@
 package team.hdt.blockadia.test.engine;
 
 
-
 public class Timer {
-
 
 
     private double lastLoopTime;
 
-    
 
     public void init() {
 
@@ -17,13 +14,11 @@ public class Timer {
     }
 
 
-
     public double getTime() {
 
         return System.nanoTime() / 1000_000_000.0;
 
     }
-
 
 
     public float getElapsedTime() {
@@ -37,7 +32,6 @@ public class Timer {
         return elapsedTime;
 
     }
-
 
 
     public double getLastLoopTime() {

@@ -3,18 +3,15 @@ package team.hdt.blockadia.game_engine.common.util;
 import java.util.List;
 import java.util.Random;
 
-public class WeightedRandom
-{
+public class WeightedRandom {
     /**
      * Returns the total weight of all items in a collection.
      */
-    public static int getTotalWeight(List <? extends WeightedRandom.Item > collection)
-    {
+    public static int getTotalWeight(List<? extends WeightedRandom.Item> collection) {
         int i = 0;
         int j = 0;
 
-        for (int k = collection.size(); j < k; ++j)
-        {
+        for (int k = collection.size(); j < k; ++j) {
             WeightedRandom.Item weightedrandom$item = collection.get(j);
             i += weightedrandom$item.itemWeight;
         }
@@ -25,53 +22,45 @@ public class WeightedRandom
     /**
      * Returns a random choice from the input items, with a total weight value.
      */
-    public static <T extends WeightedRandom.Item> T getRandomItem(Random random, List<T> collection, int totalWeight)
-    {
-        if (totalWeight <= 0)
-        {
+    public static <T extends WeightedRandom.Item> T getRandomItem(Random random, List<T> collection, int totalWeight) {
+        if (totalWeight <= 0) {
             throw new IllegalArgumentException();
-        }
-        else
-        {
+        } else {
             int i = random.nextInt(totalWeight);
-            return (T)getRandomItem(collection, i);
+            return (T) getRandomItem(collection, i);
         }
     }
 
-    public static <T extends WeightedRandom.Item> T getRandomItem(List<T> collection, int weight)
-    {
+    public static <T extends WeightedRandom.Item> T getRandomItem(List<T> collection, int weight) {
         int i = 0;
 
-        for (int j = collection.size(); i < j; ++i)
-        {
+        for (int j = collection.size(); i < j; ++i) {
             T t = collection.get(i);
             weight -= t.itemWeight;
 
-            if (weight < 0)
-            {
+            if (weight < 0) {
                 return t;
             }
         }
 
-        return (T)null;
+        return (T) null;
     }
 
     /**
      * Returns a random choice from the input items.
      */
-    public static <T extends WeightedRandom.Item> T getRandomItem(Random random, List<T> collection)
-    {
-        return (T)getRandomItem(random, collection, getTotalWeight(collection));
+    public static <T extends WeightedRandom.Item> T getRandomItem(Random random, List<T> collection) {
+        return (T) getRandomItem(random, collection, getTotalWeight(collection));
     }
 
-    public static class Item
-        {
-            /** The Weight is how often the item is chosen(higher number is higher chance(lower is lower)) */
-            public int itemWeight;
+    public static class Item {
+        /**
+         * The Weight is how often the item is chosen(higher number is higher chance(lower is lower))
+         */
+        public int itemWeight;
 
-            public Item(int itemWeightIn)
-            {
-                this.itemWeight = itemWeightIn;
-            }
+        public Item(int itemWeightIn) {
+            this.itemWeight = itemWeightIn;
         }
+    }
 }

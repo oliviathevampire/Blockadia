@@ -4,6 +4,6 @@ import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors4f;
 
 public interface ParticleSpawn {
 
-	public Vectors4f getBaseSpawnPosition();
+    public Vectors4f getBaseSpawnPosition();
 
 }

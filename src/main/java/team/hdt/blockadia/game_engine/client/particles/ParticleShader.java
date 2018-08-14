@@ -8,16 +8,16 @@ import team.hdt.blockadia.game_engine.util.MyFile;
 
 public class ParticleShader extends ShaderProgram {
 
-	private static final MyFile VERTEX_SHADER = new MyFile("particles", "particleVShader.glsl");
-	private static final MyFile FRAGMENT_SHADER = new MyFile("particles", "particleFShader.glsl");
-	
-	protected UniformMatrix projectionMatrix = new UniformMatrix("projectionMatrix");
-	protected UniformFloat numberOfRows = new UniformFloat("numberOfRows");
-	protected UniformVec3 lighting = new UniformVec3("lighting");
-	
-	public ParticleShader() {
-		super(VERTEX_SHADER, FRAGMENT_SHADER);
-		super.storeAllUniformLocations(projectionMatrix, numberOfRows, lighting);
-	}
+    private static final MyFile VERTEX_SHADER = new MyFile("particles", "particleVShader.glsl");
+    private static final MyFile FRAGMENT_SHADER = new MyFile("particles", "particleFShader.glsl");
+
+    protected UniformMatrix projectionMatrix = new UniformMatrix("projectionMatrix");
+    protected UniformFloat numberOfRows = new UniformFloat("numberOfRows");
+    protected UniformVec3 lighting = new UniformVec3("lighting");
+
+    public ParticleShader() {
+        super(VERTEX_SHADER, FRAGMENT_SHADER);
+        super.storeAllUniformLocations(projectionMatrix, numberOfRows, lighting);
+    }
 
 }

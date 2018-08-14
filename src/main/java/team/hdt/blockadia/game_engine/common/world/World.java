@@ -19,7 +19,7 @@ public class World {
 
     public Map<ChunkPos, Chunk> CHUNKS = new HashMap<>();
 
-    public Document toXML(){
+    public Document toXML() {
         Element root = new Element("world");
         Element chunks = new Element("chunks");
         CHUNKS.forEach((pos, chunk) -> {
@@ -31,25 +31,25 @@ public class World {
         return document;
     }
 
-    public ChunkHolder getChunk(ChunkPos pos){
-        if(CHUNKS.containsKey(pos)){
+    public ChunkHolder getChunk(ChunkPos pos) {
+        if (CHUNKS.containsKey(pos)) {
             return new ChunkHolder(CHUNKS.get(pos), pos);
         } else {
             return generateChunk(pos);
         }
     }
 
-    private ChunkHolder generateChunk(ChunkPos pos){
+    private ChunkHolder generateChunk(ChunkPos pos) {
         List<IBiome> biomeList = new ArrayList<>();
-        for(ChunkPos chunkPos : pos.getSurroundings()){
-            if (CHUNKS.containsKey(chunkPos)){
+        for (ChunkPos chunkPos : pos.getSurroundings()) {
+            if (CHUNKS.containsKey(chunkPos)) {
                 biomeList.add(CHUNKS.get(chunkPos).getBiome());
             }
         }
         boolean flag = biomeList.isEmpty();
         IBiome biome = null;
-        if(!flag)
-        biome = biomeList.get(ChunkFactory.random.nextInt(biomeList.size()));
+        if (!flag)
+            biome = biomeList.get(ChunkFactory.random.nextInt(biomeList.size()));
         ChunkFactory factory = new ChunkFactory();
         factory.initFactory(biome, flag);
         return new ChunkHolder(factory.getChunk(), pos);
