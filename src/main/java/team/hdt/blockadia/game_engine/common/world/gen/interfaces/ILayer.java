@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.common.world.gen.interfaces;
 
 
 import team.hdt.blockadia.game_engine.common.world.block.BlockType;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
+import team.hdt.blockadia.game_engine.common.registry.BlockRegistry;
 
 public interface ILayer {
 
@@ -33,7 +33,7 @@ public interface ILayer {
 
         @Override
         public BlockType getBlockAtPos(int x, int z) {
-            return BlockTypes.AIR;
+            return BlockRegistry.AIR;
         }
     }
 }

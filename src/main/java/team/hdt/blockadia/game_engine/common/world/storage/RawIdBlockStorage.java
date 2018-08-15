@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.common.world.storage;
 
 import org.jdom2.Element;
 import team.hdt.blockadia.game_engine.common.world.block.BlockType;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
+import team.hdt.blockadia.game_engine.common.registry.BlockRegistry;
 
 public class RawIdBlockStorage implements RawBlockStorage {
     private final byte[][][] data;
@@ -19,14 +19,14 @@ public class RawIdBlockStorage implements RawBlockStorage {
 
     @Override
     public void setBlockUnchecked(int x, int y, int z, BlockType type) {
-        int id = BlockTypes.REGISTRY.getId(type.getIdentifier()) & 0xFF;
+        int id = BlockRegistry.REGISTRY.getId(type.getIdentifier()) & 0xFF;
         this.data[x][y][z] = (byte) id;
     }
 
     @Override
     public BlockType getBlockUnchecked(int x, int y, int z) {
         byte id = this.data[x][y][z];
-        return BlockTypes.REGISTRY.get(id & 0xFF);
+        return BlockRegistry.REGISTRY.get(id & 0xFF);
     }
 
     @Override
@@ -47,11 +47,11 @@ public class RawIdBlockStorage implements RawBlockStorage {
     @Override
     public Element toXML(Element element) {
         element.setAttribute("sizeX", sizeX + "");
-        element.setAttribute("sizeY", 250 + "");
+        element.setAttribute("sizeY", 10 + "");
         element.setAttribute("sizeZ", sizeZ + "");
         Element data = new Element("data");
         for (int x = 0; x < sizeX; x++) {
-            for (int y = 0; y < 250; y++) {
+            for (int y = 0; y < 10; y++) {
                 for (int z = 0; z < sizeZ; z++) {
                     Element block = new Element("block");
                     block.setAttribute("x", x + "");

@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.common.world.gen.trees;
 
 import team.hdt.blockadia.game_engine.common.world.block.BlockType;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
+import team.hdt.blockadia.game_engine.common.registry.BlockRegistry;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.ITree;
 
 public class BasicTree implements ITree {
@@ -29,8 +29,8 @@ public class BasicTree implements ITree {
     }
 
     @Override
-    public BlockType blockCanGrowOn(BlockTypes blockTypes) {
-        return BlockTypes.GRASS;
+    public BlockType blockCanGrowOn(BlockRegistry blockRegistry) {
+        return BlockRegistry.GRASS;
     }
 
 }

@@ -2,7 +2,7 @@ package team.hdt.blockadia.game_engine.common.world.biomes;
 
 import team.hdt.blockadia.game_engine.common.Identifier;
 import team.hdt.blockadia.game_engine.common.world.block.BlockType;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
+import team.hdt.blockadia.game_engine.common.registry.BlockRegistry;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.common.world.gen.interfaces.ILayer;
 
@@ -20,7 +20,7 @@ public class BiomePlains extends Biome implements IBiome {
 
     @Override
     public ILayer getLayer(int y, Random random) {
-        return y < 50 ? new LayerSolid(BlockTypes.ROCK) : new ILayer.LayerAir(32, 32);
+        return y < 50 ? new LayerSolid(BlockRegistry.ROCK) : new ILayer.LayerAir(32, 32);
     }
 
     /**

@@ -1,7 +1,7 @@
 package team.hdt.blockadia.test.engine.item;
 
 import org.joml.Vector4f;
-import team.hdt.blockadia.test.engine.OBJLoader;
+import team.hdt.blockadia.game_engine.client.model.objutil.OBJLoader;
 import team.hdt.blockadia.test.engine.graph.Material;
 import team.hdt.blockadia.test.engine.graph.Mesh;
 import team.hdt.blockadia.test.engine.graph.Texture;
