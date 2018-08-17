@@ -5,6 +5,7 @@ import team.hdt.blockadia.game_engine.client.entity.util.SharePeacefulAspects;
 import team.hdt.blockadia.game_engine.client.entity.util.SharedHostileAspects;
 import team.hdt.blockadia.game_engine.client.rendering.TexturedModel;
 import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
+import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 
 public class BaseEntity {
     public static int ID;
@@ -80,5 +81,12 @@ public class BaseEntity {
 
     public float getScale() {
         return scale;
+    }
+
+    public Vectors3f getPosition(){
+        return new Vectors3f(positionX,positionY,positionZ);
+    }
+    public Vectors3f getRotation(){
+        return new Vectors3f(rotationXY,rotationXZ,rotationZY);
     }
 }
