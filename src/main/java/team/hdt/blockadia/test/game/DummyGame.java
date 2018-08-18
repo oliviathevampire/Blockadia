@@ -5,11 +5,14 @@ import org.jdom2.output.XMLOutputter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import team.hdt.blockadia.game_engine.common.world.World;
-import team.hdt.blockadia.game_engine.common.world.biomes.Biomes;
-import team.hdt.blockadia.game_engine.common.world.block.BlockTypes;
-import team.hdt.blockadia.game_engine.common.world.gen.factory.WorldFactory;
-import team.hdt.blockadia.test.engine.*;
+import team.hdt.blockadia.game_engine.client.util.OBJLoader;
+import team.hdt.blockadia.game_engine.core.world.World;
+import team.hdt.blockadia.game_engine.core.world.gen.factory.WorldFactory;
+import team.hdt.blockadia.game_engine_old.common.util.Util;
+import team.hdt.blockadia.test.engine.MouseInput;
+import team.hdt.blockadia.test.engine.Scene;
+import team.hdt.blockadia.test.engine.SceneLight;
+import team.hdt.blockadia.test.engine.Window;
 import team.hdt.blockadia.test.engine.graph.*;
 import team.hdt.blockadia.test.engine.graph.light.DirectionalLight;
 import team.hdt.blockadia.test.engine.graph.weather.Fog;
@@ -26,6 +29,7 @@ public class DummyGame implements IGameLogic {
 
     private static final float MOUSE_SENSITIVITY = 0.5f;
     private static final float CAMERA_POS_STEP = 0.05f;
+    public static final boolean IS_RUNNING_ON_MAC = Util.getOSType() == Util.EnumOS.OSX;
     private final Vector3f cameraInc;
     private final Renderer renderer;
     private final Camera camera;
@@ -48,8 +52,6 @@ public class DummyGame implements IGameLogic {
 
     @Override
     public void init(Window window) throws Exception {
-        BlockTypes.register();
-        Biomes.register();
         world = WorldFactory.generate();
         XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
         File f = new File("world.xml");
