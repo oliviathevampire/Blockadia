@@ -4,6 +4,7 @@ import team.hdt.blockadia.game_engine.client.entity.util.AllEntityAspects;
 import team.hdt.blockadia.game_engine.client.entity.util.SharePeacefulAspects;
 import team.hdt.blockadia.game_engine.client.entity.util.SharedHostileAspects;
 import team.hdt.blockadia.game_engine.client.rendering.TexturedModel;
+import team.hdt.blockadia.game_engine.common.util.interfaces.Nonnull;
 import team.hdt.blockadia.game_engine.common.util.interfaces.Nullable;
 import team.hdt.blockadia.game_engine.common.util.math.vectors.Vectors3f;
 
@@ -19,11 +20,14 @@ public class BaseEntity {
     public boolean CanburnInDay;
     @Nullable
     public boolean IsAquatic;
+    @Nonnull
+    public boolean isItem;
     public float scale = AllEntityAspects.scale;
 
     public BaseEntity(TexturedModel model, int id, String type) {
         this.model = model;
         this.ID = id;
+        this.isItem = false;
         switch (type) {
             case ("hostile"):
                 setHostileDefalt();
@@ -38,7 +42,25 @@ public class BaseEntity {
         this.ID = id;
         this.CanburnInDay = canburnInDay;
         this.IsAquatic = isAquatic;
+        this.isItem = false;
 
+    }
+    public BaseEntity(TexturedModel model, int id, boolean isItem) {
+        this.model = model;
+        this.ID = id;
+        this.isItem = isItem;
+    }
+    public BaseEntity(TexturedModel model, int id, boolean isItem, boolean canburnInDay, float scale) {
+        this.model = model;
+        this.ID = id;
+        this.isItem = isItem;
+        this.CanburnInDay = canburnInDay;
+        if((scale == 0) == true) {
+            this.scale = 1.0F;
+        }
+        else {
+            this.scale = scale;
+        }
     }
 
     public static int getID() {

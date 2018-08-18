@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import team.hdt.blockadia.game_engine.client.item.ItemBase;
 import team.hdt.blockadia.game_engine.client.model.RawModel;
 import team.hdt.blockadia.game_engine.client.rendering.ModelTexture;
 import team.hdt.blockadia.game_engine.client.rendering.TexturedModel;
@@ -25,10 +26,22 @@ public class EntityRenderer {
         shader.stop();
     }
 
-    public void render(Map<TexturedModel, List<BaseEntity>> entities) {
+    public void renderEntities(Map<TexturedModel, List<BaseEntity>> entities) {
         for (TexturedModel model : entities.keySet()) {
             prepareTexturedModel(model);
             List<BaseEntity> batch = entities.get(model);
+            for (BaseEntity entity : batch) {
+                prepareInstance(entity);
+                GL11.glDrawElements(GL11.GL_TRIANGLES, model.getRawModel().getVertexCount(),
+                        GL11.GL_UNSIGNED_INT, 0);
+            }
+            unbindTexturedModel();
+        }
+    }
+    public void renderItmes(Map<TexturedModel, List<ItemBase>> entities) {
+        for (TexturedModel model : entities.keySet()) {
+            prepareTexturedModel(model);
+            List<ItemBase> batch = entities.get(model);
             for (BaseEntity entity : batch) {
                 prepareInstance(entity);
                 GL11.glDrawElements(GL11.GL_TRIANGLES, model.getRawModel().getVertexCount(),
