@@ -1,6 +1,7 @@
 package team.hdt.blockadia.game_engine.core.world.biomes;
 
 import team.hdt.blockadia.game_engine.core.init.Biomes;
+import team.hdt.blockadia.game_engine.core.init.Blocks;
 import team.hdt.blockadia.game_engine_old.common.Identifier;
 import team.hdt.blockadia.game_engine.core.block.BlockType;
 import team.hdt.blockadia.game_engine.core.registries.BlockRegistry;
@@ -21,7 +22,7 @@ public class BiomeDesert extends Biome implements IBiome {
 
     @Override
     public ILayer getLayer(int y, Random random) {
-        return y < 50 ? new LayerSolid(BlockRegistry.ROCK) : new ILayer.LayerAir(32, 32);
+        return y < 50 ? new LayerSolid(Blocks.ROCK) : new ILayer.LayerAir(32, 32);
     }
 
     /**

@@ -6,12 +6,12 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.item.ItemBase;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine_old.client.model.RawModel;
 import team.hdt.blockadia.game_engine_old.client.rendering.ModelTexture;
 import team.hdt.blockadia.game_engine_old.client.rendering.TexturedModel;
 import team.hdt.blockadia.game_engine_old.client.shaders.StaticShader;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
-import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class EntityRenderer {
             unbindTexturedModel();
         }
     }
-    public void renderItmes(Map<TexturedModel, List<ItemBase>> entities) {
+    public void renderItems(Map<TexturedModel, List<ItemBase>> entities) {
         for (TexturedModel model : entities.keySet()) {
             prepareTexturedModel(model);
             List<ItemBase> batch = entities.get(model);

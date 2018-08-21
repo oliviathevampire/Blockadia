@@ -1,6 +1,7 @@
 package team.hdt.blockadia.game_engine.core.world.gen.trees;
 
 import team.hdt.blockadia.game_engine.core.block.BlockType;
+import team.hdt.blockadia.game_engine.core.init.Blocks;
 import team.hdt.blockadia.game_engine.core.registries.BlockRegistry;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.ITree;
 
@@ -30,7 +31,7 @@ public class BasicTree implements ITree {
 
     @Override
     public BlockType blockCanGrowOn(BlockRegistry blockTypes) {
-        return BlockRegistry.GRASS;
+        return Blocks.GRASS;
     }
 
 }

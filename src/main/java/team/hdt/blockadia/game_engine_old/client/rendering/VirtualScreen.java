@@ -9,7 +9,7 @@ import com.google.common.collect.Maps;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWMonitorCallback;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.test.engine.GameEngine;
 import team.hdt.blockadia.test.engine.Window;
 

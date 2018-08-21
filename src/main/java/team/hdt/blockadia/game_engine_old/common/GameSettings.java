@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import team.hdt.blockadia.game_engine_old.client.rendering.VideoMode;
 import team.hdt.blockadia.game_engine_old.client.resourceProcessing.I18n;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.test.engine.GameEngine;
 
 import java.io.File;

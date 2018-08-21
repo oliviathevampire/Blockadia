@@ -1,6 +1,5 @@
 package team.hdt.blockadia.game_engine.core.world.chunk;
 
-import team.hdt.blockadia.game_engine.core.block.BlockType;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.core.world.storage.RawBlockStorage;
 import team.hdt.blockadia.game_engine.core.world.storage.RawIdBlockStorage;
@@ -45,13 +44,13 @@ public class Chunk {
         return this.chunkZ;
     }
 
-    public void setBlock(int x, int y, int z, BlockType type) {
+    /*public void setBlock(int x, int y, int z, BlockType type) {
         this.storage.setBlockUnchecked(x, y, z, type);
     }
 
     public BlockType getBlock(int x, int y, int z) {
         return this.storage.getBlockUnchecked(x, y, z);
-    }
+    }*/
 
     public enum ChunkType {
         HORIZONTAL, VERTICAL

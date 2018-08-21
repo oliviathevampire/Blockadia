@@ -1,9 +1,9 @@
 package team.hdt.blockadia.game_engine.core.world.biomes;
 
 import team.hdt.blockadia.game_engine.core.init.Biomes;
+import team.hdt.blockadia.game_engine.core.init.Blocks;
 import team.hdt.blockadia.game_engine_old.common.Identifier;
 import team.hdt.blockadia.game_engine.core.block.BlockType;
-import team.hdt.blockadia.game_engine.core.registries.BlockRegistry;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IForest;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.ILayer;
@@ -25,7 +25,7 @@ public class BiomeForest extends Biome implements IBiome, IForest {
     //TODO: finish tree gen.
     @Override
     public ILayer getLayer(int y, Random random) {
-        return y < 50 ? new BiomeForest.LayerSolid(BlockRegistry.OAK_PLANKS) : new ILayer.LayerAir(32, 32);
+        return y < 50 ? new BiomeForest.LayerSolid(Blocks.OAK_PLANKS) : new ILayer.LayerAir(32, 32);
     }
 
     /**
@@ -58,7 +58,7 @@ public class BiomeForest extends Biome implements IBiome, IForest {
 
     @Override
     public ITree getTreeGen() {
-        return new BasicTree(BlockRegistry.OAK_LOG, BlockRegistry.OAK_LEAVES);
+        return new BasicTree(Blocks.OAK_LOG, Blocks.OAK_LEAVES);
     }
 
     private class LayerSolid implements ILayer {

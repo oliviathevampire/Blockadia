@@ -43,7 +43,7 @@ public class ChunkFactory {
             for (int y = 0; y < 100; y++) {
                 ILayer layer = IBiome.getLayer(y, random);
                 for (int z = 0; z < Chunk.CHUNK_SIZE; z++) {
-                    chunk.setBlock(x, y, z, layer.getBlockAtPos(x, z));
+//                    chunk.setBlock(x, y, z, layer.getBlockAtPos(x, z));
                 }
             }
         }

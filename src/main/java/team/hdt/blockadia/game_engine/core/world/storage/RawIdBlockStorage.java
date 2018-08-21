@@ -17,7 +17,7 @@ public class RawIdBlockStorage implements RawBlockStorage {
         this.sizeZ = sizeZ;
     }
 
-    @Override
+    /*@Override
     public void setBlockUnchecked(int x, int y, int z, BlockType type) {
         int id = BlockRegistry.REGISTRY.getId(type.getIdentifier()) & 0xFF;
         this.data[x][y][z] = (byte) id;
@@ -26,7 +26,17 @@ public class RawIdBlockStorage implements RawBlockStorage {
     @Override
     public BlockType getBlockUnchecked(int x, int y, int z) {
         byte id = this.data[x][y][z];
-        return BlockRegistry.REGISTRY.get(id & 0xFF);
+        return BlockRegistry.registries.get(id & 0xFF);
+    }*/
+
+    @Override
+    public void setBlockUnchecked(int x, int y, int z, BlockType type) {
+
+    }
+
+    @Override
+    public BlockType getBlockUnchecked(int x, int y, int z) {
+        return null;
     }
 
     @Override

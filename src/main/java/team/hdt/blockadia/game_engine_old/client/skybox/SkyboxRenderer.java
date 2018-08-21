@@ -5,7 +5,7 @@ import team.hdt.blockadia.game_engine_old.client.ClientMain;
 import team.hdt.blockadia.game_engine_old.client.rendering.EngineMaster;
 import team.hdt.blockadia.game_engine_old.client.rendering.MasterRenderer;
 import team.hdt.blockadia.game_engine_old.client.rendering.textures.Texture;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.core.world.misc.EnvironmentVariables;

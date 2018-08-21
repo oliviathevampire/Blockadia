@@ -6,7 +6,7 @@ import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiMaster;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine_old.client.rendering.guiRendering.GuiRenderData;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine_old.util.toolbox.Colour;
 

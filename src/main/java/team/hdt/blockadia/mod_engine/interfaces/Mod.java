@@ -93,110 +93,14 @@ public @interface Mod {
     boolean serverSideOnly() default false;
 
     /**
-     * The acceptable range of minecraft versions that this mod will load and run in
-     * The default ("empty string") indicates that the currently RUNNING minecraft version is acceptable.
+     * The acceptable range of blockadia versions that this mod will load and run in
+     * The default ("empty string") indicates that the currently RUNNING blockadia version is acceptable.
      * This means ANY version that the END user adds the mod to. Modders PLEASE set this.
-     * FML will refuse to run with an error if the minecraft version is not in this range across all mods.
+     * BEM will refuse to run with an error if the blockadia version is not in this range across all mods.
      *
      * @return A version range as specified by the maven version range specification or the empty string
      */
-    String acceptedMinecraftVersions() default "";
-
-    /**
-     * A replacement for the no-longer-existing "versionRange" of NetworkMod. Specify a remote version range
-     * that this mod will accept as valid. Defaults to nothing, which is interpreted as "only this version".
-     * Another special value is '*' which means accept all versions.
-     *
-     * @return A version range as specified by the maven version range specification or the empty string
-     */
-    String acceptableRemoteVersions() default "";
-
-    /**
-     * A version range specifying compatible save version information. If your mod follows good version numbering
-     * practice <a href="http://semver.org/">Like this (http://semver.org/)</a> then this should be sufficient.
-     *
-     * @return A version range as specified by the maven version range specification or the empty string
-     */
-    String acceptableSaveVersions() default "";
-
-    /**
-     * Specifying this field allows for a mod to expect a signed jar with a fingerprint matching this value.
-     * The fingerprint should be SHA-1 encoded, lowercase with ':' removed. An empty value indicates that
-     * the mod is not expecting to be signed.
-     *
-     * @return A certificate fingerprint that is expected for this mod.
-     */
-    String certificateFingerprint() default "";
-
-    /**
-     * The language the mod is authored in. This will be used to control certain compatibility behaviours for this mod.
-     * Valid values are currently "java", "scala"
-     *
-     * @return The language the mod is authored in
-     */
-    String modLanguage() default "java";
-
-    String modLanguageAdapter() default "";
-
-    /**
-     * If your mod doesn't have a runtime persistent effect on the state of the game, and can be disabled without side effects
-     * (minimap mods, graphical tweak mods) then you can set true here and receive the FMLDeactivationEvent to perform deactivation
-     * tasks.
-     * This does not affect administrative disabling through the system property fml.modStates or the config file fmlModState.properties.
-     * The mod will only be deactivated outside of a running game world - FML will never allow mod deactivation whilst a game server
-     * is running.
-     *
-     * @return if this mod can be deactivated whilst the game is open.
-     */
-    boolean canBeDeactivated() default false;
-
-    /**
-     * An optional GUI factory for this mod. This is the name of a class implementing that will be instantiated
-     * on the client side, and will have certain configuration/options gui's requested from it.
-     *
-     * @return The name of a class implementing
-     */
-    String guiFactory() default "";
-
-    /**
-     * An optional URL to a JSON file that will be checked once per launch to determine if there is an updated
-     * version of this mod and notify the END user. For more information see ForgeVersion.
-     * Format is defined here: https://gist.github.com/LexManos/7aacb9aa991330523884
-     *
-     * @return URL to update metadata json
-     */
-    String updateJSON() default "";
-
-    /**
-     * A list of custom properties for this mod. Completely up to the mod author if/when they
-     * want to put anything in here.
-     *
-     * @return an optional list of custom properties
-     */
-    CustomProperty[] customProperties() default {};
-
-    /**
-     * A custom key => value property pair for use with {@link Mod#customProperties()}
-     *
-     * @author HuskyTheArtist
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target({})
-    @interface CustomProperty {
-        /**
-         * A key. Should be unique.
-         *
-         * @return A key
-         */
-        String k();
-
-        /**
-         * A value. Can be anything.
-         *
-         * @return A value
-         */
-        String v();
-    }
+    String acceptedBlockadiaVersions() default "";
 
     /**
      * Marks the associated method as handling an FML lifecycle event.
@@ -236,50 +140,27 @@ public @interface Mod {
     }
 
     /**
-     * Populate the annotated field with the mod's metadata.
-     *
-     * @author cpw
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.FIELD)
-    @interface Metadata {
-        /**
-         * The mod id specifying the metadata to load here
-         */
-        String value() default "";
-
-        /**
-         * Optional owner modid, required if this annotation is on something that is not inside the main class of a mod container.
-         * This is required to prevent mods from classloading other, potentially disabled mods.
-         */
-        String owner() default "";
-    }
-
-    /**
-     * Mod instance factory method. Should return an instance of the mod. Applies only to static methods on the same class as {@link Mod}.
-     *
-     * @author cpw
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    @interface InstanceFactory {
-    }
-
-    /**
      * A class which will be subscribed to at mod construction time.
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
-    @interface EventBusSubscriber {
-        Side[] value() default {Side.CLIENT, Side.SERVER};
+    @interface ModEventHandler {
+
+        /**
+         * This defines the side the
+         *
+         * @return The side the mod runs on
+         */
+        Side[] side() default {Side.CLIENT, Side.SERVER, Side.UNIVERSAL};
 
         /**
          * Optional value, only nessasary if tis annotation is not on the same class that has a @Mod annotation.
          * Needed to prevent early classloading of classes not owned by your mod.
          *
-         * @return
+         * @return The modid for the mod
          */
         String modid() default "";
+
     }
 
 }

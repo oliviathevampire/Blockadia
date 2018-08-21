@@ -3,7 +3,7 @@ package team.hdt.blockadia.game_engine.core.util.math.vectors;
 
 import team.hdt.blockadia.game_engine.core.util.math.vectors.interfaces.Vectors3i;
 import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 
 public class Vectors3d {
     public static final Vectors3d ZERO = new Vectors3d(0.0D, 0.0D, 0.0D);

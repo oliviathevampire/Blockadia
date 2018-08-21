@@ -4,7 +4,7 @@ import team.hdt.blockadia.game_engine_old.client.ClientMain;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiMaster;
 import team.hdt.blockadia.game_engine_old.common.gameManaging.GameManager;
 import team.hdt.blockadia.game_engine_old.common.gameManaging.GameState;
-import team.hdt.blockadia.game_engine_old.common.util.math.Maths;
+import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.interpolation.SmoothFloat;
 import team.hdt.blockadia.game_engine.core.util.math.interpolation.SmoothVector;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
