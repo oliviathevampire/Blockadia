@@ -6,8 +6,8 @@
 package team.hdt.blockadia.game_engine_old.common.util;
 
 import org.lwjgl.system.Pointer;
+import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
 
-import javax.annotation.Nullable;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
