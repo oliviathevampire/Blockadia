@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
+import team.hdt.blockadia.game_engine_old.common.init.Bootstrap;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
@@ -57,6 +58,7 @@ public class Display {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
+        Bootstrap.register();
     }
 
     private void loop() {

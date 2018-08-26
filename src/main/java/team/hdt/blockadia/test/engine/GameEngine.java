@@ -43,41 +43,27 @@ public class GameEngine implements Runnable {
     public static final int WIDTH = 856, HEIGHT = 480;
 
     public static byte[] memoryReserve;
-    private static int cachedMaximumTextureSize;
     private final File fileResourcepacks;
     private VirtualScreen virtualScreen;
     public Window mainWindow;
     private boolean hasCrashed;
     private CrashReport crashReporter;
 
-    public static final int TARGET_FPS = 75;
-
     private volatile boolean running = true;
     public GameSettings gameSettings;
     private final GameConfiguration.DisplayInformation displayInfo;
     public final File gameDir;
-    private final File fileAssets;
     private final IGameLogic gameLogic;
     private final String launchedVersion;
-    private final String versionType;
-    public static final int TARGET_UPS = 30;
-    private final Timer timer;
     private final Queue<FutureTask<?>> scheduledTasks = Queues.newConcurrentLinkedQueue();
     private final Thread thread = Thread.currentThread();
-    private final MouseInput mouseInput;
-    private double lastFps;
-    private int fps;
 
     public GameEngine(GameConfiguration p_i45547_1_) {
         this.gameLogic = new DummyGame();
         this.displayInfo = p_i45547_1_.displayInfo;
         this.gameDir = p_i45547_1_.folderInfo.gameDir;
-        this.fileAssets = p_i45547_1_.folderInfo.assetsDir;
         this.fileResourcepacks = p_i45547_1_.folderInfo.resourcePacksDir;
         this.launchedVersion = p_i45547_1_.gameInfo.version;
-        this.versionType = p_i45547_1_.gameInfo.versionType;
-        mouseInput = new MouseInput();
-        timer = new Timer();
         Bootstrap.register();
     }
 
@@ -331,7 +317,6 @@ public class GameEngine implements Runnable {
 
     static {
         memoryReserve = new byte[10485760];
-        cachedMaximumTextureSize = -1;
     }
 
     private void startTimerHackThread() {
