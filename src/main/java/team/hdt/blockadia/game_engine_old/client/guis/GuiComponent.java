@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.guis;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.rendering.fontRendering.Text;
 import team.hdt.blockadia.game_engine_old.client.rendering.guiRendering.GuiRenderData;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
@@ -104,8 +104,8 @@ public abstract class GuiComponent {
         if (!initialized) {
             System.err.println("UI Component must be initialized before adding PP component!");
         }
-        float width = component.preferredPixelSize / (scale.x * ClientMain.WIDTH);
-        float height = component.preferredPixelSize / (scale.y * ClientMain.HEIGHT);
+        float width = component.preferredPixelSize / (scale.x * MainExtras.WIDTH);
+        float height = component.preferredPixelSize / (scale.y * MainExtras.HEIGHT);
         addComponent(component, relX, relY, width, height);
     }
 
@@ -113,8 +113,8 @@ public abstract class GuiComponent {
         if (!initialized) {
             System.err.println("UI Component must be initialized before adding PP component!");
         }
-        float width = component.preferredPixelSize / (scale.x * ClientMain.WIDTH);
-        float height = component.preferredPixelSize / (scale.y * ClientMain.HEIGHT);
+        float width = component.preferredPixelSize / (scale.x * MainExtras.WIDTH);
+        float height = component.preferredPixelSize / (scale.y * MainExtras.HEIGHT);
         addComponent(component, centerX - (width * 0.5f), relY, width, height);
     }
 
@@ -122,8 +122,8 @@ public abstract class GuiComponent {
         if (!initialized) {
             System.err.println("UI Component must be initialized before adding PP component!");
         }
-        float width = component.preferredPixelSize / (scale.x * ClientMain.WIDTH);
-        float height = component.preferredPixelSize / (scale.y * ClientMain.HEIGHT);
+        float width = component.preferredPixelSize / (scale.x * MainExtras.WIDTH);
+        float height = component.preferredPixelSize / (scale.y * MainExtras.HEIGHT);
         addComponent(component, relX, centerY - (height * 0.5f), width, height);
     }
 
@@ -131,8 +131,8 @@ public abstract class GuiComponent {
         if (!initialized) {
             System.err.println("UI Component must be initialized before adding PP component!");
         }
-        float width = component.preferredPixelSize / (scale.x * ClientMain.WIDTH);
-        float height = component.preferredPixelSize / (scale.y * ClientMain.HEIGHT);
+        float width = component.preferredPixelSize / (scale.x * MainExtras.WIDTH);
+        float height = component.preferredPixelSize / (scale.y * MainExtras.HEIGHT);
         addComponent(component, centerX - (width * 0.5f), centerY - (height * 0.5f), width, height);
     }
 
@@ -352,11 +352,11 @@ public abstract class GuiComponent {
     }
 
     public float getPixelHeight() {
-        return scale.y * ClientMain.HEIGHT;
+        return scale.y * MainExtras.HEIGHT;
     }
 
     public float getPixelWidth() {
-        return scale.x * ClientMain.WIDTH;
+        return scale.x * MainExtras.WIDTH;
     }
 
     /**
@@ -367,15 +367,15 @@ public abstract class GuiComponent {
         if (!GuiMaster.isInFocus(this)) {
             return false;
         }
-        return isMouseOverFocusIrrelevant();
+        return false;//isMouseOverFocusIrrelevant();
     }
 
-    public boolean isMouseOverFocusIrrelevant() {
+   public boolean isMouseOverFocusIrrelevant() {
         if (!GuiMaster.isMouseInteractionEnabled()) {
             return false;
         }
-        if (ClientMain.display.getMouseX() >= position.x && ClientMain.display.getMouseX() <= position.x + scale.x) {
-            if (ClientMain.display.getMouseY() >= position.y && ClientMain.display.getMouseY() <= position.y + scale.y) {
+        if (MainExtras.getMouseX() >= position.x && MainExtras.getMouseX() <= position.x + scale.x) {
+            if (MainExtras.getMouseY() >= position.y && MainExtras.getMouseY() <= position.y + scale.y) {
                 return true;
             }
         }
@@ -391,18 +391,18 @@ public abstract class GuiComponent {
     }
 
     public float getRelativeMouseX() {
-        return (float) ((ClientMain.display.getMouseX() - position.x) / scale.x);
+        return (float) ((MainExtras.getMouseX() - position.x) / scale.x);
     }
 
     public float getRelativeMouseY() {
-        return (float) ((ClientMain.display.getMouseY() - position.y) / scale.y);
+        return (float) ((MainExtras.getMouseY() - position.y) / scale.y);
     }
 
     protected void setClippingBounds(float x, float y, float width, float height) {
-        int xPixels = Math.round(x * ClientMain.WIDTH);
-        int yPixels = ClientMain.HEIGHT - Math.round((y + height) * ClientMain.HEIGHT);
-        int widthPixels = Math.round(width * ClientMain.WIDTH);
-        int heightPixels = Math.round(height * ClientMain.HEIGHT);
+        int xPixels = Math.round(x * MainExtras.WIDTH);
+        int yPixels = MainExtras.HEIGHT - Math.round((y + height) * MainExtras.HEIGHT);
+        int widthPixels = Math.round(width * MainExtras.WIDTH);
+        int heightPixels = Math.round(height * MainExtras.HEIGHT);
         if (clippingBounds == null) {
             int[] bounds = new int[]{xPixels, yPixels, widthPixels, heightPixels};
             setChildrenClippingBounds(bounds);
@@ -421,12 +421,12 @@ public abstract class GuiComponent {
     }
 
     protected float pixelsToRelativeX(float pixels) {
-        float pixelsWide = (float) ClientMain.WIDTH * scale.x;
+        float pixelsWide = (float) MainExtras.WIDTH * scale.x;
         return pixels / pixelsWide;
     }
 
     protected float pixelsToRelativeY(float pixels) {
-        float pixelsHigh = (float) ClientMain.HEIGHT * scale.y;
+        float pixelsHigh = (float) MainExtras.HEIGHT * scale.y;
         return pixels / pixelsHigh;
     }
 
@@ -478,13 +478,13 @@ public abstract class GuiComponent {
     }
 
     protected float getRelativeHeightCoords(float relativeWidth) {
-        relativeWidth *= ((float) ClientMain.WIDTH / (float) ClientMain.HEIGHT);
+        relativeWidth *= ((float) MainExtras.WIDTH / (float) MainExtras.HEIGHT);
         relativeWidth *= scale.x / scale.y;
         return relativeWidth;
     }
 
     protected float getRelativeWidthCoords(float relativeHeight) {
-        relativeHeight /= ((float) ClientMain.WIDTH / (float) ClientMain.HEIGHT);
+        relativeHeight /= ((float) MainExtras.WIDTH / (float) MainExtras.HEIGHT);
         relativeHeight /= scale.x / scale.y;
         return relativeHeight;
     }
@@ -611,7 +611,7 @@ public abstract class GuiComponent {
         }
         textsToRemove.clear();
         for (Text text : componentTexts.keySet()) {
-            text.update(ClientMain.getDeltaSeconds());
+            text.update(MainExtras.getDeltaSeconds());
         }
     }
 
@@ -669,15 +669,13 @@ public abstract class GuiComponent {
     }
 
     private float convertToScreenWidthCoords(float heightCoord) {
-        heightCoord /= ClientMain.getAspectRatio();
-        heightCoord *= preferredAspect;
-        return heightCoord;
+        float out = (heightCoord * 16)/9;
+        return out;
     }
 
     private float convertToScreenHeightCoords(float widthCoord) {
-        widthCoord *= ClientMain.getAspectRatio();
-        widthCoord /= preferredAspect;
-        return widthCoord;
+        float out = (widthCoord * 9)/16;
+        return out;
     }
 
 }

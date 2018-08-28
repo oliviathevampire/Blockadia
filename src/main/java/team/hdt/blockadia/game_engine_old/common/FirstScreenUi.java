@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.common;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine_old.client.gui.userInterfaces.GuiImage;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
@@ -96,7 +96,7 @@ public class FirstScreenUi extends GuiComponent {
     @Override
     protected void updateSelf() {
         background.update();
-        time += ClientMain.getDeltaSeconds();
+        time += MainExtras.getDeltaSeconds();
         if (!logoFadingIn && time > START) {
             startAnimation();
         }
@@ -132,7 +132,7 @@ public class FirstScreenUi extends GuiComponent {
 
     private void slideLogo() {
         float difference = END_HEIGHT - logo.getRelativeY();
-        float change = difference * ClientMain.getDeltaSeconds() * SLIDE_SPEED;
+        float change = difference * MainExtras.getDeltaSeconds() * SLIDE_SPEED;
         logo.setRelativeY(logo.getRelativeY() + change);
     }
 

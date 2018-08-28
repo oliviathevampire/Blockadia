@@ -33,18 +33,18 @@ public class Camera {
     }
 
     public static void acceptInput(float delta) {
-        acceptInputRotate(delta);
+        //acceptInputRotate(delta);
         acceptInputGrab();
         acceptInputMove(delta);
     }
 
-    public static void acceptInputRotate(float delta) {
-        float mouseDX = (float) ClientMain.display.getMouseX();
-        float mouseDY = -(float) ClientMain.display.getMouseY();
+    /*public static void acceptInputRotate(float delta) {
+        float mouseDX = (float) MainExtras.display.getMouseX();
+        float mouseDY = -(float) MainExtras.display.getMouseY();
         rotation.y += mouseDX * mouseSensitivity * delta;
         rotation.x += mouseDY * mouseSensitivity * delta;
         rotation.x = Math.max(-maxLook, Math.min(maxLook, rotation.x));
-    }
+    }*/
 
     public static void acceptInputGrab() {
         /*if(Mouse.isInsideWindow() && Mouse.isButtonDown(0)) {

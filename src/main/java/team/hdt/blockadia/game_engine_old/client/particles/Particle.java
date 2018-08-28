@@ -1,11 +1,9 @@
 package team.hdt.blockadia.game_engine_old.client.particles;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
-import team.hdt.blockadia.game_engine_old.common.CameraInterface;
 import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
-import team.hdt.blockadia.game_engine.core.world.misc.EnvironmentVariables;
+import team.hdt.blockadia.game_engine_old.common.CameraInterface;
 import team.hdt.blockadia.game_engine_old.util.toolbox.Colour;
 
 public class Particle {
@@ -183,28 +181,29 @@ public class Particle {
     }
 
     protected boolean update(CameraInterface camera) {
-        moveParticleNaturally();
+        //moveParticleNaturally();
         rotate();
         if (colour == null && !manualStages) {
             updateTextureCoordInfo();
         }
         distance = Vectors3f.sub(camera.getPosition(), position, null).lengthSquared();
         if (decays) {
-            elapsedTime += ClientMain.getGameSeconds();
+            //TODO: please change game time to frames if we use game time and the game lags it could cause errors
+            elapsedTime += 0;//MainExtras.getGameSeconds();
         }
         return !decays || elapsedTime < lifeLength;
     }
 
-    private void moveParticleNaturally() {
-        velocity.y += EnvironmentVariables.GRAVITY * gravityEffect * ClientMain.getGameSeconds();
+    /*private void moveParticleNaturally() {
+        velocity.y += EnvironmentVariables.GRAVITY * gravityEffect * MainExtras.getGameSeconds();
         Vectors3f change = new Vectors3f(velocity);
-        change.scale(ClientMain.getGameSeconds());
+        change.scale(MainExtras.getGameSeconds());
         Vectors3f.add(change, position, position);
-    }
+    }*/
 
     private void rotate() {
         if (rotate3D) {
-            rotX += ClientMain.getGameSeconds() * rotXSpeed;
+            rotX +=/* MainExtras.getGameSeconds() **/ rotXSpeed;
         }
     }
 

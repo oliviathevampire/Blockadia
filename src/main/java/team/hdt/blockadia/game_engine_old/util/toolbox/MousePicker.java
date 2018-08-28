@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.util.toolbox;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.common.CameraInterface;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
@@ -81,7 +81,7 @@ public class MousePicker {
 
     public Vectors3f getCurrentRay() {
         if (!rayUpToDate) {
-            updateMouseRay();
+            //updateMouseRay();
         }
         return currentRay;
     }
@@ -123,8 +123,8 @@ public class MousePicker {
     }
 
     private void updateMouseRay() {
-        float mouseX = (float) ClientMain.display.getMouseX();
-        float mouseY = (float) ClientMain.display.getMouseY();
+        float mouseX = (float) MainExtras.getMouseX();
+        float mouseY = (float) MainExtras.getMouseY();
         Vectors2f normalizedCoords = getNormalisedDeviceCoordinates(mouseX, mouseY);
         if (pickCenterScreen) {
             normalizedCoords.set(0, -0f);
@@ -151,8 +151,8 @@ public class MousePicker {
     }
 
     private Vectors2f getNormalisedDeviceCoordinates(float mouseX, float mouseY) {
-        float x = (2.0f * mouseX) / ClientMain.WIDTH - 1f;
-        float y = (2.0f * mouseY) / ClientMain.HEIGHT - 1f;
+        float x = (2.0f * mouseX) / MainExtras.WIDTH - 1f;
+        float y = (2.0f * mouseY) / MainExtras.HEIGHT - 1f;
         return new Vectors2f(x, y);
     }
 

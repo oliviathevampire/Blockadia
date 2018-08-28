@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.common.gameManaging;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 
 public class Ticker {
 
@@ -10,7 +10,7 @@ public class Ticker {
     private final int periodInFrames;
 
     public Ticker(float period) {
-        periodInFrames = (int) (period * ClientMain.FPS_CAP);
+        periodInFrames = (int) (period * MainExtras.FPS_CAP);
         this.id = nextId++ % periodInFrames;
     }
 

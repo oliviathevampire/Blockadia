@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.core.util.math.interpolation;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine.core.util.math.Maths;
 
 public class Timer {
@@ -69,7 +69,8 @@ public class Timer {
         if (!looping && !started) {
             return false;
         }
-        float timePassed = gameTime ? ClientMain.getGameSeconds() : ClientMain.getDeltaSeconds();
+        //TODO: please change game time to frames if we use game time and the game lags it could cause errors
+        float timePassed = /*gameTime ? MainExtras.getGameSeconds() : */MainExtras.getDeltaSeconds();
         time += timePassed;
         if (time >= totalTime) {
             time = looping ? time %= totalTime : 0;

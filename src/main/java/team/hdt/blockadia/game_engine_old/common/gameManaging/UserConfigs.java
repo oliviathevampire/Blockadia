@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.common.gameManaging;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.saves.SaveSlot;
 import team.hdt.blockadia.game_engine_old.util.BinaryReader;
 import team.hdt.blockadia.game_engine_old.util.BinaryWriter;
@@ -10,7 +10,7 @@ import java.io.File;
 
 public class UserConfigs {
 
-    private static final File CONFIGS_FILE = new File(ClientMain.version + "_UserConfigs.dat");
+    private static final File CONFIGS_FILE = new File(MainExtras.version + "_UserConfigs.dat");
     private static int saveSlotId = 0;
     private static Language language = Language.ENGLISH;
     private static int presetId = 3;

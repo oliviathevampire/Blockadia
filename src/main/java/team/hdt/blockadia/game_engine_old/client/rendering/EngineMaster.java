@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.rendering;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.glRequestProcessing.GlRequestProcessor;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiMaster;
 import team.hdt.blockadia.game_engine_old.client.particles.ParticleMaster;
@@ -24,7 +24,7 @@ public class EngineMaster {
         sceneCamera = camera;
 //        UserConfigs.loadConfigs();
 //        GameText.init(UserConfigs.getLanguage().ordinal());
-        Display display = new Display("Blockadia", ClientMain.WIDTH, ClientMain.HEIGHT);
+        Display display = new Display("Blockadia", MainExtras.WIDTH, MainExtras.HEIGHT);
         display.run();
         MasterRenderer.init(camera);
         ParticleMaster.init(MasterRenderer.getProjectionMatrix());

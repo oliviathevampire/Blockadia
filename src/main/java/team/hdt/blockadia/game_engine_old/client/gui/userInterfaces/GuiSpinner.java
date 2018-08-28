@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.gui.userInterfaces;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.GuiRepository;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
@@ -94,8 +94,8 @@ public class GuiSpinner extends GuiComponent {
 
     private void updateReleasedText() {
         if (releasedText != null) {
-            releasedTime += ClientMain.getDeltaSeconds();
-            releasedText.increaseRelativeX(-SLIDE_SPEED * ClientMain.getDeltaSeconds());
+            releasedTime += MainExtras.getDeltaSeconds();
+            releasedText.increaseRelativeX(-SLIDE_SPEED * MainExtras.getDeltaSeconds());
             if (releasedTime > FADE_TIME) {
                 super.deleteText(releasedText);
                 releasedText = null;

@@ -1,14 +1,13 @@
 package team.hdt.blockadia.game_engine_old.client.skybox;
 
 import org.lwjgl.opengl.GL11;
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
-import team.hdt.blockadia.game_engine_old.client.rendering.EngineMaster;
-import team.hdt.blockadia.game_engine_old.client.rendering.MasterRenderer;
-import team.hdt.blockadia.game_engine_old.client.rendering.textures.Texture;
 import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.core.world.misc.EnvironmentVariables;
+import team.hdt.blockadia.game_engine_old.client.rendering.EngineMaster;
+import team.hdt.blockadia.game_engine_old.client.rendering.MasterRenderer;
+import team.hdt.blockadia.game_engine_old.client.rendering.textures.Texture;
 import team.hdt.blockadia.game_engine_old.util.FileUtils;
 import team.hdt.blockadia.game_engine_old.util.MyFile;
 import team.hdt.blockadia.game_engine_old.util.toolbox.OpenglUtils;
@@ -53,7 +52,8 @@ public class SkyboxRenderer {
         GL11.glDepthMask(false);
         OpenglUtils.bindTextureToBank(skyTexture.getID(), 0);
         shader.start();
-        time += ClientMain.getGameSeconds() * STAR_SPEED;
+        //TODO: please change game time to frames if we use game time and the game lags it could cause errors
+        //time += MainExtras.getGameSeconds() * STAR_SPEED;
         time %= 1;
         shader.time.loadFloat(time);
         shader.starBrightness.loadFloat(EnvironmentVariables.starBrightness);

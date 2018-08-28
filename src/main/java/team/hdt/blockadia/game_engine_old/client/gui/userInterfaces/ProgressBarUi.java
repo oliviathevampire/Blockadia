@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.gui.userInterfaces;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.GuiRepository;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
@@ -115,7 +115,7 @@ public class ProgressBarUi extends GuiComponent {
 
     @Override
     protected void updateSelf() {
-        alphaProgress += ClientMain.getDeltaSeconds() * 0.7f;
+        alphaProgress += MainExtras.getDeltaSeconds() * 0.7f;
         alphaProgress %= 1;
         barTexture.update();
         backgroundTexture.update();

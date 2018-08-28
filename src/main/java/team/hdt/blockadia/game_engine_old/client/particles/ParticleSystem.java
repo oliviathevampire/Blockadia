@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.particles;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.particleSpawns.ParticleSpawn;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
@@ -171,7 +171,7 @@ public class ParticleSystem {
     }
 
     public void generateParticles(Matrix4fs transform, Colour colour, float scale) {
-        float delta = ClientMain.getDeltaSeconds();
+        float delta = MainExtras.getDeltaSeconds();
         float particlesToCreate = pps * delta;
         int count = (int) Math.floor(particlesToCreate);
         float partialParticle = particlesToCreate % 1;

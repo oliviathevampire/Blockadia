@@ -100,6 +100,7 @@ public class GuiSlider extends GuiComponent {
         if (!GuiMaster.isMouseInteractionEnabled()) {
             return false;
         }
+        //TODO:what's MyMouse?
 		/*MyMouse mouse = MyMouse.getActiveMouse();
 		Vectors2f position = super.getPosition();
 		Vectors2f scale = super.getScale();

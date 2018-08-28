@@ -5,13 +5,17 @@ import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
 
 @GameSideOnly(GameSide.CLIENT)
-public class BlockadiaClient {
-
-    private static final int CLIENT_WIDTH = 856, CLIENT_HEIGHT = 480;
+public class BlockadiaClient extends MainExtras {
 
     public static void main(String[] args) {
-        Display display = new Display("Blockadia", CLIENT_WIDTH, CLIENT_HEIGHT);
+        System.out.println(getHeight());
+        Display display = new Display("Blockadia", getWidth(), getHeight());
         display.run();
     }
+    /**
+     * |=========================================|
+     * |please read TODO list before start coding|
+     * |=========================================|
+     */
 
 }

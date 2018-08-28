@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.common;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiMaster;
 import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
@@ -223,8 +223,8 @@ public class Camera implements IGameCam {
 		} else if (MyKeyboard.getKeyboard().isKeyDown(Keyboard.KEY_DOWN)||MyKeyboard.getKeyboard().isKeyDown(Keyboard.KEY_S)) {
 			speed = zoomAmount * SCROLL_SPEED * 2.5f;
 		}*/
-        float distance = speed * ClientMain.getDeltaSeconds();
-        float sideDistance = sideSpeed * ClientMain.getDeltaSeconds();
+        float distance = speed * MainExtras.getDeltaSeconds();
+        float sideDistance = sideSpeed * MainExtras.getDeltaSeconds();
         float dx = (float) (distance * Math.sin(Math.toRadians(yaw)));
         float dz = (float) (distance * Math.cos(Math.toRadians(yaw)));
         float sideDx = (float) (sideDistance * Math.sin(Math.toRadians(yaw + 90)));
@@ -236,7 +236,7 @@ public class Camera implements IGameCam {
 
     private void updateTargetPosition() {
         Vectors3f offset = Vectors3f.sub(target, aimingAt, null);
-        offset.scale(ClientMain.getDeltaSeconds() * SCROLL_AGILITY);
+        offset.scale(MainExtras.getDeltaSeconds() * SCROLL_AGILITY);
         Vectors3f.add(aimingAt, offset, aimingAt);
     }
 
@@ -252,7 +252,7 @@ public class Camera implements IGameCam {
     }
 
     private void calculateHorizontalAngle() {
-        float delta = ClientMain.getDeltaSeconds();
+        float delta = MainExtras.getDeltaSeconds();
 		/*if ((mouse.isMouseWheelDown() && !keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 				|| keyboard.isKeyDown(Keyboard.KEY_C)) {
 			float angleChange = ((float) mouse.getDX()) / INFLUENCE_OF_MOUSEDX;
@@ -282,7 +282,7 @@ public class Camera implements IGameCam {
                 offset = (targetRotationAngle - Maths.DEGREES_IN_CIRCLE) - angleAroundPlayer;
             }
         }
-        float change = offset * ClientMain.getDeltaSeconds() * ROTATE_AGILITY;
+        float change = offset * MainExtras.getDeltaSeconds() * ROTATE_AGILITY;
         this.angleAroundPlayer += change;
         if (angleAroundPlayer >= Maths.DEGREES_IN_HALF_CIRCLE) {
             angleAroundPlayer -= Maths.DEGREES_IN_CIRCLE;
@@ -292,7 +292,7 @@ public class Camera implements IGameCam {
     }
 
     private void calculateVerticalAngle() {
-        float delta = ClientMain.getDeltaSeconds();
+        float delta = MainExtras.getDeltaSeconds();
 		/*if (mouse.isMouseWheelDown() && !keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			float angleChange = ((float) mouse.getDY()) / INFLUENCE_OF_MOUSEDY;
 			if (angleChange > MAX_VERTICAL_CHANGE * delta) {
@@ -311,7 +311,7 @@ public class Camera implements IGameCam {
 
     private void updatePitchAngle() {
         float offset = targetElevation - angleOfElevation;
-        float change = offset * ClientMain.getDeltaSeconds() * PITCH_AGILITY;
+        float change = offset * MainExtras.getDeltaSeconds() * PITCH_AGILITY;
         this.angleOfElevation += change;
     }
 
@@ -340,7 +340,7 @@ public class Camera implements IGameCam {
 
     private void updateActualZoom() {
         float offset = targetZoom - actualDistanceFromPoint;
-        zoomChange = offset * ClientMain.getDeltaSeconds() * ZOOM_AGILITY;
+        zoomChange = offset * MainExtras.getDeltaSeconds() * ZOOM_AGILITY;
         this.actualDistanceFromPoint += zoomChange;
     }
 

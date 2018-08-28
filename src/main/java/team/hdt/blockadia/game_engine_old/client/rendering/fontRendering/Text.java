@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.rendering.fontRendering;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
 import team.hdt.blockadia.game_engine_old.common.Loader;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
@@ -13,7 +13,7 @@ import team.hdt.blockadia.game_engine_old.util.visualFxDrivers.ValueDriver;
 public class Text {
 
     private static final float BOLD_FACTOR = 0.017f;
-    private static final float SCREEN_FACTOR = ClientMain.HEIGHT / 720f;
+    private static final float SCREEN_FACTOR = MainExtras.HEIGHT / 720f;
     private final float fontSize;
     private final FontType fontType;
     private final boolean centerText;

@@ -77,7 +77,8 @@ public class GuiScrollBar extends GuiComponent {
     private void checkBarMoving() {
         if (bar.isGrabbed()) {
             determineScroll(bar.getGrabPosition());
-        } else if (super.isMouseOver()/* && MyMouse.getActiveMouse().isLeftClick()*/ && !bar.isMouseOver()) {
+            //TODO: what's MyMouse?
+        } else if (super.isMouseOver()&& /*MyMouse.getActiveMouse().isLeftClick() && */!bar.isMouseOver()) {
             determineScroll(0.5f);
         } else {
             doMouseWheelScroll();
@@ -85,7 +86,7 @@ public class GuiScrollBar extends GuiComponent {
     }
 
     private void determineScroll(float grabPosition) {
-        float mousePosition = getRelativeMouseY();
+        float mousePosition = 0;//getRelativeMouseY();
         float barPosition = mousePosition - (grabPosition * bar.getRelativeScaleY());
         this.currentY = Maths.clamp(barPosition, 0, 1 - (1f / scaleFactor));
         updateBarPosition();

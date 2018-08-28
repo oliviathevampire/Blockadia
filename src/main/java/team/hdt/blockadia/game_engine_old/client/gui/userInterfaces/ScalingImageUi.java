@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.gui.userInterfaces;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiTexture;
 import team.hdt.blockadia.game_engine_old.client.rendering.textures.Texture;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
@@ -35,7 +35,7 @@ public class ScalingImageUi extends GuiImage {
     @Override
     protected void updateSelf() {
         super.updateSelf();
-        float value = sinDriver.update(ClientMain.getDeltaSeconds());
+        float value = sinDriver.update(MainExtras.getDeltaSeconds());
         this.xScaleValue = 1 + value * SIZE_UP_X;
         this.yScaleValue = 1 + (1 - value) * SIZE_UP_Y;
         Vectors2f pos = super.getPosition();

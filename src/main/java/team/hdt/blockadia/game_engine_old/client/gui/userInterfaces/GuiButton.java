@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine_old.client.gui.userInterfaces;
 
-import team.hdt.blockadia.game_engine_old.client.ClientMain;
+import team.hdt.blockadia.game_engine.client.MainExtras;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.ColourPalette;
 import team.hdt.blockadia.game_engine_old.client.gui.mainGuis.UiSettings;
 import team.hdt.blockadia.game_engine_old.client.guis.GuiComponent;
@@ -133,7 +133,7 @@ public class GuiButton extends GuiComponent {
         if (!locked) {
             checkClickEvent();
         }
-        currentScale = scaleDriver.update(ClientMain.getDeltaSeconds());
+        currentScale = scaleDriver.update(MainExtras.getDeltaSeconds());
         updatePositions();
     }
 
