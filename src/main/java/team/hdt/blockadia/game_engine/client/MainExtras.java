@@ -6,8 +6,8 @@ import java.util.List;
 public class MainExtras {
 
     //need to add mouse IO into these variables
-    public static int MouseX = 0;
-    public static int MouseY = 0;
+    public static int mouseX = 0;
+    public static int mouseY = 0;
     public static final int FPS_CAP = 100;
     public static final boolean V_SYNC = false;
     public static final int WIDTH = 720, HEIGHT = WIDTH * 9 / 16;
@@ -20,18 +20,18 @@ public class MainExtras {
     private static float delta;
     private static float time = 0;
     private static boolean error = false;
-    public static boolean isConnetedServer = false;
+    public static boolean isConnectedServer = false;
     // if need can be removed.
-    public List Blocks = new ArrayList();
-    public List Items = new ArrayList();
-    public List Entity = new ArrayList();
+    public List blocks = new ArrayList();
+    public List items = new ArrayList();
+    public List entities = new ArrayList();
 
     public static int getMouseX(){
-        return MouseX;
+        return mouseX;
     }
 
     public static int getMouseY(){
-        return MouseY;
+        return mouseY;
     }
     public static int getWidth() {
         return WIDTH;
@@ -53,7 +53,7 @@ public class MainExtras {
         return time;
     }
 
-    public static boolean isIsConnetedServer() {
-        return isConnetedServer;
+    public static boolean isConnectedServer() {
+        return isConnectedServer;
     }
 }
