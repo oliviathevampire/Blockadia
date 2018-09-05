@@ -66,15 +66,14 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
-        BlockadiaClient.gamerender();
+        BlockadiaClient.gameRender();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glfwSwapBuffers(window);
             glfwPollEvents();
             StaticShader shader = new StaticShader();
             MainRenderer renderer = new MainRenderer(shader);
-            for(BaseEntity entity :BlockadiaClient.Entites)
-            {
+            for(BaseEntity entity :BlockadiaClient.entities) {
                 renderer.render(entity,shader);
             }
         }

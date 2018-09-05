@@ -361,7 +361,7 @@ public class Loader {
         Texture texture = null;
         try {
             texture = TextureLoader.getTexture("PNG",
-                    new FileInputStream("resources/textures/" + fileName + ".png"));
+                    new FileInputStream("src/main/resources/textures/" + fileName + ".png"));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Tried to load texture " + fileName + ".png , didn't work");
