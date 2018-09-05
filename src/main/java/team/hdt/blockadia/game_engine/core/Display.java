@@ -5,8 +5,12 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import team.hdt.blockadia.game_engine.client.BlockadiaClient;
+import team.hdt.blockadia.game_engine.client.rendering.MainRenderer;
+import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
+import team.hdt.blockadia.game_engine_old.client.shaders.StaticShader;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;
@@ -62,10 +66,17 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
+        BlockadiaClient.gamerender();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glfwSwapBuffers(window);
             glfwPollEvents();
+            StaticShader shader = new StaticShader();
+            MainRenderer renderer = new MainRenderer(shader);
+            for(BaseEntity entity :BlockadiaClient.Entites)
+            {
+                renderer.render(entity,shader);
+            }
         }
     }
 
