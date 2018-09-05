@@ -14,10 +14,14 @@ import java.util.List;
 
 @GameSideOnly(GameSide.CLIENT)
 public class BlockadiaClient extends MainExtras {
+
     public static List<BaseEntity> Entites = new ArrayList<BaseEntity>();
     public static void main(String[] args) {
         System.out.println(getHeight());
         Display display = new Display("Blockadia", getWidth(), getHeight());
+        Client client = new Client("aurorafs1.ddns.net",25570);
+        client.connect();
+        client.send();
         display.run();
 
     }
