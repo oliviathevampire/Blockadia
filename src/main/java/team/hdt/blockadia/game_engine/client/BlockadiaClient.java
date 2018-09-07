@@ -16,16 +16,15 @@ import java.util.List;
 public class BlockadiaClient extends MainExtras {
 
     public static List<BaseEntity> Entites = new ArrayList<BaseEntity>();
+    public static List<BaseEntity> entities = new ArrayList<>();
+
     public static void main(String[] args) {
         System.out.println(getHeight());
         Display display = new Display("Blockadia", getWidth(), getHeight());
-        Client client = new Client("aurorafs1.ddns.net",25570);
-        client.connect();
-        client.send();
         display.run();
 
     }
-    public static void gamerender(){
+    public static void gameRender(){
         Loader loader = new Loader();
         int[] indices = {
                 0,1,3,
@@ -104,10 +103,10 @@ public class BlockadiaClient extends MainExtras {
 
         };
         RawModel model = loader.loadToVAO(vertices,textureCoords,indices);
-        TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("grass")));
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("bricks")));
         int id = 4;
         BaseEntity entity = new BaseEntity(staticModel, id, false);
-        Entites.add(entity);
+        entities.add(entity);
     }
     /**
      * |=========================================|
