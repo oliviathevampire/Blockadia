@@ -589,4 +589,28 @@ public class Matrix4fs
     public Matrix4fs negate(Matrix4fs dest) {
         return negate(this, dest);
     }
+
+    public static Matrix4fs createPerspectiveProjection(float fov, float aspect, float zNear, float zFar) {
+        Matrix4fs mat = new Matrix4fs();
+
+        float yScale = 1f / (float) Math.tan(Math.toRadians(fov / 2f));
+        float xScale = yScale / aspect;
+        float frustumLength = zFar - zNear;
+
+        mat.m00 = xScale;
+        mat.m11 = yScale;
+        mat.m22 = -((zFar + zNear) / frustumLength);
+        mat.m23 = -1;
+        mat.m32 = -((2 * zFar * zNear) / frustumLength);
+        mat.m33 = 0;
+
+        return mat;
+    }
+
+    public static Matrix4fs createIdentityMatrix() {
+        Matrix4fs mat = new Matrix4fs();
+        mat.setIdentity();
+        return mat;
+    }
+
 }

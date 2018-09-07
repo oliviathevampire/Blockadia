@@ -23,6 +23,10 @@ public class Vectors3f extends Vectors implements Serializable, ReadableVector3f
     public float y;
     public float z;
 
+    public static Vectors3f xAxis = new Vectors3f(1, 0, 0);
+    public static Vectors3f yAxis = new Vectors3f(0, 1, 0);
+    public static Vectors3f zAxis = new Vectors3f(0, 0, 1);
+
     public Vectors3f() {
     }
 

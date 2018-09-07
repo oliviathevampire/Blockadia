@@ -40,6 +40,7 @@ public class MainRenderer {
         GL20.glDisableVertexAttribArray(1);
         GL30.glBindVertexArray(0);
     }
+
     private void createProjectionMatrix(){
         float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
         float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV / 2f))) * aspectRatio);
@@ -54,4 +55,5 @@ public class MainRenderer {
         projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
         projectionMatrix.m33 = 0;
     }
+
 }

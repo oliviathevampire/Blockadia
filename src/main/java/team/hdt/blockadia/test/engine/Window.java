@@ -55,13 +55,13 @@ public class Window {
 
     private static int width;
     private static int height;
-    public long windowHandle;
+    public static long windowHandle;
     private boolean fullscreen;
     private boolean lastFullscreen;
     private int windowX;
     private int windowY;
-    private int windowWidth;
-    private int windowHeight;
+    private static int windowWidth;
+    private static int windowHeight;
     private int scaledWidth;
     private int scaledHeight;
     private double guiScaleFactor;
@@ -77,6 +77,7 @@ public class Window {
     private String renderPhase = "";
     private boolean videoModeChanged;
     private double field_198139_z = 4.9E-324D;
+    public static float one_pixel_size = 2.0f / Math.min(windowWidth, windowHeight);
 
     public Window(GameEngine gameEngine, VirtualScreen p_i47667_2_, GameConfiguration.DisplayInformation p_i47667_3_, String p_i47667_4_) {
         this.virtualScreen = p_i47667_2_;

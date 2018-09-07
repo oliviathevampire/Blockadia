@@ -2,18 +2,22 @@ package team.hdt.blockadia.game_engine_old.common;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import team.hdt.blockadia.game_engine_old.client.model.RawModel;
 import team.hdt.blockadia.game_engine_old.util.toolbox.ByteWork;
 
-import java.io.FileInputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.lwjgl.opengl.GL11.glGenTextures;
 
 /**
  * Contains a lot of methods for VAO and VBO data management, and also keeps
@@ -358,16 +362,33 @@ public class Loader {
     }
     private List<Integer> textures = new ArrayList<Integer>();
     public int loadTexture(String fileName) {
-        Texture texture = null;
+
+        BufferedImage img = null;
         try {
-            texture = TextureLoader.getTexture("PNG",
-                    new FileInputStream("src/main/resources/textures/" + fileName + ".png"));
-        } catch (Exception e) {
+            img = ImageIO.read(new File("src/main/resources/textures/" + fileName + ".png"));
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Tried to load texture " + fileName + ".png , didn't work");
-            System.exit(-1);
+            System.out.println("Unable to load Texture: " + fileName);
+            System.exit(1);
         }
-        textures.add(texture.getTextureID());
-        return texture.getTextureID();
+
+        int[] pixels = new int[img.getWidth() * img.getHeight()];
+        img.getRGB(0, 0, img.getWidth(), img.getHeight(), pixels, 0, img.getWidth());
+        ByteBuffer buffer = BufferUtils.createByteBuffer(img.getWidth() * img.getHeight() * 4);
+
+        for (int y = 0; y < img.getHeight(); y++) {
+            for (int x = 0; x < img.getWidth(); x++) {
+                int pixel = pixels[y * img.getWidth() + x];
+                buffer.put((byte) ((pixel >> 16) & 0xFF));
+                buffer.put((byte) ((pixel >> 8) & 0xFF));
+                buffer.put((byte) (pixel & 0xFF));
+                buffer.put((byte) ((pixel >> 24) & 0xFF));
+            }
+        }
+        buffer.flip();
+
+        int texture_id = glGenTextures();
+
+        return texture_id;
     }
 }

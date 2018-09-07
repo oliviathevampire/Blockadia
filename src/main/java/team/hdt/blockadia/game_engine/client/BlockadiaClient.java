@@ -4,10 +4,12 @@ import team.hdt.blockadia.game_engine.core.Display;
 import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
+import team.hdt.blockadia.game_engine_old.client.Camera;
 import team.hdt.blockadia.game_engine_old.client.model.RawModel;
 import team.hdt.blockadia.game_engine_old.client.rendering.ModelTexture;
 import team.hdt.blockadia.game_engine_old.client.rendering.TexturedModel;
 import team.hdt.blockadia.game_engine_old.common.Loader;
+import team.hdt.blockadia.game_engine_old.common.init.Bootstrap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,10 @@ public class BlockadiaClient extends MainExtras {
     public static List<BaseEntity> entities = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println(getHeight());
         Display display = new Display("Blockadia", getWidth(), getHeight());
         display.run();
-
+        Camera.create();
+        Bootstrap.register();
     }
     public static void gameRender(){
         Loader loader = new Loader();
@@ -72,7 +74,6 @@ public class BlockadiaClient extends MainExtras {
 
         };
         float[] textureCoords = {
-
                 0,0,
                 0,1,
                 1,1,
@@ -97,16 +98,14 @@ public class BlockadiaClient extends MainExtras {
                 0,1,
                 1,1,
                 1,0
-
-
         };
         RawModel model = loader.loadToVAO(vertices,textureCoords,indices);
-        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("bricks")));
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("grass")));
         int id = 4;
         BaseEntity entity = new BaseEntity(staticModel, id, false);
         entities.add(entity);
     }
-    /**
+    /*
      * |=========================================|
      * |please read TODO list before start coding|
      * |=========================================|

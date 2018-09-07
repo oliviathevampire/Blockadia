@@ -61,7 +61,6 @@ public class Display {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
-//        Bootstrap.register();
     }
 
     private void loop() {
@@ -73,7 +72,7 @@ public class Display {
             glfwPollEvents();
             StaticShader shader = new StaticShader();
             MainRenderer renderer = new MainRenderer(shader);
-            for(BaseEntity entity :BlockadiaClient.entities) {
+            for(BaseEntity entity : BlockadiaClient.entities) {
                 renderer.render(entity,shader);
             }
         }
