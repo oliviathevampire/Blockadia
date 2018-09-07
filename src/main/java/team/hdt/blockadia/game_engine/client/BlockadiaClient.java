@@ -16,6 +16,8 @@ import java.util.List;
 
 @GameSideOnly(GameSide.CLIENT)
 public class BlockadiaClient extends MainExtras {
+
+    public static List<BaseEntity> Entites = new ArrayList<BaseEntity>();
     public static List<BaseEntity> entities = new ArrayList<>();
 
     public static void main(String[] args) {
