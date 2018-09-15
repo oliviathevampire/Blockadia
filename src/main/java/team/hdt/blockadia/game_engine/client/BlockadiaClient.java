@@ -19,12 +19,31 @@ public class BlockadiaClient extends MainExtras {
 
     public static List<BaseEntity> Entites = new ArrayList<BaseEntity>();
     public static List<BaseEntity> entities = new ArrayList<>();
+	public static boolean canStart = true;
+	public static Client client;
+	public static ListenFromServer serverData;
+	public static final String server = "";
+	public static final int port = "";
+	public static final String userName = "";
+	public static final String password = "";
+	public static final float version = "";
 
     public static void main(String[] args) {
         Display display = new Display("Blockadia", getWidth(), getHeight());
+		public String ServerResponce;
+		public Stirng ClientToSend = userName + ":" + password;
+		client  = new Client(server, portNumber, userName, password, version);
+		client.start();
+		client.sendMessage(new PacketHandler(PacketHandler.MESSAGE, ClientToSend));
+		//finish server sender
+		if(canStart){
         display.run();
         Camera.create();
         Bootstrap.register();
+		}else{
+			Syste.out.printl("can not authenticate");
+			System.exit(1);
+		}
     }
     public static void gameRender(){
         Loader loader = new Loader();
