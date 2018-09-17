@@ -44,3 +44,4 @@ src/main/java/idk/*
 classes/*
 world.xml
 src/main/java/team/hdt/blockadia/game_engine_old/
+/nbproject/private/

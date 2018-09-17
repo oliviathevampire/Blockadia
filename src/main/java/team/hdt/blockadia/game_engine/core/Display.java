@@ -65,7 +65,7 @@ public class Display {
 
     private void loop() {
         GL.createCapabilities();
-        BlockadiaClient.gameRender();
+        //BlockadiaClient.gameRender();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glfwSwapBuffers(window);
@@ -80,6 +80,12 @@ public class Display {
 
     public void run() {
         loop();
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
+    }
+    public void TestEnd() {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
         glfwTerminate();

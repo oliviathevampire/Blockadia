@@ -6,25 +6,16 @@
 package team.hdt.blockadia.game_engine_old.common.util;
 
 import com.google.common.collect.Iterators;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.AccessController;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.List;
@@ -199,7 +190,8 @@ public class Util {
         private EnumOS() {
         }
 
-        public void openURL(URL p_openURL_1_) {
+        /**Warning:(205, 48) java: readLines(java.io.InputStream) in org.apache.commons.io.IOUtils has been deprecated*/
+       /* public void openURL(URL p_openURL_1_) {
             try {
                 Process lvt_2_1_ = AccessController.doPrivileged((PrivilegedExceptionAction<Process>) () -> Runtime.getRuntime().exec(this.getOpenCommandLine(p_openURL_1_)));
                 Iterator<String> var3 = IOUtils.readLines(lvt_2_1_.getErrorStream()).iterator();
@@ -216,9 +208,9 @@ public class Util {
                 Util.LOGGER.error("Couldn't open url '{}'", p_openURL_1_, var5);
             }
 
-        }
+        }*/
 
-        public void openURI(URI p_openURI_1_) {
+        /*public void openURI(URI p_openURI_1_) {
             try {
                 this.openURL(p_openURI_1_.toURL());
             } catch (MalformedURLException var3) {
@@ -234,7 +226,7 @@ public class Util {
                 Util.LOGGER.error("Couldn't open file '{}'", p_openFile_1_, var3);
             }
 
-        }
+        }*/
 
         protected String[] getOpenCommandLine(URL p_getOpenCommandLine_1_) {
             String lvt_2_1_ = p_getOpenCommandLine_1_.toString();
@@ -245,13 +237,13 @@ public class Util {
             return new String[]{"xdg-open", lvt_2_1_};
         }
 
-        public void openUri(String p_openUri_1_) {
+        /*public void openUri(String p_openUri_1_) {
             try {
                 this.openURL((new URI(p_openUri_1_)).toURL());
             } catch (MalformedURLException | IllegalArgumentException | URISyntaxException var3) {
                 Util.LOGGER.error("Couldn't open uri '{}'", p_openUri_1_, var3);
             }
 
-        }
+        }*/
     }
 }

@@ -1,4 +1,4 @@
-package team.hdt.blockadia.game_engine.client.network;
+ package team.hdt.blockadia.game_engine.client.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -309,11 +309,18 @@ public class Client  {
      * a class that waits for the message from the server and append them to the JTextArea
      * if we have a GUI or simply System.out.println() it in console mode
      */
-    class ListenFromServer extends Thread {
+    public class ListenFromServer extends Thread {
+        
+	public String got;
+	public String getGot(){
+		return got;
+	}
+
         public void run() {
             while(true) {
                 try {
                     String msg = (String) sInput.readObject();
+                    got = msg;
 
                     // if console mode print the message and add back the prompt
                     if(isGUI == null) {

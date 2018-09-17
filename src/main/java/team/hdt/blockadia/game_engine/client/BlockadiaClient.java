@@ -1,5 +1,7 @@
 package team.hdt.blockadia.game_engine.client;
 
+import team.hdt.blockadia.game_engine.client.network.Client;
+import team.hdt.blockadia.game_engine.client.network.Client.ListenFromServer;
 import team.hdt.blockadia.game_engine.core.Display;
 import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
@@ -23,25 +25,35 @@ public class BlockadiaClient extends MainExtras {
 	public static Client client;
 	public static ListenFromServer serverData;
 	public static final String server = "";
-	public static final int port = "";
+	public static final String port = "25570";
 	public static final String userName = "";
 	public static final String password = "";
-	public static final float version = "";
+	public static final float version = 0.0F;
 
     public static void main(String[] args) {
         Display display = new Display("Blockadia", getWidth(), getHeight());
-		public String ServerResponce;
-		public Stirng ClientToSend = userName + ":" + password;
-		client  = new Client(server, portNumber, userName, password, version);
+		//authentication system still testing
+		/*public String ServerResponce;
+		public String ClientToSend = userName + ":" + password;
+		client  = new Client(server, port, userName, password,(int) version);
 		client.start();
 		client.sendMessage(new PacketHandler(PacketHandler.MESSAGE, ClientToSend));
-		//finish server sender
+		serverData.run();
+		if(ServerResponce == null){
+			ServerResponce = serverData.getGot();
+		}
+
+		if(null){
+			canStart = true;
+		}
+		client.disconnect();*/
+		//end system
 		if(canStart){
         display.run();
         Camera.create();
         Bootstrap.register();
 		}else{
-			Syste.out.printl("can not authenticate");
+			System.out.print("can not authenticate");
 			System.exit(1);
 		}
     }

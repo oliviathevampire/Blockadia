@@ -1,0 +1,12 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}this is to only test for things for the game
+${licensePrefix}this is a warning from pheonix
+${licensePrefix}if works pheonixfirewingz will add to the main game
+${licensePrefix}-------------------------------------
+${licensePrefix}@author Pheonixfirewingz aka Mystic4pheonix.
+${licensePrefix}-------------------------------------
+<#if licenseLast??>
+${licenseLast}
+</#if>

@@ -83,13 +83,13 @@ public class Chunk extends IndexedMesh {
         this.updating = true;
 
 //        lighting();
-
+        /**dose not work*/
         Queue<Vectors2f> texs = new LinkedList<>();
-        texs.add(TextureAtlas.get_coord("grass"));
+        /*texs.add(TextureAtlas.get_coord("grass"));
         texs.add(TextureAtlas.get_coord("moss_stone"));
         texs.add(TextureAtlas.get_coord("stone"));
         texs.add(TextureAtlas.get_coord("wood_0"));
-        texs.add(TextureAtlas.get_coord("sand"));
+        texs.add(TextureAtlas.get_coord("sand"));*/
 
         Map<Vertex, Integer> vertex2index = new LinkedHashMap<>();
         List<Integer> indices = new ArrayList<>();
