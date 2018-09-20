@@ -8,6 +8,7 @@
  */
 package team.priv.pheonix.testingzone.engine;
 
+import org.lwjgl.glfw.GLFW;
 import team.priv.pheonix.testingzone.utils.Mesh;
 import team.priv.pheonix.testingzone.utils.Renderer;
 
@@ -23,7 +24,7 @@ public class Init {
     public static Renderer renderer = new Renderer();
 
 
-    public void init() throws Exception {
+    public void init() {
         try {
             renderer.init();
         } catch (Exception e) {
@@ -31,7 +32,7 @@ public class Init {
         }
     }
     public static void run() {
-        while (run = true) {
+        while(run) {
             glfwSwapInterval(1);
             glfwSwapBuffers(TestMain.display.window);
             float[] positions = new float[]{
@@ -41,8 +42,9 @@ public class Init {
                     0.5f, 0.5f, 0.0f,};
             int[] indices = new int[]{
                     0, 1, 3, 3, 1, 2,};
+            GLFW.glfwMakeContextCurrent(TestMain.display.window);
             Mesh mesh = new Mesh(positions, indices);
-            renderer.render(TestMain.display.window, mesh);
+            renderer.render(mesh);
         }
     }
 

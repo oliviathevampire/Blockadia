@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.core.item;
 
-import team.hdt.blockadia.game_engine_old.common.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Identifier;
 
 public class ItemBuilder {
 

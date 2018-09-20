@@ -1,10 +1,10 @@
 package team.hdt.blockadia.game_engine.core.world.misc;
 
+import team.hdt.blockadia.game_engine.core.util.Colour;
 import team.hdt.blockadia.game_engine.core.util.math.Maths;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.core.world.dayNightCycle.DayNightCycle;
-import team.hdt.blockadia.game_engine_old.util.toolbox.Colour;
 
 public class EnvironmentVariables {
 

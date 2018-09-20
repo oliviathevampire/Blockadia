@@ -2,16 +2,14 @@ package team.hdt.blockadia.game_engine.client;
 
 import team.hdt.blockadia.game_engine.client.network.Client;
 import team.hdt.blockadia.game_engine.client.network.Client.ListenFromServer;
+import team.hdt.blockadia.game_engine.client.rendering.model.ModelTexture;
+import team.hdt.blockadia.game_engine.client.rendering.model.RawModel;
+import team.hdt.blockadia.game_engine.client.rendering.model.TexturedModel;
 import team.hdt.blockadia.game_engine.core.Display;
 import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
-import team.hdt.blockadia.game_engine_old.client.Camera;
-import team.hdt.blockadia.game_engine_old.client.model.RawModel;
-import team.hdt.blockadia.game_engine_old.client.rendering.ModelTexture;
-import team.hdt.blockadia.game_engine_old.client.rendering.TexturedModel;
-import team.hdt.blockadia.game_engine_old.common.Loader;
-import team.hdt.blockadia.game_engine_old.common.init.Bootstrap;
+import team.hdt.blockadia.game_engine.core.util.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +48,6 @@ public class BlockadiaClient extends MainExtras {
 		//end system
 		if(canStart){
         display.run();
-        Camera.create();
-        Bootstrap.register();
 		}else{
 			System.out.print("can not authenticate");
 			System.exit(1);

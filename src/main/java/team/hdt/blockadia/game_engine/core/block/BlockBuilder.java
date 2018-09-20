@@ -3,7 +3,7 @@ package team.hdt.blockadia.game_engine.core.block;
 import team.hdt.blockadia.game_engine.core.block.material.BlockMaterials;
 import team.hdt.blockadia.game_engine.core.block.material.MapColor;
 import team.hdt.blockadia.game_engine.core.item.ItemGroup;
-import team.hdt.blockadia.game_engine_old.common.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Identifier;
 
 public class BlockBuilder {
 

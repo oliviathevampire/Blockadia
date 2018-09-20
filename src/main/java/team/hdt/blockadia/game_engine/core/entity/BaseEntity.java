@@ -1,11 +1,11 @@
 package team.hdt.blockadia.game_engine.core.entity;
 
-import team.hdt.blockadia.game_engine_old.client.entity.util.AllEntityAspects;
-import team.hdt.blockadia.game_engine_old.client.entity.util.SharePeacefulAspects;
-import team.hdt.blockadia.game_engine_old.client.entity.util.SharedHostileAspects;
-import team.hdt.blockadia.game_engine_old.client.rendering.TexturedModel;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nonnull;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
+import team.hdt.blockadia.game_engine.client.rendering.model.TexturedModel;
+import team.hdt.blockadia.game_engine.client.util.Nonnull;
+import team.hdt.blockadia.game_engine.client.util.Nullable;
+import team.hdt.blockadia.game_engine.core.entity.util.AllEntityAspects;
+import team.hdt.blockadia.game_engine.core.entity.util.SharePeacefulAspects;
+import team.hdt.blockadia.game_engine.core.entity.util.SharedHostileAspects;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 
 public class BaseEntity {
@@ -30,9 +30,9 @@ public class BaseEntity {
         this.isItem = false;
         switch (type) {
             case ("hostile"):
-                setHostileDefalt();
+                setHostileDefault();
             case ("peaceful"):
-                setPassiveDefalt();
+                setPassiveDefault();
         }
 
     }
@@ -67,12 +67,12 @@ public class BaseEntity {
         return ID;
     }
 
-    public void setPassiveDefalt() {
+    public void setPassiveDefault() {
         this.CanburnInDay = SharePeacefulAspects.burnInDay;
         this.IsAquatic = SharePeacefulAspects.liveInWater;
     }
 
-    public void setHostileDefalt() {
+    public void setHostileDefault() {
         this.CanburnInDay = SharedHostileAspects.burnInDay;
         this.IsAquatic = SharedHostileAspects.liveInWater;
     }

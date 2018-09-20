@@ -1,6 +1,6 @@
 package team.hdt.blockadia.game_engine.core.world.dayNightCycle;
 
-import team.hdt.blockadia.game_engine_old.util.toolbox.Colour;
+import team.hdt.blockadia.game_engine.core.util.Colour;
 
 public class LightColourCycle extends ColourCycle {
 

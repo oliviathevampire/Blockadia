@@ -1,8 +1,8 @@
 package team.hdt.blockadia.game_engine.core.world.gen.factory;
 
-import team.hdt.blockadia.game_engine_old.common.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Nullable;
 import team.hdt.blockadia.game_engine.core.registries.BiomeRegistry;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
 import team.hdt.blockadia.game_engine.core.world.chunk.Chunk;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.ILayer;

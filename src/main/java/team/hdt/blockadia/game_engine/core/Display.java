@@ -7,10 +7,10 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 import team.hdt.blockadia.game_engine.client.BlockadiaClient;
 import team.hdt.blockadia.game_engine.client.rendering.MainRenderer;
+import team.hdt.blockadia.game_engine.client.rendering.shader.StaticShader;
 import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.GameSide;
 import team.hdt.blockadia.game_engine.core.util.GameSideOnly;
-import team.hdt.blockadia.game_engine_old.client.shaders.StaticShader;
 
 import java.nio.DoubleBuffer;
 import java.nio.IntBuffer;

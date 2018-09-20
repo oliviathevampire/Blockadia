@@ -1,11 +1,11 @@
 package team.hdt.blockadia.game_engine.core.block;
 
-import team.hdt.blockadia.game_engine.core.item.ItemGroup;
-import team.hdt.blockadia.game_engine_old.common.Identifier;
-import team.hdt.blockadia.game_engine.core.registries.RegistryEntry;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nonnull;
+import team.hdt.blockadia.game_engine.client.util.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Nonnull;
 import team.hdt.blockadia.game_engine.core.block.material.BlockMaterials;
 import team.hdt.blockadia.game_engine.core.block.material.MapColor;
+import team.hdt.blockadia.game_engine.core.item.ItemGroup;
+import team.hdt.blockadia.game_engine.core.registries.RegistryEntry;
 
 public class BlockType implements RegistryEntry {
 

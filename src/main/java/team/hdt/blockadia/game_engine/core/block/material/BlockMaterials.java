@@ -20,7 +20,7 @@ public class BlockMaterials {
     public static class Material {
 
         /**
-         * The color index used to draw the blocks of this material on maps.
+         * The color index used to draw the block of this material on maps.
          */
         private final MapColor materialMapColor;
         /**
@@ -28,7 +28,7 @@ public class BlockMaterials {
          */
         private boolean canBurn;
         /**
-         * Determines whether blocks with this material can be "overwritten" by other blocks when placed - eg snow, vines
+         * Determines whether block with this material can be "overwritten" by other block when placed - eg snow, vines
          * and tall grass.
          */
         private boolean replaceable;
@@ -48,7 +48,7 @@ public class BlockMaterials {
         }
 
         /**
-         * Returns if blocks of these materials are liquids.
+         * Returns if block of these materials are liquids.
          */
         public boolean isLiquid() {
             return false;
@@ -84,7 +84,7 @@ public class BlockMaterials {
         }
 
         /**
-         * Makes blocks with this material require the correct tool to be harvested.
+         * Makes block with this material require the correct tool to be harvested.
          */
         protected Material setRequiresTool() {
             this.requiresNoTool = false;
@@ -115,7 +115,7 @@ public class BlockMaterials {
         }
 
         /**
-         * Returns whether the material can be replaced by other blocks when placed - eg snow, vines and tall grass.
+         * Returns whether the material can be replaced by other block when placed - eg snow, vines and tall grass.
          */
         public boolean isReplaceable() {
             return this.replaceable;

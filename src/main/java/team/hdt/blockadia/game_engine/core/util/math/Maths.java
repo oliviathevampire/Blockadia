@@ -5,8 +5,6 @@ import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors4f;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.interfaces.Vectors3i;
-import team.hdt.blockadia.game_engine_old.client.entity.Camera;
-import team.hdt.blockadia.game_engine_old.util.toolbox.Quaternion;
 
 import java.util.List;
 import java.util.Random;
@@ -69,18 +67,6 @@ public class Maths {
         Matrix4fs.translate(translation, matrix, matrix);
         Matrix4fs.scale(new Vectors3f(scale.x, scale.y, 1f), matrix, matrix);
         return matrix;
-    }
-
-    public static Matrix4fs createViewMatrix(Camera camera) {
-        Matrix4fs viewMatrix = new Matrix4fs();
-        viewMatrix.setIdentity();
-        Matrix4fs.rotate((float) Math.toRadians(camera.getPitch()), new Vectors3f(1, 0, 0), viewMatrix,
-                viewMatrix);
-        Matrix4fs.rotate((float) Math.toRadians(camera.getYaw()), new Vectors3f(0, 1, 0), viewMatrix, viewMatrix);
-        Vectors3f cameraPos = camera.getPosition();
-        Vectors3f negativeCameraPos = new Vectors3f(-cameraPos.x, -cameraPos.y, -cameraPos.z);
-        Matrix4fs.translate(negativeCameraPos, viewMatrix, viewMatrix);
-        return viewMatrix;
     }
 
     public static float abs(float fValue) {
