@@ -7,12 +7,14 @@
  * -------------------------------------
  */
 package team.priv.pheonix.testingzone.utils;
+
 import team.hdt.blockadia.game_engine.core.Display;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
+
 public class Renderer {
 
     private ShaderProgram shaderProgram;

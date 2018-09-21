@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Util {
+
     public static String loadResource(String fileName) throws Exception {
         String result;
         try (InputStream in = Class.forName(Util.class.getName()).getResourceAsStream(fileName);
@@ -12,4 +13,5 @@ public class Util {
         }
         return result;
     }
+
 }

@@ -11,15 +11,16 @@ package team.priv.pheonix.testingzone.engine;
 import team.hdt.blockadia.game_engine.core.Display;
 
 /**
- *
  * @author 326296
  */
 public class TestMain {
-    public static Display display;   
-    public static void main(String[] args){
-        display = new Display("tester",1280,720);
+
+    public static Display display;
+
+    public static void main(String[] args) {
+        display = new Display("tester", 1280, 720);
         Init.run();
         display.TestEnd();
     }
-    
+
 }

@@ -7,6 +7,7 @@
  * -------------------------------------
  */
 package team.priv.pheonix.testingzone.utils;
+
 import static org.lwjgl.opengl.GL20.*;
 
 public class ShaderProgram {

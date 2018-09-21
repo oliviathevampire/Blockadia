@@ -83,6 +83,7 @@ public class Mesh {
         glDisableVertexAttribArray(0);
 
         // Delete the VBOs
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDeleteBuffers(posVboId);
         glDeleteBuffers(idxVboId);
