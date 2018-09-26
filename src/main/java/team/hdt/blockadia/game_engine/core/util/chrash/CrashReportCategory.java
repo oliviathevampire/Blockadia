@@ -61,7 +61,7 @@ public class CrashReportCategory {
             lvt_10_2_ = lvt_5_2_ << 4;
             lvt_11_2_ = (lvt_4_4_ + 1 << 4) - 1;
             lvt_12_2_ = (lvt_5_2_ + 1 << 4) - 1;
-            lvt_3_1_.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains blocks %d,0,%d to %d,255,%d)", lvt_6_2_, lvt_7_2_, lvt_8_2_, lvt_4_4_, lvt_5_2_, lvt_9_2_, lvt_10_2_, lvt_11_2_, lvt_12_2_));
+            lvt_3_1_.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains block %d,0,%d to %d,255,%d)", lvt_6_2_, lvt_7_2_, lvt_8_2_, lvt_4_4_, lvt_5_2_, lvt_9_2_, lvt_10_2_, lvt_11_2_, lvt_12_2_));
         } catch (Throwable var15) {
             lvt_3_1_.append("(Error finding chunk loc)");
         }
@@ -79,7 +79,7 @@ public class CrashReportCategory {
             lvt_11_2_ = lvt_5_2_ << 9;
             lvt_12_2_ = (lvt_4_4_ + 1 << 9) - 1;
             int lvt_13_1_ = (lvt_5_2_ + 1 << 9) - 1;
-            lvt_3_1_.append(String.format("Region: (%d,%d; contains chunks %d,%d to %d,%d, blocks %d,0,%d to %d,255,%d)", lvt_4_4_, lvt_5_2_, lvt_6_2_, lvt_7_2_, lvt_8_2_, lvt_9_2_, lvt_10_2_, lvt_11_2_, lvt_12_2_, lvt_13_1_));
+            lvt_3_1_.append(String.format("Region: (%d,%d; contains chunks %d,%d to %d,%d, block %d,0,%d to %d,255,%d)", lvt_4_4_, lvt_5_2_, lvt_6_2_, lvt_7_2_, lvt_8_2_, lvt_9_2_, lvt_10_2_, lvt_11_2_, lvt_12_2_, lvt_13_1_));
         } catch (Throwable var14) {
             lvt_3_1_.append("(Error finding world loc)");
         }

@@ -1,8 +1,15 @@
 package team.hdt.blockadia.game_engine.core.util;
 
 
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors2f;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class TextureAtlas {
-   /* public static final float atlas_size = 80;
+    public static final float atlas_size = 80;
     public static final float crop_size = 16;
 
     public static final float gl_pixel_size = 1.0f / atlas_size;
@@ -24,5 +31,5 @@ public class TextureAtlas {
 
     public static Vectors2f get_coord(String title) {
         return atlas_title_coords.get(title);
-    }*/
+    }
 }

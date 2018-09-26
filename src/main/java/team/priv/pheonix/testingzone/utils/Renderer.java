@@ -7,12 +7,14 @@
  * -------------------------------------
  */
 package team.priv.pheonix.testingzone.utils;
-import team.priv.pheonix.testingzone.engine.TestMain;
+
+import team.hdt.blockadia.game_engine.core.Display;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
+
 public class Renderer {
 
     private ShaderProgram shaderProgram;
@@ -31,9 +33,9 @@ public class Renderer {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public void render(long window, Mesh mesh) {
+    public void render(Mesh mesh) {
         clear();
-        glViewport(0, 0, TestMain.display.getWidth(), TestMain.display.getHeight());
+        glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
         shaderProgram.bind();
 

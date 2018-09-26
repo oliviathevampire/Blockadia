@@ -5,7 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import team.hdt.blockadia.game_engine_old.common.util.Util;
+import team.hdt.blockadia.game_engine.core.util.Util;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

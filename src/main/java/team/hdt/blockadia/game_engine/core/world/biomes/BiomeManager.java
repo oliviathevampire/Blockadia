@@ -1,9 +1,9 @@
 package team.hdt.blockadia.game_engine.core.world.biomes;
 
 import com.google.common.collect.ImmutableList;
+import team.hdt.blockadia.game_engine.client.util.Nullable;
 import team.hdt.blockadia.game_engine.core.init.Biomes;
-import team.hdt.blockadia.game_engine_old.common.util.WeightedRandom;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
+import team.hdt.blockadia.game_engine.core.util.WeightedRandom;
 
 import java.util.ArrayList;
 import java.util.Collection;

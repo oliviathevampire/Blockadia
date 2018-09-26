@@ -7,7 +7,7 @@ public class LiquidMaterial extends BlockMaterials.Material {
     }
 
     /**
-     * Returns if blocks of these materials are liquids.
+     * Returns if block of these materials are liquids.
      */
     public boolean isLiquid() {
         return true;

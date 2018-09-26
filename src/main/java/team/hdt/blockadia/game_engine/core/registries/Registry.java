@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.core.registries;
 
-import team.hdt.blockadia.game_engine_old.common.Identifier;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nullable;
+import team.hdt.blockadia.game_engine.client.util.Identifier;
+import team.hdt.blockadia.game_engine.client.util.Nullable;
 
 
 public interface Registry<T extends RegistryEntry> {

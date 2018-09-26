@@ -1,7 +1,6 @@
 package team.hdt.blockadia.game_engine.core.util.math;
 
-import team.hdt.blockadia.game_engine_old.common.entity.BaseEntity;
-import team.hdt.blockadia.game_engine_old.common.util.EnumFacing;
+import team.hdt.blockadia.game_engine.core.entity.BaseEntity;
 import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3d;
 
 public class RayTraceResult {

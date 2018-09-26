@@ -1,7 +1,7 @@
 package team.hdt.blockadia.game_engine.core.world.storage;
 
 import org.jdom2.Element;
-import team.hdt.blockadia.game_engine_old.common.util.interfaces.Nonnull;
+import team.hdt.blockadia.game_engine.client.util.Nonnull;
 import team.hdt.blockadia.game_engine.core.world.chunk.Chunk;
 import team.hdt.blockadia.game_engine.core.world.chunk.ChunkPos;
 
