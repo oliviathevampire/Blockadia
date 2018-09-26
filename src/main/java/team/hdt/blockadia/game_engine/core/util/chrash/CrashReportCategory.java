@@ -146,8 +146,8 @@ public class CrashReportCategory {
         p_appendToStringBuilder_1_.append("Details:");
         Iterator var2 = this.children.iterator();
 
-        while(var2.hasNext()) {
-            CrashReportCategory.Entry lvt_3_1_ = (CrashReportCategory.Entry)var2.next();
+        while (var2.hasNext()) {
+            CrashReportCategory.Entry lvt_3_1_ = (CrashReportCategory.Entry) var2.next();
             p_appendToStringBuilder_1_.append("\n\t");
             p_appendToStringBuilder_1_.append(lvt_3_1_.getKey());
             p_appendToStringBuilder_1_.append(": ");
@@ -159,7 +159,7 @@ public class CrashReportCategory {
             StackTraceElement[] var6 = this.stackTrace;
             int var7 = var6.length;
 
-            for(int var4 = 0; var4 < var7; ++var4) {
+            for (int var4 = 0; var4 < var7; ++var4) {
                 StackTraceElement lvt_5_1_ = var6[var4];
                 p_appendToStringBuilder_1_.append("\n\tat ");
                 p_appendToStringBuilder_1_.append(lvt_5_1_);
@@ -181,7 +181,7 @@ public class CrashReportCategory {
             if (p_i1352_2_ == null) {
                 this.value = "~~NULL~~";
             } else if (p_i1352_2_ instanceof Throwable) {
-                Throwable lvt_3_1_ = (Throwable)p_i1352_2_;
+                Throwable lvt_3_1_ = (Throwable) p_i1352_2_;
                 this.value = "~~ERROR~~ " + lvt_3_1_.getClass().getSimpleName() + ": " + lvt_3_1_.getMessage();
             } else {
                 this.value = p_i1352_2_.toString();

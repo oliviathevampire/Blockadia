@@ -40,6 +40,23 @@ public class Maths {
     private static final double[] ASINE_TAB;
     private static final double[] COS_TAB;
 
+    static {
+        for (int i = 0; i < 65536; ++i) {
+            SIN_TABLE[i] = (float) Math.sin((double) i * Math.PI * 2.0D / 65536.0D);
+        }
+
+        MULTIPLY_DE_BRUIJN_BIT_POSITION = new int[]{0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
+        FRAC_BIAS = Double.longBitsToDouble(4805340802404319232L);
+        ASINE_TAB = new double[257];
+        COS_TAB = new double[257];
+
+        for (int j = 0; j < 257; ++j) {
+            double d0 = (double) j / 256.0D;
+            double d1 = Math.asin(d0);
+            COS_TAB[j] = Math.cos(d1);
+            ASINE_TAB[j] = d1;
+        }
+    }
 
     public static float barryCentric(Vectors3f p1, Vectors3f p2, Vectors3f p3, Vectors2f pos) {
         float det = (p2.z - p3.z) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.z - p3.z);
@@ -74,23 +91,6 @@ public class Maths {
             return -fValue;
         }
         return fValue;
-    }
-    static {
-        for (int i = 0; i < 65536; ++i) {
-            SIN_TABLE[i] = (float) Math.sin((double) i * Math.PI * 2.0D / 65536.0D);
-        }
-
-        MULTIPLY_DE_BRUIJN_BIT_POSITION = new int[]{0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
-        FRAC_BIAS = Double.longBitsToDouble(4805340802404319232L);
-        ASINE_TAB = new double[257];
-        COS_TAB = new double[257];
-
-        for (int j = 0; j < 257; ++j) {
-            double d0 = (double) j / 256.0D;
-            double d1 = Math.asin(d0);
-            COS_TAB[j] = Math.cos(d1);
-            ASINE_TAB[j] = d1;
-        }
     }
 
     /**

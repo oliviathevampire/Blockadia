@@ -5,9 +5,9 @@ import team.hdt.blockadia.game_engine.core.util.IItemProvider;
 public class ItemStack {
 
     public static final ItemStack EMPTY = new ItemStack(null);
-    private int stackSize;
     @Deprecated
     private final ItemType item;
+    private int stackSize;
 
     public ItemStack(IItemProvider itemProvider) {
         this(itemProvider, 1);

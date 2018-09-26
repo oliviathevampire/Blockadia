@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Util {
-    public static LongSupplier nanoTimeSupplier = System::nanoTime;
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Pattern RESERVED_WINDOWS_NAMES = Pattern.compile(".*\\.|(?:CON|PRN|AUX|NUL|COM1|COM2|COM3|COM4|COM5|COM6|COM7|COM8|COM9|LPT1|LPT2|LPT3|LPT4|LPT5|LPT6|LPT7|LPT8|LPT9)(?:\\..*)?", 2);
+    public static LongSupplier nanoTimeSupplier = System::nanoTime;
 
     public static <K, V> Collector<Entry<? extends K, ? extends V>, ?, Map<K, V>> toMapCollector() {
         return Collectors.toMap(Entry::getKey, Entry::getValue);
@@ -87,7 +87,7 @@ public class Util {
             }
 
             lvt_2_1_ = var1.next();
-        } while(!RESERVED_WINDOWS_NAMES.matcher(lvt_2_1_.toString()).matches());
+        } while (!RESERVED_WINDOWS_NAMES.matcher(lvt_2_1_.toString()).matches());
 
         return false;
     }
@@ -126,7 +126,7 @@ public class Util {
         if (p_195647_1_ != null) {
             T lvt_4_1_ = lvt_3_1_;
 
-            while(lvt_4_1_ != p_195647_1_) {
+            while (lvt_4_1_ != p_195647_1_) {
                 if (lvt_2_1_.hasNext()) {
                     lvt_4_1_ = lvt_2_1_.next();
                 }
@@ -145,7 +145,7 @@ public class Util {
 
         T lvt_3_1_;
         T lvt_4_1_;
-        for(lvt_3_1_ = null; lvt_2_1_.hasNext(); lvt_3_1_ = lvt_4_1_) {
+        for (lvt_3_1_ = null; lvt_2_1_.hasNext(); lvt_3_1_ = lvt_4_1_) {
             lvt_4_1_ = lvt_2_1_.next();
             if (lvt_4_1_ == p_195648_1_) {
                 if (lvt_3_1_ == null) {
@@ -185,7 +185,9 @@ public class Util {
         private EnumOS() {
         }
 
-        /**Warning:(205, 48) java: readLines(java.io.InputStream) in org.apache.commons.io.IOUtils has been deprecated*/
+        /**
+         * Warning:(205, 48) java: readLines(java.io.InputStream) in org.apache.commons.io.IOUtils has been deprecated
+         */
        /* public void openURL(URL p_openURL_1_) {
             try {
                 Process lvt_2_1_ = AccessController.doPrivileged((PrivilegedExceptionAction<Process>) () -> Runtime.getRuntime().exec(this.getOpenCommandLine(p_openURL_1_)));
@@ -216,7 +218,6 @@ public class Util {
                 Util.LOGGER.error("Couldn't open file '{}'", p_openFile_1_, var3);
             }
         }*/
-
         protected String[] getOpenCommandLine(URL p_getOpenCommandLine_1_) {
             String lvt_2_1_ = p_getOpenCommandLine_1_.toString();
             if ("file".equals(p_getOpenCommandLine_1_.getProtocol())) {

@@ -14,9 +14,11 @@ public class Game {
     public static Shader current_shader, world_shader, gui_shader;
 
     public static Player player;
-    /**Error:(18, 83) java: cannot find symbol
-     symbol:   variable atlas_size
-     location: class team.hdt.blockadia.game_engine.core.util.TextureAtlas*/
+    /**
+     * Error:(18, 83) java: cannot find symbol
+     * symbol:   variable atlas_size
+     * location: class team.hdt.blockadia.game_engine.core.util.TextureAtlas
+     */
     //public static Vectors2f chunk_shader_texture_info = new Vectors2f(TextureAtlas.atlas_size, TextureAtlas.crop_size);
     public static Vectors2f model_shader_texture_info = new Vectors2f(0, 0);
 
@@ -74,7 +76,7 @@ public class Game {
         current_shader.set_uniform("uniform_camera_projection", Camera.projection);
         current_shader.set_uniform("uniform_camera_view", Camera.view);
         current_shader.set_uniform("uniform_texture", 0);
-        current_shader.set_uniform("uniform_texture_info",0 /*chunk_shader_texture_info*/);
+        current_shader.set_uniform("uniform_texture_info", 0 /*chunk_shader_texture_info*/);
 
         AbstractMesh.bind_texture(ResourceUtil.texture_id("atlas.png"));
         World.render();
@@ -93,7 +95,8 @@ public class Game {
         current_shader.unbind();
     }
 
-    public static void after_render() {}
+    public static void after_render() {
+    }
 
     public static void destroy() {
         World.destroy();

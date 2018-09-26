@@ -15,6 +15,7 @@ public class Chunk {
     private final int chunkZ;
     private final ChunkType chunkType;
     private final IBiome BIOME;
+
     public Chunk(int chunkX, int chunkY, int chunkZ, ChunkType chunkType, IBiome biome) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;

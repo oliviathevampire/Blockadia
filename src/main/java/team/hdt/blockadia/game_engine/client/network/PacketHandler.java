@@ -1,16 +1,14 @@
 package team.hdt.blockadia.game_engine.client.network;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class PacketHandler implements Serializable {
-
-    protected static final long serialVersionUID = 1112122200L;
 
     // The different types of message sent by the client
     public static final int LISTUSERS = 0;  // send a request for the list of connected users
     public static final int MESSAGE = 1;    // send a command or message
     public static final int LOGOUT = 2;     // disconnect from the server
-
+    protected static final long serialVersionUID = 1112122200L;
     public int type;
     public String message;
 
@@ -24,6 +22,7 @@ public class PacketHandler implements Serializable {
     public int getType() {
         return type;
     }
+
     public String getMessage() {
         return message;
     }

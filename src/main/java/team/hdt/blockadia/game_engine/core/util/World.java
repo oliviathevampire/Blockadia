@@ -3,17 +3,13 @@ package team.hdt.blockadia.game_engine.core.util;
 import java.util.*;
 
 public class World {
+    public static final int near_chunks_radius = 2;
     public static int size, height, volume, vertical_square;
-
     public static int chunks_in_frame = 0;
     public static int faces_in_frame = 0;
-
-    public static final int near_chunks_radius = 2;
-
     public static Set<Chunk> nearest_chunks = new HashSet<>();
-
-    private static Chunk[] chunks;
     public static Queue<LightNode> light_bfs_queue;
+    private static Chunk[] chunks;
 
     public static void init() {
         vertical_square = size * height;
@@ -34,16 +30,6 @@ public class World {
         }
 
         gen();
-    }
-
-    public static class LightNode {
-        public int idx;
-        public Chunk chunk;
-
-        public LightNode(int idx, Chunk chunk) {
-            this.idx = idx;
-            this.chunk = chunk;
-        }
     }
 
     private static void lighting(int x, int y, int z, Chunk chunk, int light_level) {
@@ -189,7 +175,7 @@ public class World {
             }
         }
     }
-    
+
     public static void gen2() {
         Random rnd = new Random();
         for (int i = 0; i < size; i++) {
@@ -229,5 +215,15 @@ public class World {
             return new HashSet<>();
         }
         return nearest_chunks(cur_chunk.x_chunk_pos, cur_chunk.z_chunk_pos, r);
+    }
+
+    public static class LightNode {
+        public int idx;
+        public Chunk chunk;
+
+        public LightNode(int idx, Chunk chunk) {
+            this.idx = idx;
+            this.chunk = chunk;
+        }
     }
 }

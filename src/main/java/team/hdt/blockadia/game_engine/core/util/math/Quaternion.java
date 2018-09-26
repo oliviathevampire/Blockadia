@@ -1,7 +1,5 @@
 package team.hdt.blockadia.game_engine.core.util.math;
 
-import team.hdt.blockadia.game_engine.core.util.math.Maths;
-
 public class Quaternion {
 
     private double w;

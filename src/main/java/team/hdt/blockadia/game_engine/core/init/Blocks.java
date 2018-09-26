@@ -1,11 +1,11 @@
 package team.hdt.blockadia.game_engine.core.init;
 
+import team.hdt.blockadia.game_engine.client.util.Identifier;
 import team.hdt.blockadia.game_engine.core.block.BlockBuilder;
 import team.hdt.blockadia.game_engine.core.block.BlockType;
 import team.hdt.blockadia.game_engine.core.block.material.BlockMaterials;
 import team.hdt.blockadia.game_engine.core.block.material.MapColor;
 import team.hdt.blockadia.game_engine.core.registries.BlockRegistry;
-import team.hdt.blockadia.game_engine.client.util.Identifier;
 
 /*
  * This class is made by HuskyTheArtist

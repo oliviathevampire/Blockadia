@@ -1,10 +1,10 @@
 package team.hdt.blockadia.game_engine.core.init;
 
+import team.hdt.blockadia.game_engine.client.util.Identifier;
+import team.hdt.blockadia.game_engine.core.registries.BiomeRegistry;
 import team.hdt.blockadia.game_engine.core.world.biomes.BiomeDesert;
 import team.hdt.blockadia.game_engine.core.world.biomes.BiomeForest;
 import team.hdt.blockadia.game_engine.core.world.biomes.BiomePlains;
-import team.hdt.blockadia.game_engine.client.util.Identifier;
-import team.hdt.blockadia.game_engine.core.registries.BiomeRegistry;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IBiome;
 
 public class Biomes {

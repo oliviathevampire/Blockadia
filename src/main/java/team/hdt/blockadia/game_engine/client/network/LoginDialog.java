@@ -34,7 +34,7 @@ public class LoginDialog extends JDialog {
 
             // Okay button
             public void actionPerformed(ActionEvent e) {
-                if(getUsername().length() == 0)
+                if (getUsername().length() == 0)
                     JOptionPane.showMessageDialog(LoginDialog.this, "You must enter a username.", "Error", JOptionPane.ERROR_MESSAGE);
                 else
                     setVisible(false);

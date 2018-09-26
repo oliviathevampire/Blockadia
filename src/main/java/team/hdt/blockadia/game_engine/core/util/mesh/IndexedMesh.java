@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
-import static org.lwjgl.opengl.GL11.glDrawElements;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glMapBufferRange;
@@ -59,23 +59,23 @@ public class IndexedMesh extends AbstractMesh {
         super.update_gl_data(vertices, tex_coords, tex_coords_offsets, colors);
         this.update_ibo(vertices.size() / 2);
     }
-    
+
     public void update_gl_data(Set<Vertex> vertices, List<Integer> indices) {
-		this.indices_counter = indices.size();
-		this.ibo_data = BufferUtils.createByteBuffer(indices_counter * 4);
-		this.vbo_data = BufferUtils.createByteBuffer(vertices.size() * 40);
-		for (int index : indices) {
-			ibo_data.putInt(index);
-		}
-		ibo_data.flip();
-		
-		for (Vertex vertex : vertices) {
-			vbo_data.putFloat(vertex.pos_x).putFloat(vertex.pos_y).putFloat(vertex.pos_z);
-			vbo_data.putFloat(vertex.tex_coord_x).putFloat(vertex.tex_coord_y);
-			vbo_data.putFloat(vertex.tex_coord_offset_x).putFloat(vertex.tex_coord_offset_y);
-			vbo_data.putFloat(vertex.color_r).putFloat(vertex.color_g).putFloat(vertex.color_b);
-		}
-		vbo_data.flip();
+        this.indices_counter = indices.size();
+        this.ibo_data = BufferUtils.createByteBuffer(indices_counter * 4);
+        this.vbo_data = BufferUtils.createByteBuffer(vertices.size() * 40);
+        for (int index : indices) {
+            ibo_data.putInt(index);
+        }
+        ibo_data.flip();
+
+        for (Vertex vertex : vertices) {
+            vbo_data.putFloat(vertex.pos_x).putFloat(vertex.pos_y).putFloat(vertex.pos_z);
+            vbo_data.putFloat(vertex.tex_coord_x).putFloat(vertex.tex_coord_y);
+            vbo_data.putFloat(vertex.tex_coord_offset_x).putFloat(vertex.tex_coord_offset_y);
+            vbo_data.putFloat(vertex.color_r).putFloat(vertex.color_g).putFloat(vertex.color_b);
+        }
+        vbo_data.flip();
     }
 
     public void draw() {

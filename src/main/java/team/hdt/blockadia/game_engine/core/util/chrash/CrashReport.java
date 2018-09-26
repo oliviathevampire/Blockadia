@@ -31,6 +31,27 @@ public class CrashReport {
         this.populateEnvironment();
     }
 
+    private static String getWittyComment() {
+        String[] lvt_0_1_ = new String[]{"Who set us up the TNT?", "Everything's going to plan. No, really, that was supposed to happen.", "Uh... Did I do that?", "Oops.", "Why did you do that?", "I feel sad now :(", "My bad.", "I'm sorry, Dave.", "I let you down. Sorry :(", "On the bright side, I bought you a teddy bear!", "Daisy, daisy...", "Oh - I know what I did wrong!", "Hey, that tickles! Hehehe!", "I blame Dinnerbone.", "You should try our sister game, Minceraft!", "Don't be sad. I'll do better next time, I promise!", "Don't be sad, have a hug! <3", "I just don't know what went wrong :(", "Shall we play a game?", "Quite honestly, I wouldn't worry myself about that.", "I bet Cylons wouldn't have this problem.", "Sorry :(", "Surprise! Haha. Well, this is awkward.", "Would you like a cupcake?", "Hi. I'm Minecraft, and I'm a crashaholic.", "Ooh. Shiny.", "This doesn't make any sense!", "Why is it breaking :(", "Don't do that.", "Ouch. That hurt :(", "You're mean.", "This is a token for 1 free hug. Redeem at your nearest Mojangsta: [~~HUG~~]", "There are four lights!", "But it works on my machine."};
+
+        try {
+            return lvt_0_1_[(int) (Util.nanoTime() % (long) lvt_0_1_.length)];
+        } catch (Throwable var2) {
+            return "Witty comment unavailable :(";
+        }
+    }
+
+    public static CrashReport makeCrashReport(Throwable p_makeCrashReport_0_, String p_makeCrashReport_1_) {
+        CrashReport lvt_2_2_;
+        if (p_makeCrashReport_0_ instanceof ReportedException) {
+            lvt_2_2_ = ((ReportedException) p_makeCrashReport_0_).getCrashReport();
+        } else {
+            lvt_2_2_ = new CrashReport(p_makeCrashReport_1_, p_makeCrashReport_0_);
+        }
+
+        return lvt_2_2_;
+    }
+
     private void populateEnvironment() {
         this.systemDetailsCategory.addDetail("Blockadia Version", () -> "0.0.1");
         this.systemDetailsCategory.addDetail("Operating System", () -> System.getProperty("os.name") + " (" + System.getProperty("os.arch") + ") version " + System.getProperty("os.version"));
@@ -62,7 +83,7 @@ public class CrashReport {
 
     public void getSectionsInStringBuilder(StringBuilder p_getSectionsInStringBuilder_1_) {
         if ((this.stacktrace == null || this.stacktrace.length <= 0) && !this.crashReportSections.isEmpty()) {
-            this.stacktrace = (StackTraceElement[])ArrayUtils.subarray(((CrashReportCategory)this.crashReportSections.get(0)).getStackTrace(), 0, 1);
+            this.stacktrace = (StackTraceElement[]) ArrayUtils.subarray(((CrashReportCategory) this.crashReportSections.get(0)).getStackTrace(), 0, 1);
         }
 
         if (this.stacktrace != null && this.stacktrace.length > 0) {
@@ -72,7 +93,7 @@ public class CrashReport {
             StackTraceElement[] var2 = this.stacktrace;
             int var3 = var2.length;
 
-            for(int var4 = 0; var4 < var3; ++var4) {
+            for (int var4 = 0; var4 < var3; ++var4) {
                 StackTraceElement lvt_5_1_ = var2[var4];
                 p_getSectionsInStringBuilder_1_.append("\t").append("at ").append(lvt_5_1_);
                 p_getSectionsInStringBuilder_1_.append("\n");
@@ -83,8 +104,8 @@ public class CrashReport {
 
         Iterator var6 = this.crashReportSections.iterator();
 
-        while(var6.hasNext()) {
-            CrashReportCategory lvt_3_1_ = (CrashReportCategory)var6.next();
+        while (var6.hasNext()) {
+            CrashReportCategory lvt_3_1_ = (CrashReportCategory) var6.next();
             lvt_3_1_.appendToStringBuilder(p_getSectionsInStringBuilder_1_);
             p_getSectionsInStringBuilder_1_.append("\n\n");
         }
@@ -137,7 +158,7 @@ public class CrashReport {
         lvt_1_1_.append(this.getCauseStackTraceOrString());
         lvt_1_1_.append("\n\nA detailed walkthrough of the error, its code path and all known details is as follows:\n");
 
-        for(int lvt_2_1_ = 0; lvt_2_1_ < 87; ++lvt_2_1_) {
+        for (int lvt_2_1_ = 0; lvt_2_1_ < 87; ++lvt_2_1_) {
             lvt_1_1_.append("-");
         }
 
@@ -219,26 +240,5 @@ public class CrashReport {
 
         this.crashReportSections.add(lvt_3_1_);
         return lvt_3_1_;
-    }
-
-    private static String getWittyComment() {
-        String[] lvt_0_1_ = new String[]{"Who set us up the TNT?", "Everything's going to plan. No, really, that was supposed to happen.", "Uh... Did I do that?", "Oops.", "Why did you do that?", "I feel sad now :(", "My bad.", "I'm sorry, Dave.", "I let you down. Sorry :(", "On the bright side, I bought you a teddy bear!", "Daisy, daisy...", "Oh - I know what I did wrong!", "Hey, that tickles! Hehehe!", "I blame Dinnerbone.", "You should try our sister game, Minceraft!", "Don't be sad. I'll do better next time, I promise!", "Don't be sad, have a hug! <3", "I just don't know what went wrong :(", "Shall we play a game?", "Quite honestly, I wouldn't worry myself about that.", "I bet Cylons wouldn't have this problem.", "Sorry :(", "Surprise! Haha. Well, this is awkward.", "Would you like a cupcake?", "Hi. I'm Minecraft, and I'm a crashaholic.", "Ooh. Shiny.", "This doesn't make any sense!", "Why is it breaking :(", "Don't do that.", "Ouch. That hurt :(", "You're mean.", "This is a token for 1 free hug. Redeem at your nearest Mojangsta: [~~HUG~~]", "There are four lights!", "But it works on my machine."};
-
-        try {
-            return lvt_0_1_[(int)(Util.nanoTime() % (long)lvt_0_1_.length)];
-        } catch (Throwable var2) {
-            return "Witty comment unavailable :(";
-        }
-    }
-
-    public static CrashReport makeCrashReport(Throwable p_makeCrashReport_0_, String p_makeCrashReport_1_) {
-        CrashReport lvt_2_2_;
-        if (p_makeCrashReport_0_ instanceof ReportedException) {
-            lvt_2_2_ = ((ReportedException)p_makeCrashReport_0_).getCrashReport();
-        } else {
-            lvt_2_2_ = new CrashReport(p_makeCrashReport_1_, p_makeCrashReport_0_);
-        }
-
-        return lvt_2_2_;
     }
 }

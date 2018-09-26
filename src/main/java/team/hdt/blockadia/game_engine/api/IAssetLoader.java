@@ -6,6 +6,5 @@ package team.hdt.blockadia.game_engine.api;
  */
 public class IAssetLoader {
 
-    
 
 }

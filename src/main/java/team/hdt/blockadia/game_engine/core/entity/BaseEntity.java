@@ -45,20 +45,21 @@ public class BaseEntity {
         this.isItem = false;
 
     }
+
     public BaseEntity(TexturedModel model, int id, boolean isItem) {
         this.model = model;
         this.ID = id;
         this.isItem = isItem;
     }
+
     public BaseEntity(TexturedModel model, int id, boolean isItem, boolean canburnInDay, float scale) {
         this.model = model;
         this.ID = id;
         this.isItem = isItem;
         this.CanburnInDay = canburnInDay;
-        if((scale == 0) == true) {
+        if ((scale == 0) == true) {
             this.scale = 1.0F;
-        }
-        else {
+        } else {
             this.scale = scale;
         }
     }
@@ -105,11 +106,12 @@ public class BaseEntity {
         return scale;
     }
 
-    public Vectors3f getPosition(){
-        return new Vectors3f(positionX,positionY,positionZ);
+    public Vectors3f getPosition() {
+        return new Vectors3f(positionX, positionY, positionZ);
     }
-    public Vectors3f getRotation(){
-        return new Vectors3f(rotationXY,rotationXZ,rotationZY);
+
+    public Vectors3f getRotation() {
+        return new Vectors3f(rotationXY, rotationXZ, rotationZY);
     }
 
 }

@@ -17,7 +17,7 @@ public class BlockRegistry implements Registry<BlockType> {
 
     @Override
     public void register(Identifier identifier, BlockType value) {
-        if(identifier != null && value != null) {
+        if (identifier != null && value != null) {
             registry.put(identifier, value);
             LOGGER.info(String.format("Registering a biome called %s", Objects.requireNonNull(identifier).getNamespace() + ":" + identifier.getPath()));
         } else {

@@ -1,9 +1,9 @@
 package team.hdt.blockadia.game_engine.core.block;
 
+import team.hdt.blockadia.game_engine.client.util.Identifier;
 import team.hdt.blockadia.game_engine.core.block.material.BlockMaterials;
 import team.hdt.blockadia.game_engine.core.block.material.MapColor;
 import team.hdt.blockadia.game_engine.core.item.ItemGroup;
-import team.hdt.blockadia.game_engine.client.util.Identifier;
 
 public class BlockBuilder {
 
@@ -35,7 +35,7 @@ public class BlockBuilder {
 
     public BlockBuilder withItemGroup(ItemGroup itemGroup) {
         this.itemGroup = itemGroup;
-        if(itemGroup == null) {
+        if (itemGroup == null) {
             this.itemGroup = ItemGroup.BASIC_BLOCKS;
         }
         return this;

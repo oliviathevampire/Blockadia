@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
 public class ResourceUtil {
     public static final Map<String, Integer> textures = new HashMap<>();
-    public static final Map<String, Model> models = new HashMap<>(); 
+    public static final Map<String, Model> models = new HashMap<>();
 
     public static String load_shader(String shader_name) {
         return FileUtil.readFromFile("src/main/resources/assets/test/shaders/" + shader_name);
@@ -77,23 +77,23 @@ public class ResourceUtil {
     public static int texture_id(String texture_name) {
         return textures.get(texture_name);
     }
-    
-    public static void load_models(String... models) {
-    	for (String model : models) {
-    		load_model(model);
-    	}
-    }
-    
-    public static void load_model(String model_name) {
-    	FileUtil.Reader reader = new FileUtil.Reader("src/main/resources/assets/test/models/" + model_name + "/" + model_name + ".obj");
 
-    	List<int[]> faces = new ArrayList<>();
-    	List<Vectors3f> verts = new ArrayList<>();
+    public static void load_models(String... models) {
+        for (String model : models) {
+            load_model(model);
+        }
+    }
+
+    public static void load_model(String model_name) {
+        FileUtil.Reader reader = new FileUtil.Reader("src/main/resources/assets/test/models/" + model_name + "/" + model_name + ".obj");
+
+        List<int[]> faces = new ArrayList<>();
+        List<Vectors3f> verts = new ArrayList<>();
         List<Vectors2f> tex_coords = new ArrayList<>();
         while (reader.ready()) {
-        	String[] tokens = reader.tokens();
+            String[] tokens = reader.tokens();
 
-        	if ("v".equals(tokens[0])) {
+            if ("v".equals(tokens[0])) {
                 float x = Float.parseFloat(tokens[1]);
                 float y = Float.parseFloat(tokens[2]);
                 float z = Float.parseFloat(tokens[3]);
@@ -123,7 +123,7 @@ public class ResourceUtil {
             }
         }
         reader.close();
-        
+
         models.put(model_name.split("/")[0], new Model(faces, verts, tex_coords));
     }
 

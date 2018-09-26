@@ -28,6 +28,8 @@ import static org.lwjgl.opengl.GL11.glGenTextures;
 public class Loader {
 
     private static Map<Integer, List<Integer>> vaoCache = new HashMap<Integer, List<Integer>>();
+    private List<Integer> vbos = new ArrayList<Integer>();
+    private List<Integer> textures = new ArrayList<Integer>();
 
     /**
      * Loads interleaved vertex data into a VBO which is stored in a newly
@@ -318,19 +320,20 @@ public class Loader {
         return bufferObjectID;
     }
 
-    private List<Integer> vbos = new ArrayList<Integer>();
-    public RawModel loadToVAO(float[] positions, float[] textureCoords, int[] indices){
+    public RawModel loadToVAO(float[] positions, float[] textureCoords, int[] indices) {
         int vaoID = createVAO();
         bindIndicesBuffer(indices);
-        storeDataInAttributeList(0,3,positions);
-        storeDataInAttributeList(1,2,textureCoords);
+        storeDataInAttributeList(0, 3, positions);
+        storeDataInAttributeList(1, 2, textureCoords);
         unbindVAO();
-        return new RawModel(vaoID,indices.length);
+        return new RawModel(vaoID, indices.length);
     }
-    private void unbindVAO(){
+
+    private void unbindVAO() {
         GL30.glBindVertexArray(0);
     }
-    private void bindIndicesBuffer(int[] indices){
+
+    private void bindIndicesBuffer(int[] indices) {
         int vboID = GL15.glGenBuffers();
         vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboID);
@@ -338,29 +341,30 @@ public class Loader {
         GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
     }
 
-    private IntBuffer storeDataInIntBuffer(int[] data){
+    private IntBuffer storeDataInIntBuffer(int[] data) {
         IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
         buffer.put(data);
         buffer.flip();
         return buffer;
     }
 
-    private FloatBuffer storeDataInFloatBuffer(float[] data){
+    private FloatBuffer storeDataInFloatBuffer(float[] data) {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
         buffer.put(data);
         buffer.flip();
         return buffer;
     }
-    private void storeDataInAttributeList(int attributeNumber, int coordinateSize,float[] data){
+
+    private void storeDataInAttributeList(int attributeNumber, int coordinateSize, float[] data) {
         int vboID = GL15.glGenBuffers();
         vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
         FloatBuffer buffer = storeDataInFloatBuffer(data);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-        GL20.glVertexAttribPointer(attributeNumber,coordinateSize,GL11.GL_FLOAT,false,0,0);
+        GL20.glVertexAttribPointer(attributeNumber, coordinateSize, GL11.GL_FLOAT, false, 0, 0);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
-    private List<Integer> textures = new ArrayList<Integer>();
+
     public int loadTexture(String fileName) {
 
         BufferedImage img = null;
