@@ -18,20 +18,20 @@ public class MainRenderer {
     private static final float FAR_PLANE = 1000;
     private Matrix4fs projectionMatrix;
 
-    public MainRenderer(StaticShader shader){
+    public MainRenderer(StaticShader shader) {
         createProjectionMatrix();
         shader.start();
         shader.loadProjectionMatrix(projectionMatrix);
         shader.stop();
     }
 
-    public void render(BaseEntity entity, StaticShader shader){
+    public void render(BaseEntity entity, StaticShader shader) {
         TexturedModel model = entity.getModel();
         RawModel rawModel = model.getRawModel();
         GL30.glBindVertexArray(rawModel.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
-        Matrix4fs transformationmatrix = Maths.createTransformationMatrix(entity.getPosition(),entity.getRotation().x,entity.getRotation().y,entity.getRotation().z, entity.scale);
+        Matrix4fs transformationmatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y, entity.getRotation().z, entity.scale);
         shader.loadTransformationMatrix(transformationmatrix);
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getID());
@@ -41,7 +41,7 @@ public class MainRenderer {
         GL30.glBindVertexArray(0);
     }
 
-    private void createProjectionMatrix(){
+    private void createProjectionMatrix() {
         float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
         float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV / 2f))) * aspectRatio);
         float x_scale = y_scale / aspectRatio;

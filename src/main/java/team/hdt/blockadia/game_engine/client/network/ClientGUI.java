@@ -11,28 +11,22 @@ public class ClientGUI extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
     final JFrame frame = new JFrame("authentication Client (Build " + Client.clientVer);
-
-    // boolean of whether or not we are currently connected
-    private boolean connected;
-
-    // the Client object
-    private Client client;
-
-    private JTextArea lstChat;
-
-    private JTextField txtServer;
-    private JTextField txtPort;
-    private JTextField txtMessage;
-
-    private JButton btnConnect;
-    private JButton btnDisconnect;
-    private JButton btnUserlist;
-    private JScrollPane scrollPane;
-
     Random r = new Random();
     int randint = r.nextInt(50);
     String username = "Guest" + randint;
     String password = null;
+    // boolean of whether or not we are currently connected
+    private boolean connected;
+    // the Client object
+    private Client client;
+    private JTextArea lstChat;
+    private JTextField txtServer;
+    private JTextField txtPort;
+    private JTextField txtMessage;
+    private JButton btnConnect;
+    private JButton btnDisconnect;
+    private JButton btnUserlist;
+    private JScrollPane scrollPane;
 
     // Constructor connection receiving a socket number
     ClientGUI(String host, int port) {
@@ -89,7 +83,7 @@ public class ClientGUI extends JFrame implements ActionListener {
         txtMessage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(!connected && e.getButton() == MouseEvent.BUTTON1) {
+                if (!connected && e.getButton() == MouseEvent.BUTTON1) {
                     // Open login window
                     LoginDialog loginDlg = new LoginDialog(frame);
                     loginDlg.setVisible(true);
@@ -113,13 +107,13 @@ public class ClientGUI extends JFrame implements ActionListener {
             }
         });
 
-        txtMessage.addKeyListener(new KeyAdapter() {	// set username when not connected
+        txtMessage.addKeyListener(new KeyAdapter() {    // set username when not connected
             @Override
             public void keyPressed(KeyEvent e) {
-                if(!connected && e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if (!connected && e.getKeyCode() == KeyEvent.VK_ENTER) {
                     String msg = txtMessage.getText();
                     // empty message ignore it
-                    if(msg.length() == 0)
+                    if (msg.length() == 0)
                         return;
                     username = msg;
                     txtMessage.setText("");
@@ -142,6 +136,11 @@ public class ClientGUI extends JFrame implements ActionListener {
         lstChat.setLineWrap(true);
         setVisible(true);
 
+    }
+
+    // to start the whole thing the server
+    public static void main(String[] args) {
+        new ClientGUI("localhost", 1500);
     }
 
     // called by the Client to append text in the TextArea
@@ -168,17 +167,17 @@ public class ClientGUI extends JFrame implements ActionListener {
 
     void connect() {   // connection request
         // empty username -> ignore it and cancel
-        if(username.length() == 0)
+        if (username.length() == 0)
             return;
 
         // empty serverAddress -> ignore it and cancel
         String server = txtServer.getText().trim();
-        if(server.length() == 0)
+        if (server.length() == 0)
             return;
 
         // empty or invalid port number -> ignore it and cancel
         String portNumber = txtPort.getText().trim();
-        if(portNumber.length() == 0)
+        if (portNumber.length() == 0)
             return;
 
         // Variable which will be assigned the parsed port number
@@ -186,15 +185,14 @@ public class ClientGUI extends JFrame implements ActionListener {
 
         try {
             port = Integer.parseInt(portNumber);
-        }
-        catch(Exception en) {
+        } catch (Exception en) {
             return;   // nothing I can do if the port number is not valid
         }
 
         // try creating a new Client with GUI
         client = new Client(server, port, username, password, Client.getClientVer(), this);
         // test if we can start the Client -> if not, cancel
-        if(!client.start())
+        if (!client.start())
             return;
 
         txtMessage.setText("");
@@ -222,28 +220,28 @@ public class ClientGUI extends JFrame implements ActionListener {
         Object o = e.getSource();
 
         // if it is the disconnect button
-        if(o == btnDisconnect) {
+        if (o == btnDisconnect) {
             client.sendMessage(new PacketHandler(PacketHandler.LOGOUT, ""));
             return;
         }
 
         // if it the userlist button
-        if(o == btnUserlist) {
+        if (o == btnUserlist) {
             client.sendMessage(new PacketHandler(PacketHandler.LISTUSERS, ""));
             return;
         }
 
         // if it is the connect button
-        if(o == btnConnect) {
+        if (o == btnConnect) {
             connect();
         }
 
         // coming from the JTextField
-        if(connected) {
+        if (connected) {
             String msg = txtMessage.getText().trim();
 
             // empty message ignore it
-            if(msg.length() == 0)
+            if (msg.length() == 0)
                 return;
 
             // just have to send the message
@@ -252,10 +250,5 @@ public class ClientGUI extends JFrame implements ActionListener {
             txtMessage.requestFocus();
             return;
         }
-    }
-
-    // to start the whole thing the server
-    public static void main(String[] args) {
-        new ClientGUI("localhost", 1500);
     }
 }

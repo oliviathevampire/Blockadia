@@ -18,18 +18,19 @@ public abstract class ItemBase extends BaseEntity {
     public ItemBase(TexturedModel model, int id, boolean isItem, boolean canburnInDay, float scale) {
         super(model, id, isItem, canburnInDay, scale);
     }
+
     //to be able to make item that can attack the player
-    public ItemBase(TexturedModel model, int id, boolean canburnInDay,boolean isNotLivingEntity, boolean isinhand) {
+    public ItemBase(TexturedModel model, int id, boolean canburnInDay, boolean isNotLivingEntity, boolean isinhand) {
         super(model, id, true, canburnInDay, 1.0F);
         this.isNotLivingEntity = isNotLivingEntity;
         this.isInHand = isinhand;
     }
 
-    public void setEnchantments(List enchantments) {
-        this.enchantments = enchantments;
-    }
-
     public List getEnchantments() {
         return enchantments;
+    }
+
+    public void setEnchantments(List enchantments) {
+        this.enchantments = enchantments;
     }
 }

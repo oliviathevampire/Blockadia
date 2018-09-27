@@ -23,13 +23,10 @@ public class Window {
     public static boolean vsync = false;
 
     public static long window;
-
+    public static boolean was_resize = false;
     private static double last_time;
     private static int fps;
-
     private static GLFWKeyCallback keyCallback;
-
-    public static boolean was_resize = false;
 
     public static void init() {
         Window.last_time = glfwGetTime();

@@ -4,9 +4,9 @@ import team.hdt.blockadia.game_engine.core.util.math.vectors.Matrix4fs;
 import team.hdt.blockadia.game_engine.core.util.mesh.IndexedMesh;
 
 public class Player extends IndexedMesh {
-    private Transform transform;
     public float x, y, z, rot_y, rot_z;
     public AABB box;
+    private Transform transform;
 
     public Player() {
         float[] tex_off = {

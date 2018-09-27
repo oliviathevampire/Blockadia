@@ -1,4 +1,4 @@
- package team.hdt.blockadia.game_engine.client.network;
+package team.hdt.blockadia.game_engine.client.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,14 +9,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Client  {
+public class Client {
 
     public static int clientVer = 78;      // the client version
     public static String compileDate = "August 30, 2013";
 
     // for I/O
-    private ObjectInputStream sInput;		// to read from the socket
-    private ObjectOutputStream sOutput;		// to write on the socket
+    private ObjectInputStream sInput;        // to read from the socket
+    private ObjectOutputStream sOutput;        // to write on the socket
     private Socket socket;
 
     // if the client is in GUI mode
@@ -53,105 +53,6 @@ public class Client  {
     }
 
     /*
-     * To start the connection
-     */
-    public boolean start() {
-        // try to connect to the server
-        display("Connecting to server...");
-        try {
-            socket = new Socket(server, port);
-        }
-
-        // if it failed not much I can do
-        catch(Exception ec) {
-            display("Error connecting to server: " + ec);
-            return false;
-        }
-
-        String msg = "Connection accepted " + socket.getInetAddress() + ": " + socket.getPort();
-        display(msg);
-        // TODO: Get MOTD from server
-
-        if(isGUI == null)	// this means the text won't show up in GUI mode
-            System.out.println("Should you wish to disconnect, you can type /logout at anytime.");
-
-        /* Creating both Data Stream */
-        try
-        {
-            sInput  = new ObjectInputStream(socket.getInputStream());
-            sOutput = new ObjectOutputStream(socket.getOutputStream());
-        }
-        catch (IOException eIO) {
-            display("Exception creating new input/output Streams: " + eIO);
-            return false;
-        }
-
-        // creates the Thread to listen from the server
-        new ListenFromServer().start();
-
-        // Send the username, password, and client version to the server. These are
-        // the only things we will send as strings. All other messages will be message objects.
-        try
-        {
-            sOutput.writeObject(username);
-            sOutput.writeObject(password);
-            sOutput.writeObject(clientVer);
-        }
-        catch (IOException eIO) {
-            display("Exception establishing connection to server: " + eIO);
-            disconnect();
-            return false;
-        }
-        // success we inform the caller that it worked
-        return true;
-    }
-
-    /*
-     * To send a message to the console or the GUI
-     */
-    private void display(String msg) {
-        if(isGUI == null)
-            System.out.println(msg);        // println in console mode
-        else
-            isGUI.append(msg + "\n");		// append to the ClientGUI JTextArea (or whatever)
-    }
-
-    /*
-     * To send a message to the server
-     */
-    void sendMessage(PacketHandler msg) {
-        try {
-            sOutput.writeObject(msg);
-        }
-        catch(IOException e) {
-            display("Exception sending message to server: " + e);
-        }
-    }
-
-    /*
-     * When something goes wrong
-     * Close the Input/Output streams and disconnect not much to do in the catch clause
-     */
-    private void disconnect() {
-        try {
-            if(sInput != null) sInput.close();
-        }
-        catch(Exception e) {} // not much else I can do
-        try {
-            if(sOutput != null) sOutput.close();
-        }
-        catch(Exception e) {} // not much else I can do
-        try{
-            if(socket != null) socket.close();
-        }
-        catch(Exception e) {} // not much else I can do
-
-        // inform the GUI
-        if(isGUI != null)
-            isGUI.connectionFailed();
-
-    }
-    /*
      * To start the Client in console mode use one of the following command
      * > java Client
      * > java Client username
@@ -180,7 +81,7 @@ public class Client  {
         String password = null;
 
         // depending of the number of arguments provided we fall through
-        switch(args.length) {
+        switch (args.length) {
             // > javac Client username portNumber serverAddr password
             case 4:
                 try {
@@ -200,8 +101,7 @@ public class Client  {
             case 2:
                 try {
                     portNumber = Integer.parseInt(args[1]);
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     System.out.println("Invalid port number.");
                     System.out.println("Usage is: > java Client [username] [portNumber] [serverAddress]");
                     return;
@@ -226,7 +126,7 @@ public class Client  {
         Client client = new Client(serverAddress, portNumber, userName, password, getClientVer());
         // test if we can start the connection to the Server
         // if it failed nothing we can do
-        if(!client.start())
+        if (!client.start())
             return;
 
         // wait for messages from user
@@ -240,22 +140,17 @@ public class Client  {
             // These act as client-sided commands for the text-only client
             if (msg.equalsIgnoreCase("/commands")) {
                 listCommands();
-            }
-            else if (msg.equalsIgnoreCase("/logout")) {	// logout
+            } else if (msg.equalsIgnoreCase("/logout")) {    // logout
                 client.sendMessage(new PacketHandler(PacketHandler.LOGOUT, ""));
                 // break out of loop to do the disconnect
                 break;
-            }
-            else if (msg.equalsIgnoreCase("/whoisin") || msg.equalsIgnoreCase("/userlist")) {	// list users
+            } else if (msg.equalsIgnoreCase("/whoisin") || msg.equalsIgnoreCase("/userlist")) {    // list users
                 client.sendMessage(new PacketHandler(PacketHandler.LISTUSERS, ""));
-            }
-            else if (msg.equalsIgnoreCase("/quit")) {
+            } else if (msg.equalsIgnoreCase("/quit")) {
                 System.exit(0);
-            }
-            else if (msg.trim().equalsIgnoreCase("")) {
+            } else if (msg.trim().equalsIgnoreCase("")) {
                 // we don't want the client to be able to send blank messages so do nothing
-            }
-            else {	// default to ordinary message
+            } else {    // default to ordinary message
                 client.sendMessage(new PacketHandler(PacketHandler.MESSAGE, msg));
             }
         }
@@ -268,11 +163,9 @@ public class Client  {
         String msg = scan.nextLine();
         if (msg.startsWith("/connect")) {
             main(args);
-        }
-        else if (msg.equalsIgnoreCase("/commands")) {
+        } else if (msg.equalsIgnoreCase("/commands")) {
             listCommands();
-        }
-        else if (msg.equalsIgnoreCase("/quit")) {
+        } else if (msg.equalsIgnoreCase("/quit")) {
             System.exit(0);
         }
         // Close the scanner to prevent leaks
@@ -289,14 +182,6 @@ public class Client  {
         System.out.println("For server commands, try typing /help instead.");
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public static int getClientVer() {
         return clientVer;
     }
@@ -306,39 +191,141 @@ public class Client  {
     }
 
     /*
+     * To start the connection
+     */
+    public boolean start() {
+        // try to connect to the server
+        display("Connecting to server...");
+        try {
+            socket = new Socket(server, port);
+        }
+
+        // if it failed not much I can do
+        catch (Exception ec) {
+            display("Error connecting to server: " + ec);
+            return false;
+        }
+
+        String msg = "Connection accepted " + socket.getInetAddress() + ": " + socket.getPort();
+        display(msg);
+        // TODO: Get MOTD from server
+
+        if (isGUI == null)    // this means the text won't show up in GUI mode
+            System.out.println("Should you wish to disconnect, you can type /logout at anytime.");
+
+        /* Creating both Data Stream */
+        try {
+            sInput = new ObjectInputStream(socket.getInputStream());
+            sOutput = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException eIO) {
+            display("Exception creating new input/output Streams: " + eIO);
+            return false;
+        }
+
+        // creates the Thread to listen from the server
+        new ListenFromServer().start();
+
+        // Send the username, password, and client version to the server. These are
+        // the only things we will send as strings. All other messages will be message objects.
+        try {
+            sOutput.writeObject(username);
+            sOutput.writeObject(password);
+            sOutput.writeObject(clientVer);
+        } catch (IOException eIO) {
+            display("Exception establishing connection to server: " + eIO);
+            disconnect();
+            return false;
+        }
+        // success we inform the caller that it worked
+        return true;
+    }
+
+    /*
+     * To send a message to the console or the GUI
+     */
+    private void display(String msg) {
+        if (isGUI == null)
+            System.out.println(msg);        // println in console mode
+        else
+            isGUI.append(msg + "\n");        // append to the ClientGUI JTextArea (or whatever)
+    }
+
+    /*
+     * To send a message to the server
+     */
+    void sendMessage(PacketHandler msg) {
+        try {
+            sOutput.writeObject(msg);
+        } catch (IOException e) {
+            display("Exception sending message to server: " + e);
+        }
+    }
+
+    /*
+     * When something goes wrong
+     * Close the Input/Output streams and disconnect not much to do in the catch clause
+     */
+    private void disconnect() {
+        try {
+            if (sInput != null) sInput.close();
+        } catch (Exception e) {
+        } // not much else I can do
+        try {
+            if (sOutput != null) sOutput.close();
+        } catch (Exception e) {
+        } // not much else I can do
+        try {
+            if (socket != null) socket.close();
+        } catch (Exception e) {
+        } // not much else I can do
+
+        // inform the GUI
+        if (isGUI != null)
+            isGUI.connectionFailed();
+
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /*
      * a class that waits for the message from the server and append them to the JTextArea
      * if we have a GUI or simply System.out.println() it in console mode
      */
     public class ListenFromServer extends Thread {
-        
-	public String got;
-	public String getGot(){
-		return got;
-	}
+
+        public String got;
+
+        public String getGot() {
+            return got;
+        }
 
         public void run() {
-            while(true) {
+            while (true) {
                 try {
                     String msg = (String) sInput.readObject();
                     got = msg;
 
                     // if console mode print the message and add back the prompt
-                    if(isGUI == null) {
+                    if (isGUI == null) {
                         System.out.println(msg);
                         System.out.print("> ");
-                    }
-                    else {
+                    } else {
                         isGUI.append(msg);
                     }
-                }
-                catch(IOException e) {
+                } catch (IOException e) {
                     display("Server has closed the connection: " + e);
-                    if(isGUI != null)
+                    if (isGUI != null)
                         isGUI.connectionFailed();
                     break;
                 }
                 // can't happen with a String object but need the catch anyhow
-                catch(ClassNotFoundException e2) {
+                catch (ClassNotFoundException e2) {
                 }
             }
         }

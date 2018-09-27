@@ -24,7 +24,7 @@ public class Shader {
 
         attach_vertex_shader(shader_name + ".vs");
         attach_fragment_shader(shader_name + ".fs");
-        
+
         compile();
     }
 
@@ -89,7 +89,7 @@ public class Shader {
         return this;
     }
 
-    public Shader save_attrs(String ... attrs_names) {
+    public Shader save_attrs(String... attrs_names) {
         for (String attr_name : attrs_names) {
             save_attr(attr_name);
         }
@@ -106,9 +106,9 @@ public class Shader {
         }
         return attributes.get(attr_name);
     }
-    
+
     public boolean has_attr(String attr_name) {
-    	return attributes.containsKey(attr_name);
+        return attributes.containsKey(attr_name);
     }
 
     private void attach_vertex_shader(String shader_name) {

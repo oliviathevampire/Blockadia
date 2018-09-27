@@ -15,6 +15,7 @@ public class ChunkFactory {
 
     public static Random random = new Random();
     private IBiome IBiome;
+
     public ChunkFactory() {
     }
 

@@ -8,27 +8,21 @@ import java.util.List;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
-import static org.lwjgl.opengl.GL15.glBindBuffer;
-import static org.lwjgl.opengl.GL15.glDeleteBuffers;
-import static org.lwjgl.opengl.GL15.glGenBuffers;
-import static org.lwjgl.opengl.GL15.glUnmapBuffer;
+import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL30.glBufferData;
+import static org.lwjgl.opengl.GL30.*;
 
 public abstract class AbstractMesh {
-    public int faces_counter;
-
-    public ByteBuffer vbo_data;
-
-    protected int vbo_capacity;
-    protected int vao, vbo;
-
     protected static final int mapping_flags = GL_MAP_WRITE_BIT | (/*Configurator.unsynchronized_buffering ? GL_MAP_UNSYNCHRONIZED_BIT : */GL_MAP_INVALIDATE_RANGE_BIT);
     protected static final int initial_capacity = 512;
+    public int faces_counter;
+    public ByteBuffer vbo_data;
+    protected int vbo_capacity;
+    protected int vao, vbo;
 
     public AbstractMesh() {
         this.faces_counter = 0;

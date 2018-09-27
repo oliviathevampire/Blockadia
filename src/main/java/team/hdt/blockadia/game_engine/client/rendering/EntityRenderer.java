@@ -38,6 +38,7 @@ public class EntityRenderer {
             unbindTexturedModel();
         }
     }
+
     public void renderItems(Map<TexturedModel, List<ItemBase>> entities) {
         for (TexturedModel model : entities.keySet()) {
             prepareTexturedModel(model);

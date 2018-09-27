@@ -1,11 +1,11 @@
 package team.hdt.blockadia.game_engine.core.world.biomes;
 
+import team.hdt.blockadia.game_engine.client.util.Identifier;
 import team.hdt.blockadia.game_engine.core.block.BlockType;
 import team.hdt.blockadia.game_engine.core.init.Biomes;
 import team.hdt.blockadia.game_engine.core.init.Blocks;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.game_engine.core.world.gen.interfaces.ILayer;
-import team.hdt.blockadia.game_engine.client.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;

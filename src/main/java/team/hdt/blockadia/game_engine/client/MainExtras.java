@@ -5,9 +5,6 @@ import java.util.List;
 
 public class MainExtras {
 
-    //need to add mouse IO into these variables
-    public static int mouseX = 0;
-    public static int mouseY = 0;
     public static final int FPS_CAP = 100;
     public static final boolean V_SYNC = false;
     public static final int WIDTH = 720, HEIGHT = WIDTH * 9 / 16;
@@ -16,23 +13,27 @@ public class MainExtras {
     private static final float MAX_DELTA = 0.2f;
     private static final float STABLE_DELTA_TIME = 2;
     private static final int TITLE_TEXT_ID = 1;
+    //need to add mouse IO into these variables
+    public static int mouseX = 0;
+    public static int mouseY = 0;
     public static String version = "0.0.1";
+    public static boolean isConnectedServer = false;
     private static float delta;
     private static float time = 0;
     private static boolean error = false;
-    public static boolean isConnectedServer = false;
     // if need can be removed.
     public List blocks = new ArrayList();
     public List items = new ArrayList();
     public List entities = new ArrayList();
 
-    public static int getMouseX(){
+    public static int getMouseX() {
         return mouseX;
     }
 
-    public static int getMouseY(){
+    public static int getMouseY() {
         return mouseY;
     }
+
     public static int getWidth() {
         return WIDTH;
     }

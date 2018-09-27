@@ -7,14 +7,11 @@ import java.util.*;
 
 public class Chunk extends IndexedMesh {
     public static int size, volume, square;
-
-    private int[] blocks;
-    private byte[] light_map;
-
     public boolean changed, updating, updated, empty, waiting, visible;
-
     public int x_chunk_pos, y_chunk_pos, z_chunk_pos;
     public int x_offset, y_offset, z_offset;
+    private int[] blocks;
+    private byte[] light_map;
 
     public Chunk(int x_chunk_pos, int y_chunk_pos, int z_chunk_pos) {
         super();
@@ -187,9 +184,9 @@ public class Chunk extends IndexedMesh {
                             }
                         }
                         if (r < 0.02f && g < 0.02f && b < 0.02f) {
-                        	r = 0.02f;
-                        	g = 0.02f;
-                        	b = 0.02f;
+                            r = 0.02f;
+                            g = 0.02f;
+                            b = 0.02f;
                         }
 
                         float[] vertices = AABB.SIDE.values[side_idx].translate_and_expand(x0 + x_offset, y + y_offset, z0 + z_offset, xx, yy, zz);

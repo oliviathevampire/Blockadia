@@ -7,28 +7,22 @@ import team.hdt.blockadia.game_engine.core.util.math.vectors.Vectors3f;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Camera {
-    public static float fov;
-    public static float aspect;
-    public static float z_far;
-
-    public static Matrix4fs projection, view;
-    public static Vectors3f position, rotation;
-
-    public static Vectors2f center;
-    public static Ray ray;
-
-    private static boolean mouse_locked;
-
-    private static boolean mouse_left_down = false;
-    private static boolean mouse_right_down = false;
-
-    private static float pitch = 0.0f;
-
     public static final float MOVE_SPEED = 100f;
     public static final float STRAFE_SPEED = MOVE_SPEED / 1.2f;
     public static final float SENSITIVITY_X = 0.33f;
     public static final float SENSITIVITY_Y = SENSITIVITY_X * 1.0f;
     public static final float ROT_SPEED_X = 70.0f;
+    public static float fov;
+    public static float aspect;
+    public static float z_far;
+    public static Matrix4fs projection, view;
+    public static Vectors3f position, rotation;
+    public static Vectors2f center;
+    public static Ray ray;
+    private static boolean mouse_locked;
+    private static boolean mouse_left_down = false;
+    private static boolean mouse_right_down = false;
+    private static float pitch = 0.0f;
 
     public static void init() {
         init((float) Window.width / (float) Window.height);

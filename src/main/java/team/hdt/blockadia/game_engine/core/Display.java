@@ -63,6 +63,14 @@ public class Display {
         glfwShowWindow(window);
     }
 
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
     private void loop() {
         GL.createCapabilities();
         //BlockadiaClient.gameRender();
@@ -72,8 +80,8 @@ public class Display {
             glfwPollEvents();
             StaticShader shader = new StaticShader();
             MainRenderer renderer = new MainRenderer(shader);
-            for(BaseEntity entity : BlockadiaClient.entities) {
-                renderer.render(entity,shader);
+            for (BaseEntity entity : BlockadiaClient.entities) {
+                renderer.render(entity, shader);
             }
         }
     }
@@ -85,6 +93,7 @@ public class Display {
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
+
     public void TestEnd() {
         glfwFreeCallbacks(window);
         glfwDestroyWindow(window);
@@ -100,14 +109,6 @@ public class Display {
     public double getMouseY() {
         glfwGetCursorPos(window, xBuffer, yBuffer);
         return yBuffer.get(0);
-    }
-
-    public static int getWidth() {
-        return width;
-    }
-
-    public static int getHeight() {
-        return height;
     }
 
     public boolean shouldClose() {

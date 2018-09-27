@@ -2,7 +2,6 @@ package team.hdt.blockadia.game_engine.core.world.storage;
 
 import org.jdom2.Element;
 import team.hdt.blockadia.game_engine.core.block.BlockType;
-import team.hdt.blockadia.game_engine.core.registries.BlockRegistry;
 
 public class RawIdBlockStorage implements RawBlockStorage {
     private final byte[][][] data;

@@ -20,7 +20,7 @@ public class ItemBuilder {
 
     public ItemBuilder withItemGroup(ItemGroup itemGroup) {
         this.itemGroup = itemGroup;
-        if(itemGroup == null) {
+        if (itemGroup == null) {
             this.itemGroup = ItemGroup.BASIC_ITEMS;
         }
         return this;

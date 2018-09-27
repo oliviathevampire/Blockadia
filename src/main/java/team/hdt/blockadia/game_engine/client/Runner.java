@@ -5,7 +5,17 @@ import team.hdt.blockadia.game_engine.core.util.Input;
 import team.hdt.blockadia.game_engine.core.util.Window;
 
 public class Runner {
-    private Runner() {}
+    private Runner() {
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Runner().run();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
 
     private void run() {
         try {
@@ -46,14 +56,5 @@ public class Runner {
 
     private void terminate() {
         Window.terminate();
-    }
-
-    public static void main(String[] args) {
-        try {
-            new Runner().run();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
     }
 }
