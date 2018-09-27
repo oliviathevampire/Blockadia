@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrashReport {
+public class CrashReport{
     private static final Logger LOGGER = LogManager.getLogger();
     private final String description;
     private final Throwable cause;
