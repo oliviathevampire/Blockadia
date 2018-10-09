@@ -8,7 +8,7 @@
  */
 package team.priv.pheonix.testingzone.engine;
 
-import team.hdt.blockadia.game_engine.core.Display;
+import team.hdt.blockadia.engine.core.Display;
 
 /**
  * @author 326296
