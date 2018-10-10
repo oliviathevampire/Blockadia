@@ -1,7 +1,7 @@
 package team.hdt.blockadia.bml.common.event;
 
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.ModContainer;
+import team.hdt.blockadia.bml.ModContainer;
 
 /**
  * Parent type to all ModLifecycle events. This is based on Forge EventBus. They fire through the

@@ -1,13 +1,8 @@
 package team.hdt.blockadia.bml;
 
-import net.minecraftforge.fml.language.IModInfo;
+import team.hdt.blockadia.bml.language.IModInfo;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
