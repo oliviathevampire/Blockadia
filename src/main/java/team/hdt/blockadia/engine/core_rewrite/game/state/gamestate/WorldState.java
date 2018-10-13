@@ -60,11 +60,6 @@ public class WorldState extends GameState {
 		if (keyCode == Keybinds.OPEN_INVENTORY.getKeyCode()) {
 			this.openGui(0);
 		}
-		if(keyCode == Keybinds.OPEN_INVENTORY.getKeyCode()) {
-			if(this.displayedGui.hashCode() == 0) {
-				this.
-			}
-		}
 	}
 
 	@Override

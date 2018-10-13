@@ -43,3 +43,4 @@ classes/*
 run/*
 logs/*
 chunks/*
+src/main/resources/assets/neutronia/textures_alt/**
