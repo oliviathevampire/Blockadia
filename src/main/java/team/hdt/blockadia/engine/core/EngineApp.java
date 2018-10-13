@@ -1,5 +1,6 @@
 package team.hdt.blockadia.engine.core;
 
+import ga.pheonix.utillib.utils.vectors.Transform;
 import ga.pheonix.utillib.utils.vectors.Vectors3f;
 import team.hdt.blockadia.engine.core.graphics.GameObject;
 import team.hdt.blockadia.engine.core.graphics.Mesh;
@@ -8,7 +9,6 @@ import team.hdt.blockadia.engine.core.input.Key;
 import team.hdt.blockadia.engine.core.shader.Default3DShader;
 import team.hdt.blockadia.engine.core.texture.Texture;
 import team.hdt.blockadia.engine.core.texture.TextureLoader;
-import team.hdt.blockadia.engine.core.util.math.Transform;
 
 import java.util.ArrayList;
 
@@ -73,7 +73,7 @@ public class EngineApp {
         mesh = new Mesh();
         mesh.add(vertices, texCoords, indices);
 
-        object = new GameObject(new Transform(new Vectors3f(0), new Vectors3f(0), new Vectors3f(1))) {
+        object = new GameObject(new Transform(/*new Vectors3f(0), new Vectors3f(0), new Vectors3f(1)*/)) {
             public void update() {
             }
         };

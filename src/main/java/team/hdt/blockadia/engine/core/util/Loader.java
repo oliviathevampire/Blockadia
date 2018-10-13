@@ -1,9 +1,9 @@
 package team.hdt.blockadia.engine.core.util;
 
+import ga.pheonix.utillib.utils.ByteWork;
+import ga.pheonix.utillib.utils.model.RawModel;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
-import team.hdt.blockadia.engine.client.rendering.model.RawModel;
-import team.hdt.blockadia.engine.core.util.math.ByteWork;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

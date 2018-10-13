@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.core.util.mesh;
 
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 import org.lwjgl.BufferUtils;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
 
 import java.util.List;
 

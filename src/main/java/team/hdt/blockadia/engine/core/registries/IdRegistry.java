@@ -1,7 +1,7 @@
 package team.hdt.blockadia.engine.core.registries;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
-import team.hdt.blockadia.engine.client.util.Nullable;
+import ga.pheonix.utillib.utils.anouncments.Nullable;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 public interface IdRegistry<T extends RegistryEntry> extends Registry<T> {
 

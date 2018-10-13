@@ -21,14 +21,13 @@ package team.hdt.blockadia.bml.versioning;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import team.hdt.blockadia.bml.VersionChecker;
 
 import javax.annotation.Nullable;
 
 import static team.hdt.blockadia.bml.Logging.CORE;
 
-public class ForgeVersion
-{
+public class ForgeVersion {
+
     private static final Logger LOGGER = LogManager.getLogger();
     // This is Forge's Mod Id, used for the ForgeMod and resource locations
     public static final String MOD_ID = "forge";
@@ -63,11 +62,6 @@ public class ForgeVersion
         return forgeVersion;
     }
 
-    public static VersionChecker.Status getStatus()
-    {
-        return VersionChecker.Status.PENDING;
-    }
-
     @Nullable
     public static String getTarget()
     {
@@ -77,5 +71,5 @@ public class ForgeVersion
     public static String getSpec() {
         return forgeSpec;
     }
-}
 
+}

@@ -1,9 +1,9 @@
 package team.hdt.blockadia.engine.core.world.biomes;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
 import team.hdt.blockadia.engine.core.block.BlockType;
 import team.hdt.blockadia.engine.core.init.Biomes;
 import team.hdt.blockadia.engine.core.init.Blocks;
+import team.hdt.blockadia.engine.core.util.Identifier;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.ILayer;
 
@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class BiomeDesert extends Biome implements IBiome {
 
-    private Identifier identifier = new Identifier("biome_desert");
+    private Identifier identifier = new Identifier("desert");
 
     public BiomeDesert() {
         super((new Biome.BiomeProperties("Desert")).baseHeight(0.125F).heightVariation(0.05F).temperature(2.0F).rainfall(0.0F).rainDisabled());

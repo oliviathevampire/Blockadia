@@ -1,14 +1,12 @@
 package team.hdt.blockadia.engine.core.util.mesh;
 
+import ga.pheonix.utillib.vertex.Vertex;
 import org.lwjgl.BufferUtils;
-import team.hdt.blockadia.engine.core.util.Vertex;
 
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Set;
 
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;

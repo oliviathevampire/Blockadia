@@ -1,11 +1,11 @@
 package team.hdt.blockadia.engine.core.registries;
 
+import ga.pheonix.utillib.utils.anouncments.Nullable;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import team.hdt.blockadia.engine.client.util.Identifier;
-import team.hdt.blockadia.engine.client.util.Nullable;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;

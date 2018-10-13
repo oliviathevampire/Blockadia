@@ -1,17 +1,16 @@
 package team.hdt.blockadia.engine.client.rendering;
 
+import ga.pheonix.utillib.utils.model.ModelTexture;
+import ga.pheonix.utillib.utils.model.RawModel;
+import ga.pheonix.utillib.utils.model.TexturedModel;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import team.hdt.blockadia.engine.client.rendering.model.ModelTexture;
-import team.hdt.blockadia.engine.client.rendering.model.RawModel;
-import team.hdt.blockadia.engine.client.rendering.model.TexturedModel;
 import team.hdt.blockadia.engine.client.rendering.shader.StaticShader;
 import team.hdt.blockadia.engine.core.entity.BaseEntity;
 import team.hdt.blockadia.engine.core.item.ItemBase;
-import team.hdt.blockadia.engine.core.util.math.Maths;
-import team.hdt.blockadia.engine.core.util.math.vectors.Matrix4fs;
+import team.hdt.blockadia.engine.core.util.Matrix4fs;
 
 import java.util.List;
 import java.util.Map;
@@ -72,8 +71,8 @@ public class EntityRenderer {
     }
 
     private void prepareInstance(BaseEntity entity) {
-        Matrix4fs transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(),
+        /*Matrix4fs transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(),
                 entity.getRotation().x, entity.getRotation().y, entity.getRotation().z, entity.getScale());
-        shader.loadTransformationMatrix(transformationMatrix);
+        shader.loadTransformationMatrix(transformationMatrix);*/
     }
 }

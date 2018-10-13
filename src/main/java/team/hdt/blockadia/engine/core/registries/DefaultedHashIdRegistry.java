@@ -1,7 +1,7 @@
 package team.hdt.blockadia.engine.core.registries;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
-import team.hdt.blockadia.engine.client.util.Nonnull;
+import ga.pheonix.utillib.utils.anouncments.Nonnull;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 public class DefaultedHashIdRegistry<T extends RegistryEntry> extends HashIdRegistry<T> {
     private T defaultEntry;

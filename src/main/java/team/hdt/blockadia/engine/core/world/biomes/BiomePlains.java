@@ -1,9 +1,9 @@
 package team.hdt.blockadia.engine.core.world.biomes;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
 import team.hdt.blockadia.engine.core.block.BlockType;
 import team.hdt.blockadia.engine.core.init.Biomes;
 import team.hdt.blockadia.engine.core.init.Blocks;
+import team.hdt.blockadia.engine.core.util.Identifier;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.ILayer;
 
@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class BiomePlains extends Biome implements IBiome {
 
-    public Identifier identifier = new Identifier("biome_plains");
+    public Identifier identifier = new Identifier("plains");
 
     public BiomePlains() {
         super((new Biome.BiomeProperties("Plains")).baseHeight(0.125F).heightVariation(0.05F).temperature(0.8F).rainfall(0.4F));

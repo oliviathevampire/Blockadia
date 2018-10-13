@@ -8,8 +8,6 @@
  */
 package team.priv.pheonix.testingzone.utils;
 
-import team.hdt.blockadia.engine.core.Display;
-
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;

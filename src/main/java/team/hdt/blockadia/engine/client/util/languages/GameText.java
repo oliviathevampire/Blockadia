@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.client.util.languages;
 
-import team.hdt.blockadia.engine.client.util.CSVReader;
-import team.hdt.blockadia.engine.client.util.FileUtils;
-import team.hdt.blockadia.engine.client.util.MyFile;
+import ga.pheonix.utillib.utils.CSVReader;
+import ga.pheonix.utillib.utils.FileUtils;
+import ga.pheonix.utillib.utils.MyFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package team.hdt.blockadia.engine.core.world.misc;
 
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 public class NormalsGenerator {
 
@@ -20,7 +20,7 @@ public class NormalsGenerator {
         float heightD = getHeight(x, z - 1, heights);
         float heightU = getHeight(x, z + 1, heights);
         Vectors3f normal = new Vectors3f(heightL - heightR, 2f, heightD - heightU);
-        normal.normalise();
+//        normal.normalise();
         return normal;
     }
 

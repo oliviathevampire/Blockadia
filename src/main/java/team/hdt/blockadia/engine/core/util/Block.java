@@ -1,7 +1,8 @@
 package team.hdt.blockadia.engine.core.util;
 
-import team.hdt.blockadia.engine.core.util.math.BitUtils;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.collision.AABB;
+import ga.pheonix.utillib.utils.BitUtils;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 /**
  * Block represented as 32 bit integer number.

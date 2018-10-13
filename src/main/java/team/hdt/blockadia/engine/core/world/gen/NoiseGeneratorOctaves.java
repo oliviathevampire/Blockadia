@@ -1,6 +1,6 @@
 package team.hdt.blockadia.engine.core.world.gen;
 
-import team.hdt.blockadia.engine.core.util.math.Maths;
+import ga.pheonix.utillib.utils.Maths;
 
 import java.util.Random;
 

@@ -1,9 +1,9 @@
 package team.hdt.blockadia.engine.core.world.biomes;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
 import team.hdt.blockadia.engine.core.block.BlockType;
 import team.hdt.blockadia.engine.core.init.Biomes;
 import team.hdt.blockadia.engine.core.init.Blocks;
+import team.hdt.blockadia.engine.core.util.Identifier;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.IBiome;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.IForest;
 import team.hdt.blockadia.engine.core.world.gen.interfaces.ILayer;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class BiomeForest extends Biome implements IBiome, IForest {
 
-    public Identifier identifier = new Identifier("biome_forest");
+    public Identifier identifier = new Identifier("forest");
 
     public BiomeForest() {
         super(new BiomeProperties("Forest"));

@@ -1,11 +1,11 @@
 package team.hdt.blockadia.engine.core.block;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
-import team.hdt.blockadia.engine.client.util.Nonnull;
+import ga.pheonix.utillib.utils.anouncments.Nonnull;
 import team.hdt.blockadia.engine.core.block.material.BlockMaterials;
 import team.hdt.blockadia.engine.core.block.material.MapColor;
 import team.hdt.blockadia.engine.core.item.ItemGroup;
 import team.hdt.blockadia.engine.core.registries.RegistryEntry;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 public class BlockType implements RegistryEntry {
 

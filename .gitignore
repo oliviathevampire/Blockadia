@@ -36,12 +36,10 @@ build/
 .DS_Store
 .idea
 .gradle
-out/
-jars
-crash-reports/
-src/main/java/com/*
-src/main/java/idk/*
+out/*
+jars/*
 classes/*
-world.xml
-src/main/java/team/hdt/blockadia/game_engine_old/
 /nbproject/private/
+run/*
+logs/*
+chunks/*

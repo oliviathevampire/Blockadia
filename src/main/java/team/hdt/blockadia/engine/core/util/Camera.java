@@ -1,8 +1,10 @@
+/*
 package team.hdt.blockadia.engine.core.util;
 
-import team.hdt.blockadia.engine.core.util.math.vectors.Matrix4fs;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.Input;
+import ga.pheonix.utillib.utils.vectors.Ray;
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -46,7 +48,7 @@ public class Camera {
     public static boolean input() {
         boolean was_input = false;
 
-        Vectors2f delta = Vectors2f.sub(Input.getMousePosition(), center, null);
+        Vectors2f delta = Vectors2f.sub(Input.getMousePosition(0), center, null);
 
         boolean rot_x = delta.y != 0;
         boolean rot_y = delta.x != 0;
@@ -58,7 +60,7 @@ public class Camera {
             pitch(delta.y * SENSITIVITY_Y);
         }
         if (rot_y || rot_x) {
-            Input.setMousePosition(center);
+            Input.setMousePosition(center, 0);
             was_input = true;
         }
 
@@ -172,4 +174,4 @@ public class Camera {
     public static void update_ray() {
         ray = new Ray(projection, view, center, Window.width, Window.height);
     }
-}
+}*/

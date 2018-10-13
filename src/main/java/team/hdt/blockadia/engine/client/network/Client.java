@@ -1,5 +1,8 @@
 package team.hdt.blockadia.engine.client.network;
 
+import ga.pheonix.utillib.java.server.AeSimpleSHA1;
+import ga.pheonix.utillib.java.server.PacketHandler;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -132,13 +135,13 @@ public class Client {
         // wait for messages from user
         Scanner scan = new Scanner(System.in);
         // loop forever for message from the user
-        while (true) {
+        /*while (true) {
             //System.out.print("> ");	// what the line appears like to the user in no-gui mode
             // read message from user
             String msg = scan.nextLine().trim();
 
             // These act as client-sided commands for the text-only client
-            if (msg.equalsIgnoreCase("/commands")) {
+            /*if (msg.equalsIgnoreCase("/commands")) {
                 listCommands();
             } else if (msg.equalsIgnoreCase("/logout")) {    // logout
                 client.sendMessage(new PacketHandler(PacketHandler.LOGOUT, ""));
@@ -153,7 +156,7 @@ public class Client {
             } else {    // default to ordinary message
                 client.sendMessage(new PacketHandler(PacketHandler.MESSAGE, msg));
             }
-        }
+        }*/
 
         // disconnect
         client.disconnect();

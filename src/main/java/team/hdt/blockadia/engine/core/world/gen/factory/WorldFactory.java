@@ -1,6 +1,6 @@
 package team.hdt.blockadia.engine.core.world.gen.factory;
 
-import team.hdt.blockadia.engine.client.util.Nullable;
+import ga.pheonix.utillib.utils.anouncments.Nullable;
 import team.hdt.blockadia.engine.core.world.World;
 import team.hdt.blockadia.engine.core.world.chunk.Chunk;
 import team.hdt.blockadia.engine.core.world.chunk.ChunkPos;

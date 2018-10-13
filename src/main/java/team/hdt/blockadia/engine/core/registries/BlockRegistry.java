@@ -2,8 +2,8 @@ package team.hdt.blockadia.engine.core.registries;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import team.hdt.blockadia.engine.client.util.Identifier;
 import team.hdt.blockadia.engine.core.block.BlockType;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;

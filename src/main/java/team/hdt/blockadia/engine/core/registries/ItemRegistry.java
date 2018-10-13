@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.core.registries;
 
-import team.hdt.blockadia.engine.client.util.Identifier;
 import team.hdt.blockadia.engine.core.item.ItemStack;
 import team.hdt.blockadia.engine.core.item.ItemType;
+import team.hdt.blockadia.engine.core.util.Identifier;
 
 public class ItemRegistry {
 

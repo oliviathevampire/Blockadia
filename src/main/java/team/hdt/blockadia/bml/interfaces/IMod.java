@@ -10,7 +10,7 @@ public interface IMod {
 
     String getModID();
 
-    String getResourceLocation();
+    String getIdentifier();
 
     String getVersion();
 

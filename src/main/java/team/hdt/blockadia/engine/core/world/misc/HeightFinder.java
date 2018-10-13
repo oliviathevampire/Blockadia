@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.core.world.misc;
 
-import team.hdt.blockadia.engine.core.util.math.Maths;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.Maths;
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 public class HeightFinder {
 

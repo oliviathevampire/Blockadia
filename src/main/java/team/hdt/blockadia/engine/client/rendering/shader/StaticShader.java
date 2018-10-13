@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.client.rendering.shader;
 
 
-import team.hdt.blockadia.engine.core.util.math.vectors.Matrix4fs;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.vectors.Matrix4fs;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 public class StaticShader extends ShaderProgram {
 

@@ -1,12 +1,12 @@
 package team.hdt.blockadia.engine.core;
 
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 import team.hdt.blockadia.engine.core.input.Input;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
 
 import java.nio.IntBuffer;
 

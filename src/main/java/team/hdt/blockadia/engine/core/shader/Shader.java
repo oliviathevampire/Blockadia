@@ -61,7 +61,7 @@ public abstract class Shader {
     }
 
     public void loadMatrix(int location, Matrix4fs matrix) {
-        matrix.store(matrixBuffer);
+//        matrix.store(matrixBuffer);
         matrixBuffer.flip();
         GL20.glUniformMatrix4fv(location, false, matrixBuffer);
     }
@@ -87,7 +87,6 @@ public abstract class Shader {
 
     public Matrix4fs createViewMatrix(Camera camera) {
         Matrix4fs viewMatrix = new Matrix4fs();
-        viewMatrix.();
         Matrix4fs.rotate((float) Math.toRadians(camera.getPitch()), new Vectors3f(1, 0, 0), viewMatrix, viewMatrix);
         Matrix4fs.rotate((float) Math.toRadians(camera.getYaw()), new Vectors3f(0, 1, 0), viewMatrix, viewMatrix);
         Matrix4fs.rotate((float) Math.toRadians(camera.getRoll()), new Vectors3f(0, 0, 1), viewMatrix, viewMatrix);

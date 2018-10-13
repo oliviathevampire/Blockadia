@@ -1,6 +1,8 @@
 package team.hdt.blockadia.engine.core.util;
 
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
+import ga.pheonix.utillib.collision.AABB;
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
+import ga.pheonix.utillib.vertex.Vertex;
 import team.hdt.blockadia.engine.core.util.mesh.IndexedMesh;
 
 import java.util.*;

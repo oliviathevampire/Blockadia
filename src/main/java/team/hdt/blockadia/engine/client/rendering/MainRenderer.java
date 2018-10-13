@@ -1,16 +1,15 @@
 package team.hdt.blockadia.engine.client.rendering;
 
+import ga.pheonix.utillib.utils.model.RawModel;
+import ga.pheonix.utillib.utils.model.TexturedModel;
+import ga.pheonix.utillib.utils.vectors.Matrix4fs;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import team.hdt.blockadia.engine.client.rendering.model.RawModel;
-import team.hdt.blockadia.engine.client.rendering.model.TexturedModel;
 import team.hdt.blockadia.engine.client.rendering.shader.StaticShader;
-import team.hdt.blockadia.engine.core.Display;
 import team.hdt.blockadia.engine.core.entity.BaseEntity;
-import team.hdt.blockadia.engine.core.util.math.Maths;
-import team.hdt.blockadia.engine.core.util.math.vectors.Matrix4fs;
+import team.hdt.blockadia.engine.core_rewrite.Display;
 
 public class MainRenderer {
     private static final float FOV = 70;
@@ -31,8 +30,8 @@ public class MainRenderer {
         GL30.glBindVertexArray(rawModel.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
-        Matrix4fs transformationmatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y, entity.getRotation().z, entity.scale);
-        shader.loadTransformationMatrix(transformationmatrix);
+        /*Matrix4fs transformationmatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y, entity.getRotation().z, entity.scale);
+        shader.loadTransformationMatrix(transformationmatrix);*/
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getID());
         GL11.glDrawElements(GL11.GL_TRIANGLES, rawModel.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
@@ -48,12 +47,12 @@ public class MainRenderer {
         float frustum_length = FAR_PLANE - NEAR_PLANE;
 
         projectionMatrix = new Matrix4fs();
-        projectionMatrix.m00 = x_scale;
-        projectionMatrix.m11 = y_scale;
-        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustum_length);
-        projectionMatrix.m23 = -1;
-        projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
-        projectionMatrix.m33 = 0;
+        projectionMatrix.m00(x_scale);
+        projectionMatrix.m11(y_scale);
+        projectionMatrix.m22(-((FAR_PLANE + NEAR_PLANE) / frustum_length));
+        projectionMatrix.m23(-1);
+        projectionMatrix.m32(-((2 * NEAR_PLANE * FAR_PLANE) / frustum_length));
+        projectionMatrix.m33(0);
     }
 
 }

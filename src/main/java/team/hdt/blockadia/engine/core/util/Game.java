@@ -1,6 +1,8 @@
 package team.hdt.blockadia.engine.core.util;
 
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors2f;
+import ga.pheonix.utillib.utils.vectors.Frustum;
+import ga.pheonix.utillib.utils.vectors.Transform;
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
 import team.hdt.blockadia.engine.core.util.mesh.AbstractMesh;
 
 import java.util.Random;
@@ -64,7 +66,7 @@ public class Game {
         if (Camera.input()) {
             Camera.update();
 //            World.update();
-            Frustum.update();
+            Frustum.update(null);
             player.update();
         }
     }
@@ -72,7 +74,7 @@ public class Game {
     public static void render() {
         current_shader = world_shader;
         current_shader.bind();
-        current_shader.set_uniform("uniform_transform", world_transform.getTransform());
+//        current_shader.set_uniform("uniform_transform", world_transform.getTransform());
         current_shader.set_uniform("uniform_camera_projection", Camera.projection);
         current_shader.set_uniform("uniform_camera_view", Camera.view);
         current_shader.set_uniform("uniform_texture", 0);

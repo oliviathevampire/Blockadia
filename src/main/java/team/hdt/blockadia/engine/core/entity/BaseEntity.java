@@ -1,12 +1,12 @@
 package team.hdt.blockadia.engine.core.entity;
 
-import team.hdt.blockadia.engine.client.rendering.model.TexturedModel;
-import team.hdt.blockadia.engine.client.util.Nonnull;
-import team.hdt.blockadia.engine.client.util.Nullable;
-import team.hdt.blockadia.engine.core.entity.util.AllEntityAspects;
-import team.hdt.blockadia.engine.core.entity.util.SharePeacefulAspects;
-import team.hdt.blockadia.engine.core.entity.util.SharedHostileAspects;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.anouncments.Nonnull;
+import ga.pheonix.utillib.utils.anouncments.Nullable;
+import ga.pheonix.utillib.utils.entity.AllEntityAspects;
+import ga.pheonix.utillib.utils.entity.SharePeacefulAspects;
+import ga.pheonix.utillib.utils.entity.SharedHostileAspects;
+import ga.pheonix.utillib.utils.model.TexturedModel;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 public class BaseEntity {
     public static int ID;
@@ -57,7 +57,7 @@ public class BaseEntity {
         this.ID = id;
         this.isItem = isItem;
         this.CanburnInDay = canburnInDay;
-        if ((scale == 0) == true) {
+        if ((scale == 0)) {
             this.scale = 1.0F;
         } else {
             this.scale = scale;

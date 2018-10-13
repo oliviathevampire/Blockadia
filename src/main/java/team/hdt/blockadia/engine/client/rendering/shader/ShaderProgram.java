@@ -1,10 +1,10 @@
 package team.hdt.blockadia.engine.client.rendering.shader;
 
+import ga.pheonix.utillib.utils.vectors.Matrix4fs;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import team.hdt.blockadia.engine.core.util.math.vectors.Matrix4fs;
-import team.hdt.blockadia.engine.core.util.math.vectors.Vectors3f;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -99,7 +99,7 @@ public abstract class ShaderProgram {
     }
 
     protected void loadMatrix(int location, Matrix4fs matrix) {
-        matrix.store(matrixBuffer);
+//        matrix.store(matrixBuffer);
         matrixBuffer.flip();
         GL20.glUniformMatrix4fv(location, false, matrixBuffer);
     }
