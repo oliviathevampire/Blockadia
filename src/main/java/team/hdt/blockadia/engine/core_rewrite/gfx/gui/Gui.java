@@ -1,8 +1,8 @@
 package team.hdt.blockadia.engine.core_rewrite.gfx.gui;
 
-import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import ga.pheonix.utillib.utils.vectors.Vectors2f;
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
+import ga.pheonix.utillib.utils.vectors.Vectors4f;
 import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 import team.hdt.blockadia.engine.core_rewrite.Blockadia;
 import team.hdt.blockadia.engine.core_rewrite.Display;
@@ -10,6 +10,7 @@ import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.GuiRenderer;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
 import team.hdt.blockadia.engine.core_rewrite.object.Quad;
 import team.hdt.blockadia.engine.core_rewrite.util.Maths;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Gui {
 	private List<Component> components;
 
 	public Gui() {
-		this.defaultBackgroundQuad = new Quad(new Vector3f(), new Vector3f(), new Vector3f(Display.getWidth() / GuiRenderer.scale), new Vector4f(0, 0, 0, 0.25f));
+		this.defaultBackgroundQuad = new Quad(new Vectors3f(), new Vectors3f(), new Vectors3f(Display.getWidth() / GuiRenderer.scale), new Vectors4f(0, 0, 0, 0.25f));
 		this.textures = new ArrayList<GuiTexture>();
 		this.components = new ArrayList<Component>();
 	}
@@ -114,8 +115,8 @@ public class Gui {
 	 *            The color of the rectangle
 	 */
 	public void drawRect(float x, float y, float width, float height, int color) {
-		Vector4f vectorColor = new Vector4f((float) ((color >> 16) & 0xff) / 255f, (float) ((color >> 8) & 0xff) / 255f, (float) (color & 0xff) / 255f, (float) ((color >> 24) & 0xff) / 255f);
-		textures.add(new GuiTexture(vectorColor, Maths.createTransformationMatrix(new Vector2f(x, y), new Vector2f(width, height))));
+		Vectors4f vectorColor = new Vectors4f()((float) ((color >> 16) & 0xff) / 255f, (float) ((color >> 8) & 0xff) / 255f, (float) (color & 0xff) / 255f, (float) ((color >> 24) & 0xff) / 255f);
+		textures.add(new GuiTexture(vectorColor, Maths.createTransformationMatrix(new Vectors2f(x, y), new Vectors2f(width, height))));
 	}
 
 	/**

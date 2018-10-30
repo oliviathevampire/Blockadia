@@ -1,6 +1,7 @@
 package team.hdt.blockadia.engine.core.util.math.interpolation;
 
-import team.hdt.blockadia.engine.core.util.math.Maths;
+
+import ga.pheonix.utillib.java.math.Maths;
 
 public class InterFloat {
 

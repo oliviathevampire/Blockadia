@@ -1,18 +1,19 @@
 package team.hdt.blockadia.engine.core_rewrite.object;
 
-import org.joml.Vector3f;
+
+import ga.pheonix.utillib.utils.vectors.Vectors3f;
 
 public interface ICamera {
 
-	Vector3f getPosition();
+	Vectors3f getPosition();
 
-	Vector3f getLastPosition();
+	Vectors3f getLastPosition();
 
-	Vector3f getRotation();
+	Vectors3f getRotation();
 
-	Vector3f getLastRotation();
+	Vectors3f getLastRotation();
 
-	Vector3f getScale();
+	Vectors3f getScale();
 
-	Vector3f getDirection();
+	Vectors3f getDirection();
 }
