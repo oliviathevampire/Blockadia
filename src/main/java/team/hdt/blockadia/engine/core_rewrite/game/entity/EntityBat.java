@@ -4,8 +4,8 @@ import org.joml.Vector2f;
 import team.hdt.blockadia.engine.core_rewrite.gfx.Animation;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.EntityRenderer;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
-import team.hdt.blockadia.engine.core_rewrite.util.AxisAlignedBB;
 import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
+import team.hdt.blockadia.engine.core_rewrite.util.three_d.AxisAlignedBB;
 
 import java.util.Random;
 

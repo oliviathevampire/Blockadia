@@ -1,13 +1,13 @@
 package team.hdt.blockadia.engine.core_rewrite.game.entity.item;
 
 import org.joml.Vector2f;
-import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 import team.hdt.blockadia.engine.core_rewrite.game.entity.Entity;
 import team.hdt.blockadia.engine.core_rewrite.game.entity.EntityPlayer;
 import team.hdt.blockadia.engine.core_rewrite.game.entity.EntityType;
 import team.hdt.blockadia.engine.core_rewrite.game.item.ItemStack;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
-import team.hdt.blockadia.engine.core_rewrite.util.AxisAlignedBB;
+import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
+import team.hdt.blockadia.engine.core_rewrite.util.three_d.AxisAlignedBB;
 
 public class EntityItem extends Entity {
 

@@ -12,8 +12,6 @@ public class RayTraceResult {
      * Used to add extra hit info
      */
     public Object hitInfo = null;
-
-    private BlockPos blockPos;
     /**
      * The type of hit that occured, see  for possibilities.
      */
@@ -28,21 +26,16 @@ public class RayTraceResult {
      */
     public Entity entityHit;
 
-    public RayTraceResult(Vec3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
-        this(RayTraceResult.Type.BLOCK, hitVecIn, sideHitIn, blockPosIn);
-    }
-
     public RayTraceResult(Vec3d hitVecIn, EnumFacing sideHitIn) {
-        this(RayTraceResult.Type.BLOCK, hitVecIn, sideHitIn, BlockPos.ORIGIN);
+        this(RayTraceResult.Type.BLOCK, hitVecIn, sideHitIn);
     }
 
     public RayTraceResult(Entity entityIn) {
         this(entityIn, new Vec3d(entityIn.getPosition().x, entityIn.getPosition().y, entityIn.getPosition().z));
     }
 
-    public RayTraceResult(RayTraceResult.Type typeIn, Vec3d hitVecIn, EnumFacing sideHitIn, BlockPos blockPosIn) {
+    public RayTraceResult(RayTraceResult.Type typeIn, Vec3d hitVecIn, EnumFacing sideHitIn) {
         this.typeOfHit = typeIn;
-        this.blockPos = blockPosIn;
         this.sideHit = sideHitIn;
         this.hitVec = new Vec3d(hitVecIn.x, hitVecIn.y, hitVecIn.z);
     }
@@ -53,18 +46,14 @@ public class RayTraceResult {
         this.hitVec = hitVecIn;
     }
 
-    public BlockPos getBlockPos() {
-        return this.blockPos;
-    }
-
     public String toString() {
-        return "HitResult{type=" + this.typeOfHit + ", blockpos=" + this.blockPos + ", f=" + this.sideHit + ", pos=" + this.hitVec + ", entity=" + this.entityHit + '}';
+        return "HitResult{type=" + this.typeOfHit + ", f=" + this.sideHit + ", pos=" + this.hitVec + ", entity=" + this.entityHit + '}';
     }
 
-    public static enum Type {
+    public enum Type {
         MISS,
         BLOCK,
-        ENTITY;
+        ENTITY
     }
 }
 

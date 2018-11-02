@@ -1,7 +1,8 @@
 package team.hdt.blockadia.engine.core_rewrite.util.three_d;
 
-import com.google.common.annotations.VisibleForTesting;
+
 import ga.pheonix.utillib.utils.anouncments.Nullable;
+import ga.pheonix.utillib.utils.anouncments.VisibleForTesting;
 import ga.pheonix.utillib.utils.world.EnumFacing;
 
 public class AxisAlignedBB3D
