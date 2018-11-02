@@ -1,4 +1,4 @@
-package team.hdt.blockadia.engine.core.util.math;
+package team.hdt.blockadia.engine.core_rewrite.util.three_d;
 
 public class BlockPos {
 
