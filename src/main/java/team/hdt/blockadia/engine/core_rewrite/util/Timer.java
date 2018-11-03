@@ -23,7 +23,7 @@ public class Timer {
 
 	public void updateTimer() {
 		long i = System.currentTimeMillis();
-		this.elapsedPartialTicks = (float) ((i - this.lastSyncSysClock) / this.tickLength);
+		this.elapsedPartialTicks = (i - this.lastSyncSysClock) / this.tickLength;
 		this.lastSyncSysClock = i;
 		this.renderPartialTicks += this.elapsedPartialTicks;
 		this.elapsedTicks = (int) this.renderPartialTicks;
