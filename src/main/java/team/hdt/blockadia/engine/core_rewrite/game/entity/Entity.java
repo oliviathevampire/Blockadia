@@ -6,8 +6,8 @@ import team.hdt.blockadia.engine.core_rewrite.game.GameObject;
 import team.hdt.blockadia.engine.core_rewrite.game.world.World;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.EntityRenderer;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
+import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB;
 import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
-import team.hdt.blockadia.engine.core_rewrite.util.three_d.AxisAlignedBB;
 
 import javax.annotation.Nullable;
 

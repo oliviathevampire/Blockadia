@@ -1,20 +1,22 @@
 package team.hdt.blockadia.game;
 
+import ga.pheonix.utillib.utils.MainUtils;
 import ga.pheonix.utillib.utils.model.ModelTexture;
 import ga.pheonix.utillib.utils.model.RawModel;
 import ga.pheonix.utillib.utils.model.TexturedModel;
-import team.hdt.blockadia.engine.client.MainExtras;
 import team.hdt.blockadia.engine.client.network.Client;
 import team.hdt.blockadia.engine.core.entity.BaseEntity;
 import team.hdt.blockadia.engine.core.util.GameSide;
 import team.hdt.blockadia.engine.core.util.GameSideOnly;
 import team.hdt.blockadia.engine.core.util.Loader;
+import team.hdt.blockadia.engine.core_rewrite.Display;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 @GameSideOnly(GameSide.CLIENT)
-public class BlockadiaClient extends MainExtras {
+public class BlockadiaClient extends MainUtils {
 
     public static final String server = "";
     public static final String port = "25570";
@@ -27,7 +29,7 @@ public class BlockadiaClient extends MainExtras {
     public static Client.ListenFromServer serverData;
 
     public static void main(String[] args) {
-        Display display = new Display("Blockadia", getWidth(), getHeight());
+        Display display = new Display("Blockadia", 640, 320);
         //authentication system still testing
 		/*public String ServerResponce;
 		public String ClientToSend = userName + ":" + password;

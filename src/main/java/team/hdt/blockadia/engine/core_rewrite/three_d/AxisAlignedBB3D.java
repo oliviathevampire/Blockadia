@@ -1,4 +1,4 @@
-package team.hdt.blockadia.engine.core_rewrite.util.three_d;
+package team.hdt.blockadia.engine.core_rewrite.three_d;
 
 
 import ga.pheonix.utillib.utils.anouncments.Nullable;
@@ -7,17 +7,11 @@ import ga.pheonix.utillib.utils.world.EnumFacing;
 
 public class AxisAlignedBB3D
 {
-    /** The minimum X coordinate of this bounding box. Guaranteed to always be less than or equal to {@link #maxX}. */
     public final double minX;
-    /** The minimum Y coordinate of this bounding box. Guaranteed to always be less than or equal to {@link #maxY}. */
     public final double minY;
-    /** The minimum Y coordinate of this bounding box. Guaranteed to always be less than or equal to {@link #maxZ}. */
     public final double minZ;
-    /** The maximum X coordinate of this bounding box. Guaranteed to always be greater than or equal to {@link #minX}. */
     public final double maxX;
-    /** The maximum Y coordinate of this bounding box. Guaranteed to always be greater than or equal to {@link #minY}. */
     public final double maxY;
-    /** The maximum Z coordinate of this bounding box. Guaranteed to always be greater than or equal to {@link #minZ}. */
     public final double maxZ;
 
     public AxisAlignedBB3D(double x1, double y1, double z1, double x2, double y2, double z2)
@@ -29,16 +23,12 @@ public class AxisAlignedBB3D
         this.maxY = Math.max(y1, y2);
         this.maxZ = Math.max(z1, z2);
     }
-    
+
     public AxisAlignedBB3D(Vec3d min, Vec3d max)
     {
-        this(min.x, min.y, min.z, max.x, max.y, max.z);
+        this(min.xCoord, min.yCoord, min.zCoord, max.xCoord, max.yCoord, max.zCoord);
     }
 
-    /**
-     * Helper method that returns a new {@link AxisAlignedBB3D} with the given value for {@link #maxY} and all other
-     * values taken from this bounding box.
-     */
     public AxisAlignedBB3D setMaxY(double y2)
     {
         return new AxisAlignedBB3D(this.minX, this.minY, this.minZ, this.maxX, y2, this.maxZ);
@@ -102,36 +92,7 @@ public class AxisAlignedBB3D
         return j;
     }
 
-    /**
-     * Creates a new {@link AxisAlignedBB3D} that has been contracted by the given amount, with positive changes
-     * decreasing max values and negative changes increasing min values.
-     * <br/>
-     * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid
-     * AABB - see last sample).
-     *
-     * <h3>Samples:</h3>
-     * <table>
-     * <tr><th>Input</th><th>Result</th></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 4, 4, 4).contract(2, 2, 2)</code></pre></td><td><pre><samp>box[0.0,
-     * 0.0, 0.0 -> 2.0, 2.0, 2.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 4, 4, 4).contract(-2, -2, -
-     * 2)</code></pre></td><td><pre><samp>box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(5, 5, 5, 7, 7, 7).contract(0, 1, -
-     * 1)</code></pre></td><td><pre><samp>box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(-2, -2, -2, 2, 2, 2).contract(4, -4,
-     * 0)</code></pre></td><td><pre><samp>box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]</samp></pre></td></tr>
-     * </table>
-     *
-     * <h3>See Also:</h3>
-     * <ul>
-     * <li>{@link #expand(double, double, double)} - like this, except for expanding.</li>
-     * <li>{@link #grow(double, double, double)} and {@link #grow(double)} - expands in all directions.</li>
-     * <li>{@link #shrink(double)} - contracts in all directions (like {@link #grow(double)})</li>
-     * </ul>
-     *
-     * @return A new modified bounding box.
-     */
-    public AxisAlignedBB3D contract(double x, double y, double z)
+    public AxisAlignedBB3D func_191195_a(double p_191195_1_, double p_191195_3_, double p_191195_5_)
     {
         double d0 = this.minX;
         double d1 = this.minY;
@@ -140,61 +101,37 @@ public class AxisAlignedBB3D
         double d4 = this.maxY;
         double d5 = this.maxZ;
 
-        if (x < 0.0D)
+        if (p_191195_1_ < 0.0D)
         {
-            d0 -= x;
-        }
-        else if (x > 0.0D)
+            d0 -= p_191195_1_;
+        } else if (p_191195_1_ > 0.0D)
         {
-            d3 -= x;
-        }
-
-        if (y < 0.0D)
-        {
-            d1 -= y;
-        }
-        else if (y > 0.0D)
-        {
-            d4 -= y;
+            d3 -= p_191195_1_;
         }
 
-        if (z < 0.0D)
+        if (p_191195_3_ < 0.0D)
         {
-            d2 -= z;
+            d1 -= p_191195_3_;
+        } else if (p_191195_3_ > 0.0D)
+        {
+            d4 -= p_191195_3_;
         }
-        else if (z > 0.0D)
+
+        if (p_191195_5_ < 0.0D)
         {
-            d5 -= z;
+            d2 -= p_191195_5_;
+        } else if (p_191195_5_ > 0.0D)
+        {
+            d5 -= p_191195_5_;
         }
 
         return new AxisAlignedBB3D(d0, d1, d2, d3, d4, d5);
     }
 
     /**
-     * Creates a new {@link AxisAlignedBB3D} that has been expanded by the given amount, with positive changes increasing
-     * max values and negative changes decreasing min values.
-     *
-     * <h3>Samples:</h3>
-     * <table>
-     * <tr><th>Input</th><th>Result</th></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 1, 1, 1).expand(2, 2, 2)</code></pre></td><td><pre><samp>box[0, 0,
-     * 0 -> 3, 3, 3]</samp></pre></td><td>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 1, 1, 1).expand(-2, -2, -2)</code></pre></td><td><pre><samp>box[-2,
-     * -2, -2 -> 1, 1, 1]</samp></pre></td><td>
-     * <tr><td><pre><code>new AxisAlignedBB3D(5, 5, 5, 7, 7, 7).expand(0, 1, -1)</code></pre></td><td><pre><samp>box[5, 5,
-     * 4, 7, 8, 7]</samp></pre></td><td>
-     * </table>
-     *
-     * <h3>See Also:</h3>
-     * <ul>
-     * <li>{@link #contract(double, double, double)} - like this, except for shrinking.</li>
-     * <li>{@link #grow(double, double, double)} and {@link #grow(double)} - expands in all directions.</li>
-     * <li>{@link #shrink(double)} - contracts in all directions (like {@link #grow(double)})</li>
-     * </ul>
-     *
-     * @return A modified bounding box that will always be equal or greater in volume to this bounding box.
+     * Adds a coordinate to the bounding box, extending it if the point lies outside the current ranges.
      */
-    public AxisAlignedBB3D expand(double x, double y, double z)
+    public AxisAlignedBB3D addCoord(double x, double y, double z)
     {
         double d0 = this.minX;
         double d1 = this.minY;
@@ -234,38 +171,9 @@ public class AxisAlignedBB3D
     }
 
     /**
-     * Creates a new {@link AxisAlignedBB3D} that has been contracted by the given amount in both directions. Negative
-     * values will shrink the AABB instead of expanding it.
-     * <br/>
-     * Side lengths will be increased by 2 times the value of the parameters, since both min and max are changed.
-     * <br/>
-     * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still
-     * creating a valid AABB - see last ample).
-     *
-     * <h3>Samples:</h3>
-     * <table>
-     * <tr><th>Input</th><th>Result</th></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 1, 1, 1).grow(2, 2, 2)</code></pre></td><td><pre><samp>box[-2.0, -
-     * 2.0, -2.0 -> 3.0, 3.0, 3.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(0, 0, 0, 6, 6, 6).grow(-2, -2, -2)</code></pre></td><td><pre><samp>box[2.0,
-     * 2.0, 2.0 -> 4.0, 4.0, 4.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(5, 5, 5, 7, 7, 7).grow(0, 1, -1)</code></pre></td><td><pre><samp>box[5.0,
-     * 4.0, 6.0 -> 7.0, 8.0, 6.0]</samp></pre></td></tr>
-     * <tr><td><pre><code>new AxisAlignedBB3D(1, 1, 1, 3, 3, 3).grow(-4, -2, -3)</code></pre></td><td><pre><samp>box[-1.0,
-     * 1.0, 0.0 -> 5.0, 3.0, 4.0]</samp></pre></td></tr>
-     * </table>
-     *
-     * <h3>See Also:</h3>
-     * <ul>
-     * <li>{@link #expand(double, double, double)} - expands in only one direction.</li>
-     * <li>{@link #contract(double, double, double)} - contracts in only one direction.</li>
-     * <lu>{@link #grow(double)} - version of this that expands in all directions from one parameter.</li>
-     * <li>{@link #shrink(double)} - contracts in all directions</li>
-     * </ul>
-     *
-     * @return A modified bounding box.
+     * Creates a new bounding box that has been expanded. If negative values are used, it will shrink.
      */
-    public AxisAlignedBB3D grow(double x, double y, double z)
+    public AxisAlignedBB3D expand(double x, double y, double z)
     {
         double d0 = this.minX - x;
         double d1 = this.minY - y;
@@ -276,30 +184,19 @@ public class AxisAlignedBB3D
         return new AxisAlignedBB3D(d0, d1, d2, d3, d4, d5);
     }
 
-    /**
-     * Creates a new {@link AxisAlignedBB3D} that is expanded by the given value in all directions. Equivalent to {@link
-     * #grow(double, double, double)} with the given value for all 3 params. Negative values will shrink the AABB.
-     * <br/>
-     * Side lengths will be increased by 2 times the value of the parameter, since both min and max are changed.
-     * <br/>
-     * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still
-     * creating a valid AABB - see samples on {@link #grow(double, double, double)}).
-     *
-     * @return A modified AABB.
-     */
-    public AxisAlignedBB3D grow(double value)
+    public AxisAlignedBB3D expandXyz(double value)
     {
-        return this.grow(value, value, value);
+        return this.expand(value, value, value);
     }
 
-    public AxisAlignedBB3D intersect(AxisAlignedBB3D other)
+    public AxisAlignedBB3D func_191500_a(AxisAlignedBB3D p_191500_1_)
     {
-        double d0 = Math.max(this.minX, other.minX);
-        double d1 = Math.max(this.minY, other.minY);
-        double d2 = Math.max(this.minZ, other.minZ);
-        double d3 = Math.min(this.maxX, other.maxX);
-        double d4 = Math.min(this.maxY, other.maxY);
-        double d5 = Math.min(this.maxZ, other.maxZ);
+        double d0 = Math.max(this.minX, p_191500_1_.minX);
+        double d1 = Math.max(this.minY, p_191500_1_.minY);
+        double d2 = Math.max(this.minZ, p_191500_1_.minZ);
+        double d3 = Math.min(this.maxX, p_191500_1_.maxX);
+        double d4 = Math.min(this.maxY, p_191500_1_.maxY);
+        double d5 = Math.min(this.maxZ, p_191500_1_.maxZ);
         return new AxisAlignedBB3D(d0, d1, d2, d3, d4, d5);
     }
 
@@ -322,9 +219,9 @@ public class AxisAlignedBB3D
         return new AxisAlignedBB3D(this.minX + x, this.minY + y, this.minZ + z, this.maxX + x, this.maxY + y, this.maxZ + z);
     }
 
-    public AxisAlignedBB3D offset(Vec3d vec)
+    public AxisAlignedBB3D func_191194_a(Vec3d p_191194_1_)
     {
-        return this.offset(vec.x, vec.y, vec.z);
+        return this.offset(p_191194_1_.xCoord, p_191194_1_.yCoord, p_191194_1_.zCoord);
     }
 
     /**
@@ -438,7 +335,7 @@ public class AxisAlignedBB3D
     /**
      * Checks if the bounding box intersects with another.
      */
-    public boolean intersects(AxisAlignedBB3D other)
+    public boolean intersectsWith(AxisAlignedBB3D other)
     {
         return this.intersects(other.minX, other.minY, other.minZ, other.maxX, other.maxY, other.maxZ);
     }
@@ -450,19 +347,19 @@ public class AxisAlignedBB3D
 
     public boolean intersects(Vec3d min, Vec3d max)
     {
-        return this.intersects(Math.min(min.x, max.x), Math.min(min.y, max.y), Math.min(min.z, max.z), Math.max(min.x, max.x), Math.max(min.y, max.y), Math.max(min.z, max.z));
+        return this.intersects(Math.min(min.xCoord, max.xCoord), Math.min(min.yCoord, max.yCoord), Math.min(min.zCoord, max.zCoord), Math.max(min.xCoord, max.xCoord), Math.max(min.yCoord, max.yCoord), Math.max(min.zCoord, max.zCoord));
     }
 
     /**
      * Returns if the supplied Vec3D is completely inside the bounding box
      */
-    public boolean contains(Vec3d vec)
+    public boolean isVecInside(Vec3d vec)
     {
-        if (vec.x > this.minX && vec.x < this.maxX)
+        if (vec.xCoord > this.minX && vec.xCoord < this.maxX)
         {
-            if (vec.y > this.minY && vec.y < this.maxY)
+            if (vec.yCoord > this.minY && vec.yCoord < this.maxY)
             {
-                return vec.z > this.minZ && vec.z < this.maxZ;
+                return vec.zCoord > this.minZ && vec.zCoord < this.maxZ;
             }
             else
             {
@@ -486,21 +383,9 @@ public class AxisAlignedBB3D
         return (d0 + d1 + d2) / 3.0D;
     }
 
-    /**
-     * Creates a new {@link AxisAlignedBB3D} that is expanded by the given value in all directions. Equivalent to {@link
-     * #grow(double)} with value set to the negative of the value provided here. Passing a negative value to this method
-     * values will grow the AABB.
-     * <br/>
-     * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-     * <br/>
-     * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still
-     * creating a valid AABB - see samples on {@link #grow(double, double, double)}).
-     *
-     * @return A modified AABB.
-     */
-    public AxisAlignedBB3D shrink(double value)
+    public AxisAlignedBB3D contract(double value)
     {
-        return this.grow(-value);
+        return this.expandXyz(-value);
     }
 
     @Nullable
@@ -584,19 +469,19 @@ public class AxisAlignedBB3D
     @VisibleForTesting
     public boolean intersectsWithYZ(Vec3d vec)
     {
-        return vec.y >= this.minY && vec.y <= this.maxY && vec.z >= this.minZ && vec.z <= this.maxZ;
+        return vec.yCoord >= this.minY && vec.yCoord <= this.maxY && vec.zCoord >= this.minZ && vec.zCoord <= this.maxZ;
     }
 
     @VisibleForTesting
     public boolean intersectsWithXZ(Vec3d vec)
     {
-        return vec.x >= this.minX && vec.x <= this.maxX && vec.z >= this.minZ && vec.z <= this.maxZ;
+        return vec.xCoord >= this.minX && vec.xCoord <= this.maxX && vec.zCoord >= this.minZ && vec.zCoord <= this.maxZ;
     }
 
     @VisibleForTesting
     public boolean intersectsWithXY(Vec3d vec)
     {
-        return vec.x >= this.minX && vec.x <= this.maxX && vec.y >= this.minY && vec.y <= this.maxY;
+        return vec.xCoord >= this.minX && vec.xCoord <= this.maxX && vec.yCoord >= this.minY && vec.yCoord <= this.maxY;
     }
 
     public String toString()
@@ -614,3 +499,4 @@ public class AxisAlignedBB3D
         return new Vec3d(this.minX + (this.maxX - this.minX) * 0.5D, this.minY + (this.maxY - this.minY) * 0.5D, this.minZ + (this.maxZ - this.minZ) * 0.5D);
     }
 }
+

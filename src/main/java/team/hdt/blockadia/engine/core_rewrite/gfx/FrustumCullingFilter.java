@@ -6,7 +6,7 @@ import team.hdt.blockadia.engine.core_rewrite.game.entity.Entity;
 import team.hdt.blockadia.engine.core_rewrite.game.world.map.Chunk;
 import team.hdt.blockadia.engine.core_rewrite.game.world.map.TileMap;
 import team.hdt.blockadia.engine.core_rewrite.game.world.tile.TileEntry;
-import team.hdt.blockadia.engine.core_rewrite.util.three_d.AxisAlignedBB;
+import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB;
 
 import java.util.List;
 

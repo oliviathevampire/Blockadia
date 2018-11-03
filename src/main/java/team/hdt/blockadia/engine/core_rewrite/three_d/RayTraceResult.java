@@ -1,6 +1,7 @@
-package team.hdt.blockadia.engine.core_rewrite.util.three_d;
+package team.hdt.blockadia.engine.core_rewrite.three_d;
 
 import ga.pheonix.utillib.utils.world.EnumFacing;
+import team.hdt.blockadia.engine.core_rewrite.three_d.entitys.Entity;
 
 public class RayTraceResult {
     /**

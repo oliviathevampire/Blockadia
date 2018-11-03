@@ -38,7 +38,13 @@ public class Display {
 	private static long windowID;
 	private static long cursorID;
 
-	private Display() {
+    public Display() {
+    }
+
+    public Display(String blockadia, int width, int height) {
+        title = blockadia;
+        Display.width = width;
+        Display.height = height;
 	}
 
 	/**
