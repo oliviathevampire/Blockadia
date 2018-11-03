@@ -38,7 +38,13 @@ public class Display {
 	private static long windowID;
 	private static long cursorID;
 
-	private Display() {
+    public Display() {
+    }
+
+    public Display(String blockadia, int width, int height) {
+        title = blockadia;
+        Display.width = width;
+        Display.height = height;
 	}
 
 	/**
@@ -102,9 +108,9 @@ public class Display {
 
 		Display.joystickPresent = GLFW.glfwJoystickPresent(GLFW.GLFW_JOYSTICK_1);
 		if (Display.joystickPresent) {
-			Blockadia.logger().info("Joystick 1 was detected");
+			//Blockadia.logger().info("Joystick 1 was detected");
 		} else {
-			Blockadia.logger().info("No joystick was detected");
+			//Blockadia.logger().info("No joystick was detected");
 		}
 
 		GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());

@@ -1,10 +1,10 @@
 package team.hdt.blockadia.engine.core_rewrite.game;
 
 import org.joml.Vector2f;
-import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.EntityRenderer;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
-import team.hdt.blockadia.engine.core_rewrite.util.AxisAlignedBB;
+import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB;
+import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 
 import javax.annotation.Nonnull;
 

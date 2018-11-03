@@ -1,12 +1,12 @@
 package team.hdt.blockadia.engine.core_rewrite.game.world.tile;
 
 import org.joml.Vector2f;
-import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 import team.hdt.blockadia.engine.core_rewrite.game.world.map.TileMap;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.MasterRenderer;
 import team.hdt.blockadia.engine.core_rewrite.gfx.renderer.TileRenderer;
-import team.hdt.blockadia.engine.core_rewrite.util.AxisAlignedBB;
+import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB;
 import team.hdt.blockadia.engine.core_rewrite.util.I18n;
+import team.hdt.blockadia.engine.core_rewrite.util.Identifier;
 
 import javax.annotation.Nullable;
 

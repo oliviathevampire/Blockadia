@@ -1,8 +1,5 @@
 package team.hdt.blockadia.engine.core_rewrite;
 
-import org.apache.commons.lang3.time.StopWatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import team.hdt.blockadia.engine.core_rewrite.game.entity.EntityBat;
@@ -30,7 +27,6 @@ import team.hdt.blockadia.engine.core_rewrite.util.thread.ThreadPool;
 import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class Blockadia implements Runnable {
 
@@ -40,7 +36,8 @@ public class Blockadia implements Runnable {
     public static int WIDTH = 1280;
     public static int HEIGHT = 720;
 
-    private static Logger logger = LogManager.getLogger("Blockadia");
+    /*TODO:Log4J lib dose not work in gradle please check and fix logger in display and this classwill not work with out it*/
+    //private static Logger logger = LogManager.getLogger("Blockadia");
     private static Blockadia instance = new Blockadia();
     private static final Timer TIMER = new Timer(60);
     private static int lastFPS = 0;
@@ -56,14 +53,14 @@ public class Blockadia implements Runnable {
     }
 
     /**
-     * Sets the game's running status to true.
+     * The main method. This is where it all began...
+     *
+     * @param args You know what these do... or don't. Don't think it really matters, to be honest.
      */
-    public synchronized void start() {
-        if (running)
-            return;
-
-        logger.info("Running game...");
-        running = true;
+    public static void main(String[] args) {
+        //logger.info("Setting up game...");
+        new Thread(Blockadia.getInstance(), "main").start();
+        Blockadia.getInstance().start();
     }
 
     /**
@@ -77,13 +74,24 @@ public class Blockadia implements Runnable {
     }
 
     /**
+     * Sets the game's running status to true.
+     */
+    public synchronized void start() {
+        if (running)
+            return;
+
+        //logger.info("Running game...");
+        running = true;
+    }
+
+    /**
      * Initializes the game.
      *
      * @throws Exception
      *             May be unable to load missing world files.
      */
     private void init() {
-        logger.info("Creating display...");
+        //logger.info("Creating display...");
         Display.createDisplay(TITLE + " v" + VERSION, WIDTH, HEIGHT);
         Display.setIcon(LoadingUtils.loadImage("icon", new Identifier("icons/32.png").getInputStream()));
 
@@ -114,66 +122,9 @@ public class Blockadia implements Runnable {
 
         ModService.getInstance().postInit();
 
-        logger.info("Loading game...");
+        //logger.info("Loading game...");
         /** This is where game loading is first called. */
         load();
-    }
-
-    /**
-     * This is the GAME LOOP. This regulates the game cycling. DO NOT TOUCH.
-     */
-    @Override
-    public void run() {
-        try {
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        long timer = System.currentTimeMillis();
-        int frames = 0;
-
-        while (true) {
-            try {
-                while (running) {
-                    if (!Display.isCloseRequested())
-                        Display.update();
-                    else
-                        running = false;
-
-                    TIMER.updateTimer();
-
-                    for (int i = 0; i < Math.min(10, TIMER.elapsedTicks); ++i) {
-                        update();
-                    }
-
-                    GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-                    render();
-                    frames++;
-
-                    if (System.currentTimeMillis() - timer > 1000) {
-                        timer += 1000;
-                        // logger.info("World Finished Loading: " + Game.worldFinishedLoading + " --- fps: " + frames);
-                        Display.setTitle(TITLE + " v" + VERSION + " | fps: " + frames);
-                        if (frames - lastFPS < -30) {
-                            logger.warn("Lag spike detected in the game!");
-                        }
-                        Blockadia.lastFPS = frames;
-                        frames = 0;
-                    }
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                stop();
-            }
-            cleanUp();
-            break;
-        }
     }
 
     /**
@@ -297,9 +248,9 @@ public class Blockadia implements Runnable {
     /**
      * @return The logger for the game.
      */
-    public static Logger logger() {
+    /*public static Logger logger() {
         return logger;
-    }
+    }*/
 
     /**
      * @return The instance for the game.
@@ -309,21 +260,60 @@ public class Blockadia implements Runnable {
     }
 
     /**
-     * Cleans up the game before the game loop has closed.
+     * This is the GAME LOOP. This regulates the game cycling. DO NOT TOUCH.
      */
-    private void cleanUp() {
-        this.addTask(this::save);
-        Display.destroy();
-        logger.info("Closing Current Processes");
-        StopWatch watch = StopWatch.createStarted();
-        pool.join();
-        logger.info("Closed Processes in " + watch.getTime(TimeUnit.MILLISECONDS) + "ms");
-        logger.info("Cleaning up resources");
-        PostProcessing.cleanUp();
-        Loader.cleanUp();
-        renderer.cleanUp();
-        logger.info("Closing game...");
-        System.exit(0);
+    @Override
+    public void run() {
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        long timer = System.currentTimeMillis();
+        int frames = 0;
+
+        while (true) {
+            try {
+                while (running) {
+                    if (!Display.isCloseRequested())
+                        Display.update();
+                    else
+                        running = false;
+
+                    TIMER.updateTimer();
+
+                    for (int i = 0; i < Math.min(10, TIMER.elapsedTicks); ++i) {
+                        update();
+                    }
+
+                    GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+                    render();
+                    frames++;
+
+                    if (System.currentTimeMillis() - timer > 1000) {
+                        timer += 1000;
+                        // logger.info("World Finished Loading: " + Game.worldFinishedLoading + " --- fps: " + frames);
+                        Display.setTitle(TITLE + " v" + VERSION + " | fps: " + frames);
+                        if (frames - lastFPS < -30) {
+                            //logger.warn("Lag spike detected in the game!");
+                        }
+                        Blockadia.lastFPS = frames;
+                        frames = 0;
+                    }
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                stop();
+            }
+            cleanUp();
+            break;
+        }
     }
 
     /**
@@ -387,17 +377,23 @@ public class Blockadia implements Runnable {
         return camera;
     }
 
-
     /**
-     * The main method. This is where it all began...
-     *
-     * @param args
-     *            You know what these do... or don't. Don't think it really matters, to be honest.
+     * Cleans up the game before the game loop has closed.
      */
-    public static void main(String[] args) {
-        logger.info("Setting up game...");
-        new Thread(Blockadia.getInstance(), "main").start();
-        Blockadia.getInstance().start();
+    private void cleanUp() {
+        this.addTask(this::save);
+        Display.destroy();
+        //logger.info("Closing Current Processes");
+        //TODO: org.apache.commons.lang3.time.StopWatch dose not compute please fix gradle for it
+        //StopWatch watch = StopWatch.createStarted();
+        pool.join();
+        //logger.info("Closed Processes in " + watch.getTime(TimeUnit.MILLISECONDS) + "ms");
+        //logger.info("Cleaning up resources");
+        PostProcessing.cleanUp();
+        Loader.cleanUp();
+        renderer.cleanUp();
+        //logger.info("Closing game...");
+        System.exit(0);
     }
 
 }

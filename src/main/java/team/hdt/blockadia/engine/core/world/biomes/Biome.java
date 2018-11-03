@@ -4,7 +4,7 @@ import ga.pheonix.utillib.utils.Maths;
 import ga.pheonix.utillib.utils.anouncments.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import team.hdt.blockadia.engine.core.util.math.BlockPos;
+import team.hdt.blockadia.engine.core.BlockPos;
 import team.hdt.blockadia.engine.core.world.gen.NoiseGeneratorPerlin;
 
 import java.util.Random;
