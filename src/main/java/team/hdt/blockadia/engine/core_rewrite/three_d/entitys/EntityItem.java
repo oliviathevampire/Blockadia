@@ -2,7 +2,7 @@ package team.hdt.blockadia.engine.core_rewrite.three_d.entitys;
 
 import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB3D;
 
-public class EntityItem extends Entity {
+public abstract class EntityItem extends Entity {
     private static AxisAlignedBB3D defalt_hitbox = new AxisAlignedBB3D(0.0D, 0.0D, 0.0D, 0.25D, 0.25D, 0.25D);
     private int health;                                               //            min                         max
 
@@ -31,4 +31,5 @@ public class EntityItem extends Entity {
     public boolean canBeWornDown() {
         return true;
     }
+
 }
