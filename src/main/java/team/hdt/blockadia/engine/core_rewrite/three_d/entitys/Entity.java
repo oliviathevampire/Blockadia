@@ -12,8 +12,8 @@ public abstract class Entity {
     @Nonnull
     private static String name;
     private static float scale;
-    private static Vectors3f postion;
-    private static Vectors3f rotation;
+    public static Vectors3f postion;
+    public static Vectors3f rotation;
     @Nullable
     private static float runspeed;
     @Nullable
@@ -62,8 +62,8 @@ public abstract class Entity {
         return postion;
     }
 
-    public void setPosition(Vectors3f vectors3f) {
-        postion = vectors3f;
+    public void setPosition(Vectors3f v) {
+        postion = v;
     }
 
     public void setRotation(float v, float v1, float v2) {

@@ -108,9 +108,9 @@ public class Display {
 
 		Display.joystickPresent = GLFW.glfwJoystickPresent(GLFW.GLFW_JOYSTICK_1);
 		if (Display.joystickPresent) {
-			Blockadia.logger().info("Joystick 1 was detected");
+			//Blockadia.logger().info("Joystick 1 was detected");
 		} else {
-			Blockadia.logger().info("No joystick was detected");
+			//Blockadia.logger().info("No joystick was detected");
 		}
 
 		GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
