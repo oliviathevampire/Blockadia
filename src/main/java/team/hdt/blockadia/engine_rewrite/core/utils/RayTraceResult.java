@@ -1,7 +1,7 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d;
+package team.hdt.blockadia.engine_rewrite.core.utils;
 
 import ga.pheonix.utillib.utils.world.EnumFacing;
-import team.hdt.blockadia.engine.core_rewrite.three_d.entitys.Entity;
+import team.hdt.blockadia.engine_rewrite.core.entitys.Entity;
 
 public class RayTraceResult {
     /**
@@ -38,7 +38,7 @@ public class RayTraceResult {
     public RayTraceResult(RayTraceResult.Type typeIn, Vec3d hitVecIn, EnumFacing sideHitIn) {
         this.typeOfHit = typeIn;
         this.sideHit = sideHitIn;
-        this.hitVec = new Vec3d(hitVecIn.x, hitVecIn.y, hitVecIn.z);
+        this.hitVec = new Vec3d(hitVecIn.xCoord, hitVecIn.yCoord, hitVecIn.zCoord);
     }
 
     public RayTraceResult(Entity entityHitIn, Vec3d hitVecIn) {

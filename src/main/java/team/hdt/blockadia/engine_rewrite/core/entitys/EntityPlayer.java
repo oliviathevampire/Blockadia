@@ -1,10 +1,10 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d.entitys;
+package team.hdt.blockadia.engine_rewrite.core.entitys;
 
 import ga.pheonix.utillib.utils.vectors.Vectors3f;
 import org.lwjgl.glfw.GLFW;
 import team.hdt.blockadia.engine.core_rewrite.Display;
 import team.hdt.blockadia.engine.core_rewrite.game.inventory.PlayerInventory;
-import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB3D;
+import team.hdt.blockadia.engine_rewrite.core.utils.AxisAlignedBB3D;
 
 public class EntityPlayer extends LivingEntity {
     public int exp = 0;

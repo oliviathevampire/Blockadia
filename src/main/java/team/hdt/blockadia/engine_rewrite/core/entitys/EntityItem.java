@@ -1,6 +1,6 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d.entitys;
+package team.hdt.blockadia.engine_rewrite.core.entitys;
 
-import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB3D;
+import team.hdt.blockadia.engine_rewrite.core.utils.AxisAlignedBB3D;
 
 public abstract class EntityItem extends Entity {
     private static AxisAlignedBB3D defalt_hitbox = new AxisAlignedBB3D(0.0D, 0.0D, 0.0D, 0.25D, 0.25D, 0.25D);

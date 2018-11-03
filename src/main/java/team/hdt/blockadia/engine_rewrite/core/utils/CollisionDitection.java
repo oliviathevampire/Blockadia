@@ -1,9 +1,9 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d;
+package team.hdt.blockadia.engine_rewrite.core.utils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import ga.pheonix.utillib.utils.anouncments.Nullable;
-import team.hdt.blockadia.engine.core_rewrite.three_d.entitys.Entity;
+import team.hdt.blockadia.engine_rewrite.core.entitys.Entity;
 
 import java.util.List;
 

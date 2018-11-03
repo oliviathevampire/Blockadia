@@ -1,4 +1,4 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d.entitys;
+package team.hdt.blockadia.engine_rewrite.core.entitys;
 
 public abstract class LivingEntity extends Entity {
 

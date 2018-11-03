@@ -1,9 +1,9 @@
-package team.hdt.blockadia.engine.core_rewrite.three_d.entitys;
+package team.hdt.blockadia.engine_rewrite.core.entitys;
 
 import ga.pheonix.utillib.utils.anouncments.Nonnull;
 import ga.pheonix.utillib.utils.anouncments.Nullable;
 import ga.pheonix.utillib.utils.vectors.Vectors3f;
-import team.hdt.blockadia.engine.core_rewrite.three_d.AxisAlignedBB3D;
+import team.hdt.blockadia.engine_rewrite.core.utils.AxisAlignedBB3D;
 
 public abstract class Entity {
     public static boolean fly = false;
