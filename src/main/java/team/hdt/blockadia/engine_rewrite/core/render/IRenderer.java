@@ -4,9 +4,5 @@ public interface IRenderer {
 
     void register();
 
-    void prerender();
-
     void render();
-
-    void unrender();
 }

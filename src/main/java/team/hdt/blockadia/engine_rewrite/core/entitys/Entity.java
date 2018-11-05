@@ -20,6 +20,15 @@ public abstract class Entity {
     private static float walkspeed;
     private static AxisAlignedBB3D zero_hitbox = new AxisAlignedBB3D(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
     public boolean isDead;
+    private int textureID;
+
+    public int getTextureID() {
+        return textureID;
+    }
+
+    public void setTextureID(int textureID) {
+        this.textureID = textureID;
+    }
 
     public static AxisAlignedBB3D getZero_hitbox() {
         return zero_hitbox;
@@ -231,6 +240,8 @@ public abstract class Entity {
     }
 
     protected abstract void entityInit();
+
+    public abstract void update();
 
 
 }

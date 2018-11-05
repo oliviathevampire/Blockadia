@@ -8,7 +8,7 @@ import team.hdt.blockadia.engine_rewrite.core.entitys.EntityPlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractRender {
+public abstract class AbstractRender implements IRenderer {
 
     //ment to hold all living non player entitys in the client game
     public static List<Entity> entities = new ArrayList<Entity>();
@@ -143,7 +143,7 @@ public abstract class AbstractRender {
      * ---------------------------------------
      */
     public void is_Modded(boolean is_Modded) {
-        this.Modded = is_Modded;
+        Modded = is_Modded;
     }
 
     public int get_Player_Count() {

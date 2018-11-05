@@ -2,9 +2,7 @@ package team.hdt.blockadia.engine_rewrite;
 
 import ga.pheonix.utillib.utils.vectors.Vectors2f;
 import ga.pheonix.utillib.utils.vectors.Vectors3f;
-import team.hdt.blockadia.engine.core.util.Matrix4fs;
-
-import java.nio.DoubleBuffer;
+import team.hdt.blockadia.engine_rewrite.core.utils.Matrix4fs;
 
 public class Camera {
 
@@ -34,7 +32,7 @@ public class Camera {
         this.z_near = z_near;
         this.z_far = z_far;
 
-        createProjectionMatrix(window.getWidth(), window.getHeight());
+        createProjectionMatrix(Display.getWidth(), Display.getHeight());
     }
 
     protected void createProjectionMatrix(int width, int height) {
