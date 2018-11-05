@@ -8,7 +8,7 @@ import team.hdt.blockadia.engine_rewrite.core.utils.AxisAlignedBB3D;
 public abstract class Entity {
     public static boolean fly = false;
     @Nonnull
-    public static int id;
+    public static String id;
     @Nonnull
     private static String name;
     private static float scale;
@@ -19,6 +19,7 @@ public abstract class Entity {
     @Nullable
     private static float walkspeed;
     private static AxisAlignedBB3D zero_hitbox = new AxisAlignedBB3D(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+    public boolean isDead;
 
     public static AxisAlignedBB3D getZero_hitbox() {
         return zero_hitbox;
@@ -28,11 +29,11 @@ public abstract class Entity {
         Entity.zero_hitbox = zero_hitbox;
     }
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 
-    public void setID(int i) {
+    public void setID(String i) {
         id = i;
     }
 
@@ -219,6 +220,14 @@ public abstract class Entity {
 
     public boolean canBeWornDown() {
         return false;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     protected abstract void entityInit();
