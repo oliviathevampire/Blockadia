@@ -11,10 +11,11 @@ public abstract class ShaderProgram {
 
     private int programID, fragmentShaderID, vertexShaderID;
     private String fragmentFile, vertexFile;
+    private static final String shaderFileEndName = ".shad";
 
     public ShaderProgram(String fragmentFile, String vertexFile) {
-        this.fragmentFile = fragmentFile;
-        this.vertexFile = vertexFile;
+        this.fragmentFile = fragmentFile + shaderFileEndName;
+        this.vertexFile = vertexFile + shaderFileEndName;
     }
 
     public void create(){
@@ -66,6 +67,13 @@ public abstract class ShaderProgram {
 
     }
 
+    protected abstract void getAllUniformLocations();
+
+    protected int getUniformLocation(String uniformName) {
+        return GL20.glGetUniformLocation(programID, uniformName);
+    }
+
+
     private CharSequence readFile(String file) {
         BufferedReader reader = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -79,5 +87,13 @@ public abstract class ShaderProgram {
             e.getStackTrace();
         }
         return stringBuilder.toString();
+    }
+
+    public void start() {
+        GL20.glUseProgram(programID);
+    }
+
+    public void stop() {
+        GL20.glUseProgram(0);
     }
 }

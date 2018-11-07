@@ -3,9 +3,13 @@ package team.hdt.blockadia.engine_rewrite.core.entitys;
 import ga.pheonix.utillib.utils.anouncments.Nonnull;
 import ga.pheonix.utillib.utils.anouncments.Nullable;
 import ga.pheonix.utillib.utils.vectors.Vectors3f;
+import team.hdt.blockadia.engine_rewrite.client.modeling.TexturedModel;
 import team.hdt.blockadia.engine_rewrite.core.utils.AxisAlignedBB3D;
 
 public abstract class Entity {
+
+    public static int textureIndex = 0;
+    public TexturedModel texturedModel;
     public static boolean fly = false;
     @Nonnull
     public static String id;
@@ -243,5 +247,19 @@ public abstract class Entity {
 
     public abstract void update();
 
+    public static int getTextureIndex() {
+        return textureIndex;
+    }
 
+    public static void setTextureIndex(int textureIndex) {
+        Entity.textureIndex = textureIndex;
+    }
+
+    public TexturedModel getTexturedModel() {
+        return texturedModel;
+    }
+
+    public void setTexturedModel(TexturedModel texturedModel) {
+        this.texturedModel = texturedModel;
+    }
 }

@@ -16,6 +16,7 @@ public class MasterRenderer extends AbstractRender {
     private static final float BLUE = 0.0f;
     public MainShader program = new MainShader();
     private Matrix4fs projectionMatrix;
+    private EntityRenderer entityRenderer;
 
     public static void enableCulling() {
         GL11.glEnable(GL11.GL_CULL_FACE);
