@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import team.hdt.blockadia.engine_rewrite.Display;
 import team.hdt.blockadia.engine_rewrite.core.utils.Matrix4fs;
 
-public class MaterRenderer extends AbstractRender {
+public class MasterRenderer extends AbstractRender {
 
     private static final float FOV = 70;
     private static final float NEAR_PLANE = 0.1f;
