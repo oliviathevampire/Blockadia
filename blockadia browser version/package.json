@@ -1,0 +1,9 @@
+{
+  "name": "blockadia",
+  "version": "0.0.0",
+  "description": "blockadia",
+  "main": "gameclient.js",
+  "author": {
+    "name": ""
+  }
+}
